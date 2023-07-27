@@ -13,7 +13,7 @@ const CarouselSlider = () => {
       <Navbar />
 
       <Carousel fade>
-        <Carousel.Item interval={200000}>
+        <Carousel.Item interval={5000}>
           <img class = "crousel" src={imgSlider1}  alt="image1" />
           <Carousel.Caption>
             <h1
@@ -33,7 +33,7 @@ const CarouselSlider = () => {
             </button>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={50000}>
+        <Carousel.Item interval={5000}>
           <img class = "crousel" src={imgSlider2} alt="image2" />
           <Carousel.Caption>
             <div className="carousel-caption d-none d-md-block">
@@ -52,7 +52,7 @@ const CarouselSlider = () => {
             </div>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={50000}>
+        <Carousel.Item interval={5000}>
           <img class = "crousel" src={imgSlider3} alt="image3" />
           <Carousel.Caption>
             <h1
@@ -69,7 +69,7 @@ const CarouselSlider = () => {
             </button>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={50000}>
+        <Carousel.Item interval={5000}>
           <img class = "crousel" src={imgSlider4} alt="image4" />
           <Carousel.Caption>
             <h1
@@ -86,7 +86,7 @@ const CarouselSlider = () => {
             </button>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={50000}>
+        <Carousel.Item interval={5000}>
           <img class = "crousel" src={imgSlider5} alt="image5" />
           <Carousel.Caption>
             <h1
