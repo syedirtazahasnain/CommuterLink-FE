@@ -101,6 +101,11 @@
   width: 100px;
 height: 150px;
 }
+
+img.crousel{
+  width: 100%;
+}
+
 .textride{
   width: 70rem;
   height: 5%;
