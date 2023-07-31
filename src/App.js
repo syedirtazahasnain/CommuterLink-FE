@@ -2,7 +2,7 @@
 import './App.css';
 import Home from './pages/frontend/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Signup from './pages/frontend/Hompage-components/Signup';
+import Signup from './pages/frontend/Signup/Signup';
 import Login from './pages/frontend/Hompage-components/Login';
 import CarouselSlider from './pages/frontend/Hompage-components/Carousel';
 import HowWorks from './pages/frontend/Hompage-components/HowWorks';
@@ -11,12 +11,14 @@ import Registration from './pages/frontend/Hompage-components/Registration ';
 import Faq from './pages/frontend/Hompage-components/Faq';
 import ShareRide from './pages/frontend/register-form/ShareRide';
 import WouldYouLikeTo from './pages/frontend/register-form/WouldYouLikeTo';
+import OtpPage from "./pages/frontend/register-form/OtpPage"
+import Nestedform from "./pages/frontend/register-form/WouldYouLikeTo";
 function App() {
   return (
     <>
       <Router>
       <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/'  element={<Home />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
         <Route path='/carousel' element={<CarouselSlider />} /> 
@@ -26,6 +28,8 @@ function App() {
         <Route path='/Faq' element={<Faq/>}/>
         <Route path='/ShareRide' element={<ShareRide/>}></Route>
         <Route path='/WouldYouLikeTo' element={<WouldYouLikeTo/>}></Route>
+        <Route path="/otp" element={<OtpPage />} />
+        <Route path='/Nested' element={<Nestedform/>}></Route>
       </Routes>
     </Router>
     </>

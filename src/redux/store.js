@@ -1,12 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
-import generalReducer, { setCurrentPage } from './generalSlice'
-import authReducer from './authSlice'
+import signupSlice from './signupSlice'
 import { persistReducer } from 'redux-persist';
 
 const reducers = combineReducers({
-    general: generalReducer,
-    auth: authReducer,
+  signup: signupSlice, 
 });
 
 const persistConfig = {
@@ -16,13 +14,11 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-export const store = configureStore({
+const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
   devTools: true
 })
+export default store;
 
-export const resetCurrentPage = () => {
-  store.dispatch(setCurrentPage(''));
-  return null;
-}
+ 
