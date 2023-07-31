@@ -246,7 +246,7 @@ CardGroup a{
   text-decoration: none;
 }
 #footer .footer-top .footer-links ul li {
-  padding: 10px 0;
+  padding: 12px 0;
   display: flex;
   align-items: center;
 }
@@ -308,16 +308,13 @@ CardGroup a{
   padding: 0;
   margin: 0;
 }
-#footer .footer-top .footer-links ul li {
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-}
+
 #footer .footer-top .footer-links ul a {
   color: #fff;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
+  text-decoration: none;
 }
 #footer .footer-top .footer-links ul a:hover {
   color: #56e7d0;

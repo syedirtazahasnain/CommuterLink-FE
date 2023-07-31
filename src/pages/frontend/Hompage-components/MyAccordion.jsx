@@ -100,7 +100,7 @@ const MyAccordion = () => {
         
         <div className="col-md-4">
         <div className="container d-flex justify-content-center">
-            <img className="img-fluid" src={imgsignup3} />
+            <img className="w-100 img-fluid" src={imgsignup3} />
             </div>
         </div>
       </div>

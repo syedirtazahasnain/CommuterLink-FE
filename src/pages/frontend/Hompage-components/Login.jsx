@@ -24,8 +24,9 @@ const Login = () => {
     <div>
       <div>
         <Navbar />
+        
         <section id="sign-up" class="mt-5" style={{ backgroundColor: "#eee" }}>
-          <div className="row">
+          <div className="container"> <div className="row">
             <div
               className="col-md-6"
               style={{
@@ -34,68 +35,62 @@ const Login = () => {
                 marginTop: "10vh",
               }}
             >
-              <Carousel
-                style={{
-                  backgroundColor: "#eee",
-                  height: "40vh",
-                  width: "30vw",
-                }}
-                className="carousel-container"
-                prevIcon={null}
-                nextIcon={null}
-                indicators={null}
-              >
-                <Carousel.Item interval={2000}>
-                  <img
-                    className="Carousel_image"
-                    src={mySlides1}
-                    alt="First slide"
-                    style={{
-                      height: "40vh",
-                      marginLeft: "5px",
-                      backgroundColor: "#eee",
-                    }}
-                  />
-                </Carousel.Item>
+              <div
+              className="col-md-6"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "5vh",
+                
+              }}
+            ><Carousel
+            style={{
+              backgroundColor: "#eee",
+              
+            }}
+            className="carousel-container"
+            prevIcon={null}
+            nextIcon={null}
+            indicators={null}
+          >
+            <Carousel.Item interval={2000}>
+              <img
+                className="Carousel_image img-fluid w-100"
+                src={mySlides1}
+                alt="First slide"
+               
+              />
+            </Carousel.Item>
 
-                <Carousel.Item interval={2000}>
-                  <img
-                    className="Carousel_image"
-                    src={mySlides2}
-                    alt="First slide"
-                    style={{
-                      height: "40vh",
-                      marginLeft: "5px",
-                      backgroundColor: "white",
-                    }}
-                  />
-                </Carousel.Item>
+            <Carousel.Item interval={2000}>
+              <img
+                className="Carousel_image img-fluid w-100"
+                src={mySlides2}
+                alt="First slide"
+                
+              />
+            </Carousel.Item>
 
-                <Carousel.Item interval={2000}>
-                  <img
-                    className="Carousel_image"
-                    src={mySlides3}
-                    alt="First slide"
-                    style={{
-                      height: "40vh",
-                      marginLeft: "5px",
-                      backgroundColor: "#eee",
-                    }}
-                  />
-                </Carousel.Item>
-                <Carousel.Item interval={2000}>
-                  <img
-                    className="Carousel_image"
-                    src={mySlides4}
-                    alt="First slide"
-                    style={{
-                      height: "40vh",
-                      marginLeft: "5px",
-                      backgroundColor: "#eee",
-                    }}
-                  />
-                </Carousel.Item>
-              </Carousel>
+            <Carousel.Item interval={2000}>
+              <img
+                className="Carousel_image img-fluid w-100"
+                src={mySlides3}
+                alt="First slide"
+              
+              />
+            </Carousel.Item>
+            <Carousel.Item interval={2000}>
+              <img
+                className="Carousel_image img-fluid w-100"
+                src={mySlides4}
+                alt="First slide"
+              
+              />
+            </Carousel.Item>
+          </Carousel>
+
+            </div>
+              
 
               {/* <div
                 className="w3-content w3-section"
@@ -130,7 +125,7 @@ const Login = () => {
                 style={{
                   color: "#198754",
                   marginBottom: "5px",
-                  marginTop: "5vh",
+                  marginTop: "10vh",
                 }}
               >
                 {" "}
@@ -239,8 +234,11 @@ const Login = () => {
                 </div>
               </Form>
             </div>
-          </div>
+          </div>  </div>
+         
         </section>
+      
+        
         <Footer />
       </div>
     </div>

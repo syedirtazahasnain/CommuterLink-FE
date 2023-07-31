@@ -14,12 +14,13 @@ import Registration from "./Hompage-components/Registration ";
 import AddressCards from "./Hompage-components/AddressCards";
 // import Otp from './register-form/otp_2'
 import Faq from "./Hompage-components/Faq";
-// import TopCarousel from './Hompage-components/TopCarousel';
+import Otp from './register-form/otp_3'
+import Nestedform from "./register-form/nestedform";
 export default function () {
   return (
     <div>
-      <Navbar />
-      {/* <TopCarousel /> */}
+      {/* <Navbar />
+     
       <CarouselSlider />
       <MyAccordion />
       <ShareRideCards />
@@ -28,12 +29,13 @@ export default function () {
       <Contribute />
       <Contact />
       <AddressCards />
-      <Footer />
+      <Footer /> */}
       {/* <Signup/>
              <Login/> */}
       {/* <Registration/> */}
-      {/* <Otp/> */}
+      <Otp/>
       {/* <Faq/> */}
+      {/* <Nestedform/> */}
     </div>
   );
 }

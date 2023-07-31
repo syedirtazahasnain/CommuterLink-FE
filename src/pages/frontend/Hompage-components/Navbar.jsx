@@ -6,7 +6,7 @@ const Navbar = () => {
     <div>
       <div className="container ">
         <div className="row">
-          {/* {" "} */}
+          
           <div class="pos-f-t">
           <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <Link
@@ -16,7 +16,8 @@ const Navbar = () => {
               <img src={logo} width="mr-auto" height="40px" alt="logoimg" />
             </Link>
             <button
-              className="navbar-toggler"
+              className="navbar-toggler mr-2"
+              style={{color:'#198754'}}
               type="button"
               data-toggle="collapse"
               data-target="#navbarSupportedContent"

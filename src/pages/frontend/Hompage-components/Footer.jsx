@@ -12,7 +12,7 @@ const Footer = () => {
               <p>
                 Office 8, Ground Floor, Hamadan Heights, <br />Koral
                 Interchange, Express Highway, <br />Islamabad, 46000.<br /><br />
-                <strong>Phone:</strong> +92 322 51212345<br />
+                <strong>Phone:</strong> +92 315 1502443<br />
                 <strong>Email:</strong> info@commuterslink.com<br/>
               </p>
               <div className="social-links mt-3">
@@ -55,27 +55,27 @@ const Footer = () => {
               <h4>FAQs</h4>
               <ul>
                 <li>
-                  <i className="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right1 mb-3"></i>
                   <a href="faq1.html">
                     How is CommutersLink different than other carpooling
                     Apps?</a>
                  
                 </li>
                 <li>
-                  <i className="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right1 "></i>
                   <a href="https://www.commuterslink.com/faqs">
                     How the cost is calculated and distributed?</a>
                   
                 </li>
                 <li>
-                  <i className="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right1"></i>
                   <a href="https://www.commuterslink.com/faqs">
                     As a travel buddy with someone who owns a car, how my
                     payment is calculated and paid?</a>
                  
                 </li>
                 <li>
-                  <i className="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right1"></i>
                   <a href="faq1.html">Click here for more FAQs </a>
                 </li>
                 
