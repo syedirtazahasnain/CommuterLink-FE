@@ -11,7 +11,7 @@ function HowWorks() {
   return (
     <div>
 <Navbar/>
-      <section id="working" className="my-2">
+      <section id="working" className="my-1">
         <div className="container">
           <div className="section-title text-center">
             <h2 className="heading-color text-black">How It Works?</h2>
@@ -104,7 +104,7 @@ function HowWorks() {
               </div>
             </div> */}
             <CardGroup>
-              <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+              <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-3 mb-lg-0">
                 <Card sx={{ maxWidth: 345 }} id="work-card">
                   <CardActionArea>
                     <CardMedia
@@ -136,7 +136,7 @@ function HowWorks() {
                   </CardActionArea>
                 </Card>
               </div>
-              <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+              <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-3 mb-lg-0">
                 <Card sx={{ maxWidth: 345 }} id="work-card">
                   <CardActionArea>
                     <CardMedia
@@ -168,7 +168,7 @@ function HowWorks() {
                   </CardActionArea>
                 </Card>
               </div>
-              <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+              <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-3 mb-lg-0">
                 <Card sx={{ maxWidth: 345 }} id="work-card">
                   <CardActionArea>
                     <CardMedia
@@ -200,7 +200,7 @@ function HowWorks() {
                   </CardActionArea>
                 </Card>
               </div>
-              <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+              <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-3 mb-lg-0">
                 <Card sx={{ maxWidth: 345 }} id="work-card">
                   <CardActionArea>
                     <CardMedia
@@ -233,7 +233,7 @@ function HowWorks() {
                 </Card>
               </div>
             </CardGroup>
-            <section id="working" className="my-2">
+            <section id="working" className="my-0">
               <div className="container">
                 <div className="section-title text-center">
                   

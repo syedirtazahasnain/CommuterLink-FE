@@ -78,7 +78,7 @@ const Signup = () => {
                       style={{
                         height: "40vh",
                         marginLeft: "5px",
-                        backgroundColor: "white",
+                        backgroundColor: "#eee",
                       }}
                     />
                   </Carousel.Item>

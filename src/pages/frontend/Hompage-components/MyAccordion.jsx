@@ -6,12 +6,12 @@ import React from "react";
 const MyAccordion = () => {
   return (
     <div >
-      <section>
-        <div className="section-title text-center p-5">
-          <h2 className="heading-color" style={{ color: "black" }}>
+      <div className="container">
+        <div className="section-title text-center py-2">
+          <h2 className="heading-color" style={{ color: "black"}}>
             It's Not About Earning but Cost Sharing and Saving
           </h2>
-          <p>
+          <p className="p-3">
             The basic difference between other carpooling Apps and CommutersLink
             is that we are offering long term solutions for daily commute
             instead of a onetime ride. The concept is to collectively defeat the
@@ -19,10 +19,12 @@ const MyAccordion = () => {
             but saving
           </p>
         </div>
-      </section>
-      <div className="row p-5 accordion">
-        <div className="col-md-6 height">
-        <Accordion className="p-2">
+      </div>
+      <div className="container d-flex">
+
+      <div className="row accordion justify-content-between">
+        <div className="col-md-6">
+        <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -47,7 +49,7 @@ const MyAccordion = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className="heading-color">2.Long Term
+          <Typography className="heading-color">2. Long Term
                         Commitment</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -95,11 +97,13 @@ const MyAccordion = () => {
         </AccordionDetails>
       </Accordion>
         </div>
-        <div className="col-lg-4">
-        <div className="container mt-3">
+        
+        <div className="col-md-4">
+        <div className="container d-flex justify-content-center">
             <img className="img-fluid" src={imgsignup3} />
             </div>
         </div>
+      </div>
       </div>
       <div>
       <section>

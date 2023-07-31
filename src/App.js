@@ -8,7 +8,7 @@ import CarouselSlider from './pages/frontend/Hompage-components/Carousel';
 import HowWorks from './pages/frontend/Hompage-components/HowWorks';
 import Contribute from './pages/frontend/Contribute';
 import Registration from './pages/frontend/Hompage-components/Registration ';
-
+import Faq from './pages/frontend/Hompage-components/Faq';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route path='/howworks' element={<HowWorks/>}/>
         <Route path='/contribute' element={<Contribute/>}/>
         <Route path='/registration' element={<Registration/>}/>
+        <Route path='/Faq' element={<Faq/>}/>
       </Routes>
     </Router>
     </>

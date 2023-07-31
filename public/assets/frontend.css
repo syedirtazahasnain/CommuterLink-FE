@@ -416,3 +416,9 @@ i {
     border-color: #198754 !important;
     color: #fff !important;
 }
+.accordianfaqs{
+  background-color: rgb(222,222,222) !important;
+}
+img.carousel{
+  width: 100%;
+}

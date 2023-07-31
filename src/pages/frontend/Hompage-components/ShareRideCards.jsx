@@ -8,13 +8,16 @@ import imguni from '../../../Images/commutelinksuni.jpg';
 const ShareRideCards=()=> {
   return (
     <div>
-        <section>
-        <div className="section-title text-center p-5">
+      <div className="container">
+      <div className="section-title text-center p-5">
           <h2 className="heading-color text-black">
           SHARE RIDE (YOUR CAR OR OTHERS) WITH SUITABLE MATCHES TO COMMUTE TO
           </h2>
         </div>
-      </section>
+      </div>
+        
+       
+      
 <div className="container">
   <div className="row">
     

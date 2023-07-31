@@ -8,6 +8,7 @@ import imgSlider5 from "../../../Images/slide-5.jpg";
 import Navbar from "./Navbar";
 
 const CarouselSlider = () => {
+  const images=[imgSlider1,imgSlider2,imgSlider3,imgSlider4,imgSlider5]
   return (
     <div>
       <Navbar />
