@@ -13,9 +13,10 @@ import Footer from "./Hompage-components/Footer";
 import Registration from "./Hompage-components/Registration ";
 import AddressCards from "./Hompage-components/AddressCards";
 // import Otp from './register-form/otp_2'
-import Faq from "./Hompage-components/Faq";
+// import Faq from "./Hompage-components/Faq";
 import Otp from './register-form/otp_3'
-import Nestedform from "./register-form/nestedform";
+// import ShareRide "./register-form/nestedform";
+import Office from './register-form/WouldYouLikeTo';
 export default function () {
   return (
     <div>
@@ -36,6 +37,7 @@ export default function () {
       <Otp/>
       {/* <Faq/> */}
       {/* <Nestedform/> */}
+      {/* <Office/> */}
     </div>
   );
 }

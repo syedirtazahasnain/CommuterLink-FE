@@ -23,7 +23,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import imgpoper from "../../../Images/popper.png";
 import { ImageNotSupportedSharp } from "@mui/icons-material";
-import Nestedform from "./nestedform";
+import ShareRide from "./ShareRide";
 const Otp_3 = () => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
   const [isOTPMatched, setIsOTPMatched] = useState(false);
@@ -243,7 +243,7 @@ const Otp_3 = () => {
               Close
             </Button>
             <Button variant="secondary" onClick={handleCloseModal}>
-              <Link to="/Nested">Next</Link>
+              <Link to="/ShareRide">Next</Link>
             </Button>
           </Modal.Footer>
         </Modal>

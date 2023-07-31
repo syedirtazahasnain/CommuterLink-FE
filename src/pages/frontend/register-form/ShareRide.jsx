@@ -16,10 +16,10 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import { Link } from "react-router-dom";
 
+import {Link } from 'react-router-dom';
 
-const Nestedform = () => {
+const ShareRide = () => {
 
     const Size = {
         fonstSize: "14px",
@@ -123,15 +123,15 @@ const Nestedform = () => {
                           <div className="col-12 text-center">
                       {/* onClick={() => setModalShow(true)} */}
 
-                      <Button
+                      {/* <Button
                         variant="outlined"
                         type="submit"
                         // onClick={validateOTP}
-                        className="btnregistration mt-4"
-                        
+                        className="btn btn-outline-custom"
                       >
-                        Next
-                      </Button>
+                         <Link to="/Office">Next</Link>
+                      </Button> */}
+                      <div className="mt-4"><Link to="/WouldYouLikeTo" className="btn btn-outline-custom">Next</Link></div>
                     </div>
                     </form>
                     </Typography>
@@ -158,4 +158,4 @@ const Nestedform = () => {
   )
 }
 
-export default Nestedform
+export default ShareRide;

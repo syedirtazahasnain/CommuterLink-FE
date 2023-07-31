@@ -9,7 +9,8 @@ import HowWorks from './pages/frontend/Hompage-components/HowWorks';
 import Contribute from './pages/frontend/Contribute';
 import Registration from './pages/frontend/Hompage-components/Registration ';
 import Faq from './pages/frontend/Hompage-components/Faq';
-import NestedForm from './pages/frontend/register-form/nestedform'
+import ShareRide from './pages/frontend/register-form/ShareRide';
+import WouldYouLikeTo from './pages/frontend/register-form/WouldYouLikeTo';
 function App() {
   return (
     <>
@@ -23,7 +24,8 @@ function App() {
         <Route path='/contribute' element={<Contribute/>}/>
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/Faq' element={<Faq/>}/>
-        <Route path='/Nested' element={<NestedForm/>}></Route>
+        <Route path='/ShareRide' element={<ShareRide/>}></Route>
+        <Route path='/WouldYouLikeTo' element={<WouldYouLikeTo/>}></Route>
       </Routes>
     </Router>
     </>
