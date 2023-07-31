@@ -23,6 +23,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import imgpoper from "../../../Images/popper.png";
 import { ImageNotSupportedSharp } from "@mui/icons-material";
+import Nestedform from "./nestedform";
 const Otp_3 = () => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
   const [isOTPMatched, setIsOTPMatched] = useState(false);
@@ -43,14 +44,7 @@ const Otp_3 = () => {
     if (index === 5) {
       // If the last input field is filled, validate the OTP
       const enteredOTP = otp.join("");
-      //   if (enteredOTP === hardcodedOTP) {
-
-      //     setIsOTPMatched(true);
-      //     alert('OTP is matched')
-      //   } else {
-      //     setIsOTPMatched(false);
-      //     alert('OTP does not match. Please try again.');
-      //   }
+      
     }
   };
   const validateOTP = () => {
@@ -247,6 +241,9 @@ const Otp_3 = () => {
           <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>
               Close
+            </Button>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              <Link to="/Nested">Next</Link>
             </Button>
           </Modal.Footer>
         </Modal>
