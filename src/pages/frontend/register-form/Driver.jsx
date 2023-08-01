@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
-import mySlides1 from "../../../Images/signup.png";
-import mySlides2 from "../../../Images/signup-3.png";
-import mySlides3 from "../../../Images/signup-4.png";
-import mySlides4 from "../../../Images/signup-6.png";
+import ibn from '../../../Images/iban.png';
+import easypaisa from '../../../Images/ep.png';
+import jazzcash from '../../../Images/jazz.png';
+import raast from '../../../Images/raast.png';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Carousel from "react-bootstrap/Carousel";
@@ -118,7 +118,7 @@ const Driver = () => {
                   </Form.Group>
                 </Row>
 
-                <Row className="mb-3">
+                <Row className="mb-0">
                   <Form.Group as={Col} md="6" controlId="validationCustom01">
                     <Form.Label style={{ color: "#198754" }}>
                       Registeration Number
@@ -126,6 +126,7 @@ const Driver = () => {
                     <Form.Control
                       required
                       type="text"
+                      className="colorplace"
                       placeholder="Registeration Number"
                       defaultValue=""
                     />
@@ -149,7 +150,7 @@ const Driver = () => {
                     md="12"
                     className="mb-3"
                   >
-                    <Form.Label style={{ color: "#198754" }}>
+                    <Form.Label className="mt-3" style={{ color: "#198754" }}>
                       Upload Car Image with visible number plate
                     </Form.Label>
                     <Form.Control type="file" />
@@ -221,6 +222,39 @@ const Driver = () => {
                     </Form.Select>
                   </Form.Group>
                 </Row>
+                <div class="tab">
+                          <div className="container">
+                            <div className="row justify-content-center mt-5">
+                              <div className="col-lg-12">
+                                <div className="card text-center" >
+                                  <div className="card-body">
+                                    <h5 className="card-title">Bank/Payment Details</h5>
+                                    <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                                     <div class="container">
+                                      <img src={ibn} alt=""/> <img src={easypaisa} alt=""/> <img src={jazzcash} alt=""/> <img src={raast} alt=""/>
+                                     </div>
+                                     <form id="paymentForm">
+                                      <div className="mt-4">
+                                        <input type="text" className="form-control mb-2" id="bankAccount" name="bankAccount" placeholder="Bank Account (IBAN)" required=""/>
+                                      </div>
+                                      <div>
+                                        <input type="text" className="form-control mb-2" id="jazzCashAccount" name="jazzCashAccount" placeholder="Jazz Cash Account Number" required=""/>
+                                      </div>
+                                      <div>
+                                        <input type="text" className="form-control mb-2" id="easypaisaAccount" name="easypaisaAccount" placeholder="EasyPaisa Account Number" required=""/>
+                                      </div>
+                                      <div>
+                                        <input type="text" className="form-control mb-2" id="raastID" name="raastID" placeholder="Raast ID"/>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                             
+                            </div>
+                          </div>
+                        
+                      </div>
                 <div className="row">
                   <div className="col">
                     <div className="container text-center d-flex justify-content-center   pt-3">
