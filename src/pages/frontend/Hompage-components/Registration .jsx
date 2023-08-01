@@ -1,10 +1,22 @@
 import React from "react";
 import { useState } from "react";
-import { Placeholder } from "react-bootstrap";
-
+import Navbar from "../Hompage-components/Navbar";
+import Footer from "../Hompage-components/Footer";
+import mySlides1 from "../../../Images/signup.png";
+import mySlides2 from "../../../Images/signup-3.png";
+import mySlides3 from "../../../Images/signup-4.png";
+import mySlides4 from "../../../Images/signup-6.png";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Carousel from "react-bootstrap/Carousel";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -25,7 +37,9 @@ const Registration = () => {
     setValidated(true);
   };
   return (
-    <div  style={{ backgroundColor: "#eee" }}>
+    <>
+    <Navbar/>
+     <div  style={{ backgroundColor: "#eee" }}>
       <div className="containter">
         <div className="row justify-content-center">
           <div className="col-md-8 bg-white  mt-5 mb-5">
@@ -49,9 +63,12 @@ const Registration = () => {
                   </Form.Label>
                   <Form.Select
                     aria-label="Default select example"
-                    style={{ color: "#198754" }}
+                    style={{ color: "#198754" }} 
                   >
-                    <option>Province</option>
+                     <option value="0">
+          Province
+        </option>
+                    
                     <option value="1">Punjab</option>
                     <option value="2">Sindh</option>
                     <option value="3">KPK</option>
@@ -68,7 +85,9 @@ const Registration = () => {
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Choose City</option>
+                         <option value="">
+          Choose City
+        </option>
                     <option value="1">Punjab</option>
                     <option value="2">Sindh</option>
                     <option value="3">KPK</option>
@@ -81,13 +100,13 @@ const Registration = () => {
               <Row className="mb-3">
                 <Form.Group as={Col} md="6" controlId="validationCustom01">
                   <Form.Label style={{ color: "#198754" }}>
-                    Starting Point
+                    Drop Off
                   </Form.Label>
                   <Form.Select
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Drop off</option>
+                  <option value="0">Province</option>
                     <option value="1">Punjab</option>
                     <option value="2">Sindh</option>
                     <option value="3">KPK</option>
@@ -104,13 +123,13 @@ const Registration = () => {
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Choose City</option>
-                    <option value="1">Punjab</option>
-                    <option value="2">Sindh</option>
-                    <option value="3">KPK</option>
-                    <option value="3">Balochistan</option>
-                    <option value="3">AJK</option>
+                    <option value="0">Choose City</option>
+                    <option value="1">AJK</option>
+                    <option value="2">Balochistan</option>
                     <option value="3">Gilgit Baltistan</option>
+                    <option value="3">KPK</option>
+                    <option value="3">Punjab</option>
+                    <option value="3">Sindh</option>
                   </Form.Select>
                 </Form.Group>
               </Row>
@@ -124,8 +143,10 @@ const Registration = () => {
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Timing</option>
-                    <option value="">Home to Office</option>
+                          <option value="0">
+          Home to Office
+        </option>
+                    
                     <option value="9:00 AM">00:00 AM</option>
                     <option value="10:00 AM">00:15 AM</option>
                     <option value="11:00 AM">00:30 AM</option>
@@ -224,13 +245,15 @@ const Registration = () => {
                 </Form.Group>
                 <Form.Group as={Col} md="6" controlId="validationCustom02">
                   <Form.Label style={{ color: "#198754" }}>
-                    Select Timing
+                    Drop-off Time
                   </Form.Label>
                   <Form.Select
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Home to office</option>
+                          <option  value="0">
+          Office to Home
+        </option>
 
                     <option value="9:00 AM">00:00 AM</option>
                     <option value="10:00 AM">00:15 AM</option>
@@ -335,15 +358,16 @@ const Registration = () => {
                   <Form.Label style={{ color: "#198754" }}>
                     I commute (Select Days)
                   </Form.Label>
-                </Form.Group>
-                {["checkbox"].map((type) => (
-                  <div key={`inline-${type}`} className="mb-3">
+                </Form.Group><div className="row d-flex mt-2">
+                  <div className="col-md-6 col-sm-4">
+                  {["checkbox"].map((type) => (
+                  <div key={`inline-${type}`} className="mb-3 d-flex">
                     <Form.Check
                       inline
                       label="Monday"
                       name="group1"
                       type={type}
-                      id={`inline-${type}-1`}
+                      id={`inline-${type}-0`}
                     />
                     <Form.Check
                       inline
@@ -368,7 +392,7 @@ const Registration = () => {
                       inline
                       label="Friday"
                       type={type}
-                      className="mt-2"
+                      
                       id={`inline-${type}-3`}
                     />
                     <Form.Check
@@ -385,6 +409,9 @@ const Registration = () => {
                     />
                   </div>
                 ))}
+                  </div>
+                </div>
+               
               </Row>
 
               <Row className="mb-3">
@@ -394,7 +421,7 @@ const Registration = () => {
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Gender</option>
+                    <option value="0">Gender</option>
                     <option value="1">Male</option>
                     <option value="2">Female</option>
                   </Form.Select>
@@ -407,10 +434,10 @@ const Registration = () => {
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Prefer</option>
+                    
                     <option value="1">Male</option>
                     <option value="2">Female</option>
-                    <option value="3">Others</option>
+                    <option value="3">Both</option>
                   </Form.Select>
                 </Form.Group>
               </Row>
@@ -423,8 +450,9 @@ const Registration = () => {
                   <LocalizationProvider dateAdapter={AdapterDayjs} sx="w">
                     <DemoContainer components={["DatePicker"]}>
                       <DatePicker
-                        label="Basic date picker"
+                        label="MM/DD/YY"
                         sx={{ width: "100%" }}
+                        size={''}
                       />
                     </DemoContainer>
                   </LocalizationProvider>
@@ -437,7 +465,7 @@ const Registration = () => {
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Martial Status</option>
+                    <option value="">Martial Status</option>
                     <option value="1">Married</option>
                     <option value="2">Single</option>
                   </Form.Select>
@@ -453,10 +481,19 @@ const Registration = () => {
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                    <option>Education</option>
+                    <option value="0">Education</option>
                     <option value="1">Phd</option>
                     <option value="2">Master</option>
                     <option value="3">Bachelor</option>
+                    <option value="4">BA</option>
+                    <option value="5">BSC</option>
+                    <option value="6">FSC</option>
+                    <option value="7">FA</option>
+                    <option value="8">I.Com</option>
+                    <option value="9">Matric</option>
+                    <option value="10">Middle</option>
+                    <option value="11">Primary</option>
+
                   </Form.Select>
                 </Form.Group>
                 <Form.Group as={Col} md="6" controlId="validationCustom02">
@@ -480,6 +517,7 @@ const Registration = () => {
                     type="number"
                     placeholder="xxxxxxxxxxxxx"
                     defaultValue=""
+                    maxLength={13}
                   />
                 </Form.Group>
               </Row>
@@ -514,10 +552,62 @@ const Registration = () => {
       <Button variant="" className="btnregistration">Next</Button> </Stack>
               
             </Form>
+             {/* <div className="row">
+                          <div className="col-lg-6 col-md-4">
+                            <Box
+                              component="form"
+                              sx={{
+                                "& .MuiTextField-root": { m: 1, width: "50ch" },
+                              }}
+                              noValidate
+                              autoComplete="off"
+                            >
+                              <div>
+                                <TextField
+                                  id="outlined-multiline-flexible"
+                                  label="Multiline"
+                                  multiline
+                                  maxRows={12}
+                                />
+                                
+                             
+                              </div>
+                             
+                          
+                            </Box>
+                          </div>
+                          <div className="col-lg-6 col-md-4">
+                            <Box
+                              component="form"
+                              sx={{
+                                "& .MuiTextField-root": { m: 1, width: "50ch" },
+                              }}
+                              noValidate
+                              autoComplete="off"
+                            >
+                              <div>
+                                <TextField
+                                  id="outlined-multiline-flexible"
+                                  label=""
+                                  multiline
+                                  maxRows={12}
+                                />
+                                
+                             
+                              </div>
+                             
+                          
+                            </Box>
+                          </div>
+                        
+                        </div> */}
           </div>
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
+   
   );
 };
 

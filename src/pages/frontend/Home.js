@@ -16,7 +16,8 @@ import AddressCards from "./Hompage-components/AddressCards";
 // import Faq from "./Hompage-components/Faq";
 import Otp from './register-form/OtpPage'
 // import ShareRide "./register-form/nestedform";
-import Office from './register-form/WouldYouLikeTo';
+import WouldYouLikeTo from './register-form/WouldYouLikeTo';
+import Driver from './register-form/Driver';
 export default function () {
   return (
     <div>
@@ -38,6 +39,7 @@ export default function () {
       {/* <Faq/> */}
       {/* <Nestedform/> */}
       {/* <Office/> */}
+      {/* <Driver/> */}
     </div>
   );
 }

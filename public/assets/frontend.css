@@ -419,3 +419,19 @@ i {
 img.carousel{
   width: 100%;
 }
+.btnDriver{
+  background-color: #198754!important;
+  color: #ffff !important;
+}
+.btnWhite{
+  background-color: #ffff !important;
+  color: #198754 !important;
+  border-color: #198754!important;
+}
+.new-heading{
+  background-color: #198754!important;
+  color:#ffff;
+}
+.colorplace::placeholder{
+  color: #198754!important;
+}
