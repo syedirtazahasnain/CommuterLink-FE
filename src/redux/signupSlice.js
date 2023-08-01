@@ -9,6 +9,7 @@ const initialState = {
     provider: "",
     otp: "",
     token: "",
+    googletoken:"",
   },
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
@@ -22,11 +22,48 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+
 const Registration = () => {
   const [validated, setValidated] = useState(false);
+  const [dropdowndata, setDropDownData] = useState();
+  const [provinceId, setProvinceId] = useState('');
+  const [selectedProvinceCities, setSelectedProvinceCities] = useState([]);
+  
+  useEffect(() => {
+    getdropdowndata();
+  }, []);
 
+  useEffect(() => {
+    if(provinceId){
+      console.log("provinceId",provinceId)
+    const selectedProvince = dropdowndata?.countries[0]?.provinces.find((province) => province.id == provinceId);
+    console.log(selectedProvince)
+    setSelectedProvinceCities(selectedProvince ? selectedProvince.cities : []);
+    }
+  }, [provinceId]);
+
+  const getdropdowndata = async () => {
+    const response = await fetch(
+      "https://staging.commuterslink.com/api/v1/list/data",
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const jsonresponse = await response.json();
+    setDropDownData(jsonresponse);
+    console.log("jsonresponse", jsonresponse);
+  };
+
+  const handleProvinceChange = (event) => {
+    setProvinceId(event.target.value);
+  };
+
+ 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -39,7 +76,7 @@ const Registration = () => {
   return (
     <>
     <Navbar/>
-     <div  style={{ backgroundColor: "#eee" }}>
+     <div style={{ backgroundColor: "#eee" }}>
       <div className="containter">
         <div className="row justify-content-center">
           <div className="col-md-8 bg-white  mt-5 mb-5">
@@ -49,7 +86,6 @@ const Registration = () => {
                 color: "#198754",
                 marginBottom: "5vh",
                 marginTop: "5vh",
-                
               }}
             >
               {" "}
@@ -63,18 +99,15 @@ const Registration = () => {
                   </Form.Label>
                   <Form.Select
                     aria-label="Default select example"
-                    style={{ color: "#198754" }} 
+                    style={{ color: "#198754" }}
+                    value={provinceId}
+                    onChange={handleProvinceChange}
                   >
-                     <option value="0">
-          Province
-        </option>
-                    
-                    <option value="1">Punjab</option>
-                    <option value="2">Sindh</option>
-                    <option value="3">KPK</option>
-                    <option value="3">Balochistan</option>
-                    <option value="3">AJK</option>
-                    <option value="3">Gilgit Baltistan</option>
+                    {dropdowndata?.countries[0]?.provinces?.map((province) => (
+                      <option key={province.id} value={province.id}>
+                        {province.value}
+                      </option>
+                    ))}
                   </Form.Select>
                 </Form.Group>
                 <Form.Group as={Col} md="6" controlId="validationCustom02">
@@ -85,15 +118,11 @@ const Registration = () => {
                     aria-label="Default select example"
                     style={{ color: "#198754" }}
                   >
-                         <option value="">
-          Choose City
-        </option>
-                    <option value="1">Punjab</option>
-                    <option value="2">Sindh</option>
-                    <option value="3">KPK</option>
-                    <option value="3">Balochistan</option>
-                    <option value="3">AJK</option>
-                    <option value="3">Gilgit Baltistan</option>
+                    {selectedProvinceCities?.map((province) => (
+                      <option key={province.id} value={province.id}>
+                        {province.value}
+                      </option>
+                    ))}
                   </Form.Select>
                 </Form.Group>
               </Row>
@@ -522,35 +551,62 @@ const Registration = () => {
                 </Form.Group>
               </Row>
               <Row className="mb-3">
-                
-
-                  <Form.Group controlId="formFile" as={Col} md="6" className="mb-3">
-        <Form.Label style={{ color: "#198754" }}> Upload CNIC (Front)</Form.Label>
-        <Form.Control type="file" />
-      </Form.Group>
-      <Form.Group controlId="formFile" as={Col} md="6" className="mb-3">
-        <Form.Label style={{ color: "#198754" }}> Upload CNIC (back)</Form.Label>
-        <Form.Control type="file" />
-      </Form.Group>
+                <Form.Group
+                  controlId="formFile"
+                  as={Col}
+                  md="6"
+                  className="mb-3"
+                >
+                  <Form.Label style={{ color: "#198754" }}>
+                    {" "}
+                    Upload CNIC (Front)
+                  </Form.Label>
+                  <Form.Control type="file" />
+                </Form.Group>
+                <Form.Group
+                  controlId="formFile"
+                  as={Col}
+                  md="6"
+                  className="mb-3"
+                >
+                  <Form.Label style={{ color: "#198754" }}>
+                    {" "}
+                    Upload CNIC (back)
+                  </Form.Label>
+                  <Form.Control type="file" />
+                </Form.Group>
               </Row>
 
               <Row className="mb-3">
-                
-
-       
-    <Form.Group controlId="formFile" as={Col} md="12" className="mb-3">
-      <Form.Label style={{ color: "#198754" }}>Upload your picture</Form.Label>
-      <Form.Control type="file" />
-      <Form.Text className="" style={{ color: "#198754" }}>
-      The picture will only be shown to members with whom you agree to commute
-        </Form.Text>
-    </Form.Group>
-    
-            </Row>
-            <Stack direction="row" className="mb-4"  spacing={2} style={{justifyContent:'right'}}>
-      <Button variant="" className="btnregistration">Previous</Button>
-      <Button variant="" className="btnregistration">Next</Button> </Stack>
-              
+                <Form.Group
+                  controlId="formFile"
+                  as={Col}
+                  md="12"
+                  className="mb-3"
+                >
+                  <Form.Label style={{ color: "#198754" }}>
+                    Upload your picture
+                  </Form.Label>
+                  <Form.Control type="file" />
+                  <Form.Text className="" style={{ color: "#198754" }}>
+                    The picture will only be shown to members with whom you
+                    agree to commute
+                  </Form.Text>
+                </Form.Group>
+              </Row>
+              <Stack
+                direction="row"
+                className="mb-4"
+                spacing={2}
+                style={{ justifyContent: "right" }}
+              >
+                <Button variant="" className="btnregistration">
+                  Previous
+                </Button>
+                <Button variant="" className="btnregistration">
+                  Next
+                </Button>{" "}
+              </Stack>
             </Form>
              {/* <div className="row">
                           <div className="col-lg-6 col-md-4">

@@ -18,11 +18,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../../redux/signupSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useGoogleLogin } from "@react-oauth/google";
+
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [provider, setProvider] = useState("web");
@@ -34,6 +35,50 @@ const Signup = () => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
+  
+  function generateRandomPassword() {
+    const length = 8;
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?";
+    let password = "";
+  
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset.charAt(randomIndex);
+    }
+  
+    return password;
+  }
+  const googlesignup = useGoogleLogin({
+    onSuccess: (codeResponse) => handleSuccess(codeResponse),
+    onError: (codeResponse) => handleFailure(codeResponse),
+  });
+  const handleFailure = (response) => {
+   console.log("handleFailure",response);
+  };
+  const handleSuccess = async (response) => {
+    console.log("handleSuccess",response);
+    const profile = await fetch(
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      
+      {
+        headers: {
+          Authorization: `Bearer ${response.access_token}`,
+        },
+        method: "get",
+      }
+    );
+    // var userObject=jwt_decode(response.credential)
+     let userObject = await profile.json();
+     dispatch(
+      setsignupState({
+        name:  userObject.name,
+        email: userObject.email,
+        provider: "google",
+        googletoken:response.access_token,
+        password : generateRandomPassword()
+        }))
+        navigate("/ShareRide");
+  }
   const postData = async () => {
     try {
       if (termsService) {
@@ -64,8 +109,7 @@ const Signup = () => {
               otp: jsonresponse.otp,
               token: jsonresponse.token,
               confirmPassword:confirmPassword
-        })
-          )
+        }))
           navigate("/otp");
         }
         else{
@@ -328,12 +372,13 @@ const Signup = () => {
                             }}
                           >
                             <li class="mr-3">
-                              <a href="https://www.linkedin.com/company/sysreforms-international/">
+                              <a onClick={()=>googlesignup()} >
                                 <img
                                   src={imggoogle}
                                   alt=""
                                   style={{ height: "25px", width: "25px" }}
                                 />
+                               
                               </a>
                             </li>
                             <li class="mr-3">
