@@ -20,7 +20,6 @@ import { setsignupState } from "../../../redux/signupSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 
-
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,31 +34,36 @@ const Signup = () => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
-  
+
   function generateRandomPassword() {
-    const length = 8;
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?";
+    const length = 3;
+    const charset =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?";
     let password = "";
-  
+
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * charset.length);
       password += charset.charAt(randomIndex);
     }
-  
+
     return password;
+  }
+
+  function generateRandomOtp(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   const googlesignup = useGoogleLogin({
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
     onError: (codeResponse) => handleFailure(codeResponse),
   });
   const handleFailure = (response) => {
-   console.log("handleFailure",response);
+    console.log("handleFailure", response);
   };
   const handleSuccess = async (response) => {
-    console.log("handleSuccess",response);
+     
     const profile = await fetch(
       "https://www.googleapis.com/oauth2/v3/userinfo",
-      
+
       {
         headers: {
           Authorization: `Bearer ${response.access_token}`,
@@ -68,17 +72,56 @@ const Signup = () => {
       }
     );
     // var userObject=jwt_decode(response.credential)
-     let userObject = await profile.json();
-     dispatch(
-      setsignupState({
-        name:  userObject.name,
-        email: userObject.email,
-        provider: "google",
-        googletoken:response.access_token,
-        password : generateRandomPassword()
-        }))
+    let userObject = await profile.json();
+    const googleuserdata = {
+      name: userObject.name,
+      email: userObject.email,
+      provider: "google",
+      provider_id:"DasD" + generateRandomOtp(0,1000000),
+      googletoken: response.access_token,
+      password: "jWaeo@123" + generateRandomPassword(),
+      otp: generateRandomOtp(0,1000000),
+      phone: "",
+    };
+    dispatch(setsignupState(googleuserdata));
+    signupgoogledatapost(googleuserdata)
+  };
+  const signupgoogledatapost = async (userData) => {
+    try {
+      const body = {
+        email: userData.email,
+        number: userData.phone,
+        provider: userData.provider,
+        password: userData.password,
+        provider_id: userData.provider_id,
+        confirm_password: userData.password,
+        name: userData.name,
+        otp: userData.otp,
+        token: userData.googletoken,
+      };
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      const jsonresponse = await response.json();
+       
+      if (jsonresponse.statusCode == 200) {
+        console.log(jsonresponse);
         navigate("/ShareRide");
-  }
+      } else {
+        alert("Error: " + jsonresponse.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const postData = async () => {
     try {
       if (termsService) {
@@ -87,18 +130,20 @@ const Signup = () => {
           number: phoneNumber,
           signatur: "",
         };
-        const response =await fetch("https://staging.commuterslink.com/api/v1/send/otp", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        })
-        
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/send/otp",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
         const jsonresponse = await response.json();
-    
-        if(jsonresponse.statusCode ==200){
-          
+
+        if (jsonresponse.statusCode == 200) {
           dispatch(
             setsignupState({
               name: fullName,
@@ -108,13 +153,13 @@ const Signup = () => {
               provider: provider,
               otp: jsonresponse.otp,
               token: jsonresponse.token,
-              confirmPassword:confirmPassword
-        }))
+              confirmPassword: confirmPassword,
+            })
+          );
           navigate("/otp");
+        } else {
+          alert("Error: " + jsonresponse.message);
         }
-        else{
-          alert("Error: " + jsonresponse.message)
-        } 
       } else {
         alert("please check Terms of Service");
       }
@@ -161,12 +206,7 @@ const Signup = () => {
       setisValidConfirmPassword(false);
     }
   };
-  const Size = {
-    fonstSize: "14px",
-    marginBottom: "8px",
-    width: "350px",
-    margin: "auto",
-  };
+
   return (
     <div>
       <div>
@@ -372,13 +412,12 @@ const Signup = () => {
                             }}
                           >
                             <li class="mr-3">
-                              <a onClick={()=>googlesignup()} >
+                              <a onClick={() => googlesignup()}>
                                 <img
                                   src={imggoogle}
                                   alt=""
                                   style={{ height: "25px", width: "25px" }}
                                 />
-                               
                               </a>
                             </li>
                             <li class="mr-3">
