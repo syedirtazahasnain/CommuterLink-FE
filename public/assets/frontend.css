@@ -435,3 +435,6 @@ img.carousel{
 .colorplace::placeholder{
   color: #198754!important;
 }
+.cardpadding{
+  padding: 100px!important;
+}

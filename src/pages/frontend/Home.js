@@ -18,10 +18,11 @@ import Otp from './register-form/OtpPage'
 // import ShareRide "./register-form/nestedform";
 import WouldYouLikeTo from './register-form/WouldYouLikeTo';
 import Driver from './register-form/Driver';
+import NumberGenerate from "./register-form/NumberGenerate";
 export default function () {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar />
      
       <CarouselSlider />
       <MyAccordion />
@@ -31,7 +32,7 @@ export default function () {
       <Contribute />
       <Contact />
       <AddressCards />
-      <Footer />
+      <Footer /> */}
       {/* <Signup/>
              <Login/> */}
       {/* <Registration/> */}
@@ -40,6 +41,7 @@ export default function () {
       {/* <Nestedform/> */}
       {/* <Office/> */}
       {/* <Driver/> */}
+      <NumberGenerate/>
     </div>
   );
 }
