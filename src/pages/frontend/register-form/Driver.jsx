@@ -25,7 +25,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 const Driver = () => {
-  
+
   const navigate = useNavigate();
   const [showmyself, setshowmyself] = useState(false);
   const [showmydriver, setshowmydriver] = useState(false);
@@ -271,7 +271,8 @@ const Driver = () => {
                 <div className="row">
                   <div className="col">
                     <div className="container text-center d-flex justify-content-center pt-2 flex-wrap">
-                      <div
+                      <Button
+                        variant="outlined"
                         className={`btn ${showmyself === true ? "btnDriver" : "btnWhite" }  btn-toogle pt-2 mx-2 mt-3`}
                         onClick={() => {
                           setshowmyself(true);
@@ -281,8 +282,9 @@ const Driver = () => {
                         data-toggle="buttons"
                       >
                         I Driver MySelf
-                      </div>
-                      <div
+                      </Button>
+                      <Button
+                        variant="outlined"
                         className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite" }  btn-toogle pt-2 mx-2 mt-3`}
                         onClick={() => {
                           setshowmyself(false);
@@ -292,8 +294,9 @@ const Driver = () => {
                         data-toggle="buttons"
                       >
                         My Driver Drives
-                      </div>
-                      <div
+                      </Button>
+                      <Button
+                        variant="outlined"
                         className={`btn ${showboth === true ? "btnDriver" : "btnWhite" }  btn-toogle pt-2 mx-2 mt-3`}
                         onClick={() => {
                           setshowmydriver(false);
@@ -303,7 +306,7 @@ const Driver = () => {
                         data-toggle="buttons"
                       >
                         Both
-                      </div>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -402,7 +405,7 @@ const Driver = () => {
                           required
                           type="text"
                           className="colorplace"
-                          placeholder="CNIC:xxxxxxxxxxxxx"
+                          placeholder="CNIC: xxxxxxxxxxxxx"
                           defaultValue=""
                           maxLength={13}
                         />
@@ -521,7 +524,7 @@ const Driver = () => {
                           required
                           type="text"
                           className="colorplace"
-                          placeholder="CNIC:xxxxxxxxxxxxx"
+                          placeholder="CNIC: xxxxxxxxxxxxx"
                           defaultValue=""
                           maxLength={13}
                         />

@@ -444,8 +444,14 @@ img.carousel{
 }
 .btnDriver{
   background-color: #198754!important;
+  box-shadow: none !important;
   color: #ffff !important;
 }
+
+.btnDriver:hover{
+  border-color: #198754!important;
+}
+
 .btnWhite{
   background-color: #ffff !important;
   color: #198754 !important;
