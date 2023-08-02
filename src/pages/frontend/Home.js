@@ -22,6 +22,7 @@ export default function () {
   return (
     <div>
       <Navbar />
+      <Navbar />
      
       <CarouselSlider />
       <MyAccordion />

@@ -14,7 +14,7 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { Container, Row } from 'react-bootstrap';
@@ -27,48 +27,79 @@ import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const Registration = () => {
+  
+  const navigate = useNavigate();
+  const[locationString, setLocationString] = useState("");
   const [validated, setValidated] = useState(false);
-  const [dropdowndata, setDropDownData] = useState();
-  const [startingProvinceId, setStartingProvinceId] = useState("");
-  const [startingSelectedProvinceCities, setstartingSelectedProvinceCities] = useState([]);
-  const [startingCityId, setStartingCityId] = useState("");
-  const [StartingSelectedCityArea, setStartingSelectedCityArea] = useState([]);
-  const [dropOffProvinceId, setDropOffProvinceId] = useState("");
-  const [dropOffSelectedProvinceCities, setDropOffSelectedProvinceCities] = useState([]);
-  const [dropOffCityId, setDropOffCityId] = useState("");
-  const [dropOffSelectedCityArea, setDropOffSelectedCityArea] = useState([]);
+  const [homeTimeSlots, setHomeTimeSlots] = useState([]);
+  const [selectedHomeTime, setSelectedHomeTime] = useState("");
+  const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
+  const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
+  // For Start Point
+  const [dropdownStartdata, setDropDownStartData] = useState();
+  const [provinceStartId, setProvinceStartId] = useState("");
+  const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
+  const [cityStartId, setCityStartId] = useState("");
+  const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
+  // For End Point
+  const [dropdownEnddata, setDropDownEndData] = useState();
+  const [provinceEndId, setProvinceEndId] = useState("");
+  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
+  const [cityEndId, setCityEndId] = useState("");
+  const [selectedEndCityArea, setSelectedEndCityArea] = useState([]);
+  
+  const [defaultCenter, setDefaultCenter] = useState ({
+    lat: 40.712776,
+    lng: -74.005974,
+  });
 
-  const [defaultCenter, setDefaultCenter] = useState({ lat: 0, lng: 0 });
-  const [locationString , setLocationString] = useState("Islamabad")
+  const nextPage = () => {
+    navigate("/registration/driving-form");
+  }
 
   useEffect(() => {
-    getdropdowndata();
+    getdropdownStartdata();
   }, []);
 
   useEffect(() => {
-    if (startingProvinceId) {
-      const selectedProvince = dropdowndata?.countries[0]?.provinces.find(
-        (province) => province.id == startingProvinceId
+    if (provinceStartId) {
+      const selectedStartProvince = dropdownStartdata?.countries[0]?.provinces.find(
+        (province) => province.id == provinceStartId
       );
-      setstartingSelectedProvinceCities(
-        selectedProvince ? selectedProvince.cities : []
+      setSelectedStartProvinceCities(
+        selectedStartProvince ? selectedStartProvince.cities : []
       );
     }
-  }, [startingProvinceId]);
+    if (provinceEndId) {
+      const selectedEndProvince = dropdownEnddata?.countries[0]?.provinces.find(
+        (province) => province.id == provinceEndId
+      );
+      setSelectedEndProvinceCities(
+        selectedEndProvince ? selectedEndProvince.cities : []
+      );
+    }
+  }, [provinceStartId, provinceEndId]);
 
   useEffect(() => {
-    if (startingCityId) {
-      const filteredCities = dropdowndata.area.filter(
-        (city) => city.parent_id == startingCityId
+    
+    if (cityStartId ) {
+      const filteredStartCities = dropdownStartdata.area.filter(
+        (city) => city.parent_id == cityStartId
       );
-      const citystring= startingSelectedProvinceCities.filter(
-        (city) => city.id == startingCityId
-      );
-     
-      setLocationString(citystring[0].value)
-      setStartingSelectedCityArea(filteredCities ? filteredCities : []);
+      console.log("filteredCities", filteredStartCities);
+      setSelectedStartCityArea(filteredStartCities ? filteredStartCities : []);
+      setLocationString(filteredStartCities[0].value)
     }
-  }, [startingCityId]);
+
+    if (cityEndId) {
+      const filteredEndCities = dropdownEnddata.area.filter(
+        (city) => city.parent_id == cityEndId
+      );
+      console.log("filteredCities", filteredEndCities);
+      setSelectedEndCityArea(filteredEndCities ? filteredEndCities : []);
+      setLocationString(filteredEndCities[0].value)
+    }
+  }, [cityStartId, cityEndId]);
 
   useEffect(() => {
     // Function to fetch the geocoding data
@@ -93,7 +124,7 @@ const Registration = () => {
     getGeocodeData();
   }, [locationString]);
 
-  const getdropdowndata = async () => {
+  const getdropdownStartdata = async () => {
     const response = await fetch(
       "https://staging.commuterslink.com/api/v1/list/data",
       {
@@ -104,12 +135,19 @@ const Registration = () => {
       }
     );
     const jsonresponse = await response.json();
-    setDropDownData(jsonresponse);
-    console.log("jsonresponse", jsonresponse);
+    setDropDownStartData(jsonresponse);
+    setDropDownEndData(jsonresponse);
+    setHomeTimeSlots(jsonresponse.time_slots);
+    setOfficeTimeSlots(jsonresponse.time_slots);
+    console.log(jsonresponse);
   };
 
-  const handleProvinceChange = (event) => {
-    setStartingProvinceId(event.target.value);
+  const handleProvinceStartChange = (event) => {
+    setProvinceStartId(event.target.value);
+  };
+
+  const handleProvinceEndChange = (event) => {
+    setProvinceEndId(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -120,11 +158,12 @@ const Registration = () => {
     }
     setValidated(true);
   };
+  
   return (
     <>
       <Navbar />
       <div style={{ backgroundColor: "#eee" }}>
-        <div className="containter">
+        <div className="containter p-5">
           <div className="row justify-content-center">
             <div className="col-md-8 bg-white  mt-5 mb-5">
               <h1
@@ -135,25 +174,25 @@ const Registration = () => {
                   marginTop: "5vh",
                 }}
               >
-                {" "}
                 Registration
-              </h1>{" "}
+              </h1>
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Row className="mb-3">
-                  <Form.Group as={Col}  md={startingCityId ? '4' : '6'} controlId="validationCustom01">
+                  <Form.Group as={Col}  md={cityStartId ? '4' : '6'} controlId="validationCustom01">
                     <Form.Label style={{ color: "#198754" }}>
                       Starting Point
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
-                      value={startingProvinceId}
-                      onChange={handleProvinceChange}
+                      value={provinceStartId}
+                      onChange={handleProvinceStartChange}
+                      required
                     >
                       <option value="" disabled hidden>
                         Select a Starting Point
                       </option>
-                      {dropdowndata?.countries[0]?.provinces?.map(
+                      {dropdownStartdata?.countries[0]?.provinces?.map(
                         (province) => (
                           <option key={province.id} value={province.id}>
                             {province.value}
@@ -162,27 +201,28 @@ const Registration = () => {
                       )}
                     </Form.Select>
                   </Form.Group>
-                  <Form.Group as={Col} md={startingCityId ? '4' : '6'} controlId="validationCustom02">
+                  <Form.Group as={Col} md={cityStartId ? '4' : '6'} controlId="validationCustom02">
                     <Form.Label style={{ color: "#198754" }}>
                       Select City
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
-                      value={startingCityId}
-                      onChange={(e) => setStartingCityId(e.target.value)}
+                      value={cityStartId}
+                      onChange={(e) => setCityStartId(e.target.value)}
+                      required
                     >
                       <option value="" disabled hidden>
                         Select a city
                       </option>
-                      {startingSelectedProvinceCities?.map((province) => (
+                      {selectedStartProvinceCities?.map((province) => (
                         <option key={province.id} value={province.id}>
                           {province.value}
                         </option>
                       ))}
                     </Form.Select>
                   </Form.Group>
-                  {startingCityId && (
+                  {cityStartId && (
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                       <Form.Label style={{ color: "#198754" }}>
                         Select Area from Dropdown
@@ -190,71 +230,86 @@ const Registration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        required
                       >
                         <option value="" disabled hidden>
                           Select Area from Dropdown
                         </option>
-                        {StartingSelectedCityArea?.map((province) => (
+                        {selectedStartCityArea?.map((province) => (
                           <option key={province.id} value={province.id}>
                             {province.value}
                           </option>
                         ))}
                       </Form.Select>
-
-                      <spain>
-                        Can't find your area?
-                        <a>Add Another</a>
-                      </spain>
+                      <LoadScript googleMapsApiKey={""}>
+                        <GoogleMap
+                           
+                          zoom={10}
+                          center={defaultCenter}
+                        >
+                          <spain>
+                            Can't find your area?
+                            <a  >
+                              Add Another
+                            </a>
+                          </spain>
+                        </GoogleMap>
+                      </LoadScript>
                     </Form.Group>
                   )}
                 </Row>
-                {startingCityId &&  <Container
-                  className="d-flex justify-content-center align-items-center">
-                  <Row style={{ height: "80%", width: "80%" }}>
-                    <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
-                      <GoogleMap zoom={10} center={defaultCenter} mapContainerStyle={{  width: "100%" ,height: "50vh"}}>
-                        Map
-                      </GoogleMap>
-                    </LoadScript>
-                  </Row>
-                </Container>}
-                
                 <Row className="mb-3">
-                  <Form.Group as={Col} md={dropOffCityId ? '4' : '6'} controlId="validationCustom01">
-                    <Form.Label style={{ color: "#198754" }}>
+                  <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
+                    <Form.Label 
+                      style={{ color: "#198754" }}
+                    >
                       Drop Off
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
+                      value={provinceEndId}
+                      onChange={handleProvinceEndChange}
+                      required
                     >
-                      <option value="0">Province</option>
-                      <option value="1">Punjab</option>
-                      <option value="2">Sindh</option>
-                      <option value="3">KPK</option>
-                      <option value="3">Balochistan</option>
-                      <option value="3">AJK</option>
-                      <option value="3">Gilgit Baltistan</option>
+                      <option value="" disabled hidden>
+                        Select a Drop Off Point
+                      </option>
+                      {dropdownEnddata?.countries[0]?.provinces?.map(
+                        (province) => (
+                          <option key={province.id} value={province.id}>
+                            {province.value}
+                          </option>
+                        )
+                      )}
                     </Form.Select>
                   </Form.Group>
-                  <Form.Group as={Col} md={dropOffCityId ? '4' : '6'} controlId="validationCustom02">
-                    <Form.Label style={{ color: "#198754" }}>
+                  <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom02">
+                    <Form.Label 
+                      style={{ color: "#198754" }} 
+                      value={cityEndId}
+                      onChange={(e) => setCityEndId(e.target.value)}
+                      >
                       Select City
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
+                      value={cityEndId}
+                      onChange={(e) => setCityEndId(e.target.value)}
+                      required
                     >
-                      <option value="0">Choose City</option>
-                      <option value="1">AJK</option>
-                      <option value="2">Balochistan</option>
-                      <option value="3">Gilgit Baltistan</option>
-                      <option value="3">KPK</option>
-                      <option value="3">Punjab</option>
-                      <option value="3">Sindh</option>
+                      <option value="" disabled hidden>
+                        Select a city
+                      </option>
+                      {selectedEndProvinceCities?.map((province) => (
+                        <option key={province.id} value={province.id}>
+                          {province.value}
+                        </option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
-                  {dropOffCityId && (
+                  {cityEndId && (
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                       <Form.Label style={{ color: "#198754" }}>
                         Select Area from Dropdown
@@ -262,24 +317,35 @@ const Registration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        required
                       >
                         <option value="" disabled hidden>
                           Select Area from Dropdown
                         </option>
-                        {StartingSelectedCityArea?.map((province) => (
+                        {selectedEndCityArea?.map((province) => (
                           <option key={province.id} value={province.id}>
                             {province.value}
                           </option>
                         ))}
                       </Form.Select>
-
-                      <spain>
-                        Can't find your area?
-                        <a>Add Another</a>
-                      </spain>
+                      <LoadScript googleMapsApiKey={""}>
+                        <GoogleMap
+                           
+                          zoom={10}
+                          center={defaultCenter}
+                        >
+                          <spain>
+                            Can't find your area?
+                            <a  >
+                              Add Another
+                            </a>
+                          </spain>
+                        </GoogleMap>
+                      </LoadScript>
                     </Form.Group>
                   )}
                 </Row>
+
                 <Row className="mb-3">
                   <Form.Group as={Col} md="6" controlId="validationCustom01">
                     <Form.Label style={{ color: "#198754" }}>
@@ -288,103 +354,18 @@ const Registration = () => {
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
+                      value={selectedHomeTime}
+                      onChange={(e) => setSelectedHomeTime(e.target.value)}
+                      required
                     >
-                      <option value="0">Home to Office</option>
-
-                      <option value="9:00 AM">00:00 AM</option>
-                      <option value="10:00 AM">00:15 AM</option>
-                      <option value="11:00 AM">00:30 AM</option>
-                      <option value="12:00 PM">00:45 AM</option>
-                      <option value="1:00 PM">01:00 AM</option>
-                      <option value="2:00 PM">01:15 AM</option>
-                      <option value="3:00 PM">01:30 AM</option>
-                      <option value="4:00 PM">01:45 AM</option>
-                      <option value="5:00 PM">02:00 AM</option>
-                      <option value="6:00 PM">02:30 AM</option>
-                      <option value="6:00 PM">02:45 AM</option>
-                      <option value="6:00 PM">03:00 AM</option>
-                      <option value="6:00 PM">03:15 AM</option>
-                      <option value="6:00 PM">03:30 AM</option>
-                      <option value="6:00 PM">03:45 AM</option>
-                      <option value="6:00 PM">04:00 AM</option>
-                      <option value="6:00 PM">04:15 AM</option>
-                      <option value="6:00 PM">04:30 AM</option>
-                      <option value="6:00 PM">04:45 AM</option>
-                      <option value="6:00 PM">05:00 AM</option>
-                      <option value="6:00 PM">05:15 AM</option>
-                      <option value="6:00 PM">05:30 AM</option>
-                      <option value="6:00 PM">05:45 AM</option>
-                      <option value="6:00 PM">06:00 AM</option>
-                      <option value="6:00 PM">06:15 AM</option>
-                      <option value="6:00 PM">06:30 AM</option>
-                      <option value="6:00 PM">06:45 AM</option>
-                      <option value="6:00 PM">07:00 AM</option>
-                      <option value="6:00 PM">07:15 AM</option>
-                      <option value="6:00 PM">07:30 AM</option>
-                      <option value="6:00 PM">07:45 AM</option>
-                      <option value="6:00 PM">08:00 AM</option>
-                      <option value="6:00 PM">08:15 AM</option>
-                      <option value="6:00 PM">08:30 AM</option>
-                      <option value="6:00 PM">08:45 AM</option>
-                      <option value="6:00 PM">09:00 AM</option>
-                      <option value="6:00 PM">09:15 AM</option>
-                      <option value="6:00 PM">09:30 AM</option>
-                      <option value="6:00 PM">09:45 AM</option>
-                      <option value="6:00 PM">10:00 AM</option>
-                      <option value="6:00 PM">10:15 AM</option>
-                      <option value="6:00 PM">10:30 AM</option>
-                      <option value="6:00 PM">10:45 AM</option>
-                      <option value="6:00 PM">11:00 AM</option>
-                      <option value="6:00 PM">11:15 AM</option>
-                      <option value="6:00 PM">11:30 AM</option>
-                      <option value="6:00 PM">11:45 AM</option>
-                      <option value="6:00 PM">12:00 PM</option>
-                      <option value="6:00 PM">12:15 PM</option>
-                      <option value="6:00 PM">12:30 PM</option>
-                      <option value="6:00 PM">12:45 PM</option>
-                      <option value="6:00 PM">01:00 PM</option>
-                      <option value="2:00 PM">01:15 PM</option>
-                      <option value="3:00 PM">01:30 PM</option>
-                      <option value="4:00 PM">01:45 PM</option>
-                      <option value="5:00 PM">02:00 PM</option>
-                      <option value="6:00 PM">02:30 PM</option>
-                      <option value="6:00 PM">02:45 PM</option>
-                      <option value="6:00 PM">03:00 PM</option>
-                      <option value="6:00 PM">03:15 PM</option>
-                      <option value="6:00 PM">03:30 PM</option>
-                      <option value="6:00 PM">03:45 PM</option>
-                      <option value="6:00 PM">04:00 PM</option>
-                      <option value="6:00 PM">04:15 PM</option>
-                      <option value="6:00 PM">04:30 PM</option>
-                      <option value="6:00 PM">04:45 PM</option>
-                      <option value="6:00 PM">05:00 PM</option>
-                      <option value="6:00 PM">05:15 PM</option>
-                      <option value="6:00 PM">05:30 PM</option>
-                      <option value="6:00 PM">05:45 PM</option>
-                      <option value="6:00 PM">06:00 PM</option>
-                      <option value="6:00 PM">06:15 PM</option>
-                      <option value="6:00 PM">06:30 PM</option>
-                      <option value="6:00 PM">06:45 PM</option>
-                      <option value="6:00 PM">07:00 PM</option>
-                      <option value="6:00 PM">07:15 PM</option>
-                      <option value="6:00 PM">07:30 PM</option>
-                      <option value="6:00 PM">07:45 PM</option>
-                      <option value="6:00 PM">08:00 PM</option>
-                      <option value="6:00 PM">08:15 PM</option>
-                      <option value="6:00 PM">08:30 PM</option>
-                      <option value="6:00 PM">08:45 PM</option>
-                      <option value="6:00 PM">09:00 PM</option>
-                      <option value="6:00 PM">09:15 PM</option>
-                      <option value="6:00 PM">09:30 PM</option>
-                      <option value="6:00 PM">09:45 PM</option>
-                      <option value="6:00 PM">10:00 PM</option>
-                      <option value="6:00 PM">10:15 PM</option>
-                      <option value="6:00 PM">10:30 PM</option>
-                      <option value="6:00 PM">10:45 PM</option>
-                      <option value="6:00 PM">11:00 PM</option>
-                      <option value="6:00 PM">11:15 PM</option>
-                      <option value="6:00 PM">11:30 PM</option>
-                      <option value="6:00 PM">11:45 PM</option>
+                      <option value="" disabled hidden>
+                            Home to Office
+                        </option>
+                        {homeTimeSlots?.map((time) => (
+                          <option key={time.id} value={time.time_string}>
+                            {time.time_string}
+                          </option>
+                        ))}
                     </Form.Select>
                   </Form.Group>
                   <Form.Group as={Col} md="6" controlId="validationCustom02">
@@ -394,103 +375,18 @@ const Registration = () => {
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
+                      value={selectedOfficeTime}
+                      onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                      required
                     >
-                      <option value="0">Office to Home</option>
-
-                      <option value="9:00 AM">00:00 AM</option>
-                      <option value="10:00 AM">00:15 AM</option>
-                      <option value="11:00 AM">00:30 AM</option>
-                      <option value="12:00 PM">00:45 AM</option>
-                      <option value="1:00 PM">01:00 AM</option>
-                      <option value="2:00 PM">01:15 AM</option>
-                      <option value="3:00 PM">01:30 AM</option>
-                      <option value="4:00 PM">01:45 AM</option>
-                      <option value="5:00 PM">02:00 AM</option>
-                      <option value="6:00 PM">02:30 AM</option>
-                      <option value="6:00 PM">02:45 AM</option>
-                      <option value="6:00 PM">03:00 AM</option>
-                      <option value="6:00 PM">03:15 AM</option>
-                      <option value="6:00 PM">03:30 AM</option>
-                      <option value="6:00 PM">03:45 AM</option>
-                      <option value="6:00 PM">04:00 AM</option>
-                      <option value="6:00 PM">04:15 AM</option>
-                      <option value="6:00 PM">04:30 AM</option>
-                      <option value="6:00 PM">04:45 AM</option>
-                      <option value="6:00 PM">05:00 AM</option>
-                      <option value="6:00 PM">05:15 AM</option>
-                      <option value="6:00 PM">05:30 AM</option>
-                      <option value="6:00 PM">05:45 AM</option>
-                      <option value="6:00 PM">06:00 AM</option>
-                      <option value="6:00 PM">06:15 AM</option>
-                      <option value="6:00 PM">06:30 AM</option>
-                      <option value="6:00 PM">06:45 AM</option>
-                      <option value="6:00 PM">07:00 AM</option>
-                      <option value="6:00 PM">07:15 AM</option>
-                      <option value="6:00 PM">07:30 AM</option>
-                      <option value="6:00 PM">07:45 AM</option>
-                      <option value="6:00 PM">08:00 AM</option>
-                      <option value="6:00 PM">08:15 AM</option>
-                      <option value="6:00 PM">08:30 AM</option>
-                      <option value="6:00 PM">08:45 AM</option>
-                      <option value="6:00 PM">09:00 AM</option>
-                      <option value="6:00 PM">09:15 AM</option>
-                      <option value="6:00 PM">09:30 AM</option>
-                      <option value="6:00 PM">09:45 AM</option>
-                      <option value="6:00 PM">10:00 AM</option>
-                      <option value="6:00 PM">10:15 AM</option>
-                      <option value="6:00 PM">10:30 AM</option>
-                      <option value="6:00 PM">10:45 AM</option>
-                      <option value="6:00 PM">11:00 AM</option>
-                      <option value="6:00 PM">11:15 AM</option>
-                      <option value="6:00 PM">11:30 AM</option>
-                      <option value="6:00 PM">11:45 AM</option>
-                      <option value="6:00 PM">12:00 PM</option>
-                      <option value="6:00 PM">12:15 PM</option>
-                      <option value="6:00 PM">12:30 PM</option>
-                      <option value="6:00 PM">12:45 PM</option>
-                      <option value="6:00 PM">01:00 PM</option>
-                      <option value="2:00 PM">01:15 PM</option>
-                      <option value="3:00 PM">01:30 PM</option>
-                      <option value="4:00 PM">01:45 PM</option>
-                      <option value="5:00 PM">02:00 PM</option>
-                      <option value="6:00 PM">02:30 PM</option>
-                      <option value="6:00 PM">02:45 PM</option>
-                      <option value="6:00 PM">03:00 PM</option>
-                      <option value="6:00 PM">03:15 PM</option>
-                      <option value="6:00 PM">03:30 PM</option>
-                      <option value="6:00 PM">03:45 PM</option>
-                      <option value="6:00 PM">04:00 PM</option>
-                      <option value="6:00 PM">04:15 PM</option>
-                      <option value="6:00 PM">04:30 PM</option>
-                      <option value="6:00 PM">04:45 PM</option>
-                      <option value="6:00 PM">05:00 PM</option>
-                      <option value="6:00 PM">05:15 PM</option>
-                      <option value="6:00 PM">05:30 PM</option>
-                      <option value="6:00 PM">05:45 PM</option>
-                      <option value="6:00 PM">06:00 PM</option>
-                      <option value="6:00 PM">06:15 PM</option>
-                      <option value="6:00 PM">06:30 PM</option>
-                      <option value="6:00 PM">06:45 PM</option>
-                      <option value="6:00 PM">07:00 PM</option>
-                      <option value="6:00 PM">07:15 PM</option>
-                      <option value="6:00 PM">07:30 PM</option>
-                      <option value="6:00 PM">07:45 PM</option>
-                      <option value="6:00 PM">08:00 PM</option>
-                      <option value="6:00 PM">08:15 PM</option>
-                      <option value="6:00 PM">08:30 PM</option>
-                      <option value="6:00 PM">08:45 PM</option>
-                      <option value="6:00 PM">09:00 PM</option>
-                      <option value="6:00 PM">09:15 PM</option>
-                      <option value="6:00 PM">09:30 PM</option>
-                      <option value="6:00 PM">09:45 PM</option>
-                      <option value="6:00 PM">10:00 PM</option>
-                      <option value="6:00 PM">10:15 PM</option>
-                      <option value="6:00 PM">10:30 PM</option>
-                      <option value="6:00 PM">10:45 PM</option>
-                      <option value="6:00 PM">11:00 PM</option>
-                      <option value="6:00 PM">11:15 PM</option>
-                      <option value="6:00 PM">11:30 PM</option>
-                      <option value="6:00 PM">11:45 PM</option>
+                      <option value="" disabled hidden>
+                            Office to Home
+                        </option>
+                        {officeTimeSlots?.map((time) => (
+                          <option key={time.id} value={time.time_string}>
+                            {time.time_string}
+                          </option>
+                        ))}
                     </Form.Select>
                   </Form.Group>
                 </Row>
@@ -501,56 +397,64 @@ const Registration = () => {
                       I commute (Select Days)
                     </Form.Label>
                   </Form.Group>
-                  <div className="row d-flex mt-2">
-                    <div className="col-md-6 col-sm-4">
-                      {["checkbox"].map((type) => (
-                        <div key={`inline-${type}`} className="mb-3 d-flex">
-                          <Form.Check
+
+                    <div className="row d-flex mt-2">
+                      <div className="col">
+                        {["checkbox"].map((type) => (
+                        <div key={`inline-${type}`} className="mb-3 d-flex flex-wrap">
+                            <Form.Check
                             inline
                             label="Monday"
                             name="group1"
                             type={type}
                             id={`inline-${type}-0`}
-                          />
-                          <Form.Check
+                            required
+                            />
+                            <Form.Check
                             inline
                             label="Tuesday"
                             name="group1"
                             type={type}
                             id={`inline-${type}-2`}
-                          />
-                          <Form.Check
+                            required
+                            />
+                            <Form.Check
                             inline
                             label="Wednesday"
                             type={type}
                             id={`inline-${type}-3`}
-                          />
-                          <Form.Check
+                            required
+                            />
+                            <Form.Check
                             inline
                             label="Thursday"
                             type={type}
                             id={`inline-${type}-3`}
-                          />
-                          <Form.Check
+                            required
+                            />
+                            <Form.Check
                             inline
                             label="Friday"
                             type={type}
                             id={`inline-${type}-3`}
-                          />
-                          <Form.Check
+                            required
+                            />
+                            <Form.Check
                             inline
                             label="Saturday"
                             type={type}
                             id={`inline-${type}-3`}
-                          />
-                          <Form.Check
+                            required
+                            />
+                            <Form.Check
                             inline
                             label="Sunday"
                             type={type}
                             id={`inline-${type}-3`}
-                          />
+                            required
+                            />
                         </div>
-                      ))}
+                        ))}
                     </div>
                   </div>
                 </Row>
@@ -561,10 +465,11 @@ const Registration = () => {
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
+                      required
                     >
-                      <option value="0">Gender</option>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
+                      <option value="" hidden> Gender </option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
                     </Form.Select>
                   </Form.Group>
                   <Form.Group as={Col} md="6" controlId="validationCustom02">
@@ -574,10 +479,12 @@ const Registration = () => {
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
+                      required
                     >
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
-                      <option value="3">Both</option>
+                      <option value="" hidden>Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Both">Both</option>
                     </Form.Select>
                   </Form.Group>
                 </Row>
@@ -590,9 +497,15 @@ const Registration = () => {
                     <LocalizationProvider dateAdapter={AdapterDayjs} sx="w">
                       <DemoContainer components={["DatePicker"]}>
                         <DatePicker
-                          label="MM/DD/YY"
+                           label={
+                            <span style={{ color: "#198754" }}>
+                              MM/DD/YY
+                            </span>
+                          }
                           sx={{ width: "100%" }}
+                          inputProps={{ style: { color: '#198754' } }}
                           size={""}
+                          required
                         />
                       </DemoContainer>
                     </LocalizationProvider>
@@ -604,8 +517,9 @@ const Registration = () => {
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
+                      required
                     >
-                      <option value="">Martial Status</option>
+                      <option value="" hidden>Martial Status</option>
                       <option value="1">Married</option>
                       <option value="2">Single</option>
                     </Form.Select>
@@ -620,19 +534,20 @@ const Registration = () => {
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
+                      required
                     >
-                      <option value="0">Education</option>
-                      <option value="1">Phd</option>
-                      <option value="2">Master</option>
-                      <option value="3">Bachelor</option>
-                      <option value="4">BA</option>
-                      <option value="5">BSC</option>
-                      <option value="6">FSC</option>
-                      <option value="7">FA</option>
-                      <option value="8">I.Com</option>
-                      <option value="9">Matric</option>
-                      <option value="10">Middle</option>
-                      <option value="11">Primary</option>
+                      <option value="" hidden>Education</option>
+                      <option value="Phd">Phd</option>
+                      <option value="Master">Master</option>
+                      <option value="Bachelor">Bachelor</option>
+                      <option value="BA">BA</option>
+                      <option value="BSC">BSC</option>
+                      <option value="FSC">FSC</option>
+                      <option value="FA">FA</option>
+                      <option value="I.Com">I.Com</option>
+                      <option value="Matric">Matric</option>
+                      <option value="Middle">Middle</option>
+                      <option value="Primary">Primary</option>
                     </Form.Select>
                   </Form.Group>
                   <Form.Group as={Col} md="6" controlId="validationCustom02">
@@ -642,6 +557,7 @@ const Registration = () => {
                     <Form.Control
                       required
                       type="text"
+                      className="colorplace"
                       placeholder="Profession (Engineer, Doctor, etc)"
                       defaultValue=""
                     />
@@ -654,6 +570,7 @@ const Registration = () => {
                     <Form.Control
                       required
                       type="number"
+                      className="colorplace"
                       placeholder="xxxxxxxxxxxxx"
                       defaultValue=""
                       maxLength={13}
@@ -671,7 +588,7 @@ const Registration = () => {
                       {" "}
                       Upload CNIC (Front)
                     </Form.Label>
-                    <Form.Control type="file" />
+                    <Form.Control type="file" required />
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
@@ -683,7 +600,7 @@ const Registration = () => {
                       {" "}
                       Upload CNIC (back)
                     </Form.Label>
-                    <Form.Control type="file" />
+                    <Form.Control type="file" required />
                   </Form.Group>
                 </Row>
 
@@ -697,7 +614,7 @@ const Registration = () => {
                     <Form.Label style={{ color: "#198754" }}>
                       Upload your picture
                     </Form.Label>
-                    <Form.Control type="file" />
+                    <Form.Control type="file" required/>
                     <Form.Text className="" style={{ color: "#198754" }}>
                       The picture will only be shown to members with whom you
                       agree to commute
@@ -710,12 +627,9 @@ const Registration = () => {
                   spacing={2}
                   style={{ justifyContent: "right" }}
                 >
-                  <Button variant="" className="btnregistration">
-                    Previous
-                  </Button>
-                  <Button variant="" className="btnregistration">
+                  <Button variant="outlined" size="large" className="btnregistration" onClick={nextPage}>
                     Next
-                  </Button>{" "}
+                  </Button>
                 </Stack>
               </Form>
              

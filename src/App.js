@@ -14,6 +14,7 @@ import WouldYouLikeTo from './pages/frontend/register-form/WouldYouLikeTo';
 import OtpPage from "./pages/frontend/register-form/OtpPage"
 import Nestedform from "./pages/frontend/register-form/WouldYouLikeTo";
 import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
+import Driver from './pages/frontend/register-form/Driver';
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
         <Route path='/howworks' element={<HowWorks/>}/>
         <Route path='/contribute' element={<Contribute/>}/>
         <Route path='/registration' element={<Registration/>}/>
+        <Route path='/registration/driving-form' element={<Driver/>}/>
         <Route path='/Faq' element={<Faq/>}/>
         <Route path='/ShareRide' element={<ShareRide/>}></Route>
         <Route path='/WouldYouLikeTo' element={<WouldYouLikeTo/>}></Route>

@@ -1,13 +1,14 @@
 import React from "react";
 import logo from "../../../Images/CL-logo.png";
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
 const Navbar = () => {
   return (
     <div>
       <div className="container ">
         <div className="row">
           
-          <div class="pos-f-t">
+          <div className="pos-f-t">
           <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <Link
               className="navbar-brand ml-3"
@@ -16,8 +17,15 @@ const Navbar = () => {
               <img src={logo} width="mr-auto" height="40px" alt="logoimg" />
             </Link>
             <button
-              className="navbar-toggler mr-2"
-              style={{color:'#198754'}}
+              className="navbar-toggler mr-2 d-lg-none" // Add 'd-lg-none' class to hide the button in desktop view
+              style={{
+                color: '#198754',
+                width: '40px',
+                height: '35px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
               type="button"
               data-toggle="collapse"
               data-target="#navbarSupportedContent"
@@ -25,8 +33,9 @@ const Navbar = () => {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span className="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon" style={{}}></span>
             </button>
+
             {/* <div class="fixed-top"> */}
             {/* <div class="bg-dark p-4">
       <h5 class="text-white h4">Collapsed content</h5>
@@ -76,15 +85,13 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
               </ul>
               <Link
                 to="/signup"
-                className="btn btn-outline-custom  ml-3 fw-bold"
               >
-                Sign up
+                <Button className="btn btn-outline-custom ml-3 fw-bold" variant="outlined">Sign up</Button>
               </Link>
               <Link
                 to="/login"
-                className="btn btn-outline-custom m-2 fw-bold mr-3 ml-3"
               >
-                Login
+                 <Button className="btn btn-outline-custom m-2 fw-bold mr-3 ml-3" variant="outlined">Login</Button>
               </Link>
             </div>
           </nav>
