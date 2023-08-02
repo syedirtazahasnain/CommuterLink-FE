@@ -10,9 +10,8 @@ const  Register=()=> {
             <div className="text-center text-white">
               <h3>Register</h3>
               <p>Care to Share - Carpool with Your Neighbourhood</p>
-              <button onclick="window.location.href = 'signup.html';"
+              <button
                 className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 btn-outline-custom"
-                type="submit"
               >
                 JOIN NOW
               </button>

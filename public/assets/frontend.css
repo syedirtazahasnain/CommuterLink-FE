@@ -30,6 +30,7 @@
   .btn-outline-custom {
     color: #198754 !important;
     border-color: #198754 !important;
+    box-shadow: none !important;
     font-size: 12px !important;
     font-family: "Poppins", sans-serif;
     display: inline-block;
@@ -43,7 +44,7 @@
     background-color: #198754 !important;
     border-color: #198754 !important;
     color: white!important;  
-    text-decoration: none;
+    text-decoration:solid;
   }
   
   a.btn:hover {

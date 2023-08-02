@@ -113,9 +113,8 @@ const MyAccordion = () => {
             <div className="text-center text-white">
               <h3>Be Part of CommutersLink</h3>
               <p>It's not about EARNING but cost sharing and SAVING</p>
-              <button onclick="window.location.href = 'signup.html';"
+              <button
                 className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 btn-outline-custom"
-                type="submit"
               >
                 JOIN NOW
               </button>

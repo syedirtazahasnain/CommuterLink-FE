@@ -9,7 +9,7 @@ const Contribute = () => {
     <div>
       <Navbar/>
 <section id="contribute" className="bg-light">
-      <div class="section-title text-center">
+      <div className="section-title text-center">
         <h2 className="heading-color text-black">Contribute</h2>
         <p>
           Let's Do Our Part to Make Pakistan a Better Living Place for Future
@@ -25,9 +25,8 @@ const Contribute = () => {
               </div>
               <article className="text-left">
                 <h2>Help Reduce Traffic Congestion</h2>
-                <button onclick="window.location.href = 'signup.html';"
+                <button
                   className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 btn-outline-custom"
-                  type="submit"
                 >
                   JOIN NOW
                 </button>
@@ -40,9 +39,8 @@ const Contribute = () => {
               </div>
               <article className="text-left">
                 <h2>Help Reduce Traffic Congestion</h2>
-                <button onclick="window.location.href = 'signup.html';"
+                <button
                   className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 btn-outline-custom"
-                  type="submit"
                 >
                   JOIN NOW
                 </button>
@@ -55,9 +53,8 @@ const Contribute = () => {
               </div>
               <article className="text-left">
                 <h2>Help Reduce Traffic Congestion</h2>
-                <button onclick="window.location.href = 'signup.html';"
+                <button
                   className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 btn-outline-custom"
-                  type="submit"
                 >
                   JOIN NOW
                 </button>
