@@ -17,7 +17,7 @@ import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
+import { Container, Row } from 'react-bootstrap';
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -29,40 +29,69 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 const Registration = () => {
   const [validated, setValidated] = useState(false);
   const [dropdowndata, setDropDownData] = useState();
-  const [provinceId, setProvinceId] = useState("");
-  const [selectedProvinceCities, setSelectedProvinceCities] = useState([]);
-  const [cityId, setCityId] = useState("");
-  const [selectedCityArea, setSelectedCityArea] = useState([]);
-  
-  const defaultCenter = {
-    lat: 40.712776,
-    lng: -74.005974,
-  };
+  const [startingProvinceId, setStartingProvinceId] = useState("");
+  const [startingSelectedProvinceCities, setstartingSelectedProvinceCities] = useState([]);
+  const [startingCityId, setStartingCityId] = useState("");
+  const [StartingSelectedCityArea, setStartingSelectedCityArea] = useState([]);
+  const [dropOffProvinceId, setDropOffProvinceId] = useState("");
+  const [dropOffSelectedProvinceCities, setDropOffSelectedProvinceCities] = useState([]);
+  const [dropOffCityId, setDropOffCityId] = useState("");
+  const [dropOffSelectedCityArea, setDropOffSelectedCityArea] = useState([]);
+
+  const [defaultCenter, setDefaultCenter] = useState({ lat: 0, lng: 0 });
+  const [locationString , setLocationString] = useState("Islamabad")
 
   useEffect(() => {
     getdropdowndata();
   }, []);
 
   useEffect(() => {
-    if (provinceId) {
+    if (startingProvinceId) {
       const selectedProvince = dropdowndata?.countries[0]?.provinces.find(
-        (province) => province.id == provinceId
+        (province) => province.id == startingProvinceId
       );
-      setSelectedProvinceCities(
+      setstartingSelectedProvinceCities(
         selectedProvince ? selectedProvince.cities : []
       );
     }
-  }, [provinceId]);
+  }, [startingProvinceId]);
 
   useEffect(() => {
-    if (cityId) {
+    if (startingCityId) {
       const filteredCities = dropdowndata.area.filter(
-        (city) => city.parent_id == cityId
+        (city) => city.parent_id == startingCityId
       );
-      console.log("filteredCities", filteredCities);
-      setSelectedCityArea(filteredCities ? filteredCities : []);
+      const citystring= startingSelectedProvinceCities.filter(
+        (city) => city.id == startingCityId
+      );
+     
+      setLocationString(citystring[0].value)
+      setStartingSelectedCityArea(filteredCities ? filteredCities : []);
     }
-  }, [cityId]);
+  }, [startingCityId]);
+
+  useEffect(() => {
+    // Function to fetch the geocoding data
+    const getGeocodeData = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+
+        const data = await response.json(); // Parse the response as JSON
+        if (data.status === 'OK' && data.results.length > 0) {
+          const { lat, lng } = data.results[0].geometry.location;
+          setDefaultCenter({ lat, lng });
+        } else {
+          console.error('Geocoding API response error');
+        }
+      } catch (error) {
+        console.error('Error fetching geocoding data:', error);
+      }
+    };
+
+    getGeocodeData();
+  }, [locationString]);
 
   const getdropdowndata = async () => {
     const response = await fetch(
@@ -80,7 +109,7 @@ const Registration = () => {
   };
 
   const handleProvinceChange = (event) => {
-    setProvinceId(event.target.value);
+    setStartingProvinceId(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -111,14 +140,14 @@ const Registration = () => {
               </h1>{" "}
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Row className="mb-3">
-                  <Form.Group as={Col} md="4" controlId="validationCustom01">
+                  <Form.Group as={Col}  md={startingCityId ? '4' : '6'} controlId="validationCustom01">
                     <Form.Label style={{ color: "#198754" }}>
                       Starting Point
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
-                      value={provinceId}
+                      value={startingProvinceId}
                       onChange={handleProvinceChange}
                     >
                       <option value="" disabled hidden>
@@ -133,27 +162,27 @@ const Registration = () => {
                       )}
                     </Form.Select>
                   </Form.Group>
-                  <Form.Group as={Col} md="4" controlId="validationCustom02">
+                  <Form.Group as={Col} md={startingCityId ? '4' : '6'} controlId="validationCustom02">
                     <Form.Label style={{ color: "#198754" }}>
                       Select City
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
-                      value={cityId}
-                      onChange={(e) => setCityId(e.target.value)}
+                      value={startingCityId}
+                      onChange={(e) => setStartingCityId(e.target.value)}
                     >
                       <option value="" disabled hidden>
                         Select a city
                       </option>
-                      {selectedProvinceCities?.map((province) => (
+                      {startingSelectedProvinceCities?.map((province) => (
                         <option key={province.id} value={province.id}>
                           {province.value}
                         </option>
                       ))}
                     </Form.Select>
                   </Form.Group>
-                  {cityId && (
+                  {startingCityId && (
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                       <Form.Label style={{ color: "#198754" }}>
                         Select Area from Dropdown
@@ -165,31 +194,33 @@ const Registration = () => {
                         <option value="" disabled hidden>
                           Select Area from Dropdown
                         </option>
-                        {selectedCityArea?.map((province) => (
+                        {StartingSelectedCityArea?.map((province) => (
                           <option key={province.id} value={province.id}>
                             {province.value}
                           </option>
                         ))}
                       </Form.Select>
-                      <LoadScript googleMapsApiKey={""}>
-                        <GoogleMap
-                           
-                          zoom={10}
-                          center={defaultCenter}
-                        >
-                          <spain>
-                            Can't find your area?
-                            <a  >
-                              Add Another
-                            </a>
-                          </spain>
-                        </GoogleMap>
-                      </LoadScript>
+
+                      <spain>
+                        Can't find your area?
+                        <a>Add Another</a>
+                      </spain>
                     </Form.Group>
                   )}
                 </Row>
+                {startingCityId &&  <Container
+                  className="d-flex justify-content-center align-items-center">
+                  <Row style={{ height: "80%", width: "80%" }}>
+                    <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
+                      <GoogleMap zoom={10} center={defaultCenter} mapContainerStyle={{  width: "100%" ,height: "50vh"}}>
+                        Map
+                      </GoogleMap>
+                    </LoadScript>
+                  </Row>
+                </Container>}
+                
                 <Row className="mb-3">
-                  <Form.Group as={Col} md="6" controlId="validationCustom01">
+                  <Form.Group as={Col} md={dropOffCityId ? '4' : '6'} controlId="validationCustom01">
                     <Form.Label style={{ color: "#198754" }}>
                       Drop Off
                     </Form.Label>
@@ -206,7 +237,7 @@ const Registration = () => {
                       <option value="3">Gilgit Baltistan</option>
                     </Form.Select>
                   </Form.Group>
-                  <Form.Group as={Col} md="6" controlId="validationCustom02">
+                  <Form.Group as={Col} md={dropOffCityId ? '4' : '6'} controlId="validationCustom02">
                     <Form.Label style={{ color: "#198754" }}>
                       Select City
                     </Form.Label>
@@ -223,8 +254,32 @@ const Registration = () => {
                       <option value="3">Sindh</option>
                     </Form.Select>
                   </Form.Group>
-                </Row>
+                  {dropOffCityId && (
+                    <Form.Group as={Col} md="4" controlId="validationCustom02">
+                      <Form.Label style={{ color: "#198754" }}>
+                        Select Area from Dropdown
+                      </Form.Label>
+                      <Form.Select
+                        aria-label="Default select example"
+                        style={{ color: "#198754" }}
+                      >
+                        <option value="" disabled hidden>
+                          Select Area from Dropdown
+                        </option>
+                        {StartingSelectedCityArea?.map((province) => (
+                          <option key={province.id} value={province.id}>
+                            {province.value}
+                          </option>
+                        ))}
+                      </Form.Select>
 
+                      <spain>
+                        Can't find your area?
+                        <a>Add Another</a>
+                      </spain>
+                    </Form.Group>
+                  )}
+                </Row>
                 <Row className="mb-3">
                   <Form.Group as={Col} md="6" controlId="validationCustom01">
                     <Form.Label style={{ color: "#198754" }}>
@@ -663,55 +718,7 @@ const Registration = () => {
                   </Button>{" "}
                 </Stack>
               </Form>
-              {/* <div className="row">
-                          <div className="col-lg-6 col-md-4">
-                            <Box
-                              component="form"
-                              sx={{
-                                "& .MuiTextField-root": { m: 1, width: "50ch" },
-                              }}
-                              noValidate
-                              autoComplete="off"
-                            >
-                              <div>
-                                <TextField
-                                  id="outlined-multiline-flexible"
-                                  label="Multiline"
-                                  multiline
-                                  maxRows={12}
-                                />
-                                
-                             
-                              </div>
-                             
-                          
-                            </Box>
-                          </div>
-                          <div className="col-lg-6 col-md-4">
-                            <Box
-                              component="form"
-                              sx={{
-                                "& .MuiTextField-root": { m: 1, width: "50ch" },
-                              }}
-                              noValidate
-                              autoComplete="off"
-                            >
-                              <div>
-                                <TextField
-                                  id="outlined-multiline-flexible"
-                                  label=""
-                                  multiline
-                                  maxRows={12}
-                                />
-                                
-                             
-                              </div>
-                             
-                          
-                            </Box>
-                          </div>
-                        
-                        </div> */}
+             
             </div>
           </div>
         </div>
