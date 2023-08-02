@@ -49,7 +49,7 @@ const Login = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.status_code == 200) {
         navigate("/");
       } else {
         console.log(jsonresponse);
@@ -86,9 +86,8 @@ const Login = () => {
       const body = {
         email: userObject.email,
         provider_id : "DasD8BjWaeoVDCq4",
-        provider:"google"
+        provider:"google",
       };
-      console.log("body",body)
       const res = await fetch(
         "https://staging.commuterslink.com/api/v1/auth",
         {
@@ -101,8 +100,9 @@ const Login = () => {
       );
 
       const jsonresponse = await res.json();
+      console.log(jsonresponse.access_token)
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.status_code == 200) {
         navigate("/");
       } else {
         console.log(jsonresponse);

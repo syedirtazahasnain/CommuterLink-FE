@@ -13,6 +13,7 @@ import ShareRide from './pages/frontend/register-form/ShareRide';
 import WouldYouLikeTo from './pages/frontend/register-form/WouldYouLikeTo';
 import OtpPage from "./pages/frontend/register-form/OtpPage"
 import Nestedform from "./pages/frontend/register-form/WouldYouLikeTo";
+import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
         <Route path='/WouldYouLikeTo' element={<WouldYouLikeTo/>}></Route>
         <Route path="/otp" element={<OtpPage />} />
         <Route path='/Nested' element={<Nestedform/>}></Route>
+        <Route path='/NumberGenerate' element={<NumberGenerate/>}></Route>
       </Routes>
     </Router>
     </>

@@ -1,12 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 import img from "../../../Images/contribute-1.jpg";
 function NumberGenerate() {
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
+  const navigate = useNavigate();
+  const [ phoneNumber , setPhoneNumber ] =  useState()
+  const submitForm = async() =>{
+    try {
+      const body = {
+        mobile: phoneNumber,
+      };
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/mobile",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      const jsonresponse = await response.json();
+       
+      if (jsonresponse.status_code == 200) {
+        console.log(jsonresponse);
+        navigate("/registration");
+      } else {
+        alert("Error: " + jsonresponse.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    } 
+  }
+  const validatePhoneNumber = (phoneNumber) => {
+    // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+    const phonePattern = /^03\d{9}$/;
+    if (phonePattern.test(phoneNumber)) {
+      setPhoneNumber(phoneNumber);
+      setIsValidPhoneNumber(true);
+    } else {
+      setIsValidPhoneNumber(false);
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -36,9 +78,11 @@ function NumberGenerate() {
                         type="text"
                         className="colorplace mb-3"
                         placeholder="03XXXXXXXXX"
+                        onChange = { (e) => validatePhoneNumber(e.target.value)}
                         defaultValue=""
                         maxLength={11}
                       />
+                      {isValidPhoneNumber && <span> Please enter a valid phone number </span>}
                     </Form.Group>
                   </Row>
                   <div className="px-4 mb-3">
@@ -46,6 +90,7 @@ function NumberGenerate() {
                     <Button
                       variant="success"
                       className=""
+                      onClick={ () => submitForm()}
                     >
                       Submit
                     </Button>{" "}

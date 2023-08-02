@@ -114,7 +114,7 @@ const Signup = () => {
        
       if (jsonresponse.statusCode == 200) {
         console.log(jsonresponse);
-        navigate("/ShareRide");
+        navigate("/NumberGenerate");
       } else {
         alert("Error: " + jsonresponse.message);
       }
