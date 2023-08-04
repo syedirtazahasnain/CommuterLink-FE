@@ -128,7 +128,7 @@ const WouldYouLikeTo = () => {
                           <div className="col-12 text-center">
                       {/* onClick={() => setModalShow(true)} */}
 
-                      <div className="mt-4"><Link to=""
+                      <div className="mt-4"><Link to="Registration"
                        className="btn btn-outline-custom">Next</Link></div>
                     </div>
                     </form>
