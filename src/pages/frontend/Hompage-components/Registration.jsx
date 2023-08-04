@@ -24,34 +24,41 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 
 const Registration = () => {
   
   const navigate = useNavigate();
-  const[locationString, setLocationString] = useState("");
   const [validated, setValidated] = useState(false);
   const [homeTimeSlots, setHomeTimeSlots] = useState([]);
   const [selectedHomeTime, setSelectedHomeTime] = useState("");
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
+  
   // For Start Point
+  const[locationStartString, setLocationStartString] = useState("");
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
   const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
   const [cityStartId, setCityStartId] = useState("");
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
+  
   // For End Point
+  const[locationEndString, setLocationEndString] = useState("");
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
   const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
   const [cityEndId, setCityEndId] = useState("");
   const [selectedEndCityArea, setSelectedEndCityArea] = useState([]);
-  
-  const [defaultCenter, setDefaultCenter] = useState ({
-    lat: 40.712776,
-    lng: -74.005974,
-  });
+
+
+  // For Start Point
+  const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 0, lng: 0 });
+  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 0, lng: 0 });
+
+  // For End Point
+  const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 0, lng: 0 });
+  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 0, lng: 0 });
 
   const nextPage = () => {
     navigate("/registration/driving-form");
@@ -82,37 +89,51 @@ const Registration = () => {
 
   useEffect(() => {
     
-    if (cityStartId ) {
+    if (cityStartId) {
+      
       const filteredStartCities = dropdownStartdata.area.filter(
         (city) => city.parent_id == cityStartId
       );
-      console.log("filteredCities", filteredStartCities);
+
+      const citystring= selectedStartProvinceCities.filter(
+        (city) => city.id == cityStartId
+      );
+      
+      setLocationStartString(citystring[0].value);
       setSelectedStartCityArea(filteredStartCities ? filteredStartCities : []);
-      setLocationString(filteredStartCities[0].value)
     }
 
     if (cityEndId) {
+      
       const filteredEndCities = dropdownEnddata.area.filter(
         (city) => city.parent_id == cityEndId
       );
-      console.log("filteredCities", filteredEndCities);
+      
+      const citystring= selectedEndProvinceCities.filter(
+        (city) => city.id == cityEndId
+      );
+      
+      setLocationEndString(citystring[0].value);
       setSelectedEndCityArea(filteredEndCities ? filteredEndCities : []);
-      setLocationString(filteredEndCities[0].value)
     }
   }, [cityStartId, cityEndId]);
 
+  console.log(locationEndString);
+
   useEffect(() => {
     // Function to fetch the geocoding data
-    const getGeocodeData = async () => {
+    const getGeocodeStartData = async () => {
       try {
-        const response = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-        );
 
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+        
         const data = await response.json(); // Parse the response as JSON
         if (data.status === 'OK' && data.results.length > 0) {
           const { lat, lng } = data.results[0].geometry.location;
-          setDefaultCenter({ lat, lng });
+          setDefaultStartCenter({ lat, lng });
+          setMarkerPositionStart({ lat, lng });
         } else {
           console.error('Geocoding API response error');
         }
@@ -121,8 +142,32 @@ const Registration = () => {
       }
     };
 
-    getGeocodeData();
-  }, [locationString]);
+    getGeocodeStartData();
+  }, [locationStartString]);
+
+  useEffect(() => {
+    // Function to fetch the geocoding data
+    const getGeocodeEndData = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+
+        const data = await response.json(); // Parse the response as JSON
+        if (data.status === 'OK' && data.results.length > 0) {
+          const { lat, lng } = data.results[0].geometry.location;
+          setDefaultEndCenter({ lat, lng });
+          setMarkerPositionEnd({ lat, lng });
+        } else {
+          console.error('Geocoding API response error');
+        }
+      } catch (error) {
+        console.error('Error fetching geocoding data:', error);
+      }
+    };
+
+    getGeocodeEndData();
+  }, [locationEndString]);
 
   const getdropdownStartdata = async () => {
     const response = await fetch(
@@ -158,6 +203,13 @@ const Registration = () => {
     }
     setValidated(true);
   };
+  
+
+  // console.log(locationStartString);
+
+  // console.log(defaultStartCenter);
+
+
   
   return (
     <>
@@ -212,7 +264,7 @@ const Registration = () => {
                       onChange={(e) => setCityStartId(e.target.value)}
                       required
                     >
-                      <option value="" disabled hidden>
+                      <option value="" hidden>
                         Select a city
                       </option>
                       {selectedStartProvinceCities?.map((province) => (
@@ -230,34 +282,47 @@ const Registration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={locationStartString}
+                        onChange={(e) => setLocationStartString(e.target.value)}
                         required
                       >
                         <option value="" disabled hidden>
                           Select Area from Dropdown
                         </option>
                         {selectedStartCityArea?.map((province) => (
-                          <option key={province.id} value={province.id}>
+                          <option key={province.id} value={province.value}>
                             {province.value}
                           </option>
                         ))}
                       </Form.Select>
-                      <LoadScript googleMapsApiKey={""}>
-                        <GoogleMap
-                           
-                          zoom={10}
-                          center={defaultCenter}
-                        >
-                          <spain>
-                            Can't find your area?
-                            <a  >
-                              Add Another
-                            </a>
-                          </spain>
-                        </GoogleMap>
-                      </LoadScript>
+                      <span className="mt-3">
+                          Can't find your area?
+                          <a  >
+                           {" "} Add Another
+                          </a>
+                      </span>
                     </Form.Group>
                   )}
                 </Row>
+
+                
+                {cityStartId &&  
+                  <Container
+                    className="d-flex justify-content-center align-items-center mb-3">
+                    <Row style={{ height: "80%", width: "80%" }}>
+                      <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
+                        <GoogleMap 
+                          zoom={14} 
+                          center={defaultStartCenter} 
+                          mapContainerStyle={{  width: "100%" ,height: "50vh"}}
+                        >
+                        <MarkerF position={markerPositionStart} />
+                        </GoogleMap>
+                      </LoadScript>
+                    </Row>
+                  </Container>
+                }
+
                 <Row className="mb-3">
                   <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
                     <Form.Label 
@@ -285,13 +350,9 @@ const Registration = () => {
                     </Form.Select>
                   </Form.Group>
                   <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom02">
-                    <Form.Label 
-                      style={{ color: "#198754" }} 
-                      value={cityEndId}
-                      onChange={(e) => setCityEndId(e.target.value)}
-                      >
+                  <Form.Label style={{ color: "#198754" }}>
                       Select City
-                    </Form.Label>
+                  </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       style={{ color: "#198754" }}
@@ -299,7 +360,7 @@ const Registration = () => {
                       onChange={(e) => setCityEndId(e.target.value)}
                       required
                     >
-                      <option value="" disabled hidden>
+                      <option value="" hidden>
                         Select a city
                       </option>
                       {selectedEndProvinceCities?.map((province) => (
@@ -317,34 +378,45 @@ const Registration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={locationEndString}
+                        onChange={(e) => setLocationEndString(e.target.value)}
                         required
                       >
                         <option value="" disabled hidden>
                           Select Area from Dropdown
                         </option>
                         {selectedEndCityArea?.map((province) => (
-                          <option key={province.id} value={province.id}>
+                          <option key={province.id} value={province.value}>
                             {province.value}
                           </option>
                         ))}
                       </Form.Select>
-                      <LoadScript googleMapsApiKey={""}>
-                        <GoogleMap
-                           
-                          zoom={10}
-                          center={defaultCenter}
-                        >
-                          <spain>
-                            Can't find your area?
-                            <a  >
-                              Add Another
-                            </a>
-                          </spain>
-                        </GoogleMap>
-                      </LoadScript>
+                       <span className="mt-3">
+                          Can't find your area?
+                          <a  >
+                           {" "} Add Another
+                          </a>
+                      </span>
                     </Form.Group>
                   )}
                 </Row>
+
+                {cityEndId &&  
+                  <Container
+                    className="d-flex justify-content-center align-items-center mb-3">
+                    <Row style={{ height: "80%", width: "80%" }}>
+                      <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
+                        <GoogleMap 
+                          zoom={14} 
+                          center={defaultEndCenter} 
+                          mapContainerStyle={{  width: "100%" ,height: "50vh"}}
+                        >
+                          <MarkerF position={markerPositionEnd} />
+                        </GoogleMap>
+                      </LoadScript>
+                    </Row>
+                  </Container>
+                }
 
                 <Row className="mb-3">
                   <Form.Group as={Col} md="6" controlId="validationCustom01">

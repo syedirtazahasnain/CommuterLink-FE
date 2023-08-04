@@ -10,7 +10,7 @@ import Contact from "./Hompage-components/Contact";
 import Footer from "./Hompage-components/Footer";
 // import Signup from './Hompage-components/Signup';
 // import Login from './Hompage-components/Login';
-import Registration from "./Hompage-components/Registration ";
+import Registration from "./Hompage-components/Registration";
 import AddressCards from "./Hompage-components/AddressCards";
 // import Otp from './register-form/otp_2'
 // import Faq from "./Hompage-components/Faq";

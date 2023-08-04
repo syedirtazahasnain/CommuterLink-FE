@@ -7,7 +7,7 @@ import Login from './pages/frontend/Hompage-components/Login';
 import CarouselSlider from './pages/frontend/Hompage-components/Carousel';
 import HowWorks from './pages/frontend/Hompage-components/HowWorks';
 import Contribute from './pages/frontend/Contribute';
-import Registration from './pages/frontend/Hompage-components/Registration ';
+import Registration from './pages/frontend/Hompage-components/Registration';
 import Faq from './pages/frontend/Hompage-components/Faq';
 import ShareRide from './pages/frontend/register-form/ShareRide';
 import WouldYouLikeTo from './pages/frontend/register-form/WouldYouLikeTo';

@@ -10,7 +10,7 @@ import Footer from "./Footer";
 function HowWorks() {
   return (
     <div>
-<Navbar/>
+{/* <Navbar/> */}
       <section id="working" className="my-1">
         <div className="container">
           <div className="section-title text-center">
