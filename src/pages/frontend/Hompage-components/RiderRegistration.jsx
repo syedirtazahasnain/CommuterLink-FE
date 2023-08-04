@@ -14,7 +14,7 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import { useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { Container, Row } from 'react-bootstrap';
@@ -25,19 +25,17 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
-import ibn from '../../../Images/iban.png';
-import easypaisa from '../../../Images/ep.png';
-import jazzcash from '../../../Images/jazz.png';
-import raast from '../../../Images/raast.png';
+import { useNavigate } from "react-router-dom";
 
-const Registration = () => {
 
-  const navigate = useNavigate();
+const RiderRegistration = () => {
 
-  const route = () => {
-    navigate("/verification");
-  
-};
+    const navigate = useNavigate();
+
+    const route = () => {
+        navigate("/verification");
+      
+    };
 
 
   // For Registration
@@ -71,26 +69,6 @@ const Registration = () => {
   // For End Point
   const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 0, lng: 0 });
   const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 0, lng: 0 });
-
-  // For Driver's
-  const [carBrand, setCarBrand] = useState([]);
-  const [selectedCarBrand, setSelectedCarBrand] = useState("");
-  const [selectedModelName, setSelectedModelName] = useState("");
-  const [manYear, setManYear] = useState([]);
-  const [selectedManYear, setSelectedManYear] = useState("");
-  const [regYear, setRegYear] = useState([]);
-  const [selectedRegYear, setSelectedRegYear] = useState("");
-  const [selectedRegNumber, setSelectedRegNumber] = useState("");
-  const [selectedCarImage, setSelectedCarImage] = useState([]);
-  const [selectedSeat, setSelectedSeat] = useState("");
-  const [selectedSeatGender, setSelectedSeatGender] = useState("");
-  const [selectedRoutePartner, setSelectedRoutePartner] = useState("");
-
-  // For Driver Form
-  const [showDriverForm, setShowDriverForm]=useState(false);
-  const [showmyself, setshowmyself] = useState(false);
-  const [showmydriver, setshowmydriver] = useState(false);
-  const [showboth, setshowboth]=useState(false);
 
   useEffect(() => {
     getdropdownStartdata();
@@ -212,9 +190,6 @@ const Registration = () => {
     setDropDownEndData(jsonresponse);
     setHomeTimeSlots(jsonresponse.time_slots);
     setOfficeTimeSlots(jsonresponse.time_slots);
-    setCarBrand(jsonresponse.car_brand);
-    setManYear(jsonresponse.car_reg_year);
-    setRegYear(jsonresponse.car_reg_year);
     console.log(jsonresponse);
   };
 
@@ -234,19 +209,11 @@ const Registration = () => {
     }
     setValidated(true);
   };
-  
 
-  // console.log(locationStartString);
-
-  // console.log(defaultStartCenter);
-
-
-  
+ 
   return (
     <>
       <Navbar />
-      {!showDriverForm && (
-        <>
           <div style={{ backgroundColor: "#eee" }}>
           <div className="containter p-5">
             <div className="row justify-content-center">
@@ -737,10 +704,10 @@ const Registration = () => {
                       size="large" 
                       className="btnregistration" 
                       onClick={() => {
-                            setShowDriverForm(true);
+                            route();
                           
                       }}>
-                      Next
+                      Submit
                     </Button>
                   </Stack>
                 </Form>
@@ -750,598 +717,9 @@ const Registration = () => {
           </div>
         </div>
 
-        </>
-      )}
-
-      {showDriverForm && (
-          <>
-            <div style={{ backgroundColor: "#eee" }}>
-            <div className="containter p-5">
-              <div className="row justify-content-center">
-                <div className="col-md-8 bg-white  mt-5 mb-5">
-                  <h1
-                    className="text-center mb-4"
-                    style={{
-                      color: "#198754",
-                      marginBottom: "5vh",
-                      marginTop: "5vh",
-                    }}
-                  >
-                    {" "}
-                    Driver's Registration Form
-                  </h1>{" "}
-                  <Form>
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
-                          Car Brand
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          value={selectedCarBrand}
-                          onChange={(e) => setSelectedCarBrand(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Car Brand</option>
-
-                          {carBrand?.map((car) => (
-                            <option key={car.id} value={car.brand_name}>
-                              {car.brand_name}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
-                          Model Name
-                        </Form.Label>
-                        <Form.Control
-                          required
-                          type="text"
-                          className="colorplace"
-                          placeholder="Car Model"
-                          defaultValue=""
-                        />
-                      </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
-                          Manufacturing Year
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          value={selectedManYear}
-                          onChange={(e) => setSelectedManYear(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Manufacturing Year</option>
-                          {manYear?.map((man) => (
-                            <option key={man.id} value={man.car_year_ranges}>
-                              {man.car_year_ranges}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
-                          Registration Year
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          value={selectedRegYear}
-                          onChange={(e) => setSelectedRegYear(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Registration Year</option>
-                          {regYear?.map((reg) => (
-                            <option key={reg.id} value={reg.car_year_ranges}>
-                              {reg.car_year_ranges}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                    </Row>
-
-                    <Row className="mb-0">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
-                          Registeration Number
-                        </Form.Label>
-                        <Form.Control
-                          required
-                          type="text"
-                          className="colorplace"
-                          placeholder="Registeration Number"
-                          defaultValue=""
-                        />
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
-                          My Car has AC
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          required
-                        >
-                          <option value="" hidden>AC</option>
-                          <option value="Yes">Yes</option>
-                          <option value="No">No</option>
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group
-                        controlId="formFile"
-                        as={Col}
-                        md="12"
-                        className="mb-3"
-                      >
-                        <Form.Label className="mt-3" style={{ color: "#198754" }}>
-                          Upload Car Image with visible number plate
-                        </Form.Label>
-                        <Form.Control type="file" required />
-                      </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
-                          Seats Available
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          required
-                        >
-                          <option value="" hidden>Seats Available</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
-                          Seats Available for (Male, Female, Both)
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          required
-                        >
-                          <option value="" hidden>Seats Available</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Both">Both</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
-                          I also accept mid-route partner
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          required
-                        >
-                          <option value="" hidden>I also accept mid-route partner</option>
-                          <option value="Yes">Yes</option>
-                          <option value="No">No</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Row>
-                    <div className="tab">
-                        <div className="container">
-                          <div className="row justify-content-center mt-5">
-                            <div className="col-lg-12">
-                              <div className="card text-center" >
-                                <div className="card-body">
-                                  <h5 className="card-title">Bank/Payment Details</h5>
-                                  <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
-                                    <div class="container">
-                                    <img src={ibn} alt=""/> <img src={easypaisa} alt=""/> <img src={jazzcash} alt=""/> <img src={raast} alt=""/>
-                                    </div>
-                                    <form id="paymentForm">
-                                    <div className="mt-4">
-                                      <input type="text" className="form-control mb-2" id="bankAccount" name="bankAccount" placeholder="Bank Account (IBAN)" required=""/>
-                                    </div>
-                                    <div>
-                                      <input type="text" className="form-control mb-2" id="jazzCashAccount" name="jazzCashAccount" placeholder="Jazz Cash Account Number" required=""/>
-                                    </div>
-                                    <div>
-                                      <input type="text" className="form-control mb-2" id="easypaisaAccount" name="easypaisaAccount" placeholder="EasyPaisa Account Number" required=""/>
-                                    </div>
-                                    <div>
-                                      <input type="text" className="form-control mb-2" id="raastID" name="raastID" placeholder="Raast ID"/>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>    
-                      </div>
-                    <div className="row">
-                      <div className="col">
-                        <div className="container text-center d-flex justify-content-center pt-2 flex-wrap">
-                          <Button
-                            variant="outlined"
-                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite" }  btn-toogle pt-2 mx-2 mt-3`}
-                            onClick={() => {
-                              setshowmyself(true);
-                              setshowmydriver(false);
-                              setshowboth(false);
-                            }}
-                            data-toggle="buttons"
-                          >
-                            I Driver MySelf
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite" }  btn-toogle pt-2 mx-2 mt-3`}
-                            onClick={() => {
-                              setshowmyself(false);
-                              setshowmydriver(true);
-                              setshowboth(false);
-                            }}
-                            data-toggle="buttons"
-                          >
-                            My Driver Drives
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            className={`btn ${showboth === true ? "btnDriver" : "btnWhite" }  btn-toogle pt-2 mx-2 mt-3`}
-                            onClick={() => {
-                              setshowmydriver(false);
-                              setshowmyself(false);
-                              setshowboth(true);
-                            }}
-                            data-toggle="buttons"
-                          >
-                            Both
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {showmyself && (
-                      <>
-                        <Row className="mb-3 mt-3">
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Driving Licence No.
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="License No."
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Valid Upto
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="Enter Here"
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (front)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom02"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (back)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                        </Row>
-                      </>
-                    )}
-
-                    {showmydriver && (
-                      <>
-                        <Row className="mb-3 mt-3">
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Name
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="Name"
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              CNIC
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="CNIC: xxxxxxxxxxxxx"
-                              defaultValue=""
-                              maxLength={13}
-                            />
-                          </Form.Group>
-                        </Row>
-
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload CNIC (front)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom02"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload CNIC (back)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Driving Licence No.
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="License No."
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Valid Upto
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="Enter Here"
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (front)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom02"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (back)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                        </Row>
-                      </>
-                    )}
-                    {showboth && (<>
-                        <Row className="mb-3 mt-3">
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Name
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="Name"
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              CNIC
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="CNIC: xxxxxxxxxxxxx"
-                              defaultValue=""
-                              maxLength={13}
-                            />
-                          </Form.Group>
-                        </Row>
-
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload CNIC (front)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom02"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload CNIC (back)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Driving Licence No.
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="License No."
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Valid Upto
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="colorplace"
-                              placeholder="Enter Here"
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (front)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom02"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (back)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                        </Row>
-
-                    </>)
-                    }
-                    <Stack
-                      direction="row"
-                      className="mb-4 mt-3"
-                      spacing={2}
-                      style={{ justifyContent: "right" }}
-                    >
-                      <Button 
-                        variant="" 
-                        className="btnregistration"  
-                        onClick={() => {
-                          setShowDriverForm(false);
-                          
-                        }}
-                      >
-                        Previous
-                      </Button>
-                      <Button variant="" className="btnregistration" onClick={route}>
-                        Submit
-                      </Button>
-                    </Stack>
-                  </Form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </> 
-      )}
-
       <Footer />
     </>
   );
 };
 
-export default Registration;
+export default RiderRegistration;

@@ -121,7 +121,7 @@ const Signup = () => {
           })
         );
         console.log(jsonresponse);
-        navigate("/NumberGenerate");
+        navigate("/number-generate");
       } else {
         alert("Error: " + jsonresponse.message);
       }

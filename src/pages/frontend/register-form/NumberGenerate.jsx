@@ -40,7 +40,7 @@ function NumberGenerate() {
        
       if (jsonresponse.status_code == 200) {
         console.log(jsonresponse);
-        navigate("/Nested");
+        navigate("/nested");
       } else {
         alert("Error: " + jsonresponse.message);
       }

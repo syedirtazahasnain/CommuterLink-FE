@@ -14,7 +14,9 @@ import WouldYouLikeTo from './pages/frontend/register-form/WouldYouLikeTo';
 import OtpPage from "./pages/frontend/register-form/OtpPage"
 import Nestedform from "./pages/frontend/register-form/WouldYouLikeTo";
 import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
-import Driver from './pages/frontend/register-form/Driver';
+import RiderRegistration from './pages/frontend/Hompage-components/RiderRegistration';
+import Verification from './pages/frontend/register-form/Verification';
+
 function App() {
   return (
     <>
@@ -26,14 +28,15 @@ function App() {
         <Route path='/carousel' element={<CarouselSlider />} /> 
         <Route path='/howworks' element={<HowWorks/>}/>
         <Route path='/contribute' element={<Contribute/>}/>
-        <Route path='/registration' element={<Registration/>}/>
-        <Route path='/registration/driving-form' element={<Driver/>}/>
-        <Route path='/Faq' element={<Faq/>}/>
-        <Route path='/ShareRide' element={<ShareRide/>}></Route>
-        <Route path='/WouldYouLikeTo' element={<WouldYouLikeTo/>}></Route>
+        <Route path='/driver-registration' element={<Registration/>}/>
+        <Route path='/registration' element={<RiderRegistration/>}/>
+        <Route path='/faq' element={<Faq/>}/>
+        <Route path='/shareride' element={<ShareRide/>}></Route>
+        <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
         <Route path="/otp" element={<OtpPage />} />
-        <Route path='/Nested' element={<Nestedform/>}></Route>
-        <Route path='/NumberGenerate' element={<NumberGenerate/>}></Route>
+        <Route path='/nested' element={<Nestedform/>}></Route>
+        <Route path='/number-generate' element={<NumberGenerate/>}></Route>
+        <Route path='/verification' element={<Verification/>}></Route>
       </Routes>
     </Router>
     </>
