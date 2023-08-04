@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 import mySlides1 from "../../../Images/signup.png";
 import mySlides2 from "../../../Images/signup-3.png";
 import mySlides3 from "../../../Images/signup-4.png";
