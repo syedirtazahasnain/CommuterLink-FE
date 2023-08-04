@@ -69,7 +69,7 @@ const Registration = () => {
       setStartingSelectedCityArea(filteredCities ? filteredCities : []);
     }
   }, [startingCityId]);
-
+  
   useEffect(() => {
     // Function to fetch the geocoding data
     const getGeocodeData = async () => {

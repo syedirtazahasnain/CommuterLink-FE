@@ -7,17 +7,26 @@ import Footer from "../Hompage-components/Footer";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import img from "../../../Images/contribute-1.jpg";
+import { useSelector } from "react-redux";
 function NumberGenerate() {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const navigate = useNavigate();
   const [ phoneNumber , setPhoneNumber ] =  useState()
+  const store_signup = useSelector((s)=> s.signup.data);
+  // const store_login = useSelector((s)=> s.login.data);
+  
   const submitForm = async() =>{
     try {
       const body = {
         mobile: phoneNumber,
+        email : store_signup.email,
       };
+  //  return console.log( store_signup.email);
+  // return console.log(store_login);
+  
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/mobile",
+        "https://staging.commuterslink.com/api/v1/mobilew",
+        // "http://127.0.0.1:8000/api/v1/mobilew",
         {
           method: "POST",
           headers: {
@@ -31,7 +40,7 @@ function NumberGenerate() {
        
       if (jsonresponse.status_code == 200) {
         console.log(jsonresponse);
-        navigate("/registration");
+        navigate("/Nested");
       } else {
         alert("Error: " + jsonresponse.message);
       }
@@ -41,7 +50,7 @@ function NumberGenerate() {
   }
   const validatePhoneNumber = (phoneNumber) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
-    const phonePattern = /^03\d{9}$/;
+    const phonePattern = /^03\d{10}$/;
     if (phonePattern.test(phoneNumber)) {
       setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(true);
@@ -68,7 +77,7 @@ function NumberGenerate() {
                   Please Enter Your valid Phone No.
                 </h5>
                 <form id="numberForm">
-                  <Row className="mb-3 mt-2 px-4">
+                  <Row className="mb-3 mt-2 px-2">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">
                       <Form.Label className="d-flex justify-content-left mb-3 ">
                         Number

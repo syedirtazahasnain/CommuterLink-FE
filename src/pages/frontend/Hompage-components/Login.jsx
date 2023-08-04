@@ -49,7 +49,7 @@ const Login = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.status_code == 200) {
+      if (jsonresponse.statusCode == 200) {
         navigate("/");
       } else {
         console.log(jsonresponse);
@@ -85,7 +85,7 @@ const Login = () => {
       let userObject = await profile.json();
       const body = {
         email: userObject.email,
-        provider_id : "DasD8BjWaeoVDCq4",
+        // provider_id : "DasD8BjWaeoVDCq4",
         provider:"google",
       };
       const res = await fetch(
@@ -102,7 +102,7 @@ const Login = () => {
       const jsonresponse = await res.json();
       console.log(jsonresponse.access_token)
 
-      if (jsonresponse.status_code == 200) {
+      if (jsonresponse.statusCode == 200) {
         navigate("/");
       } else {
         console.log(jsonresponse);

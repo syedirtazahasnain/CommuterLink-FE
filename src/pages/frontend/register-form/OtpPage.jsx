@@ -62,6 +62,7 @@ const OtpPage = () => {
       const jsonresponse = await response.json();
       console.log(jsonresponse);
       if (jsonresponse.statusCode == 200) {
+        navigate("/Nested");
         console.log(jsonresponse);
       } else {
         alert("Error: " + jsonresponse.message);
