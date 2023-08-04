@@ -5,9 +5,32 @@
   .bg-green{
     color: var(--bs-primary);
   }
+
+  .btn-outline-getstarted{
+    margin-bottom: 20px !important;
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: white!important;
+    border-radius: 25px !important; 
+    display: inline-block;
+    padding: 8px 28px !important; 
+    text-decoration: none;
+  }
+
+  .btn-outline-getstarted:hover{
+    color: #198754 !important;
+    background-color: white !important;
+    border-color: white !important;
+    display: inline-block;
+    padding: 8px 28px !important;
+    border-radius: 25px !important;
+    transition: 0.5s;
+  }
+
   .btn-outline-custom {
     color: #198754 !important;
     border-color: #198754 !important;
+    box-shadow: none !important;
     font-size: 12px !important;
     font-family: "Poppins", sans-serif;
     display: inline-block;
@@ -16,11 +39,12 @@
     transition: 0.5s;
   
   }
+
   .btn-outline-custom:hover {
-    background-color: #198754;
-    border-color: #198754;
+    background-color: #198754 !important;
+    border-color: #198754 !important;
     color: white!important;  
-    text-decoration: none;
+    text-decoration:solid;
   }
   
   a.btn:hover {
@@ -421,8 +445,14 @@ img.carousel{
 }
 .btnDriver{
   background-color: #198754!important;
+  box-shadow: none !important;
   color: #ffff !important;
 }
+
+.btnDriver:hover{
+  border-color: #198754!important;
+}
+
 .btnWhite{
   background-color: #ffff !important;
   color: #198754 !important;

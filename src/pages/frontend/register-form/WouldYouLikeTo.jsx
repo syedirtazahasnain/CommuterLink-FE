@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../Hompage-components/Navbar';
 import Footer from "../Hompage-components/Footer";
 import mySlides1 from "../../../Images/signup.png";
@@ -6,18 +6,37 @@ import mySlides2 from "../../../Images/signup-3.png";
 import mySlides3 from "../../../Images/signup-4.png";
 import mySlides4 from "../../../Images/signup-6.png";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import imgfacebook from "../../../Images/facebook.png";
 import imggoogle from "../../../Images/google.png";
 import imgtwitter from "../../../Images/twitter.png";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 const WouldYouLikeTo = () => {
+
+  const [radio1, setRadio1 ] = useState("");
+  const [radio2, setRadio2] = useState("");
+ 
+  const navigate = useNavigate();
+
+ const route = () =>{
+
+  if(radio1){
+    navigate("/registration");
+  }
+    
+    if(radio2){
+      navigate("/driver-registration");
+    }
+ };
+
+ console.log("Selected", radio1);
   return (
     <div>
       
@@ -105,9 +124,10 @@ const WouldYouLikeTo = () => {
                         <h3 className="text-center text-custom mb-3" style={{color:'#198754'}}>Would you like to</h3>
                       <div className="text-left"> </div>
                        
-                          <div className="text-left"> <div><label class="radio-button ">
-                             <input type="radio" id="option1" name="option" value="others_car"/>
-                                <span class="ml-3"><strong>Ride in other’s car</strong> </span>
+                          <div className="text-left"> <div>
+                            <label className="radio-button ">
+                             <input type="radio" id="option1" name="option" value={radio1} onClick={setRadio1} />
+                                <span className="ml-3"><strong>Ride in other’s car</strong> </span>
                                
                               </label></div>
                               <span className="text-green"style={{color:'#198754', fontSize:'12px'}}>CommutersLink will match you with car owners offering available seats based upon Gender, Route and Timings on cost sharing basis</span>
@@ -115,7 +135,7 @@ const WouldYouLikeTo = () => {
                               </div></div>
                               <div className="text-left"><div>
                               <label className="radio-button ">
-                                <input type="radio" id="option2" name="option" value="your_car"/>
+                                <input type="radio" id="option2" name="option" value={radio2} onClick={setRadio2}/>
                                 <span className="ml-3"><strong>Use your car and offer available seats</strong></span>
                               </label>
                               </div>
@@ -128,8 +148,9 @@ const WouldYouLikeTo = () => {
                           <div className="col-12 text-center">
                       {/* onClick={() => setModalShow(true)} */}
 
-                      <div className="mt-4"><Link to=""
-                       className="btn btn-outline-custom">Next</Link></div>
+                      <Button variant="outlined" className="mt-4btn btn-outline-custom" onClick={route}>
+                        Next
+                      </Button>
                     </div>
                     </form>
                     </Typography>

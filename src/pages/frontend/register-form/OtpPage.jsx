@@ -62,6 +62,7 @@ const OtpPage = () => {
       const jsonresponse = await response.json();
       console.log(jsonresponse);
       if (jsonresponse.statusCode == 200) {
+        navigate("/nested");
         console.log(jsonresponse);
       } else {
         alert("Error: " + jsonresponse.message);
@@ -282,7 +283,7 @@ const OtpPage = () => {
               Close
             </Button>
             <Button variant="secondary" onClick={handleCloseModal}>
-              <Link to="/Nested">Next</Link>
+              <Link to="/nested">Next</Link>
             </Button>
           </Modal.Footer>
         </Modal>

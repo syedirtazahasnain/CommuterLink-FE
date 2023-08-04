@@ -85,10 +85,9 @@ const Login = () => {
       let userObject = await profile.json();
       const body = {
         email: userObject.email,
-        provider_id : "DasD8BjWaeoVDCq4",
-        provider:"google"
+        // provider_id : "DasD8BjWaeoVDCq4",
+        provider:"google",
       };
-      console.log("body",body)
       const res = await fetch(
         "https://staging.commuterslink.com/api/v1/auth",
         {
@@ -101,6 +100,7 @@ const Login = () => {
       );
 
       const jsonresponse = await res.json();
+      console.log(jsonresponse.access_token)
 
       if (jsonresponse.statusCode == 200) {
         navigate("/");

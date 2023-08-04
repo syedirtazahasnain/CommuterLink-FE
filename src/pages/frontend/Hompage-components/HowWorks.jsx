@@ -10,15 +10,15 @@ import Footer from "./Footer";
 function HowWorks() {
   return (
     <div>
-<Navbar/>
+{/* <Navbar/> */}
       <section id="working" className="my-1">
         <div className="container">
           <div className="section-title text-center">
             <h2 className="heading-color text-black">How It Works?</h2>
-            <p>
+            <span>
               It’s a long term commitment between the car owner and travel
               buddies for ride sharing and not a one-time drop-off
-            </p>
+            </span>
           </div>
           <div className="row">
             {/* <div
@@ -103,7 +103,7 @@ function HowWorks() {
                 </div>
               </div>
             </div> */}
-            <CardGroup>
+            <CardGroup className="mt-3">
               <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-3 mb-lg-0">
                 <Card sx={{ maxWidth: 345 }} id="work-card">
                   <CardActionArea>
@@ -115,14 +115,10 @@ function HowWorks() {
                       alt="green iguana"
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        <h5 className="heading">
-                          {" "}
+                      <Typography className="heading" gutterBottom variant="h5" component="div">
                           <a href="">Sign Up &amp; Match</a>{" "}
-                        </h5>
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <p className="Typography1">
+                      <Typography className="Typography1" variant="body2" color="text.secondary">
                           CommutersLink, based upon your gender, area of
                           residence, start point (usually home address), start
                           timings, destination (office/school/university) and
@@ -130,7 +126,6 @@ function HowWorks() {
                           will include individuals whose car you can share and
                           at the same time those who can share your car. You
                           make the final choice that you consider suitable
-                        </p>{" "}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -147,14 +142,10 @@ function HowWorks() {
                       alt="green iguana"
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        <h5 className="heading">
-                          {" "}
+                      <Typography className="heading" gutterBottom variant="h5" component="div">
                           <a href="">Connect</a>{" "}
-                        </h5>
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <p className="Typography1">
+                      <Typography className="Typography1" variant="body2" color="text.secondary">
                           You connect with matches offered through your personal
                           dashboard in the system. And if both members find each
                           other suitable then they give formal consent to share
@@ -162,7 +153,6 @@ function HowWorks() {
                           both for the member whose car is being used and the
                           one sharing someone else’s car. This ensures
                           transparency and security.
-                        </p>
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -179,14 +169,10 @@ function HowWorks() {
                       alt="green iguana"
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        <h5 className="heading">
-                          
+                      <Typography className="heading" gutterBottom variant="h5" component="div">
                           <a href="">Share Cost</a>
-                        </h5>
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <p className="Typography1">
+                      <Typography className="Typography1" variant="body2" color="text.secondary">
                           System calculates “cost per seat” considering type of
                           car, distance (average fuel consumption) and offers
                           this system generated cost to car owners and travel
@@ -194,7 +180,6 @@ function HowWorks() {
                           upon fuel prices and inform both stake holders. The
                           cost calculator also takes care of maintenance cost
                           and wear and tear.
-                        </p>
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -211,14 +196,11 @@ function HowWorks() {
                       alt="green iguana"
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        <h5 className="heading">
+                      <Typography className="heading" gutterBottom variant="h5" component="div">
                           
                           <a href="">Pay</a>
-                        </h5>
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        <p className="Typography1">
+                      <Typography className="Typography1" variant="body2" color="text.secondary">
                           Payment is also system generated and reimbursed to the
                           car owner on daily basis. You only pay for the number
                           of days travelled (public holidays and school holidays
@@ -226,7 +208,6 @@ function HowWorks() {
                           which is credited to their Wallet. Any remaining
                           amount after daily payments are carried forward to
                           next month.
-                        </p>
                       </Typography>
                     </CardContent>
                   </CardActionArea>
