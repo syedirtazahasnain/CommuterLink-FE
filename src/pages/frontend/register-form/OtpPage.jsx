@@ -283,7 +283,7 @@ const OtpPage = () => {
               Close
             </Button>
             <Button variant="secondary" onClick={handleCloseModal}>
-              <Link to="/Nested">Next</Link>
+              <Link to="/nested">Next</Link>
             </Button>
           </Modal.Footer>
         </Modal>
