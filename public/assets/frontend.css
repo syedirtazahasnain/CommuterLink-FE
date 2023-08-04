@@ -246,7 +246,7 @@ CardGroup a{
   text-decoration: none;
 }
 #footer .footer-top .footer-links ul li {
-  padding: 10px 0;
+  padding: 12px 0;
   display: flex;
   align-items: center;
 }
@@ -308,16 +308,13 @@ CardGroup a{
   padding: 0;
   margin: 0;
 }
-#footer .footer-top .footer-links ul li {
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-}
+
 #footer .footer-top .footer-links ul a {
   color: #fff;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
+  text-decoration: none;
 }
 #footer .footer-top .footer-links ul a:hover {
   color: #56e7d0;
@@ -415,4 +412,29 @@ i {
   background-color: #198754 !important;
     border-color: #198754 !important;
     color: #fff !important;
+}
+.accordianfaqs{
+  background-color: rgb(222,222,222) !important;
+}
+img.carousel{
+  width: 100%;
+}
+.btnDriver{
+  background-color: #198754!important;
+  color: #ffff !important;
+}
+.btnWhite{
+  background-color: #ffff !important;
+  color: #198754 !important;
+  border-color: #198754!important;
+}
+.new-heading{
+  background-color: #198754!important;
+  color:#ffff;
+}
+.colorplace::placeholder{
+  color: #198754!important;
+}
+.cardpadding{
+  padding: 100px!important;
 }

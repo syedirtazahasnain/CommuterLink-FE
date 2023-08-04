@@ -100,8 +100,8 @@ const AddressCards = () => {
   return (
     <div className="container">
         <div className="row mb-3">
-          <div className="col-lg-3 info d-flex flex-column align-items-stretch">
-            <i className="bx bx-map"></i>
+          <div className="col-lg-3 info d-flex flex-column ">
+            <i className="bx bx-map mb-2" style={{ fontSize: '2.5rem', color:'darkgreen' }}></i>
             <h4>Address</h4>
             <p>
               Office 8, Ground Floor, Hamadan Heights, Koral Interchange,
@@ -111,24 +111,25 @@ const AddressCards = () => {
           <div
             className="col-lg-3 info info-bg d-flex flex-column align-items-stretch"
           >
-            <i className="bx bx-phone"></i>
+            <i className="bx bx-phone mb-2" style={{ fontSize: '2.5rem', color:'darkgreen' }}></i>
             <h4>Call Us</h4>
             <p>
-              +92 322 5121234<br />
-              +92 345 5115722
+              +92 315 1502443<br />
+              +92 333 5069216<br />
+              +92 51 8743328
             </p>
           </div>
           <div
             className="col-lg-3 info info-bg d-flex flex-column align-items-stretch"
           >
-            <i className="bx bx-envelope"></i>
+            <i className="bx bx-envelope mb-2" style={{ fontSize: '2.5rem',color:'darkgreen' }}></i>
             <h4>Email Us</h4>
             <p>info@commuterslink.com</p>
           </div>
           <div className="col-lg-3 info d-flex flex-column align-items-stretch">
-            <i className="bx bx-time-five"></i>
+            <i className="bx bx-time-five mb-2" style={{ fontSize: '2.5rem',color:'darkgreen' }}></i>
             <h4>Working Hours</h4>
-            <p>Mon - Fri: 9AM to 5PM<br />Sunday: 9AM to 1PM</p>
+            <p> 9AM to 5PM </p>
           </div>
         </div>
       </div>

@@ -14,14 +14,7 @@ import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import AccessAlarmsRoundedIcon from '@mui/icons-material/AccessAlarmsRounded';
 const Contact = () => {
-  const bull = (
-    <Box
-      component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-    >
-      •
-    </Box>
-  );
+
 
  
   return (
@@ -40,7 +33,7 @@ const Contact = () => {
       </section>
       <div className="container">
         <div className="row text-left">
-          <div className="col-md-8 bg-light p-5 mb-5 sha m-auto">
+          <div className="col-md-8 bg-light p-5 mb-3 sha m-auto">
             <form action="#" method="post">
               <div className="row">
                 <div className="col-md-6 mb-2">
@@ -72,8 +65,9 @@ const Contact = () => {
                 {/* <Button variant="primary" type="submit">
         Submit
       </Button> */}
+
                 <div className="col-md-12">
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Group  controlId="formBasicPassword">
                     <Form.Label className="formlabel">Subject</Form.Label>
                     <Form.Control
                       type="text"
