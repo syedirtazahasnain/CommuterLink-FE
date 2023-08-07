@@ -16,6 +16,8 @@ import Nestedform from "./pages/frontend/register-form/WouldYouLikeTo";
 import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 import RiderRegistration from './pages/frontend/Hompage-components/RiderRegistration';
 import Verification from './pages/frontend/register-form/Verification';
+import Dashboard from './pages/frontend/Hompage-components/Dashboard';
+import CommuterProfile from './pages/frontend/Dashboard/CommuterProfile';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
         <Route path='/nested' element={<Nestedform/>}></Route>
         <Route path='/number-generate' element={<NumberGenerate/>}></Route>
         <Route path='/verification' element={<Verification/>}></Route>
+        <Route path='/dashboard' element={<Dashboard/>}></Route>
+        <Route path='/commuter-profile' element={<CommuterProfile/>}></Route>
       </Routes>
     </Router>
     </>

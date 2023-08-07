@@ -18,6 +18,14 @@ import Otp from './register-form/OtpPage'
 // import ShareRide "./register-form/nestedform";
 import WouldYouLikeTo from './register-form/WouldYouLikeTo';
 import Driver from './register-form/Driver';
+import NumberGenerate from "./register-form/NumberGenerate";
+import Dashboard from './Hompage-components/Dashboard';
+import HeaderDashboard from "./Dashboard/HeaderDashboard";
+import Terms_Condition from "./Dashboard/Terms_Condition";
+import ReplyToConfirmDates from "./Dashboard/ReplyToConfirmDates";
+import WhyProcessPayment from "./Dashboard/WhyProcessPayment";
+import SendApprovalForPartner from './Dashboard/SendApprovalForPartner';
+import CommuterProfile from './Dashboard/CommuterProfile';
 export default function () {
   return (
     <div>
@@ -32,14 +40,21 @@ export default function () {
       <AddressCards />
       <Footer /> 
       {/* <Signup/>
-             <Login/>
-      <Registration/>
-      <Otp/>
-      <Faq/>
-      <Nestedform/>
-      <Office/>
-      <Driver/>
-      <NumberGenerate/> */}
+             <Login/> */}
+      {/* <Registration/> */}
+      {/* <Otp/> */}
+      {/* <Faq/> */}
+      {/* <Nestedform/> */}
+      {/* <Office/> */}
+      {/* <Driver/> */}
+      {/* <NumberGenerate/> */}
+      {/* <Dashboard/>
+   <Terms_Condition/>
+   <ReplyToConfirmDates/>
+   <WhyProcessPayment/>
+   <SendApprovalForPartner/>
+   <CommuterProfile/>
+     */}
     </div>
   );
 }

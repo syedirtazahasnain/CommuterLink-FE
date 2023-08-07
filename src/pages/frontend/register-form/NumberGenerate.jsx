@@ -62,7 +62,7 @@ function NumberGenerate() {
       <Navbar />
       <div className="container py-5">
         <div className="row pt-5 pb-4 justify-content-center mt-5 ">
-          <div className="col-lg-4 ">
+          <div className="col-lg-4 col-md-4 col-sm-4">
             {/* <img src={img} className='w-100 rounded-top'  alt="Sample photo"/> */}
             <div
               className="card text-center border-1 border-success "
@@ -78,7 +78,7 @@ function NumberGenerate() {
                 <form id="numberForm">
                   <Row className="mb-3 mt-2 px-2">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">
-                      <Form.Label className="d-flex justify-content-left mb-3 ">
+                      <Form.Label className="d-flex justify-content-center mb-3 ">
                         Number
                       </Form.Label>
                       <Form.Control

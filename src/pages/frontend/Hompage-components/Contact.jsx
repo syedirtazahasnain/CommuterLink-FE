@@ -58,13 +58,10 @@ const Contact = () => {
                       required=""
                     />
                   </Form.Group>
-                  {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-      </Form.Group> */}
+      
                 </div>
 
-                {/* <Button variant="primary" type="submit">
-        Submit
-      </Button> */}
+        
 
                 <div className="col-md-12">
                   <Form.Group  controlId="formBasicPassword">
