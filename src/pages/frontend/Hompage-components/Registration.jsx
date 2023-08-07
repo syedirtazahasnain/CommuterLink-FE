@@ -386,14 +386,16 @@ const Registration = () => {
                           ))}
                         </Form.Select>
 
-                        <div className="mt-3">
+                        {!isMarkerSelectedStart && (
+                          <div className="mt-3">
                             <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
                                 Can't find your area?
                                 <a  >
                                 {" "} Add Here
                                 </a>
                             </span>
-                        </div>
+                          </div>
+                        )}
 
                         {addNewStart && (
                           <Row className="mb-3 mt-4">
