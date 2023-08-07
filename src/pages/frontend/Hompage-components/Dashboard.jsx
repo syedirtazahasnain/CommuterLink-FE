@@ -48,13 +48,10 @@ const Dashboard = () => {
     backgroundColor: "#198754",
   };
   return (
-    <div className="bg-light">
-      <div className="container bg-light mt-5">
-        <div className="row d-flex p-0">
-          <div className="col-lg-12 col-md-6 col-sm-4 mt-5 d-flex justify-content-center p-0">
+    
             <div
-              className="card bg-light "
-              style={{ width: "100rem", border: "0" }}
+              className="card bg-light w-100 "
+            
             >
               <div className="card-body">
                 <h5 className="card-title text_underline">
@@ -678,11 +675,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </div>
+       
   );
 };
 

@@ -29,7 +29,7 @@ import CommuterProfile from './Dashboard/CommuterProfile';
 export default function () {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar />
       <CarouselSlider />
       <MyAccordion />
       <ShareRideCards />
@@ -38,7 +38,7 @@ export default function () {
       <Contribute />
       <Contact />
       <AddressCards />
-      <Footer /> 
+      <Footer />  */}
       {/* <Signup/>
              <Login/> */}
       {/* <Registration/> */}
@@ -48,13 +48,13 @@ export default function () {
       {/* <Office/> */}
       {/* <Driver/> */}
       {/* <NumberGenerate/> */}
-      {/* <Dashboard/>
-   <Terms_Condition/>
-   <ReplyToConfirmDates/>
-   <WhyProcessPayment/>
+      {/* <Dashboard/> */}
+   {/* <Terms_Condition/> */}
+   {/* <ReplyToConfirmDates/> */}
+   {/* <WhyProcessPayment/> */}
    <SendApprovalForPartner/>
-   <CommuterProfile/>
-     */}
+   {/* <CommuterProfile/> */}
+    
     </div>
   );
 }
