@@ -24,7 +24,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, MarkerF, Autocomplete } from "@react-google-maps/api";
 import ibn from '../../../Images/iban.png';
 import easypaisa from '../../../Images/ep.png';
 import jazzcash from '../../../Images/jazz.png';
@@ -33,11 +33,29 @@ import raast from '../../../Images/raast.png';
 const Registration = () => {
 
   const navigate = useNavigate();
+  const [addNewStart, setAddNewStart] = useState(false);
+  const [addNewEnd, setAddNewEnd] = useState(false);
+  const mapLibraries = ["places"];
+
+  const pakistanBounds = {
+    north: 37.271879,
+    south: 23.634499,
+    west: 60.872972,
+    east: 77.84085,
+  };
 
   const route = () => {
     navigate("/verification");
   
-};
+  };
+
+  const AddNewStart = () => {
+    setAddNewStart(true);
+  };
+
+  const AddNewEnd = () => {
+    setAddNewEnd(true);
+  };
 
 
   // For Registration
@@ -49,6 +67,7 @@ const Registration = () => {
   
   // For Start Point
   const[locationStartString, setLocationStartString] = useState("");
+  const[locationStartStringField, setLocationStartStringField] = useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
   const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
@@ -57,6 +76,7 @@ const Registration = () => {
   
   // For End Point
   const[locationEndString, setLocationEndString] = useState("");
+  const[locationEndStringField, setLocationEndStringField] = useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
   const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
@@ -67,10 +87,12 @@ const Registration = () => {
   // For Start Point
   const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 0, lng: 0 });
   const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 0, lng: 0 });
+  const [isMarkerSelectedStart, setIsMarkerSelectedStart] = useState(false);
 
   // For End Point
   const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 0, lng: 0 });
   const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 0, lng: 0 });
+  const [isMarkerSelectedEnd, setIsMarkerSelectedEnd] = useState(false);
 
   // For Driver's
   const [carBrand, setCarBrand] = useState([]);
@@ -81,7 +103,8 @@ const Registration = () => {
   const [regYear, setRegYear] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
   const [selectedRegNumber, setSelectedRegNumber] = useState("");
-  const [selectedCarImage, setSelectedCarImage] = useState([]);
+  const [selectedCarAC, setSelectedCarAC] = useState("");
+  const [selectedCarImage, setSelectedCarImage] = useState(null);
   const [selectedSeat, setSelectedSeat] = useState("");
   const [selectedSeatGender, setSelectedSeatGender] = useState("");
   const [selectedRoutePartner, setSelectedRoutePartner] = useState("");
@@ -145,8 +168,6 @@ const Registration = () => {
       setSelectedEndCityArea(filteredEndCities ? filteredEndCities : []);
     }
   }, [cityStartId, cityEndId]);
-
-  console.log(locationEndString);
 
   useEffect(() => {
     // Function to fetch the geocoding data
@@ -234,8 +255,44 @@ const Registration = () => {
     }
     setValidated(true);
   };
-  
 
+  const handleImageSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedCarImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleLocationStartField = (e) => {
+    setLocationStartStringField(e.target.value);
+    setLocationStartString(e.target.value);
+  };
+
+  const handleLocationEndField = (e) => {
+    setLocationEndStringField(e.target.value);
+    setLocationEndString(e.target.value);
+  };
+
+  const handleMarkerClickStart = () => {
+    setIsMarkerSelectedStart(true);
+    alert(locationStartString);
+  };
+
+  const handleMarkerClickEnd = () => {
+    setIsMarkerSelectedEnd(true);
+    alert(locationEndString);
+  };
+
+  let place=[];
+
+  const handlePlaceSelect = (place) => {
+   console.log(place);
+  };
+  
   // console.log(locationStartString);
 
   // console.log(defaultStartCenter);
@@ -328,28 +385,68 @@ const Registration = () => {
                             </option>
                           ))}
                         </Form.Select>
-                        <span className="mt-3">
-                            Can't find your area?
-                            <a  >
-                            {" "} Add Another
-                            </a>
-                        </span>
+
+                        {!isMarkerSelectedStart && (
+                          <div className="mt-3">
+                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
+                                Can't find your area?
+                                <a  >
+                                {" "} Add Here
+                                </a>
+                            </span>
+                          </div>
+                        )}
+
+                        {addNewStart && (
+                          <Row className="mb-3 mt-4">
+                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                              <Autocomplete
+                                //onLoad={onLoad}
+                                // onLoad={onSBLoad}
+                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
+                                //onPlaceChanged={(e) => console.log(e)}
+                                //onPlaceChanged={(e) => setLocationStartString(e)}
+                                restrictions={{ country: 'PK' }}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  autoComplete="on"
+                                  required
+                                  type="text"
+                                  value={locationStartStringField}
+                                  onChange={handleLocationStartField}
+                                  className="colorplace"
+                                  placeholder="Enter your area"
+                                  autocomplete="on"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+                          </Row> 
+                        )}
                       </Form.Group>
                     )}
                   </Row>
-
                   
-                  {cityStartId &&  
+                  {/* {locationStartStringField}
+                  {locationStartString} */}
+                  
+                  {cityStartId && !isMarkerSelectedStart &&
                     <Container
                       className="d-flex justify-content-center align-items-center mb-3">
                       <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
+                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"} libraries={mapLibraries} >
                           <GoogleMap 
                             zoom={14} 
                             center={defaultStartCenter} 
                             mapContainerStyle={{  width: "100%" ,height: "50vh"}}
+                            options={{ 
+                              types: ['(regions)'],
+                              componentRestrictions: {country: "PK"} 
+                            }}  
                           >
-                          <MarkerF position={markerPositionStart} />
+                          <MarkerF position={markerPositionStart} onClick={handleMarkerClickStart} />
                           </GoogleMap>
                         </LoadScript>
                       </Row>
@@ -424,17 +521,47 @@ const Registration = () => {
                             </option>
                           ))}
                         </Form.Select>
-                        <span className="mt-3">
-                            Can't find your area?
-                            <a  >
-                            {" "} Add Another
-                            </a>
-                        </span>
+                        
+                        <div className="mt-3">
+                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
+                                Can't find your area?
+                                <a  >
+                                {" "} Add Here
+                                </a>
+                            </span>
+                        </div>
+
+                        {addNewEnd &&  (
+                          <Row className="mb-3 mt-4">
+                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                              <Autocomplete
+                                //onLoad={onLoad}
+                                // onLoad={onSBLoad}
+                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
+                                //onPlaceChanged={(e) => console.log(e)}
+                                //onPlaceChanged={(e) => setLocationStartString(e)}
+                                restrictions={{ country: 'PK' }}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  required
+                                  type="text"
+                                  value={locationEndStringField}
+                                  onChange={handleLocationEndField}
+                                  className="colorplace"
+                                  placeholder="Enter your area"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+                          </Row> 
+                        )}
                       </Form.Group>
                     )}
                   </Row>
 
-                  {cityEndId &&  
+                  {cityEndId && !isMarkerSelectedEnd &&
                     <Container
                       className="d-flex justify-content-center align-items-center mb-3">
                       <Row style={{ height: "80%", width: "80%" }}>
@@ -444,7 +571,7 @@ const Registration = () => {
                             center={defaultEndCenter} 
                             mapContainerStyle={{  width: "100%" ,height: "50vh"}}
                           >
-                            <MarkerF position={markerPositionEnd} />
+                            <MarkerF position={markerPositionEnd} onClick={handleMarkerClickEnd} />
                           </GoogleMap>
                         </LoadScript>
                       </Row>
@@ -512,6 +639,7 @@ const Registration = () => {
                               label="Monday"
                               name="group1"
                               type={type}
+                              value={type}
                               id={`inline-${type}-0`}
                               required
                               />
@@ -520,6 +648,7 @@ const Registration = () => {
                               label="Tuesday"
                               name="group1"
                               type={type}
+                              value={type}
                               id={`inline-${type}-2`}
                               required
                               />
@@ -527,6 +656,7 @@ const Registration = () => {
                               inline
                               label="Wednesday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -534,6 +664,7 @@ const Registration = () => {
                               inline
                               label="Thursday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -541,6 +672,7 @@ const Registration = () => {
                               inline
                               label="Friday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -548,6 +680,7 @@ const Registration = () => {
                               inline
                               label="Saturday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -555,6 +688,7 @@ const Registration = () => {
                               inline
                               label="Sunday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -800,6 +934,8 @@ const Registration = () => {
                           required
                           type="text"
                           className="colorplace"
+                          value={selectedModelName}
+                          onChange={(e) => setSelectedModelName(e.target.value)}
                           placeholder="Car Model"
                           defaultValue=""
                         />
@@ -855,6 +991,8 @@ const Registration = () => {
                           required
                           type="text"
                           className="colorplace"
+                          value={selectedRegNumber}
+                          onChange={(e) => setSelectedRegNumber(e.target.value)}
                           placeholder="Registeration Number"
                           defaultValue=""
                         />
@@ -866,6 +1004,8 @@ const Registration = () => {
                         <Form.Select
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
+                          value={selectedCarAC}
+                          onChange={(e) => setSelectedCarAC(e.target.value)}
                           required
                         >
                           <option value="" hidden>AC</option>
@@ -882,7 +1022,12 @@ const Registration = () => {
                         <Form.Label className="mt-3" style={{ color: "#198754" }}>
                           Upload Car Image with visible number plate
                         </Form.Label>
-                        <Form.Control type="file" required />
+                        <Form.Control 
+                          type="file"
+                          accept="image/*"  
+                          onChange={handleImageSelect}
+                          required 
+                        />
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
@@ -893,6 +1038,8 @@ const Registration = () => {
                         <Form.Select
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
+                          value={selectedSeat}
+                          onChange={(e) => setSelectedSeat(e.target.value)}
                           required
                         >
                           <option value="" hidden>Seats Available</option>
@@ -909,6 +1056,8 @@ const Registration = () => {
                         <Form.Select
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
+                          value={selectedSeatGender}
+                          onChange={(e) => setSelectedSeatGender(e.target.value)}
                           required
                         >
                           <option value="" hidden>Seats Available</option>
@@ -926,6 +1075,8 @@ const Registration = () => {
                         <Form.Select
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
+                          value={selectedRoutePartner}
+                          onChange={(e) => setSelectedRoutePartner(e.target.value)}
                           required
                         >
                           <option value="" hidden>I also accept mid-route partner</option>
@@ -947,16 +1098,16 @@ const Registration = () => {
                                     </div>
                                     <form id="paymentForm">
                                     <div className="mt-4">
-                                      <input type="text" className="form-control mb-2" id="bankAccount" name="bankAccount" placeholder="Bank Account (IBAN)" required=""/>
+                                      <input type="text" className="form-control mb-2 colorplace" id="bankAccount" name="bankAccount" placeholder="Bank Account (IBAN)" required=""/>
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2" id="jazzCashAccount" name="jazzCashAccount" placeholder="Jazz Cash Account Number" required=""/>
+                                      <input type="text" className="form-control mb-2 colorplace" id="jazzCashAccount" name="jazzCashAccount" placeholder="Jazz Cash Account Number" required=""/>
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2" id="easypaisaAccount" name="easypaisaAccount" placeholder="EasyPaisa Account Number" required=""/>
+                                      <input type="text" className="form-control mb-2 colorplace" id="easypaisaAccount" name="easypaisaAccount" placeholder="EasyPaisa Account Number" required=""/>
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2" id="raastID" name="raastID" placeholder="Raast ID"/>
+                                      <input type="text" className="form-control mb-2 colorplace" id="raastID" name="raastID" placeholder="Raast ID"/>
                                     </div>
                                   </form>
                                 </div>
