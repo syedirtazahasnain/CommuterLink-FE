@@ -24,18 +24,36 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, MarkerF, Autocomplete } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 
 
 const RiderRegistration = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [addNewStart, setAddNewStart] = useState(false);
+  const [addNewEnd, setAddNewEnd] = useState(false);
+  const mapLibraries = ["places"];
 
-    const route = () => {
-        navigate("/verification");
-      
-    };
+  const pakistanBounds = {
+    north: 37.271879,
+    south: 23.634499,
+    west: 60.872972,
+    east: 77.84085,
+  };
+
+  const route = () => {
+    navigate("/verification");
+  
+  };
+
+  const AddNewStart = () => {
+    setAddNewStart(true);
+  };
+
+  const AddNewEnd = () => {
+    setAddNewEnd(true);
+  };
 
 
   // For Registration
@@ -47,6 +65,7 @@ const RiderRegistration = () => {
   
   // For Start Point
   const[locationStartString, setLocationStartString] = useState("");
+  const[locationStartStringField, setLocationStartStringField] = useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
   const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
@@ -55,6 +74,7 @@ const RiderRegistration = () => {
   
   // For End Point
   const[locationEndString, setLocationEndString] = useState("");
+  const[locationEndStringField, setLocationEndStringField] = useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
   const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
@@ -65,10 +85,12 @@ const RiderRegistration = () => {
   // For Start Point
   const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 0, lng: 0 });
   const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 0, lng: 0 });
+  const [isMarkerSelectedStart, setIsMarkerSelectedStart] = useState(false);
 
   // For End Point
   const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 0, lng: 0 });
   const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 0, lng: 0 });
+  const [isMarkerSelectedEnd, setIsMarkerSelectedEnd] = useState(false);
 
   useEffect(() => {
     getdropdownStartdata();
@@ -210,11 +232,33 @@ const RiderRegistration = () => {
     setValidated(true);
   };
 
+  const handleLocationStartField = (e) => {
+    setLocationStartStringField(e.target.value);
+    setLocationStartString(e.target.value);
+  };
+
+  const handleLocationEndField = (e) => {
+    setLocationEndStringField(e.target.value);
+    setLocationEndString(e.target.value);
+  };
+
+  const handleMarkerClickStart = () => {
+    setIsMarkerSelectedStart(true);
+    setIsMarkerSelectedEnd(false);
+    //alert(locationStartString);
+  };
+
+  const handleMarkerClickEnd = () => {
+    setIsMarkerSelectedEnd(true);
+    setIsMarkerSelectedStart(false);
+    //alert(locationEndString);
+  };
+
  
   return (
     <>
       <Navbar />
-          <div style={{ backgroundColor: "#eee" }}>
+      <div style={{ backgroundColor: "#eee" }}>
           <div className="containter p-5">
             <div className="row justify-content-center">
               <div className="col-md-8 bg-white  mt-5 mb-5">
@@ -295,28 +339,68 @@ const RiderRegistration = () => {
                             </option>
                           ))}
                         </Form.Select>
-                        <span className="mt-3">
-                            Can't find your area?
-                            <a  >
-                            {" "} Add Another
-                            </a>
-                        </span>
+
+                        {!isMarkerSelectedStart && (
+                          <div className="mt-3">
+                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
+                                Can't find your area?
+                                <a  >
+                                {" "} Add Here
+                                </a>
+                            </span>
+                          </div>
+                        )}
+
+                        {addNewStart && (
+                          <Row className="mb-3 mt-4">
+                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                              <Autocomplete
+                                //onLoad={onLoad}
+                                // onLoad={onSBLoad}
+                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
+                                //onPlaceChanged={(e) => console.log(e)}
+                                //onPlaceChanged={(e) => setLocationStartString(e)}
+                                restrictions={{ country: 'PK' }}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  autoComplete="on"
+                                  required
+                                  type="text"
+                                  value={locationStartStringField}
+                                  onChange={handleLocationStartField}
+                                  className="colorplace"
+                                  placeholder="Enter your area"
+                                  autocomplete="on"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+                          </Row> 
+                        )}
                       </Form.Group>
                     )}
                   </Row>
-
                   
-                  {cityStartId &&  
+                  {/* {locationStartStringField}
+                  {locationStartString} */}
+                  
+                  {cityStartId && !isMarkerSelectedStart &&
                     <Container
                       className="d-flex justify-content-center align-items-center mb-3">
                       <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
+                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"} libraries={mapLibraries} >
                           <GoogleMap 
                             zoom={14} 
                             center={defaultStartCenter} 
                             mapContainerStyle={{  width: "100%" ,height: "50vh"}}
+                            options={{ 
+                              types: ['(regions)'],
+                              componentRestrictions: {country: "PK"} 
+                            }}  
                           >
-                          <MarkerF position={markerPositionStart} />
+                          <MarkerF position={markerPositionStart} onClick={handleMarkerClickStart} />
                           </GoogleMap>
                         </LoadScript>
                       </Row>
@@ -391,17 +475,52 @@ const RiderRegistration = () => {
                             </option>
                           ))}
                         </Form.Select>
-                        <span className="mt-3">
-                            Can't find your area?
-                            <a  >
-                            {" "} Add Another
-                            </a>
-                        </span>
+
+                        {!isMarkerSelectedEnd && (
+                          <div className="mt-3">
+                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
+                                Can't find your area?
+                                <a  >
+                                {" "} Add Here
+                                </a>
+                            </span>
+                          </div>
+                        )}
+
+                        {addNewEnd &&  (
+                          <Row className="mb-3 mt-4">
+                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                              <Autocomplete
+                                //onLoad={onLoad}
+                                // onLoad={onSBLoad}
+                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
+                                //onPlaceChanged={(e) => console.log(e)}
+                                //onPlaceChanged={(e) => setLocationStartString(e)}
+                                // onPlaceChanged={() =>
+                                //   handlePlaceSelect(true)
+                                // }
+                                restrictions={{ country: 'PK' }}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  required
+                                  type="text"
+                                  value={locationEndStringField}
+                                  onChange={handleLocationEndField}
+                                  className="colorplace"
+                                  placeholder="Enter your area"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+                          </Row> 
+                        )}
                       </Form.Group>
                     )}
                   </Row>
 
-                  {cityEndId &&  
+                  {cityEndId && !isMarkerSelectedEnd &&
                     <Container
                       className="d-flex justify-content-center align-items-center mb-3">
                       <Row style={{ height: "80%", width: "80%" }}>
@@ -410,8 +529,12 @@ const RiderRegistration = () => {
                             zoom={14} 
                             center={defaultEndCenter} 
                             mapContainerStyle={{  width: "100%" ,height: "50vh"}}
+                            options={{ 
+                              types: ['(regions)'],
+                              componentRestrictions: {country: "PK"} 
+                            }}
                           >
-                            <MarkerF position={markerPositionEnd} />
+                            <MarkerF position={markerPositionEnd} onClick={handleMarkerClickEnd} />
                           </GoogleMap>
                         </LoadScript>
                       </Row>
@@ -479,6 +602,7 @@ const RiderRegistration = () => {
                               label="Monday"
                               name="group1"
                               type={type}
+                              value={type}
                               id={`inline-${type}-0`}
                               required
                               />
@@ -487,6 +611,7 @@ const RiderRegistration = () => {
                               label="Tuesday"
                               name="group1"
                               type={type}
+                              value={type}
                               id={`inline-${type}-2`}
                               required
                               />
@@ -494,6 +619,7 @@ const RiderRegistration = () => {
                               inline
                               label="Wednesday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -501,6 +627,7 @@ const RiderRegistration = () => {
                               inline
                               label="Thursday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -508,6 +635,7 @@ const RiderRegistration = () => {
                               inline
                               label="Friday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -515,6 +643,7 @@ const RiderRegistration = () => {
                               inline
                               label="Saturday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -522,6 +651,7 @@ const RiderRegistration = () => {
                               inline
                               label="Sunday"
                               type={type}
+                              value={type}
                               id={`inline-${type}-3`}
                               required
                               />
@@ -705,7 +835,6 @@ const RiderRegistration = () => {
                       className="btnregistration" 
                       onClick={() => {
                             route();
-                          
                       }}>
                       Submit
                     </Button>
