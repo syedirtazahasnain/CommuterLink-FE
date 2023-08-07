@@ -279,18 +279,14 @@ const Registration = () => {
 
   const handleMarkerClickStart = () => {
     setIsMarkerSelectedStart(true);
-    alert(locationStartString);
+    setIsMarkerSelectedEnd(false);
+    //alert(locationStartString);
   };
 
   const handleMarkerClickEnd = () => {
     setIsMarkerSelectedEnd(true);
-    alert(locationEndString);
-  };
-
-  let place=[];
-
-  const handlePlaceSelect = (place) => {
-   console.log(place);
+    setIsMarkerSelectedStart(false);
+    //alert(locationEndString);
   };
   
   // console.log(locationStartString);
@@ -521,15 +517,17 @@ const Registration = () => {
                             </option>
                           ))}
                         </Form.Select>
-                        
-                        <div className="mt-3">
+
+                        {!isMarkerSelectedEnd && (
+                          <div className="mt-3">
                             <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
                                 Can't find your area?
                                 <a  >
                                 {" "} Add Here
                                 </a>
                             </span>
-                        </div>
+                          </div>
+                        )}
 
                         {addNewEnd &&  (
                           <Row className="mb-3 mt-4">
@@ -541,6 +539,9 @@ const Registration = () => {
                                 //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
                                 //onPlaceChanged={(e) => console.log(e)}
                                 //onPlaceChanged={(e) => setLocationStartString(e)}
+                                // onPlaceChanged={() =>
+                                //   handlePlaceSelect(true)
+                                // }
                                 restrictions={{ country: 'PK' }}
                                 options={{ strictBounds: true }}
                               >
@@ -570,6 +571,10 @@ const Registration = () => {
                             zoom={14} 
                             center={defaultEndCenter} 
                             mapContainerStyle={{  width: "100%" ,height: "50vh"}}
+                            options={{ 
+                              types: ['(regions)'],
+                              componentRestrictions: {country: "PK"} 
+                            }}
                           >
                             <MarkerF position={markerPositionEnd} onClick={handleMarkerClickEnd} />
                           </GoogleMap>
