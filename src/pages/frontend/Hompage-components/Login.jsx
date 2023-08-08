@@ -40,6 +40,12 @@ const Login = () => {
   const handleFailure = (response) => {
     console.log("handleFailure", response);
   };
+
+  const handleLogin = async () => {
+    await postData();
+    route();
+  };
+
   const postData = async () => {
     try {
       const body = {
@@ -56,11 +62,12 @@ const Login = () => {
           body: JSON.stringify(body),
         }
       );
-
       const jsonresponse = await response.json();
+      console.log(jsonresponse);
+      // return;
 
       if (jsonresponse.statusCode == 200) {
-        navigate("/");
+        // navigate("/");
       } else {
         console.log(jsonresponse);
         alert("Error: " + jsonresponse.message);
@@ -110,7 +117,6 @@ const Login = () => {
       );
 
       const jsonresponse = await res.json();
-      console.log(jsonresponse.access_token)
 
       if (jsonresponse.statusCode == 200) {
         navigate("/");
@@ -261,8 +267,9 @@ const Login = () => {
                     </label>
                   </div>
                   {/* <Button className="btn  formbtn" onClick={() => postData()}> */}
+                  <Button className="btn  formbtn" onClick={handleLogin}>
                   {/* onClick={() => setSubmit(true), route()} */}
-                  <Button className="btn  formbtn" onClick={() => route()} >  
+                  {/* <Button className="btn  formbtn" onClick={() => route()} >   */}
                     Login
                   </Button>{" "}
                   <div className="container">
