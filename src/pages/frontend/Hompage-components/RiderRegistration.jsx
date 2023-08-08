@@ -387,24 +387,31 @@ const RiderRegistration = () => {
                   {locationStartString} */}
                   
                   {cityStartId && !isMarkerSelectedStart &&
-                    <Container
-                      className="d-flex justify-content-center align-items-center mb-3">
-                      <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"} libraries={mapLibraries} >
-                          <GoogleMap 
-                            zoom={14} 
-                            center={defaultStartCenter} 
-                            mapContainerStyle={{  width: "100%" ,height: "50vh"}}
-                            options={{ 
-                              types: ['(regions)'],
-                              componentRestrictions: {country: "PK"} 
-                            }}  
-                          >
-                          <MarkerF position={markerPositionStart} onClick={handleMarkerClickStart} />
-                          </GoogleMap>
+                    <Container className="d-flex justify-content-center align-items-center mb-3">
+                    <Row style={{ height: "80%", width: "80%" }}>
+                        <LoadScript
+                            googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
+                            libraries={mapLibraries}
+                        >
+                            <GoogleMap
+                                zoom={14}
+                                center={defaultStartCenter}
+                                mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                options={{
+                                    types: ["(regions)"],
+                                    componentRestrictions: { country: "PK" },
+                                }}
+                            >
+                                <MarkerF
+                                    position={markerPositionStart}
+                                    onClick={handleMarkerClickStart}
+                                />
+                            </GoogleMap>
                         </LoadScript>
-                      </Row>
-                    </Container>
+                    </Row>
+                </Container>
+
+
                   }
 
                   <Row className="mb-3">
@@ -521,24 +528,30 @@ const RiderRegistration = () => {
                   </Row>
 
                   {cityEndId && !isMarkerSelectedEnd &&
-                    <Container
-                      className="d-flex justify-content-center align-items-center mb-3">
-                      <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
-                          <GoogleMap 
-                            zoom={14} 
-                            center={defaultEndCenter} 
-                            mapContainerStyle={{  width: "100%" ,height: "50vh"}}
-                            options={{ 
-                              types: ['(regions)'],
-                              componentRestrictions: {country: "PK"} 
-                            }}
-                          >
-                            <MarkerF position={markerPositionEnd} onClick={handleMarkerClickEnd} />
-                          </GoogleMap>
+                    <Container className="d-flex justify-content-center align-items-center mb-3">
+                    <Row style={{ height: "80%", width: "80%" }}>
+                        <LoadScript
+                            googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
+                            libraries={mapLibraries}
+                        >
+                            <GoogleMap
+                                zoom={14}
+                                center={defaultEndCenter}
+                                mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                options={{
+                                    types: ["(regions)"],
+                                    componentRestrictions: { country: "PK" },
+                                }}
+                            >
+                                <MarkerF
+                                    position={markerPositionEnd}
+                                    onClick={handleMarkerClickEnd}
+                                />
+                            </GoogleMap>
                         </LoadScript>
-                      </Row>
-                    </Container>
+                    </Row>
+                </Container>
+
                   }
 
                   <Row className="mb-3">

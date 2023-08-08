@@ -267,6 +267,15 @@ const Registration = () => {
     }
   };
 
+  const handleMapClickStart = (event) => {
+    console.log(event);
+    setMarkerPositionStart({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
+    console.log(markerPositionStart);
+  };
+
   const handleLocationStartField = (e) => {
     setLocationStartStringField(e.target.value);
     setLocationStartString(e.target.value);
@@ -279,13 +288,13 @@ const Registration = () => {
 
   const handleMarkerClickStart = () => {
     setIsMarkerSelectedStart(true);
-    setIsMarkerSelectedEnd(false);
+    //setIsMarkerSelectedEnd(false);
     //alert(locationStartString);
   };
 
   const handleMarkerClickEnd = () => {
     setIsMarkerSelectedEnd(true);
-    setIsMarkerSelectedStart(false);
+    //setIsMarkerSelectedStart(false);
     //alert(locationEndString);
   };
   
@@ -435,7 +444,8 @@ const Registration = () => {
                         <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"} libraries={mapLibraries} >
                           <GoogleMap 
                             zoom={14} 
-                            center={defaultStartCenter} 
+                            center={defaultStartCenter || defaultEndCenter} 
+                            onClick={handleMapClickStart}
                             mapContainerStyle={{  width: "100%" ,height: "50vh"}}
                             options={{ 
                               types: ['(regions)'],
