@@ -63,8 +63,6 @@ const Login = () => {
         }
       );
       const jsonresponse = await response.json();
-      console.log(jsonresponse);
-      // return;
 
       if (jsonresponse.statusCode == 200) {
         // navigate("/");
