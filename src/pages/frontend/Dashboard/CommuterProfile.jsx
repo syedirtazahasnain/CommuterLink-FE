@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
+
 import logo from "../../../Images/CL-logo.png";
 import img1 from "../../../Images/pic.png";
 import logo2 from "../../../Images/Sysreforms logo 2.png";
@@ -36,17 +36,14 @@ const CommuterProfile = () => {
   };
   return (
     <div>
-      <div className="container bg-light mt-5">
-        <div className="row d-flex p-0">
-          <div className="col-lg-12 col-md-6 col-sm-4 mt-5 d-flex justify-content-center p-0">
+  
+        
             <div
-              className="card bg-light "
-              style={{ width: "100rem", border: "0" }}
-            >
-              <div className="card-body">
+              className="card w-100">
+              <div className="card-body w-100">
                 <div className="row">
                   <div
-                    className="col-lg-12 col-md-6 col-sm-4 d-flex p-0 "
+                    className="col-lg-12 col-md-6 col-sm-4 d-flex"
                     style={{ backgroundColor: "rgb(162 229 198)", border: "0" }}
                   >
                     <div className="col-lg-3 p-0">
@@ -184,7 +181,7 @@ const CommuterProfile = () => {
                     </div>
                     <div className="col-lg-9 px-5">
                       <div
-                        className="card d-flex  d-flex justify-content-left"
+                        className="card d-flex   d-flex justify-content-left"
                         style={{
                           width: "60.5rem",
                           backgroundColor: "rgba(162 229 198)",
@@ -346,10 +343,8 @@ const CommuterProfile = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <Footer />
-    </div>
+       
+    
   );
 };
 
