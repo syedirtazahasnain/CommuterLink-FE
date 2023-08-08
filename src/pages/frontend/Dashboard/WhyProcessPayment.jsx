@@ -40,12 +40,7 @@ const WhyProcessPayment = () => {
              
             >
               <div className="card-body">
-                <h5 className="card-title text_underline">
-                  OFFERING A CAR TO OFFICE (SYSTEM SUGGESTED MATCHES)
-                </h5>
-                <h2 className="card-subtitle mb-2  second_heading">
-                  OFFERING A CAR TO OFFICE (SYSTEM SUGGESTED MATCHES)
-                </h2>
+              
                 <div className="row">
                   <div
                     className="col-lg-12 col-md-6 col-sm-4 d-flex p-0 "
