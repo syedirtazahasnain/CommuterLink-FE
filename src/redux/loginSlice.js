@@ -7,17 +7,17 @@ const initialState = {
 };
 
 export const loginSlice = createSlice({
-    name : "loin",
+    name : "login",
     initialState : {...initialState},
     reducers: {
         setloginState : (state , payload = true) => {
-            state.data = payload.payload;
+            state.data.token = payload.payload;
         },
-        resertloginState : (state) =>{
+        resetloginState : (state) =>{
             state.data = {...initialState.data};
         },
     },
 });
 
-export const { setloginState, resetloginpState } = loginSlice.actions;
+export const { setloginState, resetloginState } = loginSlice.actions;
 export default loginSlice.reducer;

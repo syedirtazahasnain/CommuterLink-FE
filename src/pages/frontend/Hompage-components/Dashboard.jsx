@@ -10,10 +10,15 @@ import downline from '../../../Images/downline of membericon.png'
 import  questionmark from "../../../Images/qustionmark.png";
 import { useNavigate } from "react-router-dom";
 import CommuterProfile from "../Dashboard/CommuterProfile";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-   const navigate = useNavigate();
+  
+  const navigate = useNavigate();
+  const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn , setSubmit] = useState(false);
+
+  // console.log(userToken);
 
   const route = () => {
     setSubmit(true);
