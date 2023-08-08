@@ -24,7 +24,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, MarkerF, Autocomplete } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Autocomplete, MarkerF, Polyline } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 
 
@@ -34,13 +34,6 @@ const RiderRegistration = () => {
   const [addNewStart, setAddNewStart] = useState(false);
   const [addNewEnd, setAddNewEnd] = useState(false);
   const mapLibraries = ["places"];
-
-  const pakistanBounds = {
-    north: 37.271879,
-    south: 23.634499,
-    west: 60.872972,
-    east: 77.84085,
-  };
 
   const route = () => {
     navigate("/verification");
@@ -254,6 +247,28 @@ const RiderRegistration = () => {
     //alert(locationEndString);
   };
 
+  const handleMapClick = (event) => {
+    console.log(event);
+    if(locationStartString){
+      setMarkerPositionStart({
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      });
+    }
+
+    if(locationEndString){
+      setMarkerPositionEnd({
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      });
+    }
+  };
+
+  const lineCoordinates = [
+    { lat: markerPositionStart.lat, lng: markerPositionStart.lng },
+    { lat: markerPositionEnd.lat, lng: markerPositionEnd.lng },
+  ];
+
  
   return (
     <>
@@ -386,7 +401,7 @@ const RiderRegistration = () => {
                   {/* {locationStartStringField}
                   {locationStartString} */}
                   
-                  {cityStartId && !isMarkerSelectedStart &&
+                  {(!isMarkerSelectedStart || !isMarkerSelectedEnd)  &&
                     <Container className="d-flex justify-content-center align-items-center mb-3">
                     <Row style={{ height: "80%", width: "80%" }}>
                         <LoadScript
@@ -394,25 +409,45 @@ const RiderRegistration = () => {
                             libraries={mapLibraries}
                         >
                             <GoogleMap
-                                zoom={14}
-                                center={defaultStartCenter}
+                                zoom={10}
+                                center={
+                                 defaultStartCenter || defaultEndCenter
+                                }
                                 mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                onClick={handleMapClick}
                                 options={{
                                     types: ["(regions)"],
                                     componentRestrictions: { country: "PK" },
                                 }}
                             >
-                                <MarkerF
+                              <MarkerF
                                     position={markerPositionStart}
                                     onClick={handleMarkerClickStart}
-                                />
+                                    icon={{
+                                      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                    }}
+                              />
+                              
+                              <MarkerF
+                                position={markerPositionEnd}
+                                onClick={handleMarkerClickEnd}
+                                icon={{
+                                  url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                }}
+                              />
+                              
+                              <Polyline 
+                                path={lineCoordinates} 
+                                strokeColor="#0000FF"
+                                strokeOpacity={0.8}
+                                strokeWeight={2} 
+                              />
+
                             </GoogleMap>
                         </LoadScript>
                     </Row>
                 </Container>
-
-
-                  }
+              }
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
@@ -527,7 +562,7 @@ const RiderRegistration = () => {
                     )}
                   </Row>
 
-                  {cityEndId && !isMarkerSelectedEnd &&
+                  {/* {cityEndId && !isMarkerSelectedEnd &&
                     <Container className="d-flex justify-content-center align-items-center mb-3">
                     <Row style={{ height: "80%", width: "80%" }}>
                         <LoadScript
@@ -552,7 +587,7 @@ const RiderRegistration = () => {
                     </Row>
                 </Container>
 
-                  }
+                  } */}
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
