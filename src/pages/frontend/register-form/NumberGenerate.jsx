@@ -13,16 +13,14 @@ function NumberGenerate() {
   const navigate = useNavigate();
   const [ phoneNumber , setPhoneNumber ] =  useState()
   const store_signup = useSelector((s)=> s.signup.data);
-  // const store_login = useSelector((s)=> s.login.data);
+  const store_login = useSelector((s)=> s.login.data);
   
   const submitForm = async() =>{
     try {
       const body = {
         mobile: phoneNumber,
-        email : store_signup.email,
+        email : store_login.email,
       };
-  //  return console.log( store_signup.email);
-  // return console.log(store_login);
   
       const response = await fetch(
         "https://staging.commuterslink.com/api/v1/mobilew",
@@ -31,6 +29,7 @@ function NumberGenerate() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            'Accept': 'application/json',
           },
           body: JSON.stringify(body),
         }
@@ -50,7 +49,7 @@ function NumberGenerate() {
   }
   const validatePhoneNumber = (phoneNumber) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
-    const phonePattern = /^03\d{10}$/;
+    const phonePattern = /^03\d{9}$/;
     if (phonePattern.test(phoneNumber)) {
       setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(true);
@@ -63,7 +62,7 @@ function NumberGenerate() {
       <Navbar />
       <div className="container py-5">
         <div className="row pt-5 pb-4 justify-content-center mt-5 ">
-          <div className="col-lg-4 ">
+          <div className="col-lg-4 col-md-4 col-sm-4">
             {/* <img src={img} className='w-100 rounded-top'  alt="Sample photo"/> */}
             <div
               className="card text-center border-1 border-success "
@@ -79,7 +78,7 @@ function NumberGenerate() {
                 <form id="numberForm">
                   <Row className="mb-3 mt-2 px-2">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">
-                      <Form.Label className="d-flex justify-content-left mb-3 ">
+                      <Form.Label className="d-flex justify-content-center mb-3 ">
                         Number
                       </Form.Label>
                       <Form.Control

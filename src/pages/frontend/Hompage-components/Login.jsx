@@ -11,6 +11,7 @@ import imgfacebook from "../../../Images/facebook.png";
 import imggoogle from "../../../Images/google.png";
 import imgtwitter from "../../../Images/twitter.png";
 import Carousel from "react-bootstrap/Carousel";
+import Dashboard from "./Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,15 @@ const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const [submitbtn , setSubmit] = useState(false);
+
+  const route = () => {
+    setSubmit(true);
+    
+    if(!submitbtn){
+      navigate("/dashboard");
+    }
+  }
 
   const googlesignup = useGoogleLogin({
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
@@ -30,6 +40,12 @@ const Login = () => {
   const handleFailure = (response) => {
     console.log("handleFailure", response);
   };
+
+  const handleLogin = async () => {
+    await postData();
+    route();
+  };
+
   const postData = async () => {
     try {
       const body = {
@@ -46,11 +62,10 @@ const Login = () => {
           body: JSON.stringify(body),
         }
       );
-
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode == 200) {
-        navigate("/");
+        // navigate("/");
       } else {
         console.log(jsonresponse);
         alert("Error: " + jsonresponse.message);
@@ -100,7 +115,6 @@ const Login = () => {
       );
 
       const jsonresponse = await res.json();
-      console.log(jsonresponse.access_token)
 
       if (jsonresponse.statusCode == 200) {
         navigate("/");
@@ -185,31 +199,7 @@ const Login = () => {
                   </Carousel>
                 </div>
 
-                {/* <div
-                className="w3-content w3-section"
-                style={{ maxwidth: "400px" }}
-              >
-                <img
-                  className="mySlides"
-                  src={mySlides1}
-                  style={{ width: "100%" }}
-                />
-                <img
-                  className="mySlides"
-                  src={mySlides2}
-                  style={{ width: "100%" }}
-                />
-                <img
-                  className="mySlides"
-                  src={mySlides3}
-                  style={{ width: "100%" }}
-                />
-                <img
-                  className="mySlides"
-                  src={mySlides4}
-                  style={{ width: "100%" }}
-                />
-              </div> */}
+               
               </div>
 
               <div className="col-md-6 mb-2">
@@ -274,7 +264,10 @@ const Login = () => {
                       </div>
                     </label>
                   </div>
-                  <Button className="btn  formbtn" onClick={() => postData()}>
+                  {/* <Button className="btn  formbtn" onClick={() => postData()}> */}
+                  <Button className="btn  formbtn" onClick={handleLogin}>
+                  {/* onClick={() => setSubmit(true), route()} */}
+                  {/* <Button className="btn  formbtn" onClick={() => route()} >   */}
                     Login
                   </Button>{" "}
                   <div className="container">
