@@ -1,4 +1,25 @@
-.btn-outline-custom {
+:root {
+  --bs-primary: #198754;
+  --bg-primary: #198754;
+ }
+
+ .bg-green{
+   color: var(--bs-primary);
+ }
+
+ .btn-custom{
+   border: 1px solid #198754 ;
+ }
+ .btn-custom:hover{
+  border: 1px solid #198754 ;
+  background-color: var(--bg-primary) ;
+   color: #fff ;
+ }
+
+ .text-custom{
+   color: #198754;
+ }
+/* .btn-outline-custom {
   color: #198754 !important;
   border-color: #198754 !important;
   font-size: 12px !important;
@@ -14,14 +35,14 @@
   border-color: #198754;
   color: white!important;  
   text-decoration: none;
-}
-
+} */
+/* 
 a.btn:hover {
   background-color: #198754;
   border-color: #198754 !important;
   color: #fff;
 
-}
+} */
 a.nav-link:hover {
   color: #198754 !important;
   text-decoration: underline;

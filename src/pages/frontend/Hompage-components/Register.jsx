@@ -11,7 +11,7 @@ const  Register=()=> {
               <h3>Register</h3>
               <p>Care to Share - Carpool with Your Neighbourhood</p>
               <button
-                className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 btn-outline-custom"
+                className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5"
               >
                 JOIN NOW
               </button>

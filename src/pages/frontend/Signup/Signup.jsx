@@ -305,6 +305,7 @@ const Signup = () => {
                         label="Full Name"
                         onChange={(e) => setFullName(e.target.value)}
                         required
+                        size="small"
                       />
                     </div>
                     <div className="col-md-12 mt-3">
@@ -315,6 +316,7 @@ const Signup = () => {
                         label="Email"
                         onChange={(e) => validateEmail(e.target.value)}
                         required
+                        size="small"
                         error={!isValidEmail}
                         helperText={
                           !isValidEmail && "Please enter a valid email"
@@ -329,6 +331,7 @@ const Signup = () => {
                         label="Mobile Number (03xxxxxxxxx)"
                         onChange={(e) => validatePhoneNumber(e.target.value)}
                         required
+                        size="small"
                         error={!isValidPhoneNumber}
                         helperText={
                           !isValidPhoneNumber &&
@@ -344,6 +347,7 @@ const Signup = () => {
                         label="Password"
                         onChange={(e) => validatePassword(e.target.value)}
                         required
+                        size="small"
                         error={!isValidPassword}
                         helperText={
                           !isValidPassword &&
@@ -359,6 +363,7 @@ const Signup = () => {
                         label="Confirm Password"
                         onChange={(e) => checkconfirmPassword(e.target.value)}
                         required
+                        size="small"
                         error={!isValidConfirmPassword}
                         helperText={
                           !isValidConfirmPassword &&
@@ -366,7 +371,7 @@ const Signup = () => {
                         }
                       />
                     </div>
-                    <div className="col-md-12  mt-3">
+                    <div className="col-md-12 text-center mt-3">
                       <FormControlLabel
                         control={
                           <Checkbox
@@ -374,6 +379,7 @@ const Signup = () => {
                             style={{ borderColor: "#198754" }}
                             required
                             onChange={(e) => setTermsService(e.target.checked)}
+                            size="small"
                           />
                         }
                         label={
@@ -393,18 +399,21 @@ const Signup = () => {
                         }
                       />
                     </div>
-                    <div className="col-md-12  mt-3">
-                      <Button
+                    <div className="col-md-12  mt-3 text-center">
+                    <button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={() => postData()}>
+                    Sign up
+                  </button>
+                      {/* <Button
                         fullWidth
                         variant="contained"
                         className="formbtn"
                         onClick={() => postData()}
                       >
                         SIGNUP
-                      </Button>
+                      </Button> */}
                     </div>
-                    <div className="container">
-                      <div className="row d-flex justify-content-center">
+                    <div className="container text-center">
+                      <div className="row d-flex">
                         <div class="column mr-3">
                           <p class=" text-muted" id="text2">
                             Or continue with

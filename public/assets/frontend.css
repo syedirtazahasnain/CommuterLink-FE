@@ -1,52 +1,45 @@
 :root {
    --bs-primary: #198754;
+   --bg-primary: #198754;
   }
 
   .bg-green{
     color: var(--bs-primary);
   }
 
-  .btn-outline-getstarted{
-    margin-bottom: 20px !important;
-    background-color: #198754 !important;
-    border-color: #198754 !important;
-    color: white!important;
-    border-radius: 25px !important; 
-    display: inline-block;
-    padding: 8px 28px !important; 
+  .btn-custom{
+    border: 1px solid #198754;
+    background: none;
+  }
+  .btn-custom:hover{
+    border: 1px solid #198754;
+    background-color: var(--bg-primary);
+    color: #fff;
+  }
+  .text-custom{
+    color: #198754;
+  }
+  .reg-text{
+    color: #198754;
+    text-decoration: underline #198754;
+  }
+  .reg-text:hover{
+    color: #0f6c40;
     text-decoration: none;
   }
-
-  .btn-outline-getstarted:hover{
-    color: #198754 !important;
-    background-color: white !important;
-    border-color: white !important;
-    display: inline-block;
-    padding: 8px 28px !important;
-    border-radius: 25px !important;
-    transition: 0.5s;
+  .link-custom{
+    color: #4d635f;
   }
-
-  .btn-outline-custom {
-    color: #198754 !important;
-    border-color: #198754 !important;
-    box-shadow: none !important;
-    font-size: 12px !important;
-    font-family: "Poppins", sans-serif;
-    display: inline-block;
-    padding: 8px 28px !important;
-    border-radius: 25px !important;
-    transition: 0.5s;
-  
+  .link-custom:hover{
+    color: #198754;
   }
-
   .btn-outline-custom:hover {
     background-color: #198754 !important;
     border-color: #198754 !important;
     color: white!important;  
     text-decoration:solid;
-  }
   
+  }
   a.btn:hover {
     background-color: #198754;
     border-color: #198754 !important;
@@ -65,46 +58,8 @@
   .navbar{
     position: fixed;
   }
-  /* .carousel-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  .carousel-item {
-    height: 100vh;
-    min-height: 300px;
-    background: no-repeat center center fixed;
-    -webkit-background-size: cover; 
-  -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-  .carousel-indicators li {
-    background-color: white;
-  }
-  .carousel-indicators .active {
-    background-color: #198754;
-  } */
   #parallax-world-of-ugg .parallax-one {padding-top: 80px; padding-bottom: 80px; overflow: hidden; position: relative; width: 100%; background-image: url(Images/abstract-green-grunge-background.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
   #parallax-world-of-ugg .parallax-two {padding-top: 80px; padding-bottom: 80px; overflow: hidden; position: relative; width: 100%; background-image: url(Images/abstract-green-grunge-background.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
-  
-  .btn-join-us{
-    padding: 12px 32px;
-    border-radius: 50px;
-    line-height: 1;
-    margin: 10px;
-    color: white !important;
-    border: 2px solid #198754 !important;
-    background-color: #198754 !important;
-    font-size: 12px;
-    font-weight: bold;
-    font-family: "Poppins", sans-serif;
-    display: inline-block;
-  }
   .heading-color{
     padding: 10px 0;
     color: #198754;
@@ -183,30 +138,8 @@ CardGroup a{
 .Typography1:hover{
   color:#fff;
 }
-.container_foto {
-  background-color: black;
-  padding: 0;
-  overflow: hidden;
-  max-width: 350px;
 
-}
-.container_foto article {
-  padding: 10%;
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-.container_foto h2 {
-  color: #fff;
-  font-weight: 500;
-  font-size: 25px;
-  border-bottom: #fff solid 1px;
-}
+
 .container_foto img {
   width: 100%;
   top: 0;
@@ -218,22 +151,8 @@ CardGroup a{
   -ms-transition: all 4s ease;
   transition: all 4s ease;
 }
-/*hover*/
-.container_foto:hover {
-  cursor: pointer;
-}
-.container_foto:hover img {
-  opacity: 0.1;
-  transform: scale(1.5);
-}
-.ver_mas span {
-  font-size: 40px;
-  color: #fff;
-  position: relative;
-  margin: 0 auto;
-  width: 100%;
-  top: 13px;
-}  
+
+ 
 .form-group{
   margin:auto;
 }
@@ -396,6 +315,56 @@ i {
 .form-check-input{
   border-color: #198754;
 }
+.container_foto {
+  background-color: rgba(3, 4, 9, 0.7);
+  overflow: hidden;
+  max-width: auto;
+  /* margin: 5px; */
+}
+.container_foto article {
+  padding: 10%;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.container_foto h2 {
+  color: #fff;
+  font-weight: 500;
+  font-size: 25px;
+  border-bottom: #fff solid 1px;
+}
+.container_foto img {
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.4;
+  -webkit-transition: all 4s ease;
+  -moz-transition: all 4s ease;
+  -o-transition: all 4s ease;
+  -ms-transition: all 4s ease;
+  transition: all 4s ease;
+}
+.ver_mas span {
+  font-size: 40px;
+  color: #fff;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  top: 13px;
+} 
+/*hovers*/ 
+.container_foto:hover {
+  cursor: pointer;
+}
+.container_foto:hover img {
+  opacity: 0.1;
+  transform: scale(1.5);
+}
 .formbtn{
   border: 1px solid !important;
   border-radius: 40px !important;
@@ -405,12 +374,6 @@ i {
   font-weight: 700 !important;
   font-size: smaller !important;
 }
-/* .carousel-container{
-  width: 100%;
-  height: 100vh; /* Adjust the height as needed *
-  overflow: hidden;
-  background-color: white !important;
-} */
 @media (max-width: 768px) {
   .carousel-item {
     flex: 0 0 50%;

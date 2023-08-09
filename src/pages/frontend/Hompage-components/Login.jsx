@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { useGoogleLogin } from "@react-oauth/google";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -181,7 +182,6 @@ const Login = () => {
                         alt="First slide"
                       />
                     </Carousel.Item>
-
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
@@ -198,8 +198,6 @@ const Login = () => {
                     </Carousel.Item>
                   </Carousel>
                 </div>
-
-               
               </div>
 
               <div className="col-md-6 mb-2">
@@ -228,7 +226,9 @@ const Login = () => {
                       required
                       error={!isValidEmail}
                       helperText={!isValidEmail && "Please enter a valid email"}
-                    />
+                      size='small'
+                      sx={{ width: '100%' }}
+                      />
                   </Form.Group>
                   <Form.Group
                     className="mt-3 text-center"
@@ -240,39 +240,47 @@ const Login = () => {
                       type="password"
                       label="Password"
                       onChange={(e) => setPassword(e.target.value)}
+                      size='small'
+                      sx={{ width: '100%' }}
                     />
                   </Form.Group>
-                  <div className="ml-3 mb-3">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="checkbox"
-                      style={{ borderBlockColor: " #198754" }}
-                      required=""
-                    />
-                    <label className="form-check-label" for="form2Example3">
-                      <div id="span-text" className=" mr-5 small">
-                        I agree with all statements in
-                        <a href="#!" style={{ textDecoration: "none" }}>
-                          <span
-                            style={{ color: "#198754", textDecoration: "none" }}
-                          >
-                            Terms of service
-                          </span>
-                        </a>
-                      </div>
-                    </label>
+                  <div className=" my-2">
+                    <FormControlLabel
+                        control={
+                          <Checkbox
+                            value="termsService"
+                            style={{ borderColor: "#198754" }}
+                            required
+                            // onChange={(e) => setTermsService(e.target.checked)}
+                            size="small"
+                          />
+                        }
+                        label={
+                          <div id="span-text" className="mr-5 small">
+                            I agree with all statements in
+                            <a href="#!" style={{ textDecoration: "none" }}>
+                              <span
+                                style={{
+                                  color: "#198754",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                Terms of service
+                              </span>
+                            </a>
+                          </div>
+                        }
+                      />
                   </div>
                   {/* <Button className="btn  formbtn" onClick={() => postData()}> */}
-                  <Button className="btn  formbtn" onClick={handleLogin}>
+                  <button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
                   {/* onClick={() => setSubmit(true), route()} */}
                   {/* <Button className="btn  formbtn" onClick={() => route()} >   */}
                     Login
-                  </Button>{" "}
+                  </button>{" "}
                   <div className="container">
                     <div className="row d-flex justify-content-center">
-                      <div class="column mr-3">
+                      <div class="column m-2">
                         <p class=" text-muted" id="text2">
                           Or continue with
                         </p>
@@ -317,9 +325,9 @@ const Login = () => {
                     </div>
                     <hr id="hrline2" />
                     <div id="span-text" className="text-center mb-5">
-                      New to CommuterLinks? &nbsp;
+                      New to CommutersLink? &nbsp;
                       <Link to="/registration">
-                        <span style={{ color: "#198754" }}>Registration</span>
+                        <span className="reg-text">Registration</span>
                       </Link>
                     </div>
                   </div>
