@@ -26,15 +26,14 @@ const Verification = () => {
     <div>
       <Navbar />
       <div className="container py-5 ">
-        <div className="row pt-0 pb-4 justify-content-center mt-5 ">
+        <div className="row justify-content-center pt-15 ">
           <div className="col-lg-4 col-md-4 col-sm-4">
             <div
-              className="card text-center border-1 border-success"
-              style={{ borderRadius: "10px" }}
+              className="card text-center border-1 border-success rounded rounded-4"
             >
                 <div className="container">
                     <div className="row">
-                        <div className="col">
+                        <div className="col px-4">
                             <div style={backgroundStyle}></div>
                         </div>
                     </div>
@@ -44,8 +43,8 @@ const Verification = () => {
                     <div className="row">
                         <div className="col">
                         <div
-                className="card-body cardpadding mb-5 py-5"
-                style={{ background: "rgb(22,70,57)", borderRadius: "10px" }}
+                className="card-body cardpadding mb-5 py-5 rounded rounded-4"
+                style={{ background: "rgb(22,70,57)"}}
               >
                 <div>
                   
@@ -59,7 +58,7 @@ const Verification = () => {
                       style={{width:'150px', height:'150px', objectFit:'cover', borderRadius:'60%'}}
                     />
                   </div>
-                  <div className="text-white">hassan3<br/>hassan3@test.com</div>
+                  <div className="text-white my-3">hassan3<br/>hassan3@test.com</div>
                   <h5 className="card-title mt-4" style={{ color: "yellow" }}>
                     Pending Verificaiton
                   </h5>
@@ -76,9 +75,9 @@ const Verification = () => {
                 <form id="numberForm">
                   <div className="mb-3">
                     
-                    <Button variant="success" className="btn-sm">
+                    <button variant="success" className="btn-custom mx-2 text-white bg-success px-4 py-2 rounded rounded-5 text-custom fw-bold">
                       Close
-                    </Button>
+                    </button>
                   </div>
                 </form>
               </div>

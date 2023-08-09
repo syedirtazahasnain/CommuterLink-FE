@@ -30,7 +30,7 @@ const MyAccordion = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className="heading-color">1. Choose Between
+          <Typography className="heading-color fw-bold">1. Choose Between
                         Using Your Car or Ride with Others</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -49,7 +49,7 @@ const MyAccordion = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className="heading-color">2. Long Term
+          <Typography className="heading-color fw-bold">2. Long Term
                         Commitment</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -67,7 +67,7 @@ const MyAccordion = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className="heading-color"> 3. Share Cost of
+          <Typography className="heading-color fw-bold"> 3. Share Cost of
                         Commuting</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -84,7 +84,7 @@ const MyAccordion = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className="heading-color"> 4. Socioeconomic
+          <Typography className="heading-color fw-bold"> 4. Socioeconomic
                         Angle</Typography>
         </AccordionSummary>
         <AccordionDetails>

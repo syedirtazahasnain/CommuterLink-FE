@@ -303,7 +303,7 @@ const Registration = () => {
           <div style={{ backgroundColor: "#eee" }}>
           <div className="containter p-5">
             <div className="row justify-content-center">
-              <div className="col-md-8 bg-white  mt-5 mb-5">
+              <div className="col-md-8 bg-white p-5 mt-5 mb-5">
                 <h1
                   className="text-center mb-4"
                   style={{
@@ -748,7 +748,7 @@ const Registration = () => {
                             }
                             sx={{ width: "100%" }}
                             inputProps={{ style: { color: '#198754' } }}
-                            size={""}
+                            size="small"
                             required
                           />
                         </DemoContainer>
