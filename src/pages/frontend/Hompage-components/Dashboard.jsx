@@ -10,11 +10,13 @@ import downline from '../../../Images/downline of membericon.png'
 import  questionmark from "../../../Images/qustionmark.png";
 import { useNavigate } from "react-router-dom";
 import CommuterProfile from "../Dashboard/CommuterProfile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setloginState } from "../../../redux/loginSlice";
 
 const Dashboard = () => {
   
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn , setSubmit] = useState(false);
 
@@ -26,6 +28,11 @@ const Dashboard = () => {
     if(!submitbtn){
       navigate("/commuter-profile");
     }
+  }
+
+  const logout = () => {
+    dispatch(setloginState(""));
+    navigate("/login");
   }
 
   const backgroundStyle = {
@@ -235,10 +242,10 @@ const Dashboard = () => {
                             ></i>
                            
                             <a
-                              href="#"
                               className="btn btn-sm fw-bold btn-success"
                               data-bs-toggle="modal"
                               data-bs-target="#kt_modal_new_target"
+                              onClick={logout}
                             >
                               LOG OUT
                             </a>

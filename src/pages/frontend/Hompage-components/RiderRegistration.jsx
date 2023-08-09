@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
@@ -24,15 +24,19 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, Autocomplete, MarkerF, Polyline } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Autocomplete, MarkerF, PolylineF } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const RiderRegistration = () => {
 
   const navigate = useNavigate();
+  const autocompleteRef = useRef(null);
+  const userToken = useSelector((s) => s.login.data.token);
   const [addNewStart, setAddNewStart] = useState(false);
   const [addNewEnd, setAddNewEnd] = useState(false);
+  const [daysSelected, setDaysSelected] = useState([]);
   const mapLibraries = ["places"];
 
   const route = () => {
@@ -58,6 +62,7 @@ const RiderRegistration = () => {
   
   // For Start Point
   const[locationStartString, setLocationStartString] = useState("");
+  const[locationStartStringId, setLocationStartStringId] = useState("");
   const[locationStartStringField, setLocationStartStringField] = useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
@@ -67,6 +72,7 @@ const RiderRegistration = () => {
   
   // For End Point
   const[locationEndString, setLocationEndString] = useState("");
+  const[locationEndStringId, setLocationEndStringId] = useState("");
   const[locationEndStringField, setLocationEndStringField] = useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
@@ -76,14 +82,12 @@ const RiderRegistration = () => {
 
 
   // For Start Point
-  const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 0, lng: 0 });
-  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 0, lng: 0 });
-  const [isMarkerSelectedStart, setIsMarkerSelectedStart] = useState(false);
+  const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 30.3753, lng: 69.3451 });
+  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 30.3753, lng: 69.3451 });
 
   // For End Point
-  const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 0, lng: 0 });
-  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 0, lng: 0 });
-  const [isMarkerSelectedEnd, setIsMarkerSelectedEnd] = useState(false);
+  const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 30.3753, lng: 69.3451 });
+  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 30.3753, lng: 69.3451 });
 
   useEffect(() => {
     getdropdownStartdata();
@@ -98,6 +102,7 @@ const RiderRegistration = () => {
         selectedStartProvince ? selectedStartProvince.cities : []
       );
     }
+    
     if (provinceEndId) {
       const selectedEndProvince = dropdownEnddata?.countries[0]?.provinces.find(
         (province) => province.id == provinceEndId
@@ -139,7 +144,7 @@ const RiderRegistration = () => {
     }
   }, [cityStartId, cityEndId]);
 
-  console.log(locationEndString);
+  //console.log(locationEndString);
 
   useEffect(() => {
     // Function to fetch the geocoding data
@@ -151,6 +156,7 @@ const RiderRegistration = () => {
         );
         
         const data = await response.json(); // Parse the response as JSON
+        console.log(data);
         if (data.status === 'OK' && data.results.length > 0) {
           const { lat, lng } = data.results[0].geometry.location;
           setDefaultStartCenter({ lat, lng });
@@ -205,7 +211,7 @@ const RiderRegistration = () => {
     setDropDownEndData(jsonresponse);
     setHomeTimeSlots(jsonresponse.time_slots);
     setOfficeTimeSlots(jsonresponse.time_slots);
-    console.log(jsonresponse);
+    //console.log(jsonresponse);
   };
 
   const handleProvinceStartChange = (event) => {
@@ -225,9 +231,34 @@ const RiderRegistration = () => {
     setValidated(true);
   };
 
+  const handleLocationStart = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const selectedValue = selectedOption.value;
+    const selectedId = selectedOption.getAttribute("data-id");
+    setLocationStartString(selectedValue);
+    setLocationStartStringId(selectedId);
+  };
+
   const handleLocationStartField = (e) => {
     setLocationStartStringField(e.target.value);
     setLocationStartString(e.target.value);
+  };
+
+  const handlePlaceSelectStart = () => {
+    const place = autocompleteRef.current.getPlace();
+    // Handle the selected place here, you can update the state with the selected place value.
+    if (place && place.formatted_address) {
+      setLocationStartStringField(place.formatted_address);
+      setLocationStartString(place.formatted_address);
+    }
+  };
+
+  const handleLocationEnd = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const selectedValue = selectedOption.value;
+    const selectedId = selectedOption.getAttribute("data-id");
+    setLocationEndString(selectedValue);
+    setLocationEndStringId(selectedId);
   };
 
   const handleLocationEndField = (e) => {
@@ -235,28 +266,25 @@ const RiderRegistration = () => {
     setLocationEndString(e.target.value);
   };
 
-  const handleMarkerClickStart = () => {
-    setIsMarkerSelectedStart(true);
-    setIsMarkerSelectedEnd(false);
-    //alert(locationStartString);
-  };
-
-  const handleMarkerClickEnd = () => {
-    setIsMarkerSelectedEnd(true);
-    setIsMarkerSelectedStart(false);
-    //alert(locationEndString);
+  const handlePlaceSelectEnd = () => {
+    const place = autocompleteRef.current.getPlace();
+    // Handle the selected place here, you can update the state with the selected place value.
+    if (place && place.formatted_address) {
+      setLocationEndStringField(place.formatted_address);
+      setLocationEndString(place.formatted_address);
+    }
   };
 
   const handleMapClick = (event) => {
     console.log(event);
-    if(locationStartString){
+    if(cityStartId){
       setMarkerPositionStart({
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
       });
     }
 
-    if(locationEndString){
+    if(cityEndId){
       setMarkerPositionEnd({
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
@@ -264,10 +292,113 @@ const RiderRegistration = () => {
     }
   };
 
+  // Function to handle checkbox changes
+  const handleCheckboxChange = (event) => {
+    const { value } = event.target;
+    // Check if the day is already selected or not
+    if (daysSelected.includes(value)) {
+      // Day is already selected, remove it from the array
+      setDaysSelected((prevSelectedDays) =>
+        prevSelectedDays.filter((day) => day !== value)
+      );
+    } else {
+      // Day is not selected, add it to the array
+      setDaysSelected((prevSelectedDays) => [...prevSelectedDays, value]);
+    }
+  };
+
   const lineCoordinates = [
     { lat: markerPositionStart.lat, lng: markerPositionStart.lng },
     { lat: markerPositionEnd.lat, lng: markerPositionEnd.lng },
   ];
+
+  const handleLogin = async () => {
+    await LocationForm();
+  };
+
+  const LocationForm = async () => {
+    try {
+      let nameArrayStart = [markerPositionStart.lat, markerPositionStart.lng];
+      const myStringStart = nameArrayStart.toString();
+      let nameArrayEnd = [markerPositionEnd.lat, markerPositionEnd.lng];
+      const myStringEnd = nameArrayEnd.toString();
+      const body = {
+        option : 0,
+        user_type : 299,
+        university_name : null,
+        university_address : null,
+        veh_option : 0 ,
+        start_point : {
+          city_id : cityStartId,
+          province_id : provinceStartId,
+          area_id: locationStartStringId,
+          area_google : {
+              name : locationStartString,
+              place_id : "ddChIJGQ_wq43t3zgRel4CwxgjgQs",
+          },
+
+          name : myStringStart,
+          // "land_mark" : "Eagle Chowk"
+       },
+       end_point: {
+           city_id : cityEndId,
+           province_id : provinceEndId,
+           area_id: locationEndStringId,
+           area_google :{
+           name : locationEndString,
+           place_id : "ChIJGQ_wq43t3zgRel4CwxgjgQs"
+           },
+           name : myStringEnd,
+          //  "land_mark" : "Clock Tower"
+       },
+       time:{
+           start_time_id : selectedHomeTime,
+           return_time_id: selectedOfficeTime,
+       },
+       days: daysSelected,
+  }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/location",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        //console.log(body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          // dispatch(
+          //   setsignupState({
+          //     name: fullName,
+          //     email: email,
+          //     phone: phoneNumber,
+          //     password: password,
+          //     provider: provider,
+          //     otp: jsonresponse.otp,
+          //     token: jsonresponse.token,
+          //     confirmPassword: confirmPassword,
+          //   })
+          // );
+          //console.log(jsonresponse);
+          //navigate("/otp");
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+
+  //console.log("Days Selected:", daysSelected);
 
  
   return (
@@ -287,7 +418,7 @@ const RiderRegistration = () => {
                 >
                   Registration
                 </h1>
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form className="px-3" noValidate validated={validated} onSubmit={handleSubmit}>
                   <Row className="mb-3">
                     <Form.Group as={Col}  md={cityStartId ? '4' : '6'} controlId="validationCustom01">
                       <Form.Label style={{ color: "#198754" }}>
@@ -342,40 +473,34 @@ const RiderRegistration = () => {
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
                           value={locationStartString}
-                          onChange={(e) => setLocationStartString(e.target.value)}
+                          onChange={handleLocationStart}
                           required
                         >
                           <option value="" disabled hidden>
                             Select Area from Dropdown
                           </option>
                           {selectedStartCityArea?.map((province) => (
-                            <option key={province.id} value={province.value}>
+                            <option key={province.id} value={province.value} data-id={province.id}>
                               {province.value}
                             </option>
                           ))}
                         </Form.Select>
 
-                        {!isMarkerSelectedStart && (
-                          <div className="mt-3">
-                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
-                                Can't find your area?
-                                <a  >
-                                {" "} Add Here
-                                </a>
-                            </span>
-                          </div>
-                        )}
+                        <div className="mt-3">
+                          <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
+                              Can't find your area?
+                              <a  >
+                              {" "} Add Here
+                              </a>
+                          </span>
+                        </div>
 
                         {addNewStart && (
                           <Row className="mb-3 mt-4">
                             <Form.Group as={Col} md="12" controlId="validationCustom01">
                               <Autocomplete
-                                //onLoad={onLoad}
-                                // onLoad={onSBLoad}
-                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
-                                //onPlaceChanged={(e) => console.log(e)}
-                                //onPlaceChanged={(e) => setLocationStartString(e)}
+                                onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                onPlaceChanged={handlePlaceSelectStart}
                                 restrictions={{ country: 'PK' }}
                                 options={{ strictBounds: true }}
                               >
@@ -398,10 +523,6 @@ const RiderRegistration = () => {
                     )}
                   </Row>
                   
-                  {/* {locationStartStringField}
-                  {locationStartString} */}
-                  
-                  {(!isMarkerSelectedStart || !isMarkerSelectedEnd)  &&
                     <Container className="d-flex justify-content-center align-items-center mb-3">
                     <Row style={{ height: "80%", width: "80%" }}>
                         <LoadScript
@@ -409,9 +530,9 @@ const RiderRegistration = () => {
                             libraries={mapLibraries}
                         >
                             <GoogleMap
-                                zoom={10}
+                                zoom={7}
                                 center={
-                                 defaultStartCenter || defaultEndCenter
+                                 defaultStartCenter ? defaultStartCenter : defaultEndCenter
                                 }
                                 mapContainerStyle={{ width: "100%", height: "50vh" }}
                                 onClick={handleMapClick}
@@ -422,7 +543,6 @@ const RiderRegistration = () => {
                             >
                               <MarkerF
                                     position={markerPositionStart}
-                                    onClick={handleMarkerClickStart}
                                     icon={{
                                       url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                                     }}
@@ -430,13 +550,12 @@ const RiderRegistration = () => {
                               
                               <MarkerF
                                 position={markerPositionEnd}
-                                onClick={handleMarkerClickEnd}
                                 icon={{
                                   url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                                 }}
                               />
                               
-                              <Polyline 
+                              <PolylineF
                                 path={lineCoordinates} 
                                 strokeColor="#0000FF"
                                 strokeOpacity={0.8}
@@ -447,7 +566,6 @@ const RiderRegistration = () => {
                         </LoadScript>
                     </Row>
                 </Container>
-              }
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
@@ -505,43 +623,34 @@ const RiderRegistration = () => {
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
                           value={locationEndString}
-                          onChange={(e) => setLocationEndString(e.target.value)}
+                          onChange={handleLocationEnd}
                           required
                         >
                           <option value="" disabled hidden>
                             Select Area from Dropdown
                           </option>
                           {selectedEndCityArea?.map((province) => (
-                            <option key={province.id} value={province.value}>
+                            <option key={province.id} value={province.value} data-id={province.id}>
                               {province.value}
                             </option>
                           ))}
                         </Form.Select>
 
-                        {!isMarkerSelectedEnd && (
-                          <div className="mt-3">
-                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
-                                Can't find your area?
-                                <a  >
-                                {" "} Add Here
-                                </a>
-                            </span>
-                          </div>
-                        )}
+                        <div className="mt-3">
+                          <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
+                              Can't find your area?
+                              <a  >
+                              {" "} Add Here
+                              </a>
+                          </span>
+                        </div>
 
                         {addNewEnd &&  (
                           <Row className="mb-3 mt-4">
                             <Form.Group as={Col} md="12" controlId="validationCustom01">
                               <Autocomplete
-                                //onLoad={onLoad}
-                                // onLoad={onSBLoad}
-                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
-                                //onPlaceChanged={(e) => console.log(e)}
-                                //onPlaceChanged={(e) => setLocationStartString(e)}
-                                // onPlaceChanged={() =>
-                                //   handlePlaceSelect(true)
-                                // }
+                               onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                               onPlaceChanged={handlePlaceSelectEnd}
                                 restrictions={{ country: 'PK' }}
                                 options={{ strictBounds: true }}
                               >
@@ -562,33 +671,6 @@ const RiderRegistration = () => {
                     )}
                   </Row>
 
-                  {/* {cityEndId && !isMarkerSelectedEnd &&
-                    <Container className="d-flex justify-content-center align-items-center mb-3">
-                    <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript
-                            googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
-                            libraries={mapLibraries}
-                        >
-                            <GoogleMap
-                                zoom={14}
-                                center={defaultEndCenter}
-                                mapContainerStyle={{ width: "100%", height: "50vh" }}
-                                options={{
-                                    types: ["(regions)"],
-                                    componentRestrictions: { country: "PK" },
-                                }}
-                            >
-                                <MarkerF
-                                    position={markerPositionEnd}
-                                    onClick={handleMarkerClickEnd}
-                                />
-                            </GoogleMap>
-                        </LoadScript>
-                    </Row>
-                </Container>
-
-                  } */}
-
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
                       <Form.Label style={{ color: "#198754" }}>
@@ -605,7 +687,7 @@ const RiderRegistration = () => {
                               Home to Office
                           </option>
                           {homeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.time_string}>
+                            <option key={time.id} value={time.id}>
                               {time.time_string}
                             </option>
                           ))}
@@ -626,7 +708,7 @@ const RiderRegistration = () => {
                               Office to Home
                           </option>
                           {officeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.time_string}>
+                            <option key={time.id} value={time.id}>
                               {time.time_string}
                             </option>
                           ))}
@@ -650,8 +732,10 @@ const RiderRegistration = () => {
                               label="Monday"
                               name="group1"
                               type={type}
-                              value={type}
+                              value="Monday"
                               id={`inline-${type}-0`}
+                              checked={daysSelected.includes("Monday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
@@ -659,48 +743,60 @@ const RiderRegistration = () => {
                               label="Tuesday"
                               name="group1"
                               type={type}
-                              value={type}
+                              value="Tuesday"
                               id={`inline-${type}-2`}
+                              checked={daysSelected.includes("Tuesday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Wednesday"
                               type={type}
-                              value={type}
+                              value="Wednesday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Wednesday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Thursday"
                               type={type}
-                              value={type}
+                              value="Thursday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Thursday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Friday"
                               type={type}
-                              value={type}
+                              value="Friday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Friday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Saturday"
                               type={type}
-                              value={type}
+                              value="Saturday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Saturday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Sunday"
                               type={type}
-                              value={type}
+                              value="Sunday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Sunday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                           </div>
@@ -708,6 +804,8 @@ const RiderRegistration = () => {
                       </div>
                     </div>
                   </Row>
+
+                  {/* {daysSelected} */}
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
@@ -881,9 +979,8 @@ const RiderRegistration = () => {
                       variant="outlined" 
                       size="large" 
                       className="btnregistration" 
-                      onClick={() => {
-                            route();
-                      }}>
+                      onClick={handleLogin}
+                      >
                       Submit
                     </Button>
                   </Stack>
