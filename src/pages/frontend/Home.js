@@ -48,12 +48,12 @@ export default function () {
       {/* <Office/> */}
       {/* <Driver/> */}
       {/* <NumberGenerate/> */}
-      {/* <Dashboard/> */}
-   {/* <Terms_Condition/> */}
-   {/* <ReplyToConfirmDates/> */}
-   {/* <WhyProcessPayment/> */}
+      <Dashboard/>
+   <Terms_Condition/>
+   <ReplyToConfirmDates/>
+   <WhyProcessPayment/>
    <SendApprovalForPartner/>
-   {/* <CommuterProfile/> */}
+   <CommuterProfile/>
     
     </div>
   );

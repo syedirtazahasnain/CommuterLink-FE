@@ -15,12 +15,7 @@ const HeaderDashboard = () => {
           id="kt_app_header_container"
         >
         <div>
-            <h3>OFFERING A CAR TO OFFICE (SYSTEM SUGGESTED MATCHES)</h3>
-          </div>
-          <div>
-            <h1 className="underline-text second_heading">
-              OFFERING A CAR TO OFFICE (SYSTEM SUGGESTED MATCHES)
-            </h1>
+           
           </div>
         </div>
       </div>
