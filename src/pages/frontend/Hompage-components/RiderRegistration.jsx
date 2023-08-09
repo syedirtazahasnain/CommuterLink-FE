@@ -94,6 +94,7 @@ const RiderRegistration = () => {
   }, []);
 
   useEffect(() => {
+
     if (provinceStartId) {
       const selectedStartProvince = dropdownStartdata?.countries[0]?.provinces.find(
         (province) => province.id == provinceStartId
@@ -102,6 +103,10 @@ const RiderRegistration = () => {
         selectedStartProvince ? selectedStartProvince.cities : []
       );
     }
+  }, [provinceStartId]);
+
+
+  useEffect(() => {
     
     if (provinceEndId) {
       const selectedEndProvince = dropdownEnddata?.countries[0]?.provinces.find(
@@ -111,7 +116,7 @@ const RiderRegistration = () => {
         selectedEndProvince ? selectedEndProvince.cities : []
       );
     }
-  }, [provinceStartId, provinceEndId]);
+  }, [provinceEndId]);
 
   useEffect(() => {
     
@@ -128,6 +133,9 @@ const RiderRegistration = () => {
       setLocationStartString(citystring[0].value);
       setSelectedStartCityArea(filteredStartCities ? filteredStartCities : []);
     }
+  }, [cityStartId]);
+
+  useEffect(() => {
 
     if (cityEndId) {
       
@@ -142,7 +150,7 @@ const RiderRegistration = () => {
       setLocationEndString(citystring[0].value);
       setSelectedEndCityArea(filteredEndCities ? filteredEndCities : []);
     }
-  }, [cityStartId, cityEndId]);
+  }, [cityEndId]);
 
   //console.log(locationEndString);
 
@@ -464,6 +472,7 @@ const RiderRegistration = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
+                    
                     {cityStartId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label style={{ color: "#198754" }}>
@@ -614,6 +623,7 @@ const RiderRegistration = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
+                    
                     {cityEndId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label style={{ color: "#198754" }}>
