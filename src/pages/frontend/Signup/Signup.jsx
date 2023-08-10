@@ -415,7 +415,7 @@ const Signup = () => {
                     </div>
                     <div className="container text-center">
                       <div className="row d-flex">
-                        <div class="column mr-3">
+                        <div class="column m-2">
                           <p class=" text-muted" id="text2">
                             Or continue with
                           </p>
@@ -460,11 +460,11 @@ const Signup = () => {
                       </div>
                       <hr id="hrline2" />
                       <div id="span-text" className="text-center mb-5">
-                        New to CommuterLinks? &nbsp;
-                        <Link to="/registration">
-                          <span style={{ color: "#198754" }}>Registration</span>
-                        </Link>
-                      </div>
+                      New to CommutersLink? &nbsp;
+                      <Link to="/registration">
+                        <span className="reg-text">Registration</span>
+                      </Link>
+                    </div>
                     </div>
                   </div>
                 </div>
