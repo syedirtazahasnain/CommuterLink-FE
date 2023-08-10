@@ -113,6 +113,8 @@ const Registration = () => {
   const [selectedManYear, setSelectedManYear] = useState("");
   const [regYear, setRegYear] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
+  const [carCc, setCarCc] = useState([]);
+  const [selectCarCc, setSelectedCarCc] = useState("");
   const [selectedRegNumber, setSelectedRegNumber] = useState("");
   const [selectedCarAC, setSelectedCarAC] = useState("");
   const [selectedCarImage, setSelectedCarImage] = useState(null);
@@ -252,6 +254,8 @@ const Registration = () => {
         },
       }
     );
+
+    console.log(response);
     const jsonresponse = await response.json();
     setDropDownStartData(jsonresponse);
     setDropDownEndData(jsonresponse);
@@ -260,6 +264,7 @@ const Registration = () => {
     setCarBrand(jsonresponse.car_brand);
     setManYear(jsonresponse.car_reg_year);
     setRegYear(jsonresponse.car_reg_year);
+    setCarCc(jsonresponse.car_cc);
     console.log(jsonresponse);
   };
 
@@ -644,67 +649,67 @@ const Registration = () => {
     }
   };
 
-  const DriverForm = async () => {
-    try {
-      const body = {
-        "option" : 1,
-        "car_brand": "Suzuki",
-        "car_cc" : 1000,
-        "car_year_ranges" : 2000,
-        "car_model" : "Suzuki Ciaz",
-        "reg_year" : 2022,
-        "reg_no" : "34224",
-        "manufac_year" : 2020, 
-        "car_ac": "Yes",
-        "car_image" : "/9j/4AAQSkZJRgABAQEASABIAAD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQAABtbnRyUkdCIFhZWiAH3AABABkAAwApADlhY3NwQVBQTAAAAAAAAAAAAAAAAAAAAAAAAAAAAN0KdGSKPIAKTPqSo/a/F8LZrsTfwuuEwgY6RnouEI8VJxXCmpibTLSMjF/mqlSpiNWqbRFo+Mqm/LhmCyMf5YTzoAqhTzqieZ5R/2fH/AGNqf+xp/wDo1H+n/9k=",
-        "car_image_ext" : "jpeg",
-        "seats_available" : 2,
-        "seats_for" : "Male",
-        "mid_route" : 0,
-        "one_side" : 0,
-        "drive_option" : "Driver",
-        "license_no" : "YU3483",
-        "valid_upto" : "2028-12-20",
-        "place_issue": "Islamabad",
-        "driver_name" : "abc",
-        "driver_cnic" : "abc",
-        "driver_license_no" :"abc",
-        "driver_license_validity" : "abc",
-        "driver_cnic_front_image" : "abc",
-        "driver_cnic_back_image" : "abc",
-        "driver_cnic_front_ext" : "abc",
-        "driver_cnic_back_ext" : "abc",
-        "license_front_image_ext" : null,
-        "license_back_image_ext": null
-    }
-        const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/registration/vehicle",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              'Accept': 'application/json',
-              Authorization: `Bearer ${userToken}`,
-            },
-            body: JSON.stringify(body),
-          }
-        );
+  // const DriverForm = async () => {
+  //   try {
+    //   const body = {
+    //     "option" : 1,
+    //     "car_brand": "Suzuki",
+    //     "car_cc" : 1000,
+    //     "car_year_ranges" : 2000,
+    //     "car_model" : "Suzuki Ciaz",
+    //     "reg_year" : 2022,
+    //     "reg_no" : "34224",
+    //     "manufac_year" : 2020, 
+    //     "car_ac": "Yes",
+    //     "car_image" : "/9j/4AAQSkZJRgABAQEASABIAAD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQAABtbnRyUkdCIFhZWiAH3AABABkAAwApADlhY3NwQVBQTAAAAAAAAAAAAAAAAAAAAAAAAAAAAN0KdGSKPIAKTPqSo/a/F8LZrsTfwuuEwgY6RnouEI8VJxXCmpibTLSMjF/mqlSpiNWqbRFo+Mqm/LhmCyMf5YTzoAqhTzqieZ5R/2fH/AGNqf+xp/wDo1H+n/9k=",
+    //     "car_image_ext" : "jpeg",
+    //     "seats_available" : 2,
+    //     "seats_for" : "Male",
+    //     "mid_route" : 0,
+    //     "one_side" : 0,
+    //     "drive_option" : "Driver",
+    //     "license_no" : "YU3483",
+    //     "valid_upto" : "2028-12-20",
+    //     "place_issue": "Islamabad",
+    //     "driver_name" : "abc",
+    //     "driver_cnic" : "abc",
+    //     "driver_license_no" :"abc",
+    //     "driver_license_validity" : "abc",
+    //     "driver_cnic_front_image" : "abc",
+    //     "driver_cnic_back_image" : "abc",
+    //     "driver_cnic_front_ext" : "abc",
+    //     "driver_cnic_back_ext" : "abc",
+    //     "license_front_image_ext" : null,
+    //     "license_back_image_ext": null
+    // }
+        // const response = await fetch(
+        //   "https://staging.commuterslink.com/api/v1/registration/vehicle",
+        //   {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //       'Accept': 'application/json',
+        //       Authorization: `Bearer ${userToken}`,
+        //     },
+        //     body: JSON.stringify(body),
+        //   }
+        // );
 
-        console.log("Images Form Picture Body:", body);
+    //     console.log("Images Form Picture Body:", body);
 
-        const jsonresponse = await response.json();
+    //     const jsonresponse = await response.json();
 
-        if (jsonresponse.statusCode == 200) {
-          console.log("Images Form Response Picture:", jsonresponse);
-          alert("Registration Successfully");
-          // route();
-        } else {
-          alert("Error: " + jsonresponse.message);
-        }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    //     if (jsonresponse.statusCode == 200) {
+    //       console.log("Images Form Response Picture:", jsonresponse);
+    //       alert("Registration Successfully");
+    //       // route();
+    //     } else {
+    //       alert("Error: " + jsonresponse.message);
+    //     }
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
+  // };
 
   //console.log("Days Selected:", daysSelected);
   
@@ -1410,6 +1415,26 @@ const Registration = () => {
                           {regYear?.map((reg) => (
                             <option key={reg.id} value={reg.car_year_ranges}>
                               {reg.car_year_ranges}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group>
+                     
+                      <Form.Group as={Col} md="6" controlId="validationCustom03">
+                        <Form.Label style={{ color: "#198754" }}>
+                          Car Cc
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#198754" }}
+                          value={selectCarCc}
+                          onChange={(e) =>setSelectedCarCc(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Car CC</option>
+                          {carCc?.map((reg) => (
+                            <option key={reg.id} value={reg.car_cc}>
+                              {reg.car_cc}
                             </option>
                           ))}
                         </Form.Select>
