@@ -17,7 +17,7 @@ import CardContent from "@mui/material/CardContent";
 import { useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row,  Modal } from 'react-bootstrap';
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -64,7 +64,8 @@ const Registration = () => {
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDateFormatted, setSelectedDateFormatted] = useState(null);
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
@@ -77,9 +78,9 @@ const Registration = () => {
   const [pictureExt, setPictureExt] = useState("");
   
   // For Start Point
-  const [locationStartString, setLocationStartString] = useState("");
-  const [locationStartStringId, setLocationStartStringId] = useState("");
-  const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
+  const[locationStartString, setLocationStartString] = useState("");
+  const[locationStartStringId, setLocationStartStringId] = useState("");
+  const[locationStartStringField, setLocationStartStringField] = useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
   const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
@@ -87,9 +88,9 @@ const Registration = () => {
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
   
   // For End Point
-  const [locationEndString, setLocationEndString] = useState("");
-  const [locationEndStringId, setLocationEndStringId] = useState("");
-  const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
+  const[locationEndString, setLocationEndString] = useState("");
+  const[locationEndStringId, setLocationEndStringId] = useState("");
+  const[locationEndStringField, setLocationEndStringField] = useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
   const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
@@ -105,6 +106,10 @@ const Registration = () => {
   const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 30.3753, lng: 69.3451 });
   const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 30.3753, lng: 69.3451 });
 
+  // For Modals
+  const [showStartModal, setShowStartModal] = useState(false);
+  const [showEndModal, setShowEndModal] = useState(false);
+
   // For Driver's
   const [carBrand, setCarBrand] = useState([]);
   const [selectedCarBrand, setSelectedCarBrand] = useState("");
@@ -113,13 +118,32 @@ const Registration = () => {
   const [selectedManYear, setSelectedManYear] = useState("");
   const [regYear, setRegYear] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
+  const [carYearRanges, setCarYearRanges] = useState([]);
+  const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
   const [selectedRegNumber, setSelectedRegNumber] = useState("");
   const [selectedCarAC, setSelectedCarAC] = useState("");
-  const [selectedCarImage, setSelectedCarImage] = useState(null);
-  const [selectedCarImageExt, setSelectedCarImageExt] = useState(null);
+  const [selectedCarImage, setSelectedCarImage] = useState("");
+  const [selectedCarImageExt, setSelectedCarImageExt] = useState("");
+  const [carCC, setCarCC] = useState([]);
+  const [selectedCarCC, setSelectedCarCC] = useState("");
   const [selectedSeat, setSelectedSeat] = useState("");
   const [selectedSeatGender, setSelectedSeatGender] = useState("");
-  const [selectedRoutePartner, setSelectedRoutePartner] = useState("");
+  const [selectedMidRoutePartner, setSelectedMidRoutePartner] = useState("");
+  const [selectedOneRoutePartner, setSelectedOneRoutePartner] = useState("");
+  const [inputBankAccount, setInputBankAccount] = useState("");
+  const [inputEasyPaisa, setInputEasyPaisa] = useState("");
+  const [inputJazzCash, setInputJazzCash] = useState("");
+  const [inputRaastID, setInputRaastID] = useState("");
+
+  // For Driver Type
+  const [inputDriverType, setInputDriverType] = useState("");
+
+  // I Drive Myself Fields
+  const [inputDrivingLicense, setInputDrivingLicense] = useState("");
+  const [inputValidUpto, setInputValidUpto] = useState("");
+  const [inputPlaceIssue, setInputPlaceIssue] = useState("");
+  // const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
+  // const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] = useState("");
 
   // For Driver Form
   const [showDriverForm, setShowDriverForm]=useState(false);
@@ -260,6 +284,8 @@ const Registration = () => {
     setCarBrand(jsonresponse.car_brand);
     setManYear(jsonresponse.car_reg_year);
     setRegYear(jsonresponse.car_reg_year);
+    setCarYearRanges(jsonresponse.car_reg_year);
+    setCarCC(jsonresponse.car_cc);
     console.log(jsonresponse);
   };
 
@@ -286,6 +312,7 @@ const Registration = () => {
     const selectedId = selectedOption.getAttribute("data-id");
     setLocationStartString(selectedValue);
     setLocationStartStringId(selectedId);
+    handleShowStartModal();
   };
 
   const handleLocationStartField = (e) => {
@@ -313,6 +340,7 @@ const Registration = () => {
     const selectedId = selectedOption.getAttribute("data-id");
     setLocationEndString(selectedValue);
     setLocationEndStringId(selectedId);
+    handleShowEndModal();
   };
 
   const handleLocationEndField = (e) => {
@@ -334,21 +362,20 @@ const Registration = () => {
     }
   };
 
-  const handleMapClick = (event) => {
+  const handleMapClickStart = (event) => {
     console.log(event);
-    if(cityStartId){
-      setMarkerPositionStart({
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-      });
-    }
+    setMarkerPositionStart({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
+  };
 
-    if(cityEndId){
-      setMarkerPositionEnd({
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-      });
-    }
+  const handleMapClickEnd = (event) => {
+    console.log(event);
+    setMarkerPositionEnd({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
   };
 
   // Function to handle checkbox changes
@@ -367,8 +394,11 @@ const Registration = () => {
   };
 
   const handleDateChange = (newDate) => {
-    const formattedDate = newDate ? dayjs(newDate).format('DD-MM-YYYY') : '';
-    setSelectedDate(formattedDate);
+    if(newDate){
+      setSelectedDate(newDate);
+    }
+    const formattedDate = selectedDate ? dayjs(selectedDate).format('DD-MM-YYYY') : '';
+    setSelectedDateFormatted(formattedDate);
   };
 
   const handleCnicChange = (event) => {
@@ -381,8 +411,12 @@ const Registration = () => {
   const handleCnicFront = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setCnicFront(file);
-      setCnicFrontExt(file.name.split('.').pop());
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCnicFront(reader.result);
+        setCnicFrontExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -392,8 +426,12 @@ const Registration = () => {
   const handleCnicBack = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setCnicBack(file);
-      setCnicBackExt(file.name.split('.').pop());
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCnicBack(reader.result);
+        setCnicBackExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -403,27 +441,49 @@ const Registration = () => {
   const handlePicture = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setPicture(file);
-      setPictureExt(file.name.split('.').pop());
-    }
-  };
-
-  const handleImageSelect = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedCarImage(file);
-      setSelectedCarImageExt(file.name.split('.').pop());
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPicture(reader.result);
+        setPictureExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   // console.log("Picture:", picture);
   // console.log("Picture Extension:", pictureExt);
 
+  const handleImageSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedCarImage(reader.result);
+        setSelectedCarImageExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-  const lineCoordinates = [
-    { lat: markerPositionStart.lat, lng: markerPositionStart.lng },
-    { lat: markerPositionEnd.lat, lng: markerPositionEnd.lng },
-  ];
+
+  // For Modal Open & Close Functionality
+
+  const handleShowStartModal = () => {
+    setShowStartModal(true);
+  };
+  
+  const handleCloseStartModal = () => {
+    setShowStartModal(false);
+  };
+  
+  const handleShowEndModal = () => {
+    setShowEndModal(true);
+  };
+  
+  const handleCloseEndModal = () => {
+    setShowEndModal(false);
+  };
+
 
   const handleLogin = async () => {
     await LocationForm();
@@ -431,6 +491,11 @@ const Registration = () => {
     await ImagesFormCnicFront();
     await ImagesFormCnicBack();
     await ImagesFormPicture();
+  };
+
+  const handleDriver = async () => {
+    await DriverForm();
+    await PaymentForm();
   };
 
   const LocationForm = async () => {
@@ -506,7 +571,7 @@ const Registration = () => {
       const body = {
         marital_status : martialStatus,
         cnic: cnic,
-        birth_year : selectedDate,
+        birth_year : selectedDateFormatted,
         gender : gender,
         preferred_gender : preferredGender,
         profession : profession,
@@ -634,7 +699,7 @@ const Registration = () => {
 
         if (jsonresponse.statusCode == 200) {
           console.log("Images Form Response Picture:", jsonresponse);
-          alert("Registration Successfully");
+          //alert("Registration Successfully");
           // route();
         } else {
           alert("Error: " + jsonresponse.message);
@@ -648,24 +713,24 @@ const Registration = () => {
     try {
       const body = {
         "option" : 1,
-        "car_brand": "Suzuki",
-        "car_cc" : 1000,
-        "car_year_ranges" : 2000,
-        "car_model" : "Suzuki Ciaz",
-        "reg_year" : 2022,
-        "reg_no" : "34224",
-        "manufac_year" : 2020, 
-        "car_ac": "Yes",
-        "car_image" : "/9j/4AAQSkZJRgABAQEASABIAAD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQAABtbnRyUkdCIFhZWiAH3AABABkAAwApADlhY3NwQVBQTAAAAAAAAAAAAAAAAAAAAAAAAAAAAN0KdGSKPIAKTPqSo/a/F8LZrsTfwuuEwgY6RnouEI8VJxXCmpibTLSMjF/mqlSpiNWqbRFo+Mqm/LhmCyMf5YTzoAqhTzqieZ5R/2fH/AGNqf+xp/wDo1H+n/9k=",
-        "car_image_ext" : "jpeg",
-        "seats_available" : 2,
-        "seats_for" : "Male",
-        "mid_route" : 0,
-        "one_side" : 0,
-        "drive_option" : "Driver",
-        "license_no" : "YU3483",
-        "valid_upto" : "2028-12-20",
-        "place_issue": "Islamabad",
+        "car_brand": selectedCarBrand,
+        "car_cc" : selectedCarCC,
+        "car_year_ranges" : selectedCarYearRanges,
+        "car_model" : selectedModelName,
+        "reg_year" : selectedRegYear,
+        "reg_no" : selectedRegNumber,
+        "manufac_year" : selectedManYear, 
+        "car_ac": selectedCarAC,
+        "car_image" : selectedCarImage,
+        "car_image_ext" : selectedCarImageExt,
+        "seats_available" : selectedSeat,
+        "seats_for" : selectedSeatGender,
+        "mid_route" : selectedMidRoutePartner,
+        "one_side" : selectedOneRoutePartner,
+        "drive_option" : inputDriverType,
+        "license_no" : inputDrivingLicense,
+        "valid_upto" : inputValidUpto,
+        "place_issue": inputPlaceIssue,
         "driver_name" : "abc",
         "driver_cnic" : "abc",
         "driver_license_no" :"abc",
@@ -690,14 +755,49 @@ const Registration = () => {
           }
         );
 
-        console.log("Images Form Picture Body:", body);
+        console.log("Driver Form Body:", body);
 
         const jsonresponse = await response.json();
 
         if (jsonresponse.statusCode == 200) {
-          console.log("Images Form Response Picture:", jsonresponse);
-          alert("Registration Successfully");
-          // route();
+          console.log("Driver Form Response:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const PaymentForm = async () => {
+    try {
+      const body = {
+        "option" : 1,
+        "drive_option" : "Both",
+        "bank_account_number" : inputBankAccount,
+        "easy_paisa_number" : inputEasyPaisa,
+        "jazz_cash_number": inputJazzCash,
+        "raast_number" : inputRaastID
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/driver",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Payment Form Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Payment Form Response:", jsonresponse);
         } else {
           alert("Error: " + jsonresponse.message);
         }
@@ -833,50 +933,6 @@ const Registration = () => {
                     )}
                   </Row>
                   
-                    <Container className="d-flex justify-content-center align-items-center mb-3">
-                    <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript
-                            googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
-                            libraries={mapLibraries}
-                        >
-                            <GoogleMap
-                                zoom={7}
-                                center={
-                                 defaultStartCenter ? defaultStartCenter : defaultEndCenter
-                                }
-                                mapContainerStyle={{ width: "100%", height: "50vh" }}
-                                onClick={handleMapClick}
-                                options={{
-                                    types: ["(regions)"],
-                                    componentRestrictions: { country: "PK" },
-                                }}
-                            >
-                              <MarkerF
-                                    position={markerPositionStart}
-                                    icon={{
-                                      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                                    }}
-                              />
-                              
-                              <MarkerF
-                                position={markerPositionEnd}
-                                icon={{
-                                  url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                                }}
-                              />
-                              
-                              <PolylineF
-                                path={lineCoordinates} 
-                                strokeColor="#0000FF"
-                                strokeOpacity={0.8}
-                                strokeWeight={2} 
-                              />
-
-                            </GoogleMap>
-                        </LoadScript>
-                    </Row>
-                </Container>
-
                   <Row className="mb-3">
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
                       <Form.Label 
@@ -981,6 +1037,84 @@ const Registration = () => {
                       </Form.Group>
                     )}
                   </Row>
+
+                  <LoadScript
+                      googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
+                      libraries={mapLibraries}
+                  >
+                        <Modal show={showStartModal} onHide={handleCloseStartModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Select Starting Location</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Container className="d-flex justify-content-center align-items-center mb-3">
+                            <Row style={{ height: "100%", width: "100%" }}>
+                              <GoogleMap
+                                  zoom={12}
+                                  center={defaultStartCenter}
+                                  mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                  onClick={handleMapClickStart}
+                                  options={{
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
+                                  }}
+                              >
+                                <MarkerF
+                                      position={markerPositionStart}
+                                      icon={{
+                                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                      }}
+                                />
+                            </GoogleMap>
+                            </Row>
+                          </Container>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="contained" onClick={handleCloseStartModal}>
+                              Close
+                          </Button>
+                        </Modal.Footer>
+                        </Modal>
+
+                        <Modal show={showEndModal} onHide={handleCloseEndModal}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Select Drop-off Location</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                          <Container className="d-flex justify-content-center align-items-center mb-3">
+                            <Row style={{ height: "100%", width: "100%" }}>
+                                <GoogleMap
+                                  zoom={12}
+                                  // center={
+                                  //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
+                                  // }
+                                  center={defaultEndCenter}
+                                  mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                  onClick={handleMapClickEnd}
+                                  options={{
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
+                                  }}
+                              >
+                                
+                                <MarkerF
+                                  position={markerPositionEnd}
+                                  icon={{
+                                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                  }}
+                                />
+
+                            </GoogleMap>
+                            </Row>
+                        </Container>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="contained" onClick={handleCloseEndModal}>
+                              Close
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                </LoadScript>
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
@@ -1306,7 +1440,7 @@ const Registration = () => {
                       className="btnregistration" 
                       onClick={() => {
                             setShowDriverForm(true);
-                          
+                            //handleLogin();
                       }}>
                       Next
                     </Button>
@@ -1416,6 +1550,30 @@ const Registration = () => {
                       </Form.Group>
                     </Row>
 
+                    <Row className="mb-3">
+                      <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#198754" }}>
+                          Registration Car Year Ranges
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#198754" }}
+                          value={selectedCarYearRanges}
+                          onChange={(e) => setSelectedCarYearRanges(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Select Car Year Ranges</option>
+                          {carYearRanges?.map((man) => (
+                            <option key={man.id} value={man.car_year_ranges}>
+                              {man.car_year_ranges}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group>
+                    </Row>
+
+                    {/* {selectedCarYearRanges} */}
+
                     <Row className="mb-0">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
@@ -1447,23 +1605,45 @@ const Registration = () => {
                           <option value="No">No</option>
                         </Form.Select>
                       </Form.Group>
+                    </Row>
+                    <Row className="mb-3">
                       <Form.Group
                         controlId="formFile"
-                        as={Col}
-                        md="12"
-                        className="mb-3"
+                        as={Col} 
+                        md="6"
                       >
                         <Form.Label className="mt-3" style={{ color: "#198754" }}>
                           Upload Car Image with visible number plate
                         </Form.Label>
                         <Form.Control 
-                          type="file"
-                          accept="image/*"  
+                          type="file" 
                           onChange={handleImageSelect}
                           required 
                         />
                       </Form.Group>
+                      <Form.Group as={Col} md="6" className="mb-3" controlId="validationCustom02">
+                        <Form.Label className="mt-3" style={{ color: "#198754" }}>
+                          Car CC
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#198754" }}
+                          value={selectedCarCC}
+                          onChange={(e) => setSelectedCarCC(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Select Car CC</option>
+                          {carCC?.map((car) => (
+                            <option key={car.id} value={car.car_cc}>
+                              {car.car_cc}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group>
                     </Row>
+                    
+                    {/* {selectedCarCC} */}
+
                     <Row className="mb-3">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
@@ -1502,6 +1682,24 @@ const Registration = () => {
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
+
+                    <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#198754" }}>
+                          I accept one-route partner
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#198754" }}
+                          value={selectedOneRoutePartner}
+                          onChange={(e) => setSelectedOneRoutePartner(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>I accept one-route partner</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </Form.Select>
+                      </Form.Group>
+                      
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
                           I also accept mid-route partner
@@ -1509,8 +1707,8 @@ const Registration = () => {
                         <Form.Select
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
-                          value={selectedRoutePartner}
-                          onChange={(e) => setSelectedRoutePartner(e.target.value)}
+                          value={selectedMidRoutePartner}
+                          onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
                           required
                         >
                           <option value="" hidden>I also accept mid-route partner</option>
@@ -1518,6 +1716,7 @@ const Registration = () => {
                           <option value="No">No</option>
                         </Form.Select>
                       </Form.Group>
+
                     </Row>
                     <div className="tab">
                         <div className="container">
@@ -1532,16 +1731,51 @@ const Registration = () => {
                                     </div>
                                     <form id="paymentForm">
                                     <div className="mt-4">
-                                      <input type="text" className="form-control mb-2 colorplace" id="bankAccount" name="bankAccount" placeholder="Bank Account (IBAN)" required=""/>
+                                      <input 
+                                        type="text" 
+                                        className="form-control mb-2 colorplace" 
+                                        id="bankAccount" 
+                                        name="bankAccount" 
+                                        placeholder="Bank Account (IBAN)"
+                                        value={inputBankAccount}
+                                        onChange={(e) => setInputBankAccount(e.target.value)} 
+                                        required
+                                      />
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2 colorplace" id="jazzCashAccount" name="jazzCashAccount" placeholder="Jazz Cash Account Number" required=""/>
+                                      <input 
+                                        type="text" 
+                                        className="form-control mb-2 colorplace" 
+                                        id="jazzCashAccount" 
+                                        name="jazzCashAccount" 
+                                        placeholder="Jazz Cash Account Number"
+                                        value={inputJazzCash}
+                                        onChange={(e) => setInputJazzCash(e.target.value)}
+                                        required
+                                      />
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2 colorplace" id="easypaisaAccount" name="easypaisaAccount" placeholder="EasyPaisa Account Number" required=""/>
+                                      <input 
+                                        type="text" 
+                                        className="form-control mb-2 colorplace" 
+                                        id="easypaisaAccount" 
+                                        name="easypaisaAccount" 
+                                        placeholder="EasyPaisa Account Number"
+                                        value={inputEasyPaisa}
+                                        onChange={(e) => setInputEasyPaisa(e.target.value)} 
+                                        required
+                                      />
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2 colorplace" id="raastID" name="raastID" placeholder="Raast ID"/>
+                                      <input 
+                                        type="text" 
+                                        className="form-control mb-2 colorplace" 
+                                        id="raastID" 
+                                        name="raastID" 
+                                        placeholder="Raast ID"
+                                        value={inputRaastID}
+                                        onChange={(e) => setInputRaastID(e.target.value)}
+                                      />
                                     </div>
                                   </form>
                                 </div>
@@ -1560,6 +1794,7 @@ const Registration = () => {
                               setshowmyself(true);
                               setshowmydriver(false);
                               setshowboth(false);
+                              setInputDriverType("I Driver MySelf");
                             }}
                             data-toggle="buttons"
                           >
@@ -1572,6 +1807,7 @@ const Registration = () => {
                               setshowmyself(false);
                               setshowmydriver(true);
                               setshowboth(false);
+                              setInputDriverType("Driver");
                             }}
                             data-toggle="buttons"
                           >
@@ -1584,6 +1820,7 @@ const Registration = () => {
                               setshowmydriver(false);
                               setshowmyself(false);
                               setshowboth(true);
+                              setInputDriverType("Both");
                             }}
                             data-toggle="buttons"
                           >
@@ -1609,6 +1846,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="License No."
+                              value={inputDrivingLicense}
+                              onChange={(e) => setInputDrivingLicense(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1627,6 +1866,28 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Enter Here"
+                              value={inputValidUpto}
+                              onChange={(e) => setInputValidUpto(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                        </Row>
+                        <Row className="mb-3 mt-3">
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#198754" }}>
+                              Place Issued
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="colorplace"
+                              placeholder="Enter Here"
+                              value={inputPlaceIssue}
+                              onChange={(e) => setInputPlaceIssue(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1912,7 +2173,7 @@ const Registration = () => {
                       >
                         Previous
                       </Button>
-                      <Button variant="" className="btnregistration" onClick={handleLogin}>
+                      <Button variant="" className="btnregistration" onClick={handleDriver}>
                         Submit
                       </Button>
                     </Stack>
