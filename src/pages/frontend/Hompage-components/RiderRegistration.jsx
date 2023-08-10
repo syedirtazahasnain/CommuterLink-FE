@@ -66,7 +66,6 @@ const RiderRegistration = () => {
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedDateFormatted, setSelectedDateFormatted] = useState(null);
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
@@ -287,6 +286,7 @@ const RiderRegistration = () => {
     });
     setLocationStartStringField(place.formatted_address);
     setLocationStartString(place.formatted_address);
+    handleShowStartModal();
     }
   };
 
@@ -315,6 +315,7 @@ const RiderRegistration = () => {
       });
       setLocationEndStringField(place.formatted_address);
       setLocationEndString(place.formatted_address);
+      handleShowEndModal();
     }
   };
 
@@ -355,10 +356,9 @@ const RiderRegistration = () => {
 
   const handleDateChange = (newDate) => {
     if(newDate){
-      setSelectedDate(newDate);
+      const formattedDate = newDate ? dayjs(newDate).format('DD-MM-YYYY') : '';
+      setSelectedDate(formattedDate);
     }
-    const formattedDate = selectedDate ? dayjs(selectedDate).format('DD-MM-YYYY') : '';
-    setSelectedDateFormatted(formattedDate);
   };
 
   const handleCnicChange = (event) => {
@@ -514,7 +514,7 @@ const RiderRegistration = () => {
       const body = {
         marital_status : martialStatus,
         cnic: cnic,
-        birth_year : selectedDateFormatted,
+        birth_year : selectedDate,
         gender : gender,
         preferred_gender : preferredGender,
         profession : profession,
