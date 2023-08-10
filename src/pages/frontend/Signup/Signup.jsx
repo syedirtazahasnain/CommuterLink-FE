@@ -285,17 +285,18 @@ const Signup = () => {
                 </div>
               </div>
 
-              <div className="col-md-6 mb-2">
-                <h3
-                  className="text-center mb-2"
+              <div className="col-md-5 mb-2">
+              <h3
+                  className="text-center text-custom  mb-2"
                   style={{
                     color: "#198754",
                     marginBottom: "5px",
-                    marginTop: "5vh",
+                    marginTop: "10vh",
                   }}
                 >
-                  Sign Up
-                </h3>
+                  {" "}
+                  Sign up
+                </h3>{" "}
                 <div className="container">
                   <div className="row justify-content-center">
                     <div className="col-md-12 ">
@@ -468,6 +469,7 @@ const Signup = () => {
                   </div>
                 </div>
               </div>
+              <div className="col-md-1"></div>
             </div>
           </div>
         </section>

@@ -150,6 +150,7 @@ const Login = () => {
                   marginTop: "10vh",
                 }}
               >
+                
                 <div
                   className="col-md-6"
                   style={{
@@ -200,9 +201,9 @@ const Login = () => {
                 </div>
               </div>
 
-              <div className="col-md-6 mb-2">
+              <div className="col-md-5 mb-2 px-5">
                 <h3
-                  className="text-center mb-2"
+                  className="text-center text-custom  mb-2"
                   style={{
                     color: "#198754",
                     marginBottom: "5px",
@@ -333,6 +334,7 @@ const Login = () => {
                   </div>
                 </Form>
               </div>
+              <div className="col-md-1"></div>
             </div>{" "}
           </div>
         </section>
