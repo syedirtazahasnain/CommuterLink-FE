@@ -21,7 +21,8 @@ import CommuterProfile from './pages/frontend/Dashboard/CommuterProfile';
 import { useSelector } from "react-redux";
 
 function App() {
-  const userToken = useSelector((s) => s.login.data.token);
+  const userLogin = useSelector((s) => s.login.data.token);
+  const userSignup = useSelector((s) => s.signup.data.token);
 
   return (
     <>
@@ -30,9 +31,25 @@ function App() {
         <Route path='/'  element={<Home />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
-        <Route path="/otp" element={<OtpPage />} />
-        <Route path='/number-generate' element={<NumberGenerate/>}></Route>
-        {userToken && (
+        {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
+        {/* <Route path='/carousel' element={<CarouselSlider />} /> 
+        <Route path='/howworks' element={<HowWorks/>}/>
+        <Route path='/contribute' element={<Contribute/>}/> */}
+        {/* <Route path='/faq' element={<Faq/>}/> */}
+             
+        {userSignup && (
+            <>
+              <Route path='/driver-registration' element={<Registration/>}/>
+              <Route path='/registration' element={<RiderRegistration/>}/>
+              <Route path='/shareride' element={<ShareRide/>}></Route>
+              <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
+              <Route path="/otp" element={<OtpPage />} />
+              <Route path='/nested' element={<Nestedform/>}></Route>
+              <Route path='/number-generate' element={<NumberGenerate/>}></Route>
+              <Route path='/verification' element={<Verification/>}></Route>
+            </>
+          )}
+        {userLogin && (
             <>
               <Route path='/carousel' element={<CarouselSlider />} /> 
               <Route path='/howworks' element={<HowWorks/>}/>
@@ -42,7 +59,7 @@ function App() {
               <Route path='/faq' element={<Faq/>}/>
               <Route path='/shareride' element={<ShareRide/>}></Route>
               <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
-              {/* <Route path="/otp" element={<OtpPage />} /> */}
+              <Route path="/otp" element={<OtpPage />} />
               <Route path='/nested' element={<Nestedform/>}></Route>
               {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
               <Route path='/verification' element={<Verification/>}></Route>
@@ -50,7 +67,8 @@ function App() {
               <Route path='/commuter-profile' element={<CommuterProfile/>}></Route>
             </>
           )}
-          {!userToken && <Route path="*" element={<Navigate to="/" />} />}
+          {!userLogin && <Route path="*" element={<Navigate to="/" />} />}
+          {!userSignup && <Route path="*" element={<Navigate to="/" />} />}
       </Routes>
     </Router>
     </>

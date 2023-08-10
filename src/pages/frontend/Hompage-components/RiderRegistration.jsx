@@ -22,6 +22,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from 'dayjs';
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Autocomplete, MarkerF, PolylineF } from "@react-google-maps/api";
@@ -59,6 +60,19 @@ const RiderRegistration = () => {
   const [selectedHomeTime, setSelectedHomeTime] = useState("");
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
+  const [gender, setGender] = useState("");
+  const [preferredGender, setPreferredGender] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [martialStatus, setMartialStatus] = useState("");
+  const [education, setEducation] = useState("");
+  const [profession, setProfession] = useState("");
+  const [cnic, setCnic] = useState("");
+  const [cnicFront, setCnicFront] = useState("");
+  const [cnicFrontExt, setCnicFrontExt] = useState("");
+  const [cnicBack, setCnicBack] = useState("");
+  const [cnicBackExt, setCnicBackExt] = useState("");
+  const [picture, setPicture] = useState("");
+  const [pictureExt, setPictureExt] = useState("");
   
   // For Start Point
   const[locationStartString, setLocationStartString] = useState("");
@@ -107,7 +121,7 @@ const RiderRegistration = () => {
 
 
   useEffect(() => {
-    
+
     if (provinceEndId) {
       const selectedEndProvince = dropdownEnddata?.countries[0]?.provinces.find(
         (province) => province.id == provinceEndId
@@ -253,11 +267,16 @@ const RiderRegistration = () => {
   };
 
   const handlePlaceSelectStart = () => {
+    
     const place = autocompleteRef.current.getPlace();
     // Handle the selected place here, you can update the state with the selected place value.
-    if (place && place.formatted_address) {
-      setLocationStartStringField(place.formatted_address);
-      setLocationStartString(place.formatted_address);
+    if (place && place.geometry && place.geometry.location) {
+    setMarkerPositionStart({
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    });
+    setLocationStartStringField(place.formatted_address);
+    setLocationStartString(place.formatted_address);
     }
   };
 
@@ -275,9 +294,14 @@ const RiderRegistration = () => {
   };
 
   const handlePlaceSelectEnd = () => {
+    
     const place = autocompleteRef.current.getPlace();
     // Handle the selected place here, you can update the state with the selected place value.
-    if (place && place.formatted_address) {
+    if (place && place.geometry && place.geometry.location) {
+      setMarkerPositionEnd({
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
       setLocationEndStringField(place.formatted_address);
       setLocationEndString(place.formatted_address);
     }
@@ -315,6 +339,52 @@ const RiderRegistration = () => {
     }
   };
 
+  const handleDateChange = (newDate) => {
+    const formattedDate = newDate ? dayjs(newDate).format('DD-MM-YYYY') : '';
+    setSelectedDate(formattedDate);
+  };
+
+  const handleCnicChange = (event) => {
+    const inputCnic = event.target.value.replace(/\D/g, '');
+    if (inputCnic.length <= 13) {
+      setCnic(inputCnic);
+    }
+  };
+
+  const handleCnicFront = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setCnicFront(file);
+      setCnicFrontExt(file.name.split('.').pop());
+    }
+  };
+
+  // console.log("Front Image:", cnicFront);
+  // console.log("Front Image Extension:", cnicFrontExt);
+
+  const handleCnicBack = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setCnicBack(file);
+      setCnicBackExt(file.name.split('.').pop());
+    }
+  };
+
+  //console.log("Back Image:", cnicBack);
+  //console.log("Back Image Extension:", cnicBackExt);
+
+  const handlePicture = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPicture(file);
+      setPictureExt(file.name.split('.').pop());
+    }
+  };
+
+  // console.log("Picture:", picture);
+  // console.log("Picture Extension:", pictureExt);
+
+
   const lineCoordinates = [
     { lat: markerPositionStart.lat, lng: markerPositionStart.lng },
     { lat: markerPositionEnd.lat, lng: markerPositionEnd.lng },
@@ -322,6 +392,10 @@ const RiderRegistration = () => {
 
   const handleLogin = async () => {
     await LocationForm();
+    await PersonalForm();
+    await ImagesFormCnicFront();
+    await ImagesFormCnicBack();
+    await ImagesFormPicture();
   };
 
   const LocationForm = async () => {
@@ -378,25 +452,12 @@ const RiderRegistration = () => {
           }
         );
 
-        //console.log(body);
+        console.log("Location Form Body:", body);
 
         const jsonresponse = await response.json();
 
         if (jsonresponse.statusCode == 200) {
-          // dispatch(
-          //   setsignupState({
-          //     name: fullName,
-          //     email: email,
-          //     phone: phoneNumber,
-          //     password: password,
-          //     provider: provider,
-          //     otp: jsonresponse.otp,
-          //     token: jsonresponse.token,
-          //     confirmPassword: confirmPassword,
-          //   })
-          // );
-          //console.log(jsonresponse);
-          //navigate("/otp");
+          console.log("Location Form Response:", jsonresponse);
         } else {
           alert("Error: " + jsonresponse.message);
         }
@@ -405,6 +466,148 @@ const RiderRegistration = () => {
     }
   };
 
+  const PersonalForm = async () => {
+    try {
+      const body = {
+        marital_status : martialStatus,
+        cnic: cnic,
+        birth_year : selectedDate,
+        gender : gender,
+        preferred_gender : preferredGender,
+        profession : profession,
+        education : education,
+        interests : null,
+        university_address : null,
+        university_name : null,
+        user_type : 299
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/personal",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Personal Form Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Personal Form Response:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormCnicFront = async () => {
+    try {
+      const body = {
+        cnic_front_image_ext: cnicFrontExt,
+        cnic_front_image: cnicFront,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/cnic_front",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Body Cnic Front:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Cnic Front:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormCnicBack = async () => {
+    try {
+      const body = {
+        cnic_back_image_ext: cnicBackExt,
+        cnic_back_image: cnicBack,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/cnic_back",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Body Cnic Back:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Cnic Back:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormPicture = async () => {
+    try {
+      const body = {
+        picture_image_ext: pictureExt,
+        picture: picture,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/picture",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Picture Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Picture:", jsonresponse);
+          alert("Registration Successfully");
+          // route();
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   //console.log("Days Selected:", daysSelected);
 
@@ -823,6 +1026,8 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
                         required
                       >
                         <option value="" hidden> Gender </option>
@@ -837,6 +1042,8 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={preferredGender}
+                        onChange={(e) => setPreferredGender(e.target.value)}
                         required
                       >
                         <option value="" hidden>Gender</option>
@@ -860,14 +1067,18 @@ const RiderRegistration = () => {
                                 MM/DD/YY
                               </span>
                             }
+                            value={selectedDate}
+                            onChange={handleDateChange}
                             sx={{ width: "100%" }}
                             inputProps={{ style: { color: '#198754' } }}
-                            size={""}
                             required
                           />
                         </DemoContainer>
                       </LocalizationProvider>
                     </Form.Group>
+
+                    {/* {selectedDate} */}
+
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
                       <Form.Label style={{ color: "#198754" }}>
                         Martial Status
@@ -875,11 +1086,13 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={martialStatus}
+                        onChange={(e) => setMartialStatus(e.target.value)}
                         required
                       >
                         <option value="" hidden>Martial Status</option>
-                        <option value="1">Married</option>
-                        <option value="2">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Single">Single</option>
                       </Form.Select>
                     </Form.Group>
                   </Row>
@@ -892,6 +1105,8 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={education}
+                        onChange={(e) => setEducation(e.target.value)}
                         required
                       >
                         <option value="" hidden>Education</option>
@@ -917,6 +1132,8 @@ const RiderRegistration = () => {
                         type="text"
                         className="colorplace"
                         placeholder="Profession (Engineer, Doctor, etc)"
+                        value={profession}
+                        onChange={(e) => setProfession(e.target.value)}
                         defaultValue=""
                       />
                     </Form.Group>
@@ -927,11 +1144,11 @@ const RiderRegistration = () => {
 
                       <Form.Control
                         required
-                        type="number"
+                        type="text"
                         className="colorplace"
                         placeholder="xxxxxxxxxxxxx"
-                        defaultValue=""
-                        maxLength={13}
+                        value={cnic}
+                        onChange={handleCnicChange}
                       />
                     </Form.Group>
                   </Row>
@@ -946,7 +1163,7 @@ const RiderRegistration = () => {
                         {" "}
                         Upload CNIC (Front)
                       </Form.Label>
-                      <Form.Control type="file" required />
+                      <Form.Control type="file" required onChange={handleCnicFront} />
                     </Form.Group>
                     <Form.Group
                       controlId="formFile"
@@ -958,7 +1175,7 @@ const RiderRegistration = () => {
                         {" "}
                         Upload CNIC (back)
                       </Form.Label>
-                      <Form.Control type="file" required />
+                      <Form.Control type="file" required onChange={handleCnicBack} />
                     </Form.Group>
                   </Row>
 
@@ -972,7 +1189,7 @@ const RiderRegistration = () => {
                       <Form.Label style={{ color: "#198754" }}>
                         Upload your picture
                       </Form.Label>
-                      <Form.Control type="file" required/>
+                      <Form.Control type="file" required onChange={handlePicture} />
                       <Form.Text className="" style={{ color: "#198754" }}>
                         The picture will only be shown to members with whom you
                         agree to commute

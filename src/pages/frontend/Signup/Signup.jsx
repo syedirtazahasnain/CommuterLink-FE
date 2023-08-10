@@ -17,7 +17,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../../redux/signupSlice";
-import { setloginState } from "../../../redux/loginSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 
@@ -115,7 +114,7 @@ const Signup = () => {
        
       if (jsonresponse.statusCode == 200) {
         dispatch(
-          setloginState({
+          setsignupState({
             email: body.email,
             provider: body.provider,
           })
@@ -149,7 +148,6 @@ const Signup = () => {
         );
 
         const jsonresponse = await response.json();
-
         if (jsonresponse.statusCode == 200) {
           dispatch(
             setsignupState({
