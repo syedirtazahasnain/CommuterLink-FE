@@ -114,7 +114,7 @@ const MyAccordion = () => {
               <h3>Be Part of CommutersLink</h3>
               <p>It's not about EARNING but cost sharing and SAVING</p>
               <button
-                className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5"
+                className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
               >
                 JOIN NOW
               </button>
