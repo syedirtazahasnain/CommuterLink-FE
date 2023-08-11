@@ -3,10 +3,12 @@ import storage from 'redux-persist/lib/storage'
 import signupReducer from './signupSlice'
 import loginReducer from './loginSlice'
 import { persistReducer } from 'redux-persist';
+import generalReducer from './generalSlice';
 
 const reducers = combineReducers({
   signup: signupReducer,
-  login: loginReducer, 
+  login: loginReducer,
+  general: generalReducer,
 });
 
 const persistConfig = {

@@ -17,7 +17,7 @@ import CardContent from "@mui/material/CardContent";
 // import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row,  Modal } from 'react-bootstrap';
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -25,12 +25,15 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from 'dayjs';
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, Autocomplete, MarkerF, PolylineF } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Autocomplete, MarkerF } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 
 const RiderRegistration = () => {
+
+  // const option0 = useSelector((s) => s.general.data.option0);
+  // console.log(option0);
 
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
@@ -62,7 +65,8 @@ const RiderRegistration = () => {
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
@@ -102,6 +106,11 @@ const RiderRegistration = () => {
   // For End Point
   const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 30.3753, lng: 69.3451 });
   const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 30.3753, lng: 69.3451 });
+
+  // For Modals
+  const [showStartModal, setShowStartModal] = useState(false);
+  const [showEndModal, setShowEndModal] = useState(false);
+
 
   useEffect(() => {
     getdropdownStartdata();
@@ -259,6 +268,7 @@ const RiderRegistration = () => {
     const selectedId = selectedOption.getAttribute("data-id");
     setLocationStartString(selectedValue);
     setLocationStartStringId(selectedId);
+    handleShowStartModal();
   };
 
   const handleLocationStartField = (e) => {
@@ -277,6 +287,7 @@ const RiderRegistration = () => {
     });
     setLocationStartStringField(place.formatted_address);
     setLocationStartString(place.formatted_address);
+    handleShowStartModal();
     }
   };
 
@@ -286,6 +297,7 @@ const RiderRegistration = () => {
     const selectedId = selectedOption.getAttribute("data-id");
     setLocationEndString(selectedValue);
     setLocationEndStringId(selectedId);
+    handleShowEndModal();
   };
 
   const handleLocationEndField = (e) => {
@@ -304,25 +316,29 @@ const RiderRegistration = () => {
       });
       setLocationEndStringField(place.formatted_address);
       setLocationEndString(place.formatted_address);
+      handleShowEndModal();
     }
   };
 
-  const handleMapClick = (event) => {
+  const handleMapClickStart = (event) => {
     console.log(event);
-    if(cityStartId){
-      setMarkerPositionStart({
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-      });
-    }
-
-    if(cityEndId){
-      setMarkerPositionEnd({
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-      });
-    }
+    setMarkerPositionStart({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
   };
+
+  console.log("Start Marker:", markerPositionStart);
+
+  const handleMapClickEnd = (event) => {
+    console.log(event);
+    setMarkerPositionEnd({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
+  };
+
+  console.log("End Marker:", markerPositionEnd);
 
   // Function to handle checkbox changes
   const handleCheckboxChange = (event) => {
@@ -340,8 +356,10 @@ const RiderRegistration = () => {
   };
 
   const handleDateChange = (newDate) => {
-    const formattedDate = newDate ? dayjs(newDate).format('DD-MM-YYYY') : '';
-    setSelectedDate(formattedDate);
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setSelectedDate(newDateObject);
+    }
   };
 
   const handleCnicChange = (event) => {
@@ -354,8 +372,12 @@ const RiderRegistration = () => {
   const handleCnicFront = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setCnicFront(file);
-      setCnicFrontExt(file.name.split('.').pop());
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCnicFront(reader.result);
+        setCnicFrontExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -365,8 +387,12 @@ const RiderRegistration = () => {
   const handleCnicBack = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setCnicBack(file);
-      setCnicBackExt(file.name.split('.').pop());
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCnicBack(reader.result);
+        setCnicBackExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -376,19 +402,36 @@ const RiderRegistration = () => {
   const handlePicture = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setPicture(file);
-      setPictureExt(file.name.split('.').pop());
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPicture(reader.result);
+        setPictureExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   // console.log("Picture:", picture);
   // console.log("Picture Extension:", pictureExt);
+  
+  // For Modal Open & Close Functionality
 
-
-  const lineCoordinates = [
-    { lat: markerPositionStart.lat, lng: markerPositionStart.lng },
-    { lat: markerPositionEnd.lat, lng: markerPositionEnd.lng },
-  ];
+  const handleShowStartModal = () => {
+    setShowStartModal(true);
+  };
+  
+  const handleCloseStartModal = () => {
+    setShowStartModal(false);
+  };
+  
+  const handleShowEndModal = () => {
+    setShowEndModal(true);
+  };
+  
+  const handleCloseEndModal = () => {
+    setShowEndModal(false);
+  };
+  
 
   const handleLogin = async () => {
     await LocationForm();
@@ -471,7 +514,7 @@ const RiderRegistration = () => {
       const body = {
         marital_status : martialStatus,
         cnic: cnic,
-        birth_year : selectedDate,
+        birth_year : selectedDateFormat,
         gender : gender,
         preferred_gender : preferredGender,
         profession : profession,
@@ -599,8 +642,8 @@ const RiderRegistration = () => {
 
         if (jsonresponse.statusCode == 200) {
           console.log("Images Form Response Picture:", jsonresponse);
-          alert("Registration Successfully");
-          // route();
+          alert("Registration Form Submitted Successfully");
+          route();
         } else {
           alert("Error: " + jsonresponse.message);
         }
@@ -734,50 +777,6 @@ const RiderRegistration = () => {
                       </Form.Group>
                     )}
                   </Row>
-                  
-                    <Container className="d-flex justify-content-center align-items-center mb-3">
-                    <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript
-                            googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
-                            libraries={mapLibraries}
-                        >
-                            <GoogleMap
-                                zoom={7}
-                                center={
-                                 defaultStartCenter ? defaultStartCenter : defaultEndCenter
-                                }
-                                mapContainerStyle={{ width: "100%", height: "50vh" }}
-                                onClick={handleMapClick}
-                                options={{
-                                    types: ["(regions)"],
-                                    componentRestrictions: { country: "PK" },
-                                }}
-                            >
-                              <MarkerF
-                                    position={markerPositionStart}
-                                    icon={{
-                                      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                                    }}
-                              />
-                              
-                              <MarkerF
-                                position={markerPositionEnd}
-                                icon={{
-                                  url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                                }}
-                              />
-                              
-                              <PolylineF
-                                path={lineCoordinates} 
-                                strokeColor="#0000FF"
-                                strokeOpacity={0.8}
-                                strokeWeight={2} 
-                              />
-
-                            </GoogleMap>
-                        </LoadScript>
-                    </Row>
-                </Container>
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
@@ -883,6 +882,84 @@ const RiderRegistration = () => {
                       </Form.Group>
                     )}
                   </Row>
+
+                  <LoadScript
+                      googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
+                      libraries={mapLibraries}
+                  >
+                        <Modal show={showStartModal} onHide={handleCloseStartModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Select Starting Location</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Container className="d-flex justify-content-center align-items-center mb-3">
+                            <Row style={{ height: "100%", width: "100%" }}>
+                              <GoogleMap
+                                  zoom={12}
+                                  center={defaultStartCenter}
+                                  mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                  onClick={handleMapClickStart}
+                                  options={{
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
+                                  }}
+                              >
+                                <MarkerF
+                                      position={markerPositionStart}
+                                      icon={{
+                                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                      }}
+                                />
+                            </GoogleMap>
+                            </Row>
+                          </Container>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="contained" onClick={handleCloseStartModal}>
+                              Close
+                          </Button>
+                        </Modal.Footer>
+                        </Modal>
+
+                        <Modal show={showEndModal} onHide={handleCloseEndModal}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Select Drop-off Location</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                          <Container className="d-flex justify-content-center align-items-center mb-3">
+                            <Row style={{ height: "100%", width: "100%" }}>
+                                <GoogleMap
+                                  zoom={12}
+                                  // center={
+                                  //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
+                                  // }
+                                  center={defaultEndCenter}
+                                  mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                  onClick={handleMapClickEnd}
+                                  options={{
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
+                                  }}
+                              >
+                                
+                                <MarkerF
+                                  position={markerPositionEnd}
+                                  icon={{
+                                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                  }}
+                                />
+
+                            </GoogleMap>
+                            </Row>
+                        </Container>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="contained" onClick={handleCloseEndModal}>
+                              Close
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                </LoadScript>
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
@@ -1018,8 +1095,6 @@ const RiderRegistration = () => {
                     </div>
                   </Row>
 
-                  {/* {daysSelected} */}
-
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
                       <Form.Label style={{ color: "#198754" }}>Gender</Form.Label>
@@ -1077,7 +1152,7 @@ const RiderRegistration = () => {
                       </LocalizationProvider>
                     </Form.Group>
 
-                    {/* {selectedDate} */}
+                    {/* {selectedDateFormat} */}
 
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
                       <Form.Label style={{ color: "#198754" }}>
@@ -1196,6 +1271,7 @@ const RiderRegistration = () => {
                       </Form.Text>
                     </Form.Group>
                   </Row>
+
                   <Stack
                     direction="row"
                     className="mb-4"

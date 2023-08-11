@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setsignupState } from "../../../redux/signupSlice";
 import { setloginState } from "../../../redux/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { setOption0State, setOption1State } from "../../../redux/generalSlice";
 
 const Verification = () => {
 
@@ -22,6 +23,8 @@ const Verification = () => {
   const route = () => {
     dispatch(setsignupState(""));
     dispatch(setloginState(""));
+    dispatch(setOption0State(""));
+    dispatch(setOption1State(""));
     navigate("/");
   };
     
