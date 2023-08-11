@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import mySlides1 from "../../../Images/signup.png";
@@ -18,21 +18,25 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { setloginState } from "../../../redux/loginSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [isValidEmail, setIsValidEmail] = useState(true);
-  const [submitbtn , setSubmit] = useState(false);
+  const userToken = useSelector((s) => s.login.data.token);
 
-  const route = () => {
-    setSubmit(true);
-    
-    if(!submitbtn){
+  useEffect(() => {
+    if(userToken){
       navigate("/dashboard");
     }
-  }
+    else{
+      navigate("/login");
+    }
+  }, [userToken]);
 
   const googlesignup = useGoogleLogin({
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
@@ -44,7 +48,6 @@ const Login = () => {
 
   const handleLogin = async () => {
     await postData();
-    route();
   };
 
   const postData = async () => {
@@ -64,9 +67,10 @@ const Login = () => {
         }
       );
       const jsonresponse = await response.json();
+      //console.log(jsonresponse);
 
       if (jsonresponse.statusCode == 200) {
-        // navigate("/");
+        dispatch(setloginState(jsonresponse.access_token));
       } else {
         console.log(jsonresponse);
         alert("Error: " + jsonresponse.message);
@@ -277,6 +281,7 @@ const Login = () => {
                   <button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
                   {/* onClick={() => setSubmit(true), route()} */}
                   {/* <Button className="btn  formbtn" onClick={() => route()} >   */}
+                  {/* <Button className="btn  formbtn" onClick={handleLogin}> */}
                     Login
                   </button>{" "}
                   <div className="container">

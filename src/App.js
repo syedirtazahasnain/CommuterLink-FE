@@ -1,7 +1,7 @@
 
 import './App.css';
 import Home from './pages/frontend/Home';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Signup from './pages/frontend/Signup/Signup';
 import Login from './pages/frontend/Hompage-components/Login';
 import CarouselSlider from './pages/frontend/Hompage-components/Carousel';
@@ -18,29 +18,74 @@ import RiderRegistration from './pages/frontend/Hompage-components/RiderRegistra
 import Verification from './pages/frontend/register-form/Verification';
 import Dashboard from './pages/frontend/Hompage-components/Dashboard';
 import CommuterProfile from './pages/frontend/Dashboard/CommuterProfile';
+import { useSelector } from "react-redux";
 
 function App() {
+  const userLogin = useSelector((s) => s.login.data.token);
+  const userSignup = useSelector((s) => s.signup.data.token);
+  const userOption0 = useSelector((s) => s.general.data.option0);
+  const userOption1 = useSelector((s) => s.general.data.option1);
+
+  console.log("Option 0", userOption0);
+  console.log("Option 1", userOption1);
+
   return (
     <>
       <Router>
       <Routes>
-      <Route path='/'  element={<Home />} />
+        <Route path='/'  element={<Home />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/carousel' element={<CarouselSlider />} /> 
+        {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
+        {/* <Route path='/carousel' element={<CarouselSlider />} /> 
         <Route path='/howworks' element={<HowWorks/>}/>
-        <Route path='/contribute' element={<Contribute/>}/>
-        <Route path='/driver-registration' element={<Registration/>}/>
-        <Route path='/registration' element={<RiderRegistration/>}/>
-        <Route path='/faq' element={<Faq/>}/>
-        <Route path='/shareride' element={<ShareRide/>}></Route>
-        <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
-        <Route path="/otp" element={<OtpPage />} />
-        <Route path='/nested' element={<Nestedform/>}></Route>
-        <Route path='/number-generate' element={<NumberGenerate/>}></Route>
-        <Route path='/verification' element={<Verification/>}></Route>
-        <Route path='/dashboard' element={<Dashboard/>}></Route>
-        <Route path='/commuter-profile' element={<CommuterProfile/>}></Route>
+        <Route path='/contribute' element={<Contribute/>}/> */}
+        {/* <Route path='/faq' element={<Faq/>}/> */}
+
+          {userOption0 && (
+            <>
+              <Route path='/registration' element={<RiderRegistration/>}/>
+            </>
+          )}
+
+          {userOption1 && (
+            <>
+              <Route path='/driver-registration' element={<Registration/>}/>
+            </>
+          )}
+             
+        {userSignup && (
+            <>
+              <Route path='/driver-registration' element={<Registration/>}/>
+              <Route path='/registration' element={<RiderRegistration/>}/>
+              <Route path='/shareride' element={<ShareRide/>}></Route>
+              <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
+              <Route path="/otp" element={<OtpPage />} />
+              <Route path='/nested' element={<Nestedform/>}></Route>
+              <Route path='/number-generate' element={<NumberGenerate/>}></Route>
+              <Route path='/verification' element={<Verification/>}></Route>
+            </>
+          )}
+        {userLogin && (
+            <>
+              <Route path='/carousel' element={<CarouselSlider />} /> 
+              <Route path='/howworks' element={<HowWorks/>}/>
+              <Route path='/contribute' element={<Contribute/>}/>
+              <Route path='/driver-registration' element={<Registration/>}/>
+              <Route path='/registration' element={<RiderRegistration/>}/>
+              <Route path='/faq' element={<Faq/>}/>
+              <Route path='/shareride' element={<ShareRide/>}></Route>
+              <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
+              <Route path="/otp" element={<OtpPage />} />
+              <Route path='/nested' element={<Nestedform/>}></Route>
+              {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
+              <Route path='/verification' element={<Verification/>}></Route>
+              <Route path='/dashboard' element={<Dashboard/>}></Route>
+              <Route path='/commuter-profile' element={<CommuterProfile/>}></Route>
+            </>
+          )}
+          {!userLogin && (!userOption0 && !userOption1) && <Route path="*" element={<Navigate to="/" />} />}
+          {!userSignup && (!userOption0 && !userOption1) && <Route path="*" element={<Navigate to="/" />} />}
       </Routes>
     </Router>
     </>

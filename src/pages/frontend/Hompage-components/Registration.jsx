@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
@@ -17,14 +17,16 @@ import CardContent from "@mui/material/CardContent";
 import { useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row,  Modal } from 'react-bootstrap';
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from 'dayjs';
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, MarkerF, Autocomplete } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Autocomplete, MarkerF, PolylineF } from "@react-google-maps/api";
+import { useSelector } from "react-redux";
 import ibn from '../../../Images/iban.png';
 import easypaisa from '../../../Images/ep.png';
 import jazzcash from '../../../Images/jazz.png';
@@ -33,16 +35,12 @@ import raast from '../../../Images/raast.png';
 const Registration = () => {
 
   const navigate = useNavigate();
+  const autocompleteRef = useRef(null);
+  const userToken = useSelector((s) => s.login.data.token);
   const [addNewStart, setAddNewStart] = useState(false);
   const [addNewEnd, setAddNewEnd] = useState(false);
+  const [daysSelected, setDaysSelected] = useState([]);
   const mapLibraries = ["places"];
-
-  const pakistanBounds = {
-    north: 37.271879,
-    south: 23.634499,
-    west: 60.872972,
-    east: 77.84085,
-  };
 
   const route = () => {
     navigate("/verification");
@@ -64,10 +62,25 @@ const Registration = () => {
   const [selectedHomeTime, setSelectedHomeTime] = useState("");
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
+  const [gender, setGender] = useState("");
+  const [preferredGender, setPreferredGender] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
+  const [martialStatus, setMartialStatus] = useState("");
+  const [education, setEducation] = useState("");
+  const [profession, setProfession] = useState("");
+  const [cnic, setCnic] = useState("");
+  const [cnicFront, setCnicFront] = useState("");
+  const [cnicFrontExt, setCnicFrontExt] = useState("");
+  const [cnicBack, setCnicBack] = useState("");
+  const [cnicBackExt, setCnicBackExt] = useState("");
+  const [picture, setPicture] = useState("");
+  const [pictureExt, setPictureExt] = useState("");
   
   // For Start Point
-  const[locationStartString, setLocationStartString] = useState("");
-  const[locationStartStringField, setLocationStartStringField] = useState(locationStartString);
+  const [locationStartString, setLocationStartString] = useState("");
+  const [locationStartStringId, setLocationStartStringId] = useState("");
+  const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
   const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
@@ -76,6 +89,7 @@ const Registration = () => {
   
   // For End Point
   const[locationEndString, setLocationEndString] = useState("");
+  const[locationEndStringId, setLocationEndStringId] = useState("");
   const[locationEndStringField, setLocationEndStringField] = useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
@@ -85,14 +99,16 @@ const Registration = () => {
 
 
   // For Start Point
-  const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 0, lng: 0 });
-  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 0, lng: 0 });
-  const [isMarkerSelectedStart, setIsMarkerSelectedStart] = useState(false);
+  const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 30.3753, lng: 69.3451 });
+  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 30.3753, lng: 69.3451 });
 
   // For End Point
-  const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 0, lng: 0 });
-  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 0, lng: 0 });
-  const [isMarkerSelectedEnd, setIsMarkerSelectedEnd] = useState(false);
+  const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 30.3753, lng: 69.3451 });
+  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 30.3753, lng: 69.3451 });
+
+  // For Modals
+  const [showStartModal, setShowStartModal] = useState(false);
+  const [showEndModal, setShowEndModal] = useState(false);
 
   // For Driver's
   const [carBrand, setCarBrand] = useState([]);
@@ -102,12 +118,46 @@ const Registration = () => {
   const [selectedManYear, setSelectedManYear] = useState("");
   const [regYear, setRegYear] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
+  const [carYearRanges, setCarYearRanges] = useState([]);
+  const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
   const [selectedRegNumber, setSelectedRegNumber] = useState("");
   const [selectedCarAC, setSelectedCarAC] = useState("");
-  const [selectedCarImage, setSelectedCarImage] = useState(null);
+  const [selectedCarImage, setSelectedCarImage] = useState("");
+  const [selectedCarImageExt, setSelectedCarImageExt] = useState("");
+  const [carCC, setCarCC] = useState([]);
+  const [selectedCarCC, setSelectedCarCC] = useState("");
   const [selectedSeat, setSelectedSeat] = useState("");
   const [selectedSeatGender, setSelectedSeatGender] = useState("");
-  const [selectedRoutePartner, setSelectedRoutePartner] = useState("");
+  const [selectedMidRoutePartner, setSelectedMidRoutePartner] = useState("");
+  const [selectedOneRoutePartner, setSelectedOneRoutePartner] = useState("");
+  const [inputBankAccount, setInputBankAccount] = useState("");
+  const [inputEasyPaisa, setInputEasyPaisa] = useState("");
+  const [inputJazzCash, setInputJazzCash] = useState("");
+  const [inputRaastID, setInputRaastID] = useState("");
+
+  // For Driver Type
+  const [inputDriverType, setInputDriverType] = useState("");
+
+  // I Drive Myself Fields
+  const [inputDrivingLicenseMySelf, setInputDrivingLicenseMySelf] = useState("");
+  const [inputValidUptoMySelf, setInputValidUptoMySelf] = useState("");
+  const [inputPlaceIssueMySelf, setInputPlaceIssueMySelf] = useState("");
+
+  // For Driver & Both Fields
+  const [inputDriverName, setInputDriverName] = useState("");
+  const [inputDriverCnicNumber, setInputDriverCnicNumber] = useState("");
+  const [inputDriverCnicFront, setInputDriverCnicFront] = useState("");
+  const [inputDriverCnicFrontExt, setInputDriverCnicFrontExt] = useState("");
+  const [inputDriverCnicBack, setInputDriverCnicBack] = useState("");
+  const [inputDriverCnicBackExt, setInputDriverCnicBackExt] = useState("");
+  const [inputDriverLicenseNumber, setInputDriverLicenseNumber] = useState("");
+  const [inputDriverValidUpto, setInputDriverValidUpto] = useState("");
+
+  // For License Fields
+  const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
+  const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] = useState("");
+  const [selectedImageLicenseBack, setSelectedImageLicenseBack] = useState("");
+  const [selectedImageLicenseBackExt, setSelectedImageLicenseBackExt] = useState("");
 
   // For Driver Form
   const [showDriverForm, setShowDriverForm]=useState(false);
@@ -120,6 +170,7 @@ const Registration = () => {
   }, []);
 
   useEffect(() => {
+
     if (provinceStartId) {
       const selectedStartProvince = dropdownStartdata?.countries[0]?.provinces.find(
         (province) => province.id == provinceStartId
@@ -128,6 +179,11 @@ const Registration = () => {
         selectedStartProvince ? selectedStartProvince.cities : []
       );
     }
+  }, [provinceStartId]);
+
+
+  useEffect(() => {
+
     if (provinceEndId) {
       const selectedEndProvince = dropdownEnddata?.countries[0]?.provinces.find(
         (province) => province.id == provinceEndId
@@ -136,7 +192,7 @@ const Registration = () => {
         selectedEndProvince ? selectedEndProvince.cities : []
       );
     }
-  }, [provinceStartId, provinceEndId]);
+  }, [provinceEndId]);
 
   useEffect(() => {
     
@@ -153,6 +209,9 @@ const Registration = () => {
       setLocationStartString(citystring[0].value);
       setSelectedStartCityArea(filteredStartCities ? filteredStartCities : []);
     }
+  }, [cityStartId]);
+
+  useEffect(() => {
 
     if (cityEndId) {
       
@@ -167,7 +226,9 @@ const Registration = () => {
       setLocationEndString(citystring[0].value);
       setSelectedEndCityArea(filteredEndCities ? filteredEndCities : []);
     }
-  }, [cityStartId, cityEndId]);
+  }, [cityEndId]);
+
+  //console.log(locationEndString);
 
   useEffect(() => {
     // Function to fetch the geocoding data
@@ -179,6 +240,7 @@ const Registration = () => {
         );
         
         const data = await response.json(); // Parse the response as JSON
+        console.log(data);
         if (data.status === 'OK' && data.results.length > 0) {
           const { lat, lng } = data.results[0].geometry.location;
           setDefaultStartCenter({ lat, lng });
@@ -228,6 +290,8 @@ const Registration = () => {
         },
       }
     );
+
+    console.log(response);
     const jsonresponse = await response.json();
     setDropDownStartData(jsonresponse);
     setDropDownEndData(jsonresponse);
@@ -236,6 +300,8 @@ const Registration = () => {
     setCarBrand(jsonresponse.car_brand);
     setManYear(jsonresponse.car_reg_year);
     setRegYear(jsonresponse.car_reg_year);
+    setCarYearRanges(jsonresponse.car_reg_year);
+    setCarCC(jsonresponse.car_cc);
     console.log(jsonresponse);
   };
 
@@ -256,15 +322,13 @@ const Registration = () => {
     setValidated(true);
   };
 
-  const handleImageSelect = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedCarImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleLocationStart = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const selectedValue = selectedOption.value;
+    const selectedId = selectedOption.getAttribute("data-id");
+    setLocationStartString(selectedValue);
+    setLocationStartStringId(selectedId);
+    handleShowStartModal();
   };
 
   const handleLocationStartField = (e) => {
@@ -272,28 +336,595 @@ const Registration = () => {
     setLocationStartString(e.target.value);
   };
 
+  const handlePlaceSelectStart = () => {
+    
+    const place = autocompleteRef.current.getPlace();
+    // Handle the selected place here, you can update the state with the selected place value.
+    if (place && place.geometry && place.geometry.location) {
+    setMarkerPositionStart({
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    });
+    setLocationStartStringField(place.formatted_address);
+    setLocationStartString(place.formatted_address);
+    handleShowStartModal();
+    }
+  };
+
+  const handleLocationEnd = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const selectedValue = selectedOption.value;
+    const selectedId = selectedOption.getAttribute("data-id");
+    setLocationEndString(selectedValue);
+    setLocationEndStringId(selectedId);
+    handleShowEndModal();
+  };
+
   const handleLocationEndField = (e) => {
     setLocationEndStringField(e.target.value);
     setLocationEndString(e.target.value);
   };
 
-  const handleMarkerClickStart = () => {
-    setIsMarkerSelectedStart(true);
-    setIsMarkerSelectedEnd(false);
-    //alert(locationStartString);
+  const handlePlaceSelectEnd = () => {
+    
+    const place = autocompleteRef.current.getPlace();
+    // Handle the selected place here, you can update the state with the selected place value.
+    if (place && place.geometry && place.geometry.location) {
+      setMarkerPositionEnd({
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
+      setLocationEndStringField(place.formatted_address);
+      setLocationEndString(place.formatted_address);
+      handleShowEndModal();
+    }
   };
 
-  const handleMarkerClickEnd = () => {
-    setIsMarkerSelectedEnd(true);
-    setIsMarkerSelectedStart(false);
-    //alert(locationEndString);
+  const handleMapClickStart = (event) => {
+    console.log(event);
+    setMarkerPositionStart({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
+  };
+
+  const handleMapClickEnd = (event) => {
+    console.log(event);
+    setMarkerPositionEnd({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
+  };
+
+  // Function to handle checkbox changes
+  const handleCheckboxChange = (event) => {
+    const { value } = event.target;
+    // Check if the day is already selected or not
+    if (daysSelected.includes(value)) {
+      // Day is already selected, remove it from the array
+      setDaysSelected((prevSelectedDays) =>
+        prevSelectedDays.filter((day) => day !== value)
+      );
+    } else {
+      // Day is not selected, add it to the array
+      setDaysSelected((prevSelectedDays) => [...prevSelectedDays, value]);
+    }
+  };
+
+  const handleDateChange = (newDate) => {
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setSelectedDate(newDateObject);
+    }
+  };
+
+  const handleCnicChange = (event) => {
+    const inputCnic = event.target.value.replace(/\D/g, '');
+    if (inputCnic.length <= 13) {
+      setCnic(inputCnic);
+    }
+  };
+
+  const handleCnicFront = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCnicFront(reader.result);
+        setCnicFrontExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // console.log("Front Image:", cnicFront);
+  // console.log("Front Image Extension:", cnicFrontExt);
+
+  const handleCnicBack = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCnicBack(reader.result);
+        setCnicBackExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  //console.log("Back Image:", cnicBack);
+  //console.log("Back Image Extension:", cnicBackExt);
+
+  const handlePicture = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPicture(reader.result);
+        setPictureExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // console.log("Picture:", picture);
+  // console.log("Picture Extension:", pictureExt);
+
+  const handleCnicFrontDriver = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setInputDriverCnicFront(reader.result);
+        setInputDriverCnicFrontExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCnicBackDriver = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setInputDriverCnicBack(reader.result);
+        setInputDriverCnicBackExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleLicenseFrontDriver = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImageLicenseFront(reader.result);
+        setSelectedImageLicenseFrontExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleLicenseBackDriver = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImageLicenseBackExt(reader.result);
+        setSelectedImageLicenseBackExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleImageSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedCarImage(reader.result);
+        setSelectedCarImageExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDriverTypeForm = () => {
+    
+    if (inputDriverType === "I Drive Myself") {
+      setInputDriverName("");
+      setInputDriverCnicNumber("");
+      setInputDriverCnicFront("");
+      setInputDriverCnicBack("");
+      setInputDriverLicenseNumber("");
+      setInputDriverValidUpto("");
+      setSelectedImageLicenseFront("");
+      setSelectedImageLicenseFrontExt("");
+      setSelectedImageLicenseBack("");
+      setSelectedImageLicenseBackExt("");
+    }
+
+    if (inputDriverType === "Driver") {
+      setInputDriverName("");
+      setInputDriverCnicNumber("");
+      setInputDriverCnicFront("");
+      setInputDriverCnicBack("");
+      setInputDriverLicenseNumber("");
+      setInputDriverValidUpto("");
+      setInputDrivingLicenseMySelf("");
+      setInputValidUptoMySelf("");
+      setInputPlaceIssueMySelf("");
+      setSelectedImageLicenseFront("");
+      setSelectedImageLicenseFrontExt("");
+      setSelectedImageLicenseBack("");
+      setSelectedImageLicenseBackExt("");
+    }
+
+    if (inputDriverType === "Both") {
+      setInputDriverName("");
+      setInputDriverCnicNumber("");
+      setInputDriverCnicFront("");
+      setInputDriverCnicBack("");
+      setInputDriverLicenseNumber("");
+      setInputDriverValidUpto("");
+      setInputDrivingLicenseMySelf("");
+      setInputValidUptoMySelf("");
+      setInputPlaceIssueMySelf("");
+      setSelectedImageLicenseFront("");
+      setSelectedImageLicenseFrontExt("");
+      setSelectedImageLicenseBack("");
+      setSelectedImageLicenseBackExt("");
+    }
+
+  };
+
+
+  // For Modal Open & Close Functionality
+
+  const handleShowStartModal = () => {
+    setShowStartModal(true);
   };
   
-  // console.log(locationStartString);
+  const handleCloseStartModal = () => {
+    setShowStartModal(false);
+  };
+  
+  const handleShowEndModal = () => {
+    setShowEndModal(true);
+  };
+  
+  const handleCloseEndModal = () => {
+    setShowEndModal(false);
+  };
 
-  // console.log(defaultStartCenter);
 
+  const handleLogin = async () => {
+    await LocationForm();
+    await PersonalForm();
+    await ImagesFormCnicFront();
+    await ImagesFormCnicBack();
+    await ImagesFormPicture();
+  };
 
+  const handleDriver = async () => {
+    await DriverForm();
+    await PaymentForm();
+  };
+
+  const LocationForm = async () => {
+    try {
+      let nameArrayStart = [markerPositionStart.lat, markerPositionStart.lng];
+      const myStringStart = nameArrayStart.toString();
+      let nameArrayEnd = [markerPositionEnd.lat, markerPositionEnd.lng];
+      const myStringEnd = nameArrayEnd.toString();
+      const body = {
+        option : 0,
+        user_type : 299,
+        university_name : null,
+        university_address : null,
+        veh_option : 0 ,
+        start_point : {
+          city_id : cityStartId,
+          province_id : provinceStartId,
+          area_id: locationStartStringId,
+          area_google : {
+              name : locationStartString,
+              place_id : "ddChIJGQ_wq43t3zgRel4CwxgjgQs",
+          },
+
+          name : myStringStart,
+          // "land_mark" : "Eagle Chowk"
+       },
+       end_point: {
+           city_id : cityEndId,
+           province_id : provinceEndId,
+           area_id: locationEndStringId,
+           area_google :{
+           name : locationEndString,
+           place_id : "ChIJGQ_wq43t3zgRel4CwxgjgQs"
+           },
+           name : myStringEnd,
+          //  "land_mark" : "Clock Tower"
+       },
+       time:{
+           start_time_id : selectedHomeTime,
+           return_time_id: selectedOfficeTime,
+       },
+       days: daysSelected,
+  }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/location",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Location Form Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Location Form Response:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const PersonalForm = async () => {
+    try {
+      const body = {
+        marital_status : martialStatus,
+        cnic: cnic,
+        birth_year : selectedDateFormat,
+        gender : gender,
+        preferred_gender : preferredGender,
+        profession : profession,
+        education : education,
+        interests : null,
+        university_address : null,
+        university_name : null,
+        user_type : 299
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/personal",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Personal Form Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Personal Form Response:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormCnicFront = async () => {
+    try {
+      const body = {
+        cnic_front_image_ext: cnicFrontExt,
+        cnic_front_image: cnicFront,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/cnic_front",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Body Cnic Front:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Cnic Front:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormCnicBack = async () => {
+    try {
+      const body = {
+        cnic_back_image_ext: cnicBackExt,
+        cnic_back_image: cnicBack,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/cnic_back",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Body Cnic Back:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Cnic Back:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormPicture = async () => {
+    try {
+      const body = {
+        picture_image_ext: pictureExt,
+        picture: picture,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/picture",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Picture Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Picture:", jsonresponse);
+          alert("Registration Form Submitted Successfully");
+          // route();
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const DriverForm = async () => {
+    try {
+      const body = {
+        option : 1,
+        car_brand: selectedCarBrand,
+        car_cc : selectedCarCC,
+        car_year_ranges : selectedCarYearRanges,
+        car_model : selectedModelName,
+        reg_year : selectedRegYear,
+        reg_no : selectedRegNumber,
+        manufac_year : selectedManYear, 
+        car_ac: selectedCarAC,
+        car_image : selectedCarImage,
+        car_image_ext : selectedCarImageExt,
+        seats_available : selectedSeat,
+        seats_for : selectedSeatGender,
+        mid_route : selectedMidRoutePartner,
+        one_side : selectedOneRoutePartner,
+        drive_option : inputDriverType,
+        license_no : inputDrivingLicenseMySelf,
+        valid_upto : inputValidUptoMySelf,
+        place_issue: inputPlaceIssueMySelf,
+        driver_name : inputDriverName,
+        driver_cnic : inputDriverCnicNumber,
+        driver_license_no : inputDriverLicenseNumber,
+        driver_license_validity : inputDriverValidUpto,
+        driver_cnic_front_image : inputDriverCnicFront,
+        driver_cnic_back_image : inputDriverCnicBack,
+        driver_cnic_front_ext : inputDriverCnicFrontExt,
+        driver_cnic_back_ext : inputDriverCnicBackExt,
+        license_front_image: selectedImageLicenseFront,
+        license_back_image: selectedImageLicenseBack,
+        license_front_image_ext : selectedImageLicenseFrontExt ,
+        license_back_image_ext : selectedImageLicenseBackExt
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/vehicle",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Driver Form Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Driver Form Response:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const PaymentForm = async () => {
+    try {
+      const body = {
+        "option" : 1,
+        "drive_option" : "Both",
+        "bank_account_number" : inputBankAccount,
+        "easy_paisa_number" : inputEasyPaisa,
+        "jazz_cash_number": inputJazzCash,
+        "raast_number" : inputRaastID
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/driver",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Payment Form Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Payment Form Response:", jsonresponse);
+          alert("Driver Form Submitted Successfully");
+          route();
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  //console.log("Days Selected:", daysSelected);
   
   return (
     <>
@@ -314,7 +945,7 @@ const Registration = () => {
                 >
                   Registration
                 </h1>
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form className="px-3" noValidate validated={validated} onSubmit={handleSubmit}>
                   <Row className="mb-3">
                     <Form.Group as={Col}  md={cityStartId ? '4' : '6'} controlId="validationCustom01">
                       <Form.Label style={{ color: "#198754" }}>
@@ -360,6 +991,7 @@ const Registration = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
+                    
                     {cityStartId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label style={{ color: "#198754" }}>
@@ -369,40 +1001,34 @@ const Registration = () => {
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
                           value={locationStartString}
-                          onChange={(e) => setLocationStartString(e.target.value)}
+                          onChange={handleLocationStart}
                           required
                         >
                           <option value="" disabled hidden>
                             Select Area from Dropdown
                           </option>
                           {selectedStartCityArea?.map((province) => (
-                            <option key={province.id} value={province.value}>
+                            <option key={province.id} value={province.value} data-id={province.id}>
                               {province.value}
                             </option>
                           ))}
                         </Form.Select>
 
-                        {!isMarkerSelectedStart && (
-                          <div className="mt-3">
-                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
-                                Can't find your area?
-                                <a  >
-                                {" "} Add Here
-                                </a>
-                            </span>
-                          </div>
-                        )}
+                        <div className="mt-3">
+                          <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
+                              Can't find your area?
+                              <a  >
+                              {" "} Add Here
+                              </a>
+                          </span>
+                        </div>
 
                         {addNewStart && (
                           <Row className="mb-3 mt-4">
                             <Form.Group as={Col} md="12" controlId="validationCustom01">
                               <Autocomplete
-                                //onLoad={onLoad}
-                                // onLoad={onSBLoad}
-                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
-                                //onPlaceChanged={(e) => console.log(e)}
-                                //onPlaceChanged={(e) => setLocationStartString(e)}
+                                onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                onPlaceChanged={handlePlaceSelectStart}
                                 restrictions={{ country: 'PK' }}
                                 options={{ strictBounds: true }}
                               >
@@ -425,30 +1051,6 @@ const Registration = () => {
                     )}
                   </Row>
                   
-                  {/* {locationStartStringField}
-                  {locationStartString} */}
-                  
-                  {cityStartId && !isMarkerSelectedStart &&
-                    <Container
-                      className="d-flex justify-content-center align-items-center mb-3">
-                      <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"} libraries={mapLibraries} >
-                          <GoogleMap 
-                            zoom={14} 
-                            center={defaultStartCenter} 
-                            mapContainerStyle={{  width: "100%" ,height: "50vh"}}
-                            options={{ 
-                              types: ['(regions)'],
-                              componentRestrictions: {country: "PK"} 
-                            }}  
-                          >
-                          <MarkerF position={markerPositionStart} onClick={handleMarkerClickStart} />
-                          </GoogleMap>
-                        </LoadScript>
-                      </Row>
-                    </Container>
-                  }
-
                   <Row className="mb-3">
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
                       <Form.Label 
@@ -496,6 +1098,7 @@ const Registration = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
+                    
                     {cityEndId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label style={{ color: "#198754" }}>
@@ -505,43 +1108,34 @@ const Registration = () => {
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
                           value={locationEndString}
-                          onChange={(e) => setLocationEndString(e.target.value)}
+                          onChange={handleLocationEnd}
                           required
                         >
                           <option value="" disabled hidden>
                             Select Area from Dropdown
                           </option>
                           {selectedEndCityArea?.map((province) => (
-                            <option key={province.id} value={province.value}>
+                            <option key={province.id} value={province.value} data-id={province.id}>
                               {province.value}
                             </option>
                           ))}
                         </Form.Select>
 
-                        {!isMarkerSelectedEnd && (
-                          <div className="mt-3">
-                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
-                                Can't find your area?
-                                <a  >
-                                {" "} Add Here
-                                </a>
-                            </span>
-                          </div>
-                        )}
+                        <div className="mt-3">
+                          <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
+                              Can't find your area?
+                              <a  >
+                              {" "} Add Here
+                              </a>
+                          </span>
+                        </div>
 
                         {addNewEnd &&  (
                           <Row className="mb-3 mt-4">
                             <Form.Group as={Col} md="12" controlId="validationCustom01">
                               <Autocomplete
-                                //onLoad={onLoad}
-                                // onLoad={onSBLoad}
-                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
-                                //onPlaceChanged={(e) => console.log(e)}
-                                //onPlaceChanged={(e) => setLocationStartString(e)}
-                                // onPlaceChanged={() =>
-                                //   handlePlaceSelect(true)
-                                // }
+                               onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                               onPlaceChanged={handlePlaceSelectEnd}
                                 restrictions={{ country: 'PK' }}
                                 options={{ strictBounds: true }}
                               >
@@ -562,26 +1156,83 @@ const Registration = () => {
                     )}
                   </Row>
 
-                  {cityEndId && !isMarkerSelectedEnd &&
-                    <Container
-                      className="d-flex justify-content-center align-items-center mb-3">
-                      <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
-                          <GoogleMap 
-                            zoom={14} 
-                            center={defaultEndCenter} 
-                            mapContainerStyle={{  width: "100%" ,height: "50vh"}}
-                            options={{ 
-                              types: ['(regions)'],
-                              componentRestrictions: {country: "PK"} 
-                            }}
-                          >
-                            <MarkerF position={markerPositionEnd} onClick={handleMarkerClickEnd} />
-                          </GoogleMap>
-                        </LoadScript>
-                      </Row>
-                    </Container>
-                  }
+                  <LoadScript
+                      googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
+                      libraries={mapLibraries}
+                  >
+                        <Modal show={showStartModal} onHide={handleCloseStartModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Select Starting Location</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Container className="d-flex justify-content-center align-items-center mb-3">
+                            <Row style={{ height: "100%", width: "100%" }}>
+                              <GoogleMap
+                                  zoom={12}
+                                  center={defaultStartCenter}
+                                  mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                  onClick={handleMapClickStart}
+                                  options={{
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
+                                  }}
+                              >
+                                <MarkerF
+                                      position={markerPositionStart}
+                                      icon={{
+                                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                      }}
+                                />
+                            </GoogleMap>
+                            </Row>
+                          </Container>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="contained" onClick={handleCloseStartModal}>
+                              Close
+                          </Button>
+                        </Modal.Footer>
+                        </Modal>
+
+                        <Modal show={showEndModal} onHide={handleCloseEndModal}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Select Drop-off Location</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                          <Container className="d-flex justify-content-center align-items-center mb-3">
+                            <Row style={{ height: "100%", width: "100%" }}>
+                                <GoogleMap
+                                  zoom={12}
+                                  // center={
+                                  //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
+                                  // }
+                                  center={defaultEndCenter}
+                                  mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                  onClick={handleMapClickEnd}
+                                  options={{
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
+                                  }}
+                              >
+                                
+                                <MarkerF
+                                  position={markerPositionEnd}
+                                  icon={{
+                                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                  }}
+                                />
+
+                            </GoogleMap>
+                            </Row>
+                        </Container>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="contained" onClick={handleCloseEndModal}>
+                              Close
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                </LoadScript>
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
@@ -599,7 +1250,7 @@ const Registration = () => {
                               Home to Office
                           </option>
                           {homeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.time_string}>
+                            <option key={time.id} value={time.id}>
                               {time.time_string}
                             </option>
                           ))}
@@ -620,7 +1271,7 @@ const Registration = () => {
                               Office to Home
                           </option>
                           {officeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.time_string}>
+                            <option key={time.id} value={time.id}>
                               {time.time_string}
                             </option>
                           ))}
@@ -644,8 +1295,10 @@ const Registration = () => {
                               label="Monday"
                               name="group1"
                               type={type}
-                              value={type}
+                              value="Monday"
                               id={`inline-${type}-0`}
+                              checked={daysSelected.includes("Monday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
@@ -653,48 +1306,60 @@ const Registration = () => {
                               label="Tuesday"
                               name="group1"
                               type={type}
-                              value={type}
+                              value="Tuesday"
                               id={`inline-${type}-2`}
+                              checked={daysSelected.includes("Tuesday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Wednesday"
                               type={type}
-                              value={type}
+                              value="Wednesday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Wednesday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Thursday"
                               type={type}
-                              value={type}
+                              value="Thursday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Thursday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Friday"
                               type={type}
-                              value={type}
+                              value="Friday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Friday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Saturday"
                               type={type}
-                              value={type}
+                              value="Saturday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Saturday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Sunday"
                               type={type}
-                              value={type}
+                              value="Sunday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Sunday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                           </div>
@@ -703,12 +1368,16 @@ const Registration = () => {
                     </div>
                   </Row>
 
+                  {/* {daysSelected} */}
+
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
                       <Form.Label style={{ color: "#198754" }}>Gender</Form.Label>
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
                         required
                       >
                         <option value="" hidden> Gender </option>
@@ -723,6 +1392,8 @@ const Registration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={preferredGender}
+                        onChange={(e) => setPreferredGender(e.target.value)}
                         required
                       >
                         <option value="" hidden>Gender</option>
@@ -746,14 +1417,18 @@ const Registration = () => {
                                 MM/DD/YY
                               </span>
                             }
+                            value={selectedDate}
+                            onChange={handleDateChange}
                             sx={{ width: "100%" }}
                             inputProps={{ style: { color: '#198754' } }}
-                            size="small"
                             required
                           />
                         </DemoContainer>
                       </LocalizationProvider>
                     </Form.Group>
+
+                    {/* {selectedDate} */}
+
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
                       <Form.Label style={{ color: "#198754" }}>
                         Martial Status
@@ -761,11 +1436,13 @@ const Registration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={martialStatus}
+                        onChange={(e) => setMartialStatus(e.target.value)}
                         required
                       >
                         <option value="" hidden>Martial Status</option>
-                        <option value="1">Married</option>
-                        <option value="2">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Single">Single</option>
                       </Form.Select>
                     </Form.Group>
                   </Row>
@@ -778,6 +1455,8 @@ const Registration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={education}
+                        onChange={(e) => setEducation(e.target.value)}
                         required
                       >
                         <option value="" hidden>Education</option>
@@ -803,6 +1482,8 @@ const Registration = () => {
                         type="text"
                         className="colorplace"
                         placeholder="Profession (Engineer, Doctor, etc)"
+                        value={profession}
+                        onChange={(e) => setProfession(e.target.value)}
                         defaultValue=""
                       />
                     </Form.Group>
@@ -813,11 +1494,11 @@ const Registration = () => {
 
                       <Form.Control
                         required
-                        type="number"
+                        type="text"
                         className="colorplace"
                         placeholder="xxxxxxxxxxxxx"
-                        defaultValue=""
-                        maxLength={13}
+                        value={cnic}
+                        onChange={handleCnicChange}
                       />
                     </Form.Group>
                   </Row>
@@ -832,7 +1513,7 @@ const Registration = () => {
                         {" "}
                         Upload CNIC (Front)
                       </Form.Label>
-                      <Form.Control type="file" required />
+                      <Form.Control type="file" required onChange={handleCnicFront} />
                     </Form.Group>
                     <Form.Group
                       controlId="formFile"
@@ -844,7 +1525,7 @@ const Registration = () => {
                         {" "}
                         Upload CNIC (back)
                       </Form.Label>
-                      <Form.Control type="file" required />
+                      <Form.Control type="file" required onChange={handleCnicBack} />
                     </Form.Group>
                   </Row>
 
@@ -858,13 +1539,14 @@ const Registration = () => {
                       <Form.Label style={{ color: "#198754" }}>
                         Upload your picture
                       </Form.Label>
-                      <Form.Control type="file" required/>
+                      <Form.Control type="file" required onChange={handlePicture} />
                       <Form.Text className="" style={{ color: "#198754" }}>
                         The picture will only be shown to members with whom you
                         agree to commute
                       </Form.Text>
                     </Form.Group>
                   </Row>
+
                   <Stack
                     direction="row"
                     className="mb-4"
@@ -877,7 +1559,7 @@ const Registration = () => {
                       className="btnregistration" 
                       onClick={() => {
                             setShowDriverForm(true);
-                          
+                            handleLogin();
                       }}>
                       Next
                     </Button>
@@ -987,6 +1669,30 @@ const Registration = () => {
                       </Form.Group>
                     </Row>
 
+                    <Row className="mb-3">
+                      <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#198754" }}>
+                          Registration Car Year Ranges
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#198754" }}
+                          value={selectedCarYearRanges}
+                          onChange={(e) => setSelectedCarYearRanges(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Select Car Year Ranges</option>
+                          {carYearRanges?.map((man) => (
+                            <option key={man.id} value={man.car_year_ranges}>
+                              {man.car_year_ranges}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group>
+                    </Row>
+
+                    {/* {selectedCarYearRanges} */}
+
                     <Row className="mb-0">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
@@ -1018,23 +1724,45 @@ const Registration = () => {
                           <option value="No">No</option>
                         </Form.Select>
                       </Form.Group>
+                    </Row>
+                    <Row className="mb-3">
                       <Form.Group
                         controlId="formFile"
-                        as={Col}
-                        md="12"
-                        className="mb-3"
+                        as={Col} 
+                        md="6"
                       >
                         <Form.Label className="mt-3" style={{ color: "#198754" }}>
                           Upload Car Image with visible number plate
                         </Form.Label>
                         <Form.Control 
-                          type="file"
-                          accept="image/*"  
+                          type="file" 
                           onChange={handleImageSelect}
                           required 
                         />
                       </Form.Group>
+                      <Form.Group as={Col} md="6" className="mb-3" controlId="validationCustom02">
+                        <Form.Label className="mt-3" style={{ color: "#198754" }}>
+                          Car CC
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#198754" }}
+                          value={selectedCarCC}
+                          onChange={(e) => setSelectedCarCC(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Select Car CC</option>
+                          {carCC?.map((car) => (
+                            <option key={car.id} value={car.car_cc}>
+                              {car.car_cc}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group>
                     </Row>
+                    
+                    {/* {selectedCarCC} */}
+
                     <Row className="mb-3">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
@@ -1073,6 +1801,24 @@ const Registration = () => {
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
+
+                    <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#198754" }}>
+                          I accept one-route partner
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#198754" }}
+                          value={selectedOneRoutePartner}
+                          onChange={(e) => setSelectedOneRoutePartner(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>I accept one-route partner</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </Form.Select>
+                      </Form.Group>
+                      
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
                           I also accept mid-route partner
@@ -1080,8 +1826,8 @@ const Registration = () => {
                         <Form.Select
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
-                          value={selectedRoutePartner}
-                          onChange={(e) => setSelectedRoutePartner(e.target.value)}
+                          value={selectedMidRoutePartner}
+                          onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
                           required
                         >
                           <option value="" hidden>I also accept mid-route partner</option>
@@ -1089,6 +1835,7 @@ const Registration = () => {
                           <option value="No">No</option>
                         </Form.Select>
                       </Form.Group>
+
                     </Row>
                     <div className="tab">
                         <div className="container">
@@ -1103,16 +1850,51 @@ const Registration = () => {
                                     </div>
                                     <form id="paymentForm">
                                     <div className="mt-4">
-                                      <input type="text" className="form-control mb-2 colorplace" id="bankAccount" name="bankAccount" placeholder="Bank Account (IBAN)" required=""/>
+                                      <input 
+                                        type="text" 
+                                        className="form-control mb-2 colorplace" 
+                                        id="bankAccount" 
+                                        name="bankAccount" 
+                                        placeholder="Bank Account (IBAN)"
+                                        value={inputBankAccount}
+                                        onChange={(e) => setInputBankAccount(e.target.value)} 
+                                        required
+                                      />
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2 colorplace" id="jazzCashAccount" name="jazzCashAccount" placeholder="Jazz Cash Account Number" required=""/>
+                                      <input 
+                                        type="text" 
+                                        className="form-control mb-2 colorplace" 
+                                        id="jazzCashAccount" 
+                                        name="jazzCashAccount" 
+                                        placeholder="Jazz Cash Account Number"
+                                        value={inputJazzCash}
+                                        onChange={(e) => setInputJazzCash(e.target.value)}
+                                        required
+                                      />
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2 colorplace" id="easypaisaAccount" name="easypaisaAccount" placeholder="EasyPaisa Account Number" required=""/>
+                                      <input 
+                                        type="text" 
+                                        className="form-control mb-2 colorplace" 
+                                        id="easypaisaAccount" 
+                                        name="easypaisaAccount" 
+                                        placeholder="EasyPaisa Account Number"
+                                        value={inputEasyPaisa}
+                                        onChange={(e) => setInputEasyPaisa(e.target.value)} 
+                                        required
+                                      />
                                     </div>
                                     <div>
-                                      <input type="text" className="form-control mb-2 colorplace" id="raastID" name="raastID" placeholder="Raast ID"/>
+                                      <input 
+                                        type="text" 
+                                        className="form-control mb-2 colorplace" 
+                                        id="raastID" 
+                                        name="raastID" 
+                                        placeholder="Raast ID"
+                                        value={inputRaastID}
+                                        onChange={(e) => setInputRaastID(e.target.value)}
+                                      />
                                     </div>
                                   </form>
                                 </div>
@@ -1131,6 +1913,8 @@ const Registration = () => {
                               setshowmyself(true);
                               setshowmydriver(false);
                               setshowboth(false);
+                              setInputDriverType("I Driver MySelf");
+                              handleDriverTypeForm();
                             }}
                             data-toggle="buttons"
                           >
@@ -1143,6 +1927,8 @@ const Registration = () => {
                               setshowmyself(false);
                               setshowmydriver(true);
                               setshowboth(false);
+                              setInputDriverType("Driver");
+                              handleDriverTypeForm();
                             }}
                             data-toggle="buttons"
                           >
@@ -1155,6 +1941,8 @@ const Registration = () => {
                               setshowmydriver(false);
                               setshowmyself(false);
                               setshowboth(true);
+                              setInputDriverType("Both");
+                              handleDriverTypeForm();
                             }}
                             data-toggle="buttons"
                           >
@@ -1163,6 +1951,8 @@ const Registration = () => {
                         </div>
                       </div>
                     </div>
+
+                    {/* {inputDriverType} */}
 
                     {showmyself && (
                       <>
@@ -1180,6 +1970,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="License No."
+                              value={inputDrivingLicenseMySelf}
+                              onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1198,32 +1990,56 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Enter Here"
+                              value={inputValidUptoMySelf}
+                              onChange={(e) => setInputValidUptoMySelf(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
                         </Row>
-                        <Row className="mb-3">
+                        <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
-                            md="6"
+                            md="12"
                             controlId="validationCustom01"
                           >
                             <Form.Label style={{ color: "#198754" }}>
-                              Upload License (front)
+                              Place Issued
                             </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom02"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (back)
-                            </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control
+                              required
+                              type="text"
+                              className="colorplace"
+                              placeholder="Enter Here"
+                              value={inputPlaceIssueMySelf}
+                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                              defaultValue=""
+                            />
                           </Form.Group>
                         </Row>
+
+                      <Row className="mb-3">
+                        <Form.Group
+                          as={Col}
+                          md="6"
+                          controlId="validationCustom01"
+                        >
+                          <Form.Label style={{ color: "#198754" }}>
+                            Upload License (front)
+                          </Form.Label>
+                          <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="6"
+                          controlId="validationCustom02"
+                        >
+                          <Form.Label style={{ color: "#198754" }}>
+                            Upload License (back)
+                          </Form.Label>
+                          <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                        </Form.Group>
+                      </Row>
+
                       </>
                     )}
 
@@ -1243,6 +2059,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Name"
+                              value={inputDriverName}
+                              onChange={(e) => setInputDriverName(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1259,6 +2077,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="CNIC: xxxxxxxxxxxxx"
+                              value={inputDriverCnicNumber}
+                              onChange={(e) => setInputDriverCnicNumber(e.target.value)}
                               defaultValue=""
                               maxLength={13}
                             />
@@ -1274,7 +2094,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload CNIC (front)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -1284,7 +2104,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload CNIC (back)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
                           </Form.Group>
                         </Row>
                         <Row className="mb-3">
@@ -1301,6 +2121,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1319,6 +2141,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Enter Here"
+                              value={inputDriverValidUpto}
+                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1332,7 +2156,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload License (front)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -1342,7 +2166,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload License (back)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </Row>
                       </>
@@ -1362,6 +2186,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Name"
+                              value={inputDriverName}
+                              onChange={(e) => setInputDriverName(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1378,6 +2204,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="CNIC: xxxxxxxxxxxxx"
+                              value={inputDriverCnicNumber}
+                              onChange={(e) => setInputDriverCnicNumber(e.target.value)}
                               defaultValue=""
                               maxLength={13}
                             />
@@ -1393,7 +2221,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload CNIC (front)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -1403,7 +2231,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload CNIC (back)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
                           </Form.Group>
                         </Row>
                         <Row className="mb-3">
@@ -1420,6 +2248,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1438,6 +2268,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Enter Here"
+                              value={inputDriverValidUpto}
+                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1451,7 +2283,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload License (front)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -1461,7 +2293,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload License (back)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </Row>
 
@@ -1483,7 +2315,7 @@ const Registration = () => {
                       >
                         Previous
                       </Button>
-                      <Button variant="" className="btnregistration" onClick={route}>
+                      <Button variant="" className="btnregistration" onClick={handleDriver}>
                         Submit
                       </Button>
                     </Stack>

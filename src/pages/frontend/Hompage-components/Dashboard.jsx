@@ -10,10 +10,17 @@ import downline from "../../../Images/downline of membericon.png";
 import questionmark from "../../../Images/qustionmark.png";
 import { useNavigate } from "react-router-dom";
 import CommuterProfile from "../Dashboard/CommuterProfile";
+import { useDispatch, useSelector } from "react-redux";
+import { setloginState } from "../../../redux/loginSlice";
 
 const Dashboard = () => {
+  
   const navigate = useNavigate();
-  const [submitbtn, setSubmit] = useState(false);
+  const dispatch = useDispatch();
+  const userToken = useSelector((s) => s.login.data.token);
+  const [submitbtn , setSubmit] = useState(false);
+
+  // console.log(userToken);
 
   const route = () => {
     setSubmit(true);
@@ -22,6 +29,11 @@ const Dashboard = () => {
       navigate("/commuter-profile");
     }
   };
+
+  const logout = () => {
+    dispatch(setloginState(""));
+    navigate("/login");
+  }
 
   const backgroundStyle = {
     backgroundImage: `url(${logo})`,
@@ -204,11 +216,170 @@ const Dashboard = () => {
                     </h2>
                   </div>
 
-                  <div className="d-flex align-items-center gap-2 gap-lg-3">
-                    <i
-                      className="fas fa-bell text-success"
-                      style={{ fontSize: "2rem" }}
-                    ></i>
+                        <div className="d-flex align-items-center mt-3 me-5 me-xl-13">
+                          {/*begin::Symbol*/}
+                          <div className="symbol symbol-50px symbol-circle me-3">
+                            <img src={img1} className alt />
+                          </div>
+                          {/*end::Symbol*/}
+                          {/*begin::Info*/}
+                          <div className="m-0">
+                            <span className="fw-semibold text-white d-block fs-5">
+                              Yasir Abbas Mirza
+                            </span>
+                            <button
+                              href="/"
+                              className="btn-success fw-bold text-white text-hover-success fs-6"
+                            >
+                              Profile
+                            </button>
+                          </div>
+                          {/*end::Info*/}
+                        </div>
+                        <div
+                          className="card"
+                          style={{
+                            width: "23rem",
+                            backgroundColor: "rgb(32 155 98)",
+                            border: "0",
+                          }}
+                        >
+                          <div className="card-body menu">
+                            <ul>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white ">
+                                    DASHBOARD
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    MATCHES
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    REQUESTS
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    NOTIFICATIONS
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    PARTNER DETAILS
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    MY COMPUTER RECORDS
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    MY WALLET
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    COST CALCULATIONS
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    <br />
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    FAQS
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    TERMS
+                                  </li>
+                                </a>
+                              </div>
+                              <div className="item">
+                                <a href="">
+                                  <li className="border-bottom text-white">
+                                    CONTACT US
+                                  </li>
+                                </a>
+                              </div>
+                            </ul>
+                          </div>
+                          <div
+                            className="bg-dark w-100 mt-1"
+                            style={backgroundStyle1}
+                          ></div>
+                        </div>
+                      </div>{" "}
+                    </div>
+                    <div className="col-lg-9 px-5">
+                      <div
+                        className="card d-flex  d-flex justify-content-left"
+                        style={{
+                          width: "60.5rem",
+                          backgroundColor: "rgba(157,233,222,0.75)",
+                        }}
+                      >
+                        <div
+                          id="kt_app_toolbar_container"
+                          className="app-container container-fluid d-flex flex-stack"
+                        >
+                          {/*begin::Page title*/}
+                          <div className="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                            {/*begin::Title*/}
+                            <span className="justify-content-center text-success">
+                              Monday, July 04, 2022
+                            </span>
+                            <h2 className="page-heading d-flex  text-success  fw-bold fs-3 flex-column justify-content-center my-0">
+                              Welcome to Yasir Abbas Mirza
+                            </h2>
+                           
+                          </div>
+                         
+                          <div className="d-flex align-items-center gap-2 gap-lg-3">
+                          
+                            <i
+                              className="fas fa-bell text-success"
+                              style={{ fontSize: "2rem" }}
+                            ></i>
+                           
+                            <a
+                              className="btn btn-sm fw-bold btn-success"
+                              data-bs-toggle="modal"
+                              data-bs-target="#kt_modal_new_target"
+                              onClick={logout}
+                            >
+                              LOG OUT
+                            </a>
+                           
+                          </div>
 
                     <a
                       href="#"

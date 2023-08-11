@@ -26,6 +26,7 @@ import { ImageNotSupportedSharp } from "@mui/icons-material";
 // import Otp from "./share_ride office & uni";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setloginState } from "../../../redux/loginSlice";
 
 const OtpPage = () => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
@@ -34,10 +35,13 @@ const OtpPage = () => {
   const inputRefs = useRef([]);
   const hardcodedOTP = "12345";
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.signup.data);
   const postData = async () => {
     try {
+      let email = userData.email;
+      let password = userData.password;
       const body = {
         email: userData.email,
         number: userData.phone,
@@ -62,8 +66,28 @@ const OtpPage = () => {
       const jsonresponse = await response.json();
       console.log(jsonresponse);
       if (jsonresponse.statusCode == 200) {
-        navigate("/nested");
-        console.log(jsonresponse);
+
+        const loginDetails = {
+          email: email,
+          password: password,
+        };
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/auth",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loginDetails),
+          }
+        );
+        const jsonresponse = await response.json();
+
+        if(jsonresponse.statusCode == 200){
+          console.log(jsonresponse);
+          dispatch(setloginState(jsonresponse.access_token));
+          navigate("/nested");
+        }
       } else {
         alert("Error: " + jsonresponse.message);
       }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
@@ -17,30 +17,31 @@ import CardContent from "@mui/material/CardContent";
 // import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row,  Modal } from 'react-bootstrap';
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from 'dayjs';
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, MarkerF, Autocomplete } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Autocomplete, MarkerF } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const RiderRegistration = () => {
 
+  // const option0 = useSelector((s) => s.general.data.option0);
+  // console.log(option0);
+
   const navigate = useNavigate();
+  const autocompleteRef = useRef(null);
+  const userToken = useSelector((s) => s.login.data.token);
   const [addNewStart, setAddNewStart] = useState(false);
   const [addNewEnd, setAddNewEnd] = useState(false);
+  const [daysSelected, setDaysSelected] = useState([]);
   const mapLibraries = ["places"];
-
-  const pakistanBounds = {
-    north: 37.271879,
-    south: 23.634499,
-    west: 60.872972,
-    east: 77.84085,
-  };
 
   const route = () => {
     navigate("/verification");
@@ -62,9 +63,24 @@ const RiderRegistration = () => {
   const [selectedHomeTime, setSelectedHomeTime] = useState("");
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
+  const [gender, setGender] = useState("");
+  const [preferredGender, setPreferredGender] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
+  const [martialStatus, setMartialStatus] = useState("");
+  const [education, setEducation] = useState("");
+  const [profession, setProfession] = useState("");
+  const [cnic, setCnic] = useState("");
+  const [cnicFront, setCnicFront] = useState("");
+  const [cnicFrontExt, setCnicFrontExt] = useState("");
+  const [cnicBack, setCnicBack] = useState("");
+  const [cnicBackExt, setCnicBackExt] = useState("");
+  const [picture, setPicture] = useState("");
+  const [pictureExt, setPictureExt] = useState("");
   
   // For Start Point
   const[locationStartString, setLocationStartString] = useState("");
+  const[locationStartStringId, setLocationStartStringId] = useState("");
   const[locationStartStringField, setLocationStartStringField] = useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
@@ -74,6 +90,7 @@ const RiderRegistration = () => {
   
   // For End Point
   const[locationEndString, setLocationEndString] = useState("");
+  const[locationEndStringId, setLocationEndStringId] = useState("");
   const[locationEndStringField, setLocationEndStringField] = useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
@@ -83,20 +100,24 @@ const RiderRegistration = () => {
 
 
   // For Start Point
-  const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 0, lng: 0 });
-  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 0, lng: 0 });
-  const [isMarkerSelectedStart, setIsMarkerSelectedStart] = useState(false);
+  const [defaultStartCenter, setDefaultStartCenter] = useState ({ lat: 30.3753, lng: 69.3451 });
+  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 30.3753, lng: 69.3451 });
 
   // For End Point
-  const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 0, lng: 0 });
-  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 0, lng: 0 });
-  const [isMarkerSelectedEnd, setIsMarkerSelectedEnd] = useState(false);
+  const [defaultEndCenter, setDefaultEndCenter] = useState ({ lat: 30.3753, lng: 69.3451 });
+  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 30.3753, lng: 69.3451 });
+
+  // For Modals
+  const [showStartModal, setShowStartModal] = useState(false);
+  const [showEndModal, setShowEndModal] = useState(false);
+
 
   useEffect(() => {
     getdropdownStartdata();
   }, []);
 
   useEffect(() => {
+
     if (provinceStartId) {
       const selectedStartProvince = dropdownStartdata?.countries[0]?.provinces.find(
         (province) => province.id == provinceStartId
@@ -105,6 +126,11 @@ const RiderRegistration = () => {
         selectedStartProvince ? selectedStartProvince.cities : []
       );
     }
+  }, [provinceStartId]);
+
+
+  useEffect(() => {
+
     if (provinceEndId) {
       const selectedEndProvince = dropdownEnddata?.countries[0]?.provinces.find(
         (province) => province.id == provinceEndId
@@ -113,7 +139,7 @@ const RiderRegistration = () => {
         selectedEndProvince ? selectedEndProvince.cities : []
       );
     }
-  }, [provinceStartId, provinceEndId]);
+  }, [provinceEndId]);
 
   useEffect(() => {
     
@@ -130,6 +156,9 @@ const RiderRegistration = () => {
       setLocationStartString(citystring[0].value);
       setSelectedStartCityArea(filteredStartCities ? filteredStartCities : []);
     }
+  }, [cityStartId]);
+
+  useEffect(() => {
 
     if (cityEndId) {
       
@@ -144,9 +173,9 @@ const RiderRegistration = () => {
       setLocationEndString(citystring[0].value);
       setSelectedEndCityArea(filteredEndCities ? filteredEndCities : []);
     }
-  }, [cityStartId, cityEndId]);
+  }, [cityEndId]);
 
-  console.log(locationEndString);
+  //console.log(locationEndString);
 
   useEffect(() => {
     // Function to fetch the geocoding data
@@ -158,6 +187,7 @@ const RiderRegistration = () => {
         );
         
         const data = await response.json(); // Parse the response as JSON
+        console.log(data);
         if (data.status === 'OK' && data.results.length > 0) {
           const { lat, lng } = data.results[0].geometry.location;
           setDefaultStartCenter({ lat, lng });
@@ -212,7 +242,7 @@ const RiderRegistration = () => {
     setDropDownEndData(jsonresponse);
     setHomeTimeSlots(jsonresponse.time_slots);
     setOfficeTimeSlots(jsonresponse.time_slots);
-    console.log(jsonresponse);
+    //console.log(jsonresponse);
   };
 
   const handleProvinceStartChange = (event) => {
@@ -232,9 +262,42 @@ const RiderRegistration = () => {
     setValidated(true);
   };
 
+  const handleLocationStart = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const selectedValue = selectedOption.value;
+    const selectedId = selectedOption.getAttribute("data-id");
+    setLocationStartString(selectedValue);
+    setLocationStartStringId(selectedId);
+    handleShowStartModal();
+  };
+
   const handleLocationStartField = (e) => {
     setLocationStartStringField(e.target.value);
     setLocationStartString(e.target.value);
+  };
+
+  const handlePlaceSelectStart = () => {
+    
+    const place = autocompleteRef.current.getPlace();
+    // Handle the selected place here, you can update the state with the selected place value.
+    if (place && place.geometry && place.geometry.location) {
+    setMarkerPositionStart({
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    });
+    setLocationStartStringField(place.formatted_address);
+    setLocationStartString(place.formatted_address);
+    handleShowStartModal();
+    }
+  };
+
+  const handleLocationEnd = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const selectedValue = selectedOption.value;
+    const selectedId = selectedOption.getAttribute("data-id");
+    setLocationEndString(selectedValue);
+    setLocationEndStringId(selectedId);
+    handleShowEndModal();
   };
 
   const handleLocationEndField = (e) => {
@@ -242,17 +305,354 @@ const RiderRegistration = () => {
     setLocationEndString(e.target.value);
   };
 
-  const handleMarkerClickStart = () => {
-    setIsMarkerSelectedStart(true);
-    setIsMarkerSelectedEnd(false);
-    //alert(locationStartString);
+  const handlePlaceSelectEnd = () => {
+    
+    const place = autocompleteRef.current.getPlace();
+    // Handle the selected place here, you can update the state with the selected place value.
+    if (place && place.geometry && place.geometry.location) {
+      setMarkerPositionEnd({
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
+      setLocationEndStringField(place.formatted_address);
+      setLocationEndString(place.formatted_address);
+      handleShowEndModal();
+    }
   };
 
-  const handleMarkerClickEnd = () => {
-    setIsMarkerSelectedEnd(true);
-    setIsMarkerSelectedStart(false);
-    //alert(locationEndString);
+  const handleMapClickStart = (event) => {
+    console.log(event);
+    setMarkerPositionStart({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
   };
+
+  console.log("Start Marker:", markerPositionStart);
+
+  const handleMapClickEnd = (event) => {
+    console.log(event);
+    setMarkerPositionEnd({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
+  };
+
+  console.log("End Marker:", markerPositionEnd);
+
+  // Function to handle checkbox changes
+  const handleCheckboxChange = (event) => {
+    const { value } = event.target;
+    // Check if the day is already selected or not
+    if (daysSelected.includes(value)) {
+      // Day is already selected, remove it from the array
+      setDaysSelected((prevSelectedDays) =>
+        prevSelectedDays.filter((day) => day !== value)
+      );
+    } else {
+      // Day is not selected, add it to the array
+      setDaysSelected((prevSelectedDays) => [...prevSelectedDays, value]);
+    }
+  };
+
+  const handleDateChange = (newDate) => {
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setSelectedDate(newDateObject);
+    }
+  };
+
+  const handleCnicChange = (event) => {
+    const inputCnic = event.target.value.replace(/\D/g, '');
+    if (inputCnic.length <= 13) {
+      setCnic(inputCnic);
+    }
+  };
+
+  const handleCnicFront = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCnicFront(reader.result);
+        setCnicFrontExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // console.log("Front Image:", cnicFront);
+  // console.log("Front Image Extension:", cnicFrontExt);
+
+  const handleCnicBack = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCnicBack(reader.result);
+        setCnicBackExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  //console.log("Back Image:", cnicBack);
+  //console.log("Back Image Extension:", cnicBackExt);
+
+  const handlePicture = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPicture(reader.result);
+        setPictureExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // console.log("Picture:", picture);
+  // console.log("Picture Extension:", pictureExt);
+  
+  // For Modal Open & Close Functionality
+
+  const handleShowStartModal = () => {
+    setShowStartModal(true);
+  };
+  
+  const handleCloseStartModal = () => {
+    setShowStartModal(false);
+  };
+  
+  const handleShowEndModal = () => {
+    setShowEndModal(true);
+  };
+  
+  const handleCloseEndModal = () => {
+    setShowEndModal(false);
+  };
+  
+
+  const handleLogin = async () => {
+    await LocationForm();
+    await PersonalForm();
+    await ImagesFormCnicFront();
+    await ImagesFormCnicBack();
+    await ImagesFormPicture();
+  };
+
+  const LocationForm = async () => {
+    try {
+      let nameArrayStart = [markerPositionStart.lat, markerPositionStart.lng];
+      const myStringStart = nameArrayStart.toString();
+      let nameArrayEnd = [markerPositionEnd.lat, markerPositionEnd.lng];
+      const myStringEnd = nameArrayEnd.toString();
+      const body = {
+        option : 0,
+        user_type : 299,
+        university_name : null,
+        university_address : null,
+        veh_option : 0 ,
+        start_point : {
+          city_id : cityStartId,
+          province_id : provinceStartId,
+          area_id: locationStartStringId,
+          area_google : {
+              name : locationStartString,
+              place_id : "ddChIJGQ_wq43t3zgRel4CwxgjgQs",
+          },
+
+          name : myStringStart,
+          // "land_mark" : "Eagle Chowk"
+       },
+       end_point: {
+           city_id : cityEndId,
+           province_id : provinceEndId,
+           area_id: locationEndStringId,
+           area_google :{
+           name : locationEndString,
+           place_id : "ChIJGQ_wq43t3zgRel4CwxgjgQs"
+           },
+           name : myStringEnd,
+          //  "land_mark" : "Clock Tower"
+       },
+       time:{
+           start_time_id : selectedHomeTime,
+           return_time_id: selectedOfficeTime,
+       },
+       days: daysSelected,
+  }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/location",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Location Form Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Location Form Response:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const PersonalForm = async () => {
+    try {
+      const body = {
+        marital_status : martialStatus,
+        cnic: cnic,
+        birth_year : selectedDateFormat,
+        gender : gender,
+        preferred_gender : preferredGender,
+        profession : profession,
+        education : education,
+        interests : null,
+        university_address : null,
+        university_name : null,
+        user_type : 299
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/personal",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Personal Form Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Personal Form Response:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormCnicFront = async () => {
+    try {
+      const body = {
+        cnic_front_image_ext: cnicFrontExt,
+        cnic_front_image: cnicFront,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/cnic_front",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Body Cnic Front:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Cnic Front:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormCnicBack = async () => {
+    try {
+      const body = {
+        cnic_back_image_ext: cnicBackExt,
+        cnic_back_image: cnicBack,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/cnic_back",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Body Cnic Back:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Cnic Back:", jsonresponse);
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const ImagesFormPicture = async () => {
+    try {
+      const body = {
+        picture_image_ext: pictureExt,
+        picture: picture,
+    }
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/registration/store-images/picture",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        console.log("Images Form Picture Body:", body);
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.statusCode == 200) {
+          console.log("Images Form Response Picture:", jsonresponse);
+          alert("Registration Form Submitted Successfully");
+          route();
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  //console.log("Days Selected:", daysSelected);
 
  
   return (
@@ -272,7 +672,7 @@ const RiderRegistration = () => {
                 >
                   Registration
                 </h1>
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form className="px-3" noValidate validated={validated} onSubmit={handleSubmit}>
                   <Row className="mb-3">
                     <Form.Group as={Col}  md={cityStartId ? '4' : '6'} controlId="validationCustom01">
                       <Form.Label style={{ color: "#198754" }}>
@@ -318,6 +718,7 @@ const RiderRegistration = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
+                    
                     {cityStartId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label style={{ color: "#198754" }}>
@@ -327,40 +728,34 @@ const RiderRegistration = () => {
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
                           value={locationStartString}
-                          onChange={(e) => setLocationStartString(e.target.value)}
+                          onChange={handleLocationStart}
                           required
                         >
                           <option value="" disabled hidden>
                             Select Area from Dropdown
                           </option>
                           {selectedStartCityArea?.map((province) => (
-                            <option key={province.id} value={province.value}>
+                            <option key={province.id} value={province.value} data-id={province.id}>
                               {province.value}
                             </option>
                           ))}
                         </Form.Select>
 
-                        {!isMarkerSelectedStart && (
-                          <div className="mt-3">
-                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
-                                Can't find your area?
-                                <a  >
-                                {" "} Add Here
-                                </a>
-                            </span>
-                          </div>
-                        )}
+                        <div className="mt-3">
+                          <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewStart}>
+                              Can't find your area?
+                              <a  >
+                              {" "} Add Here
+                              </a>
+                          </span>
+                        </div>
 
                         {addNewStart && (
                           <Row className="mb-3 mt-4">
                             <Form.Group as={Col} md="12" controlId="validationCustom01">
                               <Autocomplete
-                                //onLoad={onLoad}
-                                // onLoad={onSBLoad}
-                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
-                                //onPlaceChanged={(e) => console.log(e)}
-                                //onPlaceChanged={(e) => setLocationStartString(e)}
+                                onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                onPlaceChanged={handlePlaceSelectStart}
                                 restrictions={{ country: 'PK' }}
                                 options={{ strictBounds: true }}
                               >
@@ -382,30 +777,6 @@ const RiderRegistration = () => {
                       </Form.Group>
                     )}
                   </Row>
-                  
-                  {/* {locationStartStringField}
-                  {locationStartString} */}
-                  
-                  {cityStartId && !isMarkerSelectedStart &&
-                    <Container
-                      className="d-flex justify-content-center align-items-center mb-3">
-                      <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"} libraries={mapLibraries} >
-                          <GoogleMap 
-                            zoom={14} 
-                            center={defaultStartCenter} 
-                            mapContainerStyle={{  width: "100%" ,height: "50vh"}}
-                            options={{ 
-                              types: ['(regions)'],
-                              componentRestrictions: {country: "PK"} 
-                            }}  
-                          >
-                          <MarkerF position={markerPositionStart} onClick={handleMarkerClickStart} />
-                          </GoogleMap>
-                        </LoadScript>
-                      </Row>
-                    </Container>
-                  }
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
@@ -454,6 +825,7 @@ const RiderRegistration = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
+                    
                     {cityEndId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label style={{ color: "#198754" }}>
@@ -463,43 +835,34 @@ const RiderRegistration = () => {
                           aria-label="Default select example"
                           style={{ color: "#198754" }}
                           value={locationEndString}
-                          onChange={(e) => setLocationEndString(e.target.value)}
+                          onChange={handleLocationEnd}
                           required
                         >
                           <option value="" disabled hidden>
                             Select Area from Dropdown
                           </option>
                           {selectedEndCityArea?.map((province) => (
-                            <option key={province.id} value={province.value}>
+                            <option key={province.id} value={province.value} data-id={province.id}>
                               {province.value}
                             </option>
                           ))}
                         </Form.Select>
 
-                        {!isMarkerSelectedEnd && (
-                          <div className="mt-3">
-                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
-                                Can't find your area?
-                                <a  >
-                                {" "} Add Here
-                                </a>
-                            </span>
-                          </div>
-                        )}
+                        <div className="mt-3">
+                          <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline'}} onClick={AddNewEnd}>
+                              Can't find your area?
+                              <a  >
+                              {" "} Add Here
+                              </a>
+                          </span>
+                        </div>
 
                         {addNewEnd &&  (
                           <Row className="mb-3 mt-4">
                             <Form.Group as={Col} md="12" controlId="validationCustom01">
                               <Autocomplete
-                                //onLoad={onLoad}
-                                // onLoad={onSBLoad}
-                                //onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                //onPlaceChanged={(e) => handlePlaceSelect(e.getPlace())}
-                                //onPlaceChanged={(e) => console.log(e)}
-                                //onPlaceChanged={(e) => setLocationStartString(e)}
-                                // onPlaceChanged={() =>
-                                //   handlePlaceSelect(true)
-                                // }
+                               onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                               onPlaceChanged={handlePlaceSelectEnd}
                                 restrictions={{ country: 'PK' }}
                                 options={{ strictBounds: true }}
                               >
@@ -520,26 +883,83 @@ const RiderRegistration = () => {
                     )}
                   </Row>
 
-                  {cityEndId && !isMarkerSelectedEnd &&
-                    <Container
-                      className="d-flex justify-content-center align-items-center mb-3">
-                      <Row style={{ height: "80%", width: "80%" }}>
-                        <LoadScript googleMapsApiKey={"AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"}>
-                          <GoogleMap 
-                            zoom={14} 
-                            center={defaultEndCenter} 
-                            mapContainerStyle={{  width: "100%" ,height: "50vh"}}
-                            options={{ 
-                              types: ['(regions)'],
-                              componentRestrictions: {country: "PK"} 
-                            }}
-                          >
-                            <MarkerF position={markerPositionEnd} onClick={handleMarkerClickEnd} />
-                          </GoogleMap>
-                        </LoadScript>
-                      </Row>
-                    </Container>
-                  }
+                  <LoadScript
+                      googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
+                      libraries={mapLibraries}
+                  >
+                        <Modal show={showStartModal} onHide={handleCloseStartModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Select Starting Location</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Container className="d-flex justify-content-center align-items-center mb-3">
+                            <Row style={{ height: "100%", width: "100%" }}>
+                              <GoogleMap
+                                  zoom={12}
+                                  center={defaultStartCenter}
+                                  mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                  onClick={handleMapClickStart}
+                                  options={{
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
+                                  }}
+                              >
+                                <MarkerF
+                                      position={markerPositionStart}
+                                      icon={{
+                                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                      }}
+                                />
+                            </GoogleMap>
+                            </Row>
+                          </Container>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="contained" onClick={handleCloseStartModal}>
+                              Close
+                          </Button>
+                        </Modal.Footer>
+                        </Modal>
+
+                        <Modal show={showEndModal} onHide={handleCloseEndModal}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Select Drop-off Location</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                          <Container className="d-flex justify-content-center align-items-center mb-3">
+                            <Row style={{ height: "100%", width: "100%" }}>
+                                <GoogleMap
+                                  zoom={12}
+                                  // center={
+                                  //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
+                                  // }
+                                  center={defaultEndCenter}
+                                  mapContainerStyle={{ width: "100%", height: "50vh" }}
+                                  onClick={handleMapClickEnd}
+                                  options={{
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
+                                  }}
+                              >
+                                
+                                <MarkerF
+                                  position={markerPositionEnd}
+                                  icon={{
+                                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                  }}
+                                />
+
+                            </GoogleMap>
+                            </Row>
+                        </Container>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="contained" onClick={handleCloseEndModal}>
+                              Close
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                </LoadScript>
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
@@ -557,7 +977,7 @@ const RiderRegistration = () => {
                               Home to Office
                           </option>
                           {homeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.time_string}>
+                            <option key={time.id} value={time.id}>
                               {time.time_string}
                             </option>
                           ))}
@@ -578,7 +998,7 @@ const RiderRegistration = () => {
                               Office to Home
                           </option>
                           {officeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.time_string}>
+                            <option key={time.id} value={time.id}>
                               {time.time_string}
                             </option>
                           ))}
@@ -602,8 +1022,10 @@ const RiderRegistration = () => {
                               label="Monday"
                               name="group1"
                               type={type}
-                              value={type}
+                              value="Monday"
                               id={`inline-${type}-0`}
+                              checked={daysSelected.includes("Monday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
@@ -611,48 +1033,60 @@ const RiderRegistration = () => {
                               label="Tuesday"
                               name="group1"
                               type={type}
-                              value={type}
+                              value="Tuesday"
                               id={`inline-${type}-2`}
+                              checked={daysSelected.includes("Tuesday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Wednesday"
                               type={type}
-                              value={type}
+                              value="Wednesday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Wednesday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Thursday"
                               type={type}
-                              value={type}
+                              value="Thursday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Thursday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Friday"
                               type={type}
-                              value={type}
+                              value="Friday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Friday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Saturday"
                               type={type}
-                              value={type}
+                              value="Saturday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Saturday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                               <Form.Check
                               inline
                               label="Sunday"
                               type={type}
-                              value={type}
+                              value="Sunday"
                               id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Sunday")}
+                              onChange={handleCheckboxChange}
                               required
                               />
                           </div>
@@ -667,6 +1101,8 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
                         required
                       >
                         <option value="" hidden> Gender </option>
@@ -681,6 +1117,8 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={preferredGender}
+                        onChange={(e) => setPreferredGender(e.target.value)}
                         required
                       >
                         <option value="" hidden>Gender</option>
@@ -704,14 +1142,18 @@ const RiderRegistration = () => {
                                 MM/DD/YY
                               </span>
                             }
+                            value={selectedDate}
+                            onChange={handleDateChange}
                             sx={{ width: "100%" }}
                             inputProps={{ style: { color: '#198754' } }}
-                            size={""}
                             required
                           />
                         </DemoContainer>
                       </LocalizationProvider>
                     </Form.Group>
+
+                    {/* {selectedDateFormat} */}
+
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
                       <Form.Label style={{ color: "#198754" }}>
                         Martial Status
@@ -719,11 +1161,13 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={martialStatus}
+                        onChange={(e) => setMartialStatus(e.target.value)}
                         required
                       >
                         <option value="" hidden>Martial Status</option>
-                        <option value="1">Married</option>
-                        <option value="2">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Single">Single</option>
                       </Form.Select>
                     </Form.Group>
                   </Row>
@@ -736,6 +1180,8 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         style={{ color: "#198754" }}
+                        value={education}
+                        onChange={(e) => setEducation(e.target.value)}
                         required
                       >
                         <option value="" hidden>Education</option>
@@ -761,6 +1207,8 @@ const RiderRegistration = () => {
                         type="text"
                         className="colorplace"
                         placeholder="Profession (Engineer, Doctor, etc)"
+                        value={profession}
+                        onChange={(e) => setProfession(e.target.value)}
                         defaultValue=""
                       />
                     </Form.Group>
@@ -771,11 +1219,11 @@ const RiderRegistration = () => {
 
                       <Form.Control
                         required
-                        type="number"
+                        type="text"
                         className="colorplace"
                         placeholder="xxxxxxxxxxxxx"
-                        defaultValue=""
-                        maxLength={13}
+                        value={cnic}
+                        onChange={handleCnicChange}
                       />
                     </Form.Group>
                   </Row>
@@ -790,7 +1238,7 @@ const RiderRegistration = () => {
                         {" "}
                         Upload CNIC (Front)
                       </Form.Label>
-                      <Form.Control type="file" required />
+                      <Form.Control type="file" required onChange={handleCnicFront} />
                     </Form.Group>
                     <Form.Group
                       controlId="formFile"
@@ -802,7 +1250,7 @@ const RiderRegistration = () => {
                         {" "}
                         Upload CNIC (back)
                       </Form.Label>
-                      <Form.Control type="file" required />
+                      <Form.Control type="file" required onChange={handleCnicBack} />
                     </Form.Group>
                   </Row>
 
@@ -816,13 +1264,14 @@ const RiderRegistration = () => {
                       <Form.Label style={{ color: "#198754" }}>
                         Upload your picture
                       </Form.Label>
-                      <Form.Control type="file" required/>
+                      <Form.Control type="file" required onChange={handlePicture} />
                       <Form.Text className="" style={{ color: "#198754" }}>
                         The picture will only be shown to members with whom you
                         agree to commute
                       </Form.Text>
                     </Form.Group>
                   </Row>
+
                   <Stack
                     direction="row"
                     className="mb-4"
@@ -833,9 +1282,8 @@ const RiderRegistration = () => {
                       variant="outlined" 
                       size="large" 
                       className="btnregistration" 
-                      onClick={() => {
-                            route();
-                      }}>
+                      onClick={handleLogin}
+                      >
                       Submit
                     </Button>
                   </Stack>
