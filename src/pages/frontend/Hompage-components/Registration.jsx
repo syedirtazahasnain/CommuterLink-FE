@@ -1667,26 +1667,6 @@ const Registration = () => {
                           ))}
                         </Form.Select>
                       </Form.Group>
-                     
-                      <Form.Group as={Col} md="6" controlId="validationCustom03">
-                        <Form.Label style={{ color: "#198754" }}>
-                          Car Cc
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          value={selectCarCc}
-                          onChange={(e) =>setSelectedCarCc(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Car CC</option>
-                          {carCc?.map((reg) => (
-                            <option key={reg.id} value={reg.car_cc}>
-                              {reg.car_cc}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
                     </Row>
 
                     <Row className="mb-3">
