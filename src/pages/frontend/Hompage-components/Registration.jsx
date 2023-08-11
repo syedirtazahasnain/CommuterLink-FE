@@ -65,6 +65,7 @@ const Registration = () => {
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
+  const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
@@ -77,9 +78,9 @@ const Registration = () => {
   const [pictureExt, setPictureExt] = useState("");
   
   // For Start Point
-  const[locationStartString, setLocationStartString] = useState("");
-  const[locationStartStringId, setLocationStartStringId] = useState("");
-  const[locationStartStringField, setLocationStartStringField] = useState(locationStartString);
+  const [locationStartString, setLocationStartString] = useState("");
+  const [locationStartStringId, setLocationStartStringId] = useState("");
+  const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
   const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
@@ -138,11 +139,25 @@ const Registration = () => {
   const [inputDriverType, setInputDriverType] = useState("");
 
   // I Drive Myself Fields
-  const [inputDrivingLicense, setInputDrivingLicense] = useState("");
-  const [inputValidUpto, setInputValidUpto] = useState("");
-  const [inputPlaceIssue, setInputPlaceIssue] = useState("");
-  // const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
-  // const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] = useState("");
+  const [inputDrivingLicenseMySelf, setInputDrivingLicenseMySelf] = useState("");
+  const [inputValidUptoMySelf, setInputValidUptoMySelf] = useState("");
+  const [inputPlaceIssueMySelf, setInputPlaceIssueMySelf] = useState("");
+
+  // For Driver & Both Fields
+  const [inputDriverName, setInputDriverName] = useState("");
+  const [inputDriverCnicNumber, setInputDriverCnicNumber] = useState("");
+  const [inputDriverCnicFront, setInputDriverCnicFront] = useState("");
+  const [inputDriverCnicFrontExt, setInputDriverCnicFrontExt] = useState("");
+  const [inputDriverCnicBack, setInputDriverCnicBack] = useState("");
+  const [inputDriverCnicBackExt, setInputDriverCnicBackExt] = useState("");
+  const [inputDriverLicenseNumber, setInputDriverLicenseNumber] = useState("");
+  const [inputDriverValidUpto, setInputDriverValidUpto] = useState("");
+
+  // For License Fields
+  const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
+  const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] = useState("");
+  const [selectedImageLicenseBack, setSelectedImageLicenseBack] = useState("");
+  const [selectedImageLicenseBackExt, setSelectedImageLicenseBackExt] = useState("");
 
   // For Driver Form
   const [showDriverForm, setShowDriverForm]=useState(false);
@@ -395,9 +410,9 @@ const Registration = () => {
   };
 
   const handleDateChange = (newDate) => {
-    if(newDate){
-      const formattedDate = newDate ? dayjs(newDate).format('DD-MM-YYYY') : '';
-      setSelectedDate(formattedDate);
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setSelectedDate(newDateObject);
     }
   };
 
@@ -453,6 +468,54 @@ const Registration = () => {
   // console.log("Picture:", picture);
   // console.log("Picture Extension:", pictureExt);
 
+  const handleCnicFrontDriver = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setInputDriverCnicFront(reader.result);
+        setInputDriverCnicFrontExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCnicBackDriver = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setInputDriverCnicBack(reader.result);
+        setInputDriverCnicBackExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleLicenseFrontDriver = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImageLicenseFront(reader.result);
+        setSelectedImageLicenseFrontExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleLicenseBackDriver = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImageLicenseBackExt(reader.result);
+        setSelectedImageLicenseBackExt(file.name.split('.').pop());
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -463,6 +526,55 @@ const Registration = () => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleDriverTypeForm = () => {
+    
+    if (inputDriverType === "I Drive Myself") {
+      setInputDriverName("");
+      setInputDriverCnicNumber("");
+      setInputDriverCnicFront("");
+      setInputDriverCnicBack("");
+      setInputDriverLicenseNumber("");
+      setInputDriverValidUpto("");
+      setSelectedImageLicenseFront("");
+      setSelectedImageLicenseFrontExt("");
+      setSelectedImageLicenseBack("");
+      setSelectedImageLicenseBackExt("");
+    }
+
+    if (inputDriverType === "Driver") {
+      setInputDriverName("");
+      setInputDriverCnicNumber("");
+      setInputDriverCnicFront("");
+      setInputDriverCnicBack("");
+      setInputDriverLicenseNumber("");
+      setInputDriverValidUpto("");
+      setInputDrivingLicenseMySelf("");
+      setInputValidUptoMySelf("");
+      setInputPlaceIssueMySelf("");
+      setSelectedImageLicenseFront("");
+      setSelectedImageLicenseFrontExt("");
+      setSelectedImageLicenseBack("");
+      setSelectedImageLicenseBackExt("");
+    }
+
+    if (inputDriverType === "Both") {
+      setInputDriverName("");
+      setInputDriverCnicNumber("");
+      setInputDriverCnicFront("");
+      setInputDriverCnicBack("");
+      setInputDriverLicenseNumber("");
+      setInputDriverValidUpto("");
+      setInputDrivingLicenseMySelf("");
+      setInputValidUptoMySelf("");
+      setInputPlaceIssueMySelf("");
+      setSelectedImageLicenseFront("");
+      setSelectedImageLicenseFrontExt("");
+      setSelectedImageLicenseBack("");
+      setSelectedImageLicenseBackExt("");
+    }
+
   };
 
 
@@ -571,7 +683,7 @@ const Registration = () => {
       const body = {
         marital_status : martialStatus,
         cnic: cnic,
-        birth_year : selectedDate,
+        birth_year : selectedDateFormat,
         gender : gender,
         preferred_gender : preferredGender,
         profession : profession,
@@ -699,7 +811,7 @@ const Registration = () => {
 
         if (jsonresponse.statusCode == 200) {
           console.log("Images Form Response Picture:", jsonresponse);
-          //alert("Registration Successfully");
+          alert("Registration Form Submitted Successfully");
           // route();
         } else {
           alert("Error: " + jsonresponse.message);
@@ -712,35 +824,37 @@ const Registration = () => {
   const DriverForm = async () => {
     try {
       const body = {
-        "option" : 1,
-        "car_brand": selectedCarBrand,
-        "car_cc" : selectedCarCC,
-        "car_year_ranges" : selectedCarYearRanges,
-        "car_model" : selectedModelName,
-        "reg_year" : selectedRegYear,
-        "reg_no" : selectedRegNumber,
-        "manufac_year" : selectedManYear, 
-        "car_ac": selectedCarAC,
-        "car_image" : selectedCarImage,
-        "car_image_ext" : selectedCarImageExt,
-        "seats_available" : selectedSeat,
-        "seats_for" : selectedSeatGender,
-        "mid_route" : selectedMidRoutePartner,
-        "one_side" : selectedOneRoutePartner,
-        "drive_option" : inputDriverType,
-        "license_no" : inputDrivingLicense,
-        "valid_upto" : inputValidUpto,
-        "place_issue": inputPlaceIssue,
-        "driver_name" : "abc",
-        "driver_cnic" : "abc",
-        "driver_license_no" :"abc",
-        "driver_license_validity" : "abc",
-        "driver_cnic_front_image" : "abc",
-        "driver_cnic_back_image" : "abc",
-        "driver_cnic_front_ext" : "abc",
-        "driver_cnic_back_ext" : "abc",
-        "license_front_image_ext" : null,
-        "license_back_image_ext": null
+        option : 1,
+        car_brand: selectedCarBrand,
+        car_cc : selectedCarCC,
+        car_year_ranges : selectedCarYearRanges,
+        car_model : selectedModelName,
+        reg_year : selectedRegYear,
+        reg_no : selectedRegNumber,
+        manufac_year : selectedManYear, 
+        car_ac: selectedCarAC,
+        car_image : selectedCarImage,
+        car_image_ext : selectedCarImageExt,
+        seats_available : selectedSeat,
+        seats_for : selectedSeatGender,
+        mid_route : selectedMidRoutePartner,
+        one_side : selectedOneRoutePartner,
+        drive_option : inputDriverType,
+        license_no : inputDrivingLicenseMySelf,
+        valid_upto : inputValidUptoMySelf,
+        place_issue: inputPlaceIssueMySelf,
+        driver_name : inputDriverName,
+        driver_cnic : inputDriverCnicNumber,
+        driver_license_no : inputDriverLicenseNumber,
+        driver_license_validity : inputDriverValidUpto,
+        driver_cnic_front_image : inputDriverCnicFront,
+        driver_cnic_back_image : inputDriverCnicBack,
+        driver_cnic_front_ext : inputDriverCnicFrontExt,
+        driver_cnic_back_ext : inputDriverCnicBackExt,
+        license_front_image: selectedImageLicenseFront,
+        license_back_image: selectedImageLicenseBack,
+        license_front_image_ext : selectedImageLicenseFrontExt ,
+        license_back_image_ext : selectedImageLicenseBackExt
     }
         const response = await fetch(
           "https://staging.commuterslink.com/api/v1/registration/vehicle",
@@ -798,6 +912,8 @@ const Registration = () => {
 
         if (jsonresponse.statusCode == 200) {
           console.log("Payment Form Response:", jsonresponse);
+          alert("Driver Form Submitted Successfully");
+          route();
         } else {
           alert("Error: " + jsonresponse.message);
         }
@@ -1428,6 +1544,7 @@ const Registration = () => {
                       </Form.Text>
                     </Form.Group>
                   </Row>
+
                   <Stack
                     direction="row"
                     className="mb-4"
@@ -1440,7 +1557,7 @@ const Registration = () => {
                       className="btnregistration" 
                       onClick={() => {
                             setShowDriverForm(true);
-                            //handleLogin();
+                            handleLogin();
                       }}>
                       Next
                     </Button>
@@ -1795,6 +1912,7 @@ const Registration = () => {
                               setshowmydriver(false);
                               setshowboth(false);
                               setInputDriverType("I Driver MySelf");
+                              handleDriverTypeForm();
                             }}
                             data-toggle="buttons"
                           >
@@ -1808,6 +1926,7 @@ const Registration = () => {
                               setshowmydriver(true);
                               setshowboth(false);
                               setInputDriverType("Driver");
+                              handleDriverTypeForm();
                             }}
                             data-toggle="buttons"
                           >
@@ -1821,6 +1940,7 @@ const Registration = () => {
                               setshowmyself(false);
                               setshowboth(true);
                               setInputDriverType("Both");
+                              handleDriverTypeForm();
                             }}
                             data-toggle="buttons"
                           >
@@ -1829,6 +1949,8 @@ const Registration = () => {
                         </div>
                       </div>
                     </div>
+
+                    {/* {inputDriverType} */}
 
                     {showmyself && (
                       <>
@@ -1846,8 +1968,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="License No."
-                              value={inputDrivingLicense}
-                              onChange={(e) => setInputDrivingLicense(e.target.value)}
+                              value={inputDrivingLicenseMySelf}
+                              onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1866,8 +1988,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Enter Here"
-                              value={inputValidUpto}
-                              onChange={(e) => setInputValidUpto(e.target.value)}
+                              value={inputValidUptoMySelf}
+                              onChange={(e) => setInputValidUptoMySelf(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1886,34 +2008,36 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Enter Here"
-                              value={inputPlaceIssue}
-                              onChange={(e) => setInputPlaceIssue(e.target.value)}
+                              value={inputPlaceIssueMySelf}
+                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
                         </Row>
-                        <Row className="mb-3">
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom01"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (front)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationCustom02"
-                          >
-                            <Form.Label style={{ color: "#198754" }}>
-                              Upload License (back)
-                            </Form.Label>
-                            <Form.Control type="file" required />
-                          </Form.Group>
-                        </Row>
+
+                      <Row className="mb-3">
+                        <Form.Group
+                          as={Col}
+                          md="6"
+                          controlId="validationCustom01"
+                        >
+                          <Form.Label style={{ color: "#198754" }}>
+                            Upload License (front)
+                          </Form.Label>
+                          <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="6"
+                          controlId="validationCustom02"
+                        >
+                          <Form.Label style={{ color: "#198754" }}>
+                            Upload License (back)
+                          </Form.Label>
+                          <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                        </Form.Group>
+                      </Row>
+
                       </>
                     )}
 
@@ -1933,6 +2057,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Name"
+                              value={inputDriverName}
+                              onChange={(e) => setInputDriverName(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -1949,6 +2075,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="CNIC: xxxxxxxxxxxxx"
+                              value={inputDriverCnicNumber}
+                              onChange={(e) => setInputDriverCnicNumber(e.target.value)}
                               defaultValue=""
                               maxLength={13}
                             />
@@ -1964,7 +2092,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload CNIC (front)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -1974,7 +2102,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload CNIC (back)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
                           </Form.Group>
                         </Row>
                         <Row className="mb-3">
@@ -1991,6 +2119,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -2009,6 +2139,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Enter Here"
+                              value={inputDriverValidUpto}
+                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -2022,7 +2154,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload License (front)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -2032,7 +2164,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload License (back)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </Row>
                       </>
@@ -2052,6 +2184,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Name"
+                              value={inputDriverName}
+                              onChange={(e) => setInputDriverName(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -2068,6 +2202,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="CNIC: xxxxxxxxxxxxx"
+                              value={inputDriverCnicNumber}
+                              onChange={(e) => setInputDriverCnicNumber(e.target.value)}
                               defaultValue=""
                               maxLength={13}
                             />
@@ -2083,7 +2219,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload CNIC (front)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -2093,7 +2229,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload CNIC (back)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
                           </Form.Group>
                         </Row>
                         <Row className="mb-3">
@@ -2110,6 +2246,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -2128,6 +2266,8 @@ const Registration = () => {
                               type="text"
                               className="colorplace"
                               placeholder="Enter Here"
+                              value={inputDriverValidUpto}
+                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
@@ -2141,7 +2281,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload License (front)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -2151,7 +2291,7 @@ const Registration = () => {
                             <Form.Label style={{ color: "#198754" }}>
                               Upload License (back)
                             </Form.Label>
-                            <Form.Control type="file" required />
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </Row>
 

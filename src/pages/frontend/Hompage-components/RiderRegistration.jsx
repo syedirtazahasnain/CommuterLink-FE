@@ -66,6 +66,7 @@ const RiderRegistration = () => {
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
+  const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
@@ -355,9 +356,9 @@ const RiderRegistration = () => {
   };
 
   const handleDateChange = (newDate) => {
-    if(newDate){
-      const formattedDate = newDate ? dayjs(newDate).format('DD-MM-YYYY') : '';
-      setSelectedDate(formattedDate);
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setSelectedDate(newDateObject);
     }
   };
 
@@ -412,7 +413,6 @@ const RiderRegistration = () => {
 
   // console.log("Picture:", picture);
   // console.log("Picture Extension:", pictureExt);
-
   
   // For Modal Open & Close Functionality
 
@@ -514,7 +514,7 @@ const RiderRegistration = () => {
       const body = {
         marital_status : martialStatus,
         cnic: cnic,
-        birth_year : selectedDate,
+        birth_year : selectedDateFormat,
         gender : gender,
         preferred_gender : preferredGender,
         profession : profession,
@@ -642,8 +642,8 @@ const RiderRegistration = () => {
 
         if (jsonresponse.statusCode == 200) {
           console.log("Images Form Response Picture:", jsonresponse);
-          alert("Registration Successfully");
-          // route();
+          alert("Registration Form Submitted Successfully");
+          route();
         } else {
           alert("Error: " + jsonresponse.message);
         }
@@ -1095,8 +1095,6 @@ const RiderRegistration = () => {
                     </div>
                   </Row>
 
-                  {/* {daysSelected} */}
-
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
                       <Form.Label style={{ color: "#198754" }}>Gender</Form.Label>
@@ -1154,7 +1152,7 @@ const RiderRegistration = () => {
                       </LocalizationProvider>
                     </Form.Group>
 
-                    {/* {selectedDate} */}
+                    {/* {selectedDateFormat} */}
 
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
                       <Form.Label style={{ color: "#198754" }}>
@@ -1273,6 +1271,7 @@ const RiderRegistration = () => {
                       </Form.Text>
                     </Form.Group>
                   </Row>
+
                   <Stack
                     direction="row"
                     className="mb-4"
