@@ -29,7 +29,7 @@ import { BASE_URL } from "../../../constants";
 // import jazzcash from '../../../Images/jazz.png';
 // import raast from '../../../Images/raast.png';
 
-const Registration = () => {
+const DriverRegistration = () => {
 
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
@@ -616,7 +616,7 @@ const Registration = () => {
       let nameArrayEnd = [markerPositionEnd.lat, markerPositionEnd.lng];
       const myStringEnd = nameArrayEnd.toString();
       const body = {
-        option : 0,
+        option : 1,
         user_type : 299,
         university_name : null,
         university_address : null,
@@ -2332,4 +2332,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default DriverRegistration;

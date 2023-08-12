@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { Button } from "@mui/base";
+import { setsignupState } from "../../../redux/signupSlice";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Dashboard = () => {
 
   const logout = () => {
     dispatch(setloginState(""));
+    dispatch(setsignupState(""));
     navigate("/login");
   }
 

@@ -1,8 +1,22 @@
 import React from "react";
-import Navbar from "../Hompage-components/Navbar";
 import { BASE_URL } from "../../../constants";
+import { setloginState } from "../../../redux/loginSlice";
+import { Button } from "@mui/base";
+import { setsignupState } from "../../../redux/signupSlice";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 
 const CommuterProfile = () => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(setloginState(""));
+    dispatch(setsignupState(""));
+    navigate("/login");
+  }
+
   const backgroundStyle = {
     // backgroundSize: 'cover',
     backgroundImage:`url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -208,14 +222,12 @@ const CommuterProfile = () => {
                             ></i>
                             {/*end::Secondary button*/}
                             {/*begin::Primary button*/}
-                            <a
-                              href="#"
+                            <Button
                               className="btn btn-sm fw-bold btn-success"
-                              data-bs-toggle="modal"
-                              data-bs-target="#kt_modal_new_target"
+                              onClick={logout}
                             >
                               LOG OUT
-                            </a>
+                            </Button>
                             {/*end::Primary button*/}
                           </div>
 

@@ -9,7 +9,7 @@ import Contribute from "./Hompage-components/Contribute";
 import Contact from "./Hompage-components/Contact";
 import Footer from "./Hompage-components/Footer";
 import Signup from './Signup/Signup';
-import Registration from "./register-form/Registration";
+import Registration from "./register-form/DriverRegistration";
 import AddressCards from "./Hompage-components/AddressCards";
 import Otp from './register-form/OtpPage'
 import WouldYouLikeTo from './register-form/WouldYouLikeTo';
