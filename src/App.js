@@ -87,8 +87,9 @@ function App() {
               <Route path='/seatcostverification' element={<SeatCostVerification/>}></Route>
             </>
           )}
-          {!userLogin && (!userOption0 && !userOption1) && <Route path="*" element={<Navigate to="/" />} />}
-          {!userSignup && (!userOption0 && !userOption1) && <Route path="*" element={<Navigate to="/" />} />}
+          {!userLogin && <Route path="*" element={<Navigate to="/" />} />}
+          {!userSignup && <Route path="*" element={<Navigate to="/" />} />}
+          {!userOption0 && !userOption1 && <Route path="*" element={<Navigate to="/" />} />}
       </Routes>
     </Router>
     </>
