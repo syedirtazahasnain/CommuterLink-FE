@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -56,27 +57,27 @@ const Footer = () => {
               <ul>
                 <li>
                   <i className="bx bx-chevron-right1 mb-3"></i>
-                  <a href="faq1.html">
+                  <Link to="/faq">
                     How is CommutersLink different than other carpooling
-                    Apps?</a>
+                    Apps?</Link>
                  
                 </li>
                 <li>
                   <i className="bx bx-chevron-right1 "></i>
-                  <a href="https://www.commuterslink.com/faqs">
-                    How the cost is calculated and distributed?</a>
+                  <Link to="/faq">
+                    How the cost is calculated and distributed?</Link>
                   
                 </li>
                 <li>
                   <i className="bx bx-chevron-right1"></i>
-                  <a href="https://www.commuterslink.com/faqs">
+                  <Link to="/faq">
                     As a travel buddy with someone who owns a car, how my
-                    payment is calculated and paid?</a>
+                    payment is calculated and paid?</Link>
                  
                 </li>
                 <li>
                   <i className="bx bx-chevron-right1"></i>
-                  <a href="faq1.html">Click here for more FAQs </a>
+                  <Link to="/faq">Click here for more FAQs </Link>
                 </li>
                 
               </ul>

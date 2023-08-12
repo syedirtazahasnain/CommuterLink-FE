@@ -1,0 +1,161 @@
+.btn-sm, .btn-group-sm > .btn {
+  --bs-btn-font-size: 1.2rem !important;
+  --bs-btn-padding-y: 0.25rem !important;
+  --bs-btn-padding-x: 0.25rem !important;
+}
+.btn, .btn span {
+  font-family: "Sohne-Buch";
+}
+.btn {
+  border-radius: 0;
+}
+.btn.btn-dark {
+  background-color: var(--bs-dark);
+}
+.btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon).btn-sm, .btn-group-sm > .btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon) {
+  padding: calc(0.25rem + 1px) calc(0.75rem + 1px);
+}
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link.active {
+  transition: all 0.1s;
+  background-color: rgba(159, 162, 180, 0.2);
+  border-left: 5px solid var(--bs-primary);
+}
+.font-family-default {
+  font-family: "Sohne-Buch" !important;
+}
+.border-pvs {
+  border-color: var(--pvs-them-color-primary) !important;
+}
+.symbol.symbol-35px {
+  padding: 2px;
+}
+.app-container {
+  background-color: white;
+}
+.text-end {
+  font-family: "Sohne-Buch";
+}
+.app-sidebar .app-sidebar-logo .px-6 {
+  border-bottom: #363740;
+}
+.app-sidebar .menu .menu-item .menu-link.active a, 
+.menu-item a:hover {
+  transition: all 0.2s ease;
+  background-color: rgba(159, 162, 180, 0.2);
+  border-left: 5px solid var(--bs-primary);
+}
+.menu-title {
+  font-family: "Sohne-Buch";
+  font-size: 16px;
+}
+.woah-logo {
+  height: 50px;
+}
+.pvs-logo {
+  height: 50px;
+}
+hr {
+  color: #dfe0eb;
+  margin-bottom: 2px;
+  opacity: 20%;
+}
+.bg-custom {
+  background-color: #d9d9d9;
+}
+.card-woah {
+  background-color: rgb(255 242 206 / 25%);
+  /* background-color: #fffcf0; */
+}
+.card-woah > .card-body {
+  padding: 1.3rem 1.55rem;
+}
+.pvs-title {
+  font-family: "Sohne-Buch";
+  font-size: 1.25rem;
+  color: black;
+}
+.card-title1 {
+  font-family: "SohneSchmal-Dreiviertelfett";
+  font-size: 40px;
+  color: black;
+}
+.card-title2 {
+  font-family: "SohneSchmal-Dreiviertelfett";
+  font-size: 30px;
+  color: black;
+}
+.corner-rounded{
+  border-radius: 20px 0px;
+}
+.btn-grey{
+  background-color: var(--bg-grey);
+}
+.btn-grey:hover{
+  background-color: #777777;
+}
+.btn-green{
+  background-color: var(--bg-green);
+}
+.btn-green:hover{
+  background-color: #008d55;
+}
+.btn-blue{
+  background-color: var(--bg-blue);
+}
+.btn-blue:hover{
+  background-color: #17329c;
+}
+.btn-orange{
+  background-color: var(--bg-primary);
+}
+.btn-orange:hover{
+  background-color: #e74214;
+}
+
+.header-right-items {
+  margin-left: auto;
+  margin-top: 0;
+}
+ul {
+  /* display: flex; */
+  list-style-type: none;
+}
+a {
+  color: black;
+  font-family: "SohneSchmal-Halbfett";
+}
+.header-right-items > ul > li > a {
+  font-size: 24px;
+}
+.app-sidebar-menu .menu-item .menu-icon>i {
+  font-size: 1.3rem;
+}
+.line {
+  padding: 0 5px;
+}
+.dropdown-item {
+  font-family: "Sohne-Buch";
+}
+.form-check-input[type=checkbox] {
+  border-radius: 0rem;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+}
+.form-check-input:checked {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+.card-custom-background {
+  background-color: #dce9f4 !important;
+}
+.gray-border {
+  border: 2px solid #27282a52;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(231, 229, 218, 0.25) !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(231, 229, 218, 0.25) !important;
+}
+

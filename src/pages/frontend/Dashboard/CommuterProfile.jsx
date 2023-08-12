@@ -1,33 +1,25 @@
 import React from "react";
 import Navbar from "../Hompage-components/Navbar";
+import { BASE_URL } from "../../../constants";
 
-import logo from "../../../Images/CL-logo.png";
-import img1 from "../../../Images/pic.png";
-import logo2 from "../../../Images/Sysreforms logo 2.png";
-import { useNavigate } from "react-router-dom";
-import membericon from "../../../Images/Group 40.png";
-import membericon1 from "../../../Images/Vector.png";
-import downline from "../../../Images/downline of membericon.png";
-import questionmark from "../../../Images/qustionmark.png";
-import imgZafar from "../../../Images/Sir Zafar.png";
 const CommuterProfile = () => {
   const backgroundStyle = {
-    backgroundImage: `url(${logo})`,
     // backgroundSize: 'cover',
+    backgroundImage:`url(${BASE_URL}/assets/images/CL-logo.png)`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     width: "100",
     height: "20vh",
   };
   const backgroundStyle1 = {
-    backgroundImage: `url(${logo2})`,
+    backgroundImage: `url(${BASE_URL}/assets/images/Sysreformslogo2.png)`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     width: "100",
     height: "20vh",
   };
   const backgroundMember = {
-    backgroundImage: `url(${membericon})`,
+    backgroundImage: `url(${BASE_URL}/assets/images/Group 40.png)`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     width: "100",
@@ -54,12 +46,14 @@ const CommuterProfile = () => {
                         <div
                           className="bg-light w-100 mt-1 p-5"
                           style={backgroundStyle}
-                        ></div>
+                        >
+                        
+                        </div>
 
                         <div className="d-flex align-items-center mt-3 me-5 me-xl-13">
                           {/*begin::Symbol*/}
                           <div className="symbol symbol-50px symbol-circle me-3">
-                            <img src={img1} className alt />
+                            <img src={`${BASE_URL}/assets/images/pic.png`} className alt />
                           </div>
                           {/*end::Symbol*/}
                           {/*begin::Info*/}
@@ -276,7 +270,7 @@ const CommuterProfile = () => {
                                 </div>
                                 <div className="col-2">
                                   <div className="card">
-                                    <img src={imgZafar} />
+                                    <img src={`${BASE_URL}/assets/images/Sir Zafar.png`} />
                                   </div>
                                 </div>
                               </div>

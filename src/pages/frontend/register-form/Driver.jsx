@@ -1,11 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { BASE_URL } from "../../../constants";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
-import ibn from '../../../Images/iban.png';
-import easypaisa from '../../../Images/ep.png';
-import jazzcash from '../../../Images/jazz.png';
-import raast from '../../../Images/raast.png';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Carousel from "react-bootstrap/Carousel";
@@ -246,7 +243,7 @@ const Driver = () => {
                               <h5 className="card-title">Bank/Payment Details</h5>
                               <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
                                 <div class="container">
-                                <img src={ibn} alt=""/> <img src={easypaisa} alt=""/> <img src={jazzcash} alt=""/> <img src={raast} alt=""/>
+                                <img src={`${BASE_URL}/assets/images/iban.png`} alt=""/> <img src={`${BASE_URL}/assets/images/ep.png`} alt=""/> <img src={`${BASE_URL}/assets/images/jazz.png`} alt=""/> <img src={`${BASE_URL}/assets/images/raast.png`} alt=""/>
                                 </div>
                                 <form id="paymentForm">
                                 <div className="mt-4">

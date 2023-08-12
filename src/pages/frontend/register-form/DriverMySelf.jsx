@@ -2,10 +2,6 @@ import React from 'react'
 import { useState } from "react";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
-import mySlides1 from "../../../Images/signup.png";
-import mySlides2 from "../../../Images/signup-3.png";
-import mySlides3 from "../../../Images/signup-4.png";
-import mySlides4 from "../../../Images/signup-6.png";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Carousel from "react-bootstrap/Carousel";
@@ -24,6 +20,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+
 const DriverMySelf = () => {
   return (
     <div>

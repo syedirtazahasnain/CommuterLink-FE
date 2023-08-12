@@ -1,18 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
-import mySlides1 from "../../../Images/signup.png";
-import mySlides2 from "../../../Images/signup-3.png";
-import mySlides3 from "../../../Images/signup-4.png";
-import mySlides4 from "../../../Images/signup-6.png";
+import { BASE_URL } from "../../../constants";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Modal, Alert } from "react-bootstrap";
-// import Form from "react-bootstrap/Form";
-// import imgfacebook from "../../../Images/facebook.png";
-// import imggoogle from "../../../Images/google.png";
-// import imgtwitter from "../../../Images/twitter.png";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
@@ -23,7 +16,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import imgpoper from "../../../Images/popper.png";
 import { ImageNotSupportedSharp } from "@mui/icons-material";
-// import Otp from "./share_ride office & uni";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
@@ -174,7 +166,7 @@ const OtpPage = () => {
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
-                        src={mySlides1}
+                        src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
@@ -182,7 +174,7 @@ const OtpPage = () => {
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
-                        src={mySlides2}
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
@@ -190,14 +182,14 @@ const OtpPage = () => {
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
-                        src={mySlides3}
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
-                        src={mySlides4}
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>

@@ -1,7 +1,8 @@
-import React from "react";
-import logo from "../../../Images/CL-logo.png";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+import { BASE_URL } from "../../../constants";
+import { Link } from "react-scroll";
 import Button from '@mui/material/Button';
+import { Link as DomLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
@@ -12,9 +13,9 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
               <Link
                 className="navbar-brand ml-3"
-                to="https://www.commuterslink.com/"
+                to="/"
               >
-                <img src={logo} width="mr-auto" height="40px" alt="logoimg" />
+                <img src={`${BASE_URL}/assets/images/CL-logo.png`} width="mr-auto" height="40px" alt="logoimg" />
               </Link>
               <button
                 className="navbar-toggler mr-2 d-lg-none" // Add 'd-lg-none' class to hide the button in desktop view
@@ -53,46 +54,48 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
               >
                 <ul className="navbar-nav ml-auto  font-size:'12px' font-family:'Poppins, sans-serif'">
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="/">
+                    <Link className="nav-link mr-3 ml-3" to="/"  spy="true" smooth="true" offset={30} duration={100}>
                       HOME
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="/carousel">
+                    <Link className="nav-link mr-3 ml-3" to="carousel" spy="true" smooth="true" offset={30} duration={100}>
                       CONCEPT
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="/howworks">
+                    <Link className="nav-link mr-3 ml-3" to="howworks">
                       HOW IT WORKS?
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="/contribute">
+                    <Link className="nav-link mr-3 ml-3" to="contribute" spy="true" smooth="true" offset={30} duration={100}>
                       CONTRIBUTE
                     </Link>
+                   
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="/Faq">
+                    <DomLink className="nav-link mr-3 ml-3" to="/Faq">
                       FAQS
+                    </DomLink>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link mr-3 ml-3" to="contact" spy="true" smooth="true" offset={30} duration={100}>
+                      CONTACT
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link mr-3 ml-3" href="#contact">
-                      CONTACT
-                    </a>
-                  </li>
                 </ul>
+                    <DomLink
+                  to="/Signup"
+                >
                   <button
                     className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
                   >
                     Sign up
                   </button>
-                <Link
-                  to="/signup"
-                >
-                </Link>
-                <Link
+            
+                </DomLink>
+                <DomLink
                   to="/login"
                 >
 
@@ -101,7 +104,7 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
                   >
                     Login
                   </button>
-                </Link>
+                </DomLink>
               </div>
             </nav>
           </div>

@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
-import mySlides1 from "../../../Images/signup.png";
-import mySlides2 from "../../../Images/signup-3.png";
-import mySlides3 from "../../../Images/signup-4.png";
-import mySlides4 from "../../../Images/signup-6.png";
+import { BASE_URL } from "../../../constants";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox"; // Add this import
 import FormControlLabel from "@mui/material/FormControlLabel"; // Add this import
-import imgfacebook from "../../../Images/facebook.png";
-import imggoogle from "../../../Images/google.png";
-import imgtwitter from "../../../Images/twitter.png";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
@@ -252,7 +246,7 @@ const Signup = () => {
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid "
-                        src={mySlides1}
+                        src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
@@ -260,23 +254,23 @@ const Signup = () => {
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid "
-                        src={mySlides2}
-                        alt="First slide"
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
+                        alt="second slide"
                       />
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid"
-                        src={mySlides3}
-                        alt="First slide"
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
+                        alt="third slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid"
-                        src={mySlides4}
-                        alt="First slide"
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
+                        alt="fourth slide"
                       />
                     </Carousel.Item>
                   </Carousel>
@@ -328,7 +322,9 @@ const Signup = () => {
                         variant="outlined"
                         value={phoneNumber}
                         label="Mobile Number (03xxxxxxxxx)"
-                        onChange={(e) => validatePhoneNumber(e.target.value)}
+                        onChange={(e) => validatePhoneNumber(e.target.value)
+                       
+                        }
                         required
                         size="small"
                         error={!isValidPhoneNumber}
@@ -429,7 +425,7 @@ const Signup = () => {
                             <li class="mr-3">
                               <a onClick={() => googlesignup()}>
                                 <img
-                                  src={imggoogle}
+                                  src={`${BASE_URL}/assets/images/google.png`}
                                   alt=""
                                   style={{ height: "25px", width: "25px" }}
                                 />
@@ -438,7 +434,7 @@ const Signup = () => {
                             <li class="mr-3">
                               <a href="https://www.facebook.com/Sysreforms">
                                 <img
-                                  src={imgfacebook}
+                                  src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px" }}
                                 />
@@ -447,7 +443,7 @@ const Signup = () => {
                             <li>
                               <a href="https://instagram.com/sysreforms_international?igshid=YmMyMTA2M2Y= ">
                                 <img
-                                  src={imgtwitter}
+                                  src={`${BASE_URL}/assets/images/twitter.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px" }}
                                 />
@@ -471,7 +467,6 @@ const Signup = () => {
             </div>
           </div>
         </section>
-
         <Footer />
       </div>
     </div>
