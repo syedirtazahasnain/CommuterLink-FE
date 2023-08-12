@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
-import { Button } from "react-bootstrap";
+import { Button } from "@mui/base";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -275,7 +275,7 @@ const Login = () => {
                   {/* <button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}> */}
                   {/* onClick={() => setSubmit(true), route()} */}
                   {/* <Button className="btn  formbtn" onClick={() => route()} >   */}
-                  <Button className="btn  formbtn" onClick={handleLogin}>
+                  <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
                     Login
                   </Button>
                   <div className="container">

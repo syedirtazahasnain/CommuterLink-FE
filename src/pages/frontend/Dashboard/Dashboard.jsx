@@ -5,7 +5,7 @@ import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
-import { Button } from "react-bootstrap";
+import { Button } from "@mui/base";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -220,8 +220,6 @@ const Dashboard = () => {
 
                     <Button
                       className="btn btn-sm fw-bold btn-success"
-                      data-bs-toggle="modal"
-                      data-bs-target="#kt_modal_new_target"
                       onClick={logout}
                     >
                       LOG OUT

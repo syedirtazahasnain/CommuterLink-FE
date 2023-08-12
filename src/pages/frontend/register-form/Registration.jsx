@@ -23,6 +23,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Autocomplete, MarkerF, PolylineF } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
+import { BASE_URL } from "../../../constants";
 // import ibn from '../../../Images/iban.png';
 // import easypaisa from '../../../Images/ep.png';
 // import jazzcash from '../../../Images/jazz.png';
@@ -1843,9 +1844,9 @@ const Registration = () => {
                                   <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
                                     <div class="container">
                                     <img src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+                                    <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
+                                    <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                                    <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
                                     </div>
                                     <form id="paymentForm">
                                     <div className="mt-4">
