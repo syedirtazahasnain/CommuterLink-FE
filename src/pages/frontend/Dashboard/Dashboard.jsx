@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import Navbar from "../Hompage-components/Navbar";
 // import Footer from "../Hompage-components/Footer";
 import { BASE_URL } from "../../../constants";
@@ -14,7 +14,28 @@ const Dashboard = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn , setSubmit] = useState(false);
 
-  // console.log(userToken);
+  // For getting current date
+  const currentDate = new Date();
+
+  // Define arrays for days and months
+  const daysOfWeek = [
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+  ];
+
+  const monthsOfYear = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Format the date
+  const formattedDate = `${daysOfWeek[currentDate.getDay()]}, ${monthsOfYear[currentDate.getMonth()]} ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
+
+  // For Dashboard Data
+  const [contactId , setContactId] = useState("");
+
+  useEffect(() => {
+    getDashboardData();
+  }, []);
 
   const route = () => {
     setSubmit(true);
@@ -29,6 +50,23 @@ const Dashboard = () => {
     dispatch(setsignupState(""));
     navigate("/login");
   }
+
+  const getDashboardData = async () => {
+    const response = await fetch(
+      "https://staging.commuterslink.com/api/v1/matches/office",
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          'Accept': 'application/json',
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+    const jsonresponse = await response.json();
+    setContactId(jsonresponse.rider[0].contact_id);
+    //console.log("Rider Data:", jsonresponse.rider);
+  };
 
   const backgroundStyle = {
     backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -54,6 +92,7 @@ const Dashboard = () => {
     height: "20vh",
     backgroundColor: "#198754",
   };
+
   return (
     <div className="card bg-light w-100 ">
       <div className="card-body P-0">
@@ -85,7 +124,7 @@ const Dashboard = () => {
                   {/*begin::Info*/}
                   <div className="m-0">
                     <span className="fw-semibold text-white d-block fs-5">
-                      Yasir Abbas Mirza
+                        Yasir Abbas Mirza
                     </span>
                     <button
                       href="/"
@@ -207,7 +246,7 @@ const Dashboard = () => {
                   <div className="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                     {/*begin::Title*/}
                     <span className="justify-content-center text-success">
-                      Monday, July 04, 2022
+                      {formattedDate}
                     </span>
                     <h2 className="page-heading d-flex  text-success  fw-bold fs-3 flex-column justify-content-center my-0">
                       Welcome to Yasir Abbas Mirza
@@ -280,7 +319,7 @@ const Dashboard = () => {
                                       route();
                                     }}
                                   >
-                                    Member ID
+                                    {contactId}
                                   </div>
                                   <img
                                     className=""
