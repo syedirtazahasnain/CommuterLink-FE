@@ -1,16 +1,13 @@
 import React from "react";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import { BASE_URL } from "../../../constants";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
-import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setsignupState } from "../../../redux/signupSlice";
 import { setloginState } from "../../../redux/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { setOption0State, setOption1State } from "../../../redux/generalSlice";
+import { Button } from "react-bootstrap";
 
 const Verification = () => {
 

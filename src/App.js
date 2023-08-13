@@ -6,7 +6,7 @@ import Signup from './pages/frontend/Signup/Signup';
 import CarouselSlider from './pages/frontend/Hompage-components/Carousel';
 import HowWorks from './pages/frontend/Hompage-components/HowWorks';
 import Contribute from './pages/frontend/Hompage-components/Contribute';
-import Registration from './pages/frontend/register-form/Registration';
+import DriverRegistration from './pages/frontend/register-form/DriverRegistration';
 import ShareRide from './pages/frontend/register-form/ShareRide';
 import WouldYouLikeTo from './pages/frontend/register-form/WouldYouLikeTo';
 import OtpPage from "./pages/frontend/register-form/OtpPage"
@@ -50,20 +50,20 @@ function App() {
 
           {userOption0 && (
             <>
-              <Route path='/registration' element={<RiderRegistration/>}/>
+              <Route path='/rider-registration' element={<RiderRegistration/>}/>
             </>
           )}
 
           {userOption1 && (
             <>
-              <Route path='/driver-registration' element={<Registration/>}/>
+              <Route path='/driver-registration' element={<DriverRegistration/>}/>
             </>
           )}
              
         {userSignup && (
             <>
-              <Route path='/driver-registration' element={<Registration/>}/>
-              <Route path='/registration' element={<RiderRegistration/>}/>
+              <Route path='/driver-registration' element={<DriverRegistration/>}/>
+              <Route path='/rider-registration' element={<RiderRegistration/>}/>
               <Route path='/shareride' element={<ShareRide/>}></Route>
               <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
               <Route path="/otp" element={<OtpPage />} />
@@ -77,8 +77,8 @@ function App() {
               <Route path='/carousel' element={<CarouselSlider />} /> 
               <Route path='/howworks' element={<HowWorks/>}/>
               <Route path='/contribute' element={<Contribute/>}/>
-              <Route path='/driver-registration' element={<Registration/>}/>
-              <Route path='/registration' element={<RiderRegistration/>}/>
+              <Route path='/driver-registration' element={<DriverRegistration/>}/>
+              <Route path='/rider-registration' element={<RiderRegistration/>}/>
               <Route path='/shareride' element={<ShareRide/>}></Route>
               <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
               <Route path="/otp" element={<OtpPage />} />
@@ -90,8 +90,9 @@ function App() {
               <Route path='/seatcostverification' element={<SeatCostVerification/>}></Route>
             </>
           )}
-          {!userLogin && (!userOption0 && !userOption1) && <Route path="*" element={<Navigate to="/" />} />}
-          {!userSignup && (!userOption0 && !userOption1) && <Route path="*" element={<Navigate to="/" />} />}
+          {!userLogin && <Route path="*" element={<Navigate to="/" />} />}
+          {!userSignup && <Route path="*" element={<Navigate to="/" />} />}
+          {!userOption0 && !userOption1 && <Route path="*" element={<Navigate to="/" />} />}
       </Routes>
     </Router>
     </>

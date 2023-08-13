@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import Navbar from "../Hompage-components/Navbar";
 // import Footer from "../Hompage-components/Footer";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
-import { Button } from "react-bootstrap";
+import { Button } from "@mui/base";
+import { setsignupState } from "../../../redux/signupSlice";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -13,7 +14,28 @@ const Dashboard = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn , setSubmit] = useState(false);
 
-  // console.log(userToken);
+  // For getting current date
+  const currentDate = new Date();
+
+  // Define arrays for days and months
+  const daysOfWeek = [
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+  ];
+
+  const monthsOfYear = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Format the date
+  const formattedDate = `${daysOfWeek[currentDate.getDay()]}, ${monthsOfYear[currentDate.getMonth()]} ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
+
+  // For Dashboard Data
+  const [contactId , setContactId] = useState("");
+
+  useEffect(() => {
+    getDashboardData();
+  }, []);
 
   const route = () => {
     setSubmit(true);
@@ -25,8 +47,37 @@ const Dashboard = () => {
 
   const logout = () => {
     dispatch(setloginState(""));
+    dispatch(setsignupState(""));
     navigate("/login");
   }
+
+  const getDashboardData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/matches/office",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      
+      const jsonresponse = await response.json();
+      //console.log("Rider Data:", jsonresponse.rider);
+      if(jsonresponse.rider && jsonresponse.rider.length > 0){
+        setContactId(jsonresponse.rider[0].contact_id);
+      }
+      else {
+        setContactId("");
+      }
+      console.log("Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   const backgroundStyle = {
     backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -52,6 +103,7 @@ const Dashboard = () => {
     height: "20vh",
     backgroundColor: "#198754",
   };
+
   return (
     <div className="card bg-light w-100 ">
       <div className="card-body p-0">
@@ -82,7 +134,7 @@ const Dashboard = () => {
                  
                   <div className="m-0">
                     <span className="fw-semibold text-white d-block fs-5">
-                      Yasir Abbas Mirza
+                        Yasir Abbas Mirza
                     </span>
                     <button
                       href="/"
@@ -204,7 +256,7 @@ const Dashboard = () => {
                   <div className="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                
                     <span className="justify-content-center text-success">
-                      Monday, July 04, 2022
+                      {formattedDate}
                     </span>
                     <h2 className="page-heading d-flex  text-success  fw-bold fs-3 flex-column justify-content-center my-0">
                       Welcome to Yasir Abbas Mirza
@@ -219,8 +271,6 @@ const Dashboard = () => {
 
                     <Button
                       className="btn btn-sm fw-bold btn-success"
-                      data-bs-toggle="modal"
-                      data-bs-target="#kt_modal_new_target"
                       onClick={logout}
                     >
                       LOG OUT
@@ -272,7 +322,19 @@ const Dashboard = () => {
                                     className="card-img-top w-40px m-auto "
                                   />
 
-                                  <div
+                                  {contactId !== "" ? (
+                                    <div
+                                    className="card-title text-light text-center"
+                                    style={{ width: "6rem", cursor: "pointer" }}
+                                    onClick={() => {
+                                      route();
+                                    }}
+                                  >
+                                    {contactId}
+                                  </div>
+                                  ) :
+                                  (
+                                    <div
                                     className="card-title text-light text-center"
                                     style={{ width: "6rem", cursor: "pointer" }}
                                     onClick={() => {
@@ -281,6 +343,8 @@ const Dashboard = () => {
                                   >
                                     Member ID
                                   </div>
+                                  )
+                                  }
                                   <img
                                     className=""
                                     src={`${BASE_URL}/assets/images/downlineofmembericon.png`}

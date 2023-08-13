@@ -23,12 +23,13 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Autocomplete, MarkerF, PolylineF } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
+import { BASE_URL } from "../../../constants";
 // import ibn from '../../../Images/iban.png';
 // import easypaisa from '../../../Images/ep.png';
 // import jazzcash from '../../../Images/jazz.png';
 // import raast from '../../../Images/raast.png';
 
-const Registration = () => {
+const DriverRegistration = () => {
 
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
@@ -619,7 +620,7 @@ const Registration = () => {
         user_type : 299,
         university_name : null,
         university_address : null,
-        veh_option : 0 ,
+        veh_option : 1,
         start_point : {
           city_id : cityStartId,
           province_id : provinceStartId,
@@ -837,7 +838,7 @@ const Registration = () => {
         seats_for : selectedSeatGender,
         mid_route : selectedMidRoutePartner,
         one_side : selectedOneRoutePartner,
-        drive_option : inputDriverType,
+        drive_option : "Driver",
         license_no : inputDrivingLicenseMySelf,
         valid_upto : inputValidUptoMySelf,
         place_issue: inputPlaceIssueMySelf,
@@ -884,12 +885,12 @@ const Registration = () => {
   const PaymentForm = async () => {
     try {
       const body = {
-        "option" : 1,
-        "drive_option" : "Both",
-        "bank_account_number" : inputBankAccount,
-        "easy_paisa_number" : inputEasyPaisa,
-        "jazz_cash_number": inputJazzCash,
-        "raast_number" : inputRaastID
+        option : 1,
+        drive_option : "Driver",
+        bank_account_number : inputBankAccount,
+        easy_paisa_number : inputEasyPaisa,
+        jazz_cash_number: inputJazzCash,
+        raast_number : inputRaastID
     }
         const response = await fetch(
           "https://staging.commuterslink.com/api/v1/registration/driver",
@@ -1843,9 +1844,9 @@ const Registration = () => {
                                   <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
                                     <div class="container">
                                     <img src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+                                    <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
+                                    <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                                    <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
                                     </div>
                                     <form id="paymentForm">
                                     <div className="mt-4">
@@ -2331,4 +2332,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default DriverRegistration;

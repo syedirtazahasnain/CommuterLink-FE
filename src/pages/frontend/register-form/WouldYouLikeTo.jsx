@@ -7,11 +7,11 @@ import { BASE_URL } from "../../../constants";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import {Link, useNavigate} from 'react-router-dom';
+import { Button } from '@mui/base';
 
 const WouldYouLikeTo = () => {
 
@@ -23,7 +23,7 @@ const WouldYouLikeTo = () => {
  const route = () =>{
 
   if(radio1){
-    navigate("/registration");
+    navigate("/rider-registration");
   }
     
     if(radio2){
@@ -143,7 +143,7 @@ const WouldYouLikeTo = () => {
                           <div className="col-12 text-center">
                       {/* onClick={() => setModalShow(true)} */}
 
-                      <Button variant="outlined" className="mt-4btn btn-outline-custom" onClick={route}>
+                      <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={route}>
                         Next
                       </Button>
                     </div>
