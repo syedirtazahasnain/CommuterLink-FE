@@ -54,31 +54,52 @@ const CommuterProfile = () => {
   }
 
   const getDashboardData = async () => {
-    const response = await fetch(
-      "https://staging.commuterslink.com/api/v1/matches/office",
-      {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': 'application/json',
-          Authorization: `Bearer ${userToken}`,
-        },
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/matches/office",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      
+      const jsonresponse = await response.json();
+      if(jsonresponse.rider && jsonresponse.rider.length > 0){
+        setName(jsonresponse.rider[0].name);
+        setImage(jsonresponse.rider[0].commuter_image);
+        setGender(jsonresponse.rider[0].gender);
+        setAge(jsonresponse.rider[0].age);
+        setProfession(jsonresponse.rider[0].profession);
+        setPreferredGender(jsonresponse.rider[0].preferred_gender);
+        setSeats(jsonresponse.rider[0].seats);
+        setOrigin(jsonresponse.rider[0].origin);
+        setDestination(jsonresponse.rider[0].destination);
+        setTimeDepart(jsonresponse.rider[0].time_depart);
+        setTimeReturn(jsonresponse.rider[0].time_return);
+        setDays(jsonresponse.rider[0].days);
+      } 
+      else{
+        setName("");
+        setImage("");
+        setGender("");
+        setAge("");
+        setProfession("");
+        setPreferredGender("");
+        setSeats("");
+        setOrigin("");
+        setDestination("");
+        setTimeDepart("");
+        setTimeReturn("");
+        setDays("");
       }
-    );
-    const jsonresponse = await response.json();
-    setName(jsonresponse.rider[0].name);
-    setImage(jsonresponse.rider[0].commuter_image);
-    setGender(jsonresponse.rider[0].gender);
-    setAge(jsonresponse.rider[0].age);
-    setProfession(jsonresponse.rider[0].profession);
-    setPreferredGender(jsonresponse.rider[0].preferred_gender);
-    setSeats(jsonresponse.rider[0].seats);
-    setOrigin(jsonresponse.rider[0].origin);
-    setDestination(jsonresponse.rider[0].destination);
-    setTimeDepart(jsonresponse.rider[0].time_depart);
-    setTimeReturn(jsonresponse.rider[0].time_return);
-    setDays(jsonresponse.rider[0].days);
-    //console.log("Rider Data:", jsonresponse.rider);
+      console.log("Data:", jsonresponse.rider);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   const backgroundStyle = {
@@ -249,7 +270,7 @@ const CommuterProfile = () => {
                             style={backgroundStyle1}
                           ></div>
                         </div>
-                      </div>{" "}
+                      </div>
                     </div>
                     <div className="col-lg-9 px-5">
                       <div
@@ -314,10 +335,17 @@ const CommuterProfile = () => {
                           }}
                         >
                           <div class="card-header d-flex flex-column bg-light mb-2">
-                            <div>
-                              {" "}
-                              <h5 className="text-success ">{name}</h5>
-                            </div>
+                            {name !== "" ? (
+                              <div>
+                                <h5 className="text-success ">{name}</h5>
+                              </div> 
+                            )
+                            : (
+                              <div>
+                                <h5 className="text-success ">Zafar Jamil</h5>
+                              </div>
+                            )
+                            }
 
                             <div className="card" style={{ border: "0" }}>
                               <div className="row d-flex justify-content-between">
@@ -326,16 +354,49 @@ const CommuterProfile = () => {
                                     className="card border-0"
                                     style={{ width: "50rem" }}
                                   >
-                                    <p className="">
-                                      <b>Gender:</b> <u>{gender}</u>
+                                    <p className="mt-1">
+
+                                      {gender !== "" ? (
+                                          <>
+                                            <b>Gender:</b> <u>{gender}</u>
+                                          </>
+                                        )
+                                        : (
+                                          <>
+                                            <b>Gender:</b> <u>Male</u>
+                                          </>
+                                        )
+                                      }
+
                                       <br />
-                                      <b> Age:</b> <u>{age}</u> <br />
+                                      {age !== "" ? (
+                                          <>
+                                            <b> Age:</b> <u>{age}</u> 
+                                          </>
+                                        )
+                                        : (
+                                          <>
+                                            <b> Age:</b> <u>45</u> 
+                                          </>
+                                        )
+                                      }
+                                      <br />
                                       <b>Home Address:</b>
                                       <u>
                                         H-1150, St-09, DHA Phase 2, Islamabad
                                       </u>
                                       <br />
-                                      <b>Profession:</b> <u>{profession}</u>
+                                      {profession !== "" ? (
+                                          <>
+                                            <b>Profession:</b> <u>{profession}</u>
+                                          </>
+                                        )
+                                        : (
+                                          <>
+                                            <b>Profession:</b> <u>Web Developer</u>
+                                          </>
+                                        )
+                                      }
                                       <br />
                                       <b>Education:</b>
                                       <u>Masters</u>
@@ -357,22 +418,86 @@ const CommuterProfile = () => {
                                     <div className="card border-0">
                                       <div className="card border-0">
                                         <p>
-                                          <b>Preferred Gender: </b> <u>{preferredGender}</u> <br />
-                                          <b>Point of Origin: </b>
-                                          <u>
-                                            {origin}
-                                          </u>
+                                          {preferredGender !== "" ? (
+                                              <>
+                                                <b>Preferred Gender: </b> <u>{preferredGender}</u> 
+                                              </>
+                                            )
+                                            : (
+                                              <>
+                                                <b>Preferred Gender: </b> <u>Female</u> 
+                                              </>
+                                            )
+                                          }
                                           <br />
-                                          <b>Pickup Timings:</b> <u>{timeDepart}</u>
+                                          {origin !== "" ? (
+                                              <>
+                                                <b>Point of Origin: </b>
+                                                <u>
+                                                  {origin}
+                                                </u> 
+                                              </>
+                                            )
+                                            : (
+                                              <>
+                                                <b>Point of Origin: </b>
+                                                <u>
+                                                  (If different from home address)
+                                                </u>
+                                              </>
+                                            )
+                                          }
                                           <br />
-                                          <b>Destination:</b>
-                                          <u>{destination}</u>
+                                          {timeDepart !== "" ? (
+                                              <>
+                                                <b>Pickup Timings:</b> <u>{timeDepart}</u>
+                                              </>
+                                            )
+                                            : (
+                                              <>
+                                                <b>Pickup Timings:</b> <u>6:00</u>
+                                              </>
+                                            )
+                                          }
+                                          <br />
+                                          {destination !== "" ? (
+                                              <>
+                                                <b>Destination:</b>
+                                                <u>{destination}</u>
+                                              </>
+                                            )
+                                            : (
+                                              <>
+                                                <b>Destination:</b>{" "}
+                                              </>
+                                            )
+                                          }
                                           <br />
                                           <b>Contact No:</b> <u>0334-9594377</u>
                                           <br />
-                                          <b>Return Timings:</b> <u>{timeReturn}</u>
+                                          {timeReturn !== "" ? (
+                                              <>
+                                                <b>Return Timings:</b> <u>{timeReturn}</u>
+                                              </>
+                                            )
+                                            : (
+                                              <>
+                                                <b>Return Timings:</b> <u>14:00</u>
+                                              </>
+                                            )
+                                          }
                                           <br />
-                                          <b>Days:</b> <u>{days}</u>
+                                          {days !== "" ? (
+                                              <>
+                                                <b>Days:</b> <u>{days}</u>
+                                              </>
+                                            )
+                                            : (
+                                              <>
+                                                <b>Days:</b> <u>Mon-Fri</u>
+                                              </>
+                                            )
+                                          }
                                         </p>
                                       </div>
                                     </div>
@@ -383,7 +508,18 @@ const CommuterProfile = () => {
                                       style={{ width: "20rem" }}
                                     >
                                       <p>
-                                        <b>No.of Seats:</b> {seats} <br />
+                                      {days !== "" ? (
+                                              <>
+                                                <b>No.of Seats:</b> {seats}
+                                              </>
+                                            )
+                                            : (
+                                              <>
+                                                <b>No.of Seats:</b> 1
+                                              </>
+                                            )
+                                      } 
+                                        <br />
                                         <b>Payment Terms (perDay):</b>{" "}
                                         <u>Rs.350</u>
                                       </p>

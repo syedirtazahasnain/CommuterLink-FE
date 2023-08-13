@@ -616,11 +616,11 @@ const DriverRegistration = () => {
       let nameArrayEnd = [markerPositionEnd.lat, markerPositionEnd.lng];
       const myStringEnd = nameArrayEnd.toString();
       const body = {
-        option : 1,
+        option : 0,
         user_type : 299,
         university_name : null,
         university_address : null,
-        veh_option : 0 ,
+        veh_option : 1,
         start_point : {
           city_id : cityStartId,
           province_id : provinceStartId,
@@ -838,7 +838,7 @@ const DriverRegistration = () => {
         seats_for : selectedSeatGender,
         mid_route : selectedMidRoutePartner,
         one_side : selectedOneRoutePartner,
-        drive_option : inputDriverType,
+        drive_option : "Driver",
         license_no : inputDrivingLicenseMySelf,
         valid_upto : inputValidUptoMySelf,
         place_issue: inputPlaceIssueMySelf,
@@ -885,12 +885,12 @@ const DriverRegistration = () => {
   const PaymentForm = async () => {
     try {
       const body = {
-        "option" : 1,
-        "drive_option" : "Both",
-        "bank_account_number" : inputBankAccount,
-        "easy_paisa_number" : inputEasyPaisa,
-        "jazz_cash_number": inputJazzCash,
-        "raast_number" : inputRaastID
+        option : 1,
+        drive_option : "Driver",
+        bank_account_number : inputBankAccount,
+        easy_paisa_number : inputEasyPaisa,
+        jazz_cash_number: inputJazzCash,
+        raast_number : inputRaastID
     }
         const response = await fetch(
           "https://staging.commuterslink.com/api/v1/registration/driver",

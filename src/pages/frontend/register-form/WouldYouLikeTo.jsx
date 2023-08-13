@@ -23,7 +23,7 @@ const WouldYouLikeTo = () => {
  const route = () =>{
 
   if(radio1){
-    navigate("/registration");
+    navigate("/rider-registration");
   }
     
     if(radio2){

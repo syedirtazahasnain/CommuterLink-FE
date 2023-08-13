@@ -9,10 +9,10 @@ import { Modal, Alert } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/base";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import imgpoper from "../../../Images/popper.png";
 import { ImageNotSupportedSharp } from "@mui/icons-material";
@@ -116,9 +116,26 @@ const OtpPage = () => {
       alert("OTP does not match. Please try again.");
     }
   };
-  const resendOTP = () => {
+
+  const resendOTP = async () => {
+    const body = {
+      email: userData.email,
+      number: userData.phone,
+      signatur: "",
+    };
+    await fetch(
+      "https://staging.commuterslink.com/api/v1/send/otp",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
     alert("OTP has been sent again!");
   };
+
   const handleShowModal = () => {
     setShowModal(true);
   };
@@ -226,7 +243,7 @@ const OtpPage = () => {
                     >
                       Enter OTP
                     </Typography>
-                    <div className="row justify-content-center">
+                    <div className="d-flex justify-content-center">
                       {otp.map((data, index) => {
                         return (
                           <FormControl

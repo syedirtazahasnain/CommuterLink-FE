@@ -20,6 +20,7 @@ const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const [termsService, setTermsService] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
 
   useEffect(() => {
@@ -45,29 +46,34 @@ const Login = () => {
 
   const postData = async () => {
     try {
-      const body = {
-        email: email,
-        password: password,
-      };
-      const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/auth",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(body),
+      if(termsService){
+        const body = {
+          email: email,
+          password: password,
+        };
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/auth",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(body),
+          }
+        );
+        const jsonresponse = await response.json();
+        //console.log(jsonresponse);
+  
+        if (jsonresponse.statusCode == 200) {
+          dispatch(setloginState(jsonresponse.access_token));
+        } else {
+          console.log(jsonresponse);
+          alert("Error: " + jsonresponse.message);
         }
-      );
-      const jsonresponse = await response.json();
-      //console.log(jsonresponse);
-
-      if (jsonresponse.statusCode == 200) {
-        dispatch(setloginState(jsonresponse.access_token));
-      } else {
-        console.log(jsonresponse);
-        alert("Error: " + jsonresponse.message);
+      }
+      else {
+        alert("please check Terms of Service");
       }
     } catch (error) {
       console.log(error.message);
@@ -243,38 +249,34 @@ const Login = () => {
                       sx={{ width: '100%' }}
                     />
                   </Form.Group>
-                  <div className=" my-2">
-                    <FormControlLabel
+                  <div className="col-md-12 text-center mt-3">
+                      <FormControlLabel
                         control={
                           <Checkbox
                             value="termsService"
                             style={{ borderColor: "#198754" }}
                             required
-                            // onChange={(e) => setTermsService(e.target.checked)}
+                            onChange={(e) => setTermsService(e.target.checked)}
                             size="small"
                           />
                         }
                         label={
                           <div id="span-text" className="mr-5 small">
                             I agree with all statements in
-                            <a href="#!" style={{ textDecoration: "none" }}>
+                            <a href="" style={{ textDecoration: "none" }}>
                               <span
                                 style={{
                                   color: "#198754",
                                   textDecoration: "none",
                                 }}
                               >
-                                Terms of service
+                               {" "} Terms of service
                               </span>
                             </a>
                           </div>
                         }
                       />
-                  </div>
-                  {/* <Button className="btn  formbtn" onClick={() => postData()}> */}
-                  {/* <button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}> */}
-                  {/* onClick={() => setSubmit(true), route()} */}
-                  {/* <Button className="btn  formbtn" onClick={() => route()} >   */}
+                    </div>
                   <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
                     Login
                   </Button>
@@ -326,7 +328,7 @@ const Login = () => {
                     <hr id="hrline2" />
                     <div id="span-text" className="text-center mb-5">
                       New to CommutersLink? &nbsp;
-                      <Link to="/registration">
+                      <Link to="/rider-registration">
                         <span className="reg-text">Registration</span>
                       </Link>
                     </div>

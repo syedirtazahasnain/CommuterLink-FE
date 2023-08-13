@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { BASE_URL } from "../../../constants";
 import { Link } from "react-scroll";
-import Button from '@mui/material/Button';
 import { Link as DomLink } from "react-router-dom";
+import { Button } from "@mui/base";
 const Navbar = () => {
   return (
     <div>
@@ -85,25 +85,25 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
                     </Link>
                   </li>
                 </ul>
-                    <DomLink
+                <DomLink
                   to="/Signup"
                 >
-                  <button
+                  <Button
                     className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
                   >
                     Sign up
-                  </button>
+                  </Button>
             
                 </DomLink>
                 <DomLink
                   to="/login"
                 >
 
-                  <button
+                  <Button
                     className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
                   >
                     Login
-                  </button>
+                  </Button>
                 </DomLink>
               </div>
             </nav>

@@ -52,20 +52,31 @@ const Dashboard = () => {
   }
 
   const getDashboardData = async () => {
-    const response = await fetch(
-      "https://staging.commuterslink.com/api/v1/matches/office",
-      {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': 'application/json',
-          Authorization: `Bearer ${userToken}`,
-        },
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/matches/office",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      
+      const jsonresponse = await response.json();
+      //console.log("Rider Data:", jsonresponse.rider);
+      if(jsonresponse.rider && jsonresponse.rider.length > 0){
+        setContactId(jsonresponse.rider[0].contact_id);
       }
-    );
-    const jsonresponse = await response.json();
-    setContactId(jsonresponse.rider[0].contact_id);
-    //console.log("Rider Data:", jsonresponse.rider);
+      else {
+        setContactId("");
+      }
+      console.log("Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   const backgroundStyle = {
@@ -312,7 +323,8 @@ const Dashboard = () => {
                                     className="card-img-top w-40px m-auto "
                                   />
 
-                                  <div
+                                  {contactId !== "" ? (
+                                    <div
                                     className="card-title text-light text-center"
                                     style={{ width: "6rem", cursor: "pointer" }}
                                     onClick={() => {
@@ -321,6 +333,19 @@ const Dashboard = () => {
                                   >
                                     {contactId}
                                   </div>
+                                  ) :
+                                  (
+                                    <div
+                                    className="card-title text-light text-center"
+                                    style={{ width: "6rem", cursor: "pointer" }}
+                                    onClick={() => {
+                                      route();
+                                    }}
+                                  >
+                                    Member ID
+                                  </div>
+                                  )
+                                  }
                                   <img
                                     className=""
                                     src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
