@@ -17,15 +17,45 @@ import { Button } from "@mui/base";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [termsService, setTermsService] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
 
+  const checkUserStatus = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/rejectedStatus",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+        
+        const jsonresponse = await response.json();
+
+        if(jsonresponse.statusCode === 200){
+          if(jsonresponse.data[0] === 1){
+            navigate("/seatcostverification");
+          }
+        }
+        else {
+          navigate("/verfication");
+        }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
   useEffect(() => {
-    if(userToken){
-      navigate("/dashboard");
+    if(userToken)
+    {
+      checkUserStatus();
     }
     else{
       navigate("/login");
@@ -41,7 +71,12 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    await postData();
+    if(email === "" || password === ""){
+      alert("Please Fill All Fields!");
+    }
+    else {
+      await postData();
+    }
   };
 
   const postData = async () => {

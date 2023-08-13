@@ -17,12 +17,12 @@ import { useGoogleLogin } from "@react-oauth/google";
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState("web");
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
-  const [fullName, setFullName] = useState();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [termsService, setTermsService] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
@@ -124,43 +124,48 @@ const Signup = () => {
   };
   const postData = async () => {
     try {
-      if (termsService) {
-        const body = {
-          email: email,
-          number: phoneNumber,
-          signatur: "",
-        };
-        const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/send/otp",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          }
-        );
-
-        const jsonresponse = await response.json();
-        if (jsonresponse.statusCode == 200) {
-          dispatch(
-            setsignupState({
-              name: fullName,
-              email: email,
-              phone: phoneNumber,
-              password: password,
-              provider: provider,
-              otp: jsonresponse.otp,
-              token: jsonresponse.token,
-              confirmPassword: confirmPassword,
-            })
+      if(fullName === "" || email === "" || phoneNumber === null || password === "" || confirmPassword === ""){
+        alert("Please Fill All Fields!");
+      }
+      else{
+        if (termsService) {
+          const body = {
+            email: email,
+            number: phoneNumber,
+            signatur: "",
+          };
+          const response = await fetch(
+            "https://staging.commuterslink.com/api/v1/send/otp",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
+            }
           );
-          navigate("/otp");
+  
+          const jsonresponse = await response.json();
+          if (jsonresponse.statusCode == 200) {
+            dispatch(
+              setsignupState({
+                name: fullName,
+                email: email,
+                phone: phoneNumber,
+                password: password,
+                provider: provider,
+                otp: jsonresponse.otp,
+                token: jsonresponse.token,
+                confirmPassword: confirmPassword,
+              })
+            );
+            navigate("/otp");
+          } else {
+            alert("Error: " + jsonresponse.message);
+          }
         } else {
-          alert("Error: " + jsonresponse.message);
+          alert("please check Terms of Service");
         }
-      } else {
-        alert("please check Terms of Service");
       }
     } catch (error) {
       console.log(error.message);
@@ -183,6 +188,7 @@ const Signup = () => {
       setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(true);
     } else {
+      setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(false);
     }
   };
@@ -322,14 +328,16 @@ const Signup = () => {
                         variant="outlined"
                         value={phoneNumber}
                         label="Mobile Number (03xxxxxxxxx)"
-                        onChange={(e) => validatePhoneNumber(e.target.value)
-                       
-                        }
+                        onChange={(e) => {
+                          if (/^\d{0,11}$/.test(e.target.value)) {
+                            validatePhoneNumber(e.target.value);
+                          }
+                        }}
                         required
                         size="small"
-                        error={!isValidPhoneNumber}
+                        error={!isValidPhoneNumber && phoneNumber !== ''}
                         helperText={
-                          !isValidPhoneNumber &&
+                          !isValidPhoneNumber && phoneNumber !== '' &&
                           "Please enter a valid Phone Number starting with '03' and having 11 digits."
                         }
                       />
