@@ -20,7 +20,8 @@ import { useSelector } from "react-redux";
 import Faq from './pages/frontend/faq/Faq';
 import Login from './pages/frontend/login/Login';
 import SeatCostVerification from './pages/frontend/register-form/SeatCostVerification';
-import Dashboard12 from './pages/backend/dashboard/Dashboard12';
+import Dashboard1 from './pages/backend/dashboard/Dashboard1';
+import CommuterProfile1 from './pages/backend/dashboard/CommuterProfile1';
 function App() {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -38,7 +39,9 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
         <Route path='/faq' element={<Faq/>}/>
-        <Route path='/new-dashboard' element={<Dashboard12 />}/>
+        <Route path='/new-dashboard' element={<Dashboard1 />}/>
+        <Route path='/dashboard' element={<Dashboard />}/>
+        <Route path='/commuterprofile1' element={<CommuterProfile1 />}/>
         {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
         {/* <Route path='/carousel' element={<CarouselSlider />} /> 
         <Route path='/howworks' element={<HowWorks/>}/>

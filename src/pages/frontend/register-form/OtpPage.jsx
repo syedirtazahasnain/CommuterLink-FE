@@ -226,7 +226,8 @@ const OtpPage = () => {
                     >
                       Enter OTP
                     </Typography>
-                    <div className="row justify-content-center">
+                    {/* Set Otp */}
+                    <div className="d-flex justify-content-center">
                       {otp.map((data, index) => {
                         return (
                           <FormControl
