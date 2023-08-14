@@ -11,12 +11,12 @@ const Navbar = () => {
 
           <div className="pos-f-t">
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-              <Link
+              <DomLink
                 className="navbar-brand ml-3"
                 to="/"
               >
                 <img src={`${BASE_URL}/assets/images/CL-logo.png`} width="mr-auto" height="40px" alt="logoimg" />
-              </Link>
+              </DomLink>
               <button
                 className="navbar-toggler mr-2 d-lg-none" // Add 'd-lg-none' class to hide the button in desktop view
                 style={{
@@ -54,9 +54,9 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
               >
                 <ul className="navbar-nav ml-auto  font-size:'12px' font-family:'Poppins, sans-serif'">
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="/"  spy="true" smooth="true" offset={30} duration={100}>
+                    <DomLink className="nav-link mr-3 ml-3" to="/">
                       HOME
-                    </Link>
+                    </DomLink>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link mr-3 ml-3" to="carousel" spy="true" smooth="true" offset={30} duration={100}>
@@ -86,7 +86,7 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
                   </li>
                 </ul>
                 <DomLink
-                  to="/Signup"
+                  to="/signup"
                 >
                   <Button
                     className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"

@@ -39,14 +39,17 @@ const Login = () => {
         
         const jsonresponse = await response.json();
 
+        console.log(jsonresponse);
+
         if(jsonresponse.statusCode === 200){
           if(jsonresponse.data[0] === 1){
-            navigate("/seatcostverification");
+            navigate("/dashboard");
+          }
+          else{
+            navigate("/verification");
           }
         }
-        else {
-          navigate("/verfication");
-        }
+
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -100,7 +103,7 @@ const Login = () => {
         const jsonresponse = await response.json();
         //console.log(jsonresponse);
   
-        if (jsonresponse.statusCode == 200) {
+        if (jsonresponse.statusCode === 200) {
           dispatch(setloginState(jsonresponse.access_token));
         } else {
           console.log(jsonresponse);

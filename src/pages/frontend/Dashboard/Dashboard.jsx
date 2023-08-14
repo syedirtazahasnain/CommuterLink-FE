@@ -48,6 +48,7 @@ const Dashboard = () => {
   const logout = () => {
     dispatch(setloginState(""));
     dispatch(setsignupState(""));
+    setContactId("");
     navigate("/login");
   }
 
@@ -70,10 +71,13 @@ const Dashboard = () => {
       if(jsonresponse.rider && jsonresponse.rider.length > 0){
         setContactId(jsonresponse.rider[0].contact_id);
       }
+      else if(jsonresponse.drivers && jsonresponse.drivers.length > 0){
+        setContactId(jsonresponse.drivers[0].contact_id);
+      }
       else {
         setContactId("");
       }
-      console.log("Data:", jsonresponse);
+      console.log("Dashboard Data:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -315,12 +319,12 @@ const Dashboard = () => {
                             <div class="row d-flex justify-content-center">
                               <div className="col-sm-2">
                                 <div
-                                  className="card bg-success"
-                                  style={{ width: "6rem" }}
+                                  className="card"
+                                  style={{ width: "6rem", fontWeight: "bold", backgroundColor: "rgb(32 155 98)" }}
                                 >
                                   <img
                                     src={`${BASE_URL}/assets/images/Vector.png`}
-                                    className="card-img-top w-40px m-auto "
+                                    className="card-img-top w-40px m-auto"
                                   />
 
                                   {contactId !== "" ? (

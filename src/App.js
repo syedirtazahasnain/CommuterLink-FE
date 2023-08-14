@@ -27,8 +27,8 @@ function App() {
   const userOption0 = useSelector((s) => s.general.data.option0);
   const userOption1 = useSelector((s) => s.general.data.option1);
 
-  console.log("Option 0", userOption0);
-  console.log("Option 1", userOption1);
+  // console.log("Option 0", userOption0);
+  // console.log("Option 1", userOption1);
 
   return (
     <>

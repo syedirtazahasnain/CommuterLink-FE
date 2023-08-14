@@ -431,7 +431,6 @@ const RiderRegistration = () => {
   const handleCloseEndModal = () => {
     setShowEndModal(false);
   };
-  
 
   const handleLogin = async () => {
     await LocationForm();
