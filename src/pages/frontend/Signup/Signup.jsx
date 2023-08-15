@@ -429,20 +429,20 @@ const Signup = () => {
                     </div>
                     <div className="container text-center">
                       <div className="row d-flex">
-                        <div class="column mr-3">
-                          <p class=" text-muted" id="text2">
+                        <div className="column mr-3 mt-2">
+                          <p className=" text-muted" id="text2">
                             Or continue with
                           </p>
                         </div>
-                        <div class="column">
+                        <div className="column">
                           <ul
-                            class="list-unstyled  d-flex "
+                            className="list-unstyled  d-flex "
                             style={{
                               justifyContent: "center",
                               alignItems: "center",
                             }}
                           >
-                            <li class="mr-3">
+                            <li className="mr-3">
                               <a onClick={() => googlesignup()}>
                                 <img
                                   src={`${BASE_URL}/assets/images/google.png`}
@@ -451,7 +451,7 @@ const Signup = () => {
                                 />
                               </a>
                             </li>
-                            <li class="mr-3">
+                            <li className="mr-3">
                               <a href="https://www.facebook.com/Sysreforms">
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
