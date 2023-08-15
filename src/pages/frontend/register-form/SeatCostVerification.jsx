@@ -5,9 +5,18 @@ import Row from "react-bootstrap/Row";
 import { BASE_URL } from "../../../constants";
 import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
-import Button from "react-bootstrap/Button";
+import { Button } from "@mui/base";
+import { useNavigate } from "react-router-dom";
 
 const SeatCostVerification = () => {
+
+  const navigate = useNavigate();
+
+  const onSubmit = () =>{
+    navigate("/dashboard");
+   };
+
+
 
   const backgroundStyle = {
     backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -70,9 +79,9 @@ const SeatCostVerification = () => {
                       </div>
                       <form id="numberForm">
                         <div className="mb-3">
-                          <button variant="success" className="btn-custom mx-2 text-white bg-success px-4 py-2 rounded rounded-5 text-custom fw-bold">
+                          <Button variant="success" className="btn-custom mx-2 text-white bg-success px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={onSubmit}>
                             Okay
-                          </button>
+                          </Button>
                         </div>
                       </form>
                     </div>

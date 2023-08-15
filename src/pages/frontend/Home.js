@@ -27,12 +27,11 @@ import Verification from "./Dashboard/Verification";
 import Login from "./login/Login";
 import SeatCostVerification from "./register-form/SeatCostVerification";
 import DriverRegistration from "./register-form/DriverRegistration";
-import Office from "./Hompage-components/Office";
 // import NewDashboard from "../backend/dashboard/Dashboard";
 export default function () {
   return (
     <div>
-      {/* <Navbar />
+      <Navbar />
       <CarouselSlider />
       <MyAccordion />
       <ShareRideCards />
@@ -41,9 +40,9 @@ export default function () {
       <Contribute />
       <Contact />
       <AddressCards />
-      <Footer />  */}
+      <Footer />
       {/* <Signup/> */}
-             {/* <Login /> */}
+      {/* <Login /> */}
       {/* <Registration/> */}
       {/* <Otp/> */}
       {/* <Faq/> */}
@@ -52,22 +51,21 @@ export default function () {
       {/* <Driver/> */}
       {/* <NumberGenerate/> */}
       {/* <Dashboard/> */}
-   {/* <Terms_Condition/> */}
-   {/* <ReplyToConfirmDates/> */}
-   {/* <WhyProcessPayment/> */}
-   {/* <SendApprovalForPartner/> */}
-   {/* <CommuterProfile/> */}
-   {/* <DriverRegistration/> */}
+      {/* <Terms_Condition/> */}
+      {/* <ReplyToConfirmDates/> */}
+      {/* <WhyProcessPayment/> */}
+      {/* <SendApprovalForPartner/> */}
+      {/* <CommuterProfile/> */}
+      {/* <DriverRegistration/> */}
 
-   {/* Hassan Components */}
+      {/* Hassan Components */}
       {/* <ShareRide/> */}
-   {/* <Verification/> */}
-   <WouldYouLikeTo/>
- {/* <Slider/> */}
- {/* <SeatCostVerification /> */}
- {/* <NewDashboard/> */}
- {/* <Office/> */}
-    
+      {/* <Verification/> */}
+      {/* <WouldYouLikeTo/> */}
+      {/* <Slider/> */}
+      {/* <SeatCostVerification /> */}
+      {/* <NewDashboard/> */}
+      {/* <Office/> */}
     </div>
   );
 }

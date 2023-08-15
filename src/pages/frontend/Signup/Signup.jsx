@@ -17,12 +17,12 @@ import { useGoogleLogin } from "@react-oauth/google";
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState("web");
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
-  const [fullName, setFullName] = useState();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [termsService, setTermsService] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
@@ -54,31 +54,33 @@ const Signup = () => {
     console.log("handleFailure", response);
   };
   const handleSuccess = async (response) => {
-     
-    const profile = await fetch(
-      "https://www.googleapis.com/oauth2/v3/userinfo",
 
-      {
-        headers: {
-          Authorization: `Bearer ${response.access_token}`,
-        },
-        method: "get",
-      }
-    );
-    // var userObject=jwt_decode(response.credential)
-    let userObject = await profile.json();
-    const googleuserdata = {
-      name: userObject.name,
-      email: userObject.email,
-      provider: "google",
-      provider_id:"DasD" + generateRandomOtp(0,1000000),
-      googletoken: response.access_token,
-      password: "jWaeo@123" + generateRandomPassword(),
-      otp: generateRandomOtp(0,1000000),
-      phone: "",
-    };
-    dispatch(setsignupState(googleuserdata));
-    signupgoogledatapost(googleuserdata)
+    if(response){
+      const profile = await fetch(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+  
+        {
+          headers: {
+            Authorization: `Bearer ${response.access_token}`,
+          },
+          method: "get",
+        }
+      );
+      // var userObject=jwt_decode(response.credential)
+      let userObject = await profile.json();
+      const googleuserdata = {
+        name: userObject.name,
+        email: userObject.email,
+        provider: "google",
+        provider_id:"DasD" + generateRandomOtp(0,1000000),
+        googletoken: response.access_token,
+        password: "jWaeo@123" + generateRandomPassword(),
+        otp: generateRandomOtp(0,1000000),
+        phone: "",
+      };
+      //dispatch(setsignupState(googleuserdata));
+      signupgoogledatapost(googleuserdata)
+    }
   };
   const signupgoogledatapost = async (userData) => {
     try {
@@ -93,6 +95,7 @@ const Signup = () => {
         otp: userData.otp,
         token: userData.googletoken,
       };
+      console.log("Google Body:", body);
       const response = await fetch(
         "https://staging.commuterslink.com/api/v1/signup",
         {
@@ -106,14 +109,14 @@ const Signup = () => {
 
       const jsonresponse = await response.json();
        
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         dispatch(
           setsignupState({
             email: body.email,
             provider: body.provider,
           })
         );
-        console.log(jsonresponse);
+        console.log("Google Response:",jsonresponse);
         navigate("/number-generate");
       } else {
         alert("Error: " + jsonresponse.message);
@@ -124,43 +127,48 @@ const Signup = () => {
   };
   const postData = async () => {
     try {
-      if (termsService) {
-        const body = {
-          email: email,
-          number: phoneNumber,
-          signatur: "",
-        };
-        const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/send/otp",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          }
-        );
-
-        const jsonresponse = await response.json();
-        if (jsonresponse.statusCode == 200) {
-          dispatch(
-            setsignupState({
-              name: fullName,
-              email: email,
-              phone: phoneNumber,
-              password: password,
-              provider: provider,
-              otp: jsonresponse.otp,
-              token: jsonresponse.token,
-              confirmPassword: confirmPassword,
-            })
+      if(fullName === "" || email === "" || phoneNumber === null || password === "" || confirmPassword === ""){
+        alert("Please Fill All Fields!");
+      }
+      else{
+        if (termsService) {
+          const body = {
+            email: email,
+            number: phoneNumber,
+            signatur: "",
+          };
+          const response = await fetch(
+            "https://staging.commuterslink.com/api/v1/send/otp",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
+            }
           );
-          navigate("/otp");
+  
+          const jsonresponse = await response.json();
+          if (jsonresponse.statusCode == 200) {
+            dispatch(
+              setsignupState({
+                name: fullName,
+                email: email,
+                phone: phoneNumber,
+                password: password,
+                provider: provider,
+                otp: jsonresponse.otp,
+                token: jsonresponse.token,
+                confirmPassword: confirmPassword,
+              })
+            );
+            navigate("/otp");
+          } else {
+            alert("Error: " + jsonresponse.message);
+          }
         } else {
-          alert("Error: " + jsonresponse.message);
+          alert("please check Terms of Service");
         }
-      } else {
-        alert("please check Terms of Service");
       }
     } catch (error) {
       console.log(error.message);
@@ -182,8 +190,8 @@ const Signup = () => {
     if (phonePattern.test(number)) {
       setPhoneNumber(number);
       setIsValidPhoneNumber(true);
-    } 
-    else {
+    } else {
+      setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(false);
     }
     
@@ -327,14 +335,16 @@ const Signup = () => {
                         // value={phoneNumber}
 
                         label="Mobile Number (03xxxxxxxxx)"
-                        onChange={(e) => validatePhoneNumber(e.target.value)
-                       
-                        }
+                        onChange={(e) => {
+                          if (/^\d{0,11}$/.test(e.target.value)) {
+                            validatePhoneNumber(e.target.value);
+                          }
+                        }}
                         required
                         size="small"
-                        error={!isValidPhoneNumber}
+                        error={!isValidPhoneNumber && phoneNumber !== ''}
                         helperText={
-                          !isValidPhoneNumber &&
+                          !isValidPhoneNumber && phoneNumber !== '' &&
                           "Please enter a valid Phone Number starting with '03' and having 11 digits."
                         }
                       />

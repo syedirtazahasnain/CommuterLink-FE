@@ -10,7 +10,6 @@ import DriverRegistration from './pages/frontend/register-form/DriverRegistratio
 import ShareRide from './pages/frontend/register-form/ShareRide';
 import WouldYouLikeTo from './pages/frontend/register-form/WouldYouLikeTo';
 import OtpPage from "./pages/frontend/register-form/OtpPage"
-import Nestedform from "./pages/frontend/register-form/WouldYouLikeTo";
 import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 import RiderRegistration from './pages/frontend/register-form/RiderRegistration';
 import Verification from './pages/frontend/Dashboard/Verification';
@@ -28,8 +27,6 @@ import TermsCondition1 from './pages/backend/dashboard/TermsCondition1';
 import Verification1 from './pages/backend/dashboard/Verification1';
 import WhyProcessPayment1 from './pages/backend/dashboard/WhyProcessPayment1';
 import ShareToCare1 from './pages/backend/dashboard/ShareToCare1';
-import Office from './pages/frontend/Hompage-components/Office';
-import SchoolUniversity from './pages/frontend/Hompage-components/SchoolUniversity';
 import Office_School from './pages/frontend/register-form/Office_School';
 function App() {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -37,8 +34,8 @@ function App() {
   const userOption0 = useSelector((s) => s.general.data.option0);
   const userOption1 = useSelector((s) => s.general.data.option1);
 
-  console.log("Option 0", userOption0);
-  console.log("Option 1", userOption1);
+  // console.log("Option 0", userOption0);
+  // console.log("Option 1", userOption1);
 
   return (
     <>
@@ -48,8 +45,6 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
         <Route path='/faq' element={<Faq/>}/>
-        <Route path='/new-dashboard' element={<Dashboard1 />}/>
-        <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/commuterprofile1' element={<CommuterProfile1 />}/>
         <Route path='/replytoconfirmdates1' element={<ReplyToConfirmDates1 />}/>
         <Route path='/sendapprovalforpartner1' element={<SendApprovalForPartner1 />}/>
@@ -57,14 +52,9 @@ function App() {
         <Route path='/verification1' element={<Verification1 />}/>
         <Route path='/whyprocesspayment1' element={<WhyProcessPayment1 />}/>
         <Route path='/sharetocare1' element={<ShareToCare1 />}/>
-        <Route path='/office' element={<Office />}/>
-        <Route path='/schooluniversity' element={<SchoolUniversity />}/>
-        <Route path='/office_school' element={<Office_School />}/>
-        {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
-        {/* <Route path='/carousel' element={<CarouselSlider />} /> 
-        <Route path='/howworks' element={<HowWorks/>}/>
-        <Route path='/contribute' element={<Contribute/>}/> */}
-        {/* <Route path='/faq' element={<Faq/>}/> */}
+        {/* <Route path='/office_school' element={<Office_School />}/> */}
+        <Route path='/new-dashboard' element={<Dashboard1 />}/>
+        <Route path='/number-generate' element={<NumberGenerate/>}></Route>
 
           {userOption0 && (
             <>
@@ -85,7 +75,7 @@ function App() {
               <Route path='/shareride' element={<ShareRide/>}></Route>
               <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
               <Route path="/otp" element={<OtpPage />} />
-              <Route path='/nested' element={<Nestedform/>}></Route>
+              <Route path='/nested' element={<WouldYouLikeTo/>}></Route>
               <Route path='/number-generate' element={<NumberGenerate/>}></Route>
               <Route path='/verification' element={<Verification/>}></Route>
               <Route path='/office_school' element={<Office_School/>}></Route>
@@ -101,8 +91,8 @@ function App() {
               <Route path='/shareride' element={<ShareRide/>}></Route>
               <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
               <Route path="/otp" element={<OtpPage />} />
-              <Route path='/nested' element={<Nestedform/>}></Route>
-              {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
+              <Route path='/nested' element={<WouldYouLikeTo/>}></Route>
+              <Route path='/number-generate' element={<NumberGenerate/>}></Route>
               <Route path='/verification' element={<Verification/>}></Route>
               <Route path='/dashboard' element={<Dashboard/>}></Route>
               <Route path='/commuter-profile' element={<CommuterProfile/>}></Route>

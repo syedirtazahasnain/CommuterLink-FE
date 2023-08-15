@@ -19,6 +19,7 @@ import { ImageNotSupportedSharp } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
+import { setsignupState } from "../../../redux/signupSlice";
 
 const OtpPage = () => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
@@ -122,7 +123,7 @@ const OtpPage = () => {
       number: userData.phone,
       signatur: "",
     };
-    await fetch(
+    const response = await fetch(
       "https://staging.commuterslink.com/api/v1/send/otp",
       {
         method: "POST",
@@ -132,6 +133,17 @@ const OtpPage = () => {
         body: JSON.stringify(body),
       }
     );
+    const jsonresponse = await response.json();
+    if (jsonresponse.statusCode == 200) {
+      dispatch(
+        setsignupState({
+          otp: jsonresponse.otp,
+          token: jsonresponse.token,
+        })
+      );
+    } else {
+      alert("Resend OTP Error: " + jsonresponse.message);
+    }
     alert("OTP has been sent again!");
   };
 
