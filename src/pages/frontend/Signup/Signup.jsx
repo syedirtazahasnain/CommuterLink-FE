@@ -474,9 +474,9 @@ const Signup = () => {
                       </div>
                       <hr id="hrline2" />
                       <div id="span-text" className="text-center mb-5">
-                        New to CommuterLinks? &nbsp;
-                        <Link to="/rider-registration">
-                          <span style={{ color: "#198754" }}>Registration</span>
+                        Already have account on CommuterLinks? &nbsp;
+                        <Link to="/login">
+                          <span style={{ color: "#198754" }}>Login</span>
                         </Link>
                       </div>
                     </div>

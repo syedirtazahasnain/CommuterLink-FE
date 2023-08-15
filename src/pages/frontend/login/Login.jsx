@@ -366,9 +366,9 @@ const Login = () => {
                     </div>
                     <hr id="hrline2" />
                     <div id="span-text" className="text-center mb-5">
-                      New to CommutersLink? &nbsp;
-                      <Link to="/rider-registration">
-                        <span className="reg-text">Registration</span>
+                      Not have account on CommutersLink? &nbsp;
+                      <Link to="/signup">
+                        <span className="reg-text">Signup</span>
                       </Link>
                     </div>
                   </div>
