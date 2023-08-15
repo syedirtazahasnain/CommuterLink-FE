@@ -1657,28 +1657,28 @@ const DriverRegistration = () => {
                   </h1>{" "}
                   <Form>
                     <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="validationCustom01">
-        <Form.Label style={{ color: "#198754" }}>Car Brand</Form.Label>
-        <Form.Select
-          aria-label="Default select example"
-          style={{ color: "#198754" }}
-          value={selectedCarBrand}
-          onChange={handleCarBrandChange}
-          required
-          isValid={isCarBrandValid}
-          isInvalid={!isCarBrandValid}
-        >
-          <option value="" hidden>Car Brand</option>
-          {carBrand?.map((car) => (
-            <option key={car.id} value={car.brand_name}>
-              {car.brand_name}
-            </option>
-          ))}
-        </Form.Select>
-        <Form.Control.Feedback type="invalid">
-          Please select a car brand.
-        </Form.Control.Feedback>
-      </Form.Group>
+                      <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#198754" }}>Car Brand</Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#198754" }}
+                          value={selectedCarBrand}
+                          onChange={handleCarBrandChange}
+                          required
+                          isValid={isCarBrandValid}
+                          isInvalid={!isCarBrandValid}
+                        >
+                          <option value="" hidden>Car Brand</option>
+                          {carBrand?.map((car) => (
+                            <option key={car.id} value={car.brand_name}>
+                              {car.brand_name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                        <Form.Control.Feedback type="invalid">
+                          Please select a car brand.
+                        </Form.Control.Feedback>
+                      </Form.Group>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
                           Car Brand

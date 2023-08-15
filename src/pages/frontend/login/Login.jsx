@@ -66,6 +66,7 @@ const Login = () => {
   }, [userToken]);
 
   const googlesignup = useGoogleLogin({
+    clientId:"380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
     onError: (codeResponse) => handleFailure(codeResponse),
   });

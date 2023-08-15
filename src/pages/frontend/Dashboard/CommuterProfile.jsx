@@ -484,11 +484,6 @@ const CommuterProfile = () => {
                                   )
                                 }
                                 <br />
-                                <b>Home Address:</b>
-                                <u>
-                                  H-1150, St-09, DHA Phase 2, Islamabad
-                                </u>
-                                <br />
                                 {profession !== "" ? (
                                   <>
                                     <b>Profession:</b> <u>{profession}</u>
