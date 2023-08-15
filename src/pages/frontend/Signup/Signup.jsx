@@ -177,41 +177,43 @@ const Signup = () => {
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (emailPattern.test(email)) {
+    if (email === "" || emailPattern.test(email)) {
       setEmail(email);
       setIsValidEmail(true);
     } else {
+      setEmail(email);
       setIsValidEmail(false);
     }
   };
-  const validatePhoneNumber = (number) => {
+  const validatePhoneNumber = (phoneNumber) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
     const phonePattern = /^03\d{9}$/;
-    if (phonePattern.test(number)) {
-      setPhoneNumber(number);
+    if (phoneNumber === '' || phonePattern.test(phoneNumber)) {
+      setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(true);
     } else {
       setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(false);
     }
-    
   };
   const validatePassword = (password) => {
     // Regular expression pattern for validating passwords
     const passwordPattern =
       /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (passwordPattern.test(password)) {
+    if (password === '' || passwordPattern.test(password)) {
       setPassword(password);
       setIsValidPassword(true);
     } else {
+      setPassword(password);
       setIsValidPassword(false);
     }
   };
   const checkconfirmPassword = (cpassword) => {
-    if (password == cpassword) {
+    if (password === cpassword) {
       setConfirmPassword(cpassword);
       setisValidConfirmPassword(true);
     } else {
+      setConfirmPassword(cpassword);
       setisValidConfirmPassword(false);
     }
   };
@@ -306,6 +308,7 @@ const Signup = () => {
                         fullWidth
                         variant="outlined"
                         label="Full Name"
+                        value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         required
                         size="small"
@@ -318,6 +321,7 @@ const Signup = () => {
                         variant="outlined"
                         type="email"
                         label="Email"
+                        value={email}
                         onChange={(e) => validateEmail(e.target.value)}
                         required
                         size="small"
@@ -331,8 +335,7 @@ const Signup = () => {
                       <TextField
                         fullWidth
                         variant="outlined"
-                        type="number"
-                        // value={phoneNumber}
+                        value={phoneNumber}
 
                         label="Mobile Number (03xxxxxxxxx)"
                         onChange={(e) => {
@@ -355,6 +358,7 @@ const Signup = () => {
                         variant="outlined"
                         type="password"
                         label="Password"
+                        value={password}
                         onChange={(e) => validatePassword(e.target.value)}
                         required
                         size="small"
@@ -371,6 +375,7 @@ const Signup = () => {
                         variant="outlined"
                         type="password"
                         label="Confirm Password"
+                        value={confirmPassword}
                         onChange={(e) => checkconfirmPassword(e.target.value)}
                         required
                         size="small"
