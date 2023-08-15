@@ -13,7 +13,6 @@ import Registration from "./register-form/DriverRegistration";
 import AddressCards from "./Hompage-components/AddressCards";
 import Otp from './register-form/OtpPage'
 import WouldYouLikeTo from './register-form/WouldYouLikeTo';
-import Driver from './register-form/Driver';
 import NumberGenerate from "./register-form/NumberGenerate";
 import Dashboard from './Dashboard/Dashboard';
 import HeaderDashboard from "./Dashboard/HeaderDashboard";
