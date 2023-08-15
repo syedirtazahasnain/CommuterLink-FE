@@ -95,6 +95,7 @@ const Signup = () => {
         otp: userData.otp,
         token: userData.googletoken,
       };
+      console.log("Google Body:", body);
       const response = await fetch(
         "https://staging.commuterslink.com/api/v1/signup",
         {
@@ -115,7 +116,7 @@ const Signup = () => {
             provider: body.provider,
           })
         );
-        console.log(jsonresponse);
+        console.log("Google Response:",jsonresponse);
         navigate("/number-generate");
       } else {
         alert("Error: " + jsonresponse.message);

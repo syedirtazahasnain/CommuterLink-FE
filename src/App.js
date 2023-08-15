@@ -39,6 +39,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/faq' element={<Faq/>}/>
         <Route path='/new-dashboard' element={<Dashboard12 />}/>
+        <Route path='/number-generate' element={<NumberGenerate/>}></Route>
         {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
         {/* <Route path='/carousel' element={<CarouselSlider />} /> 
         <Route path='/howworks' element={<HowWorks/>}/>
@@ -80,7 +81,7 @@ function App() {
               <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route>
               <Route path="/otp" element={<OtpPage />} />
               <Route path='/nested' element={<Nestedform/>}></Route>
-              {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
+              <Route path='/number-generate' element={<NumberGenerate/>}></Route>
               <Route path='/verification' element={<Verification/>}></Route>
               <Route path='/dashboard' element={<Dashboard/>}></Route>
               <Route path='/commuter-profile' element={<CommuterProfile/>}></Route>

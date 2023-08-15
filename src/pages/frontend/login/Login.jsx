@@ -163,7 +163,6 @@ const Login = () => {
         if (jsonresponse.statusCode === 200) {
           dispatch(setloginState(jsonresponse.access_token));
         } else {
-          console.log(jsonresponse);
           alert("Error: " + jsonresponse.message);
         }
       }

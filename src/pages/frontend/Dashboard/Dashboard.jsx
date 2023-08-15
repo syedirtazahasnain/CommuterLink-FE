@@ -317,45 +317,60 @@ const Dashboard = () => {
                             style={{ width: "50rem" }}
                           >
                             <div class="row d-flex justify-content-center">
-                              <div className="col-sm-2">
-                                <div
-                                  className="card"
-                                  style={{ width: "6rem", fontWeight: "bold", backgroundColor: "rgb(32 155 98)" }}
-                                >
-                                  <img
-                                    src={`${BASE_URL}/assets/images/Vector.png`}
-                                    className="card-img-top w-40px m-auto"
-                                  />
-
-                                  {contactId !== "" ? (
-                                    <div
-                                    className="card-title text-light text-center"
-                                    style={{ width: "6rem", cursor: "pointer" }}
-                                    onClick={() => {
-                                      route();
-                                    }}
+                                {contactId !== "" ? (
+                                  <div className="col-sm-2">
+                                  <div
+                                    className="card"
+                                    style={{ width: "6rem", fontWeight: "bold", backgroundColor: "rgb(32 155 98)" }}
                                   >
-                                    {contactId}
+                                    <img
+                                      src={`${BASE_URL}/assets/images/Vector.png`}
+                                      className="card-img-top w-40px m-auto"
+                                    />
+                                    <div
+                                      className="card-title text-light text-center"
+                                      style={{ width: "6rem", cursor: "pointer" }}
+                                      onClick={() => {
+                                        route();
+                                      }}
+                                    >
+                                      {contactId}
+                                    </div>
+                                    <img
+                                      className=""
+                                      src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                                    />
                                   </div>
-                                  ) :
+                                  </div>
+                                ) :
                                   (
-                                    <div
-                                    className="card-title text-light text-center"
-                                    style={{ width: "6rem", cursor: "pointer" }}
-                                    onClick={() => {
-                                      route();
-                                    }}
-                                  >
-                                    Member ID
-                                  </div>
+                                    <div className="col-sm-2">
+                                      <div
+                                        className="card bg-success"
+                                        style={{ width: "6rem", cursor: "pointer" }}
+                                      >
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-40px m-auto "
+                                        />
+
+                                        <div
+                                          className="card-title text-center text-light"
+                                          style={{ width: "6rem" }}
+                                          onClick={() => {
+                                            route();
+                                          }}
+                                        >
+                                          Member ID
+                                        </div>
+                                        <img
+                                          className=""
+                                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                                        />
+                                      </div>
+                                    </div>
                                   )
-                                  }
-                                  <img
-                                    className=""
-                                    src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                                  />
-                                </div>
-                              </div>
+                                }
                               <div className="col-sm-2">
                                 <div
                                   className="card bg-success"
@@ -403,7 +418,7 @@ const Dashboard = () => {
                                   />
                                 </div>
                               </div>
-                              <div class="col-sm-2">
+                              <div className="col-sm-2">
                                 <div
                                   className="card bg-success"
                                   style={{ width: "6rem" }}

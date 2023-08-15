@@ -516,7 +516,7 @@ const CommuterProfile = () => {
                           </div>
                           <div className="col-2">
                             <div className="card">
-                              <img src={`${BASE_URL}/assets/images/Sir Zafar.png`} />
+                              <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "95px", width: "95px", backgroundColor: "rgb(32 155 98)" }} />
                             </div>
                           </div>
                         </div>
