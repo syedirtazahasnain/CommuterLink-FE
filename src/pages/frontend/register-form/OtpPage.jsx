@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
 import { BASE_URL } from "../../../constants";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -157,8 +155,6 @@ const OtpPage = () => {
   return (
     <div>
       <div>
-        <Navbar />
-
         <section
           id="sign-up"
           className="mt-5"
@@ -331,7 +327,6 @@ const OtpPage = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Footer />
       </div>
     </div>
   );

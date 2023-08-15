@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { ThemeProvider, Tooltip, createTheme } from "@mui/material";
 //import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { setCurrentPage, setSidebarState } from "../../../redux/generalSlice";
+import { setCurrentPage, setSidebarState } from "../../redux/generalSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { setloginState } from "../../../redux/loginSlice";
-import { BASE_URL } from "../../../constants";
-import Dashboard from "../../frontend/Dashboard/Dashboard";
+import { setloginState } from "../../redux/loginSlice";
+import { BASE_URL } from "../../constants";
+// import Dashboard from "../../frontend/Dashboard/Dashboard";
 import { useNavigate } from "react-router-dom";
 const customTheme = createTheme({
   palette: {
@@ -24,7 +24,7 @@ const customTheme = createTheme({
 
 // };
 
-const Dashboard1 = ({ children }) => {
+const BackendLayout = ({ children }) => {
   // const { instance } = useMsal();
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
@@ -38,6 +38,7 @@ const Dashboard1 = ({ children }) => {
       navigate("/commuter-profile");
     }
   };
+  
   useEffect(() => {
     // dispatch(setCurrentPage(""));
     document.getElementById("root").classList.remove("w-100");
@@ -46,6 +47,7 @@ const Dashboard1 = ({ children }) => {
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
+  
   const logout = () => {
     dispatch(setloginState(""));
     document.getElementById("root").classList.add("w-100");
@@ -1217,4 +1219,4 @@ const Dashboard1 = ({ children }) => {
   );
 };
 
-export default Dashboard1;
+export default BackendLayout;

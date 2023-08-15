@@ -10,8 +10,6 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
 import { Button } from "@mui/base";
 
 const Login = () => {
@@ -180,8 +178,6 @@ const Login = () => {
   return (
     <div>
       <div>
-        <Navbar />
-
         <section id="sign-up" class="mt-5" style={{ backgroundColor: "#eee" }}>
           <div className="container">
             {" "}
@@ -379,8 +375,6 @@ const Login = () => {
             </div>
           </div>
         </section>
-
-        <Footer />
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 import React from "react";
 import { BASE_URL } from "../../../constants";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { setsignupState } from "../../../redux/signupSlice";
 import { setloginState } from "../../../redux/loginSlice";
@@ -35,7 +33,6 @@ const Verification = () => {
   return (
 
     <div>
-      <Navbar />
       <div className="container py-5 ">
         <div className="row justify-content-center pt-15 ">
           <div className="col-lg-4 col-md-4 col-sm-4">
@@ -95,9 +92,6 @@ const Verification = () => {
           </div>
         </div>
       </div>
-
-
-      <Footer />
     </div>
   );
 };

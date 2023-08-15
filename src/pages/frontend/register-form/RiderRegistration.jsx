@@ -1,7 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
+import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Carousel from "react-bootstrap/Carousel";
@@ -679,7 +676,6 @@ const RiderRegistration = () => {
  
   return (
     <>
-      <Navbar />
       <div style={{ backgroundColor: "#eee" }}>
           <div className="containter p-5">
             <div className="row justify-content-center">
@@ -1324,8 +1320,6 @@ const RiderRegistration = () => {
             </div>
           </div>
         </div>
-
-      <Footer />
     </>
   );
 };

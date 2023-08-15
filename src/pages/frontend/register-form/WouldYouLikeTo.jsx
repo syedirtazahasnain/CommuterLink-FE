@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import Navbar from '../Hompage-components/Navbar';
-import Footer from "../Hompage-components/Footer";
 import Form from "react-bootstrap/Form";
 // import Button from "react-bootstrap/Button";
 import { BASE_URL } from "../../../constants";
@@ -34,10 +32,7 @@ const WouldYouLikeTo = () => {
  console.log("Selected", radio1);
   return (
     <div>
-      
-        <div>
-        <Navbar />
-        
+        <div>        
         <section
           id="sign-up"
           className="mt-5"
@@ -163,10 +158,6 @@ const WouldYouLikeTo = () => {
             </div>
           </div>
         </section>
-
-        
-        
-        <Footer />
       </div>
     </div>
   )

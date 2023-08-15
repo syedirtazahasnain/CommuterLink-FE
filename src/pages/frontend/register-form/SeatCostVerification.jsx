@@ -3,8 +3,6 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { BASE_URL } from "../../../constants";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
 import { Button } from "@mui/base";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +31,6 @@ const SeatCostVerification = () => {
   return (
 
     <div>
-      <Navbar />
       <div className="container py-5">
         <div className="row justify-content-center pt-15 ">
           <div className="col-lg-4 col-md-4 col-sm-4">
@@ -92,7 +89,6 @@ const SeatCostVerification = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

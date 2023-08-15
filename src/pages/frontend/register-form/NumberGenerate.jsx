@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 //import img from "../../../Images/contribute-1.jpg";
@@ -86,7 +84,6 @@ function NumberGenerate() {
   };
   return (
     <div>
-      <Navbar />
       <div className="container py-5">
         <div className="row pt-5 pb-4 justify-content-center mt-5 ">
           <div className="col-lg-4 col-md-4 col-sm-4">
@@ -136,7 +133,6 @@ function NumberGenerate() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

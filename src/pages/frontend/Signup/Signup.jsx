@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
 import { BASE_URL } from "../../../constants";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/base";
@@ -222,7 +220,6 @@ const Signup = () => {
   return (
     <div>
       <div>
-        <Navbar />
         <section
           id="sign-up"
           className="mt-5"
@@ -480,7 +477,6 @@ const Signup = () => {
             </div>
           </div>
         </section>
-        <Footer />
       </div>
     </div>
   );

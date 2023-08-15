@@ -1,7 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
+import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Carousel from "react-bootstrap/Carousel";
@@ -24,10 +21,6 @@ import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../../constants";
-// import ibn from '../../../Images/iban.png';
-// import easypaisa from '../../../Images/ep.png';
-// import jazzcash from '../../../Images/jazz.png';
-// import raast from '../../../Images/raast.png';
 
 const DriverRegistration = () => {
 
@@ -644,6 +637,7 @@ const DriverRegistration = () => {
     await ImagesFormCnicFront();
     await ImagesFormCnicBack();
     await ImagesFormPicture();
+    setShowDriverForm(true);
   };
 
   const handleDriver = async () => {
@@ -967,7 +961,6 @@ const DriverRegistration = () => {
   
   return (
     <>
-      <Navbar />
       {!showDriverForm && (
         <>
           <div style={{ backgroundColor: "#eee" }}>
@@ -1622,7 +1615,6 @@ const DriverRegistration = () => {
                       size="large" 
                       className="btnregistration" 
                       onClick={() => {
-                            setShowDriverForm(true);
                             handleLogin();
                       }}>
                       Next
@@ -1675,9 +1667,6 @@ const DriverRegistration = () => {
                             </option>
                           ))}
                         </Form.Select>
-                        <Form.Control.Feedback type="invalid">
-                          Please select a car brand.
-                        </Form.Control.Feedback>
                       </Form.Group>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
@@ -2415,8 +2404,6 @@ const DriverRegistration = () => {
           </div>
         </> 
       )}
-
-      <Footer />
     </>
   );
 };

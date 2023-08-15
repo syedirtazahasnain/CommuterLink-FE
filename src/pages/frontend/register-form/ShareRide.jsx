@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from '../Hompage-components/Navbar';
-import Footer from "../Hompage-components/Footer";
 import { BASE_URL } from "../../../constants";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -10,8 +8,7 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ShareRide = () => {
 
@@ -21,11 +18,10 @@ const ShareRide = () => {
         width: "350px",
         margin: "auto",
       };
+
   return (
     <div>
         <div>
-        <Navbar />
-        
         <section
           id="sign-up"
           className="mt-5"
@@ -143,10 +139,6 @@ const ShareRide = () => {
             </div>
           </div>
         </section>
-
-        
-        
-        <Footer />
       </div>
     </div>
   )

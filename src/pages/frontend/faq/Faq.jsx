@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from '../Hompage-components/Navbar';
-import Footer from '../Hompage-components/Footer';
 import imgfaqs from '../../../Images/question.png'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -10,7 +8,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const Faq = () => {
   return (
     <div>
-      <Navbar />
       <div className="container text-center mt-5 pt-5 fw-bold fs-1 mb-5">
         <span><img src={imgfaqs} alt="" /> Frequently Asked Questions</span>
       </div>
@@ -207,9 +204,8 @@ const Faq = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }
 
-export default Faq
+export default Faq;
