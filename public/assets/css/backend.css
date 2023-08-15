@@ -45,8 +45,9 @@
 .app-sidebar .menu .menu-item .menu-link.active a, 
 .menu-item a:hover {
   transition: all 0.2s ease;
-  background-color: rgba(159, 162, 180, 0.2);
-  border-left: 5px solid var(--bs-primary);
+  /* background-color: rgba(159, 162, 180, 0.2);
+  border-left: 5px solid var(--bs-primary); */
+  background-color: #0000;
 }
 .menu-title {
   font-family: "Sohne-Buch";
@@ -167,14 +168,19 @@ a {
   background-color: rgba(231, 229, 218, 0.25) !important;
 }
 body{
- background-color: #8FC4B7!important;;
+ background-color: rgb(217, 217, 217)!important;
 }
 
-.newdashboard{
+.Profile{
   background-color: #8FC4B7;
+  
+ }
+ .Profile:hover{
+  background-color: #c2ccc9;
+  color: #008d55;
  }
  .app-header{
-  background-color: #8FC4B7;
+  background-color:rgb(217, 217, 217)!important;
  }
 
 

@@ -48,6 +48,9 @@ const Dashboard1 = ({ children }) => {
   }, []);
   const logout = () => {
     dispatch(setloginState(""));
+    document.getElementById("root").classList.add("w-100");
+    document.getElementById("root").classList.remove("d-flex");
+    document.getElementById("root").classList.remove("flex-grow-1");
     navigate("/login");
   };
 
@@ -187,7 +190,7 @@ const Dashboard1 = ({ children }) => {
                     style={{ backgroundColor: "#198754" }}
                   >
                     <div
-                      className="app-sidebar-logo bg-white"
+                      className="app-sidebar-logo bg-white border-0"
                       id="kt_app_sidebar_logo"
                       // style={backgroundLogo}
                     >
@@ -224,10 +227,10 @@ const Dashboard1 = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="app-sidebar-menu overflow-hidden flex-column-fluid">
+                    <div className="app-sidebar-menu overflow-hidden flex-column-fluid bg-dark">
                       <div
                         id="kt_app_sidebar_menu_wrapper"
-                        className="app-sidebar-wrapper hover-scroll-overlay-y my-5 d-flex flex-column"
+                        className="app-sidebar-wrapper hover-scroll-overlay-y d-flex flex-column"
                         data-kt-scroll="true"
                         data-kt-scroll-activate="true"
                         data-kt-scroll-height="auto"
@@ -243,13 +246,12 @@ const Dashboard1 = ({ children }) => {
                           data-kt-menu-expand="false"
                         >
                           <div className="menu-item">
-                            <div className="d-flex align-items-center  me-5 me-xl-13">
+                            <div className="d-flex align-items-center mx-3  me-5 me-xl-13">
                               {/*begin::Symbol*/}
                               <div className="symbol symbol-50px symbol-circle me-3">
                                 <img
                                   src={`${BASE_URL}/assets/images/pic.png`}
-                                  className
-                                  alt
+
                                 />
                               </div>
                               {/*end::Symbol*/}
@@ -260,7 +262,7 @@ const Dashboard1 = ({ children }) => {
                                 </span>
                                 <button
                                   href="/"
-                                  className="btn-success fw-bold text-white text-hover-success fs-6"
+                                  className="btn btn-sm Profile fw-bold text-white  text-hover-dark fs-6 rounded-4"
                                 >
                                   Profile
                                 </button>
@@ -447,12 +449,12 @@ const Dashboard1 = ({ children }) => {
                       <div className="card-body p-0">
                         <div className="row">
                           <div
-                            className="col-lg-12 col-md-6 col-sm-4 d-flex p-0 "
+                            className="col-lg-12 col-md-6 col-sm-4 d-flex p-0 justify-content-center"
                             style={{ backgroundColor: "#8FC4B7", border: "0" }}
                           >
                             <div className="col-lg-9 px-5">
                               <div
-                                className="card d-flex  d-flex justify-content-left"
+                                className="card d-flex  d-flex justify-content-center"
                                 style={{
                                   width: "65rem",
                                   backgroundColor: "rgba(157,233,222,0.75)",
