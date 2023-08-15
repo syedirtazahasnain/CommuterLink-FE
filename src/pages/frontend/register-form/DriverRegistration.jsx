@@ -44,6 +44,11 @@ const DriverRegistration = () => {
   
   };
 
+  const handleCarBrandChange = (e) => {
+    const value = e.target.value;
+    setSelectedCarBrand(value);
+    setIsCarBrandValid(value !== ''); // Set validation based on whether a value is selected or not
+  };
   const AddNewStart = () => {
     setAddNewStart(true);
   };
@@ -65,15 +70,17 @@ const DriverRegistration = () => {
   const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
-  const [profession, setProfession] = useState("");
-  const [cnic, setCnic] = useState("");
+  const [cnic, setCnic] = useState('');
+  const [isValidCnic, setIsValidCnic] = useState(true);
   const [cnicFront, setCnicFront] = useState("");
   const [cnicFrontExt, setCnicFrontExt] = useState("");
   const [cnicBack, setCnicBack] = useState("");
   const [cnicBackExt, setCnicBackExt] = useState("");
   const [picture, setPicture] = useState("");
   const [pictureExt, setPictureExt] = useState("");
-  
+  const [profession, setProfession] = useState('');
+  const [isValidProfession, setIsValidProfession] = useState(true);
+  const [isCarBrandValid, setIsCarBrandValid] = useState(true);
   // For Start Point
   const [locationStartString, setLocationStartString] = useState("");
   const [locationStartStringId, setLocationStartStringId] = useState("");
@@ -305,6 +312,17 @@ const DriverRegistration = () => {
   const handleProvinceStartChange = (event) => {
     setProvinceStartId(event.target.value);
   };
+  function validateProfession(profession) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const professionPattern = /^[A-Za-z\s]+$/;
+  
+    return professionPattern.test(profession);
+  }
+  const handleProfessionChange = (e) => {
+    const newProfession = e.target.value;
+    setProfession(newProfession);
+    setIsValidProfession(validateProfession(newProfession));
+  };
 
   const handleProvinceEndChange = (event) => {
     setProvinceEndId(event.target.value);
@@ -415,13 +433,37 @@ const DriverRegistration = () => {
     }
   };
 
+  // const handleCnicChange = (event) => {
+  //   const inputCnic = event.target.value.replace(/\D/g, '');
+  //   if (inputCnic.length <= 13) {
+  //     setCnic(inputCnic);
+  //     setIsValidCnic(true);
+  //   }
+  //   else{
+  //     setIsValidCnic(false);
+  //   }
+    
+  // };
+  function validateCnic(cnic) {
+    // Regular expression pattern for validating Pakistani CNIC (12345-1234567-1)
+    const cnicPattern = /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/;
+  
+    return cnicPattern.test(cnic);
+  }
   const handleCnicChange = (event) => {
     const inputCnic = event.target.value.replace(/\D/g, '');
+
     if (inputCnic.length <= 13) {
-      setCnic(inputCnic);
+      const formattedCnic = inputCnic.replace(
+        /^(\d{5})(\d{7})(\d{1})$/,
+        '$1-$2-$3'
+      );
+      setCnic(formattedCnic);
+      setIsValidCnic(validateCnic(formattedCnic));
+    } else {
+      setIsValidCnic(false);
     }
   };
-
   const handleCnicFront = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -1471,22 +1513,26 @@ const DriverRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
-                        Profession
-                      </Form.Label>
-                      <Form.Control
-                        required
-                        type="text"
-                        className="colorplace"
-                        placeholder="Profession (Engineer, Doctor, etc)"
-                        value={profession}
-                        onChange={(e) => setProfession(e.target.value)}
-                        defaultValue=""
-                      />
-                    </Form.Group>
+        <Form.Label style={{ color: "#198754" }}>
+          Profession
+        </Form.Label>
+        <Form.Control
+          required
+          type="text"
+          className={`colorplace ${isValidProfession ? '' : 'is-invalid'}`}
+          placeholder="Profession (Engineer, Doctor, etc)"
+          value={profession}
+          onChange={handleProfessionChange}
+        />
+        {!isValidProfession && (
+          <div className="invalid-feedback">
+            Please enter a valid profession.
+          </div>
+        )}
+      </Form.Group>
                   </Row>
                   <Row className="mb-3">
-                    <Form.Group as={Col} md="12" controlId="validationCustom01">
+                    {/* <Form.Group as={Col} md="12" controlId="validationCustom01">
                       <Form.Label style={{ color: "#198754" }}>CNIC</Form.Label>
 
                       <Form.Control
@@ -1496,8 +1542,29 @@ const DriverRegistration = () => {
                         placeholder="xxxxxxxxxxxxx"
                         value={cnic}
                         onChange={handleCnicChange}
+
+                        error={!isValidCnic}
+                        helperText={
+                          !isValidCnic && "Please enter a valid Cnic"
+                        }
                       />
-                    </Form.Group>
+                    </Form.Group> */}
+                    <Form.Group as={Col} md="12" controlId="validationCustom01">
+          <Form.Label style={{ color: "#198754" }}>CNIC</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            className={`colorplace ${isValidCnic ? '' : 'is-invalid'}`}
+            placeholder="12345-1234567-1"
+            value={cnic}
+            onChange={handleCnicChange}
+          />
+          {!isValidCnic && (
+            <div className="invalid-feedback">
+              Please enter a valid CNIC in the format 12345-1234567-1.
+            </div>
+          )}
+        </Form.Group>
                   </Row>
                   <Row className="mb-3">
                     <Form.Group
@@ -1590,7 +1657,29 @@ const DriverRegistration = () => {
                   </h1>{" "}
                   <Form>
                     <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
+                    <Form.Group as={Col} md="6" controlId="validationCustom01">
+        <Form.Label style={{ color: "#198754" }}>Car Brand</Form.Label>
+        <Form.Select
+          aria-label="Default select example"
+          style={{ color: "#198754" }}
+          value={selectedCarBrand}
+          onChange={handleCarBrandChange}
+          required
+          isValid={isCarBrandValid}
+          isInvalid={!isCarBrandValid}
+        >
+          <option value="" hidden>Car Brand</option>
+          {carBrand?.map((car) => (
+            <option key={car.id} value={car.brand_name}>
+              {car.brand_name}
+            </option>
+          ))}
+        </Form.Select>
+        <Form.Control.Feedback type="invalid">
+          Please select a car brand.
+        </Form.Control.Feedback>
+      </Form.Group>
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#198754" }}>
                           Car Brand
                         </Form.Label>
@@ -1609,7 +1698,7 @@ const DriverRegistration = () => {
                             </option>
                           ))}
                         </Form.Select>
-                      </Form.Group>
+                      </Form.Group> */}
                       <Form.Group as={Col} md="6" controlId="validationCustom02">
                         <Form.Label style={{ color: "#198754" }}>
                           Model Name

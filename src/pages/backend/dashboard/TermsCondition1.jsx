@@ -23,7 +23,7 @@ const backgroundLogo={
   backgroundColor:"white",
  }
 
- const ReplyToConfirmDates1 = ({ children }) => {
+ const TermsCondition1 = ({ children }) => {
   // const { instance } = useMsal();
   const navigate = useNavigate();
   const [submitbtn , setSubmit] = useState(false);
@@ -434,7 +434,7 @@ const backgroundLogo={
               </div>
             </div>
             {/* Dashboard Content */}
-        
+          
             <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
                           <div className="border border-bottom border-success justify-content-center ml-3"></div>
                        <div className="card-body" style={{}}>
@@ -443,34 +443,38 @@ const backgroundLogo={
                         </div>
                        </div>
                         </div>
+
                         <div className="card px-5 py-5" style={{ border: "0", backgroundColor: "rgba(162 229 198)" }}>
                           <div class="card-header bg-light mb-2">
+                            <h1 className="text-center text-success m-auto">
+                              TERMS & CONDITIONS
+                            </h1>
                           
-                          
-                               <div className="card bg-light justify-content-center py-5" style={{border:'0'}}>
+                               <div className="card bg-light justify-content-center" style={{border:'0'}}>
 
-                               <div className="card-body"><h5 className="py-3">Dear Yasir Abbas Mirza,</h5>
+                               <div className="card-body"><p>1.Your car is in a good shape and is roadworthy</p>
+                                    <p className="">2. You are committed to provide the car for commuting of partners on all days
+                                        mentioned in the agreement</p>
                                         
-                                        <p>Thank you very much for accepting to share your ride to 
-                                            school/university. I also think that we are a suitable match,
-                                            so I also formally give my consent to share your car.
+                                        <p>3.If due to any unforeseen reason you cannot commute on certain day, no fee will be paid for that day</p>
+                                        <p>4.You will inform the partners well in advance (atleast 12 hours) about your inability to cummute on a certain day.
+                                            In case of an emergency this can be waived off under exceptional circumstances
                                         </p>
-                                        
-                                    
-                                        <p>I have deposited Rs.15000/- as my share for one month (20 days) with CommutersLink, which will be credited to your WALLET
-                                            on daily basis.
-                                        </p>
-                                        <p>Please also note that the deposit includes CommutersLink service fee @ Rs. 1,000/-. </p>
-                                       <p>I wish to start commuting with you starting from July 15, 2022.</p>
-                                            <p>Looking forward to a long term association for mutual benefit.</p>
-                                            <p>Best regards
-                                            
+                                        <p>5.You will be paid on daily basis for actual number of days that your car is used</p>
+                                        <p>6.If a commuting partner misses the car and fails to commute due to late arrival/time off you will still be paid for that day</p>
+                                       <p>7. You will wait at least 15 minute after the agreed time for commuting partner to join you.</p>
+                                            <p>8. You will update the scheduler in your dashboard on daily(as and when required basis)</p>
+                                            <p>9. You will receive your share of fee through CommutersLink and there will be no direct transaction between 
+                                                you and your commuting partner
                                             </p>
-                                            <p>Zafar Jamil</p>
-                                           
+                                            <p>
+                                                10. If you wish to discontinue your partnership with a member due  a reason or other CommutersLink will inform 
+                                                the partner on your behalf (insert alink here "why to receive payment through commutersLink")
+                                            </p>
+                                            11. Any complaints, grievances will be addressed to CommutersLink for resolution
                                         </div>
                              <div className="card-body">
-                                <button href="/" className=" btn_view1 btn-lg ">Reply to Confirm Dates</button>
+                                <button href="/" className=" btn_view1 btn-block ">I Accept</button>
                              </div>
                                </div>
                               
@@ -482,7 +486,6 @@ const backgroundLogo={
                            
                          </div>
                         </div>
-                       
         
           </div>
         </div>
@@ -495,4 +498,4 @@ const backgroundLogo={
   );
 };
 
-export default ReplyToConfirmDates1;
+export default TermsCondition1;

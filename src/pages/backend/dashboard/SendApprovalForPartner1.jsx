@@ -23,7 +23,7 @@ const backgroundLogo={
   backgroundColor:"white",
  }
 
- const ReplyToConfirmDates1 = ({ children }) => {
+ const SendApprovalForPartner1 = ({ children }) => {
   // const { instance } = useMsal();
   const navigate = useNavigate();
   const [submitbtn , setSubmit] = useState(false);
@@ -434,43 +434,33 @@ const backgroundLogo={
               </div>
             </div>
             {/* Dashboard Content */}
-        
+          
             <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
                           <div className="border border-bottom border-success justify-content-center ml-3"></div>
                        <div className="card-body" style={{}}>
-                        <div className="card-title">
-                            <h2 className="text-success">MEMBERS REQUESTS</h2>
-                        </div>
+                       
                        </div>
                         </div>
-                        <div className="card px-5 py-5" style={{ border: "0", backgroundColor: "rgba(162 229 198)" }}>
-                          <div class="card-header bg-light mb-2">
-                          
-                          
-                               <div className="card bg-light justify-content-center py-5" style={{border:'0'}}>
 
-                               <div className="card-body"><h5 className="py-3">Dear Yasir Abbas Mirza,</h5>
+                        <div className="card px-5 py-5 m-auto" style={{ border: "0", backgroundColor: "rgba(162 229 198)",width:'50rem' }}>
+                          <div class="card-header mb-2">
+                            <h1 className="text-center text-success m-auto">
+                             
+                            </h1>
+                          
+                               <div className="card bg-light justify-content-center" style={{border:'0', }}>
+
+                               <div className="card-body" style={{backgroundColor:"#D9D9D9E5"}}><h5>
+                               Dear Zafar Jamil,
+                               </h5>
+                                    <p className="">I have gone through your profile and I feel that we are a good match to commute together.</p>
                                         
-                                        <p>Thank you very much for accepting to share your ride to 
-                                            school/university. I also think that we are a suitable match,
-                                            so I also formally give my consent to share your car.
+                                        <p>I have approved you as a partner and we can start as soon as you also accept to share my car.
                                         </p>
-                                        
-                                    
-                                        <p>I have deposited Rs.15000/- as my share for one month (20 days) with CommutersLink, which will be credited to your WALLET
-                                            on daily basis.
-                                        </p>
-                                        <p>Please also note that the deposit includes CommutersLink service fee @ Rs. 1,000/-. </p>
-                                       <p>I wish to start commuting with you starting from July 15, 2022.</p>
-                                            <p>Looking forward to a long term association for mutual benefit.</p>
-                                            <p>Best regards
-                                            
-                                            </p>
-                                            <p>Zafar Jamil</p>
-                                           
+               
                                         </div>
-                             <div className="card-body">
-                                <button href="/" className=" btn_view1 btn-lg ">Reply to Confirm Dates</button>
+                             <div className="card-body" style={{backgroundColor:"#D9D9D9E5"}}>
+                                <button href="/" className=" btn_view1 btn-block ">Send</button>
                              </div>
                                </div>
                               
@@ -482,7 +472,6 @@ const backgroundLogo={
                            
                          </div>
                         </div>
-                       
         
           </div>
         </div>
@@ -495,4 +484,4 @@ const backgroundLogo={
   );
 };
 
-export default ReplyToConfirmDates1;
+export default SendApprovalForPartner1;

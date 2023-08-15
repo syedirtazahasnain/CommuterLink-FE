@@ -1,13 +1,11 @@
 import React, { useEffect,useState } from "react";
 import { ThemeProvider, Tooltip, createTheme } from "@mui/material";
-//import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { setCurrentPage, setSidebarState } from "../../../redux/generalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
-import Dashboard from "../../frontend/Dashboard/Dashboard";
-import { useNavigate } from "react-router-dom";
+import { setsignupState } from "../../../redux/signupSlice";
+import { Button } from "react-bootstrap";
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -22,20 +20,27 @@ const backgroundLogo={
   backgroundRepeat:"no-repeat",
   backgroundColor:"white",
  }
+ const backgroundStyle = {
+    backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
+      // backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      width:'100',
+      height:'20vh'
+        // Set the desired height of the background area
+  };
+  
 
- const ReplyToConfirmDates1 = ({ children }) => {
+ const ShareToCare1 = ({ children }) => {
   // const { instance } = useMsal();
-  const navigate = useNavigate();
   const [submitbtn , setSubmit] = useState(false);
   const dispatch = useDispatch();
   const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
   const currentPage = useSelector((s) => s.general.currentPage);
   const route = () => {
-    setSubmit(true);
     
-    if(!submitbtn){
-      navigate("/commuter-profile");
-    }
+    
+   
   }
   useEffect(() => {
     // dispatch(setCurrentPage(""));
@@ -45,11 +50,12 @@ const backgroundLogo={
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-  const logout = () => {
-    dispatch(setloginState(""));
-    navigate("/login");
-  }
+ 
 
+  const name = useSelector((s) => s.signup.data.name);
+  const email = useSelector((s) => s.signup.data.email);
+
+  
 
   return (
     <div className="container">
@@ -78,7 +84,7 @@ const backgroundLogo={
                 <button
                   className="btn btn-icon btn-active-color-primary w-35px h-35px"
                   id="kt_app_sidebar_mobile_toggle"
-                  onClick={() => dispatch(setSidebarState(!sidebarOpened))}
+                
                 >
                   <span className="svg-icon svg-icon-2 svg-icon-md-1">
                     <svg
@@ -132,7 +138,7 @@ const backgroundLogo={
                       className="btn btn-sm fw-bold btn-success"
                       data-bs-toggle="modal"
                       data-bs-target="#kt_modal_new_target"
-                      onClick={logout}
+                     
                     >
                       LOG OUT
                     </button>
@@ -434,55 +440,75 @@ const backgroundLogo={
               </div>
             </div>
             {/* Dashboard Content */}
-        
-            <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
-                          <div className="border border-bottom border-success justify-content-center ml-3"></div>
-                       <div className="card-body" style={{}}>
-                        <div className="card-title">
-                            <h2 className="text-success">MEMBERS REQUESTS</h2>
-                        </div>
-                       </div>
-                        </div>
-                        <div className="card px-5 py-5" style={{ border: "0", backgroundColor: "rgba(162 229 198)" }}>
-                          <div class="card-header bg-light mb-2">
-                          
-                          
-                               <div className="card bg-light justify-content-center py-5" style={{border:'0'}}>
+          
+            <div className="container py-5 ">
+        <div className="row justify-content-center pt-15 ">
+          <div className="col-lg-12">
+            <div
+              className="card text-center border-1 border-success rounded rounded-4"
+            >
+              <div>
+                <div>
+                  <div>
+                    <div style={backgroundStyle}></div>
+                  </div>
+                  </div>
+              </div>
+              <div>
+                <div>
+                  <div>
+                    <div className="card">
 
-                               <div className="card-body"><h5 className="py-3">Dear Yasir Abbas Mirza,</h5>
-                                        
-                                        <p>Thank you very much for accepting to share your ride to 
-                                            school/university. I also think that we are a suitable match,
-                                            so I also formally give my consent to share your car.
-                                        </p>
-                                        
-                                    
-                                        <p>I have deposited Rs.15000/- as my share for one month (20 days) with CommutersLink, which will be credited to your WALLET
-                                            on daily basis.
-                                        </p>
-                                        <p>Please also note that the deposit includes CommutersLink service fee @ Rs. 1,000/-. </p>
-                                       <p>I wish to start commuting with you starting from July 15, 2022.</p>
-                                            <p>Looking forward to a long term association for mutual benefit.</p>
-                                            <p>Best regards
-                                            
-                                            </p>
-                                            <p>Zafar Jamil</p>
-                                           
-                                        </div>
-                             <div className="card-body">
-                                <button href="/" className=" btn_view1 btn-lg ">Reply to Confirm Dates</button>
-                             </div>
-                               </div>
-                              
-                              
-                           
-                                        </div>
-
-                         <div className="card">
-                           
-                         </div>
+                    <div
+                      className="card-body cardpadding bg-light mb-5 py-5 rounded rounded-4"
+                    //   style={{ background: "rgb(22,70,57)" }}
+                    >
+                      <div>
+                  <div>
+                          {" "}
+                          <img
+                            src={`${BASE_URL}/assets/images/Vector.png`}
+                            alt="Sample photo"
+                            className="bg-success"
+                            style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '60%' }}
+                          />
                         </div>
-                       
+                  <div className="text-white">{name}<br/>{email}</div>
+                  <h5 className="card-title mt-4 text-success" style={{ color: "yellow" }}>
+                    FullName
+                  </h5>
+                  <p>test@gmail.com</p>
+                </div>
+                <div>
+               <h5 className="text-success">I want to share ride for</h5>
+               <Button variant="success" className="btn-lg">Office</Button>
+                </div>
+                <p>Or</p>
+<Button variant="success" className="btn-lg">School/University</Button>
+                <form id="numberForm">
+                  <div className="mb-3">
+                    
+                    {/* <Button variant="success" className="btn-sm" onClick={route}>
+                      
+                    </Button> */}
+                    <div><p className="py-3 text-success">
+                        On long term basis</p></div>
+                  </div>
+                </form>
+              </div>
+             
+                    </div>
+           
+              </div>
+              {/* <div className="card bg-success">
+                <div className="card-heading bg-success">Share to Care</div>
+              </div> */}
+                </div>
+                </div>
+            </div>   
+            </div>
+        </div>
+      </div>
         
           </div>
         </div>
@@ -495,4 +521,4 @@ const backgroundLogo={
   );
 };
 
-export default ReplyToConfirmDates1;
+export default ShareToCare1;

@@ -1,13 +1,14 @@
 import React, { useEffect,useState } from "react";
 import { ThemeProvider, Tooltip, createTheme } from "@mui/material";
-//import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { setCurrentPage, setSidebarState } from "../../../redux/generalSlice";
+import { setCurrentPage, setSidebarState, setOption0State, setOption1State } from "../../../redux/generalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
 import Dashboard from "../../frontend/Dashboard/Dashboard";
 import { useNavigate } from "react-router-dom";
+import { setsignupState } from "../../../redux/signupSlice";
+import { Button } from "react-bootstrap";
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -22,8 +23,18 @@ const backgroundLogo={
   backgroundRepeat:"no-repeat",
   backgroundColor:"white",
  }
+ const backgroundStyle = {
+    backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
+      // backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      width:'100',
+      height:'20vh'
+        // Set the desired height of the background area
+  };
+  
 
- const ReplyToConfirmDates1 = ({ children }) => {
+ const TermsCondition1 = ({ children }) => {
   // const { instance } = useMsal();
   const navigate = useNavigate();
   const [submitbtn , setSubmit] = useState(false);
@@ -32,6 +43,11 @@ const backgroundLogo={
   const currentPage = useSelector((s) => s.general.currentPage);
   const route = () => {
     setSubmit(true);
+    dispatch(setsignupState(""));
+    dispatch(setloginState(""));
+    dispatch(setOption0State(""));
+    dispatch(setOption1State(""));
+    navigate("/");
     
     if(!submitbtn){
       navigate("/commuter-profile");
@@ -50,6 +66,10 @@ const backgroundLogo={
     navigate("/login");
   }
 
+  const name = useSelector((s) => s.signup.data.name);
+  const email = useSelector((s) => s.signup.data.email);
+
+  
 
   return (
     <div className="container">
@@ -434,55 +454,66 @@ const backgroundLogo={
               </div>
             </div>
             {/* Dashboard Content */}
-        
-            <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
-                          <div className="border border-bottom border-success justify-content-center ml-3"></div>
-                       <div className="card-body" style={{}}>
-                        <div className="card-title">
-                            <h2 className="text-success">MEMBERS REQUESTS</h2>
+          
+            <div className="container py-5 ">
+        <div className="row justify-content-center pt-15 ">
+          <div className="col-lg-4 col-md-4 col-sm-4">
+            <div
+              className="card text-center border-1 border-success rounded rounded-4"
+            >
+              <div className="container">
+                <div className="row">
+                  <div className="col px-4">
+                    <div style={backgroundStyle}></div>
+                  </div>
+                  </div>
+              </div>
+              <div className="container">
+                <div className="row">
+                  <div className="col">
+                    <div
+                      className="card-body cardpadding mb-5 py-5 rounded rounded-4"
+                      style={{ background: "rgb(22,70,57)" }}
+                    >
+                      <div>
+                  <div>
+                          {" "}
+                          <img
+                            src={`${BASE_URL}/assets/images/CL-logo.png`}
+                            alt="Sample photo"
+                            style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '60%' }}
+                          />
                         </div>
-                       </div>
-                        </div>
-                        <div className="card px-5 py-5" style={{ border: "0", backgroundColor: "rgba(162 229 198)" }}>
-                          <div class="card-header bg-light mb-2">
-                          
-                          
-                               <div className="card bg-light justify-content-center py-5" style={{border:'0'}}>
+                  <div className="text-white">{name}<br/>{email}</div>
+                  <h5 className="card-title mt-4" style={{ color: "yellow" }}>
+                    Pending Verificaiton
+                  </h5>
+                </div>
+                <div>
+                  <p className="text-white text-justify">
+                    Thank you for providing all the information. Your membership
+                    approval will be notified through email and your mobile
+                    number after which, you will be able to access your
+                    dashboard and available choices to commute with
+                  </p>
+                </div>
 
-                               <div className="card-body"><h5 className="py-3">Dear Yasir Abbas Mirza,</h5>
-                                        
-                                        <p>Thank you very much for accepting to share your ride to 
-                                            school/university. I also think that we are a suitable match,
-                                            so I also formally give my consent to share your car.
-                                        </p>
-                                        
-                                    
-                                        <p>I have deposited Rs.15000/- as my share for one month (20 days) with CommutersLink, which will be credited to your WALLET
-                                            on daily basis.
-                                        </p>
-                                        <p>Please also note that the deposit includes CommutersLink service fee @ Rs. 1,000/-. </p>
-                                       <p>I wish to start commuting with you starting from July 15, 2022.</p>
-                                            <p>Looking forward to a long term association for mutual benefit.</p>
-                                            <p>Best regards
-                                            
-                                            </p>
-                                            <p>Zafar Jamil</p>
-                                           
-                                        </div>
-                             <div className="card-body">
-                                <button href="/" className=" btn_view1 btn-lg ">Reply to Confirm Dates</button>
-                             </div>
-                               </div>
-                              
-                              
-                           
-                                        </div>
-
-                         <div className="card">
-                           
-                         </div>
-                        </div>
-                       
+                <form id="numberForm">
+                  <div className="mb-3">
+                    
+                    <Button variant="success" className="btn-sm" onClick={route}>
+                      Close
+                    </Button>
+                  </div>
+                </form>
+              </div>
+              </div>
+                </div>
+                </div>
+            </div>   
+            </div>
+        </div>
+      </div>
         
           </div>
         </div>
@@ -495,4 +526,4 @@ const backgroundLogo={
   );
 };
 
-export default ReplyToConfirmDates1;
+export default TermsCondition1;

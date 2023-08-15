@@ -23,7 +23,7 @@ const backgroundLogo={
   backgroundColor:"white",
  }
 
- const ReplyToConfirmDates1 = ({ children }) => {
+ const WhyProcessPayment1 = ({ children }) => {
   // const { instance } = useMsal();
   const navigate = useNavigate();
   const [submitbtn , setSubmit] = useState(false);
@@ -434,43 +434,45 @@ const backgroundLogo={
               </div>
             </div>
             {/* Dashboard Content */}
-        
+          
             <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
                           <div className="border border-bottom border-success justify-content-center ml-3"></div>
                        <div className="card-body" style={{}}>
-                        <div className="card-title">
-                            <h2 className="text-success">MEMBERS REQUESTS</h2>
-                        </div>
+                       
                        </div>
                         </div>
+
                         <div className="card px-5 py-5" style={{ border: "0", backgroundColor: "rgba(162 229 198)" }}>
                           <div class="card-header bg-light mb-2">
+                            <h1 className="text-center text-success m-auto">
+                              WHY PROCESS PAYMENT<br/> THROUGH COMMUTERSLINK
+                            </h1>
                           
-                          
-                               <div className="card bg-light justify-content-center py-5" style={{border:'0'}}>
+                               <div className="card bg-light justify-content-center" style={{border:'0'}}>
 
-                               <div className="card-body"><h5 className="py-3">Dear Yasir Abbas Mirza,</h5>
+                               <div className="card-body"><p>1. Commuters link keeps a month's advance and your money is secure and will be paid transferrred
+                                to you wallet on daily basis.
+                               </p>
+                                    <p className="">2. No bargaining involved. Commuterslink works out per day cost based
+                                    upon a fixed relationized formula. If the petrol prices go up or down the same is 
+                                     adjusted in the  monthly commuter fee.</p>
                                         
-                                        <p>Thank you very much for accepting to share your ride to 
-                                            school/university. I also think that we are a suitable match,
-                                            so I also formally give my consent to share your car.
+                                        <p>3.If the partner misses out on some days and does not commute, you still  get the share
+                                            as the seat reserved for the partner remains empty.
                                         </p>
-                                        
-                                    
-                                        <p>I have deposited Rs.15000/- as my share for one month (20 days) with CommutersLink, which will be credited to your WALLET
-                                            on daily basis.
+                                        <p>4. No dispute on cost,payments,number of days the services were utilized etc.
                                         </p>
-                                        <p>Please also note that the deposit includes CommutersLink service fee @ Rs. 1,000/-. </p>
-                                       <p>I wish to start commuting with you starting from July 15, 2022.</p>
-                                            <p>Looking forward to a long term association for mutual benefit.</p>
-                                            <p>Best regards
-                                            
+                                        <p>5. If you stop provision of car seat to a partner for a reason or other, your payment is secure and you will still be able to choose another match</p>
+                                        <p>6.CommutersLink verifies all the data of its members and ensures your safety and security</p>
+                                       <p>7.By money through CommutersLink you are insured for treatment of any injury resulting from accident upto 100,000.00 Rs.</p>
+                                            <p>8. By receiving money through CommutersLink you remain an active member and
+
+have access to facilities like scheduler</p>
+                                            <p>9. Last but not the least it is the most respectable way of receiving money as
                                             </p>
-                                            <p>Zafar Jamil</p>
-                                           
                                         </div>
                              <div className="card-body">
-                                <button href="/" className=" btn_view1 btn-lg ">Reply to Confirm Dates</button>
+                                <button href="/" className=" btn_view1 btn-block ">I Agree</button>
                              </div>
                                </div>
                               
@@ -482,7 +484,6 @@ const backgroundLogo={
                            
                          </div>
                         </div>
-                       
         
           </div>
         </div>
@@ -495,4 +496,4 @@ const backgroundLogo={
   );
 };
 
-export default ReplyToConfirmDates1;
+export default WhyProcessPayment1;

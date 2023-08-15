@@ -21,17 +21,117 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import {useForm} from 'react-hook-form';
 const Driver = () => {
-
+  const{register,formState:{errors}}= useForm();
   const navigate = useNavigate();
   const [showmyself, setshowmyself] = useState(false);
   const [showmydriver, setshowmydriver] = useState(false);
   const [showboth, setshowboth]=useState(false);
-
+  const [carModel, setCarModel] = useState('');
+  const [isValidCarModel, setIsValidCarModel] = useState(true);
+  const [registerationNumber, setRegisterationNumber] = useState('');
+  const [isValidRegisterationNumber, setIsValidRegisterationNumber] = useState(true);
+  const [bankAccount, setBankAccount] = useState('');
+  const [isValidBankAccount, setIsValidBankAccount] = useState(true);
+  const [drivingLicense, setDrivingLicense] = useState('');
+  const [isValidDrivingLicense, setIsValidDrivingLicense] = useState(true);
+  const [dateExpiry, setDateExpiry] = useState('');
+  const [isValidDateExpiry, setIsValidDateExpiry] = useState(true);
+  const [name, setName]=useState('');
+  const[isValidName, setIsValidName] = useState(true);
+  const [cnic, setCnic] = useState('');
+  const [isValidCnic, setIsValidCnic] = useState(true);
   const goBack = () => {
     navigate("/registration");
   }
+  function validateCarModel(carModel) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const carModelPattern = /^[A-Za-z\s]+$/;
+  
+    return carModelPattern.test(carModel);
+  }
+  const handleCarModelChange = (e) => {
+    const newModel = e.target.value;
+    setCarModel(newModel);
+    setIsValidCarModel(validateCarModel(newModel));
+  };
+  function validateRegisterationNumber(registerationNumber) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const registerationNumberPattern = /^[A-Za-z0-9]{1,7}$/;
+  
+    return registerationNumberPattern.test(registerationNumber);
+  }
+  const handleRegisterationNumberChange = (e) => {
+    const newRegisterationNumber = e.target.value;
+    setRegisterationNumber(newRegisterationNumber);
+    setIsValidRegisterationNumber(validateRegisterationNumber(newRegisterationNumber));
+  };
+  function validateBankAccount(bankAccount) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const bankAccountPattern = /^[A-Za-z0-9]{1,26}$/;
+  
+    return bankAccountPattern.test(bankAccount);
+  }
+  const handleBankAccountChange = (e) => {
+    const newBankAccount = e.target.value;
+    setBankAccount(newBankAccount);
+    setIsValidBankAccount(validateBankAccount(newBankAccount));
+  };
+  function validateDrivingLicense(drivingLicense) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const drivingLicensePattern = /^[A-Za-z0-9-]{1,20}$/;
+  
+    return drivingLicensePattern.test(drivingLicense);
+  }
+  const handleDrivingLicenseChange = (e) => {
+    const newDrivingLicense = e.target.value;
+    setDrivingLicense(newDrivingLicense);
+    setIsValidDrivingLicense(validateDrivingLicense(newDrivingLicense));
+  };
 
+  function validateDateExpiry(dateExpiry) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const dateExpiryPattern = /^(0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])[-/](19|20)\d\d$/;
+  
+    return dateExpiryPattern.test(dateExpiry);
+  }
+  const handleDateExpiryChange = (e) => {
+    const newDateExpiry = e.target.value;
+    setDateExpiry(newDateExpiry);
+    setIsValidDateExpiry(validateDateExpiry(newDateExpiry));
+  };
+  function validateCnic(cnic) {
+    // Regular expression pattern for validating Pakistani CNIC (12345-1234567-1)
+    const cnicPattern = /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/;
+  
+    return cnicPattern.test(cnic);
+  }
+  const handleCnicChange = (event) => {
+    const inputCnic = event.target.value.replace(/\D/g, '');
+
+    if (inputCnic.length <= 13) {
+      const formattedCnic = inputCnic.replace(
+        /^(\d{5})(\d{7})(\d{1})$/,
+        '$1-$2-$3'
+      );
+      setCnic(formattedCnic);
+      setIsValidCnic(validateCnic(formattedCnic));
+    } else {
+      setIsValidCnic(false);
+    }
+  };
+  function validateName(name) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const namePattern = /^(0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])[-/](19|20)\d\d$/;
+  
+    return namePattern.test(name);
+  }
+  const handleNameChange = (e) => {
+    const newName = e.target.value;
+    setName(newName);
+    setIsValidName(validateName(newName));
+  };
   return (
     <div>
       <Navbar />
@@ -78,10 +178,16 @@ const Driver = () => {
                     <Form.Control
                       required
                       type="text"
-                      className="colorplace"
+                      className= {`colorplace ${isValidCarModel ? '' : 'is-invalid'}`}
                       placeholder="Car Model"
-                      defaultValue=""
+                      value={carModel}
+                      onChange={handleCarModelChange}
                     />
+                     {!isValidCarModel && (
+          <div className="invalid-feedback">
+            Please enter a valid Car Model.
+          </div>
+        )}
                   </Form.Group>
                 </Row>
                 <Row className="mb-3">
@@ -133,10 +239,16 @@ const Driver = () => {
                     <Form.Control
                       required
                       type="text"
-                      className="colorplace"
+                      className= {`colorplace ${isValidRegisterationNumber ? '' : 'is-invalid'}`}
                       placeholder="Registeration Number"
-                      defaultValue=""
+                      value={registerationNumber}
+                      onChange={handleRegisterationNumberChange}
                     />
+                                 {!isValidRegisterationNumber && (
+          <div className="invalid-feedback">
+            Please enter a valid Car Registeration No.
+          </div>
+        )}
                   </Form.Group>
                   <Form.Group as={Col} md="6" controlId="validationCustom02">
                     <Form.Label style={{ color: "#198754" }}>
@@ -247,10 +359,32 @@ const Driver = () => {
                                 </div>
                                 <form id="paymentForm">
                                 <div className="mt-4">
-                                  <input type="text" className="form-control mb-2" id="bankAccount" name="bankAccount" placeholder="Bank Account (IBAN)" required=""/>
+                                  {/* <input type="text" className="form-control mb-2" id="bankAccount" 
+                                  name="bankAccount" placeholder="Bank Account (IBAN)"
+                                  />      */}
+                                           <Form><Row>
+                                           <Form.Group as={Col} md="12" className="mb-3" controlId="bankAccount" id="bankAccount">
+                    {/* <Form.Label style={{ color: "#198754" }}>
+                      Bank Account (IBAN)
+                    </Form.Label> */}
+                    <Form.Control
+                      required
+                      type="text"
+                      className= {` ${isValidBankAccount ? '' : 'is-invalid'}`}
+                      placeholder="BankAccount"
+                      value={bankAccount}
+                      onChange={handleBankAccountChange}
+                    />
+                            {!isValidBankAccount && (
+          <div className="invalid-feedback">
+            Please enter a valid Account or IBAN Number.
+          </div>
+        )}
+                                            
+                                    </Form.Group>        </Row></Form>      
                                 </div>
                                 <div>
-                                  <input type="text" className="form-control mb-2" id="jazzCashAccount" name="jazzCashAccount" placeholder="Jazz Cash Account Number" required=""/>
+                                  <input type="text"  className="form-control mb-2" id="jazzCashAccount" name="jazzCashAccount" placeholder="Jazz Cash Account Number" required=""/>
                                 </div>
                                 <div>
                                   <input type="text" className="form-control mb-2" id="easypaisaAccount" name="easypaisaAccount" placeholder="EasyPaisa Account Number" required=""/>
@@ -322,10 +456,18 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
+                          className={`colorplace ${isValidDrivingLicense ? '' : 'is-invalid'}`}
                           placeholder="License No."
-                          defaultValue=""
+                                   value={drivingLicense}
+                      onChange={handleDrivingLicenseChange}
+
                         />
+                     
+                    
+                     {!isValidDrivingLicense && (
+          <div className="invalid-feedback">
+            Please enter a valid License.
+          </div>)}
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
@@ -340,10 +482,16 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
                           placeholder="Enter Here"
-                          defaultValue=""
+                          
+                          className={`colorplace ${isValidDrivingLicense ? '' : 'is-invalid'}`}
+                          value={dateExpiry}
+                      onChange={handleDateExpiryChange}
                         />
+                                  {!isValidDateExpiry && (
+          <div className="invalid-feedback">
+            Please enter a valid MM/DD/YYYY or MM-DD-YYYY date.
+          </div>)}
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
@@ -385,10 +533,16 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
-                          placeholder="Name"
-                          defaultValue=""
+                          className={`colorplace ${isValidName ? '' : 'is-invalid'}`}
+                          value={name}
+                      onChange={handleNameChange}
                         />
+                          
+                      
+                                  {!isValidName && (
+          <div className="invalid-feedback">
+            Please enter a full Name
+          </div>)}
                       </Form.Group>
                       <Form.Group
                         as={Col}
@@ -401,11 +555,18 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
-                          placeholder="CNIC: xxxxxxxxxxxxx"
-                          defaultValue=""
-                          maxLength={13}
-                        />
+                          
+                      
+                          className={`colorplace ${isValidCnic ? '' : 'is-invalid'}`}
+            placeholder="12345-1234567-1"
+            value={cnic}
+            onChange={handleCnicChange}
+          />
+          {!isValidCnic && (
+            <div className="invalid-feedback">
+              Please enter a valid CNIC in the format 12345-1234567-1.
+            </div>
+          )}
                       </Form.Group>
                     </Row>
 
@@ -443,10 +604,15 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
+                          className={`colorplace ${isValidDrivingLicense ? '' : 'is-invalid'}`}
                           placeholder="License No."
-                          defaultValue=""
+                                   value={drivingLicense}
+                      onChange={handleDrivingLicenseChange}
                         />
+                                  {!isValidDrivingLicense && (
+          <div className="invalid-feedback">
+            Please enter a valid License.
+          </div>)}
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
@@ -461,10 +627,15 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
                           placeholder="Enter Here"
-                          defaultValue=""
+                          className={`colorplace ${isValidDrivingLicense ? '' : 'is-invalid'}`}
+                          value={dateExpiry}
+                      onChange={handleDateExpiryChange}
                         />
+                                                 {!isValidDateExpiry && (
+          <div className="invalid-feedback">
+            Please enter a valid MM/DD/YYYY or MM-DD-YYYY date.
+          </div>)}
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
@@ -504,10 +675,18 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
-                          placeholder="Name"
-                          defaultValue=""
+                         
+                      
+                                   className={`colorplace ${isValidName ? '' : 'is-invalid'}`}
+                          value={name}
+                      onChange={handleNameChange}
                         />
+                          
+                      
+                                  {!isValidName && (
+          <div className="invalid-feedback">
+            Please enter a full Name
+          </div>)}
                       </Form.Group>
                       <Form.Group
                         as={Col}
@@ -520,11 +699,16 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
-                          placeholder="CNIC: xxxxxxxxxxxxx"
-                          defaultValue=""
-                          maxLength={13}
-                        />
+        className={`colorplace ${isValidCnic ? '' : 'is-invalid'}`}
+            placeholder="12345-1234567-1"
+            value={cnic}
+            onChange={handleCnicChange}
+          />
+          {!isValidCnic && (
+            <div className="invalid-feedback">
+              Please enter a valid CNIC in the format 12345-1234567-1.
+            </div>
+          )}
                       </Form.Group>
                     </Row>
 
@@ -562,10 +746,15 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
+                          className={`colorplace ${isValidDrivingLicense ? '' : 'is-invalid'}`}
                           placeholder="License No."
-                          defaultValue=""
+                                   value={drivingLicense}
+                      onChange={handleDrivingLicenseChange}
                         />
+                                                 {!isValidDrivingLicense && (
+          <div className="invalid-feedback">
+            Please enter a valid License.
+          </div>)}
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
@@ -580,10 +769,14 @@ const Driver = () => {
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
-                          placeholder="Enter Here"
-                          defaultValue=""
+                          className={`colorplace ${isValidDrivingLicense ? '' : 'is-invalid'}`}
+                          value={dateExpiry}
+                      onChange={handleDateExpiryChange}
                         />
+                                                                 {!isValidDateExpiry && (
+          <div className="invalid-feedback">
+            Please enter a valid MM/DD/YYYY or MM-DD-YYYY date.
+          </div>)}
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">

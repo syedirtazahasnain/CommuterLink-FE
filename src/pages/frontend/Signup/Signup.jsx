@@ -176,15 +176,17 @@ const Signup = () => {
       setIsValidEmail(false);
     }
   };
-  const validatePhoneNumber = (phoneNumber) => {
+  const validatePhoneNumber = (number) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
     const phonePattern = /^03\d{9}$/;
-    if (phonePattern.test(phoneNumber)) {
-      setPhoneNumber(phoneNumber);
+    if (phonePattern.test(number)) {
+      setPhoneNumber(number);
       setIsValidPhoneNumber(true);
-    } else {
+    } 
+    else {
       setIsValidPhoneNumber(false);
     }
+    
   };
   const validatePassword = (password) => {
     // Regular expression pattern for validating passwords
@@ -299,6 +301,7 @@ const Signup = () => {
                         onChange={(e) => setFullName(e.target.value)}
                         required
                         size="small"
+                        
                       />
                     </div>
                     <div className="col-md-12 mt-3">
@@ -320,7 +323,9 @@ const Signup = () => {
                       <TextField
                         fullWidth
                         variant="outlined"
-                        value={phoneNumber}
+                        type="number"
+                        // value={phoneNumber}
+
                         label="Mobile Number (03xxxxxxxxx)"
                         onChange={(e) => validatePhoneNumber(e.target.value)
                        

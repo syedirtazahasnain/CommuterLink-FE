@@ -122,10 +122,10 @@ const backgroundLogo={
                       data-kt-menu-placement="bottom-end"
                     >
                       <div className="text-center">
-                        <div className="mt-3">
+                        <div className="mt-3 px-4">
                           <Tooltip title="Notifications">
                             <Link to="/" className="d-inline-block">
-                              <i className="fa-solid fa-bell fs-3 text-success mt-2"></i>
+                              <i className="fa-solid fa-bell fs-3 text-success mt-2 mx-4"></i>
                             </Link>
                           </Tooltip>
                         <button

@@ -43,6 +43,8 @@ const RiderRegistration = () => {
   const [daysSelected, setDaysSelected] = useState([]);
   const mapLibraries = ["places"];
 
+  const [isValidProfession, setIsValidProfession] = useState(true);
+
   const route = () => {
     navigate("/verification");
   
@@ -55,8 +57,38 @@ const RiderRegistration = () => {
   const AddNewEnd = () => {
     setAddNewEnd(true);
   };
+  function validateProfession(profession) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const professionPattern = /^[A-Za-z\s]+$/;
+  
+    return professionPattern.test(profession);
+  }
+  const handleProfessionChange = (e) => {
+    const newProfession = e.target.value;
+    setProfession(newProfession);
+    setIsValidProfession(validateProfession(newProfession));
+  };
 
+  function validateCnic(cnic) {
+    // Regular expression pattern for validating Pakistani CNIC (12345-1234567-1)
+    const cnicPattern = /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/;
+  
+    return cnicPattern.test(cnic);
+  }
+  const handleCnicChange = (event) => {
+    const inputCnic = event.target.value.replace(/\D/g, '');
 
+    if (inputCnic.length <= 13) {
+      const formattedCnic = inputCnic.replace(
+        /^(\d{5})(\d{7})(\d{1})$/,
+        '$1-$2-$3'
+      );
+      setCnic(formattedCnic);
+      setIsValidCnic(validateCnic(formattedCnic));
+    } else {
+      setIsValidCnic(false);
+    }
+  };
   // For Registration
   const [validated, setValidated] = useState(false);
   const [homeTimeSlots, setHomeTimeSlots] = useState([]);
@@ -71,6 +103,7 @@ const RiderRegistration = () => {
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
   const [cnic, setCnic] = useState("");
+  const [isValidCnic, setIsValidCnic] = useState(true);
   const [cnicFront, setCnicFront] = useState("");
   const [cnicFrontExt, setCnicFrontExt] = useState("");
   const [cnicBack, setCnicBack] = useState("");
@@ -362,12 +395,6 @@ const RiderRegistration = () => {
     }
   };
 
-  const handleCnicChange = (event) => {
-    const inputCnic = event.target.value.replace(/\D/g, '');
-    if (inputCnic.length <= 13) {
-      setCnic(inputCnic);
-    }
-  };
 
   const handleCnicFront = (e) => {
     const file = e.target.files[0];
@@ -1205,12 +1232,16 @@ const RiderRegistration = () => {
                       <Form.Control
                         required
                         type="text"
-                        className="colorplace"
-                        placeholder="Profession (Engineer, Doctor, etc)"
-                        value={profession}
-                        onChange={(e) => setProfession(e.target.value)}
-                        defaultValue=""
-                      />
+                   className={`colorplace ${isValidProfession ? '' : 'is-invalid'}`}
+          placeholder="Profession (Engineer, Doctor, etc)"
+          value={profession}
+          onChange={handleProfessionChange}
+        />
+        {!isValidProfession && (
+          <div className="invalid-feedback">
+            Please enter a valid profession.
+          </div>
+        )}
                     </Form.Group>
                   </Row>
                   <Row className="mb-3">
@@ -1220,11 +1251,16 @@ const RiderRegistration = () => {
                       <Form.Control
                         required
                         type="text"
-                        className="colorplace"
-                        placeholder="xxxxxxxxxxxxx"
-                        value={cnic}
-                        onChange={handleCnicChange}
-                      />
+                       className={`colorplace ${isValidCnic ? '' : 'is-invalid'}`}
+            placeholder="12345-1234567-1"
+            value={cnic}
+            onChange={handleCnicChange}
+          />
+          {!isValidCnic && (
+            <div className="invalid-feedback">
+              Please enter a valid CNIC in the format 12345-1234567-1.
+            </div>
+          )}
                     </Form.Group>
                   </Row>
                   <Row className="mb-3">

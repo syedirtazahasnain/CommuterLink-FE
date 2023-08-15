@@ -1,3 +1,7 @@
+:root{
+  --bg-green: #008d55;
+  --bs-green: #008d55;
+}
 .btn-sm, .btn-group-sm > .btn {
   --bs-btn-font-size: 1.2rem !important;
   --bs-btn-padding-y: 0.25rem !important;
@@ -112,6 +116,10 @@ hr {
   background-color: #e74214;
 }
 
+.icon-green{
+ color: #008d55 !important;
+}
+
 .header-right-items {
   margin-left: auto;
   margin-top: 0;
@@ -162,7 +170,12 @@ body{
  background-color: #8FC4B7!important;;
 }
 
-
+.newdashboard{
+  background-color: #8FC4B7;
+ }
+ .app-header{
+  background-color: #8FC4B7;
+ }
 
 
 

@@ -26,11 +26,13 @@ import ShareRide from "./register-form/ShareRide";
 import Verification from "./Dashboard/Verification";
 import Login from "./login/Login";
 import SeatCostVerification from "./register-form/SeatCostVerification";
+import DriverRegistration from "./register-form/DriverRegistration";
+import Office from "./Hompage-components/Office";
 // import NewDashboard from "../backend/dashboard/Dashboard";
 export default function () {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar />
       <CarouselSlider />
       <MyAccordion />
       <ShareRideCards />
@@ -39,7 +41,7 @@ export default function () {
       <Contribute />
       <Contact />
       <AddressCards />
-      <Footer /> 
+      <Footer />  */}
       {/* <Signup/> */}
              {/* <Login /> */}
       {/* <Registration/> */}
@@ -55,14 +57,16 @@ export default function () {
    {/* <WhyProcessPayment/> */}
    {/* <SendApprovalForPartner/> */}
    {/* <CommuterProfile/> */}
+   {/* <DriverRegistration/> */}
 
    {/* Hassan Components */}
       {/* <ShareRide/> */}
    {/* <Verification/> */}
-   {/* <WouldYouLikeTo/> */}
+   <WouldYouLikeTo/>
  {/* <Slider/> */}
  {/* <SeatCostVerification /> */}
  {/* <NewDashboard/> */}
+ {/* <Office/> */}
     
     </div>
   );

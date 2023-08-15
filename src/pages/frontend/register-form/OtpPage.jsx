@@ -28,7 +28,6 @@ const OtpPage = () => {
   const hardcodedOTP = "12345";
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const userData = useSelector((state) => state.signup.data);
   const postData = async () => {
     try {
@@ -243,7 +242,7 @@ const OtpPage = () => {
                     >
                       Enter OTP
                     </Typography>
-                    <div className="d-flex justify-content-center">
+                    <div className="row justify-content-center">
                       {otp.map((data, index) => {
                         return (
                           <FormControl

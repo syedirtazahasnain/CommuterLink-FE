@@ -22,6 +22,15 @@ import Login from './pages/frontend/login/Login';
 import SeatCostVerification from './pages/frontend/register-form/SeatCostVerification';
 import Dashboard1 from './pages/backend/dashboard/Dashboard1';
 import CommuterProfile1 from './pages/backend/dashboard/CommuterProfile1';
+import ReplyToConfirmDates1 from './pages/backend/dashboard/ReplyToConfirmDates1';
+import SendApprovalForPartner1 from './pages/backend/dashboard/SendApprovalForPartner1';
+import TermsCondition1 from './pages/backend/dashboard/TermsCondition1';
+import Verification1 from './pages/backend/dashboard/Verification1';
+import WhyProcessPayment1 from './pages/backend/dashboard/WhyProcessPayment1';
+import ShareToCare1 from './pages/backend/dashboard/ShareToCare1';
+import Office from './pages/frontend/Hompage-components/Office';
+import SchoolUniversity from './pages/frontend/Hompage-components/SchoolUniversity';
+import Office_School from './pages/frontend/register-form/Office_School';
 function App() {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -42,6 +51,15 @@ function App() {
         <Route path='/new-dashboard' element={<Dashboard1 />}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/commuterprofile1' element={<CommuterProfile1 />}/>
+        <Route path='/replytoconfirmdates1' element={<ReplyToConfirmDates1 />}/>
+        <Route path='/sendapprovalforpartner1' element={<SendApprovalForPartner1 />}/>
+        <Route path='/termscondition1' element={<TermsCondition1 />}/>
+        <Route path='/verification1' element={<Verification1 />}/>
+        <Route path='/whyprocesspayment1' element={<WhyProcessPayment1 />}/>
+        <Route path='/sharetocare1' element={<ShareToCare1 />}/>
+        <Route path='/office' element={<Office />}/>
+        <Route path='/schooluniversity' element={<SchoolUniversity />}/>
+        <Route path='/office_school' element={<Office_School />}/>
         {/* <Route path='/number-generate' element={<NumberGenerate/>}></Route> */}
         {/* <Route path='/carousel' element={<CarouselSlider />} /> 
         <Route path='/howworks' element={<HowWorks/>}/>
@@ -70,6 +88,7 @@ function App() {
               <Route path='/nested' element={<Nestedform/>}></Route>
               <Route path='/number-generate' element={<NumberGenerate/>}></Route>
               <Route path='/verification' element={<Verification/>}></Route>
+              <Route path='/office_school' element={<Office_School/>}></Route>
             </>
           )}
         {userLogin && (
