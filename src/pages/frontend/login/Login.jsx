@@ -375,7 +375,7 @@ const Login = () => {
                 </Form>
               </div>
               <div className="col-md-1"></div>
-            </div>{" "}
+            </div>
           </div>
         </section>
 

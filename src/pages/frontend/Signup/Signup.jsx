@@ -3,9 +3,9 @@ import Navbar from "../Hompage-components/Navbar";
 import Footer from "../Hompage-components/Footer";
 import { BASE_URL } from "../../../constants";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox"; // Add this import
-import FormControlLabel from "@mui/material/FormControlLabel"; // Add this import
+import { Button } from "@mui/base";
+import Checkbox from "@mui/material/Checkbox"; 
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
@@ -415,17 +415,9 @@ const Signup = () => {
                       />
                     </div>
                     <div className="col-md-12  mt-3 text-center">
-                    <button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={() => postData()}>
-                    Sign up
-                  </button>
-                      {/* <Button
-                        fullWidth
-                        variant="contained"
-                        className="formbtn"
-                        onClick={() => postData()}
-                      >
-                        SIGNUP
-                      </Button> */}
+                    <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={() => postData()}>
+                      Sign up
+                    </Button>
                     </div>
                     <div className="container text-center">
                       <div className="row d-flex">
