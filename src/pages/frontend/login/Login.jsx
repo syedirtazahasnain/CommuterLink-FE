@@ -129,41 +129,43 @@ const Login = () => {
   };
   const handleSuccess = async (response) => {
     try {
-      const profile = await fetch(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-
-        {
-          headers: {
-            Authorization: `Bearer ${response.access_token}`,
-          },
-          method: "get",
+      if(response){
+        const profile = await fetch(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+  
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+            method: "get",
+          }
+        );
+        // var userObject=jwt_decode(response.credential)
+        let userObject = await profile.json();
+        const body = {
+          email: userObject.email,
+          // provider_id : "DasD8BjWaeoVDCq4",
+          provider:"google",
+        };
+        const res = await fetch(
+          "https://staging.commuterslink.com/api/v1/auth",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
+  
+        const jsonresponse = await res.json();
+  
+        if (jsonresponse.statusCode === 200) {
+          dispatch(setloginState(jsonresponse.access_token));
+        } else {
+          console.log(jsonresponse);
+          alert("Error: " + jsonresponse.message);
         }
-      );
-      // var userObject=jwt_decode(response.credential)
-      let userObject = await profile.json();
-      const body = {
-        email: userObject.email,
-        // provider_id : "DasD8BjWaeoVDCq4",
-        provider:"google",
-      };
-      const res = await fetch(
-        "https://staging.commuterslink.com/api/v1/auth",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
-
-      const jsonresponse = await res.json();
-
-      if (jsonresponse.statusCode == 200) {
-        navigate("/");
-      } else {
-        console.log(jsonresponse);
-        alert("Error: " + jsonresponse.message);
       }
     } catch (error) {
       console.log(error.message);

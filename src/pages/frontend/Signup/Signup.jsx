@@ -54,31 +54,33 @@ const Signup = () => {
     console.log("handleFailure", response);
   };
   const handleSuccess = async (response) => {
-     
-    const profile = await fetch(
-      "https://www.googleapis.com/oauth2/v3/userinfo",
 
-      {
-        headers: {
-          Authorization: `Bearer ${response.access_token}`,
-        },
-        method: "get",
-      }
-    );
-    // var userObject=jwt_decode(response.credential)
-    let userObject = await profile.json();
-    const googleuserdata = {
-      name: userObject.name,
-      email: userObject.email,
-      provider: "google",
-      provider_id:"DasD" + generateRandomOtp(0,1000000),
-      googletoken: response.access_token,
-      password: "jWaeo@123" + generateRandomPassword(),
-      otp: generateRandomOtp(0,1000000),
-      phone: "",
-    };
-    dispatch(setsignupState(googleuserdata));
-    signupgoogledatapost(googleuserdata)
+    if(response){
+      const profile = await fetch(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+  
+        {
+          headers: {
+            Authorization: `Bearer ${response.access_token}`,
+          },
+          method: "get",
+        }
+      );
+      // var userObject=jwt_decode(response.credential)
+      let userObject = await profile.json();
+      const googleuserdata = {
+        name: userObject.name,
+        email: userObject.email,
+        provider: "google",
+        provider_id:"DasD" + generateRandomOtp(0,1000000),
+        googletoken: response.access_token,
+        password: "jWaeo@123" + generateRandomPassword(),
+        otp: generateRandomOtp(0,1000000),
+        phone: "",
+      };
+      //dispatch(setsignupState(googleuserdata));
+      signupgoogledatapost(googleuserdata)
+    }
   };
   const signupgoogledatapost = async (userData) => {
     try {
@@ -106,7 +108,7 @@ const Signup = () => {
 
       const jsonresponse = await response.json();
        
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         dispatch(
           setsignupState({
             email: body.email,
