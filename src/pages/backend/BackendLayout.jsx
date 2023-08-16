@@ -155,13 +155,13 @@ const BackendLayout = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="header card-dashboardheader border border-secondary d-flex py-1 w-100 ps-4">
+                    <div className="header shadow card-dashboardheader border border-secondary d-flex py-1 w-100 ps-4">
                       <div className="header-left mr-auto mx-4 d-flex flex-grow-1 py-2">
                         <div className="d-block">
-                          <p className=" my-auto pvs-title fw-normal text-uppercase">
+                          <p className=" my-auto fw-normal text-uppercase">
                             {formattedDate}
                           </p>
-                          {name ? (<h5>Welcome {name}!</h5>) : (<h5>Welcome Yasir Abbas Mirza!</h5>)}
+                          {name ? (<h5 className="fw-bold">Welcome {name}!</h5>) : (<h5 className="fw-bold">Welcome Yasir Abbas Mirza!</h5>)}
                         </div>
                       </div>
                       <div className="header-right">
@@ -184,7 +184,7 @@ const BackendLayout = ({ children }) => {
                                 </Tooltip>
                                 <Tooltip title="Logout">
                                   <Button
-                                    className="btn btn-sm fw-bold btn-success"
+                                    className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
                                     onClick={logout}
                                   >
                                     LOG OUT
@@ -501,7 +501,7 @@ const BackendLayout = ({ children }) => {
 
                   {/* Dashboard Content */}
 
-                  <div className="px-4">
+                  <div>
                     {children}
                     <div className="d-flex flex-column flex-column-fluid">
                       <div

@@ -28,7 +28,7 @@ const backgroundLogo = {
 const CommuterProfile1 = ({ children }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [submitbtn , setSubmit] = useState(false);
+  const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
 
   const route = () => {
@@ -222,16 +222,16 @@ const CommuterProfile1 = ({ children }) => {
 
   return (
     <div>
-      <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
+      <div className="page-title">
         {/* <div className="border border-bottom border-success justify-content-center ml-3"></div> */}
-        <p className="justify-content-center px-3 text-success">
+        <p className="card p-4 text-dark my-2 fw-bold fs-6">
           You are looking for travel buddles to ride your car, others who want
           to share their car and to connect with members with whom you can take{" "}
         </p>
       </div>
 
       <div
-        className="card px-5 py-5"
+        className="card"
         style={{
           border: "0",
           backgroundColor: "#D9D9D9",
@@ -241,246 +241,231 @@ const CommuterProfile1 = ({ children }) => {
           <div>
             {name !== "" ? (
               <div>
-                <h5 className="text-success ">{name}</h5>
+                <h5 className="text-dark ">{name}</h5>
               </div>
             ) : (
               <div>
-                <h5 className="text-success ">Zafar Jamil</h5>
+                <h5 className="text-success py-2 fw-bold">Zafar Jamil</h5>
               </div>
             )}
           </div>
 
           <div className="card bg-light" style={{ border: "0" }}>
             <div className="row d-flex justify-content-between">
-              <div className="col-4">
-                <div
-                  className="card border-0 bg-light"
-                  style={{ width: "50rem" }}
-                >
-                  <p className="">
-                    {gender !== "" ? (
-                      <>
-                        <b>Gender:</b> <u>{gender}</u>
-                      </>
-                    ) : (
-                      <>
-                        <b>Gender:</b> <u>Male</u>
-                      </>
-                    )}
-                    <br />
-                    {age !== "" ? (
-                      <>
-                        <b> Age:</b> <u>{age}</u>
-                      </>
-                    ) : (
-                      <>
-                        <b> Age:</b> <u>45</u>
-                      </>
-                    )}
-                    <br />
-                    {profession !== "" ? (
-                      <>
-                        <b>Profession:</b> <u>{profession}</u>
-                      </>
-                    ) : (
-                      <>
-                        <b>Profession:</b> <u>Web Developer</u>
-                      </>
-                    )}
-                    <br />
-                    {mobileNo !== "" ? (
-                      <>
-                        <b>Cell:</b> <u>{mobileNo}</u>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </p>
-                </div>
+              <div className="col-6">
+                <p className="">
+                  {gender !== "" ? (
+                    <>
+                      <b>Gender:</b> <u>{gender}</u>
+                    </>
+                  ) : (
+                    <>
+                      <b>Gender:</b> <u>Male</u>
+                    </>
+                  )}
+                  <br />
+                  {age !== "" ? (
+                    <>
+                      <b> Age:</b> <u>{age}</u>
+                    </>
+                  ) : (
+                    <>
+                      <b> Age:</b> <u>45</u>
+                    </>
+                  )}
+                  <br />
+                  {profession !== "" ? (
+                    <>
+                      <b>Profession:</b> <u>{profession}</u>
+                    </>
+                  ) : (
+                    <>
+                      <b>Profession:</b> <u>Web Developer</u>
+                    </>
+                  )}
+                  <br />
+                  {mobileNo !== "" ? (
+                    <>
+                      <b>Cell:</b> <u>{mobileNo}</u>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </p>
               </div>
-              <div className="col-2">
-                <div className="card">
-                  <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "95px", width: "95px", backgroundColor: "rgb(32 155 98)" }} />
-                </div>
+              <div className="col-6 text-end">
+                <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "95px", width: "95px", backgroundColor: "rgb(32 155 98)" }} />
               </div>
             </div>
             <div>
               <h5 className="text-success">{profileType} Details</h5>
               <div className="row d-flex">
                 <div className="col-4">
-                  <div className="card border-0 bg-light">
-                    <div className="card border-0 bg-light">
-                      <p>
-                        {preferredGender !== "" ? (
-                          <>
-                            <b>Preferred Gender: </b> <u>{preferredGender}</u>
-                          </>
-                        ) : (
-                          <>
-                            <b>Preferred Gender: </b> <u>Female</u>
-                          </>
-                        )}
-                        <br />
-                        {origin !== "" ? (
-                          <>
-                            <b>Point of Origin: </b>
-                            <u>{origin}</u>
-                          </>
-                        ) : (
-                          <>
-                            <b>Point of Origin: </b>
-                            <u>(If different from home address)</u>
-                          </>
-                        )}
-                        <br />
-                        {timeDepart !== "" ? (
-                          <>
-                            <b>Pickup Timings:</b> <u>{timeDepart}</u>
-                          </>
-                        ) : (
-                          <>
-                            <b>Pickup Timings:</b> <u>6:00</u>
-                          </>
-                        )}
-                        <br />
-                        {destination !== "" ? (
-                          <>
-                            <b>Destination:</b>
-                            <u>{destination}</u>
-                          </>
-                        ) : (
-                          <>
-                            <b>Destination:</b>{" "}
-                          </>
-                        )}
-                        <br />
-                        {timeReturn !== "" ? (
-                          <>
-                            <b>Return Timings:</b> <u>{timeReturn}</u>
-                          </>
-                        ) : (
-                          <>
-                            <b>Return Timings:</b> <u>14:00</u>
-                          </>
-                        )}
-                        <br />
-                        {days !== "" ? (
-                          <>
-                            <b>Days:</b> <u>{days}</u>
-                          </>
-                        ) : (
-                          <>
-                            <b>Days:</b> <u>Mon-Fri</u>
-                          </>
-                        )}
-                        <br />
-                        {mobileNo !== "" ? (
-                          <>
-                            <b>Contact No:</b> <u>{mobileNo}</u>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
-                    </div>
-                  </div>
+                  <p>
+                    {preferredGender !== "" ? (
+                      <>
+                        <b>Preferred Gender: </b> <u>{preferredGender}</u>
+                      </>
+                    ) : (
+                      <>
+                        <b>Preferred Gender: </b> <u>Female</u>
+                      </>
+                    )}
+                    <br />
+                    {origin !== "" ? (
+                      <>
+                        <b>Point of Origin: </b>
+                        <u>{origin}</u>
+                      </>
+                    ) : (
+                      <>
+                        <b>Point of Origin: </b>
+                        <u>(If different from home address)</u>
+                      </>
+                    )}
+                    <br />
+                    {timeDepart !== "" ? (
+                      <>
+                        <b>Pickup Timings:</b> <u>{timeDepart}</u>
+                      </>
+                    ) : (
+                      <>
+                        <b>Pickup Timings:</b> <u>6:00</u>
+                      </>
+                    )}
+                    <br />
+                    {destination !== "" ? (
+                      <>
+                        <b>Destination:</b>
+                        <u>{destination}</u>
+                      </>
+                    ) : (
+                      <>
+                        <b>Destination:</b>{" "}
+                      </>
+                    )}
+                    <br />
+                    {timeReturn !== "" ? (
+                      <>
+                        <b>Return Timings:</b> <u>{timeReturn}</u>
+                      </>
+                    ) : (
+                      <>
+                        <b>Return Timings:</b> <u>14:00</u>
+                      </>
+                    )}
+                    <br />
+                    {days !== "" ? (
+                      <>
+                        <b>Days:</b> <u>{days}</u>
+                      </>
+                    ) : (
+                      <>
+                        <b>Days:</b> <u>Mon-Fri</u>
+                      </>
+                    )}
+                    <br />
+                    {mobileNo !== "" ? (
+                      <>
+                        <b>Contact No:</b> <u>{mobileNo}</u>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </p>
                 </div>
                 <div className="col-2">
-                  <div
-                    className="card mx-2 border-0 bg-light"
-                    style={{ width: "20rem" }}
-                  >
-                    <p>
-                      {seats !== "" ? (
-                        <>
-                          <b>No.of Seats:</b> {seats}
-                        </>
-                      ) : (
-                        <>
-                          <b>No.of Seats:</b> 1
-                        </>
-                      )}
-                      <br />
-                      {seatsLeft !== "" ? (
-                        <>
-                          <b>No.of Seats Left:</b> {seatsLeft}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <br />
-                      {price !== "" ? (
-                        <>
-                          <b>Payment Terms (perDay):</b> <u>{price}</u>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <br />
-                      {carAC !== "" ? (
-                        <>
-                          <b>Car have AC:</b> {carAC}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <br />
-                      {carBrand !== "" ? (
-                        <>
-                          <b>Car Brand:</b> {carBrand}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <br />
-                      {carCC !== "" ? (
-                        <>
-                          <b>Car CC:</b> {carCC}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <br />
-                      {carModel !== "" ? (
-                        <>
-                          <b>Car Model:</b> {carModel}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <br />
-                      {RegNo !== "" ? (
-                        <>
-                          <b>Registration Number:</b> {RegNo}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <br />
-                      {RegYear !== "" ? (
-                        <>
-                          <b>Registration Year:</b> {RegYear}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <br />
-                      {carRegYear !== "" ? (
-                        <>
-                          <b>Car Registration Year:</b> {carRegYear}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </p>
-                  </div>
+                  <p>
+                    {seats !== "" ? (
+                      <>
+                        <b>No.of Seats:</b> {seats}
+                      </>
+                    ) : (
+                      <>
+                        <b>No.of Seats:</b> 1
+                      </>
+                    )}
+                    <br />
+                    {seatsLeft !== "" ? (
+                      <>
+                        <b>No.of Seats Left:</b> {seatsLeft}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <br />
+                    {price !== "" ? (
+                      <>
+                        <b>Payment Terms (perDay):</b> <u>{price}</u>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <br />
+                    {carAC !== "" ? (
+                      <>
+                        <b>Car have AC:</b> {carAC}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <br />
+                    {carBrand !== "" ? (
+                      <>
+                        <b>Car Brand:</b> {carBrand}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <br />
+                    {carCC !== "" ? (
+                      <>
+                        <b>Car CC:</b> {carCC}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <br />
+                    {carModel !== "" ? (
+                      <>
+                        <b>Car Model:</b> {carModel}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <br />
+                    {RegNo !== "" ? (
+                      <>
+                        <b>Registration Number:</b> {RegNo}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <br />
+                    {RegYear !== "" ? (
+                      <>
+                        <b>Registration Year:</b> {RegYear}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <br />
+                    {carRegYear !== "" ? (
+                      <>
+                        <b>Car Registration Year:</b> {carRegYear}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </p>
+                </div>
+                <div className="text-center">
+                  <button to="/" className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3">
+                    Approve
+                  </button>
+
                 </div>
               </div>
-            </div>
-            <div className="card-body bg-light">
-              <button to="/" className=" btn_view1 btn-block ">
-                Approve
-              </button>
             </div>
           </div>
         </div>

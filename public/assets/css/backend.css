@@ -13,6 +13,13 @@
 .btn {
   border-radius: 0;
 }
+
+.btn-dark-green{
+  background-color:rgb(42, 64, 42);
+}
+.btn-dark-green:hover{
+  background-color:rgb(31, 48, 31);
+}
 .btn.btn-dark {
   background-color: var(--bs-dark);
 }
@@ -118,7 +125,7 @@ hr {
 }
 
 .icon-green{
- color: #008d55 !important;
+ color: rgb(42, 64, 42) !important;
 }
 
 .header-right-items {
@@ -182,6 +189,12 @@ body{
  .app-header{
   background-color:rgb(217, 217, 217)!important;
  }
+
+
+
+
+ 
+ 
 
 
 
