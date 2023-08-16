@@ -26,7 +26,9 @@ const BackendLayout = ({ children }) => {
   const userToken = useSelector((s) => s.login.data.token);
   const currentPage = useSelector((s) => s.general.currentPage);
   const sidebarOpened = useSelector((s) =>s.general.sidebarOpened);
-  const [submitbtn , setSubmit] = useState(false);
+  const [name , setName] = useState("");
+  const [image , setImage] = useState("");
+  const [submitbtn , setSubmit] = useState(false); 
 
   // For getting current date
   const currentDate = new Date();
@@ -64,7 +66,38 @@ const BackendLayout = ({ children }) => {
     document.getElementById("root").classList.add("flex-grow-1");
     window.KTToggle.init();
     window.KTScroll.init();
+    getProfileData();
   }, []);
+
+  const getProfileData = async () => {
+    try{
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/profile",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization : `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if(jsonresponse){
+        setName(jsonresponse[0].name);
+        setImage(jsonresponse[0].contact.commuter_image);
+        //console.log("Image", jsonresponse[0].contact.commuter_image);
+      }
+      else {
+        setName("");
+        setImage("");
+      }
+      console.log("Profile Data", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   return (
     <div className="container">
@@ -128,7 +161,7 @@ const BackendLayout = ({ children }) => {
                           <p className=" my-auto pvs-title fw-normal text-uppercase">
                             {formattedDate}
                           </p>
-                          <h5>Welcome Yasir Abbas Mirza!</h5>
+                          <h5>Welcome {name}!</h5>
                         </div>
                       </div>
                       <div className="header-right">
@@ -264,14 +297,15 @@ const BackendLayout = ({ children }) => {
                               {/*begin::Symbol*/}
                               <div className="symbol symbol-50px symbol-circle me-3">
                                 <img
-                                  src={`${BASE_URL}/assets/images/pic.png`}
+                                  //src={`${BASE_URL}/assets/images/pic.png`}
+                                  src={`https://staging.commuterslink.com/uploads/picture/${image}`}
                                 />
                               </div>
                               {/*end::Symbol*/}
                               {/*begin::Info*/}
                               <div className="m-0">
                                 <span className="fw-semibold text-white d-block fs-5">
-                                  Yasir Abbas Mirza
+                                  {name}
                                 </span>
                                 <button
                                   href="/"

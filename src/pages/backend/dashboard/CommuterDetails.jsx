@@ -13,7 +13,6 @@ const CommuterDetails = () => {
 
   useEffect(() => {
     getDashboardData();
-    getProfileData();
   }, []);
 
   const route = () => {
@@ -49,27 +48,6 @@ const CommuterDetails = () => {
         setContactId("");
       }
       console.log("Dashboard Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
-  const getProfileData = async () => {
-    try{
-      const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            Authorization : `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      console.log(jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
