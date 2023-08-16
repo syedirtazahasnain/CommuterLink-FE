@@ -8,9 +8,10 @@ import { CardGroup } from "react-bootstrap";
 import Navbar from './Navbar';
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+
 function HowWorks() {
   return (
-    <div>
+    <div id="howworks">
       {/* <Navbar/> */}
       <section id="working" className="my-1">
         <div className="container">

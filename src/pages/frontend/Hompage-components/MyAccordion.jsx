@@ -1,6 +1,6 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import imgsignup3 from '../../../Images/signup-3.png'
+import { BASE_URL } from "../../../constants";
 import React from "react";
 
 const MyAccordion = () => {
@@ -100,7 +100,7 @@ const MyAccordion = () => {
         
         <div className="col-md-4">
         <div className="container d-flex justify-content-center">
-            <img className="w-100 img-fluid" src={imgsignup3} />
+            <img className="w-100 img-fluid" src={`${BASE_URL}/assets/images/signup-3.png`} />
             </div>
         </div>
       </div>

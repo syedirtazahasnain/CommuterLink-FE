@@ -2,29 +2,31 @@ import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import img from "../../../Images/contribute-1.jpg";
-import { useSelector } from "react-redux";
+//import img from "../../../Images/contribute-1.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { setloginState } from "../../../redux/loginSlice";
+
 function NumberGenerate() {
+  const dispatch = useDispatch();
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const navigate = useNavigate();
   const [ phoneNumber , setPhoneNumber ] =  useState()
   const store_signup = useSelector((s)=> s.signup.data);
-  const store_login = useSelector((s)=> s.login.data);
+  //const store_login = useSelector((s)=> s.login.data);
+
+  //console.log("Signup Status", store_signup);
   
   const submitForm = async() =>{
     try {
       const body = {
         mobile: phoneNumber,
-        email : store_login.email,
+        email : store_signup.email,
       };
   
       const response = await fetch(
         "https://staging.commuterslink.com/api/v1/mobilew",
-        // "http://127.0.0.1:8000/api/v1/mobilew",
         {
           method: "POST",
           headers: {
@@ -38,8 +40,31 @@ function NumberGenerate() {
       const jsonresponse = await response.json();
        
       if (jsonresponse.status_code == 200) {
-        console.log(jsonresponse);
-        navigate("/nested");
+        const body = {
+          email: store_signup.email,
+          provider: store_signup.provider,
+        };
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/auth",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(body),
+          }
+        );
+        const jsonresponse = await response.json();
+        //console.log(jsonresponse);
+  
+        if (jsonresponse.statusCode === 200) {
+          dispatch(setloginState(jsonresponse.access_token));
+          navigate("/nested");
+        } else {
+          console.log(jsonresponse);
+          alert("Error: " + jsonresponse.message);
+        }
       } else {
         alert("Error: " + jsonresponse.message);
       }
@@ -59,7 +84,6 @@ function NumberGenerate() {
   };
   return (
     <div>
-      <Navbar />
       <div className="container py-5">
         <div className="row pt-5 pb-4 justify-content-center mt-5 ">
           <div className="col-lg-4 col-md-4 col-sm-4">
@@ -109,7 +133,6 @@ function NumberGenerate() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

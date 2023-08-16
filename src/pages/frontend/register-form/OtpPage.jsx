@@ -1,31 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
-import mySlides1 from "../../../Images/signup.png";
-import mySlides2 from "../../../Images/signup-3.png";
-import mySlides3 from "../../../Images/signup-4.png";
-import mySlides4 from "../../../Images/signup-6.png";
+import { BASE_URL } from "../../../constants";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Modal, Alert } from "react-bootstrap";
-// import Form from "react-bootstrap/Form";
-// import imgfacebook from "../../../Images/facebook.png";
-// import imggoogle from "../../../Images/google.png";
-// import imgtwitter from "../../../Images/twitter.png";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/base";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import imgpoper from "../../../Images/popper.png";
 import { ImageNotSupportedSharp } from "@mui/icons-material";
-// import Otp from "./share_ride office & uni";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setloginState } from "../../../redux/loginSlice";
+import { setsignupState } from "../../../redux/signupSlice";
 
 const OtpPage = () => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
@@ -34,10 +26,12 @@ const OtpPage = () => {
   const inputRefs = useRef([]);
   const hardcodedOTP = "12345";
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.signup.data);
   const postData = async () => {
     try {
+      let email = userData.email;
+      let password = userData.password;
       const body = {
         email: userData.email,
         number: userData.phone,
@@ -62,8 +56,28 @@ const OtpPage = () => {
       const jsonresponse = await response.json();
       console.log(jsonresponse);
       if (jsonresponse.statusCode == 200) {
-        navigate("/nested");
-        console.log(jsonresponse);
+
+        const loginDetails = {
+          email: email,
+          password: password,
+        };
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/auth",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loginDetails),
+          }
+        );
+        const jsonresponse = await response.json();
+
+        if(jsonresponse.statusCode == 200){
+          console.log(jsonresponse);
+          dispatch(setloginState(jsonresponse.access_token));
+          navigate("/nested");
+        }
       } else {
         alert("Error: " + jsonresponse.message);
       }
@@ -100,9 +114,37 @@ const OtpPage = () => {
       alert("OTP does not match. Please try again.");
     }
   };
-  const resendOTP = () => {
+
+  const resendOTP = async () => {
+    const body = {
+      email: userData.email,
+      number: userData.phone,
+      signatur: "",
+    };
+    const response = await fetch(
+      "https://staging.commuterslink.com/api/v1/send/otp",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    const jsonresponse = await response.json();
+    if (jsonresponse.statusCode == 200) {
+      dispatch(
+        setsignupState({
+          otp: jsonresponse.otp,
+          token: jsonresponse.token,
+        })
+      );
+    } else {
+      alert("Resend OTP Error: " + jsonresponse.message);
+    }
     alert("OTP has been sent again!");
   };
+
   const handleShowModal = () => {
     setShowModal(true);
   };
@@ -113,8 +155,6 @@ const OtpPage = () => {
   return (
     <div>
       <div>
-        <Navbar />
-
         <section
           id="sign-up"
           className="mt-5"
@@ -150,7 +190,7 @@ const OtpPage = () => {
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
-                        src={mySlides1}
+                        src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
@@ -158,7 +198,7 @@ const OtpPage = () => {
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
-                        src={mySlides2}
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
@@ -166,14 +206,14 @@ const OtpPage = () => {
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
-                        src={mySlides3}
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
                         className="Carousel_image img-fluid w-100"
-                        src={mySlides4}
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
@@ -287,7 +327,6 @@ const OtpPage = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Footer />
       </div>
     </div>
   );

@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
-import Navbar from '../Hompage-components/Navbar';
-import Footer from "../Hompage-components/Footer";
-import mySlides1 from "../../../Images/signup.png";
-import mySlides2 from "../../../Images/signup-3.png";
-import mySlides3 from "../../../Images/signup-4.png";
-import mySlides4 from "../../../Images/signup-6.png";
 import Form from "react-bootstrap/Form";
 // import Button from "react-bootstrap/Button";
-import imgfacebook from "../../../Images/facebook.png";
-import imggoogle from "../../../Images/google.png";
-import imgtwitter from "../../../Images/twitter.png";
+import { BASE_URL } from "../../../constants";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import {Link, useNavigate} from 'react-router-dom';
+import { Button } from '@mui/base';
+
 const WouldYouLikeTo = () => {
 
   const [radio1, setRadio1 ] = useState("");
@@ -28,7 +21,7 @@ const WouldYouLikeTo = () => {
  const route = () =>{
 
   if(radio1){
-    navigate("/registration");
+    navigate("/rider-registration");
   }
     
     if(radio2){
@@ -39,10 +32,7 @@ const WouldYouLikeTo = () => {
  console.log("Selected", radio1);
   return (
     <div>
-      
-        <div>
-        <Navbar />
-        
+        <div>        
         <section
           id="sign-up"
           className="mt-5"
@@ -77,7 +67,7 @@ const WouldYouLikeTo = () => {
                   <Carousel.Item interval={2001}>
                     <img
                       className="Carousel_image img-fluid w-100"
-                      src={mySlides1}
+                      src={`${BASE_URL}/assets/images/signup.png`}
                       alt="First slide"
                     />
                   </Carousel.Item>
@@ -85,7 +75,7 @@ const WouldYouLikeTo = () => {
                   <Carousel.Item interval={2000}>
                     <img
                       className="Carousel_image img-fluid w-100"
-                      src={mySlides2}
+                      src={`${BASE_URL}/assets/images/signup-3.png`}
                       alt="second slide"
                     />
                   </Carousel.Item>
@@ -93,14 +83,14 @@ const WouldYouLikeTo = () => {
                   <Carousel.Item interval={2003}>
                     <img
                       className="Carousel_image img-fluid  w-100"
-                      src={mySlides3}
+                      src={`${BASE_URL}/assets/images/signup-4.png`}
                       alt="third slide"
                     />
                   </Carousel.Item>
                   <Carousel.Item interval={2004}>
                     <img
                       className="Carousel_image img-fluid  w-100"
-                      src={mySlides4}
+                      src={`${BASE_URL}/assets/images/signup-6.png`}
                       alt="Fourth slide"
                     />
                   </Carousel.Item>
@@ -148,7 +138,7 @@ const WouldYouLikeTo = () => {
                           <div className="col-12 text-center">
                       {/* onClick={() => setModalShow(true)} */}
 
-                      <Button variant="outlined" className="mt-4btn btn-outline-custom" onClick={route}>
+                      <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={route}>
                         Next
                       </Button>
                     </div>
@@ -168,10 +158,6 @@ const WouldYouLikeTo = () => {
             </div>
           </div>
         </section>
-
-        
-        
-        <Footer />
       </div>
     </div>
   )

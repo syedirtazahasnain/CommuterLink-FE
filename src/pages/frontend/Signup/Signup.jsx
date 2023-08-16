@@ -1,35 +1,26 @@
 import React, { useState } from "react";
-import Navbar from "../Hompage-components/Navbar";
-import Footer from "../Hompage-components/Footer";
-import mySlides1 from "../../../Images/signup.png";
-import mySlides2 from "../../../Images/signup-3.png";
-import mySlides3 from "../../../Images/signup-4.png";
-import mySlides4 from "../../../Images/signup-6.png";
+import { BASE_URL } from "../../../constants";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox"; // Add this import
-import FormControlLabel from "@mui/material/FormControlLabel"; // Add this import
-import imgfacebook from "../../../Images/facebook.png";
-import imggoogle from "../../../Images/google.png";
-import imgtwitter from "../../../Images/twitter.png";
+import { Button } from "@mui/base";
+import Checkbox from "@mui/material/Checkbox"; 
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../../redux/signupSlice";
-import { setloginState } from "../../../redux/loginSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState("web");
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
-  const [fullName, setFullName] = useState();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [termsService, setTermsService] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
@@ -54,6 +45,7 @@ const Signup = () => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   const googlesignup = useGoogleLogin({
+    clientId:"380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
     onError: (codeResponse) => handleFailure(codeResponse),
   });
@@ -61,31 +53,33 @@ const Signup = () => {
     console.log("handleFailure", response);
   };
   const handleSuccess = async (response) => {
-     
-    const profile = await fetch(
-      "https://www.googleapis.com/oauth2/v3/userinfo",
 
-      {
-        headers: {
-          Authorization: `Bearer ${response.access_token}`,
-        },
-        method: "get",
-      }
-    );
-    // var userObject=jwt_decode(response.credential)
-    let userObject = await profile.json();
-    const googleuserdata = {
-      name: userObject.name,
-      email: userObject.email,
-      provider: "google",
-      provider_id:"DasD" + generateRandomOtp(0,1000000),
-      googletoken: response.access_token,
-      password: "jWaeo@123" + generateRandomPassword(),
-      otp: generateRandomOtp(0,1000000),
-      phone: "",
-    };
-    dispatch(setsignupState(googleuserdata));
-    signupgoogledatapost(googleuserdata)
+    if(response){
+      const profile = await fetch(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+  
+        {
+          headers: {
+            Authorization: `Bearer ${response.access_token}`,
+          },
+          method: "get",
+        }
+      );
+      // var userObject=jwt_decode(response.credential)
+      let userObject = await profile.json();
+      const googleuserdata = {
+        name: userObject.name,
+        email: userObject.email,
+        provider: "google",
+        provider_id:"DasD" + generateRandomOtp(0,1000000),
+        googletoken: response.access_token,
+        password: "jWaeo@123" + generateRandomPassword(),
+        otp: generateRandomOtp(0,1000000),
+        phone: "",
+      };
+      //dispatch(setsignupState(googleuserdata));
+      signupgoogledatapost(googleuserdata)
+    }
   };
   const signupgoogledatapost = async (userData) => {
     try {
@@ -100,6 +94,7 @@ const Signup = () => {
         otp: userData.otp,
         token: userData.googletoken,
       };
+      console.log("Google Body:", body);
       const response = await fetch(
         "https://staging.commuterslink.com/api/v1/signup",
         {
@@ -113,14 +108,14 @@ const Signup = () => {
 
       const jsonresponse = await response.json();
        
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         dispatch(
-          setloginState({
+          setsignupState({
             email: body.email,
             provider: body.provider,
           })
         );
-        console.log(jsonresponse);
+        console.log("Google Response:",jsonresponse);
         navigate("/number-generate");
       } else {
         alert("Error: " + jsonresponse.message);
@@ -131,44 +126,48 @@ const Signup = () => {
   };
   const postData = async () => {
     try {
-      if (termsService) {
-        const body = {
-          email: email,
-          number: phoneNumber,
-          signatur: "",
-        };
-        const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/send/otp",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          }
-        );
-
-        const jsonresponse = await response.json();
-
-        if (jsonresponse.statusCode == 200) {
-          dispatch(
-            setsignupState({
-              name: fullName,
-              email: email,
-              phone: phoneNumber,
-              password: password,
-              provider: provider,
-              otp: jsonresponse.otp,
-              token: jsonresponse.token,
-              confirmPassword: confirmPassword,
-            })
+      if(fullName === "" || email === "" || phoneNumber === null || password === "" || confirmPassword === ""){
+        alert("Please Fill All Fields!");
+      }
+      else{
+        if (termsService) {
+          const body = {
+            email: email,
+            number: phoneNumber,
+            signatur: "",
+          };
+          const response = await fetch(
+            "https://staging.commuterslink.com/api/v1/send/otp",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
+            }
           );
-          navigate("/otp");
+  
+          const jsonresponse = await response.json();
+          if (jsonresponse.statusCode == 200) {
+            dispatch(
+              setsignupState({
+                name: fullName,
+                email: email,
+                phone: phoneNumber,
+                password: password,
+                provider: provider,
+                otp: jsonresponse.otp,
+                token: jsonresponse.token,
+                confirmPassword: confirmPassword,
+              })
+            );
+            navigate("/otp");
+          } else {
+            alert("Error: " + jsonresponse.message);
+          }
         } else {
-          alert("Error: " + jsonresponse.message);
+          alert("please check Terms of Service");
         }
-      } else {
-        alert("please check Terms of Service");
       }
     } catch (error) {
       console.log(error.message);
@@ -177,20 +176,22 @@ const Signup = () => {
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (emailPattern.test(email)) {
+    if (email === "" || emailPattern.test(email)) {
       setEmail(email);
       setIsValidEmail(true);
     } else {
+      setEmail(email);
       setIsValidEmail(false);
     }
   };
   const validatePhoneNumber = (phoneNumber) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
     const phonePattern = /^03\d{9}$/;
-    if (phonePattern.test(phoneNumber)) {
+    if (phoneNumber === '' || phonePattern.test(phoneNumber)) {
       setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(true);
     } else {
+      setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(false);
     }
   };
@@ -198,18 +199,20 @@ const Signup = () => {
     // Regular expression pattern for validating passwords
     const passwordPattern =
       /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (passwordPattern.test(password)) {
+    if (password === '' || passwordPattern.test(password)) {
       setPassword(password);
       setIsValidPassword(true);
     } else {
+      setPassword(password);
       setIsValidPassword(false);
     }
   };
   const checkconfirmPassword = (cpassword) => {
-    if (password == cpassword) {
+    if (password === cpassword) {
       setConfirmPassword(cpassword);
       setisValidConfirmPassword(true);
     } else {
+      setConfirmPassword(cpassword);
       setisValidConfirmPassword(false);
     }
   };
@@ -217,7 +220,6 @@ const Signup = () => {
   return (
     <div>
       <div>
-        <Navbar />
         <section
           id="sign-up"
           className="mt-5"
@@ -231,17 +233,17 @@ const Signup = () => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginTop: "10vh",
+                  marginTop: "8vh",
                 }}
               >
-                <div
+                {/* <div
                   className="col-md-6"
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "5vh",
                   }}
-                >
+                > */}
                   <Carousel
                     style={{
                       backgroundColor: "#eee",
@@ -253,36 +255,36 @@ const Signup = () => {
                   >
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid "
-                        src={mySlides1}
+                        className="img-fluid d-block w-auto"
+                        src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid "
-                        src={mySlides2}
-                        alt="First slide"
+                        className="img-fluid d-block w-auto"
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
+                        alt="second slide"
                       />
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid"
-                        src={mySlides3}
-                        alt="First slide"
+                        className="img-fluid  d-block w-auto"
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
+                        alt="third slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid"
-                        src={mySlides4}
-                        alt="First slide"
+                        className="img-fluid d-block w-auto"
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
+                        alt="fourth slide"
                       />
                     </Carousel.Item>
                   </Carousel>
-                </div>
+                {/* </div> */}
               </div>
 
               <div className="col-md-5 mb-2">
@@ -302,19 +304,24 @@ const Signup = () => {
                     <div className="col-md-12 mt-5">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         label="Full Name"
+                        value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         required
                         size="small"
+                        
                       />
                     </div>
                     <div className="col-md-12 mt-3">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         type="email"
                         label="Email"
+                        value={email}
                         onChange={(e) => validateEmail(e.target.value)}
                         required
                         size="small"
@@ -327,15 +334,21 @@ const Signup = () => {
                     <div className="col-md-12 mt-3">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         value={phoneNumber}
+
                         label="Mobile Number (03xxxxxxxxx)"
-                        onChange={(e) => validatePhoneNumber(e.target.value)}
+                        onChange={(e) => {
+                          if (/^\d{0,11}$/.test(e.target.value)) {
+                            validatePhoneNumber(e.target.value);
+                          }
+                        }}
                         required
                         size="small"
-                        error={!isValidPhoneNumber}
+                        error={!isValidPhoneNumber && phoneNumber !== ''}
                         helperText={
-                          !isValidPhoneNumber &&
+                          !isValidPhoneNumber && phoneNumber !== '' &&
                           "Please enter a valid Phone Number starting with '03' and having 11 digits."
                         }
                       />
@@ -343,9 +356,11 @@ const Signup = () => {
                     <div className="col-md-12  mt-3">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         type="password"
                         label="Password"
+                        value={password}
                         onChange={(e) => validatePassword(e.target.value)}
                         required
                         size="small"
@@ -359,9 +374,11 @@ const Signup = () => {
                     <div className="col-md-12  mt-3">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         type="password"
                         label="Confirm Password"
+                        value={confirmPassword}
                         onChange={(e) => checkconfirmPassword(e.target.value)}
                         required
                         size="small"
@@ -386,7 +403,7 @@ const Signup = () => {
                         label={
                           <div id="span-text" className="mr-5 small">
                             I agree with all statements in
-                            <a href="#!" style={{ textDecoration: "none" }}>
+                            <a href="" style={{ textDecoration: "none" }}>
                               <span
                                 style={{
                                   color: "#198754",
@@ -401,46 +418,38 @@ const Signup = () => {
                       />
                     </div>
                     <div className="col-md-12  mt-3 text-center">
-                    <button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={() => postData()}>
-                    Sign up
-                  </button>
-                      {/* <Button
-                        fullWidth
-                        variant="contained"
-                        className="formbtn"
-                        onClick={() => postData()}
-                      >
-                        SIGNUP
-                      </Button> */}
+                    <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={() => postData()}>
+                      Sign up
+                    </Button>
                     </div>
                     <div className="container text-center">
                       <div className="row d-flex">
-                        <div class="column m-2">
-                          <p class=" text-muted" id="text2">
+                        <div className="column mr-3 mt-2">
+                          <p className=" text-muted" id="text2">
                             Or continue with
                           </p>
                         </div>
-                        <div class="column">
+                        <div className="column">
                           <ul
-                            class="list-unstyled  d-flex "
+                            className="list-unstyled  d-flex "
                             style={{
                               justifyContent: "center",
                               alignItems: "center",
                             }}
                           >
-                            <li class="mr-3">
+                            <li className="mr-3">
                               <a onClick={() => googlesignup()}>
                                 <img
-                                  src={imggoogle}
+                                  src={`${BASE_URL}/assets/images/google.png`}
                                   alt=""
                                   style={{ height: "25px", width: "25px" }}
                                 />
                               </a>
                             </li>
-                            <li class="mr-3">
+                            <li className="mr-3">
                               <a href="https://www.facebook.com/Sysreforms">
                                 <img
-                                  src={imgfacebook}
+                                  src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px" }}
                                 />
@@ -449,7 +458,7 @@ const Signup = () => {
                             <li>
                               <a href="https://instagram.com/sysreforms_international?igshid=YmMyMTA2M2Y= ">
                                 <img
-                                  src={imgtwitter}
+                                  src={`${BASE_URL}/assets/images/twitter.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px" }}
                                 />
@@ -460,11 +469,11 @@ const Signup = () => {
                       </div>
                       <hr id="hrline2" />
                       <div id="span-text" className="text-center mb-5">
-                      New to CommutersLink? &nbsp;
-                      <Link to="/registration">
-                        <span className="reg-text">Registration</span>
-                      </Link>
-                    </div>
+                        Already have account on CommuterLinks? &nbsp;
+                        <Link to="/login">
+                          <span style={{ color: "#198754"}}>Login</span>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -473,8 +482,6 @@ const Signup = () => {
             </div>
           </div>
         </section>
-
-        <Footer />
       </div>
     </div>
   );
