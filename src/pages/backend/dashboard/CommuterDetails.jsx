@@ -18,7 +18,7 @@ const CommuterDetails = () => {
     };
   return (
     <div >
-      <div id="" className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
+      <div id="" className="container page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
         <div className="card border-0">
           <div className="card-body border-0 p-0">
             <div clasName="container">

@@ -183,22 +183,20 @@ const Login = () => {
             {" "}
             <div className="row">
               <div
-                className="col-md-6"
+                className="col-md-6 d-flex"
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
                   marginTop: "10vh",
                 }}
               >
                 
-                <div
+                {/* <div
                   className="col-md-6"
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "5vh",
                   }}
-                >
+                > */}
                   <Carousel
                     style={{
                       backgroundColor: "#eee",
@@ -210,7 +208,7 @@ const Login = () => {
                   >
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid w-100"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
@@ -218,27 +216,27 @@ const Login = () => {
 
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid w-100"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid w-100"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid w-100"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
                   </Carousel>
-                </div>
+                {/* </div> */}
               </div>
 
               <div className="col-md-5 mb-2 px-5">
@@ -260,6 +258,7 @@ const Login = () => {
                   >
                     <TextField
                       fullWidth
+                      className="bg-light"
                       variant="outlined"
                       type="email"
                       label="Email"
@@ -278,6 +277,7 @@ const Login = () => {
                     <TextField
                       fullWidth
                       variant="outlined"
+                      className="bg-light"
                       type="password"
                       label="Password"
                       onChange={(e) => setPassword(e.target.value)}
