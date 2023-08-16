@@ -161,7 +161,7 @@ const BackendLayout = ({ children }) => {
                           <p className=" my-auto pvs-title fw-normal text-uppercase">
                             {formattedDate}
                           </p>
-                          <h5>Welcome {name}!</h5>
+                          {name ? (<h5>Welcome {name}!</h5>) : (<h5>Welcome Yasir Abbas Mirza!</h5>)}
                         </div>
                       </div>
                       <div className="header-right">
@@ -296,16 +296,23 @@ const BackendLayout = ({ children }) => {
                             <div className="d-flex align-items-center mx-3  me-5 me-xl-13">
                               {/*begin::Symbol*/}
                               <div className="symbol symbol-50px symbol-circle me-3">
-                                <img
-                                  //src={`${BASE_URL}/assets/images/pic.png`}
-                                  src={`https://staging.commuterslink.com/uploads/picture/${image}`}
-                                />
+                              {image ? 
+                                (
+                                  <img
+                                    src={`https://staging.commuterslink.com/uploads/picture/${image}`}
+                                  />
+                                ) : 
+                                (
+                                  <img
+                                    src={`${BASE_URL}/assets/images/pic.png`}
+                                  />
+                                )}
                               </div>
                               {/*end::Symbol*/}
                               {/*begin::Info*/}
                               <div className="m-0">
                                 <span className="fw-semibold text-white d-block fs-5">
-                                  {name}
+                                {name ? (name) : ("Yasir Abbas Mirza")}
                                 </span>
                                 <button
                                   href="/"
