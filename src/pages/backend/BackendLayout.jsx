@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider, Tooltip, createTheme } from "@mui/material";
-//import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { setCurrentPage, setSidebarState } from "../../redux/generalSlice";
+import { setSidebarState } from "../../redux/generalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../redux/loginSlice";
 import { BASE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
+import { setsignupState } from "../../redux/signupSlice";
+import { Button } from "@mui/base";
+
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -16,44 +18,53 @@ const customTheme = createTheme({
   },
 });
 
-// const backgroundLogo = {
-//   backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
-//   backgroundRepeat: "no-repeat",
-//   backgroundColor: "white",
-
-// };
 
 const BackendLayout = ({ children }) => {
-  // const { instance } = useMsal();
+  
   const navigate = useNavigate();
-  const [submitbtn, setSubmit] = useState(false);
   const dispatch = useDispatch();
-  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
+  const userToken = useSelector((s) => s.login.data.token);
   const currentPage = useSelector((s) => s.general.currentPage);
+  const sidebarOpened = useSelector((s) =>s.general.sidebarOpened);
+  const [submitbtn , setSubmit] = useState(false);
+
+  // For getting current date
+  const currentDate = new Date();
+
+  // Define arrays for days and months
+  const daysOfWeek = [
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+  ];
+
+  const monthsOfYear = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Format the date
+  const formattedDate = `${daysOfWeek[currentDate.getDay()]}, ${monthsOfYear[currentDate.getMonth()]} ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
+
   const route = () => {
     setSubmit(true);
-
-    if (!submitbtn) {
+    
+    if(!submitbtn){
       navigate("/commuter-profile");
     }
-  };
+  }
+
+  const logout = () => {
+    dispatch(setloginState(""));
+    dispatch(setsignupState(""));
+    navigate("/login");
+  }
   
   useEffect(() => {
-    // dispatch(setCurrentPage(""));
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-  
-  const logout = () => {
-    dispatch(setloginState(""));
-    document.getElementById("root").classList.add("w-100");
-    document.getElementById("root").classList.remove("d-flex");
-    document.getElementById("root").classList.remove("flex-grow-1");
-    navigate("/login");
-  };
 
   return (
     <div className="container">
@@ -115,7 +126,7 @@ const BackendLayout = ({ children }) => {
                       <div className="header-left mr-auto mx-4 d-flex flex-grow-1 py-2">
                         <div className="d-block">
                           <p className=" my-auto pvs-title fw-normal text-uppercase">
-                            Monday, July 04, 2022{" "}
+                            {formattedDate}
                           </p>
                           <h5>Welcome Yasir Abbas Mirza!</h5>
                         </div>
@@ -139,14 +150,12 @@ const BackendLayout = ({ children }) => {
                                   </Link>
                                 </Tooltip>
                                 <Tooltip title="Logout">
-                                  <button
-                                    className="btn btn-sm btn-green text-white rounded rounded-2"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_new_target"
+                                  <Button
+                                    className="btn btn-sm fw-bold btn-success"
                                     onClick={logout}
                                   >
                                     LOG OUT
-                                  </button>
+                                  </Button>
                                 </Tooltip>
                               </div>
                             </div>
@@ -313,11 +322,12 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-equals"></i>
+                                <i class="fa-solid fa-user"></i>
                               </span>
                               <span className="menu-title text-white">
-                                Matches
+                                Profile
                               </span>
+                              <span className=""></span>
                             </Link>
                           </div>
 
@@ -337,10 +347,10 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-code-pull-request"></i>
+                              <i class="fa-solid fa-terminal"></i>
                               </span>
                               <span className="menu-title text-white">
-                                Requests
+                                Terms and Conditions
                               </span>
                             </Link>
                           </div>
@@ -381,10 +391,10 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-handshake"></i>
+                              <i class="fa-solid fa-address-card"></i>
                               </span>
                               <span className="menu-title text-white">
-                                Partner Details
+                                Contact Us
                               </span>
                             </Link>
                           </div>
@@ -403,16 +413,16 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-computer"></i>
+                                <i class="fa-solid fa-phone"></i>
                               </span>
                               <span className="menu-title text-white">
-                                My Computer Records
+                                WhatsApp
                               </span>
                             </Link>
                           </div>
 
                           <hr />
-                          <div className="menu-item">
+                          {/* <div className="menu-item">
                             <Link
                               className={`menu-link ${
                                 currentPage == "news-management" ? "active" : ""
@@ -433,7 +443,7 @@ const BackendLayout = ({ children }) => {
                             </Link>
                           </div>
 
-                          <hr />
+                          <hr /> */}
                         </div>
                         <div
                           className={
@@ -447,7 +457,7 @@ const BackendLayout = ({ children }) => {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Dashboard Content */}
 
                   <div className="px-4">

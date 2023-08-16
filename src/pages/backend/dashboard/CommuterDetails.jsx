@@ -1,24 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const CommuterDetails = () => {
-    const navigate = useNavigate();
-    const [submitbtn, setSubmit] = useState(false);
-    const dispatch = useDispatch();
-    const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
-    const currentPage = useSelector((s) => s.general.currentPage);
-    const route = () => {
-      setSubmit(true);
-  
-      if (!submitbtn) {
-        navigate("/commuter-profile");
+  const navigate = useNavigate();
+  const userToken = useSelector((s) => s.login.data.token);
+  const [submitbtn , setSubmit] = useState(false);
+
+  // For Dashboard Data
+  const [contactId , setContactId] = useState("");
+
+  useEffect(() => {
+    getDashboardData();
+    getProfileData();
+  }, []);
+
+  const route = () => {
+    setSubmit(true);
+    
+    if(!submitbtn){
+      navigate("/commuter-profile");
+    }
+  }
+
+  const getDashboardData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/matches/office",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      
+      const jsonresponse = await response.json();
+      if(jsonresponse.rider && jsonresponse.rider.length > 0){
+        setContactId(jsonresponse.rider[0].contact_id);
       }
-    };
+      else if(jsonresponse.drivers && jsonresponse.drivers.length > 0){
+        setContactId(jsonresponse.drivers[0].contact_id);
+      }
+      else {
+        setContactId("");
+      }
+      console.log("Dashboard Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const getProfileData = async () => {
+    try{
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/profile",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization : `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      console.log(jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
   return (
     <div >
-      <div id="" className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
+      <div id="" className="container page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
         <div className="card border-0">
           <div className="card-body border-0 p-0">
             <div clasName="container">
@@ -80,34 +139,60 @@ const CommuterDetails = () => {
                                 }}
                               >
                                 <div class="row d-flex justify-content-center">
+                                {contactId !== "" ? (
                                   <div className="col-sm-2">
+                                  <div
+                                    className="card"
+                                    style={{ width: "6rem", fontWeight: "bold", backgroundColor: "rgb(32 155 98)" }}
+                                  >
+                                    <img
+                                      src={`${BASE_URL}/assets/images/Vector.png`}
+                                      className="card-img-top w-40px m-auto"
+                                    />
                                     <div
-                                      className="card bg-success"
-                                      style={{ width: "6rem" }}
+                                      className="card-title text-light text-center"
+                                      style={{ width: "6rem", cursor: "pointer" }}
+                                      onClick={() => {
+                                        route();
+                                      }}
                                     >
-                                      <img
-                                        src={`${BASE_URL}/assets/images/Vector.png`}
-                                        className="card-img-top w-40px m-auto mt-3"
-                                      />
-
-                                      <div
-                                        className="card-title text-light text-center"
-                                        style={{
-                                          width: "6rem",
-                                          cursor: "pointer",
-                                        }}
-                                        onClick={() => {
-                                          route();
-                                        }}
-                                      >
-                                        Member ID
-                                      </div>
-                                      <img
-                                        className=""
-                                        src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                                      />
+                                      {contactId}
                                     </div>
+                                    <img
+                                      className=""
+                                      src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                                    />
                                   </div>
+                                  </div>
+                                ) :
+                                  (
+                                    <div className="col-sm-2">
+                                      <div
+                                        className="card bg-success"
+                                        style={{ width: "6rem", cursor: "pointer" }}
+                                      >
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-40px m-auto "
+                                        />
+
+                                        <div
+                                          className="card-title text-center text-light"
+                                          style={{ width: "6rem", cursor: "pointer", }}
+                                          onClick={() => {
+                                            route();
+                                          }}
+                                        >
+                                          Member ID
+                                        </div>
+                                        <img
+                                          className=""
+                                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                                        />
+                                      </div>
+                                    </div>
+                                  )
+                                }
                                   <div className="col-sm-2">
                                     <div
                                       className="card bg-success"
@@ -148,7 +233,10 @@ const CommuterDetails = () => {
 
                                       <div
                                         className="card-title text-center text-light"
-                                        style={{ width: "6rem" }}
+                                        style={{ width: "6rem", cursor: "pointer", }}
+                                        onClick={() => {
+                                          route();
+                                        }}
                                       >
                                         Member ID
                                       </div>
@@ -276,7 +364,7 @@ const CommuterDetails = () => {
                                 }}
                               >
                                 <div class="row d-flex justify-content-center">
-                                  <div className="col-sm-2">
+                                <div className="col-sm-2">
                                     <div
                                       className="card bg-success"
                                       style={{ width: "6rem" }}
@@ -288,7 +376,10 @@ const CommuterDetails = () => {
 
                                       <div
                                         className="card-title text-center text-light"
-                                        style={{ width: "6rem" }}
+                                        style={{ width: "6rem", cursor: "pointer", }}
+                                        onClick={() => {
+                                          route();
+                                        }}
                                       >
                                         Member ID
                                       </div>

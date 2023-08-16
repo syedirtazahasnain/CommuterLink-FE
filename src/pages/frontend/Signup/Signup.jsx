@@ -233,17 +233,17 @@ const Signup = () => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginTop: "10vh",
+                  marginTop: "8vh",
                 }}
               >
-                <div
+                {/* <div
                   className="col-md-6"
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "5vh",
                   }}
-                >
+                > */}
                   <Carousel
                     style={{
                       backgroundColor: "#eee",
@@ -255,7 +255,7 @@ const Signup = () => {
                   >
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid "
+                        className="img-fluid d-block w-auto"
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
@@ -263,7 +263,7 @@ const Signup = () => {
 
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid "
+                        className="img-fluid d-block w-auto"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="second slide"
                       />
@@ -271,20 +271,20 @@ const Signup = () => {
 
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid"
+                        className="img-fluid  d-block w-auto"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="third slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid"
+                        className="img-fluid d-block w-auto"
                         src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="fourth slide"
                       />
                     </Carousel.Item>
                   </Carousel>
-                </div>
+                {/* </div> */}
               </div>
 
               <div className="col-md-5 mb-2">
@@ -304,6 +304,7 @@ const Signup = () => {
                     <div className="col-md-12 ">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         label="Full Name"
                         value={fullName}
@@ -316,6 +317,7 @@ const Signup = () => {
                     <div className="col-md-12 mt-3">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         type="email"
                         label="Email"
@@ -332,6 +334,7 @@ const Signup = () => {
                     <div className="col-md-12 mt-3">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         value={phoneNumber}
 
@@ -353,6 +356,7 @@ const Signup = () => {
                     <div className="col-md-12  mt-3">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         type="password"
                         label="Password"
@@ -370,6 +374,7 @@ const Signup = () => {
                     <div className="col-md-12  mt-3">
                       <TextField
                         fullWidth
+                        className="bg-light"
                         variant="outlined"
                         type="password"
                         label="Confirm Password"
@@ -466,7 +471,7 @@ const Signup = () => {
                       <div id="span-text" className="text-center mb-5">
                         Already have account on CommuterLinks? &nbsp;
                         <Link to="/login">
-                          <span style={{ color: "#198754" }}>Login</span>
+                          <span style={{ color: "#198754"}}>Login</span>
                         </Link>
                       </div>
                     </div>
