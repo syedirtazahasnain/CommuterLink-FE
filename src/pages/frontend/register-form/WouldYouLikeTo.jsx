@@ -28,8 +28,7 @@ const WouldYouLikeTo = () => {
       navigate("/driver-registration");
     }
  };
-
- console.log("Selected", radio1);
+ 
   return (
     <div>
         <div>        

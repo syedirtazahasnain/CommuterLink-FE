@@ -28,6 +28,7 @@ const OtpPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.signup.data);
+  console.log("Signup Data:", userData);
   const postData = async () => {
     try {
       let email = userData.email;
@@ -37,7 +38,7 @@ const OtpPage = () => {
         number: userData.phone,
         provider: userData.provider,
         password: userData.password,
-        confirm_password: userData.confirmPassword,
+        confirm_password: userData.confirm_password,
         name: userData.name,
         otp: userData.otp,
         token: userData.token,
@@ -97,7 +98,7 @@ const OtpPage = () => {
       e.nextSibling.focus();
       //   inputRefs.current[index + 1].focus();
     }
-    if (index === 5) {
+    if (index === 4) {
       // If the last input field is filled, validate the OTP
       const enteredOTP = otp.join("");
     }
@@ -135,6 +136,12 @@ const OtpPage = () => {
     if (jsonresponse.statusCode == 200) {
       dispatch(
         setsignupState({
+          email: userData.email,
+          number: userData.phone,
+          provider: userData.provider,
+          password: userData.password,
+          confirm_password: userData.confirm_password,
+          name: userData.name,
           otp: jsonresponse.otp,
           token: jsonresponse.token,
         })
@@ -151,6 +158,8 @@ const OtpPage = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  // console.log("After Signup:", userData);
 
   return (
     <div>

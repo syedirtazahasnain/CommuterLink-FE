@@ -6,6 +6,7 @@ const initialState = {
     email: "",
     phone: "",
     password: "",
+    confirm_password: "",
     provider: "",
     otp: "",
     token: "",

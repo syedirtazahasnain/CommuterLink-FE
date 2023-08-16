@@ -28,6 +28,7 @@ const BackendLayout = ({ children }) => {
   const sidebarOpened = useSelector((s) =>s.general.sidebarOpened);
   const [name , setName] = useState("");
   const [image , setImage] = useState("");
+  const imageURL= "https://staging.commuterslink.com/uploads/picture";
   const [submitbtn , setSubmit] = useState(false); 
 
   // For getting current date
@@ -299,7 +300,7 @@ const BackendLayout = ({ children }) => {
                               {image ? 
                                 (
                                   <img
-                                    src={`https://staging.commuterslink.com/uploads/picture/${image}`}
+                                    src={`${imageURL}/${image}`}
                                   />
                                 ) : 
                                 (
