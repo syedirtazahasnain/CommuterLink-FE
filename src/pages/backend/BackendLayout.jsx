@@ -322,11 +322,12 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-equals"></i>
+                                <i class="fa-solid fa-user"></i>
                               </span>
                               <span className="menu-title text-white">
-                                Matches
+                                Profile
                               </span>
+                              <span className=""></span>
                             </Link>
                           </div>
 
@@ -346,10 +347,10 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-code-pull-request"></i>
+                              <i class="fa-solid fa-terminal"></i>
                               </span>
                               <span className="menu-title text-white">
-                                Requests
+                                Terms and Conditions
                               </span>
                             </Link>
                           </div>
@@ -390,10 +391,10 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-handshake"></i>
+                              <i class="fa-solid fa-address-card"></i>
                               </span>
                               <span className="menu-title text-white">
-                                Partner Details
+                                Contact Us
                               </span>
                             </Link>
                           </div>
@@ -412,16 +413,16 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-computer"></i>
+                                <i class="fa-solid fa-phone"></i>
                               </span>
                               <span className="menu-title text-white">
-                                My Computer Records
+                                WhatsApp
                               </span>
                             </Link>
                           </div>
 
                           <hr />
-                          <div className="menu-item">
+                          {/* <div className="menu-item">
                             <Link
                               className={`menu-link ${
                                 currentPage == "news-management" ? "active" : ""
@@ -442,7 +443,7 @@ const BackendLayout = ({ children }) => {
                             </Link>
                           </div>
 
-                          <hr />
+                          <hr /> */}
                         </div>
                         <div
                           className={
