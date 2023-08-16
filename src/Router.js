@@ -38,8 +38,8 @@ const Router = () => {
         <Route path='/signup' element={<FrontendLayout children={<Signup />}/>} />
         <Route path='/login' element={<FrontendLayout children={<Login />}/>} />
         <Route path='/faq' element={<FrontendLayout children={<Faq/>}/>}/>
-        {/* <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
-        <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} /> */}
+        {/* <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} /> */}
+        {/* <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} /> */}
         <Route path='/replytoconfirmdates1' element={<BackendLayout children={<ReplyToConfirmDates1 />} />} />
         <Route path='/sendapprovalforpartner1' element={<BackendLayout children={<SendApprovalForPartner1 />} />} />
         <Route path='/sharetocare1' element={<BackendLayout children={<ShareToCare1 />} />} />
