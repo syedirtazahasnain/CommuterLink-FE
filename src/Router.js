@@ -76,7 +76,7 @@ const Router = () => {
               <Route path='/nested' element={<FrontendLayout children={<WouldYouLikeTo/>}/>}></Route>
               <Route path='/number-generate' element={<FrontendLayout children={<NumberGenerate />}/>}></Route>
               <Route path='/verification' element={<FrontendLayout children={<Verification/>}/>}></Route>
-              <Route path='/dashboard' element={<BackendLayout children={<CommuterDetails />} />}></Route>
+              <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />}></Route>
               <Route path='/commuter-profile' element={<BackendLayout children={<CommuterProfile1 />} />}></Route>
               <Route path='/seatcostverification' element={<FrontendLayout children={<SeatCostVerification/>}/>}></Route>
             </>
