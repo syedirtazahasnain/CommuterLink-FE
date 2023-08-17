@@ -89,7 +89,6 @@ const TravelPatners = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="container">
             <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
               <div className="card-body">
            
@@ -349,14 +348,14 @@ const TravelPatners = () => {
                               
                                 <div className="col-md-6">
                                   <div
-                                    className="card justify-content-center border-0 w-100"
+                                    className="card justify-content-center border-0 h-100"
                                     // style={{
                                     //   width: "6rem",
                                     //   backgroundColor: "#D9D9D9",
                                     // }}
                                   >
                                     {" "}
-                                    <div className="card-body d-flex justify-content-center fw-bold text-success">
+                                    <div className="card-body h-100 d-flex justify-content-center fw-bold text-success">
                                       Rs.00000/
                                     </div>
                                     
@@ -373,7 +372,8 @@ const TravelPatners = () => {
                 <div></div>
               </div>
             </div>
-          </div>
+          {/* <div className="container">
+          </div> */}
         </div>
       </div>
     </div>

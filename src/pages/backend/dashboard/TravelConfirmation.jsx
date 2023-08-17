@@ -89,15 +89,15 @@ const TravelConfirmation = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="container">
             <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
-              <div className="card-body border border-1 border-dark">
+              <div className="card-body">
            
-              <p className="text-success text-center fs-5 ">After starting travelling with someone you will be able to confirm your date of travel</p>
+              <p className="text-success text-center fs-5 fw-bold">After starting travelling with someone you will be able to confirm your date of travel</p>
                 <div></div>
               </div>
             </div>
-          </div>
+          {/* <div className="container">
+          </div> */}
         </div>
       </div>
     </div>

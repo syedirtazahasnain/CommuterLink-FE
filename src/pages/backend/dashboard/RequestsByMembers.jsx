@@ -89,7 +89,6 @@ const RequestsByMembers = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="container">
             <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
               <div
                 className="card-header "
@@ -300,9 +299,10 @@ const RequestsByMembers = () => {
                
               </div>
             </div>
+          {/* <div className="container">
           
           
-          </div>
+          </div> */}
 
         </div>
       </div>

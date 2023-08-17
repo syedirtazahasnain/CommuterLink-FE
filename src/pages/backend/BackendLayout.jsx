@@ -101,9 +101,9 @@ const BackendLayout = ({ children }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-lg-12">
+        <div className="col-12">
           <ThemeProvider theme={customTheme}>
             <link rel="stylesheet" href={`/assets/css/backend.css`} />
             <link rel="stylesheet" href={"/assets/frontend.css"} />

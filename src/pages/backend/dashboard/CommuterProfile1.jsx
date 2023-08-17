@@ -230,13 +230,7 @@ const CommuterProfile1 = ({ children }) => {
         </p>
       </div>
 
-      <div
-        className="card"
-        style={{
-          border: "0",
-          backgroundColor: "#D9D9D9",
-        }}
-      >
+      <div className="card" style={{border: "0", backgroundColor: "#D9D9D9", }} >
         <div class="card-header d-flex flex-column bg-light mb-2">
           <div>
             {name !== "" ? (
