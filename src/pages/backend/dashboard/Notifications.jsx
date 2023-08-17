@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentPage } from "../../../redux/generalSlice";
 
 const backgroundStyle = {
   backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -17,6 +18,7 @@ const backgroundStyle = {
 const Notifications = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [submitbtn, setSubmit] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
@@ -29,6 +31,7 @@ const Notifications = () => {
   };
 
   useEffect(() => {
+    dispatch(setCurrentPage("notification"));
     getNotifications();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");

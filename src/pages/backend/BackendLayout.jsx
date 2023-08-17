@@ -332,7 +332,7 @@ const BackendLayout = ({ children }) => {
                               className={`menu-link ${
                                 currentPage == "dashboard" ? "active" : ""
                               }`}
-                              to={"/portal"}
+                              to={"/dashboard"}
                               style={{
                                 borderRadius: "0%",
                                 marginLeft: "0%",
@@ -397,7 +397,7 @@ const BackendLayout = ({ children }) => {
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
-                                currentPage == "news-management" ? "active" : ""
+                                currentPage == "notification" ? "active" : ""
                               }`}
                               to={"/notification"}
                               style={{
