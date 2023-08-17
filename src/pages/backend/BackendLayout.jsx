@@ -275,10 +275,10 @@ const BackendLayout = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="app-sidebar-menu overflow-hidden flex-column-fluid bg-dark">
+                    <div className="app-sidebar-menu overflow-hidden fw-normal flex-column-fluid bg-dark">
                       <div
                         id="kt_app_sidebar_menu_wrapper"
-                        className="app-sidebar-wrapper hover-scroll-overlay-y d-flex flex-column"
+                        className="app-sidebar-wrapper fw-normal hover-scroll-overlay-y d-flex flex-column"
                         data-kt-scroll="true"
                         data-kt-scroll-activate="true"
                         data-kt-scroll-height="auto"
@@ -288,13 +288,13 @@ const BackendLayout = ({ children }) => {
                         data-kt-scroll-save-state="true"
                       >
                         <div
-                          className="menu menu-column menu-rounded menu-sub-indention"
+                          className="menu menu-column fw-normal menu-rounded menu-sub-indention"
                           id="#kt_app_sidebar_menu"
                           data-kt-menu="true"
                           data-kt-menu-expand="false"
                         >
                           <div className="menu-item">
-                            <div className="d-flex align-items-center mx-3  me-5 me-xl-13">
+                            <div className="d-flex align-items-center mx-3  me-xl-13">
                               {/*begin::Symbol*/}
                               <div className="symbol symbol-50px symbol-circle me-3">
                               {image ? 

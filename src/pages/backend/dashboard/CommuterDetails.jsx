@@ -93,39 +93,87 @@ const CommuterDetails = () => {
                 <p>Based upon your Profile, We have Following <strong> MATCHES</strong> to Offer
                 </p>
                 <div className="row">
-                  <div className="col-sm-4">
+                  
+                  <div className="col-sm-6">
                     <div className="card">
                       <div className="card-body-inner green-card">
-                        <div className="d-flex flex-column align-items-center mt-3">
-                          <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
-                            classNameName="card-img-top w-40px m-auto "
-                          />													<a href="index-3.html"><p className="text-white fs-6 mt-4 mb-3 text-center">Member ID</p></a>
+                        <div className="d-flex flex-column">
+                        <div
+                                  className="card-header text-white"
+                                  style={{
+                                    backgroundColor: "#2a402a",
+                                  }}
+                                >
+                                  <h4 className="text-center text-white m-auto">
+                                    MY WALLET
+                                  </h4>
+                                </div>
+                                <div className="row d-flex justify-content-between ">
+                                <div className="col-md-3">
+                                  <i className=" p-3 fa-solid text-success fa-wallet"></i>
+                                  <button className="btn btn_view text-success d-flex justify-contnet-end">
+                                    Recharge
+                                  </button>
+                                </div>
+                                <div className="col-md-3">
+                                  <div
+                                    className="card border-0 w-100"
+                                    style={{
+                                      // width: "6rem",
+                                      // backgroundColor: "#D9D9D9",
+                                    }}
+                                  >
+                                    {" "}
+                                    <p className="py-3 text-center fw-bold text-success">
+                                      Rs.0/
+                                    </p>
+                                    <button className="btn btn_view text-success d-flex justify-content-end">
+                                      View Transaction History
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
                         </div>
                       </div>
                     </div>
 
                   </div>
-                  <div className="col-sm-4">
+                  <div className="col-sm-6">
                     <div className="card">
                       <div className="card-body-inner green-card">
-                        <div className="d-flex flex-column align-items-center mt-3">
-                          <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
-                            classNameName="card-img-top w-40px m-auto "
-                          />														<p className="text-white fs-6 mt-4 mb-3 text-center">Member ID</p>
+                        <div className="d-flex flex-column">
+                        <div className="card-body-inner green-card">
+                        <div className="d-flex flex-column">
+                        <div
+                                  className="card-header text-white"
+                                  style={{
+                                    backgroundColor: "#2a402a",
+                                  }}
+                                >
+                                  <h4 className="text-center text-white m-auto">
+                                    COST PER SEAT PER DAY
+                                  </h4>
+                                </div>
+                                <div className="row d-flex justify-content-between ">
+                              
+                                <div className="col-md-6">
+                                  <div
+                                    className="card text-center border-0 w-100"
+                                    style={{
+                                      // width: "6rem",
+                                      // backgroundColor: "#D9D9D9",
+                                    }}
+                                  >
+                                    {" "}
+                                    <p className="py-3 text-center fw-bold text-success">
+                                      Rs.00000/
+                                    </p>
+                                    
+                                  </div>
+                                </div>
+                              </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="col-sm-4">
-                    <div className="card">
-                      <div className="card-body-inner green-card">
-                        <div className="d-flex flex-column align-items-center mt-3">
-                          <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
-                            classNameName="card-img-top w-40px m-auto "
-                          />														<p className="text-white fs-6 mt-4 mb-3 text-center">Member ID</p>
                         </div>
                       </div>
                     </div>
@@ -228,7 +276,7 @@ const CommuterDetails = () => {
                                 >
                                   <img
                                     src={`${BASE_URL}/assets/images/Vector.png`}
-                                    className="card-img-top w-40px m-auto "
+                                    className="card-img-top w-40px m-auto mt-3"
                                   />
 
                                   <div
