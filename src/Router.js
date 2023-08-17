@@ -27,6 +27,7 @@ import Office_School from './pages/frontend/register-form/Office_School';
 import FrontendLayout from "./pages/frontend/FrontendLayout";
 import RequestApprovalByCarOwner from './pages/backend/dashboard/RequestApprovalByCarOwner';
 import Dashboard12 from './pages/backend/dashboard/Dashboard12';
+import Notifications from './pages/backend/dashboard/Notifications';
 
 const Router = () => {
   
@@ -77,6 +78,7 @@ const Router = () => {
               <Route path='/number-generate' element={<FrontendLayout children={<NumberGenerate />}/>}></Route>
               <Route path='/verification' element={<FrontendLayout children={<Verification/>}/>}></Route>
               <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />}></Route>
+              <Route path='/notification' element={<BackendLayout children={<Notifications />} />}></Route>
               <Route path='/commuter-profile' element={<BackendLayout children={<CommuterProfile1 />} />}></Route>
               <Route path='/seatcostverification' element={<FrontendLayout children={<SeatCostVerification/>}/>}></Route>
             </>

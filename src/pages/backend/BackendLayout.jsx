@@ -179,7 +179,7 @@ const BackendLayout = ({ children }) => {
                             <div className="text-center">
                               <div className="mt-3 px-4">
                                 <Tooltip title="Notifications">
-                                  <Link to="#" className="d-inline-block">
+                                  <Link to="/notification" className="d-inline-block">
                                     <i className="fa-solid fa-bell fs-3 icon-green mt-2 mx-4"></i>
                                   </Link>
                                 </Tooltip>
@@ -403,7 +403,7 @@ const BackendLayout = ({ children }) => {
                               className={`menu-link ${
                                 currentPage == "news-management" ? "active" : ""
                               }`}
-                              to={"/portal/news-management"}
+                              to={"/notification"}
                               style={{
                                 borderRadius: "0%",
                                 marginLeft: "0%",
