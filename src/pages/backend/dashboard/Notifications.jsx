@@ -69,7 +69,51 @@ const Notifications = () => {
   return (
     <>
       <div>
-        <div className="container">
+
+        <div className="card bg-light-green mt-3 mb-5 border border-dark">
+          <div className="card-header">
+            <div className="container">
+
+              <div className="row">
+                <div className="col px-4">
+                  <div style={backgroundStyle}></div>
+                </div>
+              </div>
+            </div>
+          </div> <div className="row p-4">
+            <div className="col">
+              <div
+                className="card-body cardpadding mb-5 py-5 bg-dark"
+              >
+                <div>
+                  {notifications.map((notification, index) => (
+                    <>
+                      <h5 className="card-title text-white py-1">
+                        {index + 1}: {" "} {notification}
+                      </h5>
+                    </>
+                  ))}
+                </div>
+
+                <form id="numberForm">
+                  <div className="mb-3">
+                    <Button
+                      variant="success"
+                      className="btn-block"
+                      onClick={route}
+                    >
+                      Back
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        {/* <div className="container">
           <div className="row justify-content-center pt-5">
             <div className="card">
               <div className="card  border-1 border-success rounded rounded-4">
@@ -114,7 +158,7 @@ const Notifications = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
