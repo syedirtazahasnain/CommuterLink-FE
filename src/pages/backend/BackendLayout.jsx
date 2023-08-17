@@ -293,7 +293,7 @@ const BackendLayout = ({ children }) => {
                           data-kt-menu="true"
                           data-kt-menu-expand="false"
                         >
-                          <div className="menu-item">
+                          <div >
                             <div className="d-flex align-items-center mx-3  me-xl-13">
                               {/*begin::Symbol*/}
                               <div className="symbol symbol-50px symbol-circle me-3">
@@ -327,7 +327,7 @@ const BackendLayout = ({ children }) => {
                           </div>
                           <hr />
 
-                          <div className="menu-item">
+                          <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
                                 currentPage == "dashboard" ? "active" : ""
@@ -348,8 +348,7 @@ const BackendLayout = ({ children }) => {
                             </Link>
                           </div>
 
-                          <hr />
-                          <div className="menu-item">
+                          <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
                                 currentPage == "insights-generator"
@@ -373,8 +372,7 @@ const BackendLayout = ({ children }) => {
                             </Link>
                           </div>
 
-                          <hr />
-                          <div className="menu-item">
+                          <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
                                 currentPage == "insights-generator"
@@ -396,9 +394,7 @@ const BackendLayout = ({ children }) => {
                               </span>
                             </Link>
                           </div>
-
-                          <hr />
-                          <div className="menu-item">
+                          <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
                                 currentPage == "news-management" ? "active" : ""
@@ -419,8 +415,7 @@ const BackendLayout = ({ children }) => {
                               </span>
                             </Link>
                           </div>
-                          <hr />
-                          <div className="menu-item">
+                          <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
                                 currentPage == "news-management" ? "active" : ""
@@ -440,9 +435,7 @@ const BackendLayout = ({ children }) => {
                               </span>
                             </Link>
                           </div>
-
-                          <hr />
-                          <div className="menu-item">
+                          <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
                                 currentPage == "news-management" ? "active" : ""
@@ -463,29 +456,6 @@ const BackendLayout = ({ children }) => {
                             </Link>
                           </div>
 
-                          <hr />
-                          {/* <div className="menu-item">
-                            <Link
-                              className={`menu-link ${
-                                currentPage == "news-management" ? "active" : ""
-                              }`}
-                              to={"/portal/news-management"}
-                              style={{
-                                borderRadius: "0%",
-                                marginLeft: "0%",
-                                marginRight: "0%",
-                              }}
-                            >
-                              <span className="menu-icon">
-                                <i class="fa-solid fa-wallet"></i>
-                              </span>
-                              <span className="menu-title text-white">
-                                My Wallet
-                              </span>
-                            </Link>
-                          </div>
-
-                          <hr /> */}
                         </div>
                         <div
                           className={
@@ -494,7 +464,6 @@ const BackendLayout = ({ children }) => {
                               : "px-7 mt-auto"
                           }
                         >
-                          {/* <Link to='/changelog' className='text-secondary'>{APP_VERSION}</Link> */}
                         </div>
                       </div>
                     </div>

@@ -60,6 +60,16 @@
   font-family: "Sohne-Buch";
   font-size: 16px;
 }
+
+.menu-item:hover{
+  border-bottom: none;
+  background-color: #6b6b6b;
+  border-left:3px solid #8FC4B7;
+ 
+}
+.border-custom{
+  border-bottom: 0.5px solid #606060;
+}
 .woah-logo {
   height: 50px;
 }
