@@ -426,17 +426,6 @@ const DriverRegistration = () => {
     }
   };
 
-  // const handleCnicChange = (event) => {
-  //   const inputCnic = event.target.value.replace(/\D/g, '');
-  //   if (inputCnic.length <= 13) {
-  //     setCnic(inputCnic);
-  //     setIsValidCnic(true);
-  //   }
-  //   else{
-  //     setIsValidCnic(false);
-  //   }
-    
-  // };
   function validateCnic(cnic) {
     // Regular expression pattern for validating Pakistani CNIC (12345-1234567-1)
     const cnicPattern = /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/;
@@ -632,17 +621,41 @@ const DriverRegistration = () => {
 
 
   const handleLogin = async () => {
-    await LocationForm();
-    await PersonalForm();
-    await ImagesFormCnicFront();
-    await ImagesFormCnicBack();
-    await ImagesFormPicture();
-    setShowDriverForm(true);
+    if(cityStartId === "" || provinceStartId === "" || locationStartStringId === ""
+    || locationStartString === "" || markerPositionStart === "" || cityEndId === ""
+    || provinceEndId === "" || locationEndStringId === "" || locationEndString === ""
+    || markerPositionEnd === "" || selectedHomeTime === "" || selectedOfficeTime === "" 
+    || daysSelected === "" || martialStatus === "" || cnic === "" || selectedDateFormat === ""
+    || gender === "" || preferredGender === "" || preferredGender === "" || profession === ""
+    || education === "" || cnicFrontExt === "" || cnicFront === "" || cnicBackExt === ""
+    || cnicBack === "" || pictureExt === "" || picture === "")
+    {
+      alert("Please Fill All Fields!");
+    }
+    else{
+      await LocationForm();
+      await PersonalForm();
+      await ImagesFormCnicFront();
+      await ImagesFormCnicBack();
+      await ImagesFormPicture();
+      setShowDriverForm(true);
+    }
   };
 
   const handleDriver = async () => {
-    await DriverForm();
-    await PaymentForm();
+    if(selectedCarBrand === "" || selectedCarCC === "" || selectedCarYearRanges === ""
+      || selectedModelName === "" || selectedRegYear === "" || selectedRegNumber === ""
+      || selectedManYear === "" || selectedCarAC === "" || selectedCarImage === ""
+      || selectedCarImageExt === "" || selectedSeat === "" || selectedSeatGender === "" 
+      || selectedMidRoutePartner === "" || selectedOneRoutePartner === "" || inputBankAccount === ""
+      || inputEasyPaisa === "" || inputJazzCash === "" || inputRaastID === "")
+    {
+      alert("Please Fill All Fields!");
+    }
+    else{
+      await DriverForm();
+      await PaymentForm();
+    }
   };
 
   const LocationForm = async () => {
@@ -1505,24 +1518,24 @@ const DriverRegistration = () => {
                         <option value="Primary">Primary</option>
                       </Form.Select>
                     </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="validationCustom02">
-        <Form.Label style={{ color: "#198754" }}>
-          Profession
-        </Form.Label>
-        <Form.Control
-          required
-          type="text"
-          className={`colorplace ${isValidProfession ? '' : 'is-invalid'}`}
-          placeholder="Profession (Engineer, Doctor, etc)"
-          value={profession}
-          onChange={handleProfessionChange}
-        />
-        {!isValidProfession && (
-          <div className="invalid-feedback">
-            Please enter a valid profession.
-          </div>
-        )}
-      </Form.Group>
+                      <Form.Group as={Col} md="6" controlId="validationCustom02">
+                        <Form.Label style={{ color: "#198754" }}>
+                          Profession
+                        </Form.Label>
+                        <Form.Control
+                          required
+                          type="text"
+                          className={`colorplace ${isValidProfession ? '' : 'is-invalid'}`}
+                          placeholder="Profession (Engineer, Doctor, etc)"
+                          value={profession}
+                          onChange={handleProfessionChange}
+                        />
+                        {!isValidProfession && (
+                          <div className="invalid-feedback">
+                            Please enter a valid profession.
+                          </div>
+                        )}
+                      </Form.Group>
                   </Row>
                   <Row className="mb-3">
                     {/* <Form.Group as={Col} md="12" controlId="validationCustom01">
@@ -1542,22 +1555,22 @@ const DriverRegistration = () => {
                         }
                       />
                     </Form.Group> */}
-                    <Form.Group as={Col} md="12" controlId="validationCustom01">
-          <Form.Label style={{ color: "#198754" }}>CNIC</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            className={`colorplace ${isValidCnic ? '' : 'is-invalid'}`}
-            placeholder="12345-1234567-1"
-            value={cnic}
-            onChange={handleCnicChange}
-          />
-          {!isValidCnic && (
-            <div className="invalid-feedback">
-              Please enter a valid CNIC in the format 12345-1234567-1.
-            </div>
-          )}
-        </Form.Group>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#198754" }}>CNIC</Form.Label>
+                        <Form.Control
+                          required
+                          type="text"
+                          className={`colorplace ${isValidCnic ? '' : 'is-invalid'}`}
+                          placeholder="12345-1234567-1"
+                          value={cnic}
+                          onChange={handleCnicChange}
+                        />
+                        {!isValidCnic && (
+                          <div className="invalid-feedback">
+                            Please enter a valid CNIC in the format 12345-1234567-1.
+                          </div>
+                        )}
+                      </Form.Group>
                   </Row>
                   <Row className="mb-3">
                     <Form.Group

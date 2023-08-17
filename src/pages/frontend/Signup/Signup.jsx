@@ -9,10 +9,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../../redux/signupSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -21,6 +22,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [fullNameError, setFullNameError] = useState("");
   const [termsService, setTermsService] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
@@ -44,14 +46,18 @@ const Signup = () => {
   function generateRandomOtp(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+  
   const googlesignup = useGoogleLogin({
     clientId:"380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
     onError: (codeResponse) => handleFailure(codeResponse),
   });
+  
   const handleFailure = (response) => {
     console.log("handleFailure", response);
   };
+
+
   const handleSuccess = async (response) => {
 
     if(response){
@@ -81,6 +87,8 @@ const Signup = () => {
       signupgoogledatapost(googleuserdata)
     }
   };
+
+
   const signupgoogledatapost = async (userData) => {
     try {
       const body = {
@@ -124,6 +132,8 @@ const Signup = () => {
       console.log(error.message);
     }
   };
+
+
   const postData = async () => {
     try {
       if(fullName === "" || email === "" || phoneNumber === null || password === "" || confirmPassword === ""){
@@ -158,7 +168,7 @@ const Signup = () => {
                 provider: provider,
                 otp: jsonresponse.otp,
                 token: jsonresponse.token,
-                confirmPassword: confirmPassword,
+                confirm_password: confirmPassword,
               })
             );
             navigate("/otp");
@@ -173,6 +183,19 @@ const Signup = () => {
       console.log(error.message);
     }
   };
+
+  const handleFullNameChange = (e) => {
+    const value = e.target.value;
+    setFullName(value);
+  
+    if (value.length < 4 && value.trim() !== "") {
+      setFullNameError("Full Name must be at least 4 characters");
+    } else {
+      setFullNameError("");
+    }
+  };
+
+
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -184,6 +207,7 @@ const Signup = () => {
       setIsValidEmail(false);
     }
   };
+
   const validatePhoneNumber = (phoneNumber) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
     const phonePattern = /^03\d{9}$/;
@@ -299,7 +323,7 @@ const Signup = () => {
                   {" "}
                   Sign up
                 </h3>{" "}
-                <div className="container">
+                <div className="container mt-4">
                   <div className="row justify-content-center">
                     <div className="col-md-12 mt-5">
                       <TextField
@@ -308,9 +332,11 @@ const Signup = () => {
                         variant="outlined"
                         label="Full Name"
                         value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
+                        onChange={handleFullNameChange}
                         required
                         size="small"
+                        error={!!fullNameError}
+                        helperText={fullNameError}
                         
                       />
                     </div>
