@@ -477,14 +477,7 @@
    font-weight: bold!important;
   
   }
-  .btn_view1{
-   color:white!important;
-   font-weight:bold!important;
-   background-color: #198754;
-  }
-  .btn_view1:hover{
-   background-color: #198754!important;
-  }
+  
   :root {
    --bs-primary: #198754;
    --bg-primary: #198754;

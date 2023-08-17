@@ -28,6 +28,7 @@ const BackendLayout = ({ children }) => {
   const sidebarOpened = useSelector((s) =>s.general.sidebarOpened);
   const [name , setName] = useState("");
   const [image , setImage] = useState("");
+  const imageURL= "https://staging.commuterslink.com/uploads/picture";
   const [submitbtn , setSubmit] = useState(false); 
 
   // For getting current date
@@ -155,13 +156,13 @@ const BackendLayout = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="header card-dashboardheader border border-secondary d-flex py-1 w-100 ps-4">
+                    <div className="header shadow card-dashboardheader border border-secondary d-flex py-1 w-100 ps-4">
                       <div className="header-left mr-auto mx-4 d-flex flex-grow-1 py-2">
                         <div className="d-block">
-                          <p className=" my-auto pvs-title fw-normal text-uppercase">
+                          <p className=" my-auto fw-normal text-uppercase">
                             {formattedDate}
                           </p>
-                          <h5>Welcome {name}!</h5>
+                          {name ? (<h5 className="fw-bold">Welcome {name}!</h5>) : (<h5 className="fw-bold">Welcome Yasir Abbas Mirza!</h5>)}
                         </div>
                       </div>
                       <div className="header-right">
@@ -184,7 +185,7 @@ const BackendLayout = ({ children }) => {
                                 </Tooltip>
                                 <Tooltip title="Logout">
                                   <Button
-                                    className="btn btn-sm fw-bold btn-success"
+                                    className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
                                     onClick={logout}
                                   >
                                     LOG OUT
@@ -274,10 +275,10 @@ const BackendLayout = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="app-sidebar-menu overflow-hidden flex-column-fluid bg-dark">
+                    <div className="app-sidebar-menu overflow-hidden fw-normal flex-column-fluid bg-dark">
                       <div
                         id="kt_app_sidebar_menu_wrapper"
-                        className="app-sidebar-wrapper hover-scroll-overlay-y d-flex flex-column"
+                        className="app-sidebar-wrapper fw-normal hover-scroll-overlay-y d-flex flex-column"
                         data-kt-scroll="true"
                         data-kt-scroll-activate="true"
                         data-kt-scroll-height="auto"
@@ -287,25 +288,32 @@ const BackendLayout = ({ children }) => {
                         data-kt-scroll-save-state="true"
                       >
                         <div
-                          className="menu menu-column menu-rounded menu-sub-indention"
+                          className="menu menu-column fw-normal menu-rounded menu-sub-indention"
                           id="#kt_app_sidebar_menu"
                           data-kt-menu="true"
                           data-kt-menu-expand="false"
                         >
                           <div className="menu-item">
-                            <div className="d-flex align-items-center mx-3  me-5 me-xl-13">
+                            <div className="d-flex align-items-center mx-3  me-xl-13">
                               {/*begin::Symbol*/}
                               <div className="symbol symbol-50px symbol-circle me-3">
-                                <img
-                                  //src={`${BASE_URL}/assets/images/pic.png`}
-                                  src={`https://staging.commuterslink.com/uploads/picture/${image}`}
-                                />
+                              {image ? 
+                                (
+                                  <img
+                                    src={`${imageURL}/${image}`}
+                                  />
+                                ) : 
+                                (
+                                  <img
+                                    src={`${BASE_URL}/assets/images/pic.png`}
+                                  />
+                                )}
                               </div>
                               {/*end::Symbol*/}
                               {/*begin::Info*/}
                               <div className="m-0">
                                 <span className="fw-semibold text-white d-block fs-5">
-                                  {name}
+                                {name ? (name) : ("Yasir Abbas Mirza")}
                                 </span>
                                 <button
                                   href="/"
@@ -494,7 +502,7 @@ const BackendLayout = ({ children }) => {
 
                   {/* Dashboard Content */}
 
-                  <div className="px-4">
+                  <div>
                     {children}
                     <div className="d-flex flex-column flex-column-fluid">
                       <div

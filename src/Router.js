@@ -8,7 +8,7 @@ import OtpPage from "./pages/frontend/register-form/OtpPage"
 import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 import RiderRegistration from './pages/frontend/register-form/RiderRegistration';
 import Verification from './pages/frontend/Dashboard/Verification';
-import Dashboard from './pages/frontend/Dashboard/Dashboard';
+// import Dashboard from './pages/frontend/Dashboard/Dashboard';
 import CommuterProfile from './pages/frontend/Dashboard/CommuterProfile';
 import { useSelector } from "react-redux";
 import Faq from './pages/frontend/faq/Faq';
@@ -25,6 +25,8 @@ import WhyProcessPayment1 from './pages/backend/dashboard/WhyProcessPayment1';
 import ShareToCare1 from './pages/backend/dashboard/ShareToCare1';
 import Office_School from './pages/frontend/register-form/Office_School';
 import FrontendLayout from "./pages/frontend/FrontendLayout";
+import RequestApprovalByCarOwner from './pages/backend/dashboard/RequestApprovalByCarOwner';
+import Dashboard12 from './pages/backend/dashboard/Dashboard12';
 
 const Router = () => {
   
@@ -38,6 +40,7 @@ const Router = () => {
         <Route path='/signup' element={<FrontendLayout children={<Signup />}/>} />
         <Route path='/login' element={<FrontendLayout children={<Login />}/>} />
         <Route path='/faq' element={<FrontendLayout children={<Faq/>}/>}/>
+
         {/* <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} /> */}
         {/* <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} /> */}
         <Route path='/replytoconfirmdates1' element={<BackendLayout children={<ReplyToConfirmDates1 />} />} />
@@ -46,16 +49,17 @@ const Router = () => {
         <Route path='/termscondition1' element={<BackendLayout children={<TermsCondition1 />} />} />
         <Route path='/verification1' element={<BackendLayout children={<Verification1 />} />} />
         <Route path='/whyprocesspayment1' element={<BackendLayout children={<WhyProcessPayment1 />} />} />
+        <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
+        <Route path='/requestcarowner' element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
+        {/* <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} /> */}
 
-        <Route path='/number-generate' element={<FrontendLayout children={<NumberGenerate />}/>}></Route>
-             
         {userSignup && (
             <>
               <Route path='/driver-registration' element={<FrontendLayout children={<DriverRegistration/>}/>}/>
               <Route path='/rider-registration' element={<FrontendLayout children={<RiderRegistration/>}/>}/>
               <Route path='/shareride' element={<FrontendLayout children={<ShareRide/>}/>}></Route>
               {/* <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route> */}
-              <Route path="/otp" element={<FrontendLayout children={<OtpPage />}/>} />
+              {/* <Route path="/otp" element={<FrontendLayout children={<OtpPage />}/>} /> */}
               <Route path='/nested' element={<FrontendLayout children={<WouldYouLikeTo/>}/>}></Route>
               <Route path='/number-generate' element={<FrontendLayout children={<NumberGenerate />}/>}></Route>
               <Route path='/verification' element={<FrontendLayout children={<Verification/>}/>}></Route>

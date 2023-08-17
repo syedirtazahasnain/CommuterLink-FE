@@ -453,11 +453,24 @@ const RiderRegistration = () => {
   };
 
   const handleLogin = async () => {
-    await LocationForm();
-    await PersonalForm();
-    await ImagesFormCnicFront();
-    await ImagesFormCnicBack();
-    await ImagesFormPicture();
+    if(cityStartId === "" || provinceStartId === "" || locationStartStringId === ""
+      || locationStartString === "" || markerPositionStart === "" || cityEndId === ""
+      || provinceEndId === "" || locationEndStringId === "" || locationEndString === ""
+      || markerPositionEnd === "" || selectedHomeTime === "" || selectedOfficeTime === "" 
+      || daysSelected === "" || martialStatus === "" || cnic === "" || selectedDateFormat === ""
+      || gender === "" || preferredGender === "" || preferredGender === "" || profession === ""
+      || education === "" || cnicFrontExt === "" || cnicFront === "" || cnicBackExt === ""
+      || cnicBack === "" || pictureExt === "" || picture === "")
+    {
+      alert("Please Fill All Fields!");
+    }
+    else {
+      await LocationForm();
+      await PersonalForm();
+      await ImagesFormCnicFront();
+      await ImagesFormCnicBack();
+      await ImagesFormPicture();
+    }
   };
 
   const LocationForm = async () => {
