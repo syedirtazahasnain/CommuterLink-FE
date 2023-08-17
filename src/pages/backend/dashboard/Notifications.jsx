@@ -24,7 +24,7 @@ const Notifications = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/commuter-profile");
+      navigate(-1);
     }
   };
 
@@ -100,7 +100,7 @@ const Notifications = () => {
                               className="btn-block"
                               onClick={route}
                             >
-                              Next
+                              Back
                             </Button>
                           </div>
                         </form>
