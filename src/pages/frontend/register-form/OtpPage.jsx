@@ -171,15 +171,7 @@ const OtpPage = () => {
         >
           <div className="container">
             <div className="row">
-              <div
-                className="col-md-6"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "10vh",
-                }}
-              >
-                <div
+            <div
                   className="col-md-6"
                   style={{
                     display: "flex",
@@ -228,9 +220,8 @@ const OtpPage = () => {
                     </Carousel.Item>
                   </Carousel>
                 </div>
-              </div>
 
-              <div className="col-md-6   mb-2 text-center d-flex justify-content-center">
+              <div className="col-md-6 pb-5 mb-2 text-center d-flex justify-content-center">
                 <Card
                   sx={{
                     marginTop: "10vh",
@@ -247,7 +238,7 @@ const OtpPage = () => {
                       OTP Verification
                     </Typography>
                     <Typography sx={{ fontSize: "12px" }}>
-                      <p className="text-center">
+                      <p className="text-center my-3">
                         We have sent “One Time Password” on your Mobile Number
                         and Email{" "}
                       </p>{" "}
@@ -287,19 +278,25 @@ const OtpPage = () => {
                     </div>
                   </CardContent>
 
-                  <CardActions className="row">
-                    <div className="col-12 text-end">
+                  <CardActions className="container justify-content-center">
                       <Button
                         variant="outlined"
                         type="submit"
                         onClick={validateOTP}
-                        className="btnregistration"
+                        className="btn-custom px-4 py-2 rounded rounded-5 text-custom"
                       >
                         Submit
                       </Button>
-                    </div>
+                    {/* <div className="col-12 text-end">
+                    </div> */}
                   </CardActions>
-                  <Typography sx={{ fontSize: "14px" }}>
+                  <div id="span-text" className="text-center mb-5">
+                  Didn't get the code? &nbsp;
+                        <Link onClick={resendOTP}>
+                          <span style={{ color: "#198754"}}>Resend</span>
+                        </Link>
+                      </div>
+                  {/* <Typography sx={{ fontSize: "14px" }}>
                     {" "}
                     <p className="text-center">
                       Didn't get the code?
@@ -307,11 +304,17 @@ const OtpPage = () => {
                         variant="text"
                         onClick={resendOTP}
                         style={{ color: "#198754" }}
+                        className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
                       >
                         Resend
                       </Button>
+                      <Link to="/login"
+                         onClick={resendOTP}
+                         >
+                          <span style={{ color: "#198754", textDecoration:"none"}}>Resend</span>
+                        </Link>
                     </p>{" "}
-                  </Typography>
+                  </Typography> */}
                 </Card>
               </div>
             </div>

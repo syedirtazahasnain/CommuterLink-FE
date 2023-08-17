@@ -117,7 +117,6 @@ const CommuterDetails = () => {
                         </div>
                       </div>
                     </div>
-
                   </div>
                   <div className="col-sm-4">
                     <div className="card">

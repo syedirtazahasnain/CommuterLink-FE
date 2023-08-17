@@ -38,6 +38,7 @@ const Router = () => {
         <Route path='/signup' element={<FrontendLayout children={<Signup />}/>} />
         <Route path='/login' element={<FrontendLayout children={<Login />}/>} />
         <Route path='/faq' element={<FrontendLayout children={<Faq/>}/>}/>
+
         {/* <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} /> */}
         {/* <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} /> */}
         <Route path='/replytoconfirmdates1' element={<BackendLayout children={<ReplyToConfirmDates1 />} />} />
@@ -55,7 +56,7 @@ const Router = () => {
               <Route path='/rider-registration' element={<FrontendLayout children={<RiderRegistration/>}/>}/>
               <Route path='/shareride' element={<FrontendLayout children={<ShareRide/>}/>}></Route>
               {/* <Route path='/wouldyouliketo' element={<WouldYouLikeTo/>}></Route> */}
-              <Route path="/otp" element={<FrontendLayout children={<OtpPage />}/>} />
+              {/* <Route path="/otp" element={<FrontendLayout children={<OtpPage />}/>} /> */}
               <Route path='/nested' element={<FrontendLayout children={<WouldYouLikeTo/>}/>}></Route>
               <Route path='/number-generate' element={<FrontendLayout children={<NumberGenerate />}/>}></Route>
               <Route path='/verification' element={<FrontendLayout children={<Verification/>}/>}></Route>
