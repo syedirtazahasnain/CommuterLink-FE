@@ -10,6 +10,7 @@ const CommuterLinkSuggestions = () => {
 
   // For Dashboard Data
   const [contactId, setContactId] = useState("");
+  const [requestStatus, setRequestStatus] = useState("");
 
   useEffect(() => {
     getDashboardData();
@@ -40,33 +41,15 @@ const CommuterLinkSuggestions = () => {
       const jsonresponse = await response.json();
       if (jsonresponse.rider && jsonresponse.rider.length > 0) {
         setContactId(jsonresponse.rider[0].contact_id);
+        setRequestStatus(jsonresponse.rider[0].req_sent);
       } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
         setContactId(jsonresponse.drivers[0].contact_id);
+        setRequestStatus(jsonresponse.drivers[0].req_sent);
       } else {
         setContactId("");
+        setRequestStatus("");
       }
       console.log("Dashboard Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
-  const getProfileData = async () => {
-    try {
-      const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      console.log(jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -122,11 +105,19 @@ const CommuterLinkSuggestions = () => {
                               fontWeight: "bold",
                               backgroundColor: "rgb(32 155 98)",
                             }}
-                          >
+                          > 
+                          {requestStatus === "yes" ? (
+                            <img
+                              src={`${BASE_URL}/assets/images/Vector.png`}
+                              className="card-img-top w-40px m-auto mt-3"
+                              style={{ backgroundColor: "yellowgreen" }}
+                            />
+                          ) : (
                             <img
                               src={`${BASE_URL}/assets/images/Vector.png`}
                               className="card-img-top w-40px m-auto mt-3"
                             />
+                          )}
                             <div
                               className="card-title text-light text-center"
                               style={{ width: "6rem", cursor: "pointer" }}

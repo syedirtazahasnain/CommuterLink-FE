@@ -52,7 +52,6 @@ const Router = () => {
         <Route path='/verification1' element={<BackendLayout children={<Verification1 />} />} />
         <Route path='/whyprocesspayment1' element={<BackendLayout children={<WhyProcessPayment1 />} />} />
         <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
-        <Route path='/requestcarowner' element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
         {/* <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} /> */}
         <Route path='/rejection' element={<BackendLayout children={<Rejection />} />} />
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />}/>} />
@@ -84,6 +83,7 @@ const Router = () => {
               <Route path='/notification' element={<BackendLayout children={<Notifications />} />}></Route>
               <Route path='/commuter-profile' element={<BackendLayout children={<CommuterProfile1 />} />}></Route>
               <Route path='/seatcostverification' element={<FrontendLayout children={<SeatCostVerification/>}/>}></Route>
+              <Route path='/requestcarowner' element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
             </>
           )}
           {!userLogin && <Route path="*" element={<Navigate to="/" />} />}

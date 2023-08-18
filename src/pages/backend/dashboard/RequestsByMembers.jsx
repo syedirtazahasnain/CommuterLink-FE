@@ -12,7 +12,7 @@ const RequestsByMembers = () => {
   const [contactId, setContactId] = useState("");
 
   useEffect(() => {
-    getDashboardData();
+    getMemberData();
   }, []);
 
   const route = () => {
@@ -23,10 +23,10 @@ const RequestsByMembers = () => {
     }
   };
 
-  const getDashboardData = async () => {
+  const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/matches/office",
+        "https://staging.commuterslink.com/api/v1/requests",
         {
           method: "get",
           headers: {
@@ -38,35 +38,12 @@ const RequestsByMembers = () => {
       );
 
       const jsonresponse = await response.json();
-      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
-        setContactId(jsonresponse.rider[0].contact_id);
-      } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
-        setContactId(jsonresponse.drivers[0].contact_id);
-      } else {
+      if (jsonresponse.data && jsonresponse.data.length > 0) {
+        setContactId(jsonresponse.data[0].contact_id);
+      }else {
         setContactId("");
       }
-      console.log("Dashboard Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
-  const getProfileData = async () => {
-    try {
-      const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      console.log(jsonresponse);
+      console.log("Request Member Data:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }

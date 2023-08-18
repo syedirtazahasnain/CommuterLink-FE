@@ -1,13 +1,8 @@
 import React, { useEffect,useState } from "react";
-import { ThemeProvider, Tooltip, createTheme } from "@mui/material";
-import { Link } from "react-router-dom";
-import { setCurrentPage, setSidebarState, setOption0State, setOption1State } from "../../../redux/generalSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { setloginState } from "../../../redux/loginSlice";
+import { createTheme } from "@mui/material";
+import { useSelector } from "react-redux";
 import { BASE_URL } from "../../../constants";
-import Dashboard from "../../frontend/Dashboard/Dashboard";
 import { useNavigate } from "react-router-dom";
-import { setsignupState } from "../../../redux/signupSlice";
 import { Button } from "react-bootstrap";
 const customTheme = createTheme({
   palette: {
@@ -34,40 +29,87 @@ const backgroundLogo={
   };
   
 
- const RequestApprovalByCarOwner = ({ children }) => {
-  // const { instance } = useMsal();
+ const RequestApprovalByCarOwner = () => {
   const navigate = useNavigate();
+  const [name , setName] = useState("");
+  const [driverName , setDriverName] = useState("");
   const [submitbtn , setSubmit] = useState(false);
-  const dispatch = useDispatch();
-  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
-  const currentPage = useSelector((s) => s.general.currentPage);
+  const userToken = useSelector((s) => s.login.data.token);
+  
   const route = () => {
     setSubmit(true);
-    dispatch(setsignupState(""));
-    dispatch(setloginState(""));
-    dispatch(setOption0State(""));
-    dispatch(setOption1State(""));
-    navigate("/");
     
     if(!submitbtn){
-      navigate("/commuter-profile");
+      navigate("/whyprocesspayment1");
     }
   }
+
   useEffect(() => {
-    // dispatch(setCurrentPage(""));
+    getProfileData();
+    getDashboardData();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-  const logout = () => {
-    dispatch(setloginState(""));
-    navigate("/login");
-  }
 
-  const name = useSelector((s) => s.signup.data.name);
-  const email = useSelector((s) => s.signup.data.email);
+  const getProfileData = async () => {
+    try{
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/profile",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization : `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if(jsonresponse){
+        setName(jsonresponse[0].name);
+      }
+      else {
+        setName("");
+      }
+      console.log("Profile Data", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const getDashboardData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/matches/office",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+        if (jsonresponse.rider && jsonresponse.rider.length > 0) {
+        setDriverName(jsonresponse.rider[0].name);
+      } 
+      else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
+        setDriverName(jsonresponse.drivers[0].name);
+      }  
+      else {
+        setDriverName("");
+      }
+      console.log("Dashboard Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   
 
@@ -99,7 +141,7 @@ const backgroundLogo={
                  
                   <div className="text-white"></div>
                   <h5 className="card-title text-white py-1" >
-                    Dear ride22
+                    Dear {driverName}
                   </h5>
                 </div>
                 <div>
@@ -113,7 +155,7 @@ const backgroundLogo={
                   <br/><br/>
                   Regards,
                   <br/><br/>
-                  Name
+                  {name}
                   </p>
                 </div>
 

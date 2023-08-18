@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { Button, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 //import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { setCurrentPage, setSidebarState } from "../../../redux/generalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
@@ -23,7 +22,7 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const WhyProcessPayment1 = ({ children }) => {
+const WhyProcessPayment1 = () => {
   // const { instance } = useMsal();
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
@@ -114,9 +113,9 @@ const WhyProcessPayment1 = ({ children }) => {
               </p>
             </div>
             <div className="card-body">
-              <button href="/" className=" btn_view1 btn-block ">
-                I Agree
-              </button>
+              <Button className=" btn_view1 btn-block ">
+                Next
+              </Button>
             </div>
           </div>
         </div>
