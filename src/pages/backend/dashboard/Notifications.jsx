@@ -69,26 +69,21 @@ const Notifications = () => {
   return (
     <>
       <div>
-
-        <div className="card bg-light-green mt-3 mb-5 border border-dark">
-          <div className="card-header">
-            <div className="container">
-
-              <div className="row">
-                <div className="col px-4">
-                  <div style={backgroundStyle}></div>
-                </div>
-              </div>
-            </div>
-          </div> <div className="row p-4">
+        <div className="page-title">
+          <h3 className="card p-4 text-success my-2 fw-bold">
+            Notifications
+          </h3>
+        </div>
+        <div className="card bg-light-green my-2">
+          <div className="row p-4">
             <div className="col">
               <div
-                className="card-body cardpadding mb-5 py-5 bg-dark"
+                className="card p-3" style={{ backgroundColor: '#e5f8f3' }}
               >
                 <div>
                   {notifications.map((notification, index) => (
                     <>
-                      <h5 className="card-title text-white py-1">
+                      <h5 className="card-title text-dark py-1">
                         {index + 1}: {" "} {notification}
                       </h5>
                     </>
@@ -96,10 +91,10 @@ const Notifications = () => {
                 </div>
 
                 <form id="numberForm">
-                  <div className="mb-3">
+                  <div className="container my-3 text-center">
                     <Button
                       variant="success"
-                      className="btn-block"
+                      className="text-center btn btn-sm fs-6 fw-bold text-white rounded-4 px-3 py-2 mb-3"
                       onClick={route}
                     >
                       Back
@@ -110,55 +105,6 @@ const Notifications = () => {
             </div>
           </div>
         </div>
-
-
-
-        {/* <div className="container">
-          <div className="row justify-content-center pt-5">
-            <div className="card">
-              <div className="card  border-1 border-success rounded rounded-4">
-                <div className="container">
-                  <div className="row">
-                    <div className="col px-4">
-                      <div style={backgroundStyle}></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="container">
-                  <div className="row">
-                    <div className="col">
-                      <div
-                        className="card-body cardpadding mb-5 py-5 rounded rounded-4 bg-dark"
-                      >
-                        <div>
-                          {notifications.map((notification, index) => (
-                            <>
-                              <h5 className="card-title text-white py-1">
-                              {index + 1}: {" "} {notification}
-                              </h5>
-                            </>
-                          ))}
-                        </div>
-
-                        <form id="numberForm">
-                          <div className="mb-3">
-                            <Button
-                              variant="success"
-                              className="btn-block"
-                              onClick={route}
-                            >
-                              Back
-                            </Button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </>
   );
