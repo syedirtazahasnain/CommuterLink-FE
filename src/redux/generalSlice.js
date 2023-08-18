@@ -1,30 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+    data : {
+        option0 : "",
+        option1 : "",
+    },
+};
 
 export const generalSlice = createSlice({
-  name: 'general',
-  initialState: {
-    sidebarOpened: false,
-    siteLanguage: '3',
-    currentPage: '',
-    headerTheme: 'white',
-  },
-  reducers: {
-    setSidebarState: (state, payload = false) => {
-      state.sidebarOpened = payload.payload;
+    name : "general",
+    initialState : {
+      ...initialState,
+      sidebarOpened: false,
+      currentPage: '',
     },
-    setSiteLanguage: (state, payload) => {
-      state.siteLanguage = payload.payload;
-    },
-    setCurrentPage: (state, payload) => {
-      state.currentPage = payload.payload;
-    },
-    setHeaderTheme: (state, payload) => {
-      state.headerTheme = payload.payload ? payload.payload : 'white';
-    },
-  },
-})
+    reducers: {
+        
+        setOption0State : (state , payload = true) => {
+            state.data.option0 = payload.payload;
+        },
+        
+        setOption1State : (state , payload = true) => {
+            state.data.option1 = payload.payload;
+        },
 
-// Action creators are generated for each case reducer function
-export const { setSidebarState, setCurrentPage, setHeaderTheme, setSiteLanguage } = generalSlice.actions
+        setSidebarState: (state, payload = false) => {
+          state.sidebarOpened = payload.payload;
+        },
+      
+        setCurrentPage: (state, payload) => {
+          state.currentPage = payload.payload;
+        },
+    },
+});
 
-export default generalSlice.reducer
+export const { setOption0State, setOption1State, setSidebarState, setCurrentPage  } = generalSlice.actions;
+export default generalSlice.reducer;

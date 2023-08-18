@@ -1,73 +1,102 @@
-import React from "react";
-import logo from '../../../Images/CL-logo.png';
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+import { BASE_URL } from "../../../constants";
+import { Link } from "react-scroll";
+import { Link as DomLink } from "react-router-dom";
+import { Button } from "@mui/base";
 const Navbar = () => {
   return (
     <div>
       <div className="container ">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-          <Link className="navbar-brand ml-3" to="https://www.commuterslink.com/">
-            <img src={logo} width="mr-auto" height="40px" alt="logoimg" />
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+        <div className="row">
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ml-auto  font-size:'12px' font-family:'Poppins, sans-serif'">
-              <li className="nav-item">
-                <Link className="nav-link mr-3" to="/">
-                  HOME
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mr-3" to="/carousel">
-                  CONCEPT
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mr-3" to="/howworks">
-                  HOW IT WORKS?
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mr-3" to="/contribute">
-                  CONTRIBUTE
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link mr-3" href="faq1.html">
-                  FAQS
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link mr-3" href="#contact">
-                  CONTACT
-                </a>
-              </li>
-            </ul>
-              <Link
-                to="/signup"
-                className="btn btn-outline-custom m-0 fw-bold"
+          <div className="pos-f-t">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+              <DomLink
+                className="navbar-brand ml-3"
+                to="/"
               >
-                Sign up
-              </Link>
-              <Link
-                to="/login"
-                className="btn btn-outline-custom m-2 fw-bold mr-3"
+                <img src={`${BASE_URL}/assets/images/CL-logo.png`} width="mr-auto" height="40px" alt="logoimg" />
+              </DomLink>
+              <button
+                className="navbar-toggler mr-2 d-lg-none" // Add 'd-lg-none' class to hide the button in desktop view
+                style={{
+                  color: '#198754',
+                  width: '40px',
+                  height: '35px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
               >
-                Login
-              </Link>
+                <span className="navbar-toggler-icon" style={{}}></span>
+              </button>
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav ml-auto  font-size:'12px' font-family:'Poppins, sans-serif'">
+                  <li className="nav-item">
+                    <DomLink className="nav-link mr-3 ml-3" to="/">
+                      HOME
+                    </DomLink>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link mr-3 ml-3" to="carousel" spy="true" smooth="true" offset={30} duration={100}>
+                      CONCEPT
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link mr-3 ml-3" to="howworks">
+                      HOW IT WORKS?
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link mr-3 ml-3" to="contribute" spy="true" smooth="true" offset={30} duration={100}>
+                      CONTRIBUTE
+                    </Link>
+                   
+                  </li>
+                  <li className="nav-item">
+                    <DomLink className="nav-link mr-3 ml-3" to="/Faq">
+                      FAQS
+                    </DomLink>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link mr-3 ml-3" to="contact" spy="true" smooth="true" offset={30} duration={100}>
+                      CONTACT
+                    </Link>
+                  </li>
+                </ul>
+                <DomLink
+                  to="/signup"
+                >
+                  <Button
+                    className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                  >
+                    Sign up
+                  </Button>
+            
+                </DomLink>
+                <DomLink
+                  to="/login"
+                >
+
+                  <Button
+                    className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                  >
+                    Login
+                  </Button>
+                </DomLink>
+              </div>
+            </nav>
           </div>
-        </nav>
+        </div>
       </div>
     </div>
   );

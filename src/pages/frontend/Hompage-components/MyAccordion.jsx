@@ -1,17 +1,17 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import imgsignup3 from '../../../Images/signup-3.png'
+import { BASE_URL } from "../../../constants";
 import React from "react";
 
 const MyAccordion = () => {
   return (
     <div >
-      <section>
-        <div className="section-title text-center p-5">
-          <h2 className="heading-color" style={{ color: "black" }}>
+      <div className="container">
+        <div className="section-title text-center py-2">
+          <h2 className="heading-color" style={{ color: "black"}}>
             It's Not About Earning but Cost Sharing and Saving
           </h2>
-          <p>
+          <p className="p-3">
             The basic difference between other carpooling Apps and CommutersLink
             is that we are offering long term solutions for daily commute
             instead of a onetime ride. The concept is to collectively defeat the
@@ -19,16 +19,18 @@ const MyAccordion = () => {
             but saving
           </p>
         </div>
-      </section>
-      <div className="row p-5 accordion">
-        <div className="col-md-6 height">
-        <Accordion className="p-2">
+      </div>
+      <div className="container d-flex">
+
+      <div className="row accordion justify-content-between">
+        <div className="col-md-6">
+        <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className="heading-color">1. Choose Between
+          <Typography className="heading-color fw-bold">1. Choose Between
                         Using Your Car or Ride with Others</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -47,7 +49,7 @@ const MyAccordion = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className="heading-color">2.Long Term
+          <Typography className="heading-color fw-bold">2. Long Term
                         Commitment</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -65,7 +67,7 @@ const MyAccordion = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className="heading-color"> 3. Share Cost of
+          <Typography className="heading-color fw-bold"> 3. Share Cost of
                         Commuting</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -82,7 +84,7 @@ const MyAccordion = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className="heading-color"> 4. Socioeconomic
+          <Typography className="heading-color fw-bold"> 4. Socioeconomic
                         Angle</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -95,11 +97,13 @@ const MyAccordion = () => {
         </AccordionDetails>
       </Accordion>
         </div>
-        <div className="col-lg-4">
-        <div className="container mt-3">
-            <img className="img-fluid" src={imgsignup3} />
+        
+        <div className="col-md-4">
+        <div className="container d-flex justify-content-center">
+            <img className="w-100 img-fluid" src={`${BASE_URL}/assets/images/signup-3.png`} />
             </div>
         </div>
+      </div>
       </div>
       <div>
       <section>
@@ -109,9 +113,8 @@ const MyAccordion = () => {
             <div className="text-center text-white">
               <h3>Be Part of CommutersLink</h3>
               <p>It's not about EARNING but cost sharing and SAVING</p>
-              <button onclick="window.location.href = 'signup.html';"
-                className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 btn-outline-custom"
-                type="submit"
+              <button
+                className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
               >
                 JOIN NOW
               </button>

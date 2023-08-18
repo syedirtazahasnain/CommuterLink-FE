@@ -13,17 +13,10 @@ import FmdGoodRoundedIcon from "@mui/icons-material/FmdGoodRounded";
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import AccessAlarmsRoundedIcon from '@mui/icons-material/AccessAlarmsRounded';
-const Contact = () => {
-  const bull = (
-    <Box
-      component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-    >
-      •
-    </Box>
-  );
+import { Link } from "react-router-dom";
 
- 
+
+const Contact = () => {
   return (
     <div>
       <section id="contact" className="contact section-bg">
@@ -40,67 +33,64 @@ const Contact = () => {
       </section>
       <div className="container">
         <div className="row text-left">
-          <div className="col-md-8 bg-light p-5 mb-5 sha m-auto">
+          <div className="col-md-8 bg-light p-5 mb-3 sha m-auto">
             <form action="#" method="post">
               <div className="row">
+                <div className="col-md-6">
+                  {" "}
+                  <TextField
+                    className="mb-3"
+                    id="outlined-basic"
+                    label="Your Name"
+                    variant="outlined"
+                    sx={{ width: '100%' }}
+                    size="small"
+                  />
+                </div>
                 <div className="col-md-6 mb-2">
                   {" "}
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label className="formlabel">Your Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Your Name"
-                      required=""
-                    />
-                  </Form.Group>
-                </div>
-
-                <div className="col-md-6 mb-2">
-                  {" "}
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label className="formlabel">Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="email"
-                      required=""
-                    />
-                  </Form.Group>
-                  {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-      </Form.Group> */}
-                </div>
-
-                {/* <Button variant="primary" type="submit">
-        Submit
-      </Button> */}
-                <div className="col-md-12">
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label className="formlabel">Subject</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Subject"
-                      required=""
-                    />
-                  </Form.Group>
+                  <TextField
+                    className="mb-3"
+                    id="formBasicPassword"
+                    label="Email"
+                    variant="outlined"
+                    type="email"
+                    required
+                    sx={{ width: '100%' }}
+                    size="small"
+                  />
                 </div>
                 <div className="col-md-12">
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label className="formlabel">Message</Form.Label>
-                    <textarea
-                      className="form-control"
-                      id="exampleFormControlTextarea1"
-                      rows="10"
-                    ></textarea>
-                  </Form.Group>
+                  <TextField
+                    className="mb-3"
+                    id="formBasicPassword"
+                    label="Subject"
+                    variant="outlined"
+                    type="text"
+                    required
+                    sx={{ width: '100%' }}
+                    size="small"
+                  />
+                </div>
+                <div className="col-md-12">
+                  <TextField
+                    className="mb-3"
+                    id="exampleFormControlTextarea1"
+                    label="Message"
+                    multiline
+                    rows={10}
+                    variant="outlined"
+                    sx={{ width: '100%' }}
+                  />
                 </div>
               </div>
             </form>
             <div className="d-flex justify-content-center">
-              <a
-                href="Home.js"
-                className="btn btn-outline-custom m-2 fw-bold mr-3"
+              <button
+                className="btn-custom px-4 py-2 rounded rounded-5 text-custom fw-bold"
               >
                 Send
-              </a>
+              </button>
             </div>
           </div>
         </div>
