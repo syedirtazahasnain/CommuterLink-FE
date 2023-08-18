@@ -29,7 +29,8 @@ import RequestApprovalByCarOwner from './pages/backend/dashboard/RequestApproval
 import Dashboard12 from './pages/backend/dashboard/Dashboard12';
 import Notifications from './pages/backend/dashboard/Notifications';
 import Rejection from './pages/backend/dashboard/Rejection';
-
+import AdvancePayment from './pages/backend/dashboard/AdvancePayment';
+import Contact from "./pages/frontend/Hompage-components/Contact";
 const Router = () => {
   
   const userLogin = useSelector((s) => s.login.data.token);
@@ -56,6 +57,8 @@ const Router = () => {
         {/* <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} /> */}
         <Route path='/rejection' element={<BackendLayout children={<Rejection />} />} />
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />}/>} />
+        <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />}/>} />
+        <Route path="/contact" element={<BackendLayout children={<Contact />}/>} />
 
         {userSignup && (
             <>

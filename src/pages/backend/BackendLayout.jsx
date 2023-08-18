@@ -379,7 +379,7 @@ const BackendLayout = ({ children }) => {
                                   ? "active"
                                   : ""
                               }`}
-                              to={"/portal/insights-generator"}
+                              to={"/termscondition1"}
                               style={{
                                 borderRadius: "0%",
                                 marginLeft: "0%",
@@ -420,7 +420,7 @@ const BackendLayout = ({ children }) => {
                               className={`menu-link ${
                                 currentPage == "news-management" ? "active" : ""
                               }`}
-                              to={"/portal/news-management"}
+                              to={"/contact"}
                               style={{
                                 borderRadius: "0%",
                                 marginLeft: "0%",

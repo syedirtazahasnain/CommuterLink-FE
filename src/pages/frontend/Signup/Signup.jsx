@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../../redux/signupSlice";
 import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
+import Form from "react-bootstrap/Form";
 
 const Signup = () => {
   
@@ -308,8 +309,8 @@ const Signup = () => {
                 {/* </div> */}
               </div>
 
-              <div className="col-md-5 mb-2">
-              <h3
+              <div className="col-md-5 mb-2 px-5">
+                <h3
                   className="text-center text-custom  mb-2"
                   style={{
                     color: "#198754",
@@ -320,9 +321,12 @@ const Signup = () => {
                   {" "}
                   Sign up
                 </h3>{" "}
-                <div className="container mt-4">
-                  <div className="row justify-content-center">
-                    <div className="col-md-12 mt-5">
+                <Form className="text-center">
+                  
+                <Form.Group
+                    className="mt-5 mb-1 text-center"
+                    controlId="formfullName"
+                  >
                       <TextField
                         fullWidth
                         className="bg-light"
@@ -336,8 +340,11 @@ const Signup = () => {
                         helperText={fullNameError}
                         
                       />
-                    </div>
-                    <div className="col-md-12 mt-3">
+                    </Form.Group>
+                    <Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
                       <TextField
                         fullWidth
                         className="bg-light"
@@ -353,8 +360,11 @@ const Signup = () => {
                           !isValidEmail && "Please enter a valid email"
                         }
                       />
-                    </div>
-                    <div className="col-md-12 mt-3">
+                    </Form.Group>
+                    <Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
                       <TextField
                         fullWidth
                         className="bg-light"
@@ -375,8 +385,11 @@ const Signup = () => {
                           "Please enter a valid Phone Number starting with '03' and having 11 digits."
                         }
                       />
-                    </div>
-                    <div className="col-md-12  mt-3">
+                    </Form.Group>
+                    <Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
                       <TextField
                         fullWidth
                         className="bg-light"
@@ -393,8 +406,11 @@ const Signup = () => {
                           "Password must have at least 8 characters with mix of letters numbers special  characters"
                         }
                       />
-                    </div>
-                    <div className="col-md-12  mt-3">
+                    </Form.Group>
+                    <Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
                       <TextField
                         fullWidth
                         className="bg-light"
@@ -411,8 +427,11 @@ const Signup = () => {
                           "Both passwords must be the same"
                         }
                       />
-                    </div>
-                    <div className="col-md-12 text-center mt-3">
+                    </Form.Group>
+                    <Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
                       <FormControlLabel
                         control={
                           <Checkbox
@@ -439,7 +458,7 @@ const Signup = () => {
                           </div>
                         }
                       />
-                    </div>
+                    </Form.Group>
                     <div className="col-md-12  mt-3 text-center">
                     <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={() => postData()}>
                       Sign up
@@ -498,8 +517,8 @@ const Signup = () => {
                         </Link>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  
+                </Form>
               </div>
               <div className="col-md-1"></div>
             </div>

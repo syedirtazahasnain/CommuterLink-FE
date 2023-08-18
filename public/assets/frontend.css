@@ -545,4 +545,6 @@ a.nav-link:hover {
   height: ; 
   object-fit: cover;
 } */
-
+.advancecolor{
+  background-color: 'rgb(217,217,217)';
+}
