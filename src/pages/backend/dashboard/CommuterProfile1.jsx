@@ -230,21 +230,22 @@ const CommuterProfile1 = ({ children }) => {
         </p>
       </div>
 
-      <div className="card" style={{border: "0", backgroundColor: "#D9D9D9", }} >
-        <div class="card-header d-flex flex-column bg-light mb-2">
+      <div className="card p-4 bg-light p-2" >
+      <div className="card p-4" style={{backgroundColor:'#e5f8f3'}} >
+        
           <div>
             {name !== "" ? (
               <div>
-                <h5 className="text-dark ">{name}</h5>
+                <h3 className="text-success ">{name}</h3>
               </div>
             ) : (
               <div>
-                <h5 className="text-success py-2 fw-bold">Zafar Jamil</h5>
+                <h5 className="text-white py-2 fw-bold">Zafar Jamil</h5>
               </div>
             )}
           </div>
 
-          <div className="card bg-light" style={{ border: "0" }}>
+          
             <div className="row d-flex justify-content-between">
               <div className="col-6">
                 <p className="">
@@ -292,7 +293,7 @@ const CommuterProfile1 = ({ children }) => {
               </div>
             </div>
             <div>
-              <h5 className="text-success">{profileType} Details</h5>
+              <h2 className="text-success">{profileType} Details</h2>
               <div className="row d-flex">
                 <div className="col-4">
                   <p>
@@ -455,14 +456,15 @@ const CommuterProfile1 = ({ children }) => {
                 </div>
                 <div className="text-center">
                   <button to="/" className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3">
-                    Approve
+                    View Request
                   </button>
 
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          
+        
+      </div>
       </div>
     </div>
   );

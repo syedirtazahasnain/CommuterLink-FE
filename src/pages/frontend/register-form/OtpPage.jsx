@@ -170,15 +170,15 @@ const OtpPage = () => {
           style={{ backgroundColor: "#eee" }}
         >
           <div className="container">
+            {" "}
             <div className="row">
-            <div
-                  className="col-md-6"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "10vh",
-                  }}
-                >
+              <div
+                className="col-md-6 d-flex"
+                style={{
+                  marginTop: "12vh",
+                }}
+              >
+                
                   <Carousel
                     style={{
                       backgroundColor: "#eee",
@@ -190,7 +190,7 @@ const OtpPage = () => {
                   >
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid w-100"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
@@ -198,22 +198,21 @@ const OtpPage = () => {
 
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid w-100"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
-
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid w-100"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="Carousel_image img-fluid w-100"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="First slide"
                       />
