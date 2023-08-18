@@ -979,26 +979,27 @@ const DriverRegistration = () => {
           <div style={{ backgroundColor: "#eee" }}>
           <div className="containter p-5">
             <div className="row justify-content-center">
-              <div className="col-md-8 bg-white p-5 mt-5 mb-5">
-                <h1
-                  className="text-center mb-4"
-                  style={{
-                    color: "#198754",
-                    marginBottom: "5vh",
-                    marginTop: "5vh",
-                  }}
+              <div className="col-md-10 bg-white mt-5 mb-5">
+              <div className="row shadow
+                " style={{backgroundColor:'rgb(42, 64, 42'}}>    <h1
+                  className="text-center text-white py-4"
+                  // style={{
+                  //   color: "#000",
+                  //   marginBottom: "5vh",
+                  //   marginTop: "5vh",
+                  // }}
                 >
                   Registration
-                </h1>
-                <Form className="px-3" noValidate validated={validated} onSubmit={handleSubmit}>
+                </h1></div>
+                <Form className="p-5" noValidate validated={validated} onSubmit={handleSubmit}>
                   <Row className="mb-3">
                     <Form.Group as={Col}  md={cityStartId ? '4' : '6'} controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Starting Point
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                        
                         value={provinceStartId}
                         onChange={handleProvinceStartChange}
                         required
@@ -1016,12 +1017,12 @@ const DriverRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md={cityStartId ? '4' : '6'} controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Select City
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                        
                         value={cityStartId}
                         onChange={(e) => setCityStartId(e.target.value)}
                         required
@@ -1039,12 +1040,12 @@ const DriverRegistration = () => {
                     
                     {cityStartId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Select Area from Dropdown
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                        
                           value={locationStartString}
                           onChange={handleLocationStart}
                           required
@@ -1099,13 +1100,13 @@ const DriverRegistration = () => {
                   <Row className="mb-3">
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
                       <Form.Label 
-                        style={{ color: "#198754" }}
+                        style={{ color: "#000" }}
                       >
                         Drop Off
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                  
                         value={provinceEndId}
                         onChange={handleProvinceEndChange}
                         required
@@ -1123,12 +1124,12 @@ const DriverRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom02">
-                    <Form.Label style={{ color: "#198754" }}>
+                    <Form.Label style={{ color: "#000" }}>
                         Select City
                     </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                       
                         value={cityEndId}
                         onChange={(e) => setCityEndId(e.target.value)}
                         required
@@ -1146,12 +1147,12 @@ const DriverRegistration = () => {
                     
                     {cityEndId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Select Area from Dropdown
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                          
                           value={locationEndString}
                           onChange={handleLocationEnd}
                           required
@@ -1281,12 +1282,12 @@ const DriverRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Timings (+/- 15 Minutes)
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                       
                         value={selectedHomeTime}
                         onChange={(e) => setSelectedHomeTime(e.target.value)}
                         required
@@ -1302,12 +1303,12 @@ const DriverRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Drop-off Time
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                      
                         value={selectedOfficeTime}
                         onChange={(e) => setSelectedOfficeTime(e.target.value)}
                         required
@@ -1326,7 +1327,7 @@ const DriverRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         I commute (Select Days)
                       </Form.Label>
                     </Form.Group>
@@ -1417,10 +1418,10 @@ const DriverRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>Gender</Form.Label>
+                      <Form.Label style={{ color: "#000" }}>Gender</Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                        
                         value={gender}
                         onChange={(e) => setGender(e.target.value)}
                         required
@@ -1431,12 +1432,12 @@ const DriverRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Preferred Gender
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                       
                         value={preferredGender}
                         onChange={(e) => setPreferredGender(e.target.value)}
                         required
@@ -1451,21 +1452,21 @@ const DriverRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Year of Birth
                       </Form.Label>
                       <LocalizationProvider dateAdapter={AdapterDayjs} sx="w">
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
                             label={
-                              <span style={{ color: "#198754" }}>
+                              <span>
                                 MM/DD/YY
                               </span>
                             }
                             value={selectedDate}
                             onChange={handleDateChange}
                             sx={{ width: "100%" }}
-                            inputProps={{ style: { color: '#198754' } }}
+                            inputProps={{ style: { color: '#000' } }}
                             required
                           />
                         </DemoContainer>
@@ -1475,12 +1476,12 @@ const DriverRegistration = () => {
                     {/* {selectedDate} */}
 
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Martial Status
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                        
                         value={martialStatus}
                         onChange={(e) => setMartialStatus(e.target.value)}
                         required
@@ -1494,12 +1495,12 @@ const DriverRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Education
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                        style={{ color: "#000" }}
                         value={education}
                         onChange={(e) => setEducation(e.target.value)}
                         required
@@ -1519,13 +1520,13 @@ const DriverRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                       <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Profession
                         </Form.Label>
                         <Form.Control
                           required
                           type="text"
-                          className={`colorplace ${isValidProfession ? '' : 'is-invalid'}`}
+                          className={`${isValidProfession ? '' : 'is-invalid'}`}
                           placeholder="Profession (Engineer, Doctor, etc)"
                           value={profession}
                           onChange={handleProfessionChange}
@@ -1538,29 +1539,13 @@ const DriverRegistration = () => {
                       </Form.Group>
                   </Row>
                   <Row className="mb-3">
-                    {/* <Form.Group as={Col} md="12" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>CNIC</Form.Label>
-
-                      <Form.Control
-                        required
-                        type="text"
-                        className="colorplace"
-                        placeholder="xxxxxxxxxxxxx"
-                        value={cnic}
-                        onChange={handleCnicChange}
-
-                        error={!isValidCnic}
-                        helperText={
-                          !isValidCnic && "Please enter a valid Cnic"
-                        }
-                      />
-                    </Form.Group> */}
+                    
                       <Form.Group as={Col} md="12" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>CNIC</Form.Label>
+                        <Form.Label style={{ color: "#000" }}>CNIC</Form.Label>
                         <Form.Control
                           required
                           type="text"
-                          className={`colorplace ${isValidCnic ? '' : 'is-invalid'}`}
+                          className={`${isValidCnic ? '' : 'is-invalid'}`}
                           placeholder="12345-1234567-1"
                           value={cnic}
                           onChange={handleCnicChange}
@@ -1579,7 +1564,7 @@ const DriverRegistration = () => {
                       md="6"
                       className="mb-3"
                     >
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         {" "}
                         Upload CNIC (Front)
                       </Form.Label>
@@ -1591,7 +1576,7 @@ const DriverRegistration = () => {
                       md="6"
                       className="mb-3"
                     >
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         {" "}
                         Upload CNIC (back)
                       </Form.Label>
@@ -1606,11 +1591,11 @@ const DriverRegistration = () => {
                       md="12"
                       className="mb-3"
                     >
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Upload your picture
                       </Form.Label>
                       <Form.Control type="file" required onChange={handlePicture} />
-                      <Form.Text className="" style={{ color: "#198754" }}>
+                      <Form.Text className="text-success" style={{ color: "#000" }}>
                         The picture will only be shown to members with whom you
                         agree to commute
                       </Form.Text>
@@ -1652,7 +1637,7 @@ const DriverRegistration = () => {
                   <h1
                     className="text-center mb-4"
                     style={{
-                      color: "#198754",
+                      color: "#000",
                       marginBottom: "5vh",
                       marginTop: "5vh",
                     }}
@@ -1663,10 +1648,10 @@ const DriverRegistration = () => {
                   <Form>
                     <Row className="mb-3">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>Car Brand</Form.Label>
+                        <Form.Label style={{ color: "#000" }}>Car Brand</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                        
                           value={selectedCarBrand}
                           onChange={handleCarBrandChange}
                           required
@@ -1682,12 +1667,12 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Car Brand
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                          style={{ color: "#000" }}
                           value={selectedCarBrand}
                           onChange={(e) => setSelectedCarBrand(e.target.value)}
                           required
@@ -1702,7 +1687,7 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group> */}
                       <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Model Name
                         </Form.Label>
                         <Form.Control
@@ -1718,12 +1703,12 @@ const DriverRegistration = () => {
                     </Row>
                     <Row className="mb-3">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Manufacturing Year
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                          
                           value={selectedManYear}
                           onChange={(e) => setSelectedManYear(e.target.value)}
                           required
@@ -1737,12 +1722,12 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group>
                       <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Registration Year
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                          style={{ color: "#000" }}
                           value={selectedRegYear}
                           onChange={(e) => setSelectedRegYear(e.target.value)}
                           required
@@ -1759,12 +1744,12 @@ const DriverRegistration = () => {
 
                     <Row className="mb-3">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Registration Car Year Ranges
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                         
                           value={selectedCarYearRanges}
                           onChange={(e) => setSelectedCarYearRanges(e.target.value)}
                           required
@@ -1783,7 +1768,7 @@ const DriverRegistration = () => {
 
                     <Row className="mb-0">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Registeration Number
                         </Form.Label>
                         <Form.Control
@@ -1797,12 +1782,12 @@ const DriverRegistration = () => {
                         />
                       </Form.Group>
                       <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           My Car has AC
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                         
                           value={selectedCarAC}
                           onChange={(e) => setSelectedCarAC(e.target.value)}
                           required
@@ -1819,7 +1804,7 @@ const DriverRegistration = () => {
                         as={Col} 
                         md="6"
                       >
-                        <Form.Label className="mt-3" style={{ color: "#198754" }}>
+                        <Form.Label className="mt-3" style={{ color: "#000" }}>
                           Upload Car Image with visible number plate
                         </Form.Label>
                         <Form.Control 
@@ -1829,12 +1814,12 @@ const DriverRegistration = () => {
                         />
                       </Form.Group>
                       <Form.Group as={Col} md="6" className="mb-3" controlId="validationCustom02">
-                        <Form.Label className="mt-3" style={{ color: "#198754" }}>
+                        <Form.Label className="mt-3" style={{ color: "#000" }}>
                           Car CC
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                          
                           value={selectedCarCC}
                           onChange={(e) => setSelectedCarCC(e.target.value)}
                           required
@@ -1853,12 +1838,12 @@ const DriverRegistration = () => {
 
                     <Row className="mb-3">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Seats Available
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                          
                           value={selectedSeat}
                           onChange={(e) => setSelectedSeat(e.target.value)}
                           required
@@ -1871,12 +1856,12 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group>
                       <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Seats Available for (Male, Female, Both)
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                          
                           value={selectedSeatGender}
                           onChange={(e) => setSelectedSeatGender(e.target.value)}
                           required
@@ -1891,12 +1876,12 @@ const DriverRegistration = () => {
                     <Row className="mb-3">
 
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           I accept one-route partner
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                        
                           value={selectedOneRoutePartner}
                           onChange={(e) => setSelectedOneRoutePartner(e.target.value)}
                           required
@@ -1908,12 +1893,12 @@ const DriverRegistration = () => {
                       </Form.Group>
                       
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           I also accept mid-route partner
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
+                          
                           value={selectedMidRoutePartner}
                           onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
                           required
@@ -2053,7 +2038,7 @@ const DriverRegistration = () => {
                             md="12"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Driving Licence No.
                             </Form.Label>
                             <Form.Control
@@ -2073,7 +2058,7 @@ const DriverRegistration = () => {
                             md="12"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Valid Upto
                             </Form.Label>
                             <Form.Control
@@ -2093,7 +2078,7 @@ const DriverRegistration = () => {
                             md="12"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Place Issued
                             </Form.Label>
                             <Form.Control
@@ -2114,7 +2099,7 @@ const DriverRegistration = () => {
                           md="6"
                           controlId="validationCustom01"
                         >
-                          <Form.Label style={{ color: "#198754" }}>
+                          <Form.Label style={{ color: "#000" }}>
                             Upload License (front)
                           </Form.Label>
                           <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
@@ -2124,7 +2109,7 @@ const DriverRegistration = () => {
                           md="6"
                           controlId="validationCustom02"
                         >
-                          <Form.Label style={{ color: "#198754" }}>
+                          <Form.Label style={{ color: "#000" }}>
                             Upload License (back)
                           </Form.Label>
                           <Form.Control type="file" required onChange={handleLicenseBackDriver} />
@@ -2142,7 +2127,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Name
                             </Form.Label>
                             <Form.Control
@@ -2160,7 +2145,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               CNIC
                             </Form.Label>
                             <Form.Control
@@ -2182,7 +2167,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Upload CNIC (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicFrontDriver} />
@@ -2192,7 +2177,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom02"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Upload CNIC (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicBackDriver} />
@@ -2204,7 +2189,7 @@ const DriverRegistration = () => {
                             md="12"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Driving Licence No.
                             </Form.Label>
                             <Form.Control
@@ -2224,7 +2209,7 @@ const DriverRegistration = () => {
                             md="12"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Valid Upto
                             </Form.Label>
                             <Form.Control
@@ -2244,7 +2229,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Upload License (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
@@ -2254,7 +2239,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom02"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Upload License (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseBackDriver} />
@@ -2269,7 +2254,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Name
                             </Form.Label>
                             <Form.Control
@@ -2287,7 +2272,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               CNIC
                             </Form.Label>
                             <Form.Control
@@ -2309,7 +2294,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Upload CNIC (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicFrontDriver} />
@@ -2319,7 +2304,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom02"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Upload CNIC (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicBackDriver} />
@@ -2331,7 +2316,7 @@ const DriverRegistration = () => {
                             md="12"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Driving Licence No.
                             </Form.Label>
                             <Form.Control
@@ -2351,7 +2336,7 @@ const DriverRegistration = () => {
                             md="12"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Valid Upto
                             </Form.Label>
                             <Form.Control
@@ -2371,7 +2356,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom01"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Upload License (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
@@ -2381,7 +2366,7 @@ const DriverRegistration = () => {
                             md="6"
                             controlId="validationCustom02"
                           >
-                            <Form.Label style={{ color: "#198754" }}>
+                            <Form.Label style={{ color: "#000" }}>
                               Upload License (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseBackDriver} />

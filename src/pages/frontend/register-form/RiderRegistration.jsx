@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
+import { BASE_URL } from "../../../constants";
 import TextField from "@mui/material/TextField";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -27,7 +28,15 @@ const RiderRegistration = () => {
 
   // const option0 = useSelector((s) => s.general.data.option0);
   // console.log(option0);
-
+  const backgroundStyle = {
+    backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
+      // backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      width:'100',
+      height:'20vh'
+        // Set the desired height of the background area
+  };
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
   const userToken = useSelector((s) => s.login.data.token);
@@ -691,27 +700,34 @@ const RiderRegistration = () => {
     <>
       <div style={{ backgroundColor: "#eee" }}>
           <div className="containter p-5">
-            <div className="row justify-content-center">
-              <div className="col-md-8 bg-white  mt-5 mb-5">
-                <h1
-                  className="text-center mb-4"
-                  style={{
-                    color: "#198754",
-                    marginBottom: "5vh",
-                    marginTop: "5vh",
-                  }}
+          {/* <div className="row">
+                  <div className="col px-4">
+                    <div style={backgroundStyle}></div>
+                  </div>
+                  </div> */}
+            <div className="row justify-content-center ">
+              <div className="col-md-10 shadow bg-white  mt-5 mb-5">
+                <div className="row shadow
+                " style={{backgroundColor:'rgb(42, 64, 42'}}>    <h1
+                  className="text-center text-white py-4"
+                  // style={{
+                  //   color: "#000",
+                  //   marginBottom: "5vh",
+                  //   marginTop: "5vh",
+                  // }}
                 >
                   Registration
-                </h1>
-                <Form className="px-3" noValidate validated={validated} onSubmit={handleSubmit}>
+                </h1></div>
+            
+                <Form className=" p-5" noValidate validated={validated} onSubmit={handleSubmit}>
                   <Row className="mb-3">
                     <Form.Group as={Col}  md={cityStartId ? '4' : '6'} controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Starting Point
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                        
                         value={provinceStartId}
                         onChange={handleProvinceStartChange}
                         required
@@ -729,12 +745,13 @@ const RiderRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md={cityStartId ? '4' : '6'} controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Select City
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                        // style={{ color: "#000" }}
+                        className="text-secondary"
                         value={cityStartId}
                         onChange={(e) => setCityStartId(e.target.value)}
                         required
@@ -752,13 +769,12 @@ const RiderRegistration = () => {
                     
                     {cityStartId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Select Area from Dropdown
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          value={locationStartString}
+                          className="text-secondary"                          value={locationStartString}
                           onChange={handleLocationStart}
                           required
                         >
@@ -812,14 +828,13 @@ const RiderRegistration = () => {
                   <Row className="mb-3">
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
                       <Form.Label 
-                        style={{ color: "#198754" }}
+                        style={{ color: "#000" }}
                       >
                         Drop Off
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
-                        value={provinceEndId}
+                        className="text-secondary"                        value={provinceEndId}
                         onChange={handleProvinceEndChange}
                         required
                       >
@@ -836,13 +851,12 @@ const RiderRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom02">
-                    <Form.Label style={{ color: "#198754" }}>
+                    <Form.Label style={{ color: "#000" }}>
                         Select City
                     </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
-                        value={cityEndId}
+                        className="text-secondary"                        value={cityEndId}
                         onChange={(e) => setCityEndId(e.target.value)}
                         required
                       >
@@ -859,13 +873,12 @@ const RiderRegistration = () => {
                     
                     {cityEndId && (
                       <Form.Group as={Col} md="4" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#198754" }}>
+                        <Form.Label style={{ color: "#000" }}>
                           Select Area from Dropdown
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#198754" }}
-                          value={locationEndString}
+                          className="text-secondary"                          value={locationEndString}
                           onChange={handleLocationEnd}
                           required
                         >
@@ -994,13 +1007,12 @@ const RiderRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Timings (+/- 15 Minutes)
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
-                        value={selectedHomeTime}
+                        className="text-secondary"                        value={selectedHomeTime}
                         onChange={(e) => setSelectedHomeTime(e.target.value)}
                         required
                       >
@@ -1015,13 +1027,12 @@ const RiderRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Drop-off Time
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
-                        value={selectedOfficeTime}
+                        className="text-secondary"                        value={selectedOfficeTime}
                         onChange={(e) => setSelectedOfficeTime(e.target.value)}
                         required
                       >
@@ -1039,7 +1050,7 @@ const RiderRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         I commute (Select Days)
                       </Form.Label>
                     </Form.Group>
@@ -1128,10 +1139,10 @@ const RiderRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>Gender</Form.Label>
+                      <Form.Label style={{ color: "#000" }}>Gender</Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
+                        className="text-secondary"                        
                         value={gender}
                         onChange={(e) => setGender(e.target.value)}
                         required
@@ -1142,13 +1153,12 @@ const RiderRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Preferred Gender
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
-                        value={preferredGender}
+                        className="text-secondary"                        value={preferredGender}
                         onChange={(e) => setPreferredGender(e.target.value)}
                         required
                       >
@@ -1162,21 +1172,22 @@ const RiderRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Year of Birth
                       </Form.Label>
                       <LocalizationProvider dateAdapter={AdapterDayjs} sx="w">
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
                             label={
-                              <span style={{ color: "#198754" }}>
+                              <span>
                                 MM/DD/YY
                               </span>
                             }
                             value={selectedDate}
                             onChange={handleDateChange}
+                            slotProps={{ textField: { size: "small" } }}
                             sx={{ width: "100%" }}
-                            inputProps={{ style: { color: '#198754' } }}
+                            inputProps={{ style: { color: '#000' } }}
                             required
                           />
                         </DemoContainer>
@@ -1186,13 +1197,12 @@ const RiderRegistration = () => {
                     {/* {selectedDateFormat} */}
 
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Martial Status
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
-                        value={martialStatus}
+                        className="text-secondary"                        value={martialStatus}
                         onChange={(e) => setMartialStatus(e.target.value)}
                         required
                       >
@@ -1205,13 +1215,12 @@ const RiderRegistration = () => {
 
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Education
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        style={{ color: "#198754" }}
-                        value={education}
+                        className="text-secondary"                        value={education}
                         onChange={(e) => setEducation(e.target.value)}
                         required
                       >
@@ -1230,13 +1239,13 @@ const RiderRegistration = () => {
                       </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} md="6" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Profession
                       </Form.Label>
                       <Form.Control
                         required
                         type="text"
-                   className={`colorplace ${isValidProfession ? '' : 'is-invalid'}`}
+                   className={` ${isValidProfession ? '' : 'is-invalid'}`}
           placeholder="Profession (Engineer, Doctor, etc)"
           value={profession}
           onChange={handleProfessionChange}
@@ -1250,12 +1259,12 @@ const RiderRegistration = () => {
                   </Row>
                   <Row className="mb-3">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">
-                      <Form.Label style={{ color: "#198754" }}>CNIC</Form.Label>
+                      <Form.Label style={{ color: "#000" }}>CNIC</Form.Label>
 
                       <Form.Control
                         required
                         type="text"
-                       className={`colorplace ${isValidCnic ? '' : 'is-invalid'}`}
+                       className={` ${isValidCnic ? '' : 'is-invalid'}`}
             placeholder="12345-1234567-1"
             value={cnic}
             onChange={handleCnicChange}
@@ -1274,7 +1283,7 @@ const RiderRegistration = () => {
                       md="6"
                       className="mb-3"
                     >
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         {" "}
                         Upload CNIC (Front)
                       </Form.Label>
@@ -1286,7 +1295,7 @@ const RiderRegistration = () => {
                       md="6"
                       className="mb-3"
                     >
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         {" "}
                         Upload CNIC (back)
                       </Form.Label>
@@ -1301,11 +1310,11 @@ const RiderRegistration = () => {
                       md="12"
                       className="mb-3"
                     >
-                      <Form.Label style={{ color: "#198754" }}>
+                      <Form.Label style={{ color: "#000" }}>
                         Upload your picture
                       </Form.Label>
                       <Form.Control type="file" required onChange={handlePicture} />
-                      <Form.Text className="" style={{ color: "#198754" }}>
+                      <Form.Text className="text-success">
                         The picture will only be shown to members with whom you
                         agree to commute
                       </Form.Text>
@@ -1333,6 +1342,9 @@ const RiderRegistration = () => {
             </div>
           </div>
         </div>
+
+
+
     </>
   );
 };

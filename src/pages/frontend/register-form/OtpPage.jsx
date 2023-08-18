@@ -173,7 +173,7 @@ const OtpPage = () => {
             {" "}
             <div className="row">
               <div
-                className="col-md-6 d-flex"
+                className="col-md-6 d-flex fixed"
                 style={{
                   marginTop: "12vh",
                 }}
@@ -190,7 +190,7 @@ const OtpPage = () => {
                   >
                     <Carousel.Item interval={2000}>
                       <img
-                        className="d-block img-fluid w-auto"
+                        className="d-block"
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
@@ -198,21 +198,21 @@ const OtpPage = () => {
 
                     <Carousel.Item interval={2000}>
                       <img
-                        className="d-block img-fluid w-auto"
+                        className="d-block"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="d-block img-fluid w-auto"
+                        className="d-block"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="d-block img-fluid w-auto"
+                        className="d-block"
                         src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="First slide"
                       />
@@ -220,7 +220,7 @@ const OtpPage = () => {
                   </Carousel>
                 </div>
 
-              <div className="col-md-6 pb-5 mb-2 text-center d-flex justify-content-center">
+              <div className="col-md-6 py-5 mb-3 text-center d-flex justify-content-center">
                 <Card
                   sx={{
                     marginTop: "10vh",

@@ -27,64 +27,56 @@ const ShareRide = () => {
           className="mt-5"
           style={{ backgroundColor: "#eee" }}
         >
-          <div className="container">
+        <div className="container">
+            {" "}
             <div className="row">
-            <div
-                  className="col-md-6"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "10vh",
-                  }}
-                > <div
-                className="col-md-6"
+              <div
+                className="col-md-6 d-flex"
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "10vh",
+                  marginTop: "12vh",
                 }}
               >
-                <Carousel
-                  style={{
-                    backgroundColor: "#eee",
-                  }}
-                  className="carousel-container"
-                  prevIcon={null}
-                  nextIcon={null}
-                  indicators={null}
-                >
-                  <Carousel.Item interval={2001}>
-                    <img
-                      className="Carousel_image img-fluid w-100"
-                      src={`${BASE_URL}/assets/images/signup.png`}
-                      alt="First slide"
-                    />
-                  </Carousel.Item>
+                
+                  <Carousel
+                    style={{
+                      backgroundColor: "#eee",
+                    }}
+                    className="carousel-container"
+                    prevIcon={null}
+                    nextIcon={null}
+                    indicators={null}
+                  >
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
 
-                  <Carousel.Item interval={2000}>
-                    <img
-                      className="Carousel_image img-fluid w-100"
-                      src={`${BASE_URL}/assets/images/signup-3.png`}
-                      alt="second slide"
-                    />
-                  </Carousel.Item>
-
-                  <Carousel.Item interval={2003}>
-                    <img
-                      className="Carousel_image img-fluid  w-100"
-                      src={`${BASE_URL}/assets/images/signup-4.png`}
-                      alt="third slide"
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item interval={2004}>
-                    <img
-                      className="Carousel_image img-fluid  w-100"
-                      src={`${BASE_URL}/assets/images/signup-6.png`}
-                      alt="Fourth slide"
-                    />
-                  </Carousel.Item>
-                </Carousel>
-              </div></div>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
+                        alt="second slide"
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
+                        alt="third slide"
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
+                        alt="forth slide"
+                      />
+                    </Carousel.Item>
+                  </Carousel>
+                </div>
                
               
 
