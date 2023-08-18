@@ -185,18 +185,10 @@ const Login = () => {
               <div
                 className="col-md-6 d-flex"
                 style={{
-                  marginTop: "10vh",
+                  marginTop: "12vh"
                 }}
               >
-                
-                {/* <div
-                  className="col-md-6"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "5vh",
-                  }}
-                > */}
+               
                   <Carousel
                     style={{
                       backgroundColor: "#eee",

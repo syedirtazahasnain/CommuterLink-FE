@@ -252,12 +252,10 @@ const Signup = () => {
           <div className="container">
             {" "}
             <div className="row">
-              <div
-                className="col-md-6"
+            <div
+                className="col-md-6 d-flex"
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "8vh",
+                  marginTop: "12vh",
                 }}
               >
                 {/* <div
@@ -268,7 +266,7 @@ const Signup = () => {
                     marginTop: "5vh",
                   }}
                 > */}
-                  <Carousel
+                   <Carousel
                     style={{
                       backgroundColor: "#eee",
                     }}
@@ -279,7 +277,7 @@ const Signup = () => {
                   >
                     <Carousel.Item interval={2000}>
                       <img
-                        className="img-fluid d-block w-auto"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
@@ -287,24 +285,23 @@ const Signup = () => {
 
                     <Carousel.Item interval={2000}>
                       <img
-                        className="img-fluid d-block w-auto"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="second slide"
+                        alt="First slide"
                       />
                     </Carousel.Item>
-
                     <Carousel.Item interval={2000}>
                       <img
-                        className="img-fluid  d-block w-auto"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
-                        alt="third slide"
+                        alt="First slide"
                       />
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="img-fluid d-block w-auto"
+                        className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-6.png`}
-                        alt="fourth slide"
+                        alt="First slide"
                       />
                     </Carousel.Item>
                   </Carousel>

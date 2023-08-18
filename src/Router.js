@@ -28,6 +28,7 @@ import FrontendLayout from "./pages/frontend/FrontendLayout";
 import RequestApprovalByCarOwner from './pages/backend/dashboard/RequestApprovalByCarOwner';
 import Dashboard12 from './pages/backend/dashboard/Dashboard12';
 import Notifications from './pages/backend/dashboard/Notifications';
+import Rejection from './pages/backend/dashboard/Rejection';
 
 const Router = () => {
   
@@ -43,7 +44,7 @@ const Router = () => {
         <Route path='/faq' element={<FrontendLayout children={<Faq/>}/>}/>
 
         {/* <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} /> */}
-        {/* <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} /> */}
+        <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} />
         <Route path='/replytoconfirmdates1' element={<BackendLayout children={<ReplyToConfirmDates1 />} />} />
         <Route path='/sendapprovalforpartner1' element={<BackendLayout children={<SendApprovalForPartner1 />} />} />
         <Route path='/sharetocare1' element={<BackendLayout children={<ShareToCare1 />} />} />
@@ -53,6 +54,8 @@ const Router = () => {
         <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
         <Route path='/requestcarowner' element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
         {/* <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} /> */}
+        <Route path='/rejection' element={<BackendLayout children={<Rejection />} />} />
+        <Route path="/otp" element={<FrontendLayout children={<OtpPage />}/>} />
 
         {userSignup && (
             <>
