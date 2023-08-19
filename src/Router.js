@@ -31,6 +31,7 @@ import Notifications from "./pages/backend/dashboard/Notifications";
 import Rejection from "./pages/backend/dashboard/Rejection";
 import AdvancePayment from "./pages/backend/dashboard/AdvancePayment";
 import Contact from "./pages/frontend/Hompage-components/Contact";
+import BeforeApprovalTerms from "./pages/backend/dashboard/BeforeAprrovalTerms";
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -114,6 +115,10 @@ const Router = () => {
         <Route
               path="/shareride"
               element={<FrontendLayout children={<ShareRide />} />}
+            ></Route>
+            <Route
+              path="/beforeapprovalterms"
+              element={<BackendLayout children={<BeforeApprovalTerms />} />}
             ></Route>
         {userSignup && (
           <>
