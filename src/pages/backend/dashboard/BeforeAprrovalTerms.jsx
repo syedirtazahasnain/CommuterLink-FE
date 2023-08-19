@@ -19,7 +19,7 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const BeforeApprovalTerms = ({ children }) => {
+const BeforeApprovalTerms = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const dispatch = useDispatch();

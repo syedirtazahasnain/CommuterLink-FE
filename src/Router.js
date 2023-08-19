@@ -42,6 +42,7 @@ const Router = () => {
         <Route path="/signup" element={<FrontendLayout children={<Signup />} />}/>
         <Route path="/login" element={<FrontendLayout children={<Login />} />}/>
         <Route path="/faq" element={<FrontendLayout children={<Faq />} />} />
+        <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
 
          {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />

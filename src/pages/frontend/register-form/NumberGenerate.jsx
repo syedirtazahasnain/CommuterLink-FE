@@ -12,7 +12,7 @@ function NumberGenerate() {
   const dispatch = useDispatch();
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const navigate = useNavigate();
-  const [ phoneNumber , setPhoneNumber ] =  useState()
+  const [phoneNumber, setPhoneNumber] = useState(null);
   const store_signup = useSelector((s)=> s.signup.data);
   //const store_login = useSelector((s)=> s.login.data);
 
@@ -75,10 +75,11 @@ function NumberGenerate() {
   const validatePhoneNumber = (phoneNumber) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
     const phonePattern = /^03\d{9}$/;
-    if (phonePattern.test(phoneNumber)) {
+    if (phoneNumber === '' || phonePattern.test(phoneNumber)) {
       setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(true);
     } else {
+      setPhoneNumber(phoneNumber);
       setIsValidPhoneNumber(false);
     }
   };
@@ -110,11 +111,14 @@ function NumberGenerate() {
                         type="text"
                         className="colorplace mb-3"
                         placeholder="03XXXXXXXXX"
-                        onChange = { (e) => validatePhoneNumber(e.target.value)}
-                        defaultValue=""
-                        maxLength={11}
+                        value={phoneNumber}
+                        onChange={(e) => {
+                          if (/^\d{0,11}$/.test(e.target.value)) {
+                            validatePhoneNumber(e.target.value);
+                          }
+                        }}
                       />
-                      {isValidPhoneNumber && <span> Please enter a valid phone number </span>}
+                      {!isValidPhoneNumber && phoneNumber !== '' && <span> Please enter a valid phone number </span>}
                     </Form.Group>
                   </Row>
                   <div className="px-4 mb-3">
