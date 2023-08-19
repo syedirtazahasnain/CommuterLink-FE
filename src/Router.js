@@ -32,6 +32,9 @@ import Rejection from "./pages/backend/dashboard/Rejection";
 import AdvancePayment from "./pages/backend/dashboard/AdvancePayment";
 import Contact from "./pages/frontend/Hompage-components/Contact";
 import BeforeApprovalTerms from "./pages/backend/dashboard/BeforeAprrovalTerms";
+import PaymentRide from "./pages/backend/dashboard/PaymentRide";
+import PaymentOptions from "./pages/backend/dashboard/PaymentOptions";
+import FinalStep from "./pages/backend/dashboard/FinalStep";
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -119,6 +122,18 @@ const Router = () => {
             <Route
               path="/beforeapprovalterms"
               element={<BackendLayout children={<BeforeApprovalTerms />} />}
+            ></Route>
+            <Route
+              path="/paymentride"
+              element={<BackendLayout children={<PaymentRide />} />}
+            ></Route>
+             <Route
+              path="/paymentoptions"
+              element={<BackendLayout children={<PaymentOptions />} />}
+            ></Route>
+             <Route
+              path="/finalstep"
+              element={<BackendLayout children={<FinalStep />} />}
             ></Route>
         {userSignup && (
           <>
