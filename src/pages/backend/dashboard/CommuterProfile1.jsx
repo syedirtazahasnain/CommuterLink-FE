@@ -222,7 +222,7 @@ const CommuterProfile1 = () => {
         setTimeDepart(jsonresponse.data[0].user[0].time_depart);
         setTimeReturn(jsonresponse.data[0].user[0].time_return);
         setDays(jsonresponse.data[0].user[0].days);
-      }else {
+      } else {
         setProfileType("");
         setMemberId("");
         setName("");
@@ -250,7 +250,6 @@ const CommuterProfile1 = () => {
       start_date: "2023-06-10",
     };
 
-    // console.log("Send Request:", body);
     const response = await fetch(
       "https://staging.commuterslink.com/api/v1/request",
       {
@@ -275,7 +274,6 @@ const CommuterProfile1 = () => {
   return (
     <div>
       <div className="page-title">
-        {/* <div className="border border-bottom border-success justify-content-center ml-3"></div> */}
         <p className="card p-4 text-dark my-2 fw-bold fs-6">
           You are looking for travel buddles to ride your car, others who want
           to share their car and to connect with members with whom you can take{" "}
@@ -284,30 +282,28 @@ const CommuterProfile1 = () => {
 
       <div className="card p-4 bg-light p-2" >
         <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }} >
-
-          <div>
-            {name !== "" ? (
-              <div>
-                <h3 className="text-success ">{name}</h3>
+          <div className="row">
+            <div className="col-md-1 mt-1">
+              <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
+            </div>
+            <div className="col-md-11 px-5">
+              <div className="px-5">
+                {name !== "" ? (
+                  <div>
+                    <h3 className="text-success ">{name}</h3>
+                  </div>
+                ) : (
+                  <>
+                  </>
+                )}
               </div>
-            ) : (
-              <div>
-                <h5 className="text-white py-2 fw-bold">Zafar Jamil</h5>
-              </div>
-            )}
-          </div>
-
-
-          <div className="row d-flex justify-content-between">
-            <div className="col-6">
-              <p className="">
+              <p className="px-5">
                 {gender !== "" ? (
                   <>
                     <b>Gender:</b> <u>{gender}</u>
                   </>
                 ) : (
                   <>
-                    
                   </>
                 )}
                 <br />
@@ -317,7 +313,6 @@ const CommuterProfile1 = () => {
                   </>
                 ) : (
                   <>
-                    
                   </>
                 )}
                 <br />
@@ -327,7 +322,6 @@ const CommuterProfile1 = () => {
                   </>
                 ) : (
                   <>
-                    
                   </>
                 )}
                 <br />
@@ -339,187 +333,185 @@ const CommuterProfile1 = () => {
                   <></>
                 )}
               </p>
-            </div>
-            <div className="col-6 text-end">
-              <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "95px", width: "95px", backgroundColor: "rgb(32 155 98)" }} />
+
             </div>
           </div>
-          <div>
-            <h2 className="text-success">{profileType} Details</h2>
-            <div className="row d-flex">
-              <div className="col-4">
-                <p>
-                  {preferredGender !== "" ? (
-                    <>
-                      <b>Preferred Gender: </b> <u>{preferredGender}</u>
-                    </>
-                  ) : (
-                    <>
-                      
-                    </>
-                  )}
-                  <br />
-                  {origin !== "" ? (
-                    <>
-                      <b>Point of Origin: </b>
-                      <u>{origin}</u>
-                    </>
-                  ) : (
-                    <>
-                     
-                    </>
-                  )}
-                  <br />
-                  {timeDepart !== "" ? (
-                    <>
-                      <b>Pickup Timings:</b> <u>{timeDepart}</u>
-                    </>
-                  ) : (
-                    <>
-                      
-                    </>
-                  )}
-                  <br />
-                  {destination !== "" ? (
-                    <>
-                      <b>Destination:</b>
-                      <u>{destination}</u>
-                    </>
-                  ) : (
-                    <>
-                      
-                    </>
-                  )}
-                  <br />
-                  {timeReturn !== "" ? (
-                    <>
-                      <b>Return Timings:</b> <u>{timeReturn}</u>
-                    </>
-                  ) : (
-                    <>
-                      
-                    </>
-                  )}
-                  <br />
-                  {days !== "" ? (
-                    <>
-                      <b>Days:</b> <u>{days}</u>
-                    </>
-                  ) : (
-                    <>
-                      
-                    </>
-                  )}
-                  <br />
-                  {mobileNo !== "" ? (
-                    <>
-                      <b>Contact No:</b> <u>{mobileNo}</u>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </p>
-              </div>
-              <div className="col-2">
-                <p>
-                  {seats !== "" ? (
-                    <>
-                      <b>No.of Seats:</b> {seats}
-                    </>
-                  ) : (
-                    <>
-                      
-                    </>
-                  )}
-                  <br />
-                  {seatsLeft !== "" ? (
-                    <>
-                      <b>No.of Seats Left:</b> {seatsLeft}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  <br />
-                  {price !== "" ? (
-                    <>
-                      <b>Payment Terms (perDay):</b> <u>{price}</u>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  <br />
-                  {carAC !== "" ? (
-                    <>
-                      <b>Car have AC:</b> {carAC}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  <br />
-                  {carBrand !== "" ? (
-                    <>
-                      <b>Car Brand:</b> {carBrand}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  <br />
-                  {carCC !== "" ? (
-                    <>
-                      <b>Car CC:</b> {carCC}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  <br />
-                  {carModel !== "" ? (
-                    <>
-                      <b>Car Model:</b> {carModel}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  <br />
-                  {RegNo !== "" ? (
-                    <>
-                      <b>Registration Number:</b> {RegNo}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  <br />
-                  {RegYear !== "" ? (
-                    <>
-                      <b>Registration Year:</b> {RegYear}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  <br />
-                  {carRegYear !== "" ? (
-                    <>
-                      <b>Car Registration Year:</b> {carRegYear}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </p>
-              </div>
-              {memberId !== "" ? (
-                <div className="text-center">
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={route}>
-                    Accept Request
-                  </Button>
-                </div>
-              ) : (
-                <div className="text-center">
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
-                    Send Request
-                  </Button>
-                </div>
-              )}
+          <hr style={{ color: "grey" }} />
+          <div className="row">
+            <h2 className="text-success py-2 fw-bold">{profileType} Details</h2>
+            <div className="col-md-6">
+              <p>
+                {preferredGender !== "" ? (
+                  <>
+                    <b>Preferred Gender: </b> <u>{preferredGender}</u>
+                  </>
+                ) : (
+                  <>
+                  </>
+                )}
+                <br />
+                {origin !== "" ? (
+                  <>
+                    <b>Point of Origin: </b>
+                    <u>{origin}</u>
+                  </>
+                ) : (
+                  <>
+                  </>
+                )}
+                <br />
+                {timeDepart !== "" ? (
+                  <>
+                    <b>Pickup Timings:</b> <u>{timeDepart}</u>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                <br />
+                {destination !== "" ? (
+                  <>
+                    <b>Destination:</b>
+                    <u>{destination}</u>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                <br />
+                {timeReturn !== "" ? (
+                  <>
+                    <b>Return Timings:</b> <u>{timeReturn}</u>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                <br />
+                {days !== "" ? (
+                  <>
+                    <b>Days:</b> <u>{days}</u>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                <br />
+                {mobileNo !== "" ? (
+                  <>
+                    <b>Contact No:</b> <u>{mobileNo}</u>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </p>
+
+            </div>
+            <div className="col-md-6">
+              <p>
+                {seats !== "" ? (
+                  <>
+                    <b>No.of Seats:</b> {seats}
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                <br />
+                {seatsLeft !== "" ? (
+                  <>
+                    <b>No.of Seats Left:</b> {seatsLeft}
+                  </>
+                ) : (
+                  <></>
+                )}
+                <br />
+                {price !== "" ? (
+                  <>
+                    <b>Payment Terms (perDay):</b> <u>{price}</u>
+                  </>
+                ) : (
+                  <></>
+                )}
+                <br />
+                {carAC !== "" ? (
+                  <>
+                    <b>Car have AC:</b> {carAC}
+                  </>
+                ) : (
+                  <></>
+                )}
+                <br />
+                {carBrand !== "" ? (
+                  <>
+                    <b>Car Brand:</b> {carBrand}
+                  </>
+                ) : (
+                  <></>
+                )}
+                <br />
+                {carCC !== "" ? (
+                  <>
+                    <b>Car CC:</b> {carCC}
+                  </>
+                ) : (
+                  <></>
+                )}
+                <br />
+                {carModel !== "" ? (
+                  <>
+                    <b>Car Model:</b> {carModel}
+                  </>
+                ) : (
+                  <></>
+                )}
+                <br />
+                {RegNo !== "" ? (
+                  <>
+                    <b>Registration Number:</b> {RegNo}
+                  </>
+                ) : (
+                  <></>
+                )}
+                <br />
+                {RegYear !== "" ? (
+                  <>
+                    <b>Registration Year:</b> {RegYear}
+                  </>
+                ) : (
+                  <></>
+                )}
+                <br />
+                {carRegYear !== "" ? (
+                  <>
+                    <b>Car Registration Year:</b> {carRegYear}
+                  </>
+                ) : (
+                  <></>
+                )}
+              </p>
             </div>
           </div>
+          {memberId !== "" ? (
+            <div className="text-center">
+              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={route}>
+                Accept Request
+              </Button>
+            </div>
+          ) : (
+            <div className="text-center">
+              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
+                Send Request
+              </Button>
+            </div>
+          )}
+        </div>
+        <div>
         </div>
       </div>
     </div>
