@@ -30,6 +30,7 @@ import Rejection from "./pages/backend/dashboard/Rejection";
 import AdvancePayment from "./pages/backend/dashboard/AdvancePayment";
 import Contact from "./pages/frontend/Hompage-components/Contact";
 import BeforeApprovalTerms from "./pages/backend/dashboard/BeforeAprrovalTerms";
+import SchoolRegistration from "./pages/frontend/register-form/SchoolRegistration";
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -61,6 +62,8 @@ const Router = () => {
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />}/>
         <Route path="/shareride" element={<FrontendLayout children={<ShareRide />} />}></Route>
         <Route path="/beforeapprovalterms" element={<BackendLayout children={<BeforeApprovalTerms />} />}></Route>
+        <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
+        <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
         
         {userSignup && (
           <>
@@ -71,6 +74,7 @@ const Router = () => {
             <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
             <Route path="/verification" element={<FrontendLayout children={<Verification />} />}></Route>
             <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
+            <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
           </>
         )}
         {userLogin && (
@@ -88,6 +92,7 @@ const Router = () => {
               <Route path='/seatcostverification' element={<FrontendLayout children={<SeatCostVerification/>}/>}></Route>
               <Route path='/requestcarowner' element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
               <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
+              <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
             </>
           )}
           {!userLogin && <Route path="*" element={<Navigate to="/" />} />}

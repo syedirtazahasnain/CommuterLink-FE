@@ -17,10 +17,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 
-const RiderRegistration = () => {
+const SchoolRegistration = () => {
 
-  // const option0 = useSelector((s) => s.general.data.option0);
-  // console.log(option0);
   const backgroundStyle = {
     backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
     // backgroundSize: 'cover',
@@ -39,6 +37,8 @@ const RiderRegistration = () => {
   const mapLibraries = ["places"];
 
   const [isValidProfession, setIsValidProfession] = useState(true);
+  const [isValidUniversityName, setIsValidUniversityName] = useState(true);
+  const [isValidUniversityAddress, setIsValidUniversityAddress] = useState(true);
 
   const route = () => {
     navigate("/verification");
@@ -52,6 +52,7 @@ const RiderRegistration = () => {
   const AddNewEnd = () => {
     setAddNewEnd(true);
   };
+  
   function validateProfession(profession) {
     // A simple regular expression to match alphabetic characters and spaces
     const professionPattern = /^[A-Za-z\s]+$/;
@@ -62,6 +63,30 @@ const RiderRegistration = () => {
     const newProfession = e.target.value;
     setProfession(newProfession);
     setIsValidProfession(validateProfession(newProfession));
+  };
+
+  function validateUniversityName(name) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const universityPattern = /^[A-Za-z\s]+$/;
+
+    return universityPattern.test(name);
+  }
+  const handleUniversityNameChange = (e) => {
+    const newUniversityName = e.target.value;
+    setUniversityName(newUniversityName);
+    setIsValidUniversityName(validateUniversityName(newUniversityName));
+  };
+
+  function validateUniversityAddress(address) {
+    // A simple regular expression to match alphabetic characters and spaces
+    const universityPattern = /^[A-Za-z\s]+$/;
+
+    return universityPattern.test(address);
+  }
+  const handleUniversityAddressChange = (e) => {
+    const newUniversityAddress = e.target.value;
+    setUniversityAddress(newUniversityAddress);
+    setIsValidUniversityAddress(validateUniversityAddress(newUniversityAddress));
   };
 
   function validateCnic(cnic) {
@@ -105,6 +130,8 @@ const RiderRegistration = () => {
   const [cnicBackExt, setCnicBackExt] = useState("");
   const [picture, setPicture] = useState("");
   const [pictureExt, setPictureExt] = useState("");
+  const [universityName, setUniversityName] = useState("");
+  const [universityAddress, setUniversityAddress] = useState("");
 
   // For Start Point
   const [locationStartString, setLocationStartString] = useState("");
@@ -462,7 +489,8 @@ const RiderRegistration = () => {
       || daysSelected === "" || martialStatus === "" || cnic === "" || selectedDateFormat === ""
       || gender === "" || preferredGender === "" || preferredGender === "" || profession === ""
       || education === "" || cnicFrontExt === "" || cnicFront === "" || cnicBackExt === ""
-      || cnicBack === "" || pictureExt === "" || picture === "") {
+      || cnicBack === "" || pictureExt === "" ||  picture === "" 
+      || universityName === "" || universityAddress === "") {
       alert("Please Fill All Fields!");
     }
     else {
@@ -483,8 +511,8 @@ const RiderRegistration = () => {
       const body = {
         option: 0,
         user_type: 299,
-        university_name: null,
-        university_address: null,
+        university_name: universityName,
+        university_address: universityAddress,
         veh_option: 0,
         start_point: {
           city_id: cityStartId,
@@ -553,8 +581,8 @@ const RiderRegistration = () => {
         profession: profession,
         education: education,
         interests: null,
-        university_address: null,
-        university_name: null,
+        university_address: universityAddress,
+        university_name: universityName,
         user_type: 299
       }
       const response = await fetch(
@@ -1239,7 +1267,7 @@ const RiderRegistration = () => {
                   </Form.Group>
                 </Row>
                 <Row className="mb-3">
-                  <Form.Group as={Col} md="12" controlId="validationCustom01">
+                  <Form.Group as={Col} md="6" controlId="validationCustom01">
                     <Form.Label style={{ color: "#000" }}>CNIC</Form.Label>
 
                     <Form.Control
@@ -1255,6 +1283,21 @@ const RiderRegistration = () => {
                         Please enter a valid CNIC in the format 12345-1234567-1.
                       </div>
                     )}
+                  </Form.Group>
+                  <Form.Group
+                    controlId="formFile"
+                    as={Col}
+                    md="6"
+                    className="mb-3"
+                  >
+                    <Form.Label style={{ color: "#000" }}>
+                      Upload your picture
+                    </Form.Label>
+                    <Form.Control type="file" required onChange={handlePicture} />
+                    <Form.Text style={{ color: "#000" }}>
+                      The picture will only be shown to members with whom you
+                      agree to commute
+                    </Form.Text>
                   </Form.Group>
                 </Row>
                 <Row className="mb-3">
@@ -1285,21 +1328,42 @@ const RiderRegistration = () => {
                 </Row>
 
                 <Row className="mb-3">
-                  <Form.Group
-                    controlId="formFile"
-                    as={Col}
-                    md="12"
-                    className="mb-3"
-                  >
+                <Form.Group as={Col} md="6" controlId="validationCustom02">
                     <Form.Label style={{ color: "#000" }}>
-                      Upload your picture
+                      University Name
                     </Form.Label>
-                    <Form.Control type="file" required onChange={handlePicture} />
-                    <Form.Text className="text-success">
-                      The picture will only be shown to members with whom you
-                      agree to commute
-                    </Form.Text>
-                  </Form.Group>
+                    <Form.Control
+                      required
+                      type="text"
+                      className={` ${isValidUniversityName ? '' : 'is-invalid'}`}
+                      placeholder="Enter your university name"
+                      value={universityName}
+                      onChange={handleUniversityNameChange}
+                    />
+                    {!isValidUniversityName && (
+                      <div className="invalid-feedback">
+                        Please enter a valid university name.
+                      </div>
+                    )}
+                </Form.Group>
+                <Form.Group as={Col} md="6" controlId="validationCustom02">
+                    <Form.Label style={{ color: "#000" }}>
+                      University Address
+                    </Form.Label>
+                    <Form.Control
+                      required
+                      type="text"
+                      className={` ${isValidUniversityAddress ? '' : 'is-invalid'}`}
+                      placeholder="Enter your university address"
+                      value={universityAddress}
+                      onChange={handleUniversityAddressChange}
+                    />
+                    {!isValidUniversityAddress && (
+                      <div className="invalid-feedback">
+                        Please enter a valid university address.
+                      </div>
+                    )}
+                </Form.Group>
                 </Row>
 
                 <Stack
@@ -1327,4 +1391,4 @@ const RiderRegistration = () => {
   );
 };
 
-export default RiderRegistration;
+export default SchoolRegistration;

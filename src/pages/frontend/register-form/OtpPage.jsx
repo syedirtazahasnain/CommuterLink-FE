@@ -77,7 +77,7 @@ const OtpPage = () => {
         if(jsonresponse.statusCode == 200){
           console.log(jsonresponse);
           dispatch(setloginState(jsonresponse.access_token));
-          navigate("/nested");
+          navigate("/office_school");
         }
       } else {
         alert("Error: " + jsonresponse.message);

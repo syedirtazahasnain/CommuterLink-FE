@@ -60,7 +60,7 @@ function NumberGenerate() {
   
         if (jsonresponse.statusCode === 200) {
           dispatch(setloginState(jsonresponse.access_token));
-          navigate("/nested");
+          navigate("/office_school");
         } else {
           console.log(jsonresponse);
           alert("Error: " + jsonresponse.message);
