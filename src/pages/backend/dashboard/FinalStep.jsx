@@ -4,22 +4,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
-import Checkbox from "@mui/material/Checkbox"; 
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Form from "react-bootstrap/Form";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-const customTheme = createTheme({
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
   palette: {
     primary: {
-      main: "#ff4815",
-      contrastText: "white",
+      main: '#212121', // Change this to your desired dark color
     },
+    // ... Other palette options
   },
+  // Other styling options for different components
+  // ...
 });
-
 const backgroundLogo = {
   backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
   backgroundRepeat: "no-repeat",
@@ -77,12 +78,15 @@ const FinalStep = ({ children }) => {
              I wish to start commuting with your starting from:
             </p>
            <div>
+           <ThemeProvider theme={theme}>
+      <CssBaseline />
            <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
-        <DatePicker label="Select Starting Date" className="w-50" />
+        <DatePicker label="Select Starting Date" className="bg-white"  slotProps={{ textField: { size: "small" } }}
+                            sx={{ width: "100%", }}/>
       </DemoContainer>
     </LocalizationProvider>
-
+    </ThemeProvider>
            </div>
            <br/>
             <p>

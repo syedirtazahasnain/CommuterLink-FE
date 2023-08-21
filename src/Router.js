@@ -8,7 +8,6 @@ import OtpPage from "./pages/frontend/register-form/OtpPage";
 import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 import RiderRegistration from "./pages/frontend/register-form/RiderRegistration";
 import Verification from "./pages/frontend/Dashboard/Verification";
-// import Dashboard from './pages/frontend/Dashboard/Dashboard';
 import CommuterProfile from "./pages/frontend/Dashboard/CommuterProfile";
 import { useSelector } from "react-redux";
 import Faq from "./pages/frontend/faq/Faq";
@@ -35,6 +34,8 @@ import BeforeApprovalTerms from "./pages/backend/dashboard/BeforeAprrovalTerms";
 import PaymentRide from "./pages/backend/dashboard/PaymentRide";
 import PaymentOptions from "./pages/backend/dashboard/PaymentOptions";
 import FinalStep from "./pages/backend/dashboard/FinalStep";
+import SendApprovalForMember from "./pages/backend/dashboard/SendApprovalForMember";
+import Congratulations from "./pages/backend/dashboard/Congratulations";
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -134,6 +135,14 @@ const Router = () => {
              <Route
               path="/finalstep"
               element={<BackendLayout children={<FinalStep />} />}
+            ></Route>
+             <Route
+              path="/sendapprovalformember"
+              element={<BackendLayout children={<SendApprovalForMember />} />}
+            ></Route>
+             <Route
+              path="/congratulations"
+              element={<BackendLayout children={<Congratulations />} />}
             ></Route>
         {userSignup && (
           <>
