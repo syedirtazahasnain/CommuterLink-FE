@@ -238,11 +238,17 @@ const BackendLayout = ({ children }) => {
                       id="kt_app_sidebar_logo"
                       // style={backgroundLogo}
                     >
-                      <div className="container text-center">
+                      <div className="container text-center" id="kt_app_sidebar_logo">
                         <img
                           src={`${BASE_URL}/assets/images/CL-logo.png`}
-                          className="img-fluid"
+                          className="img-fluid app-sidebar-logo-default"
                           style={{ height: "50px", width: "auto" }}
+                          alt=""
+                        />
+                         <img
+                          src={`${BASE_URL}/assets/images/signup-3.png`}
+                          className="h-40px app-sidebar-logo-minimize img-fluid w-auto"
+                          // style={{ height: "50px", width: "auto" }}
                           alt=""
                         />
                       </div>

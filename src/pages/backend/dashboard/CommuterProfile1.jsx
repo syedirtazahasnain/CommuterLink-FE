@@ -29,7 +29,7 @@ const CommuterProfile1 = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/whyprocesspayment1");
+      navigate("/beforeapprovalterms");
     }
   };
 
@@ -67,20 +67,6 @@ const CommuterProfile1 = () => {
   const [carRegYear, setCarRegYear] = useState("");
   const [RegNo, setRegNo] = useState("");
   const [RegYear, setRegYear] = useState("");
-  const [requestType, setRequestType] = useState("");
-
-
-  useEffect(() => {
-    getDashboardData();
-    getMemberData();
-    if (contactId) {
-      getProfileData();
-    }
-  }, [contactId]);
-
-  useEffect(() => {
-    getMemberData();
-  }, []);
 
   const getDashboardData = async () => {
     try {
@@ -99,7 +85,6 @@ const CommuterProfile1 = () => {
       const jsonresponse = await response.json();
       if (jsonresponse.rider && jsonresponse.rider.length > 0) {
         setProfileType("Rider");
-        setRequestType("driver");
         setContactId(jsonresponse.rider[0].contact_id);
         setName(jsonresponse.rider[0].name);
         setImage(jsonresponse.rider[0].commuter_image);
@@ -115,7 +100,6 @@ const CommuterProfile1 = () => {
         setDays(jsonresponse.rider[0].days);
       } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
         setProfileType("Driver");
-        setRequestType("rider");
         setContactId(jsonresponse.drivers[0].contact_id);
         setName(jsonresponse.drivers[0].name);
         setImage(jsonresponse.drivers[0].commuter_image);
@@ -128,19 +112,6 @@ const CommuterProfile1 = () => {
         setDestination(jsonresponse.drivers[0].destination);
         setTimeDepart(jsonresponse.drivers[0].time_depart);
         setTimeReturn(jsonresponse.drivers[0].time_return);
-      } else {
-        setName("");
-        setImage("");
-        setGender("");
-        setAge("");
-        setProfession("");
-        setPreferredGender("");
-        setSeats("");
-        setOrigin("");
-        setDestination("");
-        setTimeDepart("");
-        setTimeReturn("");
-        setDays("");
       }
       console.log("Profile Data:", jsonresponse);
     } catch (error) {
@@ -175,18 +146,6 @@ const CommuterProfile1 = () => {
         setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
         setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
         setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
-      } else {
-        setDays("");
-        setPrice("");
-        setMobileNo("");
-        setSeatsLeft("");
-        setCarAC("");
-        setCarBrand("");
-        setCarCC("");
-        setCarModel("");
-        setCarRegYear("");
-        setRegNo("");
-        setRegYear("");
       }
       console.log("Driver Profile Data:", jsonresponse);
     } catch (error) {
@@ -222,19 +181,6 @@ const CommuterProfile1 = () => {
         setTimeDepart(jsonresponse.data[0].user[0].time_depart);
         setTimeReturn(jsonresponse.data[0].user[0].time_return);
         setDays(jsonresponse.data[0].user[0].days);
-      } else {
-        setProfileType("");
-        setMemberId("");
-        setName("");
-        setImage("");
-        setGender("");
-        setAge("");
-        setProfession("");
-        setOrigin("");
-        setDestination("");
-        setTimeDepart("");
-        setTimeReturn("");
-        setDays("");
       }
       console.log("Request Member Data:", jsonresponse);
     } catch (error) {
@@ -242,32 +188,22 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const sendRequest = async () => {
-    const body = {
-      reciever_contact_id: contactId,
-      request_type: requestType,
-      message: "Dear CL Member, CL have found us as matching xyz",
-      start_date: "2023-06-10",
-    };
+  useEffect(() => {
+    if (contactId) {
+      getProfileData();
+    }
+  }, [contactId]);
 
-    const response = await fetch(
-      "https://staging.commuterslink.com/api/v1/request",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': 'application/json',
-          Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify(body),
-      }
-    );
-    const jsonresponse = await response.json();
-    console.log("API Response", jsonresponse);
-    if (jsonresponse.statusCode == 200) {
-      navigate("/dashboard");
-    } else {
-      alert("Resend Error: " + jsonresponse.message);
+  useEffect(() => {
+    getDashboardData();
+    getMemberData();
+  }, []);
+
+  const sendRequest = () => {
+    setSubmit(true);
+
+    if (!submitbtn) {
+      navigate("/termscondition1");
     }
   };
 

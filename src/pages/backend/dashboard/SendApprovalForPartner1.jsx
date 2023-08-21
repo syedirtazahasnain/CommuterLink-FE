@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ThemeProvider, Tooltip, createTheme } from "@mui/material";
-//import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { setCurrentPage, setSidebarState } from "../../../redux/generalSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { setloginState } from "../../../redux/loginSlice";
+import { createTheme } from "@mui/material";
+import { useSelector } from "react-redux";
 import { BASE_URL } from "../../../constants";
-import Dashboard from "../../frontend/Dashboard/Dashboard";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/base";
+
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -23,31 +20,78 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const SendApprovalForPartner1 = ({ children }) => {
-  // const { instance } = useMsal();
+const SendApprovalForPartner1 = () => {
   const navigate = useNavigate();
-  const [submitbtn, setSubmit] = useState(false);
-  const dispatch = useDispatch();
-  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
-  const currentPage = useSelector((s) => s.general.currentPage);
-  const route = () => {
-    setSubmit(true);
-
-    if (!submitbtn) {
-      navigate("/commuter-profile");
-    }
-  };
+  const userToken = useSelector((s) => s.login.data.token);
+  const [contactId, setContactId] = useState("");
+  const [requestType, setRequestType] = useState("");
+ 
   useEffect(() => {
-    // dispatch(setCurrentPage(""));
+    getDashboardData();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-  const logout = () => {
-    dispatch(setloginState(""));
-    navigate("/login");
+
+  const getDashboardData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/matches/office",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
+        setRequestType("driver");
+        setContactId(jsonresponse.rider[0].contact_id);
+      } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
+        setRequestType("rider");
+        setContactId(jsonresponse.drivers[0].contact_id);
+      } else {
+        setContactId("");
+      }
+      console.log("Send Approval Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const sendRequest = async () => {
+    const body = {
+      reciever_contact_id: contactId,
+      request_type: requestType,
+      message: "Dear CL Member, CL have found us as matching xyz",
+      start_date: "2023-06-10",
+    };
+
+    const response = await fetch(
+      "https://staging.commuterslink.com/api/v1/request",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'Accept': 'application/json',
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    const jsonresponse = await response.json();
+    console.log("API Response", jsonresponse);
+    if (jsonresponse.statusCode == 200) {
+      navigate("/dashboard");
+    } else {
+      alert("Resend Error: " + jsonresponse.message);
+    }
   };
 
   return (
@@ -84,9 +128,9 @@ const SendApprovalForPartner1 = ({ children }) => {
               </p>
             </div>
             <div className="card-body bg-light" style={{ backgroundColor: "#D9D9D9E5" }}>
-              <button href="/" className=" btn_view1 btn-block ">
-                Send
-              </button>
+              <Button className=" btn_view1 btn-block" onClick={sendRequest}>
+                Send Request
+              </Button>
             </div>
           </div>
         </div>

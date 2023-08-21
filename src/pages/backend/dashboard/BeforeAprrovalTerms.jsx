@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/base";
+
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -22,14 +22,12 @@ const backgroundLogo = {
 const BeforeApprovalTerms = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
-  const dispatch = useDispatch();
-  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
-  const currentPage = useSelector((s) => s.general.currentPage);
+  
   const route = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/commuter-profile");
+       navigate("/whyprocesspayment1");
     }
   };
   useEffect(() => {
@@ -39,10 +37,6 @@ const BeforeApprovalTerms = () => {
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-  const logout = () => {
-    dispatch(setloginState(""));
-    navigate("/login");
-  };
 
   return (
     <div>
@@ -55,58 +49,53 @@ const BeforeApprovalTerms = () => {
       <div className="card p-4 bg-light p-2">
         <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
           <div className="card-body">
-            
-            <p>1.Your car is in a good shape and is roadworthy</p>
+
+            <p>1. The car offer will wait 15 mins after agreed time for you to join.</p>
             <p className="">
-              2. You are committed to provide the car for commuting of partners
-              on all days mentioned in the agreement
+              2. If due to anyunforeseen reason you cannot commute an a certain day, fee will be still be charged on
+              on your seat remains reserved for you.
             </p>
             <p>
-              3.If due to any unforeseen reason you cannot commute on certain
-              day, no fee will be paid for that day
-            </p>
-            <p>
-              4.You will inform the partners well in advance (atleast 12 hours)
+              3. You will inform the partners well in advance (atleast 12 hours)
               about your inability to cummute on a certain day. In case of an
               emergency this can be waived off under exceptional circumstances
             </p>
             <p>
-              5.You will be paid on daily basis for actual number of days that
-              your car is used
+              4. You will pay are month in advance. The money will remain in your
+              wallet and will be transferred to car owner on daily basis after confirmation
+              that the service was provided.
             </p>
             <p>
-              6.If a commuting partner misses the car and fails to commute due
-              to late arrival/time off you will still be paid for that day
+              5. You will charged on daily basis for actual number of days that you share
+              the car. No charges will be levied for public holidays or number of days
+              that the car owner does not turn up.
             </p>
             <p>
-              7. You will wait at least 15 minute after the agreed time for
-              commuting partner to join you.
+              6. You will update the scheduler in your dashboard on daily (as and when required
+              basis.)
             </p>
             <p>
-              8. You will update the scheduler in your dashboard on daily(as and
-              when required basis)
+              7. You will pay your share of fee through Commuterslink and there will be no direct
+              transaction between you and your commuting partner. (insert a llink here "why to
+              receive payment through commutersLink")
             </p>
             <p>
-              9. You will receive your share of fee through CommutersLink and
-              there will be no direct transaction between you and your commuting
-              partner
+              8. If you wish to discontinue your partnership with a memeber due a reason or other
+              CommutersLink will inform the partner an your behalf
             </p>
             <p>
-              10. If you wish to discontinue your partnership with a member due
-              a reason or other CommutersLink will inform the partner on your
-              behalf (insert alink here "why to receive payment through
-              commutersLink")
+              9. Any complaints, grievances will be addressed to CommutersLink for resolution.
             </p>
-            11. Any complaints, grievances will be addressed to CommutersLink
-            for resolution
+
+
           </div>
           <div className="text-center">
-            <button
-              to="/"
+            <Button
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              onClick={route}
             >
               I Accept
-            </button>
+            </Button>
           </div>
         </div>
       </div>

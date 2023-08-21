@@ -228,7 +228,8 @@ const DriverRegistration = () => {
   //console.log(locationEndString);
 
   useEffect(() => {
-    // Function to fetch the geocoding data
+    if(locationStartString){
+      // Function to fetch the geocoding data
     const getGeocodeStartData = async () => {
       try {
 
@@ -249,12 +250,13 @@ const DriverRegistration = () => {
         console.error('Error fetching geocoding data:', error);
       }
     };
-
-    getGeocodeStartData();
+    getGeocodeStartData();  
+  }
   }, [locationStartString]);
 
   useEffect(() => {
-    // Function to fetch the geocoding data
+    if(locationEndString){
+      // Function to fetch the geocoding data
     const getGeocodeEndData = async () => {
       try {
         const response = await fetch(
@@ -273,8 +275,8 @@ const DriverRegistration = () => {
         console.error('Error fetching geocoding data:', error);
       }
     };
-
-    getGeocodeEndData();
+    getGeocodeEndData();  
+  }
   }, [locationEndString]);
 
   const getdropdownStartdata = async () => {

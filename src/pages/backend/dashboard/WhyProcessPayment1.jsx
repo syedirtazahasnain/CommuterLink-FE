@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, ThemeProvider, Tooltip, createTheme } from "@mui/material";
-//import { useTranslation } from "react-i18next";
-import { setCurrentPage, setSidebarState } from "../../../redux/generalSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { setloginState } from "../../../redux/loginSlice";
+import { createTheme } from "@mui/material";
 import { BASE_URL } from "../../../constants";
-import Dashboard from "../../frontend/Dashboard/Dashboard";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/base";
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -23,31 +19,23 @@ const backgroundLogo = {
 };
 
 const WhyProcessPayment1 = () => {
-  // const { instance } = useMsal();
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
-  const dispatch = useDispatch();
-  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
-  const currentPage = useSelector((s) => s.general.currentPage);
+
   const route = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/commuter-profile");
+      navigate("/advancepayment");
     }
   };
   useEffect(() => {
-    // dispatch(setCurrentPage(""));
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-  const logout = () => {
-    dispatch(setloginState(""));
-    navigate("/login");
-  };
 
   return (
     <div>
@@ -113,7 +101,7 @@ const WhyProcessPayment1 = () => {
               </p>
             </div>
             <div className="card-body">
-              <Button className=" btn_view1 btn-block ">
+              <Button className=" btn_view1 btn-block" onClick={route}>
                 Next
               </Button>
             </div>

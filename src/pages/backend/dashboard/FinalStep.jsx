@@ -4,7 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/base";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Form from "react-bootstrap/Form";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -20,18 +26,17 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const TermsCondition1 = ({ children }) => {
+const FinalStep = ({ children }) => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const dispatch = useDispatch();
   const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
   const currentPage = useSelector((s) => s.general.currentPage);
-  
   const route = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/sendapprovalforpartner1");
+      navigate("/commuter-profile");
     }
   };
   useEffect(() => {
@@ -50,63 +55,55 @@ const TermsCondition1 = ({ children }) => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Terms And Conditions
+          FINAL STEP - YOU ARE RIGHT THERE!
         </h3>
+
       </div>
       <div className="card p-4 bg-light p-2">
         <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
           <div className="card-body">
-            <p>1.Your car is in a good shape and is roadworthy</p>
+
+            <h5>Dear XYZ</h5><br />
             <p className="">
-              2. You are committed to provide the car for commuting of partners
-              on all days mentioned in the agreement
+              Thank you very much for accepting me as a travel buddy to ride on your car.
+              I also think that we are a suitable match to commute together. so I also formally
+              give my consent to share you car.
             </p>
             <p>
-              3.If due to any unforeseen reason you cannot commute on certain
-              day, no fee will be paid for that day
+              I have deposited Rs. XXXX/- as advance with CommutersLink which will be credited
+              to your wallet on daily basis @ Rs 335/-.
             </p>
             <p>
-              4.You will inform the partners well in advance (atleast 12 hours)
-              about your inability to cummute on a certain day. In case of an
-              emergency this can be waived off under exceptional circumstances
+              I wish to start commuting with your starting from:
+            </p>
+            <div>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DatePicker']}>
+                  <DatePicker label="Select Starting Date" className="w-50" />
+                </DemoContainer>
+              </LocalizationProvider>
+
+            </div>
+            <br />
+            <p>
+              Looking forward to a long term association for mutual benefit.
             </p>
             <p>
-              5.You will be paid on daily basis for actual number of days that
-              your car is used
+              Best Regards
             </p>
             <p>
-              6.If a commuting partner misses the car and fails to commute due
-              to late arrival/time off you will still be paid for that day
+              hassan raza
             </p>
-            <p>
-              7. You will wait at least 15 minute after the agreed time for
-              commuting partner to join you.
-            </p>
-            <p>
-              8. You will update the scheduler in your dashboard on daily(as and
-              when required basis)
-            </p>
-            <p>
-              9. You will receive your share of fee through CommutersLink and
-              there will be no direct transaction between you and your commuting
-              partner
-            </p>
-            <p>
-              10. If you wish to discontinue your partnership with a member due
-              a reason or other CommutersLink will inform the partner on your
-              behalf (insert alink here "why to receive payment through
-              commutersLink")
-            </p>
-            11. Any complaints, grievances will be addressed to CommutersLink
-            for resolution
+
           </div>
+
           <div className="text-center">
-            <Button
+            <button
+              to="/"
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
-              onClick={route}
             >
-              I Accept
-            </Button>
+              Send
+            </button>
           </div>
         </div>
       </div>
@@ -114,4 +111,4 @@ const TermsCondition1 = ({ children }) => {
   );
 };
 
-export default TermsCondition1;
+export default FinalStep;

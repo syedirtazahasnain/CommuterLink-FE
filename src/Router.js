@@ -31,6 +31,9 @@ import AdvancePayment from "./pages/backend/dashboard/AdvancePayment";
 import Contact from "./pages/frontend/Hompage-components/Contact";
 import BeforeApprovalTerms from "./pages/backend/dashboard/BeforeAprrovalTerms";
 import SchoolRegistration from "./pages/frontend/register-form/SchoolRegistration";
+import PaymentRide from "./pages/backend/dashboard/PaymentRide";
+import PaymentOptions from "./pages/backend/dashboard/PaymentOptions";
+import FinalStep from "./pages/backend/dashboard/FinalStep";
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -65,6 +68,9 @@ const Router = () => {
         <Route path="/beforeapprovalterms" element={<BackendLayout children={<BeforeApprovalTerms />} />}></Route>
         <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
         <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
+        <Route path="/paymentride" element={<BackendLayout children={<PaymentRide />} />}></Route>
+        <Route path="/paymentoptions" element={<BackendLayout children={<PaymentOptions />} />}></Route>
+        <Route path="/finalstep" element={<BackendLayout children={<FinalStep />} />}></Route>
         
         {userSignup && (
           <>
