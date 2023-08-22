@@ -34,6 +34,8 @@ import SchoolRegistration from "./pages/frontend/register-form/SchoolRegistratio
 import PaymentRide from "./pages/backend/dashboard/PaymentRide";
 import PaymentOptions from "./pages/backend/dashboard/PaymentOptions";
 import FinalStep from "./pages/backend/dashboard/FinalStep";
+import SendApprovalForMember from "./pages/backend/dashboard/SendApprovalForMember";
+import Congratulations from "./pages/backend/dashboard/Congratulations";
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -71,6 +73,8 @@ const Router = () => {
         <Route path="/paymentride" element={<BackendLayout children={<PaymentRide />} />}></Route>
         <Route path="/paymentoptions" element={<BackendLayout children={<PaymentOptions />} />}></Route>
         <Route path="/finalstep" element={<BackendLayout children={<FinalStep />} />}></Route>
+        <Route path="/sendapprovalformember" element={<BackendLayout children={<SendApprovalForMember />} />}></Route>
+        <Route path="/congratulations" element={<BackendLayout children={<Congratulations />} />}></Route>
         
         {userSignup && (
           <>
