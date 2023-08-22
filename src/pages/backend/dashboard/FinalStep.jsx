@@ -108,7 +108,7 @@ const FinalStep = () => {
       const response = await fetch(
         "https://staging.commuterslink.com/api/v1/request",
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             'Accept': 'application/json',

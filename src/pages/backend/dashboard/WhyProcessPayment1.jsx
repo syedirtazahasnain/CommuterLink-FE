@@ -26,9 +26,10 @@ const WhyProcessPayment1 = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/finalstep");
+      navigate("/advancepayment");
     }
   };
+
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");

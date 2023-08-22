@@ -369,7 +369,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-user"></i>
+                                <i className="fa-solid fa-user"></i>
                               </span>
                               <span className="menu-title text-white">
                                 Profile
@@ -393,7 +393,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                              <i class="fa-solid fa-terminal"></i>
+                              <i className="fa-solid fa-terminal"></i>
                               </span>
                               <span className="menu-title text-white">
                                 Terms and Conditions
@@ -413,7 +413,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-bell"></i>
+                                <i className="fa-solid fa-bell"></i>
                               </span>
 
                               <span className="menu-title text-white">
@@ -434,7 +434,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                              <i class="fa-solid fa-address-card"></i>
+                              <i className="fa-solid fa-address-card"></i>
                               </span>
                               <span className="menu-title text-white">
                                 Contact Us
@@ -454,7 +454,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i class="fa-solid fa-phone"></i>
+                                <i className="fa-solid fa-phone"></i>
                               </span>
                               <span className="menu-title text-white">
                                 WhatsApp

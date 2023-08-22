@@ -3,8 +3,8 @@ import { createTheme } from "@mui/material";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Modal, Button } from "react-bootstrap";
-import Iframe from "react-iframe";
+import { Button } from "@mui/base";
+
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -23,26 +23,25 @@ const backgroundLogo = {
 const AdvancePayment = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
+  const [windowClosedManually, setWindowClosedManually] = useState(false);
   const [memberId, setMemberId] = useState("");
   const [userId, setUserId] = useState("");
   const [payment, setPayment] = useState("");
   const userToken = useSelector((s) => s.login.data.token);
-  const [showCardModal, setShowCardModal] = useState(false);
-  const [showJazzModal, setShowJazzModal] = useState(false);
-  const [paymentContent, setPaymentContent] = useState("");
   const paymentURL =`https://staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
 
   const route = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/commuter-profile");
+      navigate("/congratulations");
     }
   };
   
   useEffect(() => {
     getMemberData();
     getProfileData();
+    getPaymentSuccess();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
@@ -55,6 +54,20 @@ const AdvancePayment = () => {
       getPaymentDetails();
     }
   }, [memberId]);
+
+  useEffect(() => {
+    // Listen for the beforeunload event
+    const beforeUnloadHandler = () => {
+      setWindowClosedManually(true);
+    };
+
+    window.addEventListener("beforeunload", beforeUnloadHandler);
+
+    return () => {
+      // Clean up event listener when component unmounts
+      window.removeEventListener("beforeunload", beforeUnloadHandler);
+    };
+  }, []);
 
   const getProfileData = async () => {
     try{
@@ -127,17 +140,54 @@ const AdvancePayment = () => {
       console.error("An error occurred:", error);
     }
   };
+
+  const openAndCloseWindow = () => {
+    // Calculate the center position of the screen
+    const screenWidth = window.screen.availWidth;
+    const screenHeight = window.screen.availHeight;
+    const windowWidth = 800; // Width of the new window
+    const windowHeight = 600; // Height of the new window
+    const leftPosition = (screenWidth - windowWidth) / 2;
+    const topPosition = (screenHeight - windowHeight) / 2;
   
-  // Function to fetch content from the given URL
-  const fetchPaymentContent = (url) => {
+    // Open a new window at the center
+    const newWindow = window.open(
+      paymentURL,
+      "_blank",
+      `width=${windowWidth},height=${windowHeight},left=${leftPosition},top=${topPosition}`
+    );
+
+    // After opening, start checking if the new window is closed
+    const intervalId = setInterval(() => {
+      if (newWindow && newWindow.closed) {
+        clearInterval(intervalId);
+        };
+    }, 1000);
+  };
+  
+  const getPaymentSuccess = async () => {
     try {
-      const response = url;
-      const textContent = response;
-      setPaymentContent(textContent);
+      const response = await fetch(
+        `https://staging.commuterslink.com/api/v1/apppaymentinquiry`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if(jsonresponse.statusCode === 200){
+        setWindowClosedManually(true);
+      }
+      console.log("Payment Success Message:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
-  };
+  }
 
   return (
     <div>
@@ -170,10 +220,7 @@ const AdvancePayment = () => {
                       <div>
                         <button 
                           className="btn  text-success fw-bold fs-5 lh-1" 
-                          onClick={() => {
-                            setShowCardModal(true);
-                            fetchPaymentContent(paymentURL);
-                          }}
+                          onClick={openAndCloseWindow}
                         >
                           <span><i className="fa-solid fa-wallet text-success mx-2" /></span>
                           Credit/Debit Card
@@ -184,7 +231,8 @@ const AdvancePayment = () => {
                       <div>
                         <button 
                           className="btn btncol advancecolor text-success fw-bold fs-5 lh-1"
-                          onClick={() => setShowJazzModal(true)} >
+                          onClick={openAndCloseWindow} 
+                        >
                           <span><img
                             src={`${BASE_URL}/assets/images/jazz.png`}
                             className="card-img-top w-40px m-auto mx-4"
@@ -199,49 +247,19 @@ const AdvancePayment = () => {
             </div>
           </div>
           <div className="text-center">
-            <button
+            <Button
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
             >
               Skip Payment
-            </button>
+            </Button>
+            <Button
+              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2"
+              onClick={route}
+              disabled={!windowClosedManually}
+            >
+              Next
+            </Button>
           </div>
-          
-          {/* Credit/Debit Card Modal */}
-          <Modal show={showCardModal} onHide={() => setShowCardModal(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Credit/Debit Card Payment</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {/* Using <object> to embed content */}
-              <Iframe
-                url={paymentContent}
-                width="100%"
-                height="400px"
-                display="initial"
-                position="relative"
-              />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowCardModal(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
-          {/* Jazz Cash Modal */}
-          <Modal show={showJazzModal} onHide={() => setShowJazzModal(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Jazz Cash Payment</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-            {/* <pre>{paymentContent}</pre> */}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowJazzModal(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
         </div>
       </div>
     </div>
