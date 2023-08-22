@@ -48,27 +48,7 @@ const Congratulations = ({ children }) => {
         <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
           <div className="card-body">
          
-            {/* <h5>Dear XYZ</h5><br/>
-            <p className="">
-            Thank you for sending me the request for sharing my car.
-            </p>
-            <p>
-            Based upon your profile, I feel that we are a good match. I approve your request
-            to commute togeter.
-            </p>
-            <p>
-            Looking forward to sharing
-            </p>
           
-           <br/>
-           
-            <p>
-             Best Regards
-            </p>
-            <p>
-             hassan raza
-            </p>
-            */}
 <div className="text-center">
 <span><i className="fa-solid fa-thumbs-up text-warning"style={{ fontSize: '100px' }}></i></span>
 
