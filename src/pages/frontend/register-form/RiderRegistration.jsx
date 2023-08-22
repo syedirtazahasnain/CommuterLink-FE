@@ -228,7 +228,7 @@ const RiderRegistration = () => {
       }
     };
     getGeocodeStartData();
-  }, [locationStartString]);
+  }, [locationStartString, locationStartStringField]);
 
   useEffect(() => {
     // Function to fetch the geocoding data
@@ -251,7 +251,7 @@ const RiderRegistration = () => {
       }
     };
     getGeocodeEndData();
-  }, [locationEndString]);
+  }, [locationEndString, locationEndStringField]);
 
   const getdropdownStartdata = async () => {
     const response = await fetch(
@@ -452,23 +452,29 @@ const RiderRegistration = () => {
     setShowEndModal(false);
   };
 
+  const requiredFields = [
+    cityStartId, provinceStartId,
+    locationStartString, locationStartStringField, markerPositionStart,
+    cityEndId, provinceEndId,
+    locationEndString, locationEndStringField, markerPositionEnd,
+    selectedHomeTime, selectedOfficeTime, daysSelected,
+    martialStatus, cnic, selectedDateFormat,
+    gender, preferredGender, profession,
+    education, cnicFrontExt, cnicFront,
+    cnicBackExt, cnicBack, pictureExt, picture
+  ];
+
   const handleLogin = async () => {
-    if (cityStartId === "" || provinceStartId === "" || locationStartStringId === ""
-      || locationStartString === "" || markerPositionStart === "" || cityEndId === ""
-      || provinceEndId === "" || locationEndStringId === "" || locationEndString === ""
-      || markerPositionEnd === "" || selectedHomeTime === "" || selectedOfficeTime === ""
-      || daysSelected === "" || martialStatus === "" || cnic === "" || selectedDateFormat === ""
-      || gender === "" || preferredGender === "" || preferredGender === "" || profession === ""
-      || education === "" || cnicFrontExt === "" || cnicFront === "" || cnicBackExt === ""
-      || cnicBack === "" || pictureExt === "" || picture === "") {
-      alert("Please Fill All Fields!");
-    }
-    else {
+    if (requiredFields.every(field => field !== "" && field !== null && field !== undefined)) 
+    {
       await LocationForm();
       await PersonalForm();
       await ImagesFormCnicFront();
       await ImagesFormCnicBack();
       await ImagesFormPicture();
+    }
+    else {
+      alert("Please Fill All Fields!");
     }
   };
 
@@ -671,7 +677,7 @@ const RiderRegistration = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         console.log("Images Form Response Picture:", jsonresponse);
         alert("Registration Form Submitted Successfully");
         route();

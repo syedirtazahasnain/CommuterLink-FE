@@ -243,7 +243,7 @@ const DriverRegistration = () => {
       }
     };
     getGeocodeStartData();
-  }, [locationStartString]);
+  }, [locationStartString, locationStartStringField]);
 
   useEffect(() => {
     // Function to fetch the geocoding data
@@ -266,7 +266,7 @@ const DriverRegistration = () => {
       }
     };
     getGeocodeEndData();
-  }, [locationEndString]);
+  }, [locationEndString, locationEndStringField]);
 
   const getdropdownStartdata = async () => {
     const response = await fetch(
@@ -611,19 +611,31 @@ const DriverRegistration = () => {
   };
 
 
+  const requiredFieldsLogin = [
+    cityStartId, provinceStartId,
+    locationStartString, locationStartStringField, markerPositionStart,
+    cityEndId, provinceEndId,
+    locationEndString, locationEndStringField, markerPositionEnd,
+    selectedHomeTime, selectedOfficeTime, daysSelected,
+    martialStatus, cnic, selectedDateFormat,
+    gender, preferredGender, profession,
+    education, cnicFrontExt, cnicFront,
+    cnicBackExt, cnicBack, pictureExt, picture
+  ];
+
+  const requiredFieldsDriver = [
+    selectedCarBrand, selectedCarCC, selectedCarYearRanges,
+    selectedModelName, selectedRegYear, selectedRegNumber,
+    selectedManYear, selectedCarAC, selectedCarImage,
+    selectedCarImageExt, selectedSeat, selectedSeatGender,
+    selectedMidRoutePartner, selectedOneRoutePartner, inputDrivingLicenseMySelf,
+    inputValidUptoMySelf, inputPlaceIssueMySelf
+  ];
+
   const handleLogin = async () => {
-    if (cityStartId === "" || provinceStartId === "" || locationStartStringId === ""
-      || locationStartString === "" || markerPositionStart === "" || cityEndId === ""
-      || provinceEndId === "" || locationEndStringId === "" || locationEndString === ""
-      || markerPositionEnd === "" || selectedHomeTime === "" || selectedOfficeTime === ""
-      || daysSelected === "" || martialStatus === "" || cnic === "" || selectedDateFormat === ""
-      || gender === "" || preferredGender === "" || profession === ""
-      || education === "" || cnicFrontExt === "" || cnicFront === "" || cnicBackExt === ""
-      || cnicBack === "" || pictureExt === "" || picture === "")
-    {
+    if (requiredFieldsLogin.some(field => field === "" || field === null || field === undefined)) {
       alert("Please Fill All Fields!");
-    }
-    else {
+    } else {
       await LocationForm();
       await PersonalForm();
       await ImagesFormCnicFront();
@@ -634,48 +646,9 @@ const DriverRegistration = () => {
   };
 
   const handleDriver = async () => {
-    const body = {
-      option: 1,
-      car_brand: selectedCarBrand,
-      car_cc: selectedCarCC,
-      car_year_ranges: selectedCarYearRanges,
-      car_model: selectedModelName,
-      reg_year: selectedRegYear,
-      reg_no: selectedRegNumber,
-      manufac_year: selectedManYear,
-      car_ac: selectedCarAC,
-      car_image: selectedCarImage,
-      car_image_ext: selectedCarImageExt,
-      seats_available: selectedSeat,
-      seats_for: selectedSeatGender,
-      mid_route: selectedMidRoutePartner,
-      one_side: selectedOneRoutePartner,
-      drive_option: "Driver",
-      license_no: inputDrivingLicenseMySelf,
-      valid_upto: inputValidUptoMySelf,
-      place_issue: inputPlaceIssueMySelf,
-      driver_name: inputDriverName,
-      driver_cnic: inputDriverCnicNumber,
-      driver_license_no: inputDriverLicenseNumber,
-      driver_license_validity: inputDriverValidUpto,
-      driver_cnic_front_image: inputDriverCnicFront,
-      driver_cnic_back_image: inputDriverCnicBack,
-      driver_cnic_front_ext: inputDriverCnicFrontExt,
-      driver_cnic_back_ext: inputDriverCnicBackExt,
-      license_front_image: selectedImageLicenseFront,
-      license_back_image: selectedImageLicenseBack,
-      license_front_image_ext: selectedImageLicenseFrontExt,
-      license_back_image_ext: selectedImageLicenseBackExt
-    }
-    if (selectedCarBrand === "" || selectedCarCC === "" || selectedCarYearRanges === ""
-      || selectedModelName === "" || selectedRegYear === "" || selectedRegNumber === ""
-      || selectedManYear === "" || selectedCarAC === "" || selectedCarImage === ""
-      || selectedCarImageExt === "" || selectedSeat === "" || selectedSeatGender === ""
-      || selectedMidRoutePartner === "" || selectedOneRoutePartner === "" || inputDrivingLicenseMySelf === ""
-      || inputValidUptoMySelf === "" || inputPlaceIssueMySelf === "") {
+    if (requiredFieldsDriver.some(field => field === "" || field === null || field === undefined)) {
       alert("Please Fill All Driver Form Fields!");
-    }
-    else {
+    } else {
       await DriverForm();
       await PaymentForm();
     }
