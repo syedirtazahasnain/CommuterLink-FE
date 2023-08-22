@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../../../constants";
 import { Datepicker } from "@mobiscroll/react";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -109,7 +106,6 @@ const TravelConfirmation = () => {
             <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
               <div className="card-body">
            
-              {/* <p className="text-success text-center fs-5 fw-bold">After starting travelling with someone you will be able to confirm your date of travel</p> */}
               <div className="card p-4 bg-light p-2">
         <div className="card ">
         <div className="card-body text-success fw-bold" style={{backgroundColor: "rgb(229, 248, 243)"}}>

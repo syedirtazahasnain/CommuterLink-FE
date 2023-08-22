@@ -165,7 +165,7 @@ const OtpPage = () => {
     <div>
       <div>
         <section
-          id="sign-up"
+          id="otp"
           className="mt-5"
           style={{ backgroundColor: "#eee" }}
         >
@@ -295,25 +295,7 @@ const OtpPage = () => {
                           <span style={{ color: "#198754"}}>Resend</span>
                         </Link>
                       </div>
-                  {/* <Typography sx={{ fontSize: "14px" }}>
-                    {" "}
-                    <p className="text-center">
-                      Didn't get the code?
-                      <Button
-                        variant="text"
-                        onClick={resendOTP}
-                        style={{ color: "#198754" }}
-                        className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
-                      >
-                        Resend
-                      </Button>
-                      <Link to="/login"
-                         onClick={resendOTP}
-                         >
-                          <span style={{ color: "#198754", textDecoration:"none"}}>Resend</span>
-                        </Link>
-                    </p>{" "}
-                  </Typography> */}
+               
                 </Card>
               </div>
             </div>

@@ -285,7 +285,7 @@ const TravelPatners = () => {
                 <div className="row">
                   
                   <div className="col-sm-6">
-                    <div className="card">
+                    <div className="card h-100">
                       <div className="card-body-inner green-card">
                         <div className="d-flex flex-column">
                         <div
@@ -300,8 +300,8 @@ const TravelPatners = () => {
                                 </div>
                                 <div className="row d-flex justify-content-between ">
                                 <div className="col-md-3">
-                                  <i className=" p-3 fa-solid text-success fa-wallet"></i>
-                                  <button className="btn btn_view text-success d-flex justify-contnet-end">
+                                  <i className=" p-3 fa-solid text-success fa-wallet fs-2"></i>
+                                  <button className="btn btn_view text-success d-flex justify-contnet-baseline fs-2 py-5">
                                     Recharge
                                   </button>
                                 </div>
@@ -314,10 +314,10 @@ const TravelPatners = () => {
                                     }}
                                   >
                                     {" "}
-                                    <p className="py-3 text-center fw-bold text-success">
+                                    <p className="py-3 text-center fw-bold text-success fs-2">
                                       Rs.0/
                                     </p>
-                                    <button className="btn btn_view text-success d-flex justify-content-end">
+                                    <button className="btn btn_view text-success d-flex justify-content-end fs-2 py-5">
                                       View Transaction History
                                     </button>
                                   </div>
@@ -344,22 +344,61 @@ const TravelPatners = () => {
                                     COST PER SEAT PER DAY
                                   </h4>
                                 </div>
-                                <div className="row d-flex justify-content-center ">
+                                <div className="row">
                               
-                                <div className="col-md-6">
-                                  <div
-                                    className="card justify-content-center border-0 h-100"
-                                    // style={{
-                                    //   width: "6rem",
-                                    //   backgroundColor: "#D9D9D9",
-                                    // }}
-                                  >
+                                <div className="col-md-6 m-auto">
+                                  
                                     {" "}
-                                    <div className="card-body h-100 d-flex justify-content-center fw-bold text-success">
-                                      Rs.00000/
+                                    <div className="card-body  d-flex justify-content-between h-50 fw-bold text-success">
+                                    <div
+                          className="card bg-success"
+                          style={{ width: "4rem" }}
+                        >
+                          <img
+                            src={`${BASE_URL}/assets/images/Vector.png`}
+                            className="card-img-top w-40px m-auto"
+                          />
+
+                         
+                        
+                        </div>
+                        <h3 className="py-2">RS. 354/-</h3>
                                     </div>
-                                    
-                                  </div>
+                                    <div className="card-body  d-flex justify-content-between h-50 fw-bold text-success">
+                                    <div
+                         
+                         
+                        >
+                          
+<p className="text-dark">Daily Commuting Cost</p>
+                         
+                        
+                        </div>
+                        <p className="text-dark">RS. 346/-</p>
+                                    </div>
+                                    <div className="align-items-center">
+                                      <ol style={{ listStyleType: "disc"}}>
+                                        <li>Distance: 50km</li>
+                                        <li>Avg. Fuel consumption: 10km/Ltr</li>
+                                        <li>Fuel Price: Rs. 230/Ltr (Rs. 288/-)</li>
+                                        <li>Maintenance (10%): Rs.29/-</li>
+                                         <li>Wear & Tear (10%): Rs. 29/-</li>
+                                      </ol>
+                                      <div className="card-body  d-flex justify-content-between h-50 fw-bold ">
+                                    <div
+                         
+                         
+                        >
+                          
+<p className="text-dark">Add Services Charges(2.5%):</p>
+<p className="text-dark">Daily Received per seat:</p>               
+                        
+                        </div>
+                        <div><p className="text-dark">RS. 9/-</p>
+                        <p className="text-dark">RS. 335/-</p></div>
+                        
+                                    </div>
+                                    </div>
                                 </div>
                               </div>
                         </div>
