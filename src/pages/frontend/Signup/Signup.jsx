@@ -60,32 +60,34 @@ const Signup = () => {
 
 
   const handleSuccess = async (response) => {
-
-    if(response){
-      const profile = await fetch(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
+    try {
+      if (response && response.access_token) {
+        const profile = await fetch(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+            method: "get",
+          }
+        );
   
-        {
-          headers: {
-            Authorization: `Bearer ${response.access_token}`,
-          },
-          method: "get",
+        if (profile.ok) {
+          const userObject = await profile.json();
+          const googleuserdata = {
+            name: userObject.name,
+            email: userObject.email,
+            provider: "google",
+            // ... other properties
+          };
+          
+          await signupgoogledatapost(googleuserdata);
+        } else {
+          console.error("Profile request failed with status:", profile.status);
         }
-      );
-      // var userObject=jwt_decode(response.credential)
-      let userObject = await profile.json();
-      const googleuserdata = {
-        name: userObject.name,
-        email: userObject.email,
-        provider: "google",
-        provider_id:"DasD" + generateRandomOtp(0,1000000),
-        googletoken: response.access_token,
-        password: "jWaeo@123" + generateRandomPassword(),
-        otp: generateRandomOtp(0,1000000),
-        phone: "",
-      };
-      //dispatch(setsignupState(googleuserdata));
-      signupgoogledatapost(googleuserdata)
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
     }
   };
 
@@ -130,7 +132,7 @@ const Signup = () => {
         alert("Error: " + jsonresponse.message);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("Signup Error:", error.message);
     }
   };
 

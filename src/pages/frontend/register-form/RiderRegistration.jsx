@@ -206,53 +206,57 @@ const RiderRegistration = () => {
   //console.log(locationEndString);
 
   useEffect(() => {
-    // Function to fetch the geocoding data
-    const getGeocodeStartData = async () => {
-      try {
+    if (locationStartString) {
+      // Function to fetch the geocoding data
+      const getGeocodeStartData = async () => {
+        try {
 
-        const response = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-        );
+          const response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+          );
 
-        const data = await response.json(); // Parse the response as JSON
-        console.log(data);
-        if (data.status === 'OK' && data.results.length > 0) {
-          const { lat, lng } = data.results[0].geometry.location;
-          setDefaultStartCenter({ lat, lng });
-          setMarkerPositionStart({ lat, lng });
-        } else {
-          console.error('Geocoding API response error');
+          const data = await response.json(); // Parse the response as JSON
+          console.log(data);
+          if (data.status === 'OK' && data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry.location;
+            setDefaultStartCenter({ lat, lng });
+            setMarkerPositionStart({ lat, lng });
+          } else {
+            console.error('Geocoding API response error');
+          }
+        } catch (error) {
+          console.error('Error fetching geocoding data:', error);
         }
-      } catch (error) {
-        console.error('Error fetching geocoding data:', error);
-      }
-    };
+      };
 
-    getGeocodeStartData();
+      getGeocodeStartData();
+    }
   }, [locationStartString]);
 
   useEffect(() => {
-    // Function to fetch the geocoding data
-    const getGeocodeEndData = async () => {
-      try {
-        const response = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-        );
+    if (locationEndString) {
+      // Function to fetch the geocoding data
+      const getGeocodeEndData = async () => {
+        try {
+          const response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+          );
 
-        const data = await response.json(); // Parse the response as JSON
-        if (data.status === 'OK' && data.results.length > 0) {
-          const { lat, lng } = data.results[0].geometry.location;
-          setDefaultEndCenter({ lat, lng });
-          setMarkerPositionEnd({ lat, lng });
-        } else {
-          console.error('Geocoding API response error');
+          const data = await response.json(); // Parse the response as JSON
+          if (data.status === 'OK' && data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry.location;
+            setDefaultEndCenter({ lat, lng });
+            setMarkerPositionEnd({ lat, lng });
+          } else {
+            console.error('Geocoding API response error');
+          }
+        } catch (error) {
+          console.error('Error fetching geocoding data:', error);
         }
-      } catch (error) {
-        console.error('Error fetching geocoding data:', error);
-      }
-    };
+      };
 
-    getGeocodeEndData();
+      getGeocodeEndData();
+    }
   }, [locationEndString]);
 
   const getdropdownStartdata = async () => {

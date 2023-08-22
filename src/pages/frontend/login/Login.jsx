@@ -126,12 +126,12 @@ const Login = () => {
       setIsValidEmail(false);
     }
   };
+  
   const handleSuccess = async (response) => {
     try {
-      if(response){
+      if (response && response.access_token) {
         const profile = await fetch(
           "https://www.googleapis.com/oauth2/v3/userinfo",
-  
           {
             headers: {
               Authorization: `Bearer ${response.access_token}`,
@@ -139,42 +139,41 @@ const Login = () => {
             method: "get",
           }
         );
-        // var userObject=jwt_decode(response.credential)
-        let userObject = await profile.json();
-        const body = {
-          email: userObject.email,
-          // provider_id : "DasD8BjWaeoVDCq4",
-          provider:"google",
-        };
-        const res = await fetch(
-          "https://staging.commuterslink.com/api/v1/auth",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
+        
+        if (profile.ok) {
+          const userObject = await profile.json();
+          const body = {
+            email: userObject.email,
+            provider: "google",
+          };
+  
+          const res = await fetch(
+            "https://staging.commuterslink.com/api/v1/auth",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
+            }
+          );
+  
+          const jsonresponse = await res.json();
+  
+          if (jsonresponse.statusCode === 200) {
+            dispatch(setloginState(jsonresponse.access_token));
+          } else {
+            alert("Error: " + jsonresponse.message);
           }
-        );
-  
-        const jsonresponse = await res.json();
-  
-        if (jsonresponse.statusCode === 200) {
-          dispatch(setloginState(jsonresponse.access_token));
         } else {
-          alert("Error: " + jsonresponse.message);
+          console.error("Profile request failed with status:", profile.status);
         }
       }
     } catch (error) {
-      console.log(error.message);
+      console.error("Error:", error.message);
     }
   };
-  const Size = {
-    fonstSize: "14px",
-    marginBottom: "8px",
-    width: "350px",
-    margin: "auto",
-  };
+  
   return (
     <div>
       <div>

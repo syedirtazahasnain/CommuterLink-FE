@@ -26,7 +26,7 @@ const WhyProcessPayment1 = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/advancepayment");
+      navigate("/finalstep");
     }
   };
   useEffect(() => {

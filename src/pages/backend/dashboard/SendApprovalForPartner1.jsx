@@ -23,6 +23,7 @@ const backgroundLogo = {
 const SendApprovalForPartner1 = () => {
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
+  const [name, setName] = useState("");
   const [contactId, setContactId] = useState("");
   const [requestType, setRequestType] = useState("");
  
@@ -53,9 +54,11 @@ const SendApprovalForPartner1 = () => {
       if (jsonresponse.rider && jsonresponse.rider.length > 0) {
         setRequestType("driver");
         setContactId(jsonresponse.rider[0].contact_id);
+        setName(jsonresponse.rider[0].name);
       } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
         setRequestType("rider");
         setContactId(jsonresponse.drivers[0].contact_id);
+        setName(jsonresponse.drivers[0].name);
       } else {
         setContactId("");
       }
@@ -116,7 +119,7 @@ const SendApprovalForPartner1 = () => {
             style={{ border: "0" }}
           >
             <div className="card-body bg-light" style={{ backgroundColor: "" }}>
-              <h5>Dear Zafar Jamil,</h5>
+              <h5>Dear {name},</h5>
               <p className="">
                 I have gone through your profile and I feel that we are a good
                 match to commute together.
