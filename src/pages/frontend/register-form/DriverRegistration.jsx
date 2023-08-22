@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import { useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -228,8 +221,7 @@ const DriverRegistration = () => {
   //console.log(locationEndString);
 
   useEffect(() => {
-    if(locationStartString){
-      // Function to fetch the geocoding data
+    // Function to fetch the geocoding data
     const getGeocodeStartData = async () => {
       try {
 
@@ -250,13 +242,11 @@ const DriverRegistration = () => {
         console.error('Error fetching geocoding data:', error);
       }
     };
-    getGeocodeStartData();  
-  }
+    getGeocodeStartData();
   }, [locationStartString]);
 
   useEffect(() => {
-    if(locationEndString){
-      // Function to fetch the geocoding data
+    // Function to fetch the geocoding data
     const getGeocodeEndData = async () => {
       try {
         const response = await fetch(
@@ -275,8 +265,7 @@ const DriverRegistration = () => {
         console.error('Error fetching geocoding data:', error);
       }
     };
-    getGeocodeEndData();  
-  }
+    getGeocodeEndData();
   }, [locationEndString]);
 
   const getdropdownStartdata = async () => {
@@ -628,9 +617,10 @@ const DriverRegistration = () => {
       || provinceEndId === "" || locationEndStringId === "" || locationEndString === ""
       || markerPositionEnd === "" || selectedHomeTime === "" || selectedOfficeTime === ""
       || daysSelected === "" || martialStatus === "" || cnic === "" || selectedDateFormat === ""
-      || gender === "" || preferredGender === "" || preferredGender === "" || profession === ""
+      || gender === "" || preferredGender === "" || profession === ""
       || education === "" || cnicFrontExt === "" || cnicFront === "" || cnicBackExt === ""
-      || cnicBack === "" || pictureExt === "" || picture === "") {
+      || cnicBack === "" || pictureExt === "" || picture === "")
+    {
       alert("Please Fill All Fields!");
     }
     else {
@@ -644,12 +634,46 @@ const DriverRegistration = () => {
   };
 
   const handleDriver = async () => {
+    const body = {
+      option: 1,
+      car_brand: selectedCarBrand,
+      car_cc: selectedCarCC,
+      car_year_ranges: selectedCarYearRanges,
+      car_model: selectedModelName,
+      reg_year: selectedRegYear,
+      reg_no: selectedRegNumber,
+      manufac_year: selectedManYear,
+      car_ac: selectedCarAC,
+      car_image: selectedCarImage,
+      car_image_ext: selectedCarImageExt,
+      seats_available: selectedSeat,
+      seats_for: selectedSeatGender,
+      mid_route: selectedMidRoutePartner,
+      one_side: selectedOneRoutePartner,
+      drive_option: "Driver",
+      license_no: inputDrivingLicenseMySelf,
+      valid_upto: inputValidUptoMySelf,
+      place_issue: inputPlaceIssueMySelf,
+      driver_name: inputDriverName,
+      driver_cnic: inputDriverCnicNumber,
+      driver_license_no: inputDriverLicenseNumber,
+      driver_license_validity: inputDriverValidUpto,
+      driver_cnic_front_image: inputDriverCnicFront,
+      driver_cnic_back_image: inputDriverCnicBack,
+      driver_cnic_front_ext: inputDriverCnicFrontExt,
+      driver_cnic_back_ext: inputDriverCnicBackExt,
+      license_front_image: selectedImageLicenseFront,
+      license_back_image: selectedImageLicenseBack,
+      license_front_image_ext: selectedImageLicenseFrontExt,
+      license_back_image_ext: selectedImageLicenseBackExt
+    }
     if (selectedCarBrand === "" || selectedCarCC === "" || selectedCarYearRanges === ""
       || selectedModelName === "" || selectedRegYear === "" || selectedRegNumber === ""
       || selectedManYear === "" || selectedCarAC === "" || selectedCarImage === ""
       || selectedCarImageExt === "" || selectedSeat === "" || selectedSeatGender === ""
-      || selectedMidRoutePartner === "" || selectedOneRoutePartner === "") {
-      alert("Please Fill All Fields!");
+      || selectedMidRoutePartner === "" || selectedOneRoutePartner === "" || inputDrivingLicenseMySelf === ""
+      || inputValidUptoMySelf === "" || inputPlaceIssueMySelf === "") {
+      alert("Please Fill All Driver Form Fields!");
     }
     else {
       await DriverForm();
@@ -859,7 +883,6 @@ const DriverRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Picture:", jsonresponse);
         alert("Registration Form Submitted Successfully");
-        // route();
       } else {
         alert("Error: " + jsonresponse.message);
       }
@@ -932,10 +955,7 @@ const DriverRegistration = () => {
 
   const PaymentForm = async () => {
     try {
-      if(inputBankAccount === "" || inputEasyPaisa === "" || inputJazzCash === "" || inputRaastID === ""){
-        alert("Please Enter Payment Details!")
-      }
-      else if(inputBankAccount !== "" || inputEasyPaisa !== "" || inputJazzCash !== "" || inputRaastID !== ""){
+      if (inputBankAccount || inputEasyPaisa || inputJazzCash || inputRaastID) {
         const body = {
           option: 1,
           drive_option: "Driver",
@@ -956,11 +976,11 @@ const DriverRegistration = () => {
             body: JSON.stringify(body),
           }
         );
-  
+
         console.log("Payment Form Body:", body);
-  
+
         const jsonresponse = await response.json();
-  
+
         if (jsonresponse.statusCode == 200) {
           console.log("Payment Form Response:", jsonresponse);
           alert("Driver Form Submitted Successfully");
@@ -968,7 +988,10 @@ const DriverRegistration = () => {
         } else {
           alert("Error: " + jsonresponse.message);
         }
-      }  
+      }
+      else {
+        alert("Please Enter Payment Details!");
+      }
     } catch (error) {
       console.log(error.message);
     }
