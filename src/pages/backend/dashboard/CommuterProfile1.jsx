@@ -25,10 +25,42 @@ const CommuterProfile1 = () => {
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
 
-  const route = () => {
-    setSubmit(true);
+  const route = async () => {
 
-    if (!submitbtn) {
+    if(requestedAs === "rider"){      
+      const body = {
+        request_id: id,
+        message: "I accept your request",
+        status: 1
+      }
+
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/request",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+
+      const jsonresponse = await response.json();
+      console.log("API Response", jsonresponse);
+
+      if (jsonresponse.statusCode === 200) {
+        navigate("/dashboard");
+      } else {
+        alert("Resend Error: " + jsonresponse.message);
+      }
+    }
+    else if(requestedAs === "driver"){
       navigate("/beforeapprovalterms");
     }
   };
@@ -45,6 +77,8 @@ const CommuterProfile1 = () => {
   const [profileType, setProfileType] = useState("");
   const [contactId, setContactId] = useState("");
   const [memberId, setMemberId] = useState("");
+  const [id, setId] = useState("");
+  const [requestedAs, setRequestedAs] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [gender, setGender] = useState("");
@@ -202,6 +236,8 @@ const CommuterProfile1 = () => {
       if (jsonresponse.data && jsonresponse.data.length > 0) {
         setProfileType("Rider");
         setMemberId(jsonresponse.data[0].contact_id);
+        setId(jsonresponse.data[0].id);
+        setRequestedAs(jsonresponse.data[0].requested_as);
         setName(jsonresponse.data[0].user[0].name);
         setImage(jsonresponse.data[0].user[0].commuter_image);
         setGender(jsonresponse.data[0].user[0].gender);
