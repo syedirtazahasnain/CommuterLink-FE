@@ -613,9 +613,9 @@ const DriverRegistration = () => {
 
   const requiredFieldsLogin = [
     cityStartId, provinceStartId,
-    locationStartString, locationStartStringField, markerPositionStart,
+    locationStartString, markerPositionStart,
     cityEndId, provinceEndId,
-    locationEndString, locationEndStringField, markerPositionEnd,
+    locationEndString, markerPositionEnd,
     selectedHomeTime, selectedOfficeTime, daysSelected,
     martialStatus, cnic, selectedDateFormat,
     gender, preferredGender, profession,

@@ -454,15 +454,17 @@ const RiderRegistration = () => {
 
   const requiredFields = [
     cityStartId, provinceStartId,
-    locationStartString, locationStartStringField, markerPositionStart,
+    locationStartString, markerPositionStart,
     cityEndId, provinceEndId,
-    locationEndString, locationEndStringField, markerPositionEnd,
+    locationEndString, markerPositionEnd,
     selectedHomeTime, selectedOfficeTime, daysSelected,
     martialStatus, cnic, selectedDateFormat,
     gender, preferredGender, profession,
     education, cnicFrontExt, cnicFront,
     cnicBackExt, cnicBack, pictureExt, picture
   ];
+
+  console.log("required Fields:", requiredFields);
 
   const handleLogin = async () => {
     if (requiredFields.every(field => field !== "" && field !== null && field !== undefined)) 

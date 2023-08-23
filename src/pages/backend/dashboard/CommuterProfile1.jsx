@@ -121,33 +121,64 @@ const CommuterProfile1 = () => {
 
   const getProfileData = async () => {
     try {
-      const response = await fetch(
-        `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/driver`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
+      if(profileType === "Driver"){
+        const response = await fetch(
+          `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/driver`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
+  
+        const jsonresponse = await response.json();
+        if (jsonresponse.data && jsonresponse.data.length > 0) {
+          setDays(jsonresponse.data[0].days);
+          setPrice(jsonresponse.data[0].price);
+          setMobileNo(jsonresponse.data[0].mobile);
+          setSeatsLeft(jsonresponse.data[0].vehicle[0].seats_left);
+          setCarAC(jsonresponse.data[0].vehicle[0].car_ac);
+          setCarBrand(jsonresponse.data[0].vehicle[0].car_brand);
+          setCarCC(jsonresponse.data[0].vehicle[0].car_cc);
+          setCarModel(jsonresponse.data[0].vehicle[0].car_model);
+          setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
+          setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
+          setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
         }
-      );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse.data && jsonresponse.data.length > 0) {
-        setDays(jsonresponse.data[0].days);
-        setPrice(jsonresponse.data[0].price);
-        setMobileNo(jsonresponse.data[0].mobile);
-        setSeatsLeft(jsonresponse.data[0].vehicle[0].seats_left);
-        setCarAC(jsonresponse.data[0].vehicle[0].car_ac);
-        setCarBrand(jsonresponse.data[0].vehicle[0].car_brand);
-        setCarCC(jsonresponse.data[0].vehicle[0].car_cc);
-        setCarModel(jsonresponse.data[0].vehicle[0].car_model);
-        setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
-        setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
-        setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
+        console.log("Driver Profile Data:", jsonresponse);
       }
-      console.log("Driver Profile Data:", jsonresponse);
+      else if(profileType === "Rider"){
+        const response = await fetch(
+          `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/rider`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
+  
+        const jsonresponse = await response.json();
+        if (jsonresponse.data && jsonresponse.data.length > 0) {
+          setDays(jsonresponse.data[0].days);
+          setPrice(jsonresponse.data[0].price);
+          setMobileNo(jsonresponse.data[0].mobile);
+          setSeatsLeft(jsonresponse.data[0].vehicle[0].seats_left);
+          setCarAC(jsonresponse.data[0].vehicle[0].car_ac);
+          setCarBrand(jsonresponse.data[0].vehicle[0].car_brand);
+          setCarCC(jsonresponse.data[0].vehicle[0].car_cc);
+          setCarModel(jsonresponse.data[0].vehicle[0].car_model);
+          setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
+          setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
+          setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
+        }
+        console.log("Rider Profile Data:", jsonresponse);
+      }
     } catch (error) {
       console.error("An error occurred:", error);
     }

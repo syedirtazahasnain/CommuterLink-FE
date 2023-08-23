@@ -180,7 +180,7 @@ const AdvancePayment = () => {
       );
 
       const jsonresponse = await response.json();
-      if(jsonresponse.statusCode === 200){
+      if(jsonresponse.success === true){
         setWindowClosedManually(true);
       }
       console.log("Payment Success Message:", jsonresponse);
