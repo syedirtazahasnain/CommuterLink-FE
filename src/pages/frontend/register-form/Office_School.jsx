@@ -144,17 +144,21 @@ const Office_School = () => {
                                   <h5 className="text-success mb-4">
                                     I want to share ride for
                                   </h5>
-                                  <Button
+                               <div>   <Button
                                     variant="success"
-                                    className="btn-lg bg-success text-white  border-0 rounded rounded-4  mb-2"
+                                    className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
                                     onClick={officeRoute}
                                   >
                                     Office
-                                  </Button>
-                                  <p>Or</p>
+                                  </Button></div>
+                                  {/* <p className="py-3">Or</p> */}
+                                  <div className="py-2">
+                                    Or
+                                  </div>
+                                  <div>
                                   <Button
                                     variant="success"
-                                    className="btn-lg bg-success text-white border-0 rounded rounded-4"
+                                    className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
                                     onClick={schoolRoute}
                                   >
                                     School/University
@@ -162,9 +166,9 @@ const Office_School = () => {
                                 </div>
                                 <form id="numberForm">
                                   <div>
-                                    <p className="mt-2  fs-5 text-success cursor-pointer">
+                                    <h5 className="mt-2  fs-5 text-success cursor-pointer">
                                       On long term basis
-                                    </p>
+                                    </h5>
                                   </div>
                                 </form>
                               </div>
@@ -176,6 +180,7 @@ const Office_School = () => {
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </section>

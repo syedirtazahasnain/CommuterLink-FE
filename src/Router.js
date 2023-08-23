@@ -7,8 +7,9 @@ import WouldYouLikeTo from "./pages/frontend/register-form/WouldYouLikeTo";
 import OtpPage from "./pages/frontend/register-form/OtpPage";
 import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 import RiderRegistration from "./pages/frontend/register-form/RiderRegistration";
-import Verification from "./pages/frontend/Dashboard/Verification";
-import { useSelector } from "react-redux";
+import Verification from "./pages/frontend/register-form/Verification";
+import CommuterProfile from "./pages/frontend/Dashboard/CommuterProfile";
+import { useSelector } from "react-redux"; 
 import Faq from "./pages/frontend/faq/Faq";
 import Login from "./pages/frontend/login/Login";
 import SeatCostVerification from "./pages/frontend/register-form/SeatCostVerification";
@@ -61,7 +62,7 @@ const Router = () => {
         <Route path='/whyprocesspayment1' element={<BackendLayout children={<WhyProcessPayment1 />} />} />
         <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
         <Route path="/requestcarowner" element={<BackendLayout children={<RequestApprovalByCarOwner />} />}/>
-        <Route path="/rejection" element={<BackendLayout children={<Rejection />} />}/>
+        <Route path="/rejection" element={<BackendLayout childDashboard12ren={<Rejection />} />}/>
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />} />} />
         <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />}/>
         <Route path="/contact" element={<BackendLayout children={<Contact />} />}/>

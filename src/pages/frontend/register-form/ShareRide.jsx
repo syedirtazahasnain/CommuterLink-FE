@@ -31,7 +31,7 @@ const ShareRide = () => {
             {" "}
             <div className="row">
               <div
-                className="col-md-6 d-flex"
+                className="col-md-6 d-flex fixed"
                 style={{
                   marginTop: "12vh",
                 }}
@@ -80,11 +80,11 @@ const ShareRide = () => {
                
               
 
-              <div className="col-md-6   mb-2 text-center d-flex justify-content-center">
+              <div className="col-md-6 mb-3 py-5 text-center d-flex justify-content-center">
                 <Card
                   sx={{
                     marginTop: "10vh",
-                    maxWidth: "600px",
+                    maxWidth: "400px",
                     marginLeft: "5px",
                   }}
                 >
@@ -103,16 +103,7 @@ const ShareRide = () => {
                             <span className="ml-3" style={{color:'#198754'}}>University (Only if you are over 18 years)</span>
                           </label></div>
                           <div className="col-12 text-center">
-                      {/* onClick={() => setModalShow(true)} */}
-
-                      {/* <Button
-                        variant="outlined"
-                        type="submit"
-                        // onClick={validateOTP}
-                        className="btn btn-outline-custom"
-                      >
-                         <Link to="/Office">Next</Link>
-                      </Button> */}
+                  
                       <div className="mt-4"><Link to="/WouldYouLikeTo" className="btn btn-outline-custom">Next</Link></div>
                     </div>
                     </form>

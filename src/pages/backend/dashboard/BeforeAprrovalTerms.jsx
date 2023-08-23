@@ -45,7 +45,7 @@ const BeforeApprovalTerms = () => {
         <h3 className="card p-4 text-success my-2 fw-bold">
           Terms And Conditions
         </h3>
-        <h5 className="mx-4">BEFORE SENDING THE REQUEST ACCEPT TERMS</h5>
+        <h5 className="card px-4 p-2">BEFORE SENDING THE REQUEST ACCEPT TERMS</h5>
       </div>
       <div className="card p-4 bg-light p-2">
         <div className="card" style={{ backgroundColor: "#e5f8f3" }}>

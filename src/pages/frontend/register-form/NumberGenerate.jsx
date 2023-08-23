@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
+import { BASE_URL } from "../../../constants";
+import Carousel from "react-bootstrap/Carousel";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
@@ -85,10 +87,10 @@ function NumberGenerate() {
   };
   return (
     <div>
-      <div className="container py-5">
+      {/* <div className="container py-5">
         <div className="row pt-5 pb-4 justify-content-center mt-5 ">
           <div className="col-lg-4 col-md-4 col-sm-4">
-            {/* <img src={img} className='w-100 rounded-top'  alt="Sample photo"/> */}
+         
             <div
               className="card text-center border-1 border-success "
               style={{ borderRadius: "10px" }}
@@ -136,7 +138,115 @@ function NumberGenerate() {
             </div>
           </div>
         </div>
+      </div> */}
+
+
+
+<section id="sign-up" class="mt-5" style={{ backgroundColor: "#eee" }}>
+          <div className="container">
+            {" "}
+            <div className="row">
+              <div
+                className="col-md-6 d-flex"
+                style={{
+                  marginTop: "12vh"
+                }}
+              >
+               
+                  <Carousel
+                    style={{
+                      backgroundColor: "#eee",
+                    }}
+                    className="carousel-container"
+                    prevIcon={null}
+                    nextIcon={null}
+                    indicators={null}
+                  >
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+                  </Carousel>
+                {/* </div> */}
+              </div>
+         
+          <div className="col-md-5 mb-2 px-4 py-5"  style={{
+                  marginTop: "12vh"
+                }}>
+         
+            <div
+              className="card text-center border-1 border-success"
+              style={{ borderRadius: "10px" }}
+            >
+              <div
+                className="card-body cardpadding"
+                style={{ background: "rgb(218,233,229)", borderRadius: "10px" }}
+              >
+                <h5 className="card-title mb-3">
+                  Please Enter Your valid Phone No.
+                </h5>
+                <form id="numberForm">
+                  <Row className="mb-3 mt-2 px-2">
+                    <Form.Group as={Col} md="12" controlId="validationCustom01">
+                      <Form.Label className="d-flex justify-content-center mb-3 ">
+                        Number
+                      </Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        className="colorplace mb-3"
+                        placeholder="03XXXXXXXXX"
+                        onChange = { (e) => validatePhoneNumber(e.target.value)}
+                        defaultValue=""
+                        maxLength={11}
+                      />
+                      {isValidPhoneNumber && <span> Please enter a valid phone number </span>}
+                    </Form.Group>
+                  </Row>
+                  <div className="px-4 mb-3">
+                    {" "}
+                    <Button
+                      variant="success"
+                      className=""
+                      onClick={ () => submitForm()}
+                    >
+                      Submit
+                    </Button>{" "}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+              
+            
+        </section>
     </div>
   );
 }

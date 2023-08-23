@@ -15,9 +15,12 @@ const TravelConfirmation = () => {
   const [submitbtn, setSubmit] = useState(false);
   const [selectedDate, setSelectedDate] =useState(null);
   const[dialogOpen, setDialogOpen] =useState(false);
+
   const handleDateChange =(date)=>{
-      setSelectedDate(date);
+    if(!dialogOpen){
       setDialogOpen(true);
+      setSelectedDate(date);
+    }
   }
   const handleCloseDialog=()=>{
       setDialogOpen(false);
@@ -116,7 +119,8 @@ const TravelConfirmation = () => {
                     select="date"
                     display="inline" 
                    
-                    onChange={handleDateChange}
+                    onCellClick={handleDateChange}
+                    // onClick={handleDateChange}
                     
                 />
                                            <div className="row py-2">

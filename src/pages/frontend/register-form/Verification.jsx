@@ -5,6 +5,8 @@ import { setsignupState } from "../../../redux/signupSlice";
 import { setloginState } from "../../../redux/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import Carousel from "react-bootstrap/Carousel";
+
 
 const Verification = () => {
 
@@ -33,9 +35,63 @@ const Verification = () => {
   return (
 
     <div>
-      <div className="container py-5 ">
-        <div className="row justify-content-center pt-15 ">
-          <div className="col-lg-4 col-md-4 col-sm-4">
+
+
+<section id="sign-up" class="mt-5" style={{ backgroundColor: "#eee" }}>
+          <div className="container">
+            {" "}
+            <div className="row">
+              <div
+                className="col-md-6 d-flex fixed"
+                style={{
+                  marginTop: "20vh"
+                }}
+              >
+               
+                  <Carousel
+                    style={{
+                      backgroundColor: "#eee",
+                    }}
+                    className="carousel-container"
+                    prevIcon={null}
+                    nextIcon={null}
+                    indicators={null}
+                  >
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+                  </Carousel>
+                {/* </div> */}
+              </div>
+         
+            
+          <div className="col-lg-5 col-md-4 col-sm-4 pt-5 ">
             <div
               className="card text-center border-1 border-success rounded rounded-4"
             >
@@ -90,8 +146,17 @@ const Verification = () => {
               </div>
             </div>
           </div>
+       
+      
+        
+         
+       
+     
         </div>
       </div>
+              
+            
+        </section>
     </div>
   );
 };

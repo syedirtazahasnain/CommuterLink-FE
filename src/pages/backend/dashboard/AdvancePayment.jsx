@@ -222,7 +222,7 @@ const AdvancePayment = () => {
                           className="btn  text-success fw-bold fs-5 lh-1" 
                           onClick={openAndCloseWindow}
                         >
-                          <span><i className="fa-solid fa-wallet text-success mx-2" /></span>
+                          <span><i className="fa-solid fs-3 fa-wallet text-success mx-2" /></span>
                           Credit/Debit Card
                         </button>
                       </div>

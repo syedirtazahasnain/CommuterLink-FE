@@ -50,7 +50,7 @@ const PaymentOptions = ({ children }) => {
         <h3 className="card p-4 text-success my-2 fw-bold">
           Min. Payment Due: Rs 5,310/- 
         </h3>
-        <p className="mx-4">(15 Days Advance Rs 354/-)&nbsp (Commuter Charges + 2.5% Service Charges)</p>
+        <h5 className="card p-2 px-4 text-success">(15 Days Advance Rs 354/-)&nbsp (Commuter Charges + 2.5% Service Charges)</h5>
       </div>
       <div className="card p-4  p-2">
         <div className="card" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
@@ -76,7 +76,7 @@ const PaymentOptions = ({ children }) => {
                     <div>
                     <button className="btn  text-success fw-bold fs-5 lh-1">
                     <span>
-                    <i class="fa-solid fa-building-columns text-success mx-2"></i></span>
+                    <i className="fa-solid fa-building-columns fs-4 text-success mx-2"></i></span>
                     ONLINE BANK TRANSFER
                   </button>
                         </div>
@@ -89,7 +89,7 @@ const PaymentOptions = ({ children }) => {
                               src={`${BASE_URL}/assets/images/jazz.png`}
                               className="card-img-top w-40px m-auto mx-4"
                             /> */}
-                            <i class="fa-solid fa-credit-card text-success mx-2"></i>
+                            <i className="fa-solid fa-credit-card text-success mx-2 fs-4"></i>
                             </span>
                     CREDIT/DEBIT CARD
                   </button>
@@ -104,7 +104,7 @@ const PaymentOptions = ({ children }) => {
           </div>
 <div className="row">
     <div className="col justify-content-center d-flex justify-content-center mb-3 p-2">
-    <img src={`${BASE_URL}/assets/images/ep.png`}></img>
+    <img  src={`${BASE_URL}/assets/images/ep.png`}></img>
     <img src={`${BASE_URL}/assets/images/jazz.png`}></img>
     <img src={`${BASE_URL}/assets/images/raast.png`}></img>
     <img src={`${BASE_URL}/assets/images/iban.png`}></img>
