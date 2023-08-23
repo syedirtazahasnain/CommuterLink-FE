@@ -1,9 +1,22 @@
-import React, { useRef } from "react";
+import React from "react";
 import { BASE_URL } from "../../../constants";
 import { Link } from "react-scroll";
-import { Link as DomLink } from "react-router-dom";
+import { Link as DomLink, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 const Navbar = () => {
+
+  const navigate = useNavigate();
+
+  const signupRoute = () => {
+    navigate("/signup");
+
+  };
+
+  const loginRoute = () => {
+    navigate("/login");
+
+  };
+
   return (
     <div>
       <div className="container ">
@@ -73,26 +86,20 @@ const Navbar = () => {
                     </Link>
                   </li>
                 </ul>
-                <DomLink
-                  to="/signup"
+                  
+                <Button
+                  className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                  onClick={signupRoute}
                 >
-                  <Button
-                    className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
-                  >
-                    Sign up
-                  </Button>
-            
-                </DomLink>
-                <DomLink
-                  to="/login"
-                >
+                  Sign up
+                </Button>
 
-                  <Button
-                    className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
-                  >
-                    Login
-                  </Button>
-                </DomLink>
+                <Button
+                  className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                  onClick={loginRoute}
+                >
+                  Login
+                </Button>
               </div>
             </nav>
           </div>
