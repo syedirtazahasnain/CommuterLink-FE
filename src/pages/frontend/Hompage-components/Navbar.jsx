@@ -60,17 +60,17 @@ const Navbar = () => {
                     </DomLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="carousel" spy="true" smooth="true" offset={30} duration={100}>
+                    <Link className="nav-link mr-3 ml-3" to="carousel" smooth="true" offset={30} duration={100}>
                       CONCEPT
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="howworks">
+                    <Link className="nav-link mr-3 ml-3" to="howworks" offset={30} duration={100}>
                       HOW IT WORKS?
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="contribute" spy="true" smooth="true" offset={30} duration={100}>
+                    <Link className="nav-link mr-3 ml-3" to="contribute" smooth="true" offset={30} duration={100}>
                       CONTRIBUTE
                     </Link>
                    
@@ -81,7 +81,7 @@ const Navbar = () => {
                     </DomLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="contact" spy="true" smooth="true" offset={30} duration={100}>
+                    <Link className="nav-link mr-3 ml-3" to="contact" smooth="true" offset={30} duration={100}>
                       CONTACT
                     </Link>
                   </li>

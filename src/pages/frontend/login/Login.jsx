@@ -177,7 +177,7 @@ const Login = () => {
   return (
     <div>
       <div>
-        <section id="sign-up" class="mt-5" style={{ backgroundColor: "#eee" }}>
+        <section id="sign-up" className="mt-5" style={{ backgroundColor: "#eee" }}>
           <div className="container">
             {" "}
             <div className="row">
