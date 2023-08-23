@@ -548,3 +548,16 @@ a.nav-link:hover {
 .advancecolor{
   background-color: 'rgb(217,217,217)';
 }
+.hero{
+  width:100%;
+  min-height: 100vh;
+  /* background: linear-gradient(45deg,#1d0000, #20205b); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calendar{
+  width: 500px;
+  height: 250px;
+  background: #fff;
+}

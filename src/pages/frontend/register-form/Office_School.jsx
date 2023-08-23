@@ -1,33 +1,43 @@
-import React from 'react'
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+// import Button from "react-bootstrap/Button";
 import { BASE_URL } from "../../../constants";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
-import { Button } from '@mui/base';
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Button } from "@mui/base";
 
 const Office_School = () => {
-
+  const backgroundLogo = {
+    backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
+    backgroundRepeat: "no-repeat",
+    backgroundColor: "white",
+  };
   const backgroundStyle = {
     backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
     // backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    width: '100',
-    height: '20vh'
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    width: "100",
+    height: "20vh",
   };
 
   const name = useSelector((s) => s.login.data.name);
   const email = useSelector((s) => s.login.data.email);
   const navigate = useNavigate();
 
-   const schoolRoute = () => {
+  const schoolRoute = () => {
     navigate("/school-form");
-   };
+  };
 
-   const officeRoute = () => {
+  const officeRoute = () => {
     navigate("/nested");
-   };
+  };
 
   return (
     <div>
@@ -40,82 +50,63 @@ const Office_School = () => {
           <div className="container">
             <div className="row">
               <div
-                className="col-md-6"
+                className="col-md-6 d-flex fixed"
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "10vh",
-                }}
-              > <div
-                className="col-md-6"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "10vh",
+                  marginTop: "12vh",
                 }}
               >
-                  <Carousel
-                    style={{
-                      backgroundColor: "#eee",
-                    }}
-                    className="carousel-container"
-                    prevIcon={null}
-                    nextIcon={null}
-                    indicators={null}
-                  >
-                    <Carousel.Item interval={2001}>
-                      <img
-                        className="Carousel_image img-fluid w-100"
-                        src={`${BASE_URL}/assets/images/signup.png`}
-                        alt="First slide"
-                      />
-                    </Carousel.Item>
+                <Carousel
+                  style={{
+                    backgroundColor: "#eee",
+                  }}
+                  className="carousel-container"
+                  prevIcon={null}
+                  nextIcon={null}
+                  indicators={null}
+                >
+                  <Carousel.Item interval={2000}>
+                    <img
+                      className="d-block"
+                      src={`${BASE_URL}/assets/images/signup.png`}
+                      alt="First slide"
+                    />
+                  </Carousel.Item>
 
-                    <Carousel.Item interval={2000}>
-                      <img
-                        className="Carousel_image img-fluid w-100"
-                        src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="second slide"
-                      />
-                    </Carousel.Item>
+                  <Carousel.Item interval={2000}>
+                    <img
+                      className="d-block"
+                      src={`${BASE_URL}/assets/images/signup-3.png`}
+                      alt="Second slide"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item interval={2000}>
+                    <img
+                      className="d-block"
+                      src={`${BASE_URL}/assets/images/signup-4.png`}
+                      alt="Third slide"
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item interval={2000}>
+                    <img
+                      className="d-block"
+                      src={`${BASE_URL}/assets/images/signup-6.png`}
+                      alt="Forth slide"
+                    />
+                  </Carousel.Item>
+                </Carousel>
+              </div>
 
-                    <Carousel.Item interval={2003}>
-                      <img
-                        className="Carousel_image img-fluid  w-100"
-                        src={`${BASE_URL}/assets/images/signup-4.png`}
-                        alt="third slide"
-                      />
-                    </Carousel.Item>
-                    <Carousel.Item interval={2004}>
-                      <img
-                        className="Carousel_image img-fluid  w-100"
-                        src={`${BASE_URL}/assets/images/signup-6.png`}
-                        alt="Fourth slide"
-                      />
-                    </Carousel.Item>
-                  </Carousel>
-                </div></div>
-
-              <div className="col-md-6 text-center d-flex justify-content-center">
-
+              <div className="col-md-6   mb-2 text-center d-flex justify-content-center">
                 <div className="container">
-                  <div className="row justify-content-center pt-8">
-                    <div className="col-lg-8">
-                      <div
-                        className="card text-center border-1 border-success rounded rounded-4"
-                      >
-                        <div className="container">
-                          <div className="row">
-                            <div className="col px-4">
-                              <div style={backgroundStyle}></div>
-                            </div>
-                          </div>
-                        </div>
+                  <div className="row justify-content-center py-15 my-4">
+                    <div className="col-10">
+                      <div className="card text-center border-0 shadow rounded rounded-4">
                         <div className="container">
                           <div className="row">
                             <div className="col">
                               <div
-                                className="card-body cardpadding bg-light mb-5 py-5 rounded rounded-4"
+                                className="card-body rounded rounded-4"
+                              //   style={{ background: "rgb(22,70,57)" }}
                               >
                                 <div>
                                   <div>
@@ -124,12 +115,24 @@ const Office_School = () => {
                                       src={`${BASE_URL}/assets/images/Vector.png`}
                                       alt="Sample photo"
                                       className="bg-success"
-                                      style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '60%' }}
+                                      style={{
+                                        width: "100px",
+                                        height: "100px",
+                                        objectFit: "cover",
+                                        borderRadius: "50%",
+                                      }}
                                     />
                                   </div>
-                                  <div className="text-white">{name}<br />{email}</div>
-                                  <h5 className="card-title mt-4 text-success" style={{ color: "yellow" }}>
-                                    Full Name
+                                  <div className="text-white">
+                                    {name}
+                                    <br />
+                                    {email}
+                                  </div>
+                                  <h5
+                                    className="card-title mt-4 text-success"
+                                    style={{ color: "yellow" }}
+                                  >
+                                    FullName
                                   </h5>
                                   {name ?
                                     (<p>{name}</p>)
@@ -137,17 +140,31 @@ const Office_School = () => {
                                     (<></>)
                                   }
                                 </div>
-                                <div>
-                                  <h5 className="text-success mt-3">I want to share ride for</h5>
-                                  <Button variant="success" className="btn-lg btn-success mt-3" onClick={officeRoute}>Office</Button>
+                                <div className="">
+                                  <h5 className="text-success mb-4">
+                                    I want to share ride for
+                                  </h5>
+                                  <Button
+                                    variant="success"
+                                    className="btn-lg bg-success text-white  border-0 rounded rounded-4  mb-2"
+                                    onClick={officeRoute}
+                                  >
+                                    Office
+                                  </Button>
+                                  <p>Or</p>
+                                  <Button
+                                    variant="success"
+                                    className="btn-lg bg-success text-white border-0 rounded rounded-4"
+                                    onClick={schoolRoute}
+                                  >
+                                    School/University
+                                  </Button>
                                 </div>
-                                <p className="mt-3">Or</p>
-                                <Button variant="success" className="btn-lg btn-success mb-1" onClick={schoolRoute}>School/University</Button>
                                 <form id="numberForm">
-                                  <div className="mb-3">
-                                    <div>
-                                      <p className="py-3 text-success">On long term basis</p>
-                                    </div>
+                                  <div>
+                                    <p className="mt-2  fs-5 text-success cursor-pointer">
+                                      On long term basis
+                                    </p>
                                   </div>
                                 </form>
                               </div>
@@ -164,7 +181,7 @@ const Office_School = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Office_School;

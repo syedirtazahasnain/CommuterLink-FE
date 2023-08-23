@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../../../constants";
+import { Datepicker } from "@mobiscroll/react";
+import "@mobiscroll/react/dist/css/mobiscroll.min.css";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -7,7 +13,15 @@ const TravelConfirmation = () => {
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn, setSubmit] = useState(false);
-
+  const [selectedDate, setSelectedDate] =useState(null);
+  const[dialogOpen, setDialogOpen] =useState(false);
+  const handleDateChange =(date)=>{
+      setSelectedDate(date);
+      setDialogOpen(true);
+  }
+  const handleCloseDialog=()=>{
+      setDialogOpen(false);
+  }
   // For Dashboard Data
   const [contactId, setContactId] = useState("");
 
@@ -92,12 +106,78 @@ const TravelConfirmation = () => {
             <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
               <div className="card-body">
            
-              <p className="text-success text-center fs-5 fw-bold">After starting travelling with someone you will be able to confirm your date of travel</p>
+              <div className="card p-4 bg-light p-2">
+        <div className="card ">
+        <div className="card-body text-success fw-bold" style={{backgroundColor: "rgb(229, 248, 243)"}}>
+              <div className="container">
+                <Datepicker
+                    calendarType="week"
+                    calendarSize={1} 
+                    select="date"
+                    display="inline" 
+                   
+                    onChange={handleDateChange}
+                    
+                />
+                                           <div className="row py-2">
+    <p className="text-dark text-right">No of Days Travelled 0</p>
+    <p className="btn fs-5 text-success text-right"> View Full History</p>
+</div>
+              </div>
+             
+            </div>
+        </div>
+      </div>
+      <Dialog open={dialogOpen} onClose={handleCloseDialog}>
+        <DialogTitle>Select Any Options</DialogTitle>
+        <DialogContent>
+        
+        </DialogContent>
+      
+          <div className="container text-center px-2">
+                 <div className="row px-2">
+                 <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
+                    <div>
+                    <button className="btn  text-success fw-bold fs-5 lh-1">
+                    <span>
+                   
+                    <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
+                    </span>
+                    Travelled
+                  </button>
+                        </div>
+                    <div>
+                    <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
+                    <span>
+
+                            <i class="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
+                            </span>
+                    Not Travelled
+                  </button>
+                        </div>
+                        <div>
+                    <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
+                    <span>
+                       
+                            <i class="fa-solid fa-car text-danger mx-1 fs-2" ></i>
+                            </span>
+                    Driver Didn't Come
+                  </button>
+                        </div>
+                    </div>
+
+                 </div>
+                </div>
+        
+        <DialogActions>
+          <Button className="text-dark" onClick={handleCloseDialog}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
+               
                 <div></div>
               </div>
             </div>
-          {/* <div className="container">
-          </div> */}
+        
         </div>
       </div>
     </div>
