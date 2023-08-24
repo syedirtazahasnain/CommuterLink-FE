@@ -394,7 +394,7 @@ const RiderRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setCnicFront(reader.result);
+        setCnicFront(reader.result.split(",")[1]);
         setCnicFrontExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -409,7 +409,7 @@ const RiderRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setCnicBack(reader.result);
+        setCnicBack(reader.result.split(",")[1]);
         setCnicBackExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -424,7 +424,7 @@ const RiderRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setPicture(reader.result);
+        setPicture(reader.result.split(",")[1]);
         setPictureExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);

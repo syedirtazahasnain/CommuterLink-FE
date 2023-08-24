@@ -442,7 +442,7 @@ const DriverRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setCnicFront(reader.result);
+        setCnicFront(reader.result.split(",")[1]);
         setCnicFrontExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -457,7 +457,7 @@ const DriverRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setCnicBack(reader.result);
+        setCnicBack(reader.result.split(",")[1]);
         setCnicBackExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -472,7 +472,7 @@ const DriverRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setPicture(reader.result);
+        setPicture(reader.result.split(",")[1]);
         setPictureExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -487,7 +487,7 @@ const DriverRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setInputDriverCnicFront(reader.result);
+        setInputDriverCnicFront(reader.result.split(",")[1]);
         setInputDriverCnicFrontExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -499,7 +499,7 @@ const DriverRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setInputDriverCnicBack(reader.result);
+        setInputDriverCnicBack(reader.result.split(",")[1]);
         setInputDriverCnicBackExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -511,7 +511,7 @@ const DriverRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImageLicenseFront(reader.result);
+        setSelectedImageLicenseFront(reader.result.split(",")[1]);
         setSelectedImageLicenseFrontExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -523,7 +523,7 @@ const DriverRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImageLicenseBackExt(reader.result);
+        setSelectedImageLicenseBackExt(reader.result.split(",")[1]);
         setSelectedImageLicenseBackExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -535,7 +535,7 @@ const DriverRegistration = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedCarImage(reader.result);
+        setSelectedCarImage(reader.result.split(",")[1]);
         setSelectedCarImageExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
@@ -2381,7 +2381,7 @@ const DriverRegistration = () => {
                       spacing={2}
                       style={{ justifyContent: "right" }}
                     >
-                      <Button
+                      {/* <Button
                         variant=""
                         className="btnregistration"
                         onClick={() => {
@@ -2390,7 +2390,7 @@ const DriverRegistration = () => {
                         }}
                       >
                         Previous
-                      </Button>
+                      </Button> */}
                       <Button variant="" className="btnregistration" onClick={handleDriver}>
                         Submit
                       </Button>

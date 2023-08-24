@@ -27,6 +27,7 @@ const AdvancePayment = () => {
   const [memberId, setMemberId] = useState("");
   const [userId, setUserId] = useState("");
   const [payment, setPayment] = useState("");
+  const [profileType, setProfileType] = useState("");
   const userToken = useSelector((s) => s.login.data.token);
   const paymentURL =`https://staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
 
@@ -39,6 +40,7 @@ const AdvancePayment = () => {
   };
   
   useEffect(() => {
+    getDashboardData();
     getMemberData();
     getProfileData();
     getPaymentSuccess();
@@ -68,6 +70,31 @@ const AdvancePayment = () => {
       window.removeEventListener("beforeunload", beforeUnloadHandler);
     };
   }, []);
+
+  const getDashboardData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/matches/office",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+       if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
+        setProfileType("Driver");
+        setMemberId(jsonresponse.drivers[0].contact_id);
+      }
+      console.log("Advance Payment Contact Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   const getProfileData = async () => {
     try{
@@ -109,7 +136,12 @@ const AdvancePayment = () => {
 
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
-        setMemberId(jsonresponse.data[0].contact_id);
+        if(profileType === "Driver"){
+          setMemberId("");
+        }
+        else{
+          setMemberId(jsonresponse.data[0].contact_id);
+        }
       }
       console.log("Advance Payment Data:", jsonresponse);
     } catch (error) {
