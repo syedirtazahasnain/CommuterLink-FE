@@ -142,8 +142,7 @@ const CommuterLinkSuggestions = () => {
                               {requestStatus === "yes" ? (
                                 <img
                                   src={`${BASE_URL}/assets/images/Vector.png`}
-                                  className="card-img-top w-40px m-auto mt-3"
-                                  style={{ backgroundColor: "yellowgreen" }}
+                                  className="card-img-top w-40px m-auto mt-3 bg-warning"
                                 />
                               ) : (
                                 <img
@@ -152,7 +151,7 @@ const CommuterLinkSuggestions = () => {
                                 />
                               )}
                               <div
-                                className="card-title text-center text-light"
+                                className="card-title text-center text-warning"
                                 style={{ width: "6rem", cursor: "pointer" }}
                                 onClick={() => {
                                   route();

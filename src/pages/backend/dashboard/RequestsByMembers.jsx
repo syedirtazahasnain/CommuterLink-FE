@@ -192,9 +192,6 @@ const RequestsByMembers = () => {
                             width: "6rem",
                             cursor: "pointer",
                           }}
-                          onClick={() => {
-                            route();
-                          }}
                         >
                           Member ID
                         </div>
@@ -217,9 +214,6 @@ const RequestsByMembers = () => {
                         <div
                           className="card-title text-center text-light"
                           style={{ width: "6rem", cursor: "pointer" }}
-                          onClick={() => {
-                            route();
-                          }}
                         >
                           Member ID
                         </div>
