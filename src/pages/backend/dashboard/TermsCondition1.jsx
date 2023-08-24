@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
@@ -20,30 +19,54 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const TermsCondition1 = ({ children }) => {
+const TermsCondition1 = () => {
   const navigate = useNavigate();
-  const [submitbtn, setSubmit] = useState(false);
   const dispatch = useDispatch();
   const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
   const currentPage = useSelector((s) => s.general.currentPage);
+  const userToken = useSelector((s) => s.login.data.token);
+  const [requestedAs, setRequestedAs] = useState("");
   
   const route = () => {
-    setSubmit(true);
-
-    if (!submitbtn) {
+    if (requestedAs === "rider") {
+      navigate("/sendapprovalformember");
+    }
+    else{
       navigate("/sendapprovalforpartner1");
     }
   };
+
   useEffect(() => {
+    getMemberData();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-  const logout = () => {
-    dispatch(setloginState(""));
-    navigate("/login");
+
+  const getMemberData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/requests",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse.data && jsonresponse.data.length > 0) {
+        setRequestedAs(jsonresponse.data[0].requested_as);
+      }
+      console.log("Request Member Terms Condition Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   return (

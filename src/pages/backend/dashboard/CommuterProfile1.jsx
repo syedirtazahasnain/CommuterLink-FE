@@ -24,43 +24,13 @@ const CommuterProfile1 = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
+  const [requestStage, setRequestStage] = useState("");
 
   const route = async () => {
-
-    if(requestedAs === "rider"){      
-      const body = {
-        request_id: id,
-        message: "I accept your request",
-        status: 1
-      }
-
-      const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/request",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json',
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-
-      const jsonresponse = await response.json();
-      console.log("API Response", jsonresponse);
-
-      if (jsonresponse.statusCode === 200) {
-        navigate("/dashboard");
-      } else {
-        alert("Resend Error: " + jsonresponse.message);
-      }
+    if (requestedAs === "rider") {
+      navigate("/termscondition1");
     }
-    else if(requestedAs === "driver"){
+    else if (requestedAs === "driver") {
       navigate("/beforeapprovalterms");
     }
   };
@@ -125,6 +95,7 @@ const CommuterProfile1 = () => {
         setGender(jsonresponse.rider[0].gender);
         setAge(jsonresponse.rider[0].age);
         setProfession(jsonresponse.rider[0].profession);
+        setRequestStage(jsonresponse.rider[0].req_stage);
         setPreferredGender(jsonresponse.rider[0].preferred_gender);
         setSeats(jsonresponse.rider[0].seats);
         setOrigin(jsonresponse.rider[0].origin);
@@ -139,6 +110,7 @@ const CommuterProfile1 = () => {
         setImage(jsonresponse.drivers[0].commuter_image);
         setGender(jsonresponse.drivers[0].gender);
         setAge(jsonresponse.drivers[0].age);
+        setRequestStage(jsonresponse.drivers[0].req_stage);
         setProfession(jsonresponse.drivers[0].profession);
         setPreferredGender(jsonresponse.drivers[0].preferred_gender);
         setSeats(jsonresponse.drivers[0].seats);
@@ -147,7 +119,7 @@ const CommuterProfile1 = () => {
         setTimeDepart(jsonresponse.drivers[0].time_depart);
         setTimeReturn(jsonresponse.drivers[0].time_return);
       }
-      console.log("Profile Data:", jsonresponse);
+      console.log("Commuter Profile Data:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -155,7 +127,7 @@ const CommuterProfile1 = () => {
 
   const getProfileData = async () => {
     try {
-      if(profileType === "Driver"){
+      if (profileType === "Driver") {
         const response = await fetch(
           `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/driver`,
           {
@@ -167,7 +139,7 @@ const CommuterProfile1 = () => {
             },
           }
         );
-  
+
         const jsonresponse = await response.json();
         if (jsonresponse.data && jsonresponse.data.length > 0) {
           setDays(jsonresponse.data[0].days);
@@ -184,7 +156,7 @@ const CommuterProfile1 = () => {
         }
         console.log("Driver Profile Data:", jsonresponse);
       }
-      else if(profileType === "Rider"){
+      else if (profileType === "Rider") {
         const response = await fetch(
           `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/rider`,
           {
@@ -196,7 +168,7 @@ const CommuterProfile1 = () => {
             },
           }
         );
-  
+
         const jsonresponse = await response.json();
         if (jsonresponse.data && jsonresponse.data.length > 0) {
           setDays(jsonresponse.data[0].days);
@@ -265,6 +237,14 @@ const CommuterProfile1 = () => {
     getDashboardData();
     getMemberData();
   }, []);
+
+  const viewRequest = () => {
+    setSubmit(true);
+
+    if (!submitbtn) {
+      navigate("/beforeapprovalterms");
+    }
+  };
 
   const sendRequest = () => {
     setSubmit(true);
@@ -508,9 +488,15 @@ const CommuterProfile1 = () => {
             </div>
           ) : (
             <div className="text-center">
-              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
-                Send Request
-              </Button>
+              {requestStage === 1 ? (
+                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={viewRequest}>
+                  View Request
+                </Button>
+              ) : (
+                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
+                  Send Request
+                </Button>
+              )}
             </div>
           )}
         </div>

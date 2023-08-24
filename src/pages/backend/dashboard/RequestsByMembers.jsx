@@ -10,6 +10,8 @@ const RequestsByMembers = () => {
 
   // For Dashboard Data
   const [contactId, setContactId] = useState("");
+  const [name, setName] = useState("");
+  const [requestStage, setRequestStage] = useState("");
 
   useEffect(() => {
     getMemberData();
@@ -40,8 +42,8 @@ const RequestsByMembers = () => {
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
         setContactId(jsonresponse.data[0].contact_id);
-      }else {
-        setContactId("");
+        setName(jsonresponse.data[0].user[0].name);
+        setRequestStage(jsonresponse.data[0].request_stage);
       }
       console.log("Request Member Data:", jsonresponse);
     } catch (error) {
@@ -66,132 +68,52 @@ const RequestsByMembers = () => {
             borderColor: "#066539",
           }}
         >
-            <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
-              <div
-                className="card-header "
-                style={{ backgroundColor: "#2a402a" }}
-              >
-                <h3 className="text-white mt-4 mx-auto">
-                  REQUESTS BY MEMBERS
-                </h3>
-              </div>
+          <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
+            <div
+              className="card-header "
+              style={{ backgroundColor: "#2a402a" }}
+            >
+              <h3 className="text-white mt-4 mx-auto">
+                REQUESTS BY MEMBERS
+              </h3>
+            </div>
 
-              <div className="card-body card-body-bg">
-                <p>
-                  Based upon your Profile, We have Following{" "}
-                  <strong>Requests</strong> to Offer
-                </p>
-                <div className="row">
-                  <div
-                    className="card  border-0 w-100"
-                    style={{
-                      width: "auto",
-                      backgroundColor: "#D9D9D9",
-                    }}
-                  >
-                    <div class="row d-flex justify-content-center">
-                      {contactId !== "" ? (
-                        <div className="col-sm-2">
-                          <div
-                            className="card"
-                            style={{
-                              width: "6rem",
-                              fontWeight: "bold",
-                              backgroundColor: "rgb(32 155 98)",
-                            }}
-                          >
-                            <img
-                              src={`${BASE_URL}/assets/images/Vector.png`}
-                              className="card-img-top w-40px m-auto mt-3"
-                            />
-                            <div
-                              className="card-title text-light text-center"
-                              style={{ width: "6rem", cursor: "pointer" }}
-                              onClick={() => {
-                                route();
-                              }}
-                            >
-                              {contactId}
-                            </div>
-                            <img
-                              className=""
-                              src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                            />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="col-sm-2">
-                          <div
-                            className="card bg-success"
-                            style={{ width: "6rem", cursor: "pointer" }}
-                          >
-                            <img
-                              src={`${BASE_URL}/assets/images/Vector.png`}
-                              className="card-img-top w-40px m-auto mt-3"
-                            />
-
-                            <div
-                              className="card-title text-center text-light"
-                              style={{ width: "6rem", cursor: "pointer" }}
-                              onClick={() => {
-                                route();
-                              }}
-                            >
-                              Member ID
-                            </div>
-                            <img
-                              className=""
-                              src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                            />
-                          </div>
-                        </div>
-                      )}
+            <div className="card-body card-body-bg">
+              <p>
+                Based upon your Profile, We have Following{" "}
+                <strong>Requests</strong> to Offer
+              </p>
+              <div className="row">
+                <div
+                  className="card  border-0 w-100"
+                  style={{
+                    width: "auto",
+                    backgroundColor: "#D9D9D9",
+                  }}
+                >
+                  <div class="row d-flex justify-content-center">
+                    {requestStage === 1 ? (
                       <div className="col-sm-2">
                         <div
-                          className="card bg-success"
-                          style={{ width: "6rem" }}
+                          className="card"
+                          style={{
+                            width: "6rem",
+                            fontWeight: "bold",
+                            backgroundColor: "rgb(32 155 98)",
+                          }}
                         >
                           <img
                             src={`${BASE_URL}/assets/images/Vector.png`}
                             className="card-img-top w-40px m-auto mt-3"
                           />
-
                           <div
-                            className="card-title text-center text-light"
-                            style={{
-                              width: "6rem",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              route();
-                            }}
-                          >
-                            Member ID
-                          </div>
-                          <img
-                            className=""
-                            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-2">
-                        <div
-                          className="card bg-success"
-                          style={{ width: "6rem" }}
-                        >
-                          <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
-                            className="card-img-top w-40px m-auto mt-3"
-                          />
-
-                          <div
-                            className="card-title text-center text-light"
+                            className="card-title text-light text-center"
                             style={{ width: "6rem", cursor: "pointer" }}
                             onClick={() => {
                               route();
                             }}
                           >
-                            Member ID
+                            {name}
                           </div>
                           <img
                             className=""
@@ -199,83 +121,191 @@ const RequestsByMembers = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-sm-2">
-                        <div
-                          className="card bg-success"
-                          style={{ width: "6rem" }}
-                        >
-                          <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
-                            className="card-img-top w-40px m-auto mt-3"
-                          />
+                    ) :
+                      (contactId !== "" ?
+                        (
+                          <div className="col-sm-2">
+                            <div
+                              className="card bg-success"
+                              style={{ width: "6rem", cursor: "pointer" }}
+                            >
+                              <img
+                                src={`${BASE_URL}/assets/images/Vector.png`}
+                                className="card-img-top w-40px m-auto mt-3"
+                              />
 
-                          <div
-                            className="card-title text-center text-light"
-                            style={{ width: "6rem" }}
-                          >
-                            Member ID
+                              <div
+                                className="card-title text-center text-light"
+                                style={{ width: "6rem", cursor: "pointer" }}
+                                onClick={() => {
+                                  route();
+                                }}
+                              >
+                                {contactId}
+                              </div>
+                              <img
+                                className=""
+                                src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                              />
+                            </div>
                           </div>
-                          <img
-                            className=""
-                            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                          />
+                        ) :
+                        (
+                          <div className="col-sm-2">
+                            <div
+                              className="card bg-success"
+                              style={{ width: "6rem", cursor: "pointer" }}
+                            >
+                              <img
+                                src={`${BASE_URL}/assets/images/Vector.png`}
+                                className="card-img-top w-40px m-auto mt-3"
+                              />
+
+                              <div
+                                className="card-title text-center text-light"
+                                style={{ width: "6rem", cursor: "pointer" }}
+                              >
+                                Member ID
+                              </div>
+                              <img
+                                className=""
+                                src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                              />
+                            </div>
+                          </div>
+                        )
+                      )
+                    }
+                    <div className="col-sm-2">
+                      <div
+                        className="card bg-success"
+                        style={{ width: "6rem" }}
+                      >
+                        <img
+                          src={`${BASE_URL}/assets/images/Vector.png`}
+                          className="card-img-top w-40px m-auto mt-3"
+                        />
+
+                        <div
+                          className="card-title text-center text-light"
+                          style={{
+                            width: "6rem",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            route();
+                          }}
+                        >
+                          Member ID
                         </div>
+                        <img
+                          className=""
+                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                        />
                       </div>
-                      <div class="col-sm-2">
-                        <div
-                          className="card bg-success"
-                          style={{ width: "6rem" }}
-                        >
-                          <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
-                            className="card-img-top w-40px m-auto mt-3"
-                          />
+                    </div>
+                    <div className="col-sm-2">
+                      <div
+                        className="card bg-success"
+                        style={{ width: "6rem" }}
+                      >
+                        <img
+                          src={`${BASE_URL}/assets/images/Vector.png`}
+                          className="card-img-top w-40px m-auto mt-3"
+                        />
 
-                          <div
-                            className="card-title text-center text-light"
-                            style={{ width: "6rem" }}
-                          >
-                            Member ID
-                          </div>
-                          <img
-                            className=""
-                            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                          />
+                        <div
+                          className="card-title text-center text-light"
+                          style={{ width: "6rem", cursor: "pointer" }}
+                          onClick={() => {
+                            route();
+                          }}
+                        >
+                          Member ID
                         </div>
+                        <img
+                          className=""
+                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                        />
                       </div>
-                      <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-2">
+                      <div
+                        className="card bg-success"
+                        style={{ width: "6rem" }}
+                      >
+                        <img
+                          src={`${BASE_URL}/assets/images/Vector.png`}
+                          className="card-img-top w-40px m-auto mt-3"
+                        />
+
                         <div
-                          className="card bg-success"
+                          className="card-title text-center text-light"
                           style={{ width: "6rem" }}
                         >
-                          <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
-                            className="card-img-top w-40px m-auto mt-3"
-                          />
-
-                          <div
-                            className="card-title text-center text-light"
-                            style={{ width: "6rem" }}
-                          >
-                            Member ID
-                          </div>
-                          <img
-                            className=""
-                            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                          />
+                          Member ID
                         </div>
+                        <img
+                          className=""
+                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div
+                        className="card bg-success"
+                        style={{ width: "6rem" }}
+                      >
+                        <img
+                          src={`${BASE_URL}/assets/images/Vector.png`}
+                          className="card-img-top w-40px m-auto mt-3"
+                        />
+
+                        <div
+                          className="card-title text-center text-light"
+                          style={{ width: "6rem" }}
+                        >
+                          Member ID
+                        </div>
+                        <img
+                          className=""
+                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div
+                        className="card bg-success"
+                        style={{ width: "6rem" }}
+                      >
+                        <img
+                          src={`${BASE_URL}/assets/images/Vector.png`}
+                          className="card-img-top w-40px m-auto mt-3"
+                        />
+
+                        <div
+                          className="card-title text-center text-light"
+                          style={{ width: "6rem" }}
+                        >
+                          Member ID
+                        </div>
+                        <img
+                          className=""
+                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                        />
                       </div>
                     </div>
                   </div>
-                  <button className="btn btn_view d-flex justify-content-end me-5">
-                        VIEW MORE
-                      </button>
                 </div>
-                
-                <div></div>
-               
+                <button className="btn btn_view d-flex justify-content-end me-5">
+                  VIEW MORE
+                </button>
               </div>
+
+              <div></div>
+
             </div>
+          </div>
           {/* <div className="container">
           
           
