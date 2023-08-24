@@ -2448,16 +2448,6 @@ const DriverRegistration = () => {
                       spacing={2}
                       style={{ justifyContent: "right" }}
                     >
-                      {/* <Button
-                        variant=""
-                        className="btnregistration"
-                        onClick={() => {
-                          setShowDriverForm(false);
-
-                        }}
-                      >
-                        Previous
-                      </Button> */}
                       <Button variant="" className="btnregistration" onClick={handleDriver}>
                         Submit
                       </Button>

@@ -34,7 +34,8 @@ const FinalStep = () => {
   const [id, setId] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
-  // const [profileStatus, setProfileStatus] = useState("");
+  const [profileStatus, setProfileStatus] = useState("");
+  // const [profileType, setProfileType] = useState("");
 
   useEffect(() => {
     getProfileData();
@@ -63,7 +64,8 @@ const FinalStep = () => {
       const jsonresponse = await response.json();
       if (jsonresponse) {
         setName(jsonresponse[0].name);
-        // setProfileStatus(jsonresponse[0].profile_status);
+        setProfileStatus(jsonresponse[0].profile_status);
+        setId(jsonresponse[0].id);
       }
       console.log("Final Step Profile Data", jsonresponse);
     } catch (error) {
@@ -102,7 +104,7 @@ const FinalStep = () => {
         request_id: id,
         start_date: selectedDateFormat,
         message: "I accept your request",
-        status: 3
+        status: profileStatus
       }
 
       const response = await fetch(

@@ -209,9 +209,6 @@ const CommuterLinkSuggestions = () => {
                               width: "6rem",
                               cursor: "pointer",
                             }}
-                            onClick={() => {
-                              route();
-                            }}
                           >
                             Member ID
                           </div>
@@ -234,9 +231,6 @@ const CommuterLinkSuggestions = () => {
                           <div
                             className="card-title text-center text-light"
                             style={{ width: "6rem", cursor: "pointer" }}
-                            onClick={() => {
-                              route();
-                            }}
                           >
                             Member ID
                           </div>
