@@ -32,7 +32,7 @@ const Office_School = () => {
   const navigate = useNavigate();
 
   const schoolRoute = () => {
-    navigate("/school-form");
+    navigate("/nested-school");
   };
 
   const officeRoute = () => {

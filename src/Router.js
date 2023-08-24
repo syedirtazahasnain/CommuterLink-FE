@@ -37,6 +37,8 @@ import PaymentOptions from "./pages/backend/dashboard/PaymentOptions";
 import FinalStep from "./pages/backend/dashboard/FinalStep";
 import SendApprovalForMember from "./pages/backend/dashboard/SendApprovalForMember";
 import Congratulations from "./pages/backend/dashboard/Congratulations";
+import WouldYouLikeToSchool from "./pages/frontend/register-form/WouldYouLikeToSchool";
+import SchoolDriverRegistration from "./pages/frontend/register-form/SchoolDriverRegistration";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -84,10 +86,12 @@ const Router = () => {
             <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />}/>
             <Route path="/shareride" element={<FrontendLayout children={<ShareRide />} />}></Route>
             <Route path="/nested" element={<FrontendLayout children={<WouldYouLikeTo />} />}></Route>
+            <Route path="/nested-school" element={<FrontendLayout children={<WouldYouLikeToSchool />} />}></Route>
             <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
             <Route path="/verification" element={<FrontendLayout children={<Verification />} />}></Route>
             <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
             <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
+            <Route path="/school-driver-form" element={<FrontendLayout children={<SchoolDriverRegistration />} />}></Route>
           </>
         )}
         {userLogin && (
@@ -97,6 +101,7 @@ const Router = () => {
               <Route path='/shareride' element={<FrontendLayout children={<ShareRide/>}/>}></Route>
               <Route path="/otp" element={<FrontendLayout children={<OtpPage />}/>} />
               <Route path='/nested' element={<FrontendLayout children={<WouldYouLikeTo/>}/>}></Route>
+              <Route path="/nested-school" element={<FrontendLayout children={<WouldYouLikeToSchool />} />}></Route>
               <Route path='/number-generate' element={<FrontendLayout children={<NumberGenerate />}/>}></Route>
               <Route path='/verification' element={<FrontendLayout children={<Verification/>}/>}></Route>
               <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />}></Route>
@@ -106,6 +111,7 @@ const Router = () => {
               <Route path='/requestcarowner' element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
               <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
               <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
+              <Route path="/school-driver-form" element={<FrontendLayout children={<SchoolDriverRegistration />} />}></Route>
             </>
           )}
           {!userLogin && <Route path="*" element={<Navigate to="/" />} />}
