@@ -303,26 +303,15 @@ const TravelPatners = () => {
                   </div>
 
                 </div>
-                <div className="col-sm-6">
-                  <div className="card">
-                    <div className="card-body-inner green-card">
-                      <div className="d-flex flex-column">
-                        <div className="card-body-inner green-card">
-                          <div className="d-flex flex-column">
-                            <div
-                              className="card-header text-white"
-                              style={{ backgroundColor: '#3d4f4c' }}
-                            >
-                              <h4 className="text-center text-white m-auto">
-                                COST PER SEAT PER DAY
-                              </h4>
-                            </div>
-                            <div className="row d-flex justify-content-between">
-
-                              <div className="col-md-3">
-                                <div
-                                  className="card bg-success"
-                                  style={{ width: "4rem" }}
+                <div className="row">
+                  
+                  <div className="col-sm-6">
+                    <div className="card h-100">
+                      <div className="card-body-inner green-card">
+                        <div className="d-flex flex-column">
+                        <div
+                                  className="card-header text-white"
+                                  style={{backgroundColor:'#3d4f4c'}}
                                 >
                                   <img
                                     src={`${imageURL}${image}`}
@@ -360,8 +349,84 @@ const TravelPatners = () => {
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div className="col-sm-6">
+                    <div className="card">
+                      <div className="card-body-inner green-card">
+                        <div className="d-flex flex-column">
+                        <div className="card-body-inner green-card">
+                        <div className="d-flex flex-column">
+                        <div
+                                  className="card-header text-white"
+                                  style={{backgroundColor:'#3d4f4c'}}
+                                >
+                                  <h4 className="text-center text-white m-auto">
+                                    COST PER SEAT PER DAY
+                                  </h4>
+                                </div>
+                                <div className="row">
+                              
+                                <div className="col-md-6 m-auto">
+                                  
+                                    {" "}
+                                    <div className="card-body  d-flex justify-content-between h-50 fw-bold text-success">
+                                    <div
+                          className="card bg-success"
+                          style={{ width: "4rem" }}
+                        >
+                          <img
+                            src={`${BASE_URL}/assets/images/Vector.png`}
+                            className="card-img-top w-40px m-auto"
+                          />
+
+                         
+                        
+                        </div>
+                        <h3 className="py-2">RS. 354/-</h3>
+                                    </div>
+                                    <div className="card-body  d-flex justify-content-between h-50 fw-bold text-success">
+                                    <div
+                         
+                         
+                        >
+                          
+<p className="text-dark">Daily Commuting Cost</p>
+                         
+                        
+                        </div>
+                        <p className="text-dark">RS. 346/-</p>
+                                    </div>
+                                    <div className="align-items-center">
+                                      <ol style={{ listStyleType: "disc"}}>
+                                        <li>Distance: 50km</li>
+                                        <li>Avg. Fuel consumption: 10km/Ltr</li>
+                                        <li>Fuel Price: Rs. 230/Ltr (Rs. 288/-)</li>
+                                        <li>Maintenance (10%): Rs.29/-</li>
+                                         <li>Wear & Tear (10%): Rs. 29/-</li>
+                                      </ol>
+                                      <div className="card-body  d-flex justify-content-between h-50 fw-bold ">
+                                    <div
+                         
+                         
+                        >
+                          
+<p className="text-dark">Add Services Charges(2.5%):</p>
+<p className="text-dark">Daily Received per seat:</p>               
+                        
+                        </div>
+                        <div><p className="text-dark">RS. 9/-</p>
+                        <p className="text-dark">RS. 335/-</p></div>
+                        
+                                    </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+                      </div>
                         </div>
                       </div>
                     </div>
@@ -372,7 +437,7 @@ const TravelPatners = () => {
           </div>
         </div>
       </div>
-    </div>
+
   );
 };
 

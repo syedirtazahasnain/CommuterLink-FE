@@ -106,32 +106,69 @@ const TravelConfirmation = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
-            <div className="card-body">
-              <div
-                className="card p-4 border-0  p-2"
-                style={{ backgroundColor: "#D9D9D9" }}
-              >
-                <div className="card ">
-                  {/* <div className="card-body text-success fw-bold"  > */}
-                  {/* style={{backgroundColor: "rgb(229, 248, 243)"}} */}
-                  <div className="container">
-                    <Datepicker
-                      calendarType="week"
-                      calendarSize={1}
-                      select="date"
-                      display="inline"
-                      onCellClick={handleDateChange}
-                      // onClick={handleDateChange}
-                    />
-                    <div className="row py-2">
-                      <p className="text-success fs-5 cursor-pointer text-right">
-                        No of Days Travelled 0
-                      </p>
-                      <p className="btn fs-5 text-success text-right">
-                        {" "}
-                        View Full History
-                      </p>
+            <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
+              <div className="card-body">
+           
+              <div className="card p-4 border-0  p-2"style={{ backgroundColor: "#D9D9D9" }}>
+        <div className="card ">
+        {/* <div className="card-body text-success fw-bold"  > */}
+        {/* style={{backgroundColor: "rgb(229, 248, 243)"}} */}
+              <div className="container">
+                <Datepicker
+                    calendarType="week"
+                    calendarSize={1} 
+                    select="date"
+                    display="inline" 
+                   
+                    onCellClick={handleDateChange}
+                    // onClick={handleDateChange}
+                    
+                />
+                                           <div className="row py-2">
+    <p className="text-success fs-5 cursor-pointer text-right">No of Days Travelled 0</p>
+    <p className="btn fs-5 text-success text-right"> View Full History</p>
+</div>
+              </div>
+             
+            {/* </div> */}
+        </div>
+      </div>
+      <Dialog open={dialogOpen} onClose={handleCloseDialog}>
+        <DialogTitle>Select Any Options</DialogTitle>
+        <DialogContent>
+        
+        </DialogContent>
+      </Dialog>
+          <div className="container text-center px-2">
+                 <div className="row px-2">
+                 <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
+                    <div>
+                    <button className="btn  text-success fw-bold fs-5 lh-1">
+                    <span>
+                   
+                    <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
+                    </span>
+                    Travelled
+                  </button>
+                        </div>
+                    <div>
+                    <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
+                    <span>
+
+                            <i class="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
+                            </span>
+                    Not Travelled
+                  </button>
+                        </div>
+                        <div>
+                    <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
+                    <span>
+                       
+                            <i class="fa-solid fa-car text-danger mx-1 fs-2" ></i>
+                            </span>
+                    Driver Didn't Come
+                  </button>
+                        </div>
                     </div>
                   </div>
 
@@ -183,7 +220,7 @@ const TravelConfirmation = () => {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

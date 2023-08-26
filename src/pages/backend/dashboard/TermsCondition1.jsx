@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
+<<<<<<< Updated upstream
+=======
+import { setCurrentPage } from "../../../redux/generalSlice";
+>>>>>>> Stashed changes
 
 const customTheme = createTheme({
   palette: {
@@ -35,7 +39,7 @@ const TermsCondition1 = () => {
   };
 
   useEffect(() => {
-    getMemberData();
+    dispatch(setCurrentPage("termscondition"));
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
