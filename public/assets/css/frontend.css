@@ -540,3 +540,6 @@
   .app-header{
    background-color: #8FC4B7!important;
   }
+  .image-upload-container {
+    width: 400px; /* Adjust the width as needed */
+  }

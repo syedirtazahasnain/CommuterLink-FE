@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createTheme } from "@mui/material";
+import { Button, createTheme } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
@@ -19,7 +19,7 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const Rejection = ({ children }) => {
+const Rejection = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ const Rejection = ({ children }) => {
       navigate("/commuter-profile");
     }
   };
+
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
@@ -76,12 +77,11 @@ const Rejection = ({ children }) => {
             </div>
            
           <div className="text-center">
-            <button
-              to="/"
+            <Button
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
             >
-              Back
-            </button>
+              Next
+            </Button>
           </div>
         </div>
       </div>

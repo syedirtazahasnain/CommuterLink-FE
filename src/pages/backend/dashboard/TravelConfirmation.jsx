@@ -92,7 +92,7 @@ const TravelConfirmation = () => {
   return (
     <div>
       <div className="card bg-light-green mt-3 mb-5">
-        <div className="card-header bg-black">
+        <div className="card-header " style={{ backgroundColor: "#2a402a" }}>
           <h3 className="text-center text-warning m-auto">
             {" "}
             TRAVEL CONFIRMATION{" "}
@@ -109,26 +109,28 @@ const TravelConfirmation = () => {
           <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
             <div className="card-body">
 
-              <div className="card p-4 bg-light p-2">
+              <div className="card p-4 border-0  p-2" style={{ backgroundColor: "#D9D9D9" }}>
                 <div className="card ">
-                  <div className="card-body text-success fw-bold" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
-                    <div className="container">
-                      <Datepicker
-                        calendarType="week"
-                        calendarSize={1}
-                        select="date"
-                        display="inline"
+                  {/* <div className="card-body text-success fw-bold"  > */}
+                  {/* style={{backgroundColor: "rgb(229, 248, 243)"}} */}
+                  <div className="container">
+                    <Datepicker
+                      calendarType="week"
+                      calendarSize={1}
+                      select="date"
+                      display="inline"
 
-                        onCellClick={handleDateChange}
+                      onCellClick={handleDateChange}
+                    // onClick={handleDateChange}
 
-                      />
-                      <div className="row py-2">
-                        <p className="text-dark text-right">No of Days Travelled 0</p>
-                        <p className="btn fs-5 text-success text-right"> View Full History</p>
-                      </div>
+                    />
+                    <div className="row py-2">
+                      <p className="text-success fs-5 cursor-pointer text-right">No of Days Travelled 0</p>
+                      <p className="btn fs-5 text-success text-right"> View Full History</p>
                     </div>
-
                   </div>
+
+                  {/* </div> */}
                 </div>
               </div>
               <Dialog open={dialogOpen} onClose={handleCloseDialog}>
@@ -161,26 +163,20 @@ const TravelConfirmation = () => {
                       <div>
                         <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
                           <span>
-
                             <i class="fa-solid fa-car text-danger mx-1 fs-2" ></i>
                           </span>
                           Driver Didn't Come
                         </button>
                       </div>
                     </div>
-
                   </div>
                 </div>
-
                 <DialogActions>
                   <Button className="text-dark" onClick={handleCloseDialog}>Cancel</Button>
                 </DialogActions>
               </Dialog>
-
-              <div></div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

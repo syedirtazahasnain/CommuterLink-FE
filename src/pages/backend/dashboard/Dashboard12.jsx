@@ -17,12 +17,12 @@ const Dashboard12 = () => {
 
   return (
     <>
-    <CommuterLinkSuggestions/>
-    <RequestsByMembers/>
-    <TravelPatners/>
-    <TravelConfirmation/>
+      <CommuterLinkSuggestions />
+      <RequestsByMembers />
+      <TravelPatners />
+      <TravelConfirmation />
     </>
   )
 }
 
-export default Dashboard12
+export default Dashboard12;

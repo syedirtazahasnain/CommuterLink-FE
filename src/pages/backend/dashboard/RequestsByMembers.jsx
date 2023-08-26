@@ -11,7 +11,9 @@ const RequestsByMembers = () => {
   // For Dashboard Data
   const [contactId, setContactId] = useState("");
   const [name, setName] = useState("");
+  const [image, setImage] = useState("");
   const [requestStage, setRequestStage] = useState("");
+  const imageURL = "https://staging.commuterslink.com/uploads/picture/";
 
   useEffect(() => {
     getMemberData();
@@ -43,6 +45,7 @@ const RequestsByMembers = () => {
       if (jsonresponse.data && jsonresponse.data.length > 0) {
         setContactId(jsonresponse.data[0].contact_id);
         setName(jsonresponse.data[0].user[0].name);
+        setImage(jsonresponse.data[0].user[0].commuter_image);
         setRequestStage(jsonresponse.data[0].request_stage);
       }
       console.log("Request Member Data:", jsonresponse);
@@ -53,8 +56,8 @@ const RequestsByMembers = () => {
 
   return (
     <div>
-      <div className="card bg-light-green mt-3 mb-5">
-        <div className="card-header bg-black">
+      <div className="card  mt-3 mb-5">
+        <div className="card-header"  style={{ backgroundColor: "#2a402a" }}>
           <h3 className="text-center text-warning m-auto">
             {" "}
             GET A SEAT/S IN THEIR CAR{" "}
@@ -68,15 +71,15 @@ const RequestsByMembers = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
-            <div
-              className="card-header "
-              style={{ backgroundColor: "#2a402a" }}
-            >
-              <h3 className="text-white mt-4 mx-auto">
-                REQUESTS BY MEMBERS
-              </h3>
-            </div>
+            <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
+              <div
+                className="card-header "
+                style={{backgroundColor:'#3d4f4c'}}
+              >
+                <h3 className="text-white mt-4 mx-auto">
+                  REQUESTS BY MEMBERS
+                </h3>
+              </div>
 
             <div className="card-body card-body-bg">
               <p>
@@ -92,18 +95,18 @@ const RequestsByMembers = () => {
                   }}
                 >
                   <div class="row d-flex justify-content-center">
-                    {requestStage === 1 ? (
+                    {requestStage === 1 || requestStage === 2 ? (
                       <div className="col-sm-2">
                         <div
                           className="card"
                           style={{
                             width: "6rem",
                             fontWeight: "bold",
-                            backgroundColor: "rgb(32 155 98)",
+                            backgroundColor: "rgb(32, 155, 98)",
                           }}
                         >
                           <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
+                            src={`${imageURL}${image}`}
                             className="card-img-top w-40px m-auto mt-3"
                           />
                           <div
@@ -121,9 +124,32 @@ const RequestsByMembers = () => {
                           />
                         </div>
                       </div>
-                    ) :
-                      (contactId !== "" ?
-                        (
+                    ) : (
+                      contactId !== "" ? (
+                        requestStage === 3 ? (
+                          <div className="col-sm-2">
+                            <div
+                              className="card bg-success"
+                              style={{ width: "6rem" }}
+                            >
+                              <img
+                                src={`${BASE_URL}/assets/images/Vector.png`}
+                                className="card-img-top w-40px m-auto mt-3"
+                              />
+
+                              <div
+                                className="card-title text-center text-light"
+                                style={{ width: "6rem" }}
+                              >
+                                Member ID
+                              </div>
+                              <img
+                                className=""
+                                src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                              />
+                            </div>
+                          </div>
+                        ) : (
                           <div className="col-sm-2">
                             <div
                               className="card bg-success"
@@ -149,33 +175,33 @@ const RequestsByMembers = () => {
                               />
                             </div>
                           </div>
-                        ) :
-                        (
-                          <div className="col-sm-2">
-                            <div
-                              className="card bg-success"
-                              style={{ width: "6rem", cursor: "pointer" }}
-                            >
-                              <img
-                                src={`${BASE_URL}/assets/images/Vector.png`}
-                                className="card-img-top w-40px m-auto mt-3"
-                              />
-
-                              <div
-                                className="card-title text-center text-light"
-                                style={{ width: "6rem", cursor: "pointer" }}
-                              >
-                                Member ID
-                              </div>
-                              <img
-                                className=""
-                                src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                              />
-                            </div>
-                          </div>
                         )
+                      ) : (
+                        <div className="col-sm-2">
+                          <div
+                            className="card bg-success"
+                            style={{ width: "6rem" }}
+                          >
+                            <img
+                              src={`${BASE_URL}/assets/images/Vector.png`}
+                              className="card-img-top w-40px m-auto mt-3"
+                            />
+
+                            <div
+                              className="card-title text-center text-light"
+                              style={{ width: "6rem" }}
+                            >
+                              Member ID
+                            </div>
+                            <img
+                              className=""
+                              src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                            />
+                          </div>
+                        </div>
                       )
-                    }
+                    )}
+
                     <div className="col-sm-2">
                       <div
                         className="card bg-success"
@@ -190,7 +216,6 @@ const RequestsByMembers = () => {
                           className="card-title text-center text-light"
                           style={{
                             width: "6rem",
-                            cursor: "pointer",
                           }}
                         >
                           Member ID
@@ -213,7 +238,7 @@ const RequestsByMembers = () => {
 
                         <div
                           className="card-title text-center text-light"
-                          style={{ width: "6rem", cursor: "pointer" }}
+                          style={{ width: "6rem" }}
                         >
                           Member ID
                         </div>
@@ -295,16 +320,10 @@ const RequestsByMembers = () => {
                   VIEW MORE
                 </button>
               </div>
-
-              <div></div>
-
+              <div>
+              </div>
             </div>
           </div>
-          {/* <div className="container">
-          
-          
-          </div> */}
-
         </div>
       </div>
     </div>

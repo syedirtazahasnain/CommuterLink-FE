@@ -27,8 +27,8 @@ const Office_School = () => {
     height: "20vh",
   };
 
-  const name = useSelector((s) => s.login.data.name);
-  const email = useSelector((s) => s.login.data.email);
+  const name = useSelector((s) => s.signup.data.name);
+  const email = useSelector((s) => s.signup.data.email);
   const navigate = useNavigate();
 
   const schoolRoute = () => {
@@ -38,6 +38,8 @@ const Office_School = () => {
   const officeRoute = () => {
     navigate("/nested");
   };
+
+  console.log(name, email);
 
   return (
     <div>
@@ -123,22 +125,26 @@ const Office_School = () => {
                                       }}
                                     />
                                   </div>
-                                  <div className="text-white">
-                                    {name}
-                                    <br />
-                                    {email}
-                                  </div>
                                   <h5
-                                    className="card-title mt-4 text-success"
-                                    style={{ color: "yellow" }}
+                                    className="card-title mt-4"
+                                    
                                   >
-                                    FullName
-                                  </h5>
-                                  {name ?
+                                    {name ?
                                     (<p>{name}</p>)
                                     :
                                     (<></>)
                                   }
+                                  </h5>
+                                  <h5
+                                    className="card-title mt-4"
+                                    
+                                  >
+                                    {email ?
+                                    (<p>{email}</p>)
+                                    :
+                                    (<></>)
+                                  }
+                                  </h5>
                                 </div>
                                 <div className="">
                                   <h5 className="text-success mb-4">

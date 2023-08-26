@@ -20,10 +20,11 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const CommuterProfile1 = () => {
+const TravelBuddyProfile = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
+  const imageURL= "https://staging.commuterslink.com/uploads/picture/";
   const [requestStage, setRequestStage] = useState("");
 
   const route = async () => {
@@ -206,10 +207,10 @@ const CommuterProfile1 = () => {
 
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
+        setProfileType("Rider");
         setMemberId(jsonresponse.data[0].contact_id);
         setId(jsonresponse.data[0].id);
         setRequestedAs(jsonresponse.data[0].requested_as);
-        setRequestStage(jsonresponse.data[0].request_stage);
         setName(jsonresponse.data[0].user[0].name);
         setImage(jsonresponse.data[0].user[0].commuter_image);
         setGender(jsonresponse.data[0].user[0].gender);
@@ -227,6 +228,45 @@ const CommuterProfile1 = () => {
     }
   };
 
+  const getTravelData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/travelbuddy",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if(jsonresponse.data && jsonresponse.data.length > 0){
+        setProfileType(jsonresponse.data[0].type);
+        setName(jsonresponse.data[0].name);
+        setImage(jsonresponse.data[0].commuter_image);
+        setGender(jsonresponse.data[0].gender);
+        setPrice(jsonresponse.data[0].price)
+        setAge(jsonresponse.data[0].age);
+        setMobileNo(jsonresponse.data[0].mobile);
+        setDays(jsonresponse.data[0].days);
+        setRequestStage(jsonresponse.data[0].req_stage);
+        setProfession(jsonresponse.data[0].profession);
+        setPreferredGender(jsonresponse.data[0].preferred_gender);
+        setSeats(jsonresponse.data[0].seats);
+        setOrigin(jsonresponse.data[0].origin);
+        setDestination(jsonresponse.data[0].destination);
+        setTimeDepart(jsonresponse.data[0].time_depart);
+        setTimeReturn(jsonresponse.data[0].time_return);
+      }
+      console.log("Travel Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
   useEffect(() => {
     if (contactId) {
       getProfileData();
@@ -234,28 +274,11 @@ const CommuterProfile1 = () => {
   }, [contactId]);
 
   useEffect(() => {
-    getDashboardData();
-    getMemberData();
+    getTravelData();
   }, []);
 
-  const viewRequest = () => {
-    setSubmit(true);
-
-    if (!submitbtn) {
-      navigate("/beforeapprovalterms");
-    }
-  };
-
-  const requestViewDriver = () => {
-    setSubmit(true);
-
-    if (!submitbtn) {
-      navigate("/driver-acceptance");
-    }
-  };
-
-  const requestAccepeted = () => {
-    alert("Request is waiting for response!");
+  const GoBack = () => {
+    navigate(-1);
   };
 
   const sendRequest = () => {
@@ -279,7 +302,7 @@ const CommuterProfile1 = () => {
         <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }} >
           <div className="row">
             <div className="col-md-1 mt-1">
-              <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
+              <img src={`${imageURL}${image}`} style={{ height: "115px", width: "115px" }} />
             </div>
             <div className="col-md-11 px-5">
               <div className="px-5">
@@ -333,7 +356,7 @@ const CommuterProfile1 = () => {
           </div>
           <hr style={{ color: "grey" }} />
           <div className="row">
-            <h2 className="text-success py-2 fw-bold">{profileType ? profileType : "Commuter"} Details</h2>
+            <h2 className="text-success py-2 fw-bold">{profileType === "rider" ? ("Rider Details") : ("Driver Details")}</h2>
             <div className="col-md-6">
               <p>
                 {preferredGender !== "" ? (
@@ -418,14 +441,6 @@ const CommuterProfile1 = () => {
                   </>
                 )}
                 <br />
-                {seatsLeft !== "" ? (
-                  <>
-                    <b>No.of Seats Left:</b> {seatsLeft}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
                 {price !== "" ? (
                   <>
                     <b>Payment Terms (perDay):</b> <u>{price}</u>
@@ -492,41 +507,11 @@ const CommuterProfile1 = () => {
               </p>
             </div>
           </div>
-          {memberId !== "" ? (
-            (
-              requestStage === 2 ? (
-                <div className="text-center">
-                  <Button className="btn btn-sm fs-6 fw-bold btn-warning text-gray rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted}>
-                    Request Accepted
-                  </Button>
-                </div>
-              ) : (
-                <div className="text-center">
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={route}>
-                    Accept Request
-                  </Button>
-                </div>
-              )
-            )
-          ) : (
-            <div className="text-center">
-              {requestStage === 1 ? (
-                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={viewRequest}>
-                  View Request
-                </Button>
-              ) : (
-                requestStage === 2 ? (
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={requestViewDriver}>
-                    View Request
-                  </Button>
-                ) : (
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
-                    Send Request
-                  </Button>
-                )
-              )}
-            </div>
-          )}
+          <div className="text-center">
+            <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
+              Back
+            </Button>
+          </div>
         </div>
         <div>
         </div>
@@ -535,4 +520,4 @@ const CommuterProfile1 = () => {
   );
 };
 
-export default CommuterProfile1;
+export default TravelBuddyProfile;

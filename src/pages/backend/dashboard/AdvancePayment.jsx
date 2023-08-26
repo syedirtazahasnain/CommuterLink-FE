@@ -193,6 +193,7 @@ const AdvancePayment = () => {
     const intervalId = setInterval(() => {
       if (newWindow && newWindow.closed) {
         clearInterval(intervalId);
+        getPaymentSuccess();
         };
     }, 1000);
   };
