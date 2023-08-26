@@ -382,7 +382,7 @@ const BackendLayout = ({ children }) => {
                                   ? "active"
                                   : ""
                               }`}
-                              to={"/termscondition1"}
+                              to={"/termscondition"}
                               style={{
                                 borderRadius: "0%",
                                 marginLeft: "0%",

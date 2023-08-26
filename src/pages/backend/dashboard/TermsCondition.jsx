@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
+import { setCurrentPage } from "../../../redux/generalSlice";
 
 const customTheme = createTheme({
   palette: {
@@ -20,52 +21,25 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const TermsCondition1 = () => {
+const TermsCondition = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
+  const currentPage = useSelector((s) => s.general.currentPage);
   const userToken = useSelector((s) => s.login.data.token);
-  const [requestedAs, setRequestedAs] = useState("");
-  
+
   const route = () => {
-    if (requestedAs === "rider") {
-      navigate("/sendapprovalformember");
-    }
-    else{
-      navigate("/sendapprovalforpartner1");
-    }
+    navigate(-1);
   };
 
   useEffect(() => {
-    getMemberData();
+    dispatch(setCurrentPage("termscondition"));
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-
-  const getMemberData = async () => {
-    try {
-      const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse.data && jsonresponse.data.length > 0) {
-        setRequestedAs(jsonresponse.data[0].requested_as);
-      }
-      console.log("Request Member Terms Condition Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
 
   return (
     <div>
@@ -126,7 +100,7 @@ const TermsCondition1 = () => {
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={route}
             >
-              I Accept
+              Back
             </Button>
           </div>
         </div>
@@ -135,4 +109,4 @@ const TermsCondition1 = () => {
   );
 };
 
-export default TermsCondition1;
+export default TermsCondition;

@@ -26,15 +26,6 @@ const CommuterProfile1 = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const [requestStage, setRequestStage] = useState("");
 
-  const route = async () => {
-    if (requestedAs === "rider") {
-      navigate("/termscondition1");
-    }
-    else if (requestedAs === "driver") {
-      navigate("/beforeapprovalterms");
-    }
-  };
-
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
@@ -71,6 +62,15 @@ const CommuterProfile1 = () => {
   const [carRegYear, setCarRegYear] = useState("");
   const [RegNo, setRegNo] = useState("");
   const [RegYear, setRegYear] = useState("");
+
+  const route = async () => {
+    if (requestedAs === "rider") {
+      navigate("/termscondition1");
+    }
+    else if (requestedAs === "driver") {
+      navigate("/beforeapprovalterms");
+    }
+  };
 
   const getDashboardData = async () => {
     try {

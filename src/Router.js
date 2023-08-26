@@ -47,6 +47,7 @@ import DriverWhyProcess from "./pages/backend/dashboard/DriverWhyProcess";
 import DriverFinalStep from "./pages/backend/dashboard/DriverFinalStep";
 import Resubmit from "./pages/frontend/register-form/Resubmit";
 import TravelBuddyProfile from "./pages/backend/dashboard/TravelBuddyProfile";
+import TermsCondition from "./pages/backend/dashboard/TermsCondition";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -68,7 +69,6 @@ const Router = () => {
         <Route path='/replytoconfirmdates1' element={<BackendLayout children={<ReplyToConfirmDates1 />} />} />
         <Route path='/sendapprovalforpartner1' element={<BackendLayout children={<SendApprovalForPartner1 />} />} />
         <Route path='/sharetocare1' element={<BackendLayout children={<ShareToCare1 />} />} />
-        <Route path='/termscondition1' element={<BackendLayout children={<TermsCondition1 />} />} />
         <Route path='/verification1' element={<BackendLayout children={<Verification1 />} />} />
         <Route path='/whyprocesspayment1' element={<BackendLayout children={<WhyProcessPayment1 />} />} />
         <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
@@ -140,6 +140,8 @@ const Router = () => {
             <Route path="/driver-acceptance" element={<BackendLayout children={<DriverRequestAcceptence />} />}></Route>
             <Route path="/driverwhyprocesspayment" element={<BackendLayout children={<DriverWhyProcess />} />}></Route>
             <Route path="/driverfinalstep" element={<BackendLayout children={<DriverFinalStep />} />}></Route>
+            <Route path='/termscondition1' element={<BackendLayout children={<TermsCondition1 />} />} />
+            <Route path='/termscondition' element={<BackendLayout children={<TermsCondition />} />} />
           </>
         )}
         {!userLogin && <Route path="*" element={<Navigate to="/" />} />}
