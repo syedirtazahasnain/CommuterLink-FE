@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Datepicker } from "@mobiscroll/react";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -21,10 +21,10 @@ const TravelConfirmation = () => {
       setDialogOpen(true);
       setSelectedDate(date);
     }
-  }
+  };
   const handleCloseDialog = () => {
     setDialogOpen(false);
-  }
+  };
   // For Dashboard Data
   const [contactId, setContactId] = useState("");
 
@@ -108,8 +108,10 @@ const TravelConfirmation = () => {
         >
           <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
             <div className="card-body">
-
-              <div className="card p-4 border-0  p-2" style={{ backgroundColor: "#D9D9D9" }}>
+              <div
+                className="card p-4 border-0  p-2"
+                style={{ backgroundColor: "#D9D9D9" }}
+              >
                 <div className="card ">
                   {/* <div className="card-body text-success fw-bold"  > */}
                   {/* style={{backgroundColor: "rgb(229, 248, 243)"}} */}
@@ -119,14 +121,17 @@ const TravelConfirmation = () => {
                       calendarSize={1}
                       select="date"
                       display="inline"
-
                       onCellClick={handleDateChange}
-                    // onClick={handleDateChange}
-
+                      // onClick={handleDateChange}
                     />
                     <div className="row py-2">
-                      <p className="text-success fs-5 cursor-pointer text-right">No of Days Travelled 0</p>
-                      <p className="btn fs-5 text-success text-right"> View Full History</p>
+                      <p className="text-success fs-5 cursor-pointer text-right">
+                        No of Days Travelled 0
+                      </p>
+                      <p className="btn fs-5 text-success text-right">
+                        {" "}
+                        View Full History
+                      </p>
                     </div>
                   </div>
 
@@ -135,9 +140,7 @@ const TravelConfirmation = () => {
               </div>
               <Dialog open={dialogOpen} onClose={handleCloseDialog}>
                 <DialogTitle>Select Any Options</DialogTitle>
-                <DialogContent>
-
-                </DialogContent>
+                <DialogContent></DialogContent>
 
                 <div className="container text-center px-2">
                   <div className="row px-2">
@@ -145,7 +148,6 @@ const TravelConfirmation = () => {
                       <div>
                         <button className="btn  text-success fw-bold fs-5 lh-1">
                           <span>
-
                             <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
                           </span>
                           Travelled
@@ -154,7 +156,6 @@ const TravelConfirmation = () => {
                       <div>
                         <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
                           <span>
-
                             <i class="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
                           </span>
                           Not Travelled
@@ -163,7 +164,7 @@ const TravelConfirmation = () => {
                       <div>
                         <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
                           <span>
-                            <i class="fa-solid fa-car text-danger mx-1 fs-2" ></i>
+                            <i class="fa-solid fa-car text-danger mx-1 fs-2"></i>
                           </span>
                           Driver Didn't Come
                         </button>
@@ -171,8 +172,11 @@ const TravelConfirmation = () => {
                     </div>
                   </div>
                 </div>
+
                 <DialogActions>
-                  <Button className="text-dark" onClick={handleCloseDialog}>Cancel</Button>
+                  <Button className="text-dark" onClick={handleCloseDialog}>
+                    Cancel
+                  </Button>
                 </DialogActions>
               </Dialog>
             </div>

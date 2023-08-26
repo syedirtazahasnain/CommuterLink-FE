@@ -185,203 +185,203 @@ const Resubmit = () => {
   };
 
   return (
-    <div>
-      <div>
-        <section
-          id="resubmit"
-          className="mt-5"
-          style={{ backgroundColor: "#eee" }}
-        >
-          <div className="container">
-            {" "}
-            <div className="row">
-              <div
-                className="col-md-6 d-flex py-4"
-                style={{
-                  marginTop: "10vh",
-                }}
-              >
-                <Carousel
-                  style={{
-                    backgroundColor: "#eee",
-                  }}
-                  className="carousel-container"
-                  prevIcon={null}
-                  nextIcon={null}
-                  indicators={null}
-                >
-                  <Carousel.Item interval={2000}>
-                    <img
-                      className="d-block img-fluid w-auto"
-                      src={`${BASE_URL}/assets/images/signup.png`}
-                      alt="First slide"
-                    />
-                  </Carousel.Item>
-
-                  <Carousel.Item interval={2000}>
-                    <img
-                      className="d-block img-fluid w-auto"
-                      src={`${BASE_URL}/assets/images/signup-3.png`}
-                      alt="First slide"
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item interval={2000}>
-                    <img
-                      className="d-block img-fluid w-auto"
-                      src={`${BASE_URL}/assets/images/signup-4.png`}
-                      alt="First slide"
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item interval={2000}>
-                    <img
-                      className="d-block img-fluid w-auto"
-                      src={`${BASE_URL}/assets/images/signup-6.png`}
-                      alt="First slide"
-                    />
-                  </Carousel.Item>
-                </Carousel>
-                {/* </div> */}
-              </div>
-
-              <div className="col-md-5 py-5 px-5">
-                <h1
-                  className="text-center text-custom  mb-2"
-                  style={{
-                    color: "#198754",
-                    marginBottom: "5px",
-                    marginTop: "10vh",
-                  }}
-                >
-                  {" "}
-                  ReSubmit
-                </h1>{" "}
-                <Form className="text-center">
-                  <Form.Group
-                    className="mb-1 mt-5 text-center"
-                    controlId="formBasicEmail"
-                  >
-                    <TextField
-                      fullWidth
-                      className="bg-light"
-                      variant="outlined"
-                      type="text"
-                      label="CNIC"
-                      color="success"
-                      placeholder="XXXXX-XXXXXXX-X"
-                      //   onChange={(e) => validateEmail(e.target.value)}
-                      //   required
-                      //   error={!isValidEmail}
-                      //   helperText={!isValidEmail && "Please enter a valid email"}
-                      size="small"
-                      sx={{ width: "100%" }}
-                    />
-                  </Form.Group>
-
-                  <Box className="mt-4 text-center"  >
-                    <input
-                      accept="image/*"
-                      style={{ display: "none" }}
-                      id="image-upload"
-                      type="file"
-                      color="light"
-                      onChange={handleImageChange}
-                    />
-                    
-
-                    <label htmlFor="image-upload" className="w-100 bg-light text-success">
-                      <Button
-                        variant="contained"
-                        color="success"
-                        p-3
-                        component="span"
-                        startIcon={<CloudUpload />}
-                        className="w-100 bg-light text-success"
-                      >
-                        Front Side of Your CNIC
-                      </Button>
-                    </label>
-                    {selectedImage && (
-                      <div >
-                        <Typography
-                          variant="body1"
-                          fullWidth
+                    <div>
+                    <div>
+                        <section
+                        id="resubmit"
+                        className="mt-5"
+                        style={{ backgroundColor: "#eee" }}
                         >
-                          Selected Image:
-                        </Typography>
-                        <img
-                          src={URL.createObjectURL(selectedImage)}
-                          alt="Selected"
-                        />
-                        <Button
-                          variant="contained"
-                          
-                          onClick={handleUpload}
-                        >
-                          Upload
-                        </Button>
-                      </div>
-                    )}
-                  </Box>
-                  
-                  <Box className="mt-4 text-center"  >
-                    <input
-                      accept="image/*"
-                      style={{ display: "none" }}
-                      id="image-upload"
-                      type="file"
-                      color="light"
-                      onChange={handleImageChange}
-                    />
-                    
+                        <div className="container">
+                            {" "}
+                            <div className="row">
+                            <div
+                                className="col-md-6 d-flex py-4"
+                                style={{
+                                marginTop: "10vh",
+                                }}
+                            >
+                                <Carousel
+                                style={{
+                                    backgroundColor: "#eee",
+                                }}
+                                className="carousel-container"
+                                prevIcon={null}
+                                nextIcon={null}
+                                indicators={null}
+                                >
+                                <Carousel.Item interval={2000}>
+                                    <img
+                                    className="d-block img-fluid w-auto"
+                                    src={`${BASE_URL}/assets/images/signup.png`}
+                                    alt="First slide"
+                                    />
+                                </Carousel.Item>
 
-                    <label htmlFor="image-upload" className="w-100 bg-light text-success">
-                      <Button
-                        variant="contained"
-                        color="success"
-                        p-3
-                        component="span"
-                        startIcon={<CloudUpload />}
-                        className="w-100 bg-light text-success"
-                      >
-                        Back Side of Your CNIC
-                      </Button>
-                    </label>
-                    {selectedImage && (
-                      <div >
-                        <Typography
-                          variant="body1"
-                          fullWidth
-                        >
-                          Selected Image:
-                        </Typography>
-                        <img
-                          src={URL.createObjectURL(selectedImage)}
-                          alt="Selected"
-                        />
-                        <Button
-                          variant="contained"
-                          
-                          onClick={handleUpload}
-                        >
-                          Upload
-                        </Button>
-                      </div>
-                    )}
-                  </Box>
-                 <div className="py-5">
-                 <btnresubmit className="btn-custom mx-2  px-4 py-2 rounded rounded-5 text-custom fw-bold">
-                    Resubmit
-                  </btnresubmit>
-                 </div>
-                  
-                </Form>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  );
+                                <Carousel.Item interval={2000}>
+                                    <img
+                                    className="d-block img-fluid w-auto"
+                                    src={`${BASE_URL}/assets/images/signup-3.png`}
+                                    alt="First slide"
+                                    />
+                                </Carousel.Item>
+                                <Carousel.Item interval={2000}>
+                                    <img
+                                    className="d-block img-fluid w-auto"
+                                    src={`${BASE_URL}/assets/images/signup-4.png`}
+                                    alt="First slide"
+                                    />
+                                </Carousel.Item>
+                                <Carousel.Item interval={2000}>
+                                    <img
+                                    className="d-block img-fluid w-auto"
+                                    src={`${BASE_URL}/assets/images/signup-6.png`}
+                                    alt="First slide"
+                                    />
+                                </Carousel.Item>
+                                </Carousel>
+                                {/* </div> */}
+                            </div>
+
+                            <div className="col-md-5 py-5 px-5">
+                                <h1
+                                className="text-center text-custom  mb-2"
+                                style={{
+                                    color: "#198754",
+                                    marginBottom: "5px",
+                                    marginTop: "10vh",
+                                }}
+                                >
+                                {" "}
+                                ReSubmit
+                                </h1>{" "}
+                                <Form className="text-center">
+                                <Form.Group
+                                    className="mb-1 mt-5 text-center"
+                                    controlId="formBasicEmail"
+                                >
+                                    <TextField
+                                    fullWidth
+                                    className="bg-light"
+                                    variant="outlined"
+                                    type="text"
+                                    label="CNIC"
+                                    color="success"
+                                    placeholder="XXXXX-XXXXXXX-X"
+                                    //   onChange={(e) => validateEmail(e.target.value)}
+                                    //   required
+                                    //   error={!isValidEmail}
+                                    //   helperText={!isValidEmail && "Please enter a valid email"}
+                                    size="small"
+                                    sx={{ width: "100%" }}
+                                    />
+                                </Form.Group>
+
+                                <Box className="mt-4 text-center"  >
+                                    <input
+                                    accept="image/*"
+                                    style={{ display: "none" }}
+                                    id="image-upload"
+                                    type="file"
+                                    color="light"
+                                    onChange={handleImageChange}
+                                    />
+                                    
+
+                                    <label htmlFor="image-upload" className="w-100 bg-light text-success">
+                                    <Button
+                                        variant="contained"
+                                        color="success"
+                                        p-3
+                                        component="span"
+                                        startIcon={<CloudUpload />}
+                                        className="w-100 bg-light text-success"
+                                    >
+                                        Front Side of Your CNIC
+                                    </Button>
+                                    </label>
+                                    {selectedImage && (
+                                    <div >
+                                        <Typography
+                                        variant="body1"
+                                        fullWidth
+                                        >
+                                        Selected Image:
+                                        </Typography>
+                                        <img
+                                        src={URL.createObjectURL(selectedImage)}
+                                        alt="Selected"
+                                        />
+                                        <Button
+                                        variant="contained"
+                                        
+                                        onClick={handleUpload}
+                                        >
+                                        Upload
+                                        </Button>
+                                    </div>
+                                    )}
+                                </Box>
+                                
+                                <Box className="mt-4 text-center"  >
+                                    <input
+                                    accept="image/*"
+                                    style={{ display: "none" }}
+                                    id="image-upload"
+                                    type="file"
+                                    color="light"
+                                    onChange={handleImageChange}
+                                    />
+                                    
+
+                                    <label htmlFor="image-upload" className="w-100 bg-light text-success">
+                                    <Button
+                                        variant="contained"
+                                        color="success"
+                                        p-3
+                                        component="span"
+                                        startIcon={<CloudUpload />}
+                                        className="w-100 bg-light text-success"
+                                    >
+                                        Back Side of Your CNIC
+                                    </Button>
+                                    </label>
+                                    {selectedImage && (
+                                    <div >
+                                        <Typography
+                                        variant="body1"
+                                        fullWidth
+                                        >
+                                        Selected Image:
+                                        </Typography>
+                                        <img
+                                        src={URL.createObjectURL(selectedImage)}
+                                        alt="Selected"
+                                        />
+                                        <Button
+                                        variant="contained"
+                                        
+                                        onClick={handleUpload}
+                                        >
+                                        Upload
+                                        </Button>
+                                    </div>
+                                    )}
+                                </Box>
+                                <div className="py-5">
+                                <btnresubmit className="btn-custom mx-2  px-4 py-2 rounded rounded-5 text-custom fw-bold">
+                                    Resubmit
+                                </btnresubmit>
+                                </div>
+                                
+                                </Form>
+                            </div>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                    </div>
+                );
 };
 
 export default Resubmit;
