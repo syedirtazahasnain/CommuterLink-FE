@@ -231,7 +231,7 @@ const Login = () => {
               </div>
 
               <div className="col-md-5 mb-2 px-5">
-                <h3
+                <h1
                   className="text-center text-custom  mb-2"
                   style={{
                     color: "#198754",
@@ -241,7 +241,7 @@ const Login = () => {
                 >
                   {" "}
                   Login
-                </h3>{" "}
+                </h1>{" "}
                 <Form className="text-center">
                   <Form.Group
                     className="mb-1 mt-5 text-center"
@@ -282,7 +282,7 @@ const Login = () => {
                           <Checkbox
                             value="termsService"
                             style={{ borderColor: "#198754" }}
-                            required
+                            // required
                             onChange={(e) => setTermsService(e.target.checked)}
                             size="small"
                           />
@@ -362,7 +362,7 @@ const Login = () => {
                   </div>
                 </Form>
               </div>
-              <div className="col-md-1"></div>
+             
             </div>
           </div>
         </section>

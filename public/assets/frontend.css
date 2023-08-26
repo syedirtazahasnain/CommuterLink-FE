@@ -561,3 +561,6 @@ a.nav-link:hover {
   height: 250px;
   background: #fff;
 }
+.image-upload-container {
+  width: 400px; /* Adjust the width as needed */
+}

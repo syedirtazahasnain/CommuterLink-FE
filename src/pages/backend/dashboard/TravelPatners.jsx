@@ -74,8 +74,8 @@ const TravelPatners = () => {
 
   return (
     <div>
-      <div className="card bg-light-green mt-3 mb-5">
-        <div className="card-header bg-black">
+      <div className="card  mt-3 mb-5">
+        <div className="card-header" style={{ backgroundColor: "#2a402a" }}>
           <h3 className="text-center text-warning m-auto">
             {" "}
             MY TRAVEL PARTNERS{" "}
@@ -290,9 +290,7 @@ const TravelPatners = () => {
                         <div className="d-flex flex-column">
                         <div
                                   className="card-header text-white"
-                                  style={{
-                                    backgroundColor: "#2a402a",
-                                  }}
+                                  style={{backgroundColor:'#3d4f4c'}}
                                 >
                                   <h4 className="text-center text-white m-auto">
                                     MY WALLET
@@ -336,9 +334,7 @@ const TravelPatners = () => {
                         <div className="d-flex flex-column">
                         <div
                                   className="card-header text-white"
-                                  style={{
-                                    backgroundColor: "#2a402a",
-                                  }}
+                                  style={{backgroundColor:'#3d4f4c'}}
                                 >
                                   <h4 className="text-center text-white m-auto">
                                     COST PER SEAT PER DAY

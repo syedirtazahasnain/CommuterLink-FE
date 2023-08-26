@@ -318,15 +318,15 @@ const BackendLayout = ({ children }) => {
                               {/*end::Symbol*/}
                               {/*begin::Info*/}
                               <div className="m-0">
-                                <span className="fw-semibold text-white d-block fs-5">
+                                <span className="fw-semibold text-white d-block fs-5 mb-1">
                                 {name ? (name) : ("Yasir Abbas Mirza")}
                                 </span>
-                                <button
-                                  href="/"
-                                  className="btn btn-sm Profile fw-bold text-white  text-hover-dark fs-6 rounded-4"
+                                <Link
+                                  to="/viewprofile"
+                                  className=" btn-sm Profile fw-bold text-white  text-hover-dark fs-6 py-2 rounded-4"
                                 >
                                   Profile
-                                </button>
+                                </Link>
                               </div>
                               {/*end::Info*/}
                             </div>
@@ -354,14 +354,13 @@ const BackendLayout = ({ children }) => {
                             </Link>
                           </div>
 
+                          
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
-                                currentPage == "insights-generator"
-                                  ? "active"
-                                  : ""
+                                currentPage == "profile" ? "active" : ""
                               }`}
-                              to={"/portal/insights-generator"}
+                              to={"/viewprofile"}
                               style={{
                                 borderRadius: "0%",
                                 marginLeft: "0%",
@@ -369,19 +368,17 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i className="fa-solid fa-user"></i>
+                                <i className="fas fa-solid fa-user fa-2x"></i>
                               </span>
                               <span className="menu-title text-white">
                                 Profile
                               </span>
-                              <span className=""></span>
                             </Link>
                           </div>
-
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
-                                currentPage == "insights-generator"
+                                currentPage == "termscondition"
                                   ? "active"
                                   : ""
                               }`}
@@ -424,9 +421,9 @@ const BackendLayout = ({ children }) => {
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
-                                currentPage == "news-management" ? "active" : ""
+                                currentPage == "contactus" ? "active" : ""
                               }`}
-                              to={"/contact"}
+                              to={"/contactus"}
                               style={{
                                 borderRadius: "0%",
                                 marginLeft: "0%",
@@ -444,9 +441,9 @@ const BackendLayout = ({ children }) => {
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
-                                currentPage == "news-management" ? "active" : ""
+                                currentPage == "whatsapp" ? "active" : ""
                               }`}
-                              to={"/portal/news-management"}
+                              to={"/whatsapp"}
                               style={{
                                 borderRadius: "0%",
                                 marginLeft: "0%",

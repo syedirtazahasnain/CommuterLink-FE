@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
+import { setCurrentPage } from "../../../redux/generalSlice";
+
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -38,6 +40,7 @@ const TermsCondition1 = () => {
 
   useEffect(() => {
     getMemberData();
+    dispatch(setCurrentPage("termscondition"));
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
@@ -79,26 +82,26 @@ const TermsCondition1 = () => {
       <div className="card p-4 bg-light p-2">
         <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
           <div className="card-body">
-            <p>1.Your car is in a good shape and is roadworthy</p>
+            <p>1. Your car is in a good shape and is roadworthy</p>
             <p className="">
               2. You are committed to provide the car for commuting of partners
               on all days mentioned in the agreement
             </p>
             <p>
-              3.If due to any unforeseen reason you cannot commute on certain
+              3. If due to any unforeseen reason you cannot commute on certain
               day, no fee will be paid for that day
             </p>
             <p>
-              4.You will inform the partners well in advance (atleast 12 hours)
+              4. You will inform the partners well in advance (atleast 12 hours)
               about your inability to cummute on a certain day. In case of an
               emergency this can be waived off under exceptional circumstances
             </p>
             <p>
-              5.You will be paid on daily basis for actual number of days that
+              5. You will be paid on daily basis for actual number of days that
               your car is used
             </p>
             <p>
-              6.If a commuting partner misses the car and fails to commute due
+              6. If a commuting partner misses the car and fails to commute due
               to late arrival/time off you will still be paid for that day
             </p>
             <p>

@@ -312,7 +312,7 @@ const Signup = () => {
               </div>
 
               <div className="col-md-5 mb-2 px-5">
-                <h3
+                <h1
                   className="text-center text-custom  mb-2"
                   style={{
                     color: "#198754",
@@ -322,7 +322,7 @@ const Signup = () => {
                 >
                   {" "}
                   Sign up
-                </h3>{" "}
+                </h1>{" "}
                 <Form className="text-center">
                   
                 <Form.Group
@@ -343,6 +343,7 @@ const Signup = () => {
                         
                       />
                     </Form.Group>
+                    
                     <Form.Group
                     className="mt-3 text-center"
                     controlId="formBasicEmail"

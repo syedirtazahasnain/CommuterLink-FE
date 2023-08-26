@@ -63,8 +63,8 @@ const CommuterLinkSuggestions = () => {
 
   return (
     <div>
-      <div className="card bg-light-green mt-3 mb-5">
-        <div className="card-header bg-black">
+      <div className="card  mt-3 mb-5">
+        <div className="card-header"  style={{ backgroundColor: "#2a402a" }}>
           <h3 className="text-center text-warning m-auto">
             {" "}
             TRAVEL BUDDIES FOR YOUR CAR{" "}
@@ -81,7 +81,8 @@ const CommuterLinkSuggestions = () => {
             <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
               <div
                 className="card-header "
-                style={{ backgroundColor: "#2a402a" }}
+                // style={{ backgroundColor: "#2a402a" }}
+                style={{backgroundColor:'#3d4f4c'}}
               >
                 <h3 className="text-white mt-4 mx-auto">
                   COMMUTERSLINK SUGGESTION

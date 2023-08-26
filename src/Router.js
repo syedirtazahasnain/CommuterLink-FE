@@ -37,6 +37,14 @@ import PaymentOptions from "./pages/backend/dashboard/PaymentOptions";
 import FinalStep from "./pages/backend/dashboard/FinalStep";
 import SendApprovalForMember from "./pages/backend/dashboard/SendApprovalForMember";
 import Congratulations from "./pages/backend/dashboard/Congratulations";
+import ContactUs from "./pages/backend/dashboard/ContactUs";
+import EditProfile from "./pages/backend/profile/EditProfile";
+import ViewProfile from "./pages/backend/profile/ViewProfile";
+import DriverRequestAcceptence from "./pages/backend/dashboard/DriverRequestAcceptence";
+import DriverWhyProcess from "./pages/backend/dashboard/DriverWhyProcess";
+import DriverFinalStep from "./pages/backend/dashboard/DriverFinalStep";
+import Resubmit from "./pages/frontend/register-form/Resubmit";
+
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -50,6 +58,7 @@ const Router = () => {
         <Route path="/login" element={<FrontendLayout children={<Login />} />}/>
         <Route path="/faq" element={<FrontendLayout children={<Faq />} />} />
         <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
+        <Route path="/resubmit" element={<FrontendLayout children={<Resubmit />} />} />
 
          {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />
@@ -62,13 +71,15 @@ const Router = () => {
         <Route path='/whyprocesspayment1' element={<BackendLayout children={<WhyProcessPayment1 />} />} />
         <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
         <Route path="/requestcarowner" element={<BackendLayout children={<RequestApprovalByCarOwner />} />}/>
-        <Route path="/rejection" element={<BackendLayout childDashboard12ren={<Rejection />} />}/>
+        <Route path="/rejection" element={<BackendLayout children={<Rejection />} />}/>
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />} />} />
+        
         <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />}/>
         <Route path="/contact" element={<BackendLayout children={<Contact />} />}/>
         <Route path="/driver-registration" element={<FrontendLayout children={<DriverRegistration />} />}/>
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />}/>
         <Route path="/shareride" element={<FrontendLayout children={<ShareRide />} />}></Route>
+        <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />}/>
         <Route path="/beforeapprovalterms" element={<BackendLayout children={<BeforeApprovalTerms />} />}></Route>
         <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
         <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
@@ -77,7 +88,13 @@ const Router = () => {
         <Route path="/finalstep" element={<BackendLayout children={<FinalStep />} />}></Route>
         <Route path="/sendapprovalformember" element={<BackendLayout children={<SendApprovalForMember />} />}></Route>
         <Route path="/congratulations" element={<BackendLayout children={<Congratulations />} />}></Route>
-        
+        <Route path="/contactus" element={<BackendLayout children={<ContactUs />} />}></Route>
+        <Route path="/editprofile" element={<BackendLayout children={<EditProfile />} />}></Route>
+        <Route path="/viewprofile" element={<BackendLayout children={<ViewProfile />} />}></Route>
+        <Route path="/driverwhyprocesspayment" element={<BackendLayout children={<DriverWhyProcess />} />}></Route>
+        <Route path="/driverfinalstep" element={<BackendLayout children={<DriverFinalStep />} />}></Route>
+
+
         {userSignup && (
           <>
             <Route path="/driver-registration" element={<FrontendLayout children={<DriverRegistration />} />}/>
@@ -106,6 +123,8 @@ const Router = () => {
               <Route path='/requestcarowner' element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
               <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
               <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
+              <Route path='/driver-acceptance' element={<BackendLayout children={<DriverRequestAcceptence />} />} />
+
             </>
           )}
           {!userLogin && <Route path="*" element={<Navigate to="/" />} />}

@@ -93,8 +93,7 @@ const Notifications = () => {
                 <form id="numberForm">
                   <div className="container my-3 text-center">
                     <Button
-                      variant="success"
-                      className="text-center btn btn-sm fs-6 fw-bold text-white rounded-4 px-3 py-2 mb-3"
+                      className="btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
                       onClick={route}
                     >
                       Back
