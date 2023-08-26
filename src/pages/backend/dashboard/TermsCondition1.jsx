@@ -23,6 +23,9 @@ const backgroundLogo = {
 
 const TermsCondition1 = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
+  const currentPage = useSelector((s) => s.general.currentPage);
   const userToken = useSelector((s) => s.login.data.token);
   const [requestedAs, setRequestedAs] = useState("");
   
@@ -36,7 +39,7 @@ const TermsCondition1 = () => {
   };
 
   useEffect(() => {
-    dispatch(setCurrentPage("termscondition"));
+    getMemberData();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
