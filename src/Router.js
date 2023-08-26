@@ -44,6 +44,8 @@ import DriverRequestAcceptence from "./pages/backend/dashboard/DriverRequestAcce
 import DriverWhyProcess from "./pages/backend/dashboard/DriverWhyProcess";
 import DriverFinalStep from "./pages/backend/dashboard/DriverFinalStep";
 import Resubmit from "./pages/frontend/register-form/Resubmit";
+import SchoolDriverRegistration from "./pages/frontend/register-form/SchoolDriverRegistration";
+import WouldYouLikeToSchool from "./pages/frontend/register-form/WouldYouLikeToSchool";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -103,7 +105,7 @@ const Router = () => {
             <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
             <Route path="/verification" element={<FrontendLayout children={<Verification />} />}></Route>
             <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
-            <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
+            <Route path="/school-form" element={<FrontendLayout children={<SchoolDriverRegistration />} />}></Route>
             <Route path="/school-driver-form" element={<FrontendLayout children={<SchoolDriverRegistration />} />}></Route>
           </>
         )}

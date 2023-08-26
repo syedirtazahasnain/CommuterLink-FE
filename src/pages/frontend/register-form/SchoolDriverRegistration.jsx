@@ -15,7 +15,7 @@ import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-map
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../../constants";
 
-const DriverRegistration = () => {
+const SchoolDriverRegistration = () => {
 
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
@@ -2463,4 +2463,4 @@ const DriverRegistration = () => {
   );
 };
 
-export default DriverRegistration;
+export default SchoolDriverRegistration;
