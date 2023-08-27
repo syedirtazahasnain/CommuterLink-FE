@@ -39,7 +39,7 @@ const TermsCondition1 = () => {
   };
 
   useEffect(() => {
-    getMemberData();
+    dispatch(setCurrentPage("termscondition"));
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");

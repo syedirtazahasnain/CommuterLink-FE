@@ -44,8 +44,6 @@ import DriverRequestAcceptence from "./pages/backend/dashboard/DriverRequestAcce
 import DriverWhyProcess from "./pages/backend/dashboard/DriverWhyProcess";
 import DriverFinalStep from "./pages/backend/dashboard/DriverFinalStep";
 import Resubmit from "./pages/frontend/register-form/Resubmit";
-import SchoolDriverRegistration from "./pages/frontend/register-form/SchoolDriverRegistration";
-import WouldYouLikeToSchool from "./pages/frontend/register-form/WouldYouLikeToSchool";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
