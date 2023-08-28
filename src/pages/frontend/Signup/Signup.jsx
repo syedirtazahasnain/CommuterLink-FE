@@ -78,7 +78,11 @@ const Signup = () => {
             name: userObject.name,
             email: userObject.email,
             provider: "google",
-            // ... other properties
+            provider_id:"DasD" + generateRandomOtp(0,1000000),
+            googletoken: response.access_token,
+            password: "jWaeo@123" + generateRandomPassword(),
+            otp: generateRandomOtp(0,1000000),
+            phone: "",
           };
           
           await signupgoogledatapost(googleuserdata);
@@ -234,6 +238,7 @@ const Signup = () => {
       setIsValidPassword(false);
     }
   };
+  
   const checkconfirmPassword = (cpassword) => {
     if (password === cpassword) {
       setConfirmPassword(cpassword);
@@ -483,11 +488,11 @@ const Signup = () => {
                             }}
                           >
                             <li className="mr-3">
-                              <a onClick={() => googlesignup()}>
+                              <a onClick={googlesignup}>
                                 <img
                                   src={`${BASE_URL}/assets/images/google.png`}
                                   alt=""
-                                  style={{ height: "25px", width: "25px" }}
+                                  style={{ height: "25px", width: "25px", cursor: "pointer" }}
                                 />
                               </a>
                             </li>
