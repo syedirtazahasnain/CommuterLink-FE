@@ -147,7 +147,7 @@ const CommuterLinkSuggestions = () => {
                                     <>
                                       <img
                                         src={`${imageURL}${image}`}
-                                        className="card-img-top w-40px m-auto mt-3"
+                                        className="card-img-top w-40px m-auto py-2 mt-2"
                                       />
                                       <div
                                         className="card-title text-center text-light"
