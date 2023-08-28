@@ -103,7 +103,6 @@ const Router = () => {
         <Route path="/driverwhyprocesspayment" element={<BackendLayout children={<DriverWhyProcess />} />}></Route>
         <Route path="/driverfinalstep" element={<BackendLayout children={<DriverFinalStep />} />}></Route>
 
-
         {userSignup && (
           <>
             <Route path="/driver-registration" element={<FrontendLayout children={<DriverRegistration />} />} />
