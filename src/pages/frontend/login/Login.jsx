@@ -323,11 +323,11 @@ const Login = () => {
                           }}
                         >
                           <li className="mr-3">
-                            <a onClick={() => googlesignup()}>
+                            <a onClick={googlesignup}>
                               <img
                                 src={`${BASE_URL}/assets/images/google.png`}
                                 alt=""
-                                style={{ height: "25px", width: "25px" }}
+                                style={{ height: "25px", width: "25px", cursor: "pointer" }}
                               />
                             </a>
                           </li>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BASE_URL } from "../../../constants";
 import { Form } from "react-bootstrap";
 import { Button } from "@mui/base";
@@ -14,9 +14,17 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const EditProfile = () => {
   const { id } = useParams();
+  const userToken = useSelector((s) => s.login.data.token);
+  const [email, setEmail] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isValidPassword, setIsValidPassword] = useState(true);
+  const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
   const crumbs = [
     {
       path: "/viewprofile",
@@ -36,6 +44,103 @@ const EditProfile = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  const validatePassword = (password) => {
+    // Regular expression pattern for validating passwords
+    const passwordPattern =
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (newPassword === '' || passwordPattern.test(password)) {
+      setNewPassword(password);
+      setIsValidPassword(true);
+    } else {
+      setNewPassword(password);
+      setIsValidPassword(false);
+    }
+  };
+
+  const checkconfirmPassword = (cpassword) => {
+    if (newPassword === cpassword) {
+      setConfirmPassword(cpassword);
+      setisValidConfirmPassword(true);
+    } else {
+      setConfirmPassword(cpassword);
+      setisValidConfirmPassword(false);
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
+
+  const getProfileData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/profile",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse) {
+        setEmail(jsonresponse[0].email);
+      }
+      else {
+        setEmail("");
+      }
+      console.log("Edit Profile Page Data", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const ResetPassword = async () => {
+    try {
+      if (currentPassword === "" || newPassword === "" || confirmPassword === "") {
+        alert("Please Fill All Fields!");
+      }
+      else {
+        const body = {
+          email: email,
+          old_password: currentPassword,
+          new_password: newPassword,
+        }
+        console.log("Reset Password Body", body);
+        
+        const response = await fetch(
+          "https://staging.commuterslink.com/api/v1/reset-password",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        const jsonresponse = await response.json();
+
+        if (jsonresponse.message === "Password updated successfully") {
+          alert(jsonresponse.message);
+          setCurrentPassword("");
+          setNewPassword("");
+          setConfirmPassword("");
+        } else {
+          alert("Error: " + jsonresponse.message);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div>
       <div className="page-title">
@@ -82,15 +187,10 @@ const EditProfile = () => {
         <div className="card" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
           <div className="card-body text-dark">
             <div className="container text-center">
-              <img
-                src={`${BASE_URL}/assets/images/Vector.png`}
-                style={{ height: "160px", width: "160px" }}
-                className="border border-2 rounded rounded-circle"
-              />
-              {/* <p>Name</p> */}
+              <h2 className="text-success">Change Password</h2>
               <Form className="text-center">
                 <Form.Group
-                  className=" mt-5 text-center"
+                  className=" mt-4 text-center"
                   controlId="formBasicEmail"
                 >
                   <FormControl
@@ -106,6 +206,8 @@ const EditProfile = () => {
                     <OutlinedInput
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -118,7 +220,7 @@ const EditProfile = () => {
                           </IconButton>
                         </InputAdornment>
                       }
-                      label="New Password"
+                      label="Current Password"
                     />
                   </FormControl>
                 </Form.Group>
@@ -140,6 +242,15 @@ const EditProfile = () => {
                     <OutlinedInput
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
+                      value={newPassword}
+                      onChange={(e) => validatePassword(e.target.value)}
+                      required
+                      size="small"
+                      error={!isValidPassword}
+                      helperText={
+                        !isValidPassword &&
+                        "Password must have at least 8 characters with mix of letters numbers special  characters"
+                      }
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -173,6 +284,15 @@ const EditProfile = () => {
                     <OutlinedInput
                       id="outlined-adornment-password"
                       type={showPassword ? "text" : "password"}
+                      value={confirmPassword}
+                      onChange={(e) => checkconfirmPassword(e.target.value)}
+                      required
+                      size="small"
+                      error={!isValidConfirmPassword}
+                      helperText={
+                        !isValidConfirmPassword &&
+                        "Both passwords must be the same"
+                      }
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -185,13 +305,16 @@ const EditProfile = () => {
                           </IconButton>
                         </InputAdornment>
                       }
-                      label="New Password"
+                      label="Confirm Password"
                     />
                   </FormControl>
                 </Form.Group>
                 <div className="container my-5">
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 py-2 mb-3">
-                    Save{" "}
+                  <Button 
+                    className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 py-2 mb-3" 
+                    onClick={ResetPassword}
+                  >
+                    Save
                   </Button>
                 </div>
               </Form>
