@@ -104,6 +104,9 @@ const EditProfile = () => {
       if (currentPassword === "" || newPassword === "" || confirmPassword === "") {
         alert("Please Fill All Fields!");
       }
+      else if (newPassword !== confirmPassword) {
+        alert("Confirm password is not matched with new password!")
+      }
       else {
         const body = {
           email: email,
@@ -111,7 +114,7 @@ const EditProfile = () => {
           new_password: newPassword,
         }
         console.log("Reset Password Body", body);
-        
+
         const response = await fetch(
           "https://staging.commuterslink.com/api/v1/reset-password",
           {
