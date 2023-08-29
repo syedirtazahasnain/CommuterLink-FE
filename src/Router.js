@@ -27,7 +27,7 @@ import FrontendLayout from "./pages/frontend/FrontendLayout";
 import RequestApprovalByCarOwner from "./pages/backend/dashboard/RequestApprovalByCarOwner";
 import Dashboard12 from "./pages/backend/dashboard/Dashboard12";
 import Notifications from "./pages/backend/dashboard/Notifications";
-import Rejection from "./pages/backend/dashboard/Rejection";
+import Rejection from "./pages/frontend/register-form/Rejection";
 import AdvancePayment from "./pages/backend/dashboard/AdvancePayment";
 import Contact from "./pages/frontend/Hompage-components/Contact";
 import BeforeApprovalTerms from "./pages/backend/dashboard/BeforeAprrovalTerms";
@@ -73,7 +73,7 @@ const Router = () => {
         <Route path='/whyprocesspayment1' element={<BackendLayout children={<WhyProcessPayment1 />} />} />
         <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
         <Route path="/requestcarowner" element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
-        <Route path="/rejection" element={<BackendLayout children={<Rejection />} />} />
+        <Route path="/rejection" element={<FrontendLayout children={<Rejection />} />} />
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />} />} />
 
         <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />} />

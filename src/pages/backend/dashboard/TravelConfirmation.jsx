@@ -302,71 +302,78 @@ const TravelConfirmation = () => {
           <div className="card h-50" style={{ backgroundColor: "#D9D9D9" }}>
             <div className="card-body">
               <div
-                className="card p-4 border-0  p-2"
+                className="card border-0"
                 style={{ backgroundColor: "#D9D9D9" }}
               >
                 <div className="card h-50">
-                  <div className="container">             
-                   <Box className="card  w-100">
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar
-            defaultValue={initialValue}
-            loading={isLoading}
-            className="w-100"
-            onMonthChange={handleMonthChange}
-            onClick={handleDateChange}
-            renderLoading={() => <DayCalendarSkeleton />}
-            slots={{
-              day: ServerDay,
-            }}
-            slotProps={{
-              day: {
-                highlightedDays,
-              },
-            }}
-            sx={{
-              "& .MuiDayCalendar-weekDayLabel": {
-                fontSize: "1.5rem",
-                paddingTop: "2rem",
-                paddingBottom:"1rem",
-                paddingLeft:"5rem",
-                paddingRight:"5rem",
-                margin: 0,
-              },
-              "& .MuiPickersDay-dayWithMargin": {
-                fontSize: "1.5rem",
-                padding:"5rem",
-                margin: 0,
-                
-              },
-              "& .MuiPickersDay-root:hover":{
-                backgroundColor:"#cbeddd",
-                paddding:"5rem"
-               
-                
-              },
-              "& .MuiPickersDay-root.Mui-selected":{
-                backgroundColor:"green"
-                
-              },
-              "& .MuiPickersCalendarHeader-labelContainer":{
-                fontSize:"16px"
-              },
-            
-            }}
-          />
-        </LocalizationProvider>
-      </Box>
-      <div className="row py-2">
+                  <div className="container">
+                    <Box className="card  w-100">
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateCalendar
+                          defaultValue={initialValue}
+                          loading={isLoading}
+                          className="w-100"
+                          onMonthChange={handleMonthChange}
+                          // onChange={handleDateChange}
+                          renderLoading={() => <DayCalendarSkeleton />}
+                          slots={{
+                            day: ServerDay,
+                          }}
+                          slotProps={{
+                            day: {
+                              highlightedDays,
+                              onClick: handleDateChange,
+                            },
+                          }}
+                          sx={{
+                            display: "grid",
+                            "& .MuiDayCalendar-weekDayLabel": {
+                              fontSize: "1.5rem",
+                              paddingTop: "2rem",
+                              paddingBottom: "1rem",
+                              paddingLeft: "5rem",
+                              paddingRight: "5rem",
+                              margin: 0,
+                            },
+                            "& .MuiPickersDay-dayWithMargin": {
+                              fontSize: "1.5rem",
+                              padding: "5rem",
+                              margin: 0,
+
+                            },
+                            "& .MuiPickersDay-root:hover": {
+                              backgroundColor: "#cbeddd",
+                              paddding: "5rem"
+
+
+                            },
+                            "& .MuiPickersDay-root.Mui-selected": {
+                              backgroundColor: "green",
+                              borderRadius: "90%",
+                              color: "#fff",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            },
+                            "& .MuiPickersCalendarHeader-labelContainer": {
+                              fontSize: "16px"
+                            },
+
+                          }}
+                        />
+                      </LocalizationProvider>
+                    </Box>
+                    <div className="row py-2">
                       <p className="text-success fs-5 px-4 cursor-pointer text-right">
                         No of Days Travelled 0
                       </p>
-                      <p className="btn fs-5 px-4 text-success text-right">
+                      <p className="btn fs-5 px-4 text-success text-right fw-bold">
                         {" "}
                         View Full History
                       </p>
-                    </div></div>
-  
+                    </div>
+                    </div>
+
                 </div>
               </div>
               <Dialog open={dialogOpen} onClose={handleCloseDialog}>

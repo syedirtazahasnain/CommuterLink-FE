@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BASE_URL } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { resetsignupState } from "../../../redux/signupSlice";
@@ -12,13 +12,53 @@ const Verification = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userToken = useSelector((s) => s.login.data.token);
   const name = useSelector((s) => s.signup.data.name);
   const email = useSelector((s) => s.signup.data.email);
+  const [verificationName, setVerificationName] = useState("");
+  const [image, setImage] = useState("");
+  const [verificationEmail, setVerificationEmail] = useState("");
+  const imageURL = "https://staging.commuterslink.com/uploads/picture/";
 
   const route = () => {
     dispatch(resetsignupState());
     dispatch(resetloginState());
     navigate("/");
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
+
+  const getProfileData = async () => {
+    try {
+      const response = await fetch(
+        "https://staging.commuterslink.com/api/v1/profile",
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse) {
+        setVerificationName(jsonresponse[0].name);
+        setVerificationEmail(jsonresponse[0].email);
+        setImage(jsonresponse[0].contact.commuter_image);
+      }
+      else {
+        setVerificationName("");
+        setVerificationEmail("");
+        setImage("");
+      }
+      console.log("Verification Page Data", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   const backgroundStyle = {
@@ -111,12 +151,12 @@ const Verification = () => {
                           <div>
                             {" "}
                             <img
-                              src={`${BASE_URL}/assets/images/CL-logo.png`}
+                              src={`${imageURL}${image}`}
                               alt="Sample photo"
                               style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '60%' }}
                             />
                           </div>
-                          <div className="text-white">{name}<br />{email}</div>
+                          <div className="text-white">{name ? name : verificationName}<br />{email ? email : verificationEmail}</div>
                           <h5 className="card-title mt-4" style={{ color: "yellow" }}>
                             Pending Verificaiton
                           </h5>

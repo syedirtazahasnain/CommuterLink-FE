@@ -43,8 +43,11 @@ const Login = () => {
           if(jsonresponse.data[0] === 1){
             navigate("/dashboard");
           }
-          else{
+          else if(jsonresponse.data[0] === 0){
             navigate("/verification");
+          }
+          else if(jsonresponse.data[0] === -1){
+            navigate("/rejection");
           }
         }
 

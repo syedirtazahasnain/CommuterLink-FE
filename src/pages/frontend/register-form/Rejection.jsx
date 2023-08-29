@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -47,38 +49,39 @@ const Rejection = () => {
 
   return (
     <div>
-           <div className="page-title">
+      <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-        Why Request hasnot been Approved        </h3>
+          Why Request has not been Approved        
+        </h3>
       </div>
       <div className="card p-4 bg-light p-2">
         <div className="card bg-danger">
-        <div className="card-body text-white">
-              <p>Your Request has not been approved due to the following reasons</p>
-              <p className="">
-                1. CNIC number is incorrect
-              </p>
-              <p>
-                2. CNIC front side image is not clear
-              </p>
-              <p>
-                3. CNIC is expired
-              </p>
-              <p>
-                4. Registration number is not clear in image of the car.
-              </p>
-              <div className="text-warning py-4">
-                <h5>
-                    Note: The above mentioned changes are necessary and  you can also
-                    update any other data.
-                </h5>
+          <div className="card-body text-white">
+            <p>Your Request has not been approved due to the following reasons</p>
+            <p className="">
+              1. CNIC number is incorrect
+            </p>
+            <p>
+              2. CNIC front side image is not clear
+            </p>
+            <p>
+              3. CNIC is expired
+            </p>
+            <p>
+              4. Registration number is not clear in image of the car.
+            </p>
+            <div className="text-warning py-4">
+              <h5>
+                Note: The above mentioned changes are necessary and  you can also
+                update any other data.
+              </h5>
             </div>
-             
-            </div>
-           
+
+          </div>
+
           <div className="text-center">
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="btn btn-sm fs-6 fw-bold btn-dark text-white rounded-4 px-3 py-2 mb-3"
             >
               Next
             </Button>
