@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { resetsignupState } from "../../../redux/signupSlice";
 import { resetloginState } from "../../../redux/loginSlice";
@@ -18,7 +18,6 @@ const Verification = () => {
   const [verificationName, setVerificationName] = useState("");
   const [image, setImage] = useState("");
   const [verificationEmail, setVerificationEmail] = useState("");
-  const imageURL = "https://staging.commuterslink.com/uploads/picture/";
 
   const route = () => {
     dispatch(resetsignupState());
@@ -33,7 +32,7 @@ const Verification = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -151,7 +150,7 @@ const Verification = () => {
                           <div>
                             {" "}
                             <img
-                              src={`${imageURL}${image}`}
+                              src={`${IMAGE_URL}${image}`}
                               alt="Sample photo"
                               style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '60%' }}
                             />

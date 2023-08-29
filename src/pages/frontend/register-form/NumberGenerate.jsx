@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import Carousel from "react-bootstrap/Carousel";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
@@ -28,7 +28,7 @@ function NumberGenerate() {
       };
   
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/mobilew",
+        `${API_URL}/api/v1/mobilew`,
         {
           method: "POST",
           headers: {
@@ -47,7 +47,7 @@ function NumberGenerate() {
           provider: store_signup.provider,
         };
         const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/auth",
+          `${API_URL}/api/v1/auth`,
           {
             method: "POST",
             headers: {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -14,7 +14,6 @@ const TravelPatners = () => {
   const [price, setPrice] = useState("");
   const [date, setDate] = useState("");
   const [walletAmount, setWalletAmount] = useState("");
-  const imageURL = "https://staging.commuterslink.com/uploads/picture/";
 
   useEffect(() => {
     getTravelData();
@@ -32,7 +31,7 @@ const TravelPatners = () => {
   const getTravelData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/travelbuddy",
+        `${API_URL}/api/v1/travelbuddy`,
         {
           method: "get",
           headers: {
@@ -59,7 +58,7 @@ const TravelPatners = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -109,32 +108,57 @@ const TravelPatners = () => {
                 >
                   <div class="row d-flex justify-content-center">
                     <div className="col-sm-2">
-                      <div
-                        className="card bg-success"
-                        style={{
-                          width: "6rem",
-                          fontWeight: "bold",
-                          backgroundColor: "rgb(32 155 98)",
-                        }}
-                      >
-                        <img
-                          src={`${imageURL}${image}`}
-                          className="card-img-top w-40px m-auto py-3 h-65px h-fixed"
-                        />
+                      {name && image ? (
                         <div
-                          className="card-title text-light text-center"
-                          style={{ width: "6rem", cursor: "pointer" }}
-                          onClick={() => {
-                            route();
+                          className="card bg-success"
+                          style={{
+                            width: "6rem",
+                            fontWeight: "bold",
+                            backgroundColor: "rgb(32 155 98)",
                           }}
                         >
-                          {name}
+                          <img
+                            src={`${IMAGE_URL}${image}`}
+                            className="card-img-top w-40px m-auto py-3 h-65px h-fixed"
+                          />
+                          <div
+                            className="card-title text-light text-center"
+                            style={{ width: "6rem", cursor: "pointer" }}
+                            onClick={() => {
+                              route();
+                            }}
+                          >
+                            {name}
+                          </div>
+                          <img
+                            className=""
+                            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                          />
                         </div>
-                        <img
-                          className=""
-                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                        />
-                      </div>
+                      ) : (
+                        <div
+                          className="card bg-success"
+                          style={{ width: "6rem" }}
+                        >
+                          <img
+                            src={`${BASE_URL}/assets/images/Vector.png`}
+                            className="card-img-top w-40px m-auto mt-3"
+                          />
+
+                          <div
+                            className="card-title text-center text-light"
+                            style={{
+                              width: "6rem",
+                            }}
+                          >
+                            Member ID
+                          </div>
+                          <img
+                            className=""
+                            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                          />
+                        </div>
+                      )}
                     </div>
 
                     <div className="col-sm-2">
@@ -291,21 +315,21 @@ const TravelPatners = () => {
                         <div className="row py-5 w-100">
                           <div className="col-md-3 px-1 m-auto ">
                             <div className="w-100">
-                            <button className="btn btn_view text-light btn-block bg-success btn-hover-success  fs-5">
-                              Recharge
-                            </button>
+                              <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
+                                Recharge
+                              </button>
                             </div>
-                           
+
                           </div>
                         </div>
                         <div className="row w-100">
-                          <div className="col-md-4 px-1 m-auto">
-                          <div className="w-100">
-                          <button className="btn btn_view text-light fs-5 btn-block bg-success ">
-                              View Transaction History
-                            </button>
-                          </div>
-                            
+                          <div className="col-md-5 px-1 m-auto">
+                            <div className="w-100">
+                              <button className="btn btn_view text-light btn-block bg-success">
+                                View Transaction History
+                              </button>
+                            </div>
+
                           </div>
                         </div>
                       </div>
@@ -330,12 +354,22 @@ const TravelPatners = () => {
                               <div className="col-md-12">
                                 <div
                                   className="p-3 px-5 h-fixed"
-                                  // style={{ width: "4rem" }}
+                                // style={{ width: "4rem" }}
                                 >
-                                  <img
-                                    src={`${imageURL}${image}`}
-                                    className="card-img-top w-50px m-auto border border-1 border-success "
-                                  />
+                                  {image ?
+                                    (
+                                      <img
+                                        src={`${IMAGE_URL}${image}`}
+                                        className="card-img-top w-50px m-auto border border-1 border-success "
+                                      />
+                                    ) :
+                                    (
+                                      <img
+                                        src={`${BASE_URL}/assets/images/Vector.png`}
+                                        className="card-img-top w-50px m-auto border border-1 border-success bg-success"
+                                      />
+                                    )
+                                  }
                                 </div>
                                 <div className="px-5">
                                   <h3 className="py-1">{name}</h3>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 
@@ -39,7 +39,7 @@ const SendApprovalForPartner1 = () => {
   const getDashboardData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/matches/office",
+        `${API_URL}/api/v1/matches/office`,
         {
           method: "get",
           headers: {
@@ -77,7 +77,7 @@ const SendApprovalForPartner1 = () => {
     };
 
     const response = await fetch(
-      "https://staging.commuterslink.com/api/v1/request",
+      `${API_URL}/api/v1/request`,
       {
         method: "POST",
         headers: {

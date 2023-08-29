@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BASE_URL } from '../../../constants'
+import { API_URL, BASE_URL, IMAGE_URL } from '../../../constants'
 import { Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 import { Breadcrumbs, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
@@ -14,7 +14,6 @@ const ViewProfile = () => {
   const [image, setImage] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNo, setMobileNo] = useState("");
-  const imageURL = "https://staging.commuterslink.com/uploads/picture/";
 
   const crumbs = [
     {
@@ -47,7 +46,7 @@ const ViewProfile = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -109,7 +108,7 @@ const ViewProfile = () => {
         <div className="card" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
           <div className="card-body text-dark">
             <div className="container text-center">
-              <img src={`${imageURL}${image}`} style={{ height: "150px", width: "150px" }} className='border border-2 rounded rounded-circle' />
+              <img src={`${IMAGE_URL}${image}`} style={{ height: "150px", width: "150px" }} className='border border-2 rounded rounded-circle' />
               <p>{name}</p>
               <Form className="text-center">
                 <Form.Group

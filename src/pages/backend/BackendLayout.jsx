@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { setSidebarState } from "../../redux/generalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../redux/loginSlice";
-import { BASE_URL } from "../../constants";
+import { API_URL, BASE_URL, IMAGE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../redux/signupSlice";
 import { Button } from "@mui/base";
@@ -28,7 +28,6 @@ const BackendLayout = ({ children }) => {
   const sidebarOpened = useSelector((s) =>s.general.sidebarOpened);
   const [name , setName] = useState("");
   const [image , setImage] = useState("");
-  const imageURL= "https://staging.commuterslink.com/uploads/picture";
   const [submitbtn , setSubmit] = useState(false); 
 
   // For getting current date
@@ -73,7 +72,7 @@ const BackendLayout = ({ children }) => {
   const getProfileData = async () => {
     try{
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -306,7 +305,7 @@ const BackendLayout = ({ children }) => {
                               {image ? 
                                 (
                                   <img
-                                    src={`${imageURL}/${image}`}
+                                    src={`${IMAGE_URL}${image}`}
                                   />
                                 ) : 
                                 (

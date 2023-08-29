@@ -18,6 +18,7 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import { Box } from "@mui/material";
 import { width } from "@mui/system";
+import { API_URL } from "../../../constants";
 
 const TravelConfirmation = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const TravelConfirmation = () => {
   const getDashboardData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/matches/office",
+        `${API_URL}/api/v1/matches/office`,
         {
           method: "get",
           headers: {
@@ -81,7 +82,7 @@ const TravelConfirmation = () => {
   const TravelConfirmation = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {

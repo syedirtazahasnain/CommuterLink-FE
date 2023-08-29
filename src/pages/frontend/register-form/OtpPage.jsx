@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -44,7 +44,7 @@ const OtpPage = () => {
         token: userData.token,
       };
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/signup",
+        `${API_URL}/api/v1/signup`,
         {
           method: "POST",
           headers: {
@@ -63,7 +63,7 @@ const OtpPage = () => {
           password: password,
         };
         const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/auth",
+          `${API_URL}/api/v1/auth`,
           {
             method: "POST",
             headers: {
@@ -123,7 +123,7 @@ const OtpPage = () => {
       signatur: "",
     };
     const response = await fetch(
-      "https://staging.commuterslink.com/api/v1/send/otp",
+      `${API_URL}/api/v1/send/otp`,
       {
         method: "POST",
         headers: {

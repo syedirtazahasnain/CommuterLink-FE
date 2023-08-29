@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { Form } from "react-bootstrap";
 import { Button } from "@mui/base";
 import {
@@ -75,7 +75,7 @@ const EditProfile = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -116,7 +116,7 @@ const EditProfile = () => {
         console.log("Reset Password Body", body);
 
         const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/reset-password",
+          `${API_URL}/api/v1/reset-password`,
           {
             method: "PUT",
             headers: {

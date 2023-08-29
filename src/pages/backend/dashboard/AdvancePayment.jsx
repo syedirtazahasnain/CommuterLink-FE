@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button } from "@mui/base";
@@ -74,7 +74,7 @@ const AdvancePayment = () => {
   const getDashboardData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/matches/office",
+        `${API_URL}/api/v1/matches/office`,
         {
           method: "get",
           headers: {
@@ -99,7 +99,7 @@ const AdvancePayment = () => {
   const getProfileData = async () => {
     try{
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -123,7 +123,7 @@ const AdvancePayment = () => {
   const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
+        `${API_URL}/api/v1/requests`,
         {
           method: "get",
           headers: {
@@ -152,7 +152,7 @@ const AdvancePayment = () => {
   const getPaymentDetails = async () => {
     try {
       const response = await fetch(
-        `https://staging.commuterslink.com/api/v1/advance-seat-cost/${memberId}`,
+        `${API_URL}/api/v1/advance-seat-cost/${memberId}`,
         {
           method: "get",
           headers: {
@@ -201,7 +201,7 @@ const AdvancePayment = () => {
   const getPaymentSuccess = async () => {
     try {
       const response = await fetch(
-        `https://staging.commuterslink.com/api/v1/apppaymentinquiry`,
+        `${API_URL}/api/v1/apppaymentinquiry`,
         {
           method: "get",
           headers: {

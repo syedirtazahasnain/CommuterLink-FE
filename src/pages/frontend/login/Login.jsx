@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
@@ -24,7 +24,7 @@ const Login = () => {
   const checkUserStatus = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/rejectedStatus",
+        `${API_URL}/api/v1/rejectedStatus`,
         {
           method: "get",
           headers: {
@@ -92,7 +92,7 @@ const Login = () => {
           password: password,
         };
         const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/auth",
+          `${API_URL}/api/v1/auth`,
           {
             method: "POST",
             headers: {
@@ -151,7 +151,7 @@ const Login = () => {
           };
   
           const res = await fetch(
-            "https://staging.commuterslink.com/api/v1/auth",
+            `${API_URL}/api/v1/auth`,
             {
               method: "POST",
               headers: {

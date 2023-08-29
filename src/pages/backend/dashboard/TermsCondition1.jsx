@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 
@@ -46,7 +46,7 @@ const TermsCondition1 = () => {
   const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
+        `${API_URL}/api/v1/requests`,
         {
           method: "get",
           headers: {

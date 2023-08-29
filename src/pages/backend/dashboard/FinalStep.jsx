@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -50,7 +50,7 @@ const FinalStep = () => {
   const getDashboardData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/matches/office",
+        `${API_URL}/api/v1/matches/office`,
         {
           method: "get",
           headers: {
@@ -79,7 +79,7 @@ const FinalStep = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -104,7 +104,7 @@ const FinalStep = () => {
   const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
+        `${API_URL}/api/v1/requests`,
         {
           method: "get",
           headers: {
@@ -140,7 +140,7 @@ const FinalStep = () => {
         console.log("sendRequest:", body);
   
         const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/request",
+          `${API_URL}/api/v1/request`,
           {
             method: "PUT",
             headers: {
@@ -176,7 +176,7 @@ const FinalStep = () => {
         console.log("sendRequest:", body);
   
         const response = await fetch(
-          "https://staging.commuterslink.com/api/v1/request",
+          `${API_URL}/api/v1/request`,
           {
             method: "PUT",
             headers: {

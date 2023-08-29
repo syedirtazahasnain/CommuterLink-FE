@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -13,7 +13,6 @@ const CommuterLinkSuggestions = () => {
   const [name, setName] = useState("");
   const [requestStatus, setRequestStatus] = useState("");
   const [requestStage, setRequestStage] = useState("");
-  const imageURL = "https://staging.commuterslink.com/uploads/picture/";
   const [image, setImage] = useState("");
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const CommuterLinkSuggestions = () => {
   const getDashboardData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/matches/office",
+        `${API_URL}/api/v1/matches/office`,
         {
           method: "get",
           headers: {
@@ -146,7 +145,7 @@ const CommuterLinkSuggestions = () => {
                                   {requestStage === 2 ? (
                                     <>
                                       <img
-                                        src={`${imageURL}${image}`}
+                                        src={`${IMAGE_URL}${image}`}
                                         className="card-img-top w-40px m-auto py-2 mt-2"
                                       />
                                       <div

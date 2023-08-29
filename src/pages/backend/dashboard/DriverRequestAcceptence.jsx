@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -49,7 +49,7 @@ const DriverRequestAcceptence = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -74,7 +74,7 @@ const DriverRequestAcceptence = () => {
   const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
+        `${API_URL}/api/v1/requests`,
         {
           method: "get",
           headers: {
@@ -106,7 +106,7 @@ const DriverRequestAcceptence = () => {
       }
 
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/request",
+        `${API_URL}/api/v1/request`,
         {
           method: "PUT",
           headers: {

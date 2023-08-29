@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
@@ -210,18 +210,20 @@ const RiderRegistration = () => {
     const getGeocodeStartData = async () => {
       try {
 
-        const response = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-        );
+        if (locationStartString) {
+          const response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+          );
 
-        const data = await response.json(); // Parse the response as JSON
-        console.log(data);
-        if (data.status === 'OK' && data.results.length > 0) {
-          const { lat, lng } = data.results[0].geometry.location;
-          setDefaultStartCenter({ lat, lng });
-          setMarkerPositionStart({ lat, lng });
-        } else {
-          console.error('Geocoding API response error');
+          const data = await response.json(); // Parse the response as JSON
+          console.log(data);
+          if (data.status === 'OK' && data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry.location;
+            setDefaultStartCenter({ lat, lng });
+            setMarkerPositionStart({ lat, lng });
+          } else {
+            console.error('Geocoding API response error');
+          }
         }
       } catch (error) {
         console.error('Error fetching geocoding data:', error);
@@ -234,17 +236,20 @@ const RiderRegistration = () => {
     // Function to fetch the geocoding data
     const getGeocodeEndData = async () => {
       try {
-        const response = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-        );
 
-        const data = await response.json(); // Parse the response as JSON
-        if (data.status === 'OK' && data.results.length > 0) {
-          const { lat, lng } = data.results[0].geometry.location;
-          setDefaultEndCenter({ lat, lng });
-          setMarkerPositionEnd({ lat, lng });
-        } else {
-          console.error('Geocoding API response error');
+        if (locationEndString) {
+          const response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+          );
+
+          const data = await response.json(); // Parse the response as JSON
+          if (data.status === 'OK' && data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry.location;
+            setDefaultEndCenter({ lat, lng });
+            setMarkerPositionEnd({ lat, lng });
+          } else {
+            console.error('Geocoding API response error');
+          }
         }
       } catch (error) {
         console.error('Error fetching geocoding data:', error);
@@ -255,7 +260,7 @@ const RiderRegistration = () => {
 
   const getdropdownStartdata = async () => {
     const response = await fetch(
-      "https://staging.commuterslink.com/api/v1/list/data",
+      `${API_URL}/api/v1/list/data`,
       {
         method: "get",
         headers: {
@@ -522,7 +527,7 @@ const RiderRegistration = () => {
         days: daysSelected,
       }
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/registration/location",
+        `${API_URL}/api/v1/registration/location`,
         {
           method: "POST",
           headers: {
@@ -564,7 +569,7 @@ const RiderRegistration = () => {
         user_type: 299
       }
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/registration/personal",
+        `${API_URL}/api/v1/registration/personal`,
         {
           method: "POST",
           headers: {
@@ -597,7 +602,7 @@ const RiderRegistration = () => {
         cnic_front_image: cnicFront,
       }
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/registration/store-images/cnic_front",
+        `${API_URL}/api/v1/registration/store-images/cnic_front`,
         {
           method: "POST",
           headers: {
@@ -630,7 +635,7 @@ const RiderRegistration = () => {
         cnic_back_image: cnicBack,
       }
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/registration/store-images/cnic_back",
+        `${API_URL}/api/v1/registration/store-images/cnic_back`,
         {
           method: "POST",
           headers: {
@@ -663,7 +668,7 @@ const RiderRegistration = () => {
         picture: picture,
       }
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/registration/store-images/picture",
+        `${API_URL}/api/v1/registration/store-images/picture`,
         {
           method: "POST",
           headers: {

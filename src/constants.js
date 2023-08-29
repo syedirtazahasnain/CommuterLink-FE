@@ -2,11 +2,19 @@ export const APP_VERSION = 'v1.2.0';
 export const BASE_URL = process.env.REACT_APP_BASE_URL 
     ? process.env.REACT_APP_BASE_URL 
     : 'http://localhost:3000';
+
 export const API_URL = process.env.REACT_APP_API_URL 
     ? process.env.REACT_APP_API_URL 
-    : 'http://localhost:3000';
+    : 'http://be.staging.commuterslink.com';
+
+export const IMAGE_URL = process.env.REACT_APP_IMAGE_URL 
+    ? process.env.REACT_APP_IMAGE_URL 
+    : 'http://be.staging.commuterslink.com/uploads/picture/';
+
 export const ENV_SITE_DEV = process.env.REACT_APP_SITE_DEV ? String(process.env.REACT_APP_SITE_DEV).toLowerCase() == 'true' : false;
+
 export const LAST_SYSTEM_UPDATE_DATETIME = '17-Jul-2023 (04: 37 PM)';
+
 export const LIST_DETAIL_ELEMENTS = {
     roles: {
         data_migrator: 1,

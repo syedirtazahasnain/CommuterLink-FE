@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/base";
 import Checkbox from "@mui/material/Checkbox"; 
@@ -111,7 +111,7 @@ const Signup = () => {
       };
       console.log("Google Body:", body);
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/signup",
+        `${API_URL}/api/v1/signup`,
         {
           method: "POST",
           headers: {
@@ -154,7 +154,7 @@ const Signup = () => {
             signatur: "",
           };
           const response = await fetch(
-            "https://staging.commuterslink.com/api/v1/send/otp",
+            `${API_URL}/api/v1/send/otp`,
             {
               method: "POST",
               headers: {

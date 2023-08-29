@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../../redux/generalSlice";
@@ -43,7 +43,7 @@ const Notifications = () => {
   const getNotifications = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/show-notifications/",
+        `${API_URL}/api/v1/show-notifications/`,
         {
           method: "get",
           headers: {

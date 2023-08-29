@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import { Button } from "@mui/base";
@@ -43,7 +43,7 @@ const DriverFinalStep = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -68,7 +68,7 @@ const DriverFinalStep = () => {
   const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
+        `${API_URL}/api/v1/requests`,
         {
           method: "get",
           headers: {
@@ -100,7 +100,7 @@ const DriverFinalStep = () => {
       }
 
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/request",
+        `${API_URL}/api/v1/request`,
         {
           method: "PUT",
           headers: {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 
@@ -75,7 +75,7 @@ const CommuterProfile1 = () => {
   const getDashboardData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/matches/office",
+        `${API_URL}/api/v1/matches/office`,
         {
           method: "get",
           headers: {
@@ -129,7 +129,7 @@ const CommuterProfile1 = () => {
     try {
       if (profileType === "Driver") {
         const response = await fetch(
-          `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/driver`,
+          `${API_URL}/api/v1/commuter/profile/${contactId}/driver`,
           {
             method: "get",
             headers: {
@@ -158,7 +158,7 @@ const CommuterProfile1 = () => {
       }
       else if (profileType === "Rider") {
         const response = await fetch(
-          `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/rider`,
+          `${API_URL}/api/v1/commuter/profile/${contactId}/rider`,
           {
             method: "get",
             headers: {
@@ -193,7 +193,7 @@ const CommuterProfile1 = () => {
   const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
+        `${API_URL}/api/v1/requests`,
         {
           method: "get",
           headers: {

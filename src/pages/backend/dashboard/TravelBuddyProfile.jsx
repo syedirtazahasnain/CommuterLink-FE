@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 
@@ -24,7 +24,6 @@ const TravelBuddyProfile = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
-  const imageURL= "https://staging.commuterslink.com/uploads/picture/";
   const [requestStage, setRequestStage] = useState("");
 
   const route = async () => {
@@ -76,7 +75,7 @@ const TravelBuddyProfile = () => {
   const getDashboardData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/matches/office",
+        `${API_URL}/api/v1/matches/office`,
         {
           method: "get",
           headers: {
@@ -130,7 +129,7 @@ const TravelBuddyProfile = () => {
     try {
       if (profileType === "Driver") {
         const response = await fetch(
-          `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/driver`,
+          `${API_URL}/api/v1/commuter/profile/${contactId}/driver`,
           {
             method: "get",
             headers: {
@@ -159,7 +158,7 @@ const TravelBuddyProfile = () => {
       }
       else if (profileType === "Rider") {
         const response = await fetch(
-          `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/rider`,
+          `${API_URL}/api/v1/commuter/profile/${contactId}/rider`,
           {
             method: "get",
             headers: {
@@ -194,7 +193,7 @@ const TravelBuddyProfile = () => {
   const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
+        `${API_URL}/api/v1/requests`,
         {
           method: "get",
           headers: {
@@ -231,7 +230,7 @@ const TravelBuddyProfile = () => {
   const getTravelData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/travelbuddy",
+        `${API_URL}/api/v1/travelbuddy`,
         {
           method: "get",
           headers: {
@@ -302,7 +301,7 @@ const TravelBuddyProfile = () => {
         <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }} >
           <div className="row">
             <div className="col-md-1 mt-1">
-              <img src={`${imageURL}${image}`} style={{ height: "115px", width: "115px" }} />
+              <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />
             </div>
             <div className="col-md-11 px-5">
               <div className="px-5">

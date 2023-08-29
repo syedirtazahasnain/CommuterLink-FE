@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { setloginState } from "../../../redux/loginSlice";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/base";
@@ -27,7 +27,7 @@ const SendApprovalForMember = () => {
     }
 
     const response = await fetch(
-      "https://staging.commuterslink.com/api/v1/request",
+      `${API_URL}/api/v1/request`,
       {
         method: "PUT",
         headers: {
@@ -66,7 +66,7 @@ const SendApprovalForMember = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -90,7 +90,7 @@ const SendApprovalForMember = () => {
   const getMemberData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/requests",
+        `${API_URL}/api/v1/requests`,
         {
           method: "get",
           headers: {
