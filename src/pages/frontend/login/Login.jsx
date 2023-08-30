@@ -206,6 +206,7 @@ const Login = () => {
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
@@ -214,6 +215,7 @@ const Login = () => {
                         src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
@@ -221,6 +223,7 @@ const Login = () => {
                         src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
@@ -228,6 +231,7 @@ const Login = () => {
                         src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
                     </Carousel.Item>
                   </Carousel>
                 {/* </div> */}

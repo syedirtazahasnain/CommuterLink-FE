@@ -82,7 +82,7 @@ const Verification = () => {
             <div
               className="col-md-6 d-flex fixed"
               style={{
-                marginTop: "20vh"
+                marginTop: "10vh"
               }}
             >
 
@@ -129,8 +129,52 @@ const Verification = () => {
             </div>
 
 
-            <div className="col-lg-5 col-md-4 col-sm-4 pt-5 ">
-              <div
+            <div className="col-md-6 pt-5" style={{marginTop: "6vh", marginBottom: "9vh"}}>
+              <div className="container py-3">
+                <div className="card p-3" style={{ backgroundColor: "#cddbd9" }}>
+                <div className="mt-3">
+                          <div className="text-center">
+                            {" "}
+                            <img
+                              src={`${imageURL}${image}`}
+                              alt="photo"
+                              style={{ width: '250px', height: '250px', objectFit: 'cover', borderRadius: '50%' }}
+                            />
+                          </div>
+                          <div className="text-white">{name ? name : verificationName}<br />{email ? email : verificationEmail}</div>
+                          <h3 className="card-title mt-4 mb-3 text-center text-success" >
+                            Pending Verificaiton
+                          </h3>
+                        </div>
+                        <div>
+                          <p className="text-dark text-justify">
+                            Thank you for providing all the information. Your membership
+                            approval will be notified through email and your mobile
+                            number after which, you will be able to access your
+                            dashboard and available choices to commute with
+                          </p>
+                        </div>
+
+                        <div className="text-center mb-3">
+                        <Button variant="" className="btnregistration fs-6 py-2" onClick={route}>
+                        Close
+                      </Button>
+                    </div>
+                        <form id="numberForm">
+                          {/* <div className="mb-3">
+
+                            <Button variant="success" className="btn-sm" onClick={route}>
+                              Close
+                            </Button>
+                          </div> */}
+                        </form>
+
+
+                  </div>
+                </div>
+              </div>
+           
+              {/* <div
                 className="card text-center border-1 border-success rounded rounded-4"
               >
                 <div className="container">
@@ -182,10 +226,9 @@ const Verification = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
-        </div>
       </section>
     </div>
   );
