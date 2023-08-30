@@ -246,21 +246,22 @@ const BackendLayout = ({ children }) => {
                           alt=""
                         />
                          <img
-                          src={`${BASE_URL}/assets/images/signup-3.png`}
+                          src={`${BASE_URL}/assets/images/CL-logo-small.png`}
                           className="h-40px app-sidebar-logo-minimize img-fluid w-auto"
+                          style={{ height: "50px", width: "auto" }}
                           // style={{ height: "50px", width: "auto" }}
                           alt=""
                         />
                       </div>
                       <button
                         id="kt_app_sidebar_toggle"
-                        className="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+                        className="app-sidebar-toggle btn btn-icon  btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
                         data-kt-toggle="true"
                         data-kt-toggle-state="active"
                         data-kt-toggle-target="body"
                         data-kt-toggle-name="app-sidebar-minimize"
                       >
-                        <span className="svg-icon svg-icon-2 rotate-180">
+                        <span className="svg-icon svg-icon-2 rotate-180 text-success">
                           <svg
                             width="24"
                             height="24"
@@ -313,7 +314,7 @@ const BackendLayout = ({ children }) => {
                                   <img
                                     src={`${BASE_URL}/assets/images/pic.png`}
                                   />
-                                )}
+                                )} 
                               </div>
                               {/*end::Symbol*/}
                               {/*begin::Info*/}
