@@ -323,7 +323,7 @@ const BackendLayout = ({ children }) => {
                                 </span>
                                 <Link
                                   to="/viewprofile"
-                                  className=" btn-sm Profile fw-bold text-white  text-hover-dark fs-6 py-2 rounded-4"
+                                  className=" btn-sm Profile fw-bold text-white  text-hover-dark fs-6 py-2 px-3 rounded-4"
                                 >
                                   Profile
                                 </Link>
@@ -390,7 +390,8 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                              <i className="fa-solid fa-terminal"></i>
+                              <i class="fa-regular fa-file-lines"></i>
+                              {/* <i className="fa-solid fa-terminal"></i> */}
                               </span>
                               <span className="menu-title text-white">
                                 Terms and Conditions
@@ -414,7 +415,7 @@ const BackendLayout = ({ children }) => {
                               </span>
 
                               <span className="menu-title text-white">
-                                Notification
+                                Notifications
                               </span>
                             </Link>
                           </div>
