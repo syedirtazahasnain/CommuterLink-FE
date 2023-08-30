@@ -58,36 +58,39 @@ const WouldYouLikeTo = () => {
                   nextIcon={null}
                   indicators={null}
                 >
-                  <Carousel.Item interval={2001}>
-                    <img
-                      className="Carousel_image img-fluid w-auto"
-                      src={`${BASE_URL}/assets/images/signup.png`}
-                      alt="First slide"
-                    />
-                  </Carousel.Item>
-
                   <Carousel.Item interval={2000}>
-                    <img
-                      className="Carousel_image img-fluid w-auto"
-                      src={`${BASE_URL}/assets/images/signup-3.png`}
-                      alt="second slide"
-                    />
-                  </Carousel.Item>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup.png`}
+                        alt="First slide"
+                      />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                    </Carousel.Item>
 
-                  <Carousel.Item interval={2003}>
-                    <img
-                      className="Carousel_image img-fluid  w-auto"
-                      src={`${BASE_URL}/assets/images/signup-4.png`}
-                      alt="third slide"
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item interval={2004}>
-                    <img
-                      className="Carousel_image img-fluid  w-auto"
-                      src={`${BASE_URL}/assets/images/signup-6.png`}
-                      alt="Fourth slide"
-                    />
-                  </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
+                        alt="First slide"
+                      />
+                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
+                        alt="First slide"
+                      />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
+                        alt="First slide"
+                      />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                    </Carousel.Item>
                 </Carousel>
               </div>
                
@@ -97,8 +100,8 @@ const WouldYouLikeTo = () => {
                 <Card
                   sx={{
                     marginTop: "10vh",
-                    maxWidth: "600px",
-                    marginLeft: "5px",
+                    maxWidth: "800px",
+                    // marginLeft: "5px",
                   }}
                 >
           

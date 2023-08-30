@@ -62,7 +62,15 @@
   font-family: "Sohne-Buch";
   font-size: 16px;
 }
-
+.btn-custom {
+  border: 1px solid #198754;
+  background: none;
+}
+.btn-custom:hover {
+  border: 1px solid #198754;
+  background-color: var(--bg-primary);
+  color: #fff;
+}
 .menu-item:hover, .menu-item.active{
   border-bottom: none;
   background-color: #6b6b6b;

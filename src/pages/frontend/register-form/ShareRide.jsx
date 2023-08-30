@@ -24,7 +24,7 @@ const ShareRide = () => {
         <div>
         <section
           id="sign-up"
-          className="mt-5"
+          // className="mt-5"
           style={{ backgroundColor: "#eee" }}
         >
         <div className="container">
@@ -33,7 +33,7 @@ const ShareRide = () => {
               <div
                 className="col-md-6 d-flex fixed"
                 style={{
-                  marginTop: "12vh",
+                  marginTop: "10vh",
                 }}
               >
                 
@@ -52,28 +52,32 @@ const ShareRide = () => {
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="second slide"
+                        alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
-                        alt="third slide"
+                        alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-6.png`}
-                        alt="forth slide"
+                        alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
                     </Carousel.Item>
                   </Carousel>
                 </div>
@@ -84,15 +88,15 @@ const ShareRide = () => {
                 <Card
                   sx={{
                     marginTop: "10vh",
-                    maxWidth: "400px",
-                    marginLeft: "5px",
+                    width: "600px"
+                    // marginLeft: "5px",
                   }}
                 >
           
                   <CardContent>
                     <Typography>
-                    <form id="regForm" className="multipstepform p-4 mt-3 mb-3">
-                        <h3 className="text-center text-custom mb-3" style={{color:'#198754'}}>I want to share ride for:</h3>
+                    <form id="regForm" className="multipstepform p-4 my-3">
+                        <h3 className="text-center text-custom mb-5" style={{color:'#198754'}}>I want to share ride for:</h3>
                       <div className="text-left"> <label className="radio-button ">
                             <input type="radio" id="option1"name="option" value="office"/>
                             <span className="ml-3"style={{color:'#198754'}}>Office</span>
@@ -104,19 +108,16 @@ const ShareRide = () => {
                           </label></div>
                           <div className="col-12 text-center">
                   
-                      <div className="mt-4"><Link to="/WouldYouLikeTo" className="btn btn-outline-custom">Next</Link></div>
+                      <div className="my-4">
+                      <Link variant="" className="btnregistration fs-6 py-2 px-4" style={{textDecoration: "none"}}>
+                        Next
+                      </Link>
+                        {/* <Link to="/WouldYouLikeTo" className="btn btn-custom">Next</Link> */}
+                        </div>
                     </div>
                     </form>
                     </Typography>
                   </CardContent>
-                 
-                  <CardActions className="row">
-                   
-                  </CardActions>
-                  <Typography sx={{ fontSize: "14px" }}>
-                    {" "}
-                  
-                  </Typography>
                 </Card>
               </div>
             </div>

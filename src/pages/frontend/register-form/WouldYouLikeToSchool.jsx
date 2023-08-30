@@ -97,8 +97,7 @@ const WouldYouLikeToSchool = () => {
                 <Card
                   sx={{
                     marginTop: "10vh",
-                    maxWidth: "600px",
-                    marginLeft: "5px",
+                    maxWidth: "800px",
                   }}
                 >
           
