@@ -1001,8 +1001,8 @@ const DriverRegistration = () => {
                             Province
                           </Form.Label>
                           <Form.Select
-                            aria-label="Default select example"
-
+                             aria-label="Default select example"
+                             className="text-secondary"
                             value={provinceStartId}
                             onChange={handleProvinceStartChange}
                             required
@@ -1024,8 +1024,8 @@ const DriverRegistration = () => {
                             City
                           </Form.Label>
                           <Form.Select
-                            aria-label="Default select example"
-
+                             aria-label="Default select example"
+                             className="text-secondary"
                             value={cityStartId}
                             onChange={(e) => setCityStartId(e.target.value)}
                             required
@@ -1046,8 +1046,8 @@ const DriverRegistration = () => {
                               Area
                             </Form.Label>
                             <Form.Select
-                              aria-label="Default select example"
-
+                             aria-label="Default select example"
+                             className="text-secondary"
                               value={locationStartString}
                               onChange={handleLocationStart}
                               required
@@ -1103,7 +1103,7 @@ const DriverRegistration = () => {
                           </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
-
+                            className="text-secondary"
                             value={selectedHomeTime}
                             onChange={(e) => setSelectedHomeTime(e.target.value)}
                             required
@@ -1133,7 +1133,7 @@ const DriverRegistration = () => {
                           </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
-
+                            className="text-secondary"
                             value={provinceEndId}
                             onChange={handleProvinceEndChange}
                             required
@@ -1156,7 +1156,7 @@ const DriverRegistration = () => {
                           </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
-
+                            className="text-secondary"
                             value={cityEndId}
                             onChange={(e) => setCityEndId(e.target.value)}
                             required
@@ -1178,7 +1178,7 @@ const DriverRegistration = () => {
                             </Form.Label>
                             <Form.Select
                               aria-label="Default select example"
-
+                              className="text-secondary"
                               value={locationEndString}
                               onChange={handleLocationEnd}
                               required
@@ -1232,7 +1232,7 @@ const DriverRegistration = () => {
                           </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
-
+                            className="text-secondary"
                             value={selectedOfficeTime}
                             onChange={(e) => setSelectedOfficeTime(e.target.value)}
                             required
@@ -1778,8 +1778,8 @@ const DriverRegistration = () => {
                       <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                         <Form.Label className="fs-6 text-black">Gender</Form.Label>
                         <Form.Select
-                          aria-label="Default select example"
-
+                           aria-label="Default select example"
+                           className="text-secondary"
                           value={gender}
                           onChange={(e) => setGender(e.target.value)}
                           required
@@ -1794,8 +1794,8 @@ const DriverRegistration = () => {
                           Preferred Gender
                         </Form.Label>
                         <Form.Select
-                          aria-label="Default select example"
-
+                           aria-label="Default select example"
+                           className="text-secondary"
                           value={preferredGender}
                           onChange={(e) => setPreferredGender(e.target.value)}
                           required
@@ -1848,7 +1848,7 @@ const DriverRegistration = () => {
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                          className="text-secondary"
                           value={martialStatus}
                           onChange={(e) => setMartialStatus(e.target.value)}
                           required
@@ -1864,7 +1864,7 @@ const DriverRegistration = () => {
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-                          style={{ color: "#000" }}
+                          className="text-secondary"
                           value={education}
                           onChange={(e) => setEducation(e.target.value)}
                           required
