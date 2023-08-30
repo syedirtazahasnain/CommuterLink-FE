@@ -12,6 +12,7 @@ import { setsignupState } from "../../../redux/signupSlice";
 import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 import Form from "react-bootstrap/Form";
+import { Tooltip } from "@mui/material";
 
 const Signup = () => {
   
@@ -492,6 +493,8 @@ const Signup = () => {
                             }}
                           >
                             <li className="mr-3">
+                            <Tooltip title="Signup With Google">
+                            
                               <a onClick={googlesignup}>
                                 <img
                                   src={`${BASE_URL}/assets/images/google.png`}
@@ -499,8 +502,11 @@ const Signup = () => {
                                   style={{ height: "25px", width: "25px", cursor: "pointer" }}
                                 />
                               </a>
+                            </Tooltip>
                             </li>
                             <li className="mr-3">
+                            <Tooltip title="Signup With Facebook">
+                            
                               <a href="https://www.facebook.com/Sysreforms">
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
@@ -508,8 +514,11 @@ const Signup = () => {
                                   style={{ height: "27px", width: "27px" }}
                                 />
                               </a>
+                            </Tooltip>
                             </li>
                             <li>
+                            <Tooltip title="Signup With Twitter">
+                            
                               <a href="https://instagram.com/sysreforms_international?igshid=YmMyMTA2M2Y= ">
                                 <img
                                   src={`${BASE_URL}/assets/images/twitter.png`}
@@ -517,6 +526,7 @@ const Signup = () => {
                                   style={{ height: "27px", width: "27px" }}
                                 />
                               </a>
+                            </Tooltip>
                             </li>
                           </ul>
                         </div>

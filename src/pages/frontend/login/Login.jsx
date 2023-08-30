@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { useGoogleLogin } from "@react-oauth/google";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControlLabel, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { Button } from "@mui/base";
@@ -330,15 +330,18 @@ const Login = () => {
                           }}
                         >
                           <li className="mr-3">
-                            <a onClick={googlesignup}>
+                          <Tooltip title="Login With Google">
+                          <a onClick={googlesignup}>
                               <img
                                 src={`${BASE_URL}/assets/images/google.png`}
                                 alt=""
                                 style={{ height: "25px", width: "25px", cursor: "pointer" }}
                               />
                             </a>
+                                </Tooltip>
                           </li>
                           <li className="mr-3">
+                          <Tooltip title="Login With Facebook">
                             <a href="https://www.facebook.com/Sysreforms">
                               <img
                                src={`${BASE_URL}/assets/images/facebook.png`}
@@ -346,8 +349,10 @@ const Login = () => {
                                 style={{ height: "27px", width: "27px" }}
                               />
                             </a>
+                                </Tooltip>
                           </li>
                           <li>
+                          <Tooltip title="Login With Twitter">
                             <a href="https://instagram.com/sysreforms_international?igshid=YmMyMTA2M2Y= ">
                               <img
                                 src={`${BASE_URL}/assets/images/twitter.png`}
@@ -355,6 +360,7 @@ const Login = () => {
                                 style={{ height: "27px", width: "27px" }}
                               />
                             </a>
+                            </Tooltip>
                           </li>
                         </ul>
                       </div>
