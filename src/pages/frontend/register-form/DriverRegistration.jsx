@@ -14,6 +14,7 @@ import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../../constants";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 const DriverRegistration = () => {
 
@@ -979,7 +980,7 @@ const DriverRegistration = () => {
           <div style={{ backgroundColor: "#eee" }}>
             <div className="containter p-5">
               <div className="row justify-content-center">
-                <div className="col-md-10 bg-white mt-5 mb-5">
+                <div className="col-md-6 bg-white mt-5 mb-5">
                   <div className="row shadow
                 " style={{ backgroundColor: 'rgb(42, 64, 42' }}>    <h1
                       className="text-center text-white py-4"
@@ -991,8 +992,265 @@ const DriverRegistration = () => {
                     >
                       Registration Form
                     </h1></div>
-                  <Form className="p-5" noValidate validated={validated} onSubmit={handleSubmit}>
-                    <Row className="mb-3">
+                  <Form className="p-3" noValidate validated={validated} onSubmit={handleSubmit}>
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div className="col-md-12 px-2 py-3" style={{ backgroundColor: "#cddbd9" }}>
+                        <h2 className="text-success mb-3 text-center">STARTING POINT</h2>
+                        <Form.Group as={Col} md={cityStartId ? '12' : '12'} controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-black fs-6">
+                            Province
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+
+                            value={provinceStartId}
+                            onChange={handleProvinceStartChange}
+                            required
+                          >
+                            <option value="" disabled hidden>
+                              Select a Province
+                            </option>
+                            {dropdownStartdata?.countries[0]?.provinces?.map(
+                              (province) => (
+                                <option key={province.id} value={province.id}>
+                                  {province.value}
+                                </option>
+                              )
+                            )}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md={cityStartId ? '12' : '12'} controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-black fs-6">
+                            City
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+
+                            value={cityStartId}
+                            onChange={(e) => setCityStartId(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>
+                              Select a City
+                            </option>
+                            {selectedStartProvinceCities?.map((province) => (
+                              <option key={province.id} value={province.id}>
+                                {province.value}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        {cityStartId && (
+                          <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                            <Form.Label className="text-black fs-6">
+                              Area
+                            </Form.Label>
+                            <Form.Select
+                              aria-label="Default select example"
+
+                              value={locationStartString}
+                              onChange={handleLocationStart}
+                              required
+                            >
+                              <option value="" disabled hidden>
+                                Select Area from Dropdown
+                              </option>
+                              {selectedStartCityArea?.map((province) => (
+                                <option key={province.id} value={province.value} data-id={province.id}>
+                                  {province.value}
+                                </option>
+                              ))}
+                            </Form.Select>
+
+                            <div className="mt-3">
+                              <span className="colorplace text-danger" style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: "10px" }} onClick={AddNewStart}>
+                                Can't find your area?
+                                <a  >
+                                  {" "} Add Here
+                                </a>
+                              </span>
+                            </div>
+
+                            {addNewStart && (
+                              <Row className="mb-3 mt-4">
+                                <Form.Group as={Col} md="12" controlId="validationCustom01">
+                                  <Autocomplete
+                                    onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                    onPlaceChanged={handlePlaceSelectStart}
+                                    restrictions={{ country: 'PK' }}
+                                    options={{ strictBounds: true }}
+                                  >
+                                    <Form.Control
+                                      autoComplete="on"
+                                      required
+                                      type="text"
+                                      value={locationStartStringField}
+                                      onChange={handleLocationStartField}
+                                      className="colorplace"
+                                      placeholder="Enter your area"
+                                      autocomplete="on"
+                                      defaultValue=""
+                                    />
+                                  </Autocomplete>
+                                </Form.Group>
+                              </Row>
+                            )}
+                          </Form.Group>
+                        )}
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-black fs-6">
+                            Timings (+/- 15 Minutes)
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+
+                            value={selectedHomeTime}
+                            onChange={(e) => setSelectedHomeTime(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>
+                              Pickup Timings
+                            </option>
+                            {homeTimeSlots?.map((time) => (
+                              <option key={time.id} value={time.id}>
+                                {time.time_string}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+
+                      </div>
+                    </div>
+
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div className="col-md-12 px-2 py-3" style={{ backgroundColor: "#cddbd9" }}>
+                        <h2 className="text-success mb-3 text-center">DROP-OFF POINT</h2>
+                        <Form.Group as={Col} md={cityEndId ? '12' : '12'} controlId="validationCustom01" className="mb-2">
+                          <Form.Label
+                            className="text-black fs-6"
+                          >
+                            Province
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+
+                            value={provinceEndId}
+                            onChange={handleProvinceEndChange}
+                            required
+                          >
+                            <option value="" disabled hidden>
+                              Select a Province
+                            </option>
+                            {dropdownEnddata?.countries[0]?.provinces?.map(
+                              (province) => (
+                                <option key={province.id} value={province.id}>
+                                  {province.value}
+                                </option>
+                              )
+                            )}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md={cityEndId ? '12' : '12'} controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-black fs-6">
+                            City
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+
+                            value={cityEndId}
+                            onChange={(e) => setCityEndId(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>
+                              Select a city
+                            </option>
+                            {selectedEndProvinceCities?.map((province) => (
+                              <option key={province.id} value={province.id}>
+                                {province.value}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        {cityEndId && (
+                          <Form.Group as={Col} md="12" controlId="validationCustom02">
+                            <Form.Label className="text-black fs-6">
+                              Area
+                            </Form.Label>
+                            <Form.Select
+                              aria-label="Default select example"
+
+                              value={locationEndString}
+                              onChange={handleLocationEnd}
+                              required
+                            >
+                              <option value="" disabled hidden>
+                                Select Area from Dropdown
+                              </option>
+                              {selectedEndCityArea?.map((province) => (
+                                <option key={province.id} value={province.value} data-id={province.id}>
+                                  {province.value}
+                                </option>
+                              ))}
+                            </Form.Select>
+
+                            <div className="mt-3">
+                              <span className="colorplace text-danger" style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: "10px" }} onClick={AddNewEnd}>
+                                Can't find your area?
+                                <a  >
+                                  {" "} Add Here
+                                </a>
+                              </span>
+                            </div>
+
+                            {addNewEnd && (
+                              <Row className="mb-3 mt-4">
+                                <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                                  <Autocomplete
+                                    onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+                                    onPlaceChanged={handlePlaceSelectEnd}
+                                    restrictions={{ country: 'PK' }}
+                                    options={{ strictBounds: true }}
+                                  >
+                                    <Form.Control
+                                      required
+                                      type="text"
+                                      value={locationEndStringField}
+                                      onChange={handleLocationEndField}
+                                      className="colorplace"
+                                      placeholder="Enter your area"
+                                      defaultValue=""
+                                    />
+                                  </Autocomplete>
+                                </Form.Group>
+                              </Row>
+                            )}
+                          </Form.Group>
+                        )}
+                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-black fs-6">
+                            Timings (+/- 15 Minutes)
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+
+                            value={selectedOfficeTime}
+                            onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                            required
+                          >
+                            <option value="" disabled hidden>
+                              Drop-off Timings
+                            </option>
+                            {officeTimeSlots?.map((time) => (
+                              <option key={time.id} value={time.id}>
+                                {time.time_string}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                      </div>
+
+                    </div>
+                    {/* <Row className="mb-3">
                       <Form.Group as={Col} md={cityStartId ? '4' : '6'} controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>
                           Starting Point
@@ -1005,7 +1263,7 @@ const DriverRegistration = () => {
                           required
                         >
                           <option value="" disabled hidden>
-                            Select a Starting Point
+                            Select a Province
                           </option>
                           {dropdownStartdata?.countries[0]?.provinces?.map(
                             (province) => (
@@ -1095,9 +1353,11 @@ const DriverRegistration = () => {
                           )}
                         </Form.Group>
                       )}
-                    </Row>
+                    </Row> */}
 
-                    <Row className="mb-3">
+
+
+                    {/* <Row className="mb-3">
                       <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
                         <Form.Label
                           style={{ color: "#000" }}
@@ -1112,7 +1372,7 @@ const DriverRegistration = () => {
                           required
                         >
                           <option value="" disabled hidden>
-                            Select a Drop Off Point
+                            Select a Province
                           </option>
                           {dropdownEnddata?.countries[0]?.provinces?.map(
                             (province) => (
@@ -1200,7 +1460,7 @@ const DriverRegistration = () => {
                           )}
                         </Form.Group>
                       )}
-                    </Row>
+                    </Row> */}
 
                     <LoadScript
                       googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
@@ -1280,7 +1540,7 @@ const DriverRegistration = () => {
                       </Modal>
                     </LoadScript>
 
-                    <Row className="mb-3">
+                    {/* <Row className="mb-3">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>
                           Timings (+/- 15 Minutes)
@@ -1323,20 +1583,34 @@ const DriverRegistration = () => {
                           ))}
                         </Form.Select>
                       </Form.Group>
-                    </Row>
+                    </Row> */}
 
-                    <Row className="mb-3">
+                    <Row className="my-3" style={{ border: '1px solid #cddbd9' }}>
                       <Form.Group as={Col} md="12" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          I commute (Select Days)
+                        <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
+                          I Commute (Select Days)
                         </Form.Label>
                       </Form.Group>
 
-                      <div className="row d-flex mt-2">
+                      <div className="row d-flex px-4">
                         <div className="col">
                           {["checkbox"].map((type) => (
                             <div key={`inline-${type}`} className="mb-3 d-flex flex-wrap">
-                              <Form.Check
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="group1"
+                                    value="Monday"
+                                    color="success"
+                                    checked={daysSelected.includes("Monday")}
+                                    onChange={handleCheckboxChange}
+                                  // required
+                                  />
+                                }
+                                label="Monday"
+                              />
+
+                              {/* <Form.Check
                                 inline
                                 label="Monday"
                                 name="group1"
@@ -1346,8 +1620,21 @@ const DriverRegistration = () => {
                                 checked={daysSelected.includes("Monday")}
                                 onChange={handleCheckboxChange}
                                 required
+                              /> */}
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="group1"
+                                    value="Tuesday"
+                                    color="success"
+                                    checked={daysSelected.includes("Tuesday")}
+                                    onChange={handleCheckboxChange}
+                                  // required
+                                  />
+                                }
+                                label="Tuesday"
                               />
-                              <Form.Check
+                              {/* <Form.Check
                                 inline
                                 label="Tuesday"
                                 name="group1"
@@ -1357,8 +1644,22 @@ const DriverRegistration = () => {
                                 checked={daysSelected.includes("Tuesday")}
                                 onChange={handleCheckboxChange}
                                 required
+                              /> */}
+
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="group1"
+                                    value="Wednesday"
+                                    color="success"
+                                    checked={daysSelected.includes("Wednesday")}
+                                    onChange={handleCheckboxChange}
+                                  // required
+                                  />
+                                }
+                                label="Wednesday"
                               />
-                              <Form.Check
+                              {/* <Form.Check
                                 inline
                                 label="Wednesday"
                                 type={type}
@@ -1367,8 +1668,22 @@ const DriverRegistration = () => {
                                 checked={daysSelected.includes("Wednesday")}
                                 onChange={handleCheckboxChange}
                                 required
+                              /> */}
+
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="group1"
+                                    value="Thursday"
+                                    color="success"
+                                    checked={daysSelected.includes("Thursday")}
+                                    onChange={handleCheckboxChange}
+                                  // required
+                                  />
+                                }
+                                label="Thursday"
                               />
-                              <Form.Check
+                              {/* <Form.Check
                                 inline
                                 label="Thursday"
                                 type={type}
@@ -1377,8 +1692,22 @@ const DriverRegistration = () => {
                                 checked={daysSelected.includes("Thursday")}
                                 onChange={handleCheckboxChange}
                                 required
+                              /> */}
+
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="group1"
+                                    value="Friday"
+                                    color="success"
+                                    checked={daysSelected.includes("Friday")}
+                                    onChange={handleCheckboxChange}
+                                  // required
+                                  />
+                                }
+                                label="Friday"
                               />
-                              <Form.Check
+                              {/* <Form.Check
                                 inline
                                 label="Friday"
                                 type={type}
@@ -1387,8 +1716,23 @@ const DriverRegistration = () => {
                                 checked={daysSelected.includes("Friday")}
                                 onChange={handleCheckboxChange}
                                 required
+                              /> */}
+
+
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="group1"
+                                    value="Saturday"
+                                    color="success"
+                                    checked={daysSelected.includes("Saturday")}
+                                    onChange={handleCheckboxChange}
+                                  // required
+                                  />
+                                }
+                                label="Saturday"
                               />
-                              <Form.Check
+                              {/* <Form.Check
                                 inline
                                 label="Saturday"
                                 type={type}
@@ -1397,8 +1741,22 @@ const DriverRegistration = () => {
                                 checked={daysSelected.includes("Saturday")}
                                 onChange={handleCheckboxChange}
                                 required
+                              /> */}
+
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="group1"
+                                    value="Sunday"
+                                    color="success"
+                                    checked={daysSelected.includes("Sunday")}
+                                    onChange={handleCheckboxChange}
+                                  // required
+                                  />
+                                }
+                                label="Sunday"
                               />
-                              <Form.Check
+                              {/* <Form.Check
                                 inline
                                 label="Sunday"
                                 type={type}
@@ -1407,7 +1765,7 @@ const DriverRegistration = () => {
                                 checked={daysSelected.includes("Sunday")}
                                 onChange={handleCheckboxChange}
                                 required
-                              />
+                              /> */}
                             </div>
                           ))}
                         </div>
@@ -1416,9 +1774,9 @@ const DriverRegistration = () => {
 
                     {/* {daysSelected} */}
 
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>Gender</Form.Label>
+                    <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="fs-6 text-black">Gender</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
 
@@ -1431,8 +1789,8 @@ const DriverRegistration = () => {
                           <option value="Female">Female</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Label className="fs-6 text-black">
                           Preferred Gender
                         </Form.Label>
                         <Form.Select
@@ -1450,33 +1808,42 @@ const DriverRegistration = () => {
                       </Form.Group>
                     </Row>
 
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
+                    <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="fs-6 text-black">
                           Year of Birth
                         </Form.Label>
-                        <LocalizationProvider dateAdapter={AdapterDayjs} sx="w">
-                          <DemoContainer components={["DatePicker"]}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs} >
+                          <DatePicker label={
+                            "MM/DD/YY"
+                          }
+                            className="bg-white"
+                            slotProps={{ textField: { size: "small", color: "success" } }}
+                            sx={{ width: "100%", }}
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                          />
+                          {/* <DemoContainer components={["DatePicker"]}>
                             <DatePicker
                               label={
-                                <span>
-                                  MM/DD/YY
-                                </span>
+                                  "MM/DD/YY"
                               }
                               value={selectedDate}
                               onChange={handleDateChange}
                               sx={{ width: "100%" }}
+                              className="bg-white"
+                              slotProps={{ textField: { size: "small" } }}
                               inputProps={{ style: { color: '#000' } }}
                               required
-                            />
-                          </DemoContainer>
+                              />
+                          </DemoContainer> */}
                         </LocalizationProvider>
                       </Form.Group>
 
                       {/* {selectedDate} */}
 
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Label className="fs-6 text-black">
                           Martial Status
                         </Form.Label>
                         <Form.Select
@@ -1491,11 +1858,8 @@ const DriverRegistration = () => {
                           <option value="Single">Single</option>
                         </Form.Select>
                       </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="fs-6 text-black">
                           Education
                         </Form.Label>
                         <Form.Select
@@ -1519,8 +1883,8 @@ const DriverRegistration = () => {
                           <option value="Primary">Primary</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Label className="fs-6 text-black">
                           Profession
                         </Form.Label>
                         <Form.Control
@@ -1538,10 +1902,13 @@ const DriverRegistration = () => {
                         )}
                       </Form.Group>
                     </Row>
+                    {/* 
                     <Row className="mb-3">
+                    </Row> */}
+                    <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
 
-                      <Form.Group as={Col} md="12" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>CNIC</Form.Label>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="fs-6 text-black">CNIC</Form.Label>
                         <Form.Control
                           required
                           type="text"
@@ -1556,15 +1923,13 @@ const DriverRegistration = () => {
                           </div>
                         )}
                       </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
                       <Form.Group
                         controlId="formFile"
                         as={Col}
-                        md="6"
-                        className="mb-3"
+                        md="12"
+                        className="mb-2"
                       >
-                        <Form.Label style={{ color: "#000" }}>
+                        <Form.Label className="fs-6 text-black">
                           {" "}
                           Upload CNIC (Front)
                         </Form.Label>
@@ -1573,35 +1938,31 @@ const DriverRegistration = () => {
                       <Form.Group
                         controlId="formFile"
                         as={Col}
-                        md="6"
-                        className="mb-3"
+                        md="12"
+                        className="mb-2"
                       >
-                        <Form.Label style={{ color: "#000" }}>
+                        <Form.Label className="fs-6 text-black">
                           {" "}
                           Upload CNIC (back)
                         </Form.Label>
                         <Form.Control type="file" required onChange={handleCnicBack} />
                       </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
                       <Form.Group
                         controlId="formFile"
                         as={Col}
                         md="12"
                         className="mb-3"
                       >
-                        <Form.Label style={{ color: "#000" }}>
-                          Upload your picture
+                        <Form.Label className="fs-6 text-black">
+                          Upload Your Picture
                         </Form.Label>
                         <Form.Control type="file" required onChange={handlePicture} />
-                        <Form.Text className="text-success" style={{ color: "#000" }}>
+                        <Form.Text className="text-danger" style={{ color: "#000" }}>
                           The picture will only be shown to members with whom you
                           agree to commute
                         </Form.Text>
                       </Form.Group>
                     </Row>
-
                     <Stack
                       direction="row"
                       className="mb-4"
