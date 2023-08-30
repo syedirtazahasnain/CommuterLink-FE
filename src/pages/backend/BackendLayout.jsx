@@ -103,7 +103,7 @@ const BackendLayout = ({ children }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-12">
+        <div className="col-12 bg-light">
           <ThemeProvider theme={customTheme}>
             <link rel="stylesheet" href={`/assets/css/backend.css`} />
             <link rel="stylesheet" href={"/assets/frontend.css"} />
@@ -116,7 +116,7 @@ const BackendLayout = ({ children }) => {
               id="kt_app_root"
             >
               <div
-                className="app-page flex-column flex-column-fluid"
+                className="app-page flex-column flex-column-fluid bg-light"
                 id="kt_app_page"
               >
                 <div id="kt_app_header" className="app-header">
@@ -156,7 +156,7 @@ const BackendLayout = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="header shadow card-dashboardheader border border-secondary d-flex py-1 w-100 ps-4">
+                    <div className="header shadow shadow-sm card-dashboardheader bg-white d-flex py-1 w-100 ps-4">
                       <div className="header-left mr-auto mx-4 d-flex flex-grow-1 py-2">
                         <div className="d-block">
                           <p className=" my-auto fw-normal text-uppercase">
@@ -234,7 +234,7 @@ const BackendLayout = ({ children }) => {
                     style={{ backgroundColor: "#198754" }}
                   >
                     <div
-                      className="app-sidebar-logo bg-white border-0"
+                      className="app-sidebar-logo bg-dark border-1"
                       id="kt_app_sidebar_logo"
                       // style={backgroundLogo}
                     >
