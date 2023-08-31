@@ -512,6 +512,26 @@ const BackendLayout = ({ children }) => {
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
+                                currentPage == "matchingupdate" ? "active" : ""
+                              }`}
+                              to={"/driver"}
+                              style={{
+                                borderRadius: "0%",
+                                marginLeft: "0%",
+                                marginRight: "0%",
+                              }}
+                            >
+                              <span className="menu-icon">
+                                <i className="fas fa-solid fa-user fa-2x"></i>
+                              </span>
+                              <span className="menu-title text-white">
+                                Update
+                              </span>
+                            </Link>
+                          </div>
+                          <div className="menu-item border-custom">
+                            <Link
+                              className={`menu-link ${
                                 currentPage == "contactus" ? "active" : ""
                               }`}
                               to={"/contactus"}
@@ -549,7 +569,7 @@ const BackendLayout = ({ children }) => {
                               </span>
                             </Link>
                           </div>
-
+                         
                         </div>
                         <div
                           className={
