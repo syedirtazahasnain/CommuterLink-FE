@@ -29,6 +29,7 @@ const Office_School = () => {
 
   const name = useSelector((s) => s.signup.data.name);
   const email = useSelector((s) => s.signup.data.email);
+  const [image, setImage] = useState("");
   const navigate = useNavigate();
 
   const schoolRoute = () => {
@@ -67,41 +68,45 @@ const Office_School = () => {
                   indicators={null}
                 >
                   <Carousel.Item interval={2000}>
-                    <img
-                      className="d-block"
-                      src={`${BASE_URL}/assets/images/signup.png`}
-                      alt="First slide"
-                    />
-                  </Carousel.Item>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup.png`}
+                        alt="First slide"
+                      />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                    </Carousel.Item>
 
-                  <Carousel.Item interval={2000}>
-                    <img
-                      className="d-block"
-                      src={`${BASE_URL}/assets/images/signup-3.png`}
-                      alt="Second slide"
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item interval={2000}>
-                    <img
-                      className="d-block"
-                      src={`${BASE_URL}/assets/images/signup-4.png`}
-                      alt="Third slide"
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item interval={2000}>
-                    <img
-                      className="d-block"
-                      src={`${BASE_URL}/assets/images/signup-6.png`}
-                      alt="Forth slide"
-                    />
-                  </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
+                        alt="First slide"
+                      />
+                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-4.png`}
+                        alt="First slide"
+                      />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                    </Carousel.Item>
+                    <Carousel.Item interval={2000}>
+                      <img
+                        className="d-block img-fluid w-auto"
+                        src={`${BASE_URL}/assets/images/signup-6.png`}
+                        alt="First slide"
+                      />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                    </Carousel.Item>
                 </Carousel>
               </div>
 
-              <div className="col-md-6   mb-2 text-center d-flex justify-content-center">
+              <div className="col-md-6 mb-2 text-center d-flex justify-content-center">
                 <div className="container">
                   <div className="row justify-content-center py-15 my-4">
-                    <div className="col-10">
+                    <div className="col-10 mt-2">
                       <div className="card text-center border-0 shadow rounded rounded-4">
                         <div className="container">
                           <div className="row">
@@ -111,20 +116,6 @@ const Office_School = () => {
                               //   style={{ background: "rgb(22,70,57)" }}
                               >
                                 <div>
-                                  <div>
-                                    {" "}
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      alt="Sample photo"
-                                      className="bg-success"
-                                      style={{
-                                        width: "100px",
-                                        height: "100px",
-                                        objectFit: "cover",
-                                        borderRadius: "50%",
-                                      }}
-                                    />
-                                  </div>
                                   <h5
                                     className="card-title mt-4"
                                     
@@ -147,7 +138,7 @@ const Office_School = () => {
                                   </h5>
                                 </div>
                                 <div className="">
-                                  <h5 className="text-success mb-4">
+                                  <h5 className="text-dark mb-4">
                                     I want to share ride for
                                   </h5>
                                <div>   <Button
@@ -172,9 +163,9 @@ const Office_School = () => {
                                 </div>
                                 <form id="numberForm">
                                   <div>
-                                    <h5 className="mt-2  fs-5 text-success cursor-pointer">
+                                    <p className="my-3  fs-7 text-danger cursor-pointer">
                                       On long term basis
-                                    </h5>
+                                    </p>
                                   </div>
                                 </form>
                               </div>

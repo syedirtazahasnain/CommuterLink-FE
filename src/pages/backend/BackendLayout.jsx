@@ -102,7 +102,7 @@ const BackendLayout = ({ children }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-12">
+        <div className="col-12 bg-light">
           <ThemeProvider theme={customTheme}>
             <link rel="stylesheet" href={`/assets/css/backend.css`} />
             <link rel="stylesheet" href={"/assets/frontend.css"} />
@@ -115,7 +115,7 @@ const BackendLayout = ({ children }) => {
               id="kt_app_root"
             >
               <div
-                className="app-page flex-column flex-column-fluid"
+                className="app-page flex-column flex-column-fluid bg-light"
                 id="kt_app_page"
               >
                 <div id="kt_app_header" className="app-header">
@@ -155,7 +155,7 @@ const BackendLayout = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="header shadow card-dashboardheader border border-secondary d-flex py-1 w-100 ps-4">
+                    <div className="header shadow shadow-sm card-dashboardheader bg-white d-flex py-1 w-100 ps-4">
                       <div className="header-left mr-auto mx-4 d-flex flex-grow-1 py-2">
                         <div className="d-block">
                           <p className=" my-auto fw-normal text-uppercase">
@@ -233,7 +233,7 @@ const BackendLayout = ({ children }) => {
                     style={{ backgroundColor: "#198754" }}
                   >
                     <div
-                      className="app-sidebar-logo bg-white border-0"
+                      className="app-sidebar-logo bg-dark border-1"
                       id="kt_app_sidebar_logo"
                       // style={backgroundLogo}
                     >
@@ -245,21 +245,22 @@ const BackendLayout = ({ children }) => {
                           alt=""
                         />
                          <img
-                          src={`${BASE_URL}/assets/images/signup-3.png`}
+                          src={`${BASE_URL}/assets/images/CL-logo-small.png`}
                           className="h-40px app-sidebar-logo-minimize img-fluid w-auto"
+                          style={{ height: "50px", width: "auto" }}
                           // style={{ height: "50px", width: "auto" }}
                           alt=""
                         />
                       </div>
                       <button
                         id="kt_app_sidebar_toggle"
-                        className="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+                        className="app-sidebar-toggle btn btn-icon  btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
                         data-kt-toggle="true"
                         data-kt-toggle-state="active"
                         data-kt-toggle-target="body"
                         data-kt-toggle-name="app-sidebar-minimize"
                       >
-                        <span className="svg-icon svg-icon-2 rotate-180">
+                        <span className="svg-icon svg-icon-2 rotate-180 text-success">
                           <svg
                             width="24"
                             height="24"
@@ -312,7 +313,7 @@ const BackendLayout = ({ children }) => {
                                   <img
                                     src={`${BASE_URL}/assets/images/pic.png`}
                                   />
-                                )}
+                                )} 
                               </div>
                               {/*end::Symbol*/}
                               {/*begin::Info*/}
@@ -322,7 +323,7 @@ const BackendLayout = ({ children }) => {
                                 </span>
                                 <Link
                                   to="/viewprofile"
-                                  className=" btn-sm Profile fw-bold text-white  text-hover-dark fs-6 py-2 rounded-4"
+                                  className=" btn-sm Profile fw-bold text-white  text-hover-dark fs-6 py-2 px-3 rounded-4"
                                 >
                                   Profile
                                 </Link>
@@ -389,7 +390,8 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                              <i className="fa-solid fa-terminal"></i>
+                              <i class="fa-regular fa-file-lines"></i>
+                              {/* <i className="fa-solid fa-terminal"></i> */}
                               </span>
                               <span className="menu-title text-white">
                                 Terms and Conditions
@@ -413,7 +415,7 @@ const BackendLayout = ({ children }) => {
                               </span>
 
                               <span className="menu-title text-white">
-                                Notification
+                                Notifications
                               </span>
                             </Link>
                           </div>

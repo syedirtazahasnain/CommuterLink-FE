@@ -147,9 +147,9 @@ function NumberGenerate() {
             {" "}
             <div className="row">
               <div
-                className="col-md-6 d-flex"
+                className="col-md-6 d-flex "
                 style={{
-                  marginTop: "12vh"
+                  marginTop: "10vh"
                 }}
               >
                
@@ -168,6 +168,7 @@ function NumberGenerate() {
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
@@ -176,6 +177,7 @@ function NumberGenerate() {
                         src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
@@ -183,6 +185,7 @@ function NumberGenerate() {
                         src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
@@ -190,12 +193,13 @@ function NumberGenerate() {
                         src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
                     </Carousel.Item>
                   </Carousel>
                 {/* </div> */}
               </div>
          
-          <div className="col-md-5 mb-2 px-4 py-5"  style={{
+          <div className="col-md-5 mb-5 px-4 py-5"  style={{
                   marginTop: "12vh"
                 }}>
          
@@ -207,9 +211,9 @@ function NumberGenerate() {
                 className="card-body cardpadding"
                 style={{ background: "rgb(218,233,229)", borderRadius: "10px" }}
               >
-                <h5 className="card-title mb-3">
+                <h3 className="card-title mb-3">
                   Please Enter Your valid Phone No.
-                </h5>
+                </h3>
                 <form id="numberForm">
                   <Row className="mb-3 mt-2 px-2">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">

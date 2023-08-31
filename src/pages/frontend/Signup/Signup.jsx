@@ -12,6 +12,7 @@ import { setsignupState } from "../../../redux/signupSlice";
 import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 import Form from "react-bootstrap/Form";
+import { Tooltip } from "@mui/material";
 
 const Signup = () => {
   
@@ -289,6 +290,7 @@ const Signup = () => {
                         src={`${BASE_URL}/assets/images/signup.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
@@ -297,6 +299,7 @@ const Signup = () => {
                         src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
@@ -304,6 +307,7 @@ const Signup = () => {
                         src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
@@ -311,6 +315,7 @@ const Signup = () => {
                         src={`${BASE_URL}/assets/images/signup-6.png`}
                         alt="First slide"
                       />
+                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
                     </Carousel.Item>
                   </Carousel>
                 {/* </div> */}
@@ -488,6 +493,8 @@ const Signup = () => {
                             }}
                           >
                             <li className="mr-3">
+                            <Tooltip title="Signup With Google">
+                            
                               <a onClick={googlesignup}>
                                 <img
                                   src={`${BASE_URL}/assets/images/google.png`}
@@ -495,8 +502,11 @@ const Signup = () => {
                                   style={{ height: "25px", width: "25px", cursor: "pointer" }}
                                 />
                               </a>
+                            </Tooltip>
                             </li>
                             <li className="mr-3">
+                            <Tooltip title="Signup With Facebook">
+                            
                               <a href="https://www.facebook.com/Sysreforms">
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
@@ -504,8 +514,11 @@ const Signup = () => {
                                   style={{ height: "27px", width: "27px" }}
                                 />
                               </a>
+                            </Tooltip>
                             </li>
                             <li>
+                            <Tooltip title="Signup With Twitter">
+                            
                               <a href="https://instagram.com/sysreforms_international?igshid=YmMyMTA2M2Y= ">
                                 <img
                                   src={`${BASE_URL}/assets/images/twitter.png`}
@@ -513,6 +526,7 @@ const Signup = () => {
                                   style={{ height: "27px", width: "27px" }}
                                 />
                               </a>
+                            </Tooltip>
                             </li>
                           </ul>
                         </div>

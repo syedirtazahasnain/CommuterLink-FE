@@ -4,30 +4,34 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { Container, Row, Modal } from 'react-bootstrap';
+import { Container, Row, Modal } from "react-bootstrap";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, Autocomplete, MarkerF } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Autocomplete,
+  MarkerF,
+} from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 const RiderRegistration = () => {
-
   // const option0 = useSelector((s) => s.general.data.option0);
   // console.log(option0);
   const backgroundStyle = {
     backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
     // backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    width: '100',
-    height: '20vh'
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    width: "100",
+    height: "20vh",
     // Set the desired height of the background area
   };
   const navigate = useNavigate();
@@ -42,7 +46,6 @@ const RiderRegistration = () => {
 
   const route = () => {
     navigate("/verification");
-
   };
 
   const AddNewStart = () => {
@@ -71,12 +74,12 @@ const RiderRegistration = () => {
     return cnicPattern.test(cnic);
   }
   const handleCnicChange = (event) => {
-    const inputCnic = event.target.value.replace(/\D/g, '');
+    const inputCnic = event.target.value.replace(/\D/g, "");
 
     if (inputCnic.length <= 13) {
       const formattedCnic = inputCnic.replace(
         /^(\d{5})(\d{7})(\d{1})$/,
-        '$1-$2-$3'
+        "$1-$2-$3"
       );
       setCnic(formattedCnic);
       setIsValidCnic(validateCnic(formattedCnic));
@@ -93,7 +96,9 @@ const RiderRegistration = () => {
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
+  const selectedDateFormat = selectedDate
+    ? selectedDate.format("DD-MM-YYYY")
+    : "";
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
@@ -109,56 +114,69 @@ const RiderRegistration = () => {
   // For Start Point
   const [locationStartString, setLocationStartString] = useState("");
   const [locationStartStringId, setLocationStartStringId] = useState("");
-  const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
+  const [locationStartStringField, setLocationStartStringField] =
+    useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
-  const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
+  const [selectedStartProvinceCities, setSelectedStartProvinceCities] =
+    useState([]);
   const [cityStartId, setCityStartId] = useState("");
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
 
   // For End Point
   const [locationEndString, setLocationEndString] = useState("");
   const [locationEndStringId, setLocationEndStringId] = useState("");
-  const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
+  const [locationEndStringField, setLocationEndStringField] =
+    useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
-  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
+  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState(
+    []
+  );
   const [cityEndId, setCityEndId] = useState("");
   const [selectedEndCityArea, setSelectedEndCityArea] = useState([]);
 
-
   // For Start Point
-  const [defaultStartCenter, setDefaultStartCenter] = useState({ lat: 30.3753, lng: 69.3451 });
-  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 30.3753, lng: 69.3451 });
+  const [defaultStartCenter, setDefaultStartCenter] = useState({
+    lat: 30.3753,
+    lng: 69.3451,
+  });
+  const [markerPositionStart, setMarkerPositionStart] = useState({
+    lat: 30.3753,
+    lng: 69.3451,
+  });
 
   // For End Point
-  const [defaultEndCenter, setDefaultEndCenter] = useState({ lat: 30.3753, lng: 69.3451 });
-  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 30.3753, lng: 69.3451 });
+  const [defaultEndCenter, setDefaultEndCenter] = useState({
+    lat: 30.3753,
+    lng: 69.3451,
+  });
+  const [markerPositionEnd, setMarkerPositionEnd] = useState({
+    lat: 30.3753,
+    lng: 69.3451,
+  });
 
   // For Modals
   const [showStartModal, setShowStartModal] = useState(false);
   const [showEndModal, setShowEndModal] = useState(false);
-
 
   useEffect(() => {
     getdropdownStartdata();
   }, []);
 
   useEffect(() => {
-
     if (provinceStartId) {
-      const selectedStartProvince = dropdownStartdata?.countries[0]?.provinces.find(
-        (province) => province.id == provinceStartId
-      );
+      const selectedStartProvince =
+        dropdownStartdata?.countries[0]?.provinces.find(
+          (province) => province.id == provinceStartId
+        );
       setSelectedStartProvinceCities(
         selectedStartProvince ? selectedStartProvince.cities : []
       );
     }
   }, [provinceStartId]);
 
-
   useEffect(() => {
-
     if (provinceEndId) {
       const selectedEndProvince = dropdownEnddata?.countries[0]?.provinces.find(
         (province) => province.id == provinceEndId
@@ -170,9 +188,7 @@ const RiderRegistration = () => {
   }, [provinceEndId]);
 
   useEffect(() => {
-
     if (cityStartId) {
-
       const filteredStartCities = dropdownStartdata.area.filter(
         (city) => city.parent_id == cityStartId
       );
@@ -187,9 +203,7 @@ const RiderRegistration = () => {
   }, [cityStartId]);
 
   useEffect(() => {
-
     if (cityEndId) {
-
       const filteredEndCities = dropdownEnddata.area.filter(
         (city) => city.parent_id == cityEndId
       );
@@ -226,7 +240,7 @@ const RiderRegistration = () => {
           }
         }
       } catch (error) {
-        console.error('Error fetching geocoding data:', error);
+        console.error("Error fetching geocoding data:", error);
       }
     };
     getGeocodeStartData();
@@ -252,7 +266,7 @@ const RiderRegistration = () => {
           }
         }
       } catch (error) {
-        console.error('Error fetching geocoding data:', error);
+        console.error("Error fetching geocoding data:", error);
       }
     };
     getGeocodeEndData();
@@ -308,7 +322,6 @@ const RiderRegistration = () => {
   };
 
   const handlePlaceSelectStart = () => {
-
     const place = autocompleteRef.current.getPlace();
     // Handle the selected place here, you can update the state with the selected place value.
     if (place && place.geometry && place.geometry.location) {
@@ -337,7 +350,6 @@ const RiderRegistration = () => {
   };
 
   const handlePlaceSelectEnd = () => {
-
     const place = autocompleteRef.current.getPlace();
     // Handle the selected place here, you can update the state with the selected place value.
     if (place && place.geometry && place.geometry.location) {
@@ -393,14 +405,13 @@ const RiderRegistration = () => {
     }
   };
 
-
   const handleCnicFront = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         setCnicFront(reader.result.split(",")[1]);
-        setCnicFrontExt(file.name.split('.').pop());
+        setCnicFrontExt(file.name.split(".").pop());
       };
       reader.readAsDataURL(file);
     }
@@ -415,7 +426,7 @@ const RiderRegistration = () => {
       const reader = new FileReader();
       reader.onload = () => {
         setCnicBack(reader.result.split(",")[1]);
-        setCnicBackExt(file.name.split('.').pop());
+        setCnicBackExt(file.name.split(".").pop());
       };
       reader.readAsDataURL(file);
     }
@@ -430,7 +441,7 @@ const RiderRegistration = () => {
       const reader = new FileReader();
       reader.onload = () => {
         setPicture(reader.result.split(",")[1]);
-        setPictureExt(file.name.split('.').pop());
+        setPictureExt(file.name.split(".").pop());
       };
       reader.readAsDataURL(file);
     }
@@ -458,29 +469,46 @@ const RiderRegistration = () => {
   };
 
   const requiredFields = [
-    cityStartId, provinceStartId,
-    locationStartString, markerPositionStart,
-    cityEndId, provinceEndId,
-    locationEndString, markerPositionEnd,
-    selectedHomeTime, selectedOfficeTime, daysSelected,
-    martialStatus, cnic, selectedDateFormat,
-    gender, preferredGender, profession,
-    education, cnicFrontExt, cnicFront,
-    cnicBackExt, cnicBack, pictureExt, picture
+    cityStartId,
+    provinceStartId,
+    locationStartString,
+    markerPositionStart,
+    cityEndId,
+    provinceEndId,
+    locationEndString,
+    markerPositionEnd,
+    selectedHomeTime,
+    selectedOfficeTime,
+    daysSelected,
+    martialStatus,
+    cnic,
+    selectedDateFormat,
+    gender,
+    preferredGender,
+    profession,
+    education,
+    cnicFrontExt,
+    cnicFront,
+    cnicBackExt,
+    cnicBack,
+    pictureExt,
+    picture,
   ];
 
   console.log("required Fields:", requiredFields);
 
   const handleLogin = async () => {
-    if (requiredFields.every(field => field !== "" && field !== null && field !== undefined)) 
-    {
+    if (
+      requiredFields.every(
+        (field) => field !== "" && field !== null && field !== undefined
+      )
+    ) {
       await LocationForm();
       await PersonalForm();
       await ImagesFormCnicFront();
       await ImagesFormCnicBack();
       await ImagesFormPicture();
-    }
-    else {
+    } else {
       alert("Please Fill All Fields!");
     }
   };
@@ -515,7 +543,7 @@ const RiderRegistration = () => {
           area_id: locationEndStringId,
           area_google: {
             name: locationEndString,
-            place_id: "ChIJGQ_wq43t3zgRel4CwxgjgQs"
+            place_id: "ChIJGQ_wq43t3zgRel4CwxgjgQs",
           },
           name: myStringEnd,
           //  "land_mark" : "Clock Tower"
@@ -525,14 +553,14 @@ const RiderRegistration = () => {
           return_time_id: selectedOfficeTime,
         },
         days: daysSelected,
-      }
+      };
       const response = await fetch(
         `${API_URL}/api/v1/registration/location`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json',
+            Accept: "application/json",
             Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(body),
@@ -566,15 +594,15 @@ const RiderRegistration = () => {
         interests: null,
         university_address: null,
         university_name: null,
-        user_type: 299
-      }
+        user_type: 299,
+      };
       const response = await fetch(
         `${API_URL}/api/v1/registration/personal`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json',
+            Accept: "application/json",
             Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(body),
@@ -600,14 +628,14 @@ const RiderRegistration = () => {
       const body = {
         cnic_front_image_ext: cnicFrontExt,
         cnic_front_image: cnicFront,
-      }
+      };
       const response = await fetch(
         `${API_URL}/api/v1/registration/store-images/cnic_front`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json',
+            Accept: "application/json",
             Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(body),
@@ -633,14 +661,14 @@ const RiderRegistration = () => {
       const body = {
         cnic_back_image_ext: cnicBackExt,
         cnic_back_image: cnicBack,
-      }
+      };
       const response = await fetch(
         `${API_URL}/api/v1/registration/store-images/cnic_back`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json',
+            Accept: "application/json",
             Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(body),
@@ -666,14 +694,14 @@ const RiderRegistration = () => {
       const body = {
         picture_image_ext: pictureExt,
         picture: picture,
-      }
+      };
       const response = await fetch(
         `${API_URL}/api/v1/registration/store-images/picture`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json',
+            Accept: "application/json",
             Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(body),
@@ -696,128 +724,355 @@ const RiderRegistration = () => {
     }
   };
 
-
   return (
     <>
       <div style={{ backgroundColor: "#eee" }}>
         <div className="containter p-5">
           <div className="row justify-content-center ">
-            <div className="col-md-10 shadow bg-white  mt-5 mb-5">
-              <div className="row shadow" style={{ backgroundColor: 'rgb(42, 64, 42' }}>
-                <h1
-                  className="text-center text-white py-4"
-                >
+            <div className="col-md-6 shadow bg-white  mt-5 mb-5">
+              <div
+                className="row shadow"
+                style={{ backgroundColor: "rgb(42, 64, 42" }}
+              >
+                <h1 className="text-center text-white py-4">
                   Registration Form
                 </h1>
               </div>
 
-              <Form className=" p-5" noValidate validated={validated} onSubmit={handleSubmit}>
-                <Row className="mb-3">
-                  <Form.Group as={Col} md={cityStartId ? '4' : '6'} controlId="validationCustom01">
-                    <Form.Label style={{ color: "#000" }}>
-                      Starting Point
-                    </Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-
-                      value={provinceStartId}
-                      onChange={handleProvinceStartChange}
-                      required
+              <Form
+                className=" p-3"
+                noValidate
+                validated={validated}
+                onSubmit={handleSubmit}
+              >
+                <div className="row mb-3 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                      STARTING POINT
+                    </h2>
+                    <Form.Group
+                      as={Col}
+                      md={cityStartId ? "12" : "12"}
+                      controlId="validationCustom01"
+                      className="mb-2"
                     >
-                      <option value="" disabled hidden>
-                        Select a Starting Point
-                      </option>
-                      {dropdownStartdata?.countries[0]?.provinces?.map(
-                        (province) => (
-                          <option key={province.id} value={province.id}>
-                            {province.value}
-                          </option>
-                        )
-                      )}
-                    </Form.Select>
-                  </Form.Group>
-                  <Form.Group as={Col} md={cityStartId ? '4' : '6'} controlId="validationCustom02">
-                    <Form.Label style={{ color: "#000" }}>
-                      Select City
-                    </Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      // style={{ color: "#000" }}
-                      className="text-secondary"
-                      value={cityStartId}
-                      onChange={(e) => setCityStartId(e.target.value)}
-                      required
-                    >
-                      <option value="" hidden>
-                        Select a city
-                      </option>
-                      {selectedStartProvinceCities?.map((province) => (
-                        <option key={province.id} value={province.id}>
-                          {province.value}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-
-                  {cityStartId && (
-                    <Form.Group as={Col} md="4" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#000" }}>
-                        Select Area from Dropdown
+                      <Form.Label className="text-black fs-6">
+                        Province
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
-                        className="text-secondary" value={locationStartString}
-                        onChange={handleLocationStart}
+                        className="text-secondary"
+                        value={provinceStartId}
+                        onChange={handleProvinceStartChange}
                         required
                       >
                         <option value="" disabled hidden>
-                          Select Area from Dropdown
+                          Select a Province
                         </option>
-                        {selectedStartCityArea?.map((province) => (
-                          <option key={province.id} value={province.value} data-id={province.id}>
+                        {dropdownStartdata?.countries[0]?.provinces?.map(
+                          (province) => (
+                            <option key={province.id} value={province.id}>
+                              {province.value}
+                            </option>
+                          )
+                        )}
+                      </Form.Select>
+                    </Form.Group>
+                    <Form.Group
+                      as={Col}
+                      md={cityStartId ? "12" : "12"}
+                      controlId="validationCustom02"
+                      className="mb-2"
+                    >
+                      <Form.Label className="text-black fs-6">City</Form.Label>
+                      <Form.Select
+                        aria-label="Default select example"
+                        className="text-secondary"
+                        value={cityStartId}
+                        onChange={(e) => setCityStartId(e.target.value)}
+                        required
+                      >
+                        <option value="" hidden>
+                          Select a City
+                        </option>
+                        {selectedStartProvinceCities?.map((province) => (
+                          <option key={province.id} value={province.id}>
                             {province.value}
                           </option>
                         ))}
                       </Form.Select>
-
-                      <div className="mt-3">
-                        <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={AddNewStart}>
-                          Can't find your area?
-                          <a  >
-                            {" "} Add Here
-                          </a>
-                        </span>
-                      </div>
-
-                      {addNewStart && (
-                        <Row className="mb-3 mt-4">
-                          <Form.Group as={Col} md="12" controlId="validationCustom01">
-                            <Autocomplete
-                              onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                              onPlaceChanged={handlePlaceSelectStart}
-                              restrictions={{ country: 'PK' }}
-                              options={{ strictBounds: true }}
-                            >
-                              <Form.Control
-                                autoComplete="on"
-                                required
-                                type="text"
-                                value={locationStartStringField}
-                                onChange={handleLocationStartField}
-                                className="colorplace"
-                                placeholder="Enter your area"
-                                autocomplete="on"
-                                defaultValue=""
-                              />
-                            </Autocomplete>
-                          </Form.Group>
-                        </Row>
-                      )}
                     </Form.Group>
-                  )}
-                </Row>
 
-                <Row className="mb-3">
+                    {cityStartId && (
+                      <Form.Group
+                        as={Col}
+                        md="4"
+                        controlId="validationCustom02"
+                      >
+                        <Form.Label style={{ color: "#000" }}>
+                          Select Area from Dropdown
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          className="text-secondary"
+                          value={locationStartString}
+                          onChange={handleLocationStart}
+                          required
+                        >
+                          <option value="" disabled hidden>
+                            Select Area from Dropdown
+                          </option>
+                          {selectedStartCityArea?.map((province) => (
+                            <option
+                              key={province.id}
+                              value={province.value}
+                              data-id={province.id}
+                            >
+                              {province.value}
+                            </option>
+                          ))}
+                        </Form.Select>
+
+                        <div className="mt-3">
+                          <span
+                            className="colorplace"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                            onClick={AddNewStart}
+                          >
+                            Can't find your area?
+                            <a> Add Here</a>
+                          </span>
+                        </div>
+
+                        {addNewStart && (
+                          <Row className="mb-3 mt-4">
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                            >
+                              <Autocomplete
+                                onLoad={(autocomplete) =>
+                                  (autocompleteRef.current = autocomplete)
+                                }
+                                onPlaceChanged={handlePlaceSelectStart}
+                                restrictions={{ country: "PK" }}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  autoComplete="on"
+                                  required
+                                  type="text"
+                                  value={locationStartStringField}
+                                  onChange={handleLocationStartField}
+                                  className="colorplace"
+                                  placeholder="Enter your area"
+                                  autocomplete="on"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+                          </Row>
+                        )}
+                      </Form.Group>
+                    )}
+                    <Form.Group
+                      as={Col}
+                      md="12"
+                      controlId="validationCustom01"
+                      className="mb-2"
+                    >
+                      <Form.Label className="text-black fs-6">
+                        Timings (+/- 15 Minutes)
+                      </Form.Label>
+                      <Form.Select
+                         aria-label="Default select example"
+                         className="text-secondary"
+                        value={selectedHomeTime}
+                        onChange={(e) => setSelectedHomeTime(e.target.value)}
+                        required
+                      >
+                        <option value="" hidden>
+                          Pickup Timings
+                        </option>
+                        {homeTimeSlots?.map((time) => (
+                          <option key={time.id} value={time.id}>
+                            {time.time_string}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Form.Group>
+                  </div>
+                </div>
+                <div className="row mb-3 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                      DROP-OFF POINT
+                    </h2>
+                    <Form.Group
+                      as={Col}
+                      md={cityEndId ? "12" : "12"}
+                      controlId="validationCustom01"
+                      className="mb-2"
+                    >
+                      <Form.Label className="text-black fs-6">
+                        Province
+                      </Form.Label>
+                      <Form.Select
+                        aria-label="Default select example"
+                        className="text-secondary"
+                        value={provinceEndId}
+                        onChange={handleProvinceEndChange}
+                        required
+                      >
+                        <option value="" disabled hidden>
+                          Select a Province
+                        </option>
+                        {dropdownEnddata?.countries[0]?.provinces?.map(
+                          (province) => (
+                            <option key={province.id} value={province.id}>
+                              {province.value}
+                            </option>
+                          )
+                        )}
+                      </Form.Select>
+                    </Form.Group>
+                    <Form.Group
+                      as={Col}
+                      md={cityEndId ? "12" : "12"}
+                      controlId="validationCustom02"
+                      className="mb-2"
+                    >
+                      <Form.Label style={{ color: "#000" }}>City</Form.Label>
+                      <Form.Select
+                        aria-label="Default select example"
+                        className="text-secondary"
+                        value={cityEndId}
+                        onChange={(e) => setCityEndId(e.target.value)}
+                        required
+                      >
+                        <option value="" hidden>
+                          Select a city
+                        </option>
+                        {selectedEndProvinceCities?.map((province) => (
+                          <option key={province.id} value={province.id}>
+                            {province.value}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Form.Group>
+                    {cityEndId && (
+                      <Form.Group
+                        as={Col}
+                        md="4"
+                        controlId="validationCustom02"
+                      >
+                        <Form.Label style={{ color: "#000" }}>
+                          Select Area from Dropdown
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          className="text-secondary"
+                          value={locationEndString}
+                          onChange={handleLocationEnd}
+                          required
+                        >
+                          <option value="" disabled hidden>
+                            Select Area from Dropdown
+                          </option>
+                          {selectedEndCityArea?.map((province) => (
+                            <option
+                              key={province.id}
+                              value={province.value}
+                              data-id={province.id}
+                            >
+                              {province.value}
+                            </option>
+                          ))}
+                        </Form.Select>
+
+                        <div className="mt-3">
+                          <span
+                            className="colorplace"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                            onClick={AddNewEnd}
+                          >
+                            Can't find your area?
+                            <a> Add Here</a>
+                          </span>
+                        </div>
+
+                        {addNewEnd && (
+                          <Row className="mb-3 mt-4">
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                            >
+                              <Autocomplete
+                                onLoad={(autocomplete) =>
+                                  (autocompleteRef.current = autocomplete)
+                                }
+                                onPlaceChanged={handlePlaceSelectEnd}
+                                restrictions={{ country: "PK" }}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  required
+                                  type="text"
+                                  value={locationEndStringField}
+                                  onChange={handleLocationEndField}
+                                  className="colorplace"
+                                  placeholder="Enter your area"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+                          </Row>
+                        )}
+                      </Form.Group>
+                    )}
+                    <Form.Group
+                      as={Col}
+                      md="12"
+                      controlId="validationCustom01"
+                      className="mb-2"
+                    >
+                      <Form.Label className="text-black fs-6">
+                        Timings (+/- 15 Minutes)
+                      </Form.Label>
+                      <Form.Select
+                        aria-label="Default select example"
+                        className="text-secondary"
+                        value={selectedHomeTime}
+                        onChange={(e) => setSelectedHomeTime(e.target.value)}
+                        required
+                      >
+                        <option value="" hidden>
+                          Drop-off Timings
+                        </option>
+                        {homeTimeSlots?.map((time) => (
+                          <option key={time.id} value={time.id}>
+                            {time.time_string}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Form.Group>
+                  </div>
+                </div>
+                {/* <Row className="mb-3">
                   <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
                     <Form.Label
                       style={{ color: "#000" }}
@@ -917,7 +1172,7 @@ const RiderRegistration = () => {
                       )}
                     </Form.Group>
                   )}
-                </Row>
+                </Row> */}
 
                 <LoadScript
                   googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
@@ -933,7 +1188,10 @@ const RiderRegistration = () => {
                           <GoogleMap
                             zoom={12}
                             center={defaultStartCenter}
-                            mapContainerStyle={{ width: "100%", height: "50vh" }}
+                            mapContainerStyle={{
+                              width: "100%",
+                              height: "50vh",
+                            }}
                             onClick={handleMapClickStart}
                             options={{
                               types: ["(regions)"],
@@ -951,7 +1209,10 @@ const RiderRegistration = () => {
                       </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="contained" onClick={handleCloseStartModal}>
+                      <Button
+                        variant="contained"
+                        onClick={handleCloseStartModal}
+                      >
                         Close
                       </Button>
                     </Modal.Footer>
@@ -970,21 +1231,22 @@ const RiderRegistration = () => {
                             //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
                             // }
                             center={defaultEndCenter}
-                            mapContainerStyle={{ width: "100%", height: "50vh" }}
+                            mapContainerStyle={{
+                              width: "100%",
+                              height: "50vh",
+                            }}
                             onClick={handleMapClickEnd}
                             options={{
                               types: ["(regions)"],
                               componentRestrictions: { country: "PK" },
                             }}
                           >
-
                             <MarkerF
                               position={markerPositionEnd}
                               icon={{
                                 url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                               }}
                             />
-
                           </GoogleMap>
                         </Row>
                       </Container>
@@ -997,7 +1259,7 @@ const RiderRegistration = () => {
                   </Modal>
                 </LoadScript>
 
-                <Row className="mb-3">
+                {/* <Row className="mb-3">
                   <Form.Group as={Col} md="6" controlId="validationCustom01">
                     <Form.Label style={{ color: "#000" }}>
                       Timings (+/- 15 Minutes)
@@ -1038,90 +1300,140 @@ const RiderRegistration = () => {
                       ))}
                     </Form.Select>
                   </Form.Group>
-                </Row>
+                </Row> */}
 
-                <Row className="mb-3">
+                <Row className="mb-3" style={{ border: "1px solid #cddbd9" }}>
                   <Form.Group as={Col} md="12" controlId="validationCustom01">
-                    <Form.Label style={{ color: "#000" }}>
+                    <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
                       I commute (Select Days)
                     </Form.Label>
                   </Form.Group>
 
-                  <div className="row d-flex mt-2">
+                  <div className="row d-flex px-4">
                     <div className="col">
                       {["checkbox"].map((type) => (
-                        <div key={`inline-${type}`} className="mb-3 d-flex flex-wrap">
-                          <Form.Check
-                            inline
+                        <div
+                          key={`inline-${type}`}
+                          className="mb-3 d-flex flex-wrap"
+                        >
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                inline
+                                label="Monday"
+                                name="group1"
+                                color="success"
+                                type={type}
+                                value="Monday"
+                                id={`inline-${type}-0`}
+                                checked={daysSelected.includes("Monday")}
+                                onChange={handleCheckboxChange}
+                                // required
+                              />
+                            }
                             label="Monday"
-                            name="group1"
-                            type={type}
-                            value="Monday"
-                            id={`inline-${type}-0`}
-                            checked={daysSelected.includes("Monday")}
-                            onChange={handleCheckboxChange}
-                            required
                           />
-                          <Form.Check
-                            inline
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                inline
+                                label="Tuesday"
+                                name="group1"
+                                color="success"
+                                type={type}
+                                value="Tuesday"
+                                id={`inline-${type}-1`}
+                                checked={daysSelected.includes("Tuesday")}
+                                onChange={handleCheckboxChange}
+                                // required
+                              />
+                            }
                             label="Tuesday"
-                            name="group1"
-                            type={type}
-                            value="Tuesday"
-                            id={`inline-${type}-2`}
-                            checked={daysSelected.includes("Tuesday")}
-                            onChange={handleCheckboxChange}
-                            required
                           />
-                          <Form.Check
-                            inline
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                inline
+                                label="Wednesday"
+                                name="group1"
+                                color="success"
+                                type={type}
+                                value="Wednesday"
+                                id={`inline-${type}-2`}
+                                checked={daysSelected.includes("Wednesday")}
+                                onChange={handleCheckboxChange}
+                                // required
+                              />
+                            }
                             label="Wednesday"
-                            type={type}
-                            value="Wednesday"
-                            id={`inline-${type}-3`}
-                            checked={daysSelected.includes("Wednesday")}
-                            onChange={handleCheckboxChange}
-                            required
                           />
-                          <Form.Check
-                            inline
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                inline
+                                label="Thursday"
+                                name="group1"
+                                color="success"
+                                type={type}
+                                value="Thursday"
+                                id={`inline-${type}-3`}
+                                checked={daysSelected.includes("Thursday")}
+                                onChange={handleCheckboxChange}
+                                // required
+                              />
+                            }
                             label="Thursday"
-                            type={type}
-                            value="Thursday"
-                            id={`inline-${type}-3`}
-                            checked={daysSelected.includes("Thursday")}
-                            onChange={handleCheckboxChange}
-                            required
                           />
-                          <Form.Check
-                            inline
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                inline
+                                label="Friday"
+                                name="group1"
+                                color="success"
+                                type={type}
+                                value="Friday"
+                                id={`inline-${type}-4`}
+                                checked={daysSelected.includes("Friday")}
+                                onChange={handleCheckboxChange}
+                                // required
+                              />
+                            }
                             label="Friday"
-                            type={type}
-                            value="Friday"
-                            id={`inline-${type}-3`}
-                            checked={daysSelected.includes("Friday")}
-                            onChange={handleCheckboxChange}
-                            required
                           />
-                          <Form.Check
-                            inline
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                inline
+                                label="Saturday"
+                                name="group1"
+                                type={type}
+                                value="Saturday"
+                                color="success"
+                                id={`inline-${type}-5`}
+                                checked={daysSelected.includes("Saturday")}
+                                onChange={handleCheckboxChange}
+                                // required
+                              />
+                            }
                             label="Saturday"
-                            type={type}
-                            value="Saturday"
-                            id={`inline-${type}-3`}
-                            checked={daysSelected.includes("Saturday")}
-                            onChange={handleCheckboxChange}
-                            required
                           />
-                          <Form.Check
-                            inline
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                inline
+                                label="Sunday"
+                                name="group1"
+                                type={type}
+                                value="Sunday"
+                                color="success"
+                                id={`inline-${type}-6`}
+                                checked={daysSelected.includes("Sunday")}
+                                onChange={handleCheckboxChange}
+                                // required
+                              />
+                            }
                             label="Sunday"
-                            type={type}
-                            value="Sunday"
-                            id={`inline-${type}-3`}
-                            checked={daysSelected.includes("Sunday")}
-                            onChange={handleCheckboxChange}
-                            required
                           />
                         </div>
                       ))}
@@ -1129,9 +1441,17 @@ const RiderRegistration = () => {
                   </div>
                 </Row>
 
-                <Row className="mb-3">
-                  <Form.Group as={Col} md="6" controlId="validationCustom01">
-                    <Form.Label style={{ color: "#000" }}>Gender</Form.Label>
+                <Row
+                  className="mb-3 py-3 shadow shadow-sm"
+                  style={{ backgroundColor: " #cddbd9" }}
+                >
+                  <Form.Group
+                    as={Col}
+                    md="12"
+                    controlId="validationCustom01"
+                    className="mb-2"
+                  >
+                    <Form.Label className="fs-6 text-black">Gender</Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       className="text-secondary"
@@ -1139,22 +1459,33 @@ const RiderRegistration = () => {
                       onChange={(e) => setGender(e.target.value)}
                       required
                     >
-                      <option value="" hidden> Gender </option>
+                      <option value="" hidden>
+                        {" "}
+                        Gender{" "}
+                      </option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </Form.Select>
                   </Form.Group>
-                  <Form.Group as={Col} md="6" controlId="validationCustom02">
-                    <Form.Label style={{ color: "#000" }}>
+                  <Form.Group
+                    as={Col}
+                    md="12"
+                    controlId="validationCustom02"
+                    className="mb-2"
+                  >
+                    <Form.Label className="fs-6 text-black">
                       Preferred Gender
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
-                      className="text-secondary" value={preferredGender}
+                      className="text-secondary"
+                      value={preferredGender}
                       onChange={(e) => setPreferredGender(e.target.value)}
                       required
                     >
-                      <option value="" hidden>Gender</option>
+                      <option value="" hidden>
+                        Gender
+                      </option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                       <option value="Both">Both</option>
@@ -1162,61 +1493,91 @@ const RiderRegistration = () => {
                   </Form.Group>
                 </Row>
 
-                <Row className="mb-3">
-                  <Form.Group as={Col} md="6" controlId="validationCustom01">
-                    <Form.Label style={{ color: "#000" }}>
+                <Row
+                  className="mb-3 py-3 shadow shadow-sm"
+                  style={{ backgroundColor: " #cddbd9" }}
+                >
+                  <Form.Group
+                    as={Col}
+                    md="12"
+                    controlId="validationCustom01"
+                    className="mb-2"
+                  >
+                    <Form.Label className="fs-6 text-black">
                       Year of Birth
                     </Form.Label>
-                    <LocalizationProvider dateAdapter={AdapterDayjs} sx="w">
-                      <DemoContainer components={["DatePicker"]}>
-                        <DatePicker
-                          label={
-                            <span>
-                              MM/DD/YY
-                            </span>
-                          }
-                          value={selectedDate}
-                          onChange={handleDateChange}
-                          slotProps={{ textField: { size: "small" } }}
-                          sx={{ width: "100%" }}
-                          inputProps={{ style: { color: '#000' } }}
-                          required
-                        />
-                      </DemoContainer>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        label={"MM/DD/YY"}
+                        className="bg-white"
+                        slotProps={{
+                          textField: { size: "small", color: "success" },
+                        }}
+                        sx={{ width: "100%" }}
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                      />
+                      {/* <DemoContainer components={["DatePicker"]}>
+                            <DatePicker
+                              label={
+                                  "MM/DD/YY"
+                              }
+                              value={selectedDate}
+                              onChange={handleDateChange}
+                              sx={{ width: "100%" }}
+                              className="bg-white"
+                              slotProps={{ textField: { size: "small" } }}
+                              inputProps={{ style: { color: '#000' } }}
+                              required
+                              />
+                          </DemoContainer> */}
                     </LocalizationProvider>
                   </Form.Group>
 
-                  {/* {selectedDateFormat} */}
+                  {/* {selectedDate} */}
 
-                  <Form.Group as={Col} md="6" controlId="validationCustom02">
-                    <Form.Label style={{ color: "#000" }}>
+                  <Form.Group
+                    as={Col}
+                    md="12"
+                    controlId="validationCustom02"
+                    className="mb-2"
+                  >
+                    <Form.Label className="fs-6 text-black">
                       Martial Status
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
-                      className="text-secondary" value={martialStatus}
+                      className="text-secondary"
+                      value={martialStatus}
                       onChange={(e) => setMartialStatus(e.target.value)}
                       required
                     >
-                      <option value="" hidden>Martial Status</option>
+                      <option value="" hidden>
+                        Martial Status
+                      </option>
                       <option value="Married">Married</option>
                       <option value="Single">Single</option>
                     </Form.Select>
                   </Form.Group>
-                </Row>
-
-                <Row className="mb-3">
-                  <Form.Group as={Col} md="6" controlId="validationCustom01">
-                    <Form.Label style={{ color: "#000" }}>
+                  <Form.Group
+                    as={Col}
+                    md="12"
+                    controlId="validationCustom01"
+                    className="mb-2"
+                  >
+                    <Form.Label className="fs-6 text-black">
                       Education
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
-                      className="text-secondary" value={education}
+                      className="text-secondary"
+                      value={education}
                       onChange={(e) => setEducation(e.target.value)}
                       required
                     >
-                      <option value="" hidden>Education</option>
+                      <option value="" hidden>
+                        Education
+                      </option>
                       <option value="Phd">Phd</option>
                       <option value="Master">Master</option>
                       <option value="Bachelor">Bachelor</option>
@@ -1230,14 +1591,19 @@ const RiderRegistration = () => {
                       <option value="Primary">Primary</option>
                     </Form.Select>
                   </Form.Group>
-                  <Form.Group as={Col} md="6" controlId="validationCustom02">
-                    <Form.Label style={{ color: "#000" }}>
+                  <Form.Group
+                    as={Col}
+                    md="12"
+                    controlId="validationCustom02"
+                    className="mb-2"
+                  >
+                    <Form.Label className="fs-6 text-black">
                       Profession
                     </Form.Label>
                     <Form.Control
                       required
                       type="text"
-                      className={` ${isValidProfession ? '' : 'is-invalid'}`}
+                      className={`${isValidProfession ? "" : "is-invalid"}`}
                       placeholder="Profession (Engineer, Doctor, etc)"
                       value={profession}
                       onChange={handleProfessionChange}
@@ -1249,14 +1615,21 @@ const RiderRegistration = () => {
                     )}
                   </Form.Group>
                 </Row>
-                <Row className="mb-3">
-                  <Form.Group as={Col} md="12" controlId="validationCustom01">
-                    <Form.Label style={{ color: "#000" }}>CNIC</Form.Label>
-
+                <Row
+                  className="mb-3 py-3 shadow shadow-sm"
+                  style={{ backgroundColor: " #cddbd9" }}
+                >
+                  <Form.Group
+                    as={Col}
+                    md="12"
+                    controlId="validationCustom01"
+                    className="mb-2"
+                  >
+                    <Form.Label className="fs-6 text-black">CNIC</Form.Label>
                     <Form.Control
                       required
                       type="text"
-                      className={` ${isValidCnic ? '' : 'is-invalid'}`}
+                      className={`${isValidCnic ? "" : "is-invalid"}`}
                       placeholder="12345-1234567-1"
                       value={cnic}
                       onChange={handleCnicChange}
@@ -1267,46 +1640,56 @@ const RiderRegistration = () => {
                       </div>
                     )}
                   </Form.Group>
-                </Row>
-                <Row className="mb-3">
                   <Form.Group
                     controlId="formFile"
                     as={Col}
-                    md="6"
-                    className="mb-3"
+                    md="12"
+                    className="mb-2"
                   >
-                    <Form.Label style={{ color: "#000" }}>
+                    <Form.Label className="fs-6 text-black">
                       {" "}
                       Upload CNIC (Front)
                     </Form.Label>
-                    <Form.Control type="file" required onChange={handleCnicFront} />
+                    <Form.Control
+                      type="file"
+                      required
+                      onChange={handleCnicFront}
+                    />
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
                     as={Col}
-                    md="6"
-                    className="mb-3"
+                    md="12"
+                    className="mb-2"
                   >
-                    <Form.Label style={{ color: "#000" }}>
+                    <Form.Label className="fs-6 text-black">
                       {" "}
                       Upload CNIC (back)
                     </Form.Label>
-                    <Form.Control type="file" required onChange={handleCnicBack} />
+                    <Form.Control
+                      type="file"
+                      required
+                      onChange={handleCnicBack}
+                    />
                   </Form.Group>
-                </Row>
-
-                <Row className="mb-3">
                   <Form.Group
                     controlId="formFile"
                     as={Col}
                     md="12"
                     className="mb-3"
                   >
-                    <Form.Label style={{ color: "#000" }}>
-                      Upload your picture
+                    <Form.Label className="fs-6 text-black">
+                      Upload Your Picture
                     </Form.Label>
-                    <Form.Control type="file" required onChange={handlePicture} />
-                    <Form.Text className="text-success">
+                    <Form.Control
+                      type="file"
+                      required
+                      onChange={handlePicture}
+                    />
+                    <Form.Text
+                      className="text-danger"
+                      style={{ color: "#000" }}
+                    >
                       The picture will only be shown to members with whom you
                       agree to commute
                     </Form.Text>
@@ -1329,7 +1712,6 @@ const RiderRegistration = () => {
                   </Button>
                 </Stack>
               </Form>
-
             </div>
           </div>
         </div>

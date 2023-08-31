@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL } from "../../../constants";
 import { Button } from "@mui/base";
 import { useNavigate } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
@@ -31,7 +31,7 @@ const SeatCostVerification = () => {
   const getProfileData = async () => {
     try {
       const response = await fetch(
-        "https://staging.commuterslink.com/api/v1/profile",
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -61,7 +61,7 @@ const SeatCostVerification = () => {
     try {
       if (option === 1) {
         const response = await fetch(
-          `https://staging.commuterslink.com/api/v1/commuter/profile/${contactId}/driver`,
+          `${API_URL}/api/v1/commuter/profile/${contactId}/driver`,
           {
             method: "get",
             headers: {

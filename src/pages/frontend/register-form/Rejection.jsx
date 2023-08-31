@@ -6,90 +6,64 @@ import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-const customTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#ff4815",
-      contrastText: "white",
-    },
-  },
-});
-
-const backgroundLogo = {
-  backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
-  backgroundRepeat: "no-repeat",
-  backgroundColor: "white",
-};
-
 const Rejection = () => {
-  const navigate = useNavigate();
-  const [submitbtn, setSubmit] = useState(false);
-  const dispatch = useDispatch();
-  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
-  const currentPage = useSelector((s) => s.general.currentPage);
-  const route = () => {
-    setSubmit(true);
+  // const route = () => {
+  //   setSubmit(true);
 
-    if (!submitbtn) {
-      navigate("/commuter-profile");
-    }
-  };
-
-  useEffect(() => {
-    document.getElementById("root").classList.remove("w-100");
-    document.getElementById("root").classList.add("d-flex");
-    document.getElementById("root").classList.add("flex-grow-1");
-    window.KTToggle.init();
-    window.KTScroll.init();
-  }, []);
-  const logout = () => {
-    dispatch(setloginState(""));
-    navigate("/login");
-  };
+  //   if (!submitbtn) {
+  //     navigate("/commuter-profile");
+  //   }
+  // };
 
   return (
-    <div>
-      <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
-          Why Request has not been Approved        
-        </h3>
-      </div>
-      <div className="card p-4 bg-light p-2">
-        <div className="card bg-danger">
-          <div className="card-body text-white">
-            <p>Your Request has not been approved due to the following reasons</p>
-            <p className="">
-              1. CNIC number is incorrect
-            </p>
-            <p>
-              2. CNIC front side image is not clear
-            </p>
-            <p>
-              3. CNIC is expired
-            </p>
-            <p>
-              4. Registration number is not clear in image of the car.
-            </p>
-            <div className="text-warning py-4">
-              <h5>
-                Note: The above mentioned changes are necessary and  you can also
-                update any other data.
-              </h5>
+    <>
+      <div>
+        <div className="container pt-5">
+          <div className="row justify-content-center">
+            <div className="col-md-7 bg-light mt-5 mb-5">
+              <div className="row shadow 
+                " style={{ backgroundColor: 'rgb(42, 64, 42' }}>
+                <h1 className="text-center text-white py-4">
+                  Why Request has not been Approved
+                </h1>
+              </div>
+              <div className="container py-3">
+                <div className="card p-3" style={{ backgroundColor: "#cddbd9" }}>
+                  <p>
+                    Your Request has not been approved due to the following
+                    reasons
+                  </p>
+                  <p className="text-danger">1. CNIC number is incorrect</p>
+                  <p className="text-danger">
+                    2. CNIC front side image is not clear
+                  </p>
+                  <p className="text-danger">3. CNIC is expired</p>
+                  <p className="text-danger">
+                    4. Registration number is not clear in image of the car.
+                  </p>
+                  <div className="text-warning py-4">
+                    <h5>
+                      Note: The above mentioned changes are necessary and you
+                      can also update any other data.
+                    </h5>
+                    <div className="text-center">
+                      <Button className="btn btn-sm fs-6 fw-bold btn-dark text-white rounded-4 px-3 py-2 mb-3">
+                        Next
+                      </Button>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
             </div>
 
           </div>
-
-          <div className="text-center">
-            <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark text-white rounded-4 px-3 py-2 mb-3"
-            >
-              Next
-            </Button>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+        </div>
+
+      </>
+      );
 };
 
-export default Rejection;
+      export default Rejection;

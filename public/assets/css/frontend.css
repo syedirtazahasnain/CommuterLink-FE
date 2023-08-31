@@ -531,6 +531,10 @@ a.btn:hover {
   font-size: 12px;
 }
 
+.bg-light-100{
+  background-color: #1c7a6c;
+}
+
 #parallax-world-of-ugg .parallax-one {
   padding-top: 80px;
   padding-bottom: 80px;
