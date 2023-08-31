@@ -10,10 +10,14 @@ const CommuterLinkSuggestions = () => {
 
   // For Dashboard Data
   const [contactId, setContactId] = useState("");
+  const [contactRequestId, setContactRequestId] = useState("");
   const [name, setName] = useState("");
+  const [nameRequest, setNameRequest] = useState("");
   const [requestStatus, setRequestStatus] = useState("");
   const [requestStage, setRequestStage] = useState("");
+  const [requestStageMember, setRequestStageMember] = useState("");
   const [image, setImage] = useState("");
+  const [imageRequest, setImageRequest] = useState("");
   const [option, setOption] = useState("");
 
   useEffect(() => {
@@ -107,10 +111,10 @@ const CommuterLinkSuggestions = () => {
 
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
-        setContactId(jsonresponse.data[0].contact_id);
-        setName(jsonresponse.data[0].user[0].name);
-        setImage(jsonresponse.data[0].user[0].commuter_image);
-        setRequestStage(jsonresponse.data[0].request_stage);
+        setContactRequestId(jsonresponse.data[0].contact_id);
+        setNameRequest(jsonresponse.data[0].user[0].name);
+        setImageRequest(jsonresponse.data[0].user[0].commuter_image);
+        setRequestStageMember(jsonresponse.data[0].request_stage);
       }
       console.log("Request Member Data:", jsonresponse);
     } catch (error) {
@@ -429,7 +433,7 @@ const CommuterLinkSuggestions = () => {
                   }}
                 >
                   <div class="row d-flex justify-content-center">
-                    {requestStage === 1 || requestStage === 2 ? (
+                    {requestStageMember === 1 || requestStageMember === 2 ? (
                       <div className="col-sm-2">
                         <div
                           className="card"
@@ -440,7 +444,7 @@ const CommuterLinkSuggestions = () => {
                           }}
                         >
                           <img
-                            src={`${IMAGE_URL}${image}`}
+                            src={`${IMAGE_URL}${imageRequest}`}
                             className="card-img-top w-40px m-auto mt-3"
                           />
                           <div
@@ -450,7 +454,7 @@ const CommuterLinkSuggestions = () => {
                               route();
                             }}
                           >
-                            {name}
+                            {nameRequest}
                           </div>
                           <img
                             className=""
@@ -459,8 +463,8 @@ const CommuterLinkSuggestions = () => {
                         </div>
                       </div>
                     ) : (
-                      contactId !== "" ? (
-                        requestStage === 3 ? (
+                      contactRequestId !== "" ? (
+                        requestStageMember === 3 ? (
                           <div className="col-sm-2">
                             <div
                               className="card bg-success"
@@ -501,7 +505,7 @@ const CommuterLinkSuggestions = () => {
                                   route();
                                 }}
                               >
-                                {contactId}
+                                {contactRequestId}
                               </div>
                               <img
                                 className=""
