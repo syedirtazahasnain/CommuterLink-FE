@@ -5,11 +5,11 @@ export const BASE_URL = process.env.REACT_APP_BASE_URL
 
 export const API_URL = process.env.REACT_APP_API_URL 
     ? process.env.REACT_APP_API_URL 
-    : 'http://be.staging.commuterslink.com';
+    : 'https://staging.commuterslink.com';
 
 export const IMAGE_URL = process.env.REACT_APP_IMAGE_URL 
     ? process.env.REACT_APP_IMAGE_URL 
-    : 'http://be.staging.commuterslink.com/uploads/picture/';
+    : 'https://staging.commuterslink.com/uploads/picture/';
 
 export const ENV_SITE_DEV = process.env.REACT_APP_SITE_DEV ? String(process.env.REACT_APP_SITE_DEV).toLowerCase() == 'true' : false;
 
