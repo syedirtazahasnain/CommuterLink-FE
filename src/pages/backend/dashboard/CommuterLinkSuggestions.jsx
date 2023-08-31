@@ -125,7 +125,7 @@ const CommuterLinkSuggestions = () => {
   return (
     <div>
       <div className="card  mt-3 mb-5">
-        <div className="card-header" style={{ backgroundColor: "#2a402a" }}>
+        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
           <h3 className="text-center text-warning m-auto">
             {" "}
            {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
@@ -133,24 +133,24 @@ const CommuterLinkSuggestions = () => {
         </div>
         <div
           className="card-body"
-          style={{
-            borderWidth: "0 2px 2px 2px",
-            borderStyle: "solid",
-            borderColor: "#066539",
-          }}
+          // style={{
+          //   borderWidth: "0 2px 2px 2px",
+          //   borderStyle: "solid",
+          //   borderColor: "#066539",
+          // }}
         >
           <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
             <div
               className="card-header "
               // style={{ backgroundColor: "#2a402a" }}
-              style={{ backgroundColor: '#3d4f4c' }}
+              style={{ backgroundColor: '#00917C' }}
             >
               <h3 className="text-white mt-4 mx-auto">
                 COMMUTERSLINK SUGGESTION
               </h3>
             </div>
 
-            <div className="card-body card-body-bg">
+            <div className="card-body" style={{background:"rgb(191, 216, 210)"}}>
               <p>
                 Based upon your Profile, We have Following{" "}
                 <strong> MATCHES</strong> to Offer
@@ -160,7 +160,7 @@ const CommuterLinkSuggestions = () => {
                   className="card m-auto border-0 w-100"
                   style={{
                     width: "auto",
-                    backgroundColor: "#D9D9D9",
+                    backgroundColor: "rgb(191, 216, 210)",
                   }}
                 >
                   <div class="row d-flex justify-content-center">
@@ -412,14 +412,14 @@ const CommuterLinkSuggestions = () => {
           <div className="card mt-5" style={{ backgroundColor: "#D9D9D9" }}>
               <div
                 className="card-header "
-                style={{backgroundColor:'#3d4f4c'}}
+                style={{backgroundColor:'#00917C'}}
               >
                 <h3 className="text-white mt-4 mx-auto">
                   REQUESTS BY MEMBERS
                 </h3>
               </div>
 
-            <div className="card-body card-body-bg">
+            <div className="card-body" style={{background:"rgb(191, 216, 210)"}}>
               <p>
                 Based upon your Profile, We have Following{" "}
                 <strong>Requests</strong> to Offer
@@ -429,7 +429,7 @@ const CommuterLinkSuggestions = () => {
                   className="card  border-0 w-100"
                   style={{
                     width: "auto",
-                    backgroundColor: "#D9D9D9",
+                    backgroundColor: "rgb(191, 216, 210)",
                   }}
                 >
                   <div class="row d-flex justify-content-center">

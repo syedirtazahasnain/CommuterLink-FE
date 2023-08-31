@@ -82,7 +82,7 @@ const TravelPatners = () => {
   return (
     <div>
       <div className="card  mt-3 mb-5">
-        <div className="card-header" style={{ backgroundColor: "#2a402a" }}>
+        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
           <h3 className="text-center text-warning m-auto">
             {" "}
             MY TRAVEL PARTNERS{" "}
@@ -96,14 +96,14 @@ const TravelPatners = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
+          <div className="card" style={{ backgroundColor: "#BFD8D2" }}>
             <div className="card-body">
               <div className="row">
                 <div
                   className="card  border-0 w-100"
                   style={{
                     width: "auto",
-                    backgroundColor: "#D9D9D9",
+                    backgroundColor: "#BFD8D2",
                   }}
                 >
                   <div class="row d-flex justify-content-center">
@@ -285,7 +285,7 @@ const TravelPatners = () => {
                       <div className="d-flex flex-column">
                         <div
                           className="card-header text-white"
-                          style={{ backgroundColor: "#3d4f4c" }}
+                          style={{ backgroundColor: "#00917C" }}
                         >
                           <h4 className="text-center text-white m-auto">
                             MY WALLET
@@ -344,7 +344,7 @@ const TravelPatners = () => {
                           <div className="d-flex flex-column">
                             <div
                               className="card-header text-white"
-                              style={{ backgroundColor: "#3d4f4c" }}
+                              style={{ backgroundColor: "#00917C" }}
                             >
                               <h4 className="text-center text-white m-auto">
                                 COST PER SEAT PER DAY

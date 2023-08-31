@@ -286,7 +286,7 @@ const TravelConfirmation = () => {
       </div> */}
       {/* Second Calendar */}
       <div className="card bg-light-green mt-3 mb-5">
-        <div className="card-header " style={{ backgroundColor: "#2a402a" }}>
+        <div className="card-header " style={{ backgroundColor: "#1F5F5B" }}>
           <h3 className="text-center text-warning m-auto">
             {" "}
             TRAVEL CONFIRMATION{" "}
@@ -300,7 +300,7 @@ const TravelConfirmation = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="card h-50" style={{ backgroundColor: "#D9D9D9" }}>
+          <div className="card h-50" style={{ backgroundColor: "rgb(191, 216, 210)" }}>
             <div className="card-body">
               <div
                 className="card border-0"

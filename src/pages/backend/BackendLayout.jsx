@@ -102,7 +102,7 @@ const BackendLayout = ({ children }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-12 bg-light">
+        <div className="col-12 bg-light-lime" >
           <ThemeProvider theme={customTheme}>
             <link rel="stylesheet" href={`/assets/css/backend.css`} />
             <link rel="stylesheet" href={"/assets/frontend.css"} />
@@ -115,7 +115,7 @@ const BackendLayout = ({ children }) => {
               id="kt_app_root"
             >
               <div
-                className="app-page flex-column flex-column-fluid bg-light"
+                className="app-page flex-column flex-column-fluid bg-light-lime"
                 id="kt_app_page"
               >
                 <div id="kt_app_header" className="app-header">
@@ -165,6 +165,102 @@ const BackendLayout = ({ children }) => {
                         </div>
                       </div>
                       <div className="header-right">
+                  <div
+                    className="app-navbar-item"
+                    id="kt_header_user_menu_toggle"
+                  >
+                    <div
+                      className="d-flex"
+                      data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+                      data-kt-menu-attach="parent"
+                      data-kt-menu-placement="bottom-end"
+                    >
+                      <div className="text-end d-none d-sm-flex flex-column justify-content-start py-2">
+                        <span className="align-self-end lead">
+                        <div className="d-block">
+                          {/* <p className=" my-auto fw-normal text-uppercase">
+                            {formattedDate}
+                          </p> */}
+                          {name ? (<h6 className="fs-7 fw-bold"> {name}</h6>) : (<h6 className="fs-7 fw-bold">Yasir Abbas Mirza</h6>)}
+                          <p className="fw-bold fs-6 text-dark">USER ROLE</p>
+                        </div>                        </span>
+                        {/* <div>
+                          <span
+                            className="{font-family-default cursor-pointer text-decoration-underline"
+                                
+                          >
+                            EN
+                          </span>
+                          <span className="line">|</span>
+                          <span
+                            className="{font-family-default cursor-pointer text-decoration-underline"
+                                
+                          >
+                            FR
+                          </span>
+                          <span className="line">|</span>
+                          <span
+                            className="{font-family-default cursor-pointer text-decoration-underline"
+                                
+                          >
+                            ES
+                          </span>
+                        </div> */}
+                      </div>
+                      <div className="text-center">
+                        <div className="symbol symbol-50px symbol-circle me-3">
+                              {image ? 
+                                (
+                                  <img
+                                    src={`${IMAGE_URL}${image}`}
+                                  />
+                                ) : 
+                                (
+                                  <img
+                                    src={`${BASE_URL}/assets/images/pic.png`}
+                                    style={{height:"40px", width:"40px"}}
+                                  />
+                                )} 
+                              </div>                        
+                        {/* <div className="border border-pvs border-1 cursor-pointer symbol symbol symbol-circle symbol-35px mb-2">
+                              </div> */}
+                        <div className="h-15px me-3">
+                          {/* <Notifications /> */}
+
+                          <Tooltip title="Notifications">
+                            <Link
+                              to='/portal/profile'
+                              className='mx-1 h-15px d-inline-block'
+                            >
+                              <i className="fa-regular fs-5 fa-bell icon-green mt-2"></i>
+                            </Link>
+                          </Tooltip>
+                          <Tooltip title="Settings">
+                            <Link
+                              to='/portal/profile'
+                              className='mx-1 h-15px d-inline-block'
+                            >
+                              <img className=" mb-2"
+                            src={`${BASE_URL}/assets/images/settings.png`}
+                          />
+                              {/* <i className="fa-solid fa-gear icon-green mt-2"></i> */}
+                            </Link>
+                          </Tooltip>
+
+                          <Tooltip title="Logout">
+                            <a
+                              href="#"
+                              className='mx-1 h-15px d-inline-block'
+                            >
+                              <i className="fa-solid fa-power-off fs-5 icon-green mt-2"></i>
+                            </a>
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                      {/* <div className="header-right">
                         <div
                           className="app-navbar-item"
                           id="kt_header_user_menu_toggle"
@@ -194,7 +290,7 @@ const BackendLayout = ({ children }) => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div
                       className="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
@@ -233,7 +329,7 @@ const BackendLayout = ({ children }) => {
                     style={{ backgroundColor: "#198754" }}
                   >
                     <div
-                      className="app-sidebar-logo bg-dark border-1"
+                      className="app-sidebar-logo  border-1" style={{background: "#06373A"}}
                       id="kt_app_sidebar_logo"
                       // style={backgroundLogo}
                     >
@@ -281,7 +377,7 @@ const BackendLayout = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="app-sidebar-menu overflow-hidden fw-normal flex-column-fluid bg-dark">
+                    <div className="app-sidebar-menu overflow-hidden fw-normal flex-column-fluid bg-dark-green" style={{background: "#06373A"}}>
                       <div
                         id="kt_app_sidebar_menu_wrapper"
                         className="app-sidebar-wrapper fw-normal hover-scroll-overlay-y d-flex flex-column"
@@ -299,9 +395,8 @@ const BackendLayout = ({ children }) => {
                           data-kt-menu="true"
                           data-kt-menu-expand="false"
                         >
-                          <div >
+                          {/* <div >
                             <div className="d-flex align-items-center mx-3  me-xl-13">
-                              {/*begin::Symbol*/}
                               <div className="symbol symbol-50px symbol-circle me-3">
                               {image ? 
                                 (
@@ -315,8 +410,6 @@ const BackendLayout = ({ children }) => {
                                   />
                                 )} 
                               </div>
-                              {/*end::Symbol*/}
-                              {/*begin::Info*/}
                               <div className="m-0">
                                 <span className="fw-semibold text-white d-block fs-5 mb-1">
                                 {name ? (name) : ("Yasir Abbas Mirza")}
@@ -328,10 +421,9 @@ const BackendLayout = ({ children }) => {
                                   Profile
                                 </Link>
                               </div>
-                              {/*end::Info*/}
                             </div>
-                          </div>
-                          <hr />
+                          </div> */}
+                          {/* <hr /> */}
 
                           <div className="menu-item border-custom">
                             <Link
@@ -353,8 +445,6 @@ const BackendLayout = ({ children }) => {
                               </span>
                             </Link>
                           </div>
-
-                          
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${

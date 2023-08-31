@@ -28,9 +28,10 @@
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link.active {
   transition: all 0.1s;
- border-bottom: none;
-  background-color: #6b6b6b;
-  border-left:3px solid #8FC4B7;
+  border-bottom: none;
+  border-top: none;
+  background-color: #062315;
+  border-left:3px solid rgb(191, 216, 210);
 }
 
 .font-family-default {
@@ -73,9 +74,14 @@
 }
 .menu-item:hover, .menu-item.active{
   border-bottom: none;
-  background-color: #6b6b6b;
-  border-left:0.5px solid #8FC4B7;
+  border-top: none;
+  background-color: #062315;
+  border-left:3px solid rgb(191, 216, 210);
  
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-logo {
+  border-bottom: 1px dashed rgb(118, 118, 118) !important;
 }
 
 /* .menu-item:active{
@@ -87,6 +93,11 @@
 
 .border-custom{
   border-bottom: 1px solid #606060;
+}
+
+.bg-light-lime{
+  background-color: #d1fcf21d;
+  
 }
 .woah-logo {
   height: 50px;
@@ -153,7 +164,7 @@ hr {
 }
 
 .icon-green{
- color: rgb(42, 64, 42) !important;
+ color: rgb(6, 55, 58) !important;
 }
 
 .header-right-items {
