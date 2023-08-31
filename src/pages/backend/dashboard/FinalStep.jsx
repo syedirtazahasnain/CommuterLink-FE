@@ -33,6 +33,7 @@ const FinalStep = () => {
   const [driverName, setDriverName] = useState("");
   const [id, setId] = useState("");
   const [requestAs, setRequestAs] = useState("");
+  const [amount, setAmount] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const selectedDateFormat = selectedDate ? selectedDate.format('YYYY-MM-DD') : '';
 
@@ -93,6 +94,7 @@ const FinalStep = () => {
       const jsonresponse = await response.json();
       if (jsonresponse) {
         setName(jsonresponse[0].name);
+        setAmount(jsonresponse[0].wallet.wallet_amount);
         // setId(jsonresponse[0].id);
       }
       console.log("Final Step Profile Data", jsonresponse);
@@ -136,8 +138,7 @@ const FinalStep = () => {
           message: "I accept your request",
           status: 2,
         }
-  
-        console.log("sendRequest:", body);
+        console.log("sendRequest Driver:", body);
   
         const response = await fetch(
           `${API_URL}/api/v1/request`,
@@ -172,8 +173,7 @@ const FinalStep = () => {
           message: "I accept your request",
           status: 3,
         }
-  
-        console.log("sendRequest:", body);
+        console.log("sendRequest Rider:", body);
   
         const response = await fetch(
           `${API_URL}/api/v1/request`,
@@ -233,8 +233,8 @@ const FinalStep = () => {
               give my consent to share you car.
             </p>
             <p>
-              I have deposited Rs. XXXX/- as advance with CommutersLink which will be credited
-              to your wallet on daily basis @ Rs 335/-.
+              I have deposited Rs. {amount}/- as advance with CommutersLink which will be credited
+              to your wallet on daily basis.
             </p>
             <p>
               I wish to start commuting with your starting from:

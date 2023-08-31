@@ -21,9 +21,12 @@ const CommuterLinkSuggestions = () => {
   const [option, setOption] = useState("");
 
   useEffect(() => {
-    getDashboardData();
     getProfileData();
     getMemberData();
+  }, []);
+
+  useEffect(() => {
+    getDashboardData();
   }, []);
 
   const route = () => {
@@ -31,40 +34,6 @@ const CommuterLinkSuggestions = () => {
 
     if (!submitbtn) {
       navigate("/commuter-profile");
-    }
-  };
-
-  const getDashboardData = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/matches/office`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
-        setContactId(jsonresponse.rider[0].contact_id);
-        setName(jsonresponse.rider[0].name);
-        setRequestStatus(jsonresponse.rider[0].req_sent);
-        setRequestStage(jsonresponse.rider[0].req_stage);
-        setImage(jsonresponse.rider[0].commuter_image);
-      } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
-        setContactId(jsonresponse.drivers[0].contact_id);
-        setName(jsonresponse.drivers[0].name);
-        setRequestStatus(jsonresponse.drivers[0].req_sent);
-        setRequestStage(jsonresponse.drivers[0].req_stage);
-        setImage(jsonresponse.drivers[0].commuter_image);
-      }
-      console.log("Dashboard Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
     }
   };
 
@@ -86,14 +55,49 @@ const CommuterLinkSuggestions = () => {
       if (jsonresponse) {
         setOption(jsonresponse[0].userlist.vehicle_option);
       }
-      else {
-        setOption("");
-      }
       console.log("Dashboard Page Data", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
   };
+
+  const getDashboardData = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/matches/office`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+
+      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
+        setContactId(jsonresponse.rider[0].contact_id);
+        setName(jsonresponse.rider[0].name);
+        setRequestStatus(jsonresponse.rider[0].req_sent);
+        setRequestStage(jsonresponse.rider[0].req_stage);
+        setImage(jsonresponse.rider[0].commuter_image);
+      }
+
+      if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
+        setContactId(jsonresponse.drivers[0].contact_id);
+        setName(jsonresponse.drivers[0].name);
+        setRequestStatus(jsonresponse.drivers[0].req_sent);
+        setRequestStage(jsonresponse.drivers[0].req_stage);
+        setImage(jsonresponse.drivers[0].commuter_image);
+      }
+      console.log("Dashboard Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
 
   const getMemberData = async () => {
     try {
@@ -175,7 +179,7 @@ const CommuterLinkSuggestions = () => {
                           }}
                         >
                           <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
+                            src={`${IMAGE_URL}${image}`}
                             className="card-img-top w-40px m-auto mt-3"
                           />
                           <div
@@ -223,16 +227,13 @@ const CommuterLinkSuggestions = () => {
                                     <>
                                       <img
                                         src={`${BASE_URL}/assets/images/Vector.png`}
-                                        className="card-img-top w-40px m-auto mt-3 bg-warning"
+                                        className="card-img-top w-40px m-auto mt-3"
                                       />
                                       <div
-                                        className="card-title text-center text-warning"
-                                        style={{ width: "6rem", cursor: "pointer" }}
-                                        onClick={() => {
-                                          route();
-                                        }}
+                                        className="card-title text-center text-light"
+                                        style={{ width: "6rem" }}
                                       >
-                                        {contactId}
+                                       Member ID
                                       </div>
                                     </>
                                   )}

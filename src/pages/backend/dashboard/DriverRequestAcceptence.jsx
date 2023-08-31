@@ -32,19 +32,26 @@ const DriverRequestAcceptence = () => {
   const [name, setName] = useState("");
   const [driverName, setDriverName] = useState("");
   const [id, setId] = useState("");
-  const [selectedDate, setSelectedDate] = useState(null);
-  const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
+  const [contactId, setContactId] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
   // const [profileStatus, setProfileStatus] = useState("");
 
   useEffect(() => {
     getProfileData();
     getMemberData();
+    getDashboardData();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
+
+  useEffect(() => {
+    if (contactId) {
+      getDateData();
+    }
+  }, [contactId]);
 
   const getProfileData = async () => {
     try {
@@ -96,14 +103,70 @@ const DriverRequestAcceptence = () => {
     }
   };
 
+  const getDashboardData = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/matches/office`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
+        setDriverName(jsonresponse.rider[0].name);
+        setContactId(jsonresponse.rider[0].contact_id);
+        setId(jsonresponse.rider[0].request_id);
+      } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
+        setDriverName(jsonresponse.drivers[0].name);
+        setContactId(jsonresponse.drivers[0].contact_id);
+        setId(jsonresponse.drivers[0].request_id);
+      }
+      console.log("Final Step Dashboard Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const getDateData = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/suggestedDate/${contactId}`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse) {
+        setSelectedDate(jsonresponse.data);
+      }
+      console.log("Driver Request Acceptence Date:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
   const sendRequest = async () => {
     try {
       const body = {
         request_id: id,
-        start_date: selectedDateFormat,
+        start_date: selectedDate,
         message: "I accept your request",
         status: 3
       }
+
+      console.log("Request Body:", body);
 
       const response = await fetch(
         `${API_URL}/api/v1/request`,
@@ -137,13 +200,6 @@ const DriverRequestAcceptence = () => {
     }
   };
 
-  const handleDateChange = (newDate) => {
-    if (newDate) {
-      const newDateObject = dayjs(newDate);
-      setSelectedDate(newDateObject);
-    }
-  };
-
   return (
     <div>
       <div className="page-title">
@@ -161,14 +217,14 @@ const DriverRequestAcceptence = () => {
               I also think that we are a suitable match to commute together. so I also formally
               give my consent to share you car.
             </p>
-            <p>
+            {/* <p>
               I have deposited Rs. XXXX/- as advance with CommutersLink which will be credited
               to your wallet on daily basis @ Rs 335/-.
-            </p>
+            </p> */}
             <p>
-              I wish to start commuting with your starting from 0000-00-00
+              I wish to start commuting with your starting from {selectedDate}
             </p>
-            
+
             <br />
             <p>
               Looking forward to a long term association for mutual benefit.
@@ -186,7 +242,7 @@ const DriverRequestAcceptence = () => {
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={sendRequest}
             >
-              Next
+              I Accept
             </Button>
           </div>
         </div>

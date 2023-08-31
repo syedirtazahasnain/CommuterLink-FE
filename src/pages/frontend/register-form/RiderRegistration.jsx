@@ -809,7 +809,7 @@ const RiderRegistration = () => {
                     {cityStartId && (
                       <Form.Group
                         as={Col}
-                        md="4"
+                        md="12"
                         controlId="validationCustom02"
                       >
                         <Form.Label style={{ color: "#000" }}>
@@ -838,7 +838,7 @@ const RiderRegistration = () => {
 
                         <div className="mt-3">
                           <span
-                            className="colorplace"
+                            className="colorplace text-danger"
                             style={{
                               cursor: "pointer",
                               textDecoration: "underline",
@@ -973,7 +973,7 @@ const RiderRegistration = () => {
                     {cityEndId && (
                       <Form.Group
                         as={Col}
-                        md="4"
+                        md="12"
                         controlId="validationCustom02"
                       >
                         <Form.Label style={{ color: "#000" }}>
@@ -1002,7 +1002,7 @@ const RiderRegistration = () => {
 
                         <div className="mt-3">
                           <span
-                            className="colorplace"
+                            className="colorplace text-danger"
                             style={{
                               cursor: "pointer",
                               textDecoration: "underline",
@@ -1056,14 +1056,14 @@ const RiderRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
-                        value={selectedHomeTime}
-                        onChange={(e) => setSelectedHomeTime(e.target.value)}
+                        value={selectedOfficeTime}
+                        onChange={(e) => setSelectedOfficeTime(e.target.value)}
                         required
                       >
                         <option value="" hidden>
                           Drop-off Timings
                         </option>
-                        {homeTimeSlots?.map((time) => (
+                        {officeTimeSlots?.map((time) => (
                           <option key={time.id} value={time.id}>
                             {time.time_string}
                           </option>
@@ -1186,7 +1186,7 @@ const RiderRegistration = () => {
                       <Container className="d-flex justify-content-center align-items-center mb-3">
                         <Row style={{ height: "100%", width: "100%" }}>
                           <GoogleMap
-                            zoom={12}
+                            zoom={15}
                             center={defaultStartCenter}
                             mapContainerStyle={{
                               width: "100%",
@@ -1226,7 +1226,7 @@ const RiderRegistration = () => {
                       <Container className="d-flex justify-content-center align-items-center mb-3">
                         <Row style={{ height: "100%", width: "100%" }}>
                           <GoogleMap
-                            zoom={12}
+                            zoom={15}
                             // center={
                             //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
                             // }

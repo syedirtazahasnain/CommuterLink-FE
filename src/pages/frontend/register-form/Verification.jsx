@@ -137,10 +137,10 @@ const Verification = () => {
                             <img
                               src={`${IMAGE_URL}${image}`}
                               alt="photo"
-                              style={{ width: '250px', height: '250px', objectFit: 'cover', borderRadius: '50%' }}
+                              style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '50%' }}
                             />
                           </div>
-                          <div className="text-white">{name ? name : verificationName}<br />{email ? email : verificationEmail}</div>
+                          <div className="text-dark text-center mt-2">{name ? name : verificationName}<br />{email ? email : verificationEmail}</div>
                           <h3 className="card-title mt-4 mb-3 text-center text-success" >
                             Pending Verificaiton
                           </h3>

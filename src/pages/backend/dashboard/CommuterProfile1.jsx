@@ -494,7 +494,7 @@ const CommuterProfile1 = () => {
           </div>
           {memberId !== "" ? (
             (
-              requestStage === 2 ? (
+              requestStage === 1 || requestStage === 2 ? (
                 <div className="text-center">
                   <Button className="btn btn-sm fs-6 fw-bold btn-warning text-gray rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted}>
                     Request Accepted
