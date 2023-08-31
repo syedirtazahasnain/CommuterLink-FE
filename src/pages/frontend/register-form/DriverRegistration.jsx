@@ -2673,10 +2673,10 @@ const DriverRegistration = () => {
                     </div> */}
                     <div className="row" style={{ border: "1px solid #cddbd9" }}>
                       <div className="col">
-                        <div className="container text-center d-flex justify-content-center  flex-wrap">
+                        <div className="container text-center d-flex justify-content-center  flex-wrap py-2">
                           <Button
                             variant="outlined"
-                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"}  btn-toogle pt-1 mx-2 mt-3`}
+                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"} py-2 btn-toogle  mx-2 mt-1`}
                             onClick={() => {
                               setshowmyself(true);
                               setshowmydriver(false);
@@ -2690,7 +2690,7 @@ const DriverRegistration = () => {
                           </Button>
                           <Button
                             variant="outlined"
-                            className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite"}  btn-toogle pt-1 mx-2 mt-3`}
+                            className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1`}
                             onClick={() => {
                               setshowmyself(false);
                               setshowmydriver(true);
@@ -2704,7 +2704,7 @@ const DriverRegistration = () => {
                           </Button>
                           <Button
                             variant="outlined"
-                            className={`btn ${showboth === true ? "btnDriver" : "btnWhite"}  btn-toogle pt-1 mx-2 mt-3`}
+                            className={`btn ${showboth === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1`}
                             onClick={() => {
                               setshowmydriver(false);
                               setshowmyself(false);
@@ -2724,7 +2724,95 @@ const DriverRegistration = () => {
 
                     {showmyself && (
                       <>
-                        <Row className="mb-3 mt-3">
+                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Driving License Details
+                    </h2>
+                    <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Driving Licence No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="License No."
+                              value={inputDrivingLicenseMySelf}
+                              onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Valid Upto
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Enter Here"
+                              value={inputValidUptoMySelf}
+                              onChange={(e) => setInputValidUptoMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>    
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label text-dark fs-6>
+                              Place Issued
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Enter Here"
+                              value={inputPlaceIssueMySelf}
+                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom02"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                          </Form.Group>
+                    </div></div>
+                        {/* <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
                             md="12"
@@ -2743,8 +2831,8 @@ const DriverRegistration = () => {
                               defaultValue=""
                             />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
+                        </Row> */}
+                        {/* <Row className="mb-3">
                           <Form.Group
                             as={Col}
                             md="12"
@@ -2763,8 +2851,8 @@ const DriverRegistration = () => {
                               defaultValue=""
                             />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3 mt-3">
+                        </Row> */}
+                        {/* <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
                             md="12"
@@ -2783,9 +2871,9 @@ const DriverRegistration = () => {
                               defaultValue=""
                             />
                           </Form.Group>
-                        </Row>
+                        </Row> */}
 
-                        <Row className="mb-3">
+                        {/* <Row className="mb-3">
                           <Form.Group
                             as={Col}
                             md="6"
@@ -2806,26 +2894,35 @@ const DriverRegistration = () => {
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
-                        </Row>
+                        </Row> */}
 
                       </>
                     )}
 
                     {showmydriver && (
                       <>
-                        <Row className="mb-3 mt-3">
-                          <Form.Group
+
+<div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Driver's Details
+                    </h2>
+                    <Form.Group
                             as={Col}
-                            md="6"
+                            md="12"
                             controlId="validationCustom01"
+                            className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Name
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="Name"
                               value={inputDriverName}
                               onChange={(e) => setInputDriverName(e.target.value)}
@@ -2834,16 +2931,17 @@ const DriverRegistration = () => {
                           </Form.Group>
                           <Form.Group
                             as={Col}
-                            md="6"
+                            md="12"
                             controlId="validationCustom01"
+                            className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               CNIC
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="CNIC: xxxxxxxxxxxxx"
                               value={inputDriverCnicNumber}
                               onChange={(e) => setInputDriverCnicNumber(e.target.value)}
@@ -2851,10 +2949,165 @@ const DriverRegistration = () => {
                               maxLength={13}
                             />
                           </Form.Group>
-                        </Row>
-
-                        <Row className="mb-3">
                           <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload CNIC (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom02"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark">
+                              Upload CNIC (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                          </Form.Group>
+                    </div></div>
+
+                    <div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     License Details
+                    </h2>
+                    <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Driving Licence No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Valid Upto
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Enter Here"
+                              value={inputDriverValidUpto}
+                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom02"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                          </Form.Group>
+                    </div></div>
+                        {/* <Row className="mb-3 mt-3">
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Name
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Name"
+                              value={inputDriverName}
+                              onChange={(e) => setInputDriverName(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              CNIC
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="CNIC: xxxxxxxxxxxxx"
+                              value={inputDriverCnicNumber}
+                              onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                              defaultValue=""
+                              maxLength={13}
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload CNIC (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom02"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark">
+                              Upload CNIC (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                          </Form.Group>
+                        </Row> */}
+
+                        <Row className="">
+                          {/* <Form.Group
                             as={Col}
                             md="6"
                             controlId="validationCustom01"
@@ -2863,8 +3116,8 @@ const DriverRegistration = () => {
                               Upload CNIC (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicFrontDriver} />
-                          </Form.Group>
-                          <Form.Group
+                          </Form.Group> */}
+                          {/* <Form.Group
                             as={Col}
                             md="6"
                             controlId="validationCustom02"
@@ -2873,10 +3126,10 @@ const DriverRegistration = () => {
                               Upload CNIC (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicBackDriver} />
-                          </Form.Group>
+                          </Form.Group> */}
                         </Row>
-                        <Row className="mb-3">
-                          <Form.Group
+                        <Row className="">
+                          {/* <Form.Group
                             as={Col}
                             md="12"
                             controlId="validationCustom01"
@@ -2893,10 +3146,10 @@ const DriverRegistration = () => {
                               onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
                               defaultValue=""
                             />
-                          </Form.Group>
+                          </Form.Group> */}
                         </Row>
-                        <Row className="mb-3">
-                          <Form.Group
+                        <Row className="">
+                          {/* <Form.Group
                             as={Col}
                             md="12"
                             controlId="validationCustom01"
@@ -2913,10 +3166,10 @@ const DriverRegistration = () => {
                               onChange={(e) => setInputDriverValidUpto(e.target.value)}
                               defaultValue=""
                             />
-                          </Form.Group>
+                          </Form.Group> */}
                         </Row>
-                        <Row className="mb-3">
-                          <Form.Group
+                        <Row className="">
+                          {/* <Form.Group
                             as={Col}
                             md="6"
                             controlId="validationCustom01"
@@ -2925,8 +3178,8 @@ const DriverRegistration = () => {
                               Upload License (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
-                          </Form.Group>
-                          <Form.Group
+                          </Form.Group> */}
+                          {/* <Form.Group
                             as={Col}
                             md="6"
                             controlId="validationCustom02"
@@ -2935,12 +3188,83 @@ const DriverRegistration = () => {
                               Upload License (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseBackDriver} />
-                          </Form.Group>
+                          </Form.Group> */}
                         </Row>
                       </>
                     )}
                     {showboth && (<>
-                      <Row className="mb-3 mt-3">
+
+                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Driver's Details
+                    </h2>
+                    <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Name
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Name"
+                              value={inputDriverName}
+                              onChange={(e) => setInputDriverName(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              CNIC
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="CNIC: xxxxxxxxxxxxx"
+                              value={inputDriverCnicNumber}
+                              onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                              defaultValue=""
+                              maxLength={13}
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload CNIC (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom02"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark">
+                              Upload CNIC (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                          </Form.Group>
+                    </div></div>
+                      {/* <Row className="mb-3 mt-3">
                         <Form.Group
                           as={Col}
                           md="6"
@@ -3001,8 +3325,78 @@ const DriverRegistration = () => {
                           </Form.Label>
                           <Form.Control type="file" required onChange={handleCnicBackDriver} />
                         </Form.Group>
-                      </Row>
-                      <Row className="mb-3">
+                      </Row> */}
+
+<div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Driver's License Details
+                    </h2>
+                    <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom01"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-dark fs-6">
+                            Driving Licence No.
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            type="text"
+                            className="text-secondary"
+                            placeholder="License No."
+                            value={inputDriverLicenseNumber}
+                            onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                            defaultValue=""
+                          />
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom01"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-dark fs-6">
+                            Valid Upto
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            type="text"
+                            className="text-secondary"
+                            placeholder="Enter Here"
+                            value={inputDriverValidUpto}
+                            onChange={(e) => setInputDriverValidUpto(e.target.value)}
+                            defaultValue=""
+                          />
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom01"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-dark fs-6">
+                            Upload License (front)
+                          </Form.Label>
+                          <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom02"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-dark fs-6">
+                            Upload License (back)
+                          </Form.Label>
+                          <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                        </Form.Group>
+                    </div></div>
+                      {/* <Row className="mb-3">
                         <Form.Group
                           as={Col}
                           md="12"
@@ -3063,7 +3457,7 @@ const DriverRegistration = () => {
                           </Form.Label>
                           <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                         </Form.Group>
-                      </Row>
+                      </Row> */}
 
                     </>)
                     }
