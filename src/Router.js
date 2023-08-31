@@ -48,6 +48,8 @@ import DriverFinalStep from "./pages/backend/dashboard/DriverFinalStep";
 import Resubmit from "./pages/frontend/register-form/Resubmit";
 import TravelBuddyProfile from "./pages/backend/dashboard/TravelBuddyProfile";
 import TermsCondition from "./pages/backend/dashboard/TermsCondition";
+import Rider from "./pages/backend/MatchingUpdate/Rider";
+import Driver from "./pages/backend/MatchingUpdate/Driver";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -62,6 +64,8 @@ const Router = () => {
         <Route path="/faq" element={<FrontendLayout children={<Faq />} />} />
         <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
         <Route path="/resubmit" element={<FrontendLayout children={<Resubmit />} />} />
+        <Route path="/rider" element={<BackendLayout children={<Rider />} />}></Route>
+        <Route path="/driver" element={<BackendLayout children={<Driver />} />}></Route>
 
         {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />

@@ -979,7 +979,7 @@ const DriverRegistration = () => {
 
   return (
     <>
-      {!showDriverForm && (
+      {showDriverForm && (
         <>
           <div style={{ backgroundColor: "#eee" }}>
             <div className="containter p-5">
@@ -1993,7 +1993,7 @@ const DriverRegistration = () => {
         </>
       )}
 
-      {showDriverForm && (
+      {!showDriverForm && (
         <>
           <div style={{ backgroundColor: "#eee" }}>
             <div className="containter p-5">
