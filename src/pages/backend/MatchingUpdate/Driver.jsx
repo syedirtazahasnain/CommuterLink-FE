@@ -54,7 +54,7 @@ const Driver = () => {
     //   ];
 
     useEffect(() => {
-        // dispatch(setCurrentPage("profile"));
+        dispatch(setCurrentPage("driver"));
         // getProfileData();
         document.getElementById("root").classList.remove("w-100");
         document.getElementById("root").classList.add("d-flex");
@@ -96,10 +96,10 @@ const Driver = () => {
                     Update Matching Criteria
                 </h3>
             </div>
-            <div className="card p-4  p-2">
+            <div className="card p-4">
                 <div className="card" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
                     <div className="card-body text-dark">
-                        <div className="container text-center">
+                        <div className="container text-center mt-4">
 
                             <Form className="text-center">
 

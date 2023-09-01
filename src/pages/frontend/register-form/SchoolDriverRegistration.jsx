@@ -1614,7 +1614,7 @@ const DriverRegistration = () => {
                       </Form.Group>
                     </Row> */}
 
-<Row className="my-3" style={{ border: '1px solid #cddbd9' }}>
+                      <Row className="my-3" style={{ border: '1px solid #cddbd9' }}>
                       <Form.Group as={Col} md="12" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
                           I Commute (Select Days)
@@ -2387,30 +2387,34 @@ const DriverRegistration = () => {
           <div style={{ backgroundColor: "#eee" }}>
             <div className="containter p-5">
               <div className="row justify-content-center">
-                <div className="col-md-8 bg-white  mt-5 mb-5">
-                  <h1
-                    className="text-center mb-4"
-                    style={{
-                      color: "#000",
-                      marginBottom: "5vh",
-                      marginTop: "5vh",
-                    }}
+                <div className="col-md-6 bg-white  mt-5 mb-5">
+                <div className="row shadow" style={{ backgroundColor: "rgb(42, 64, 42" }}>
+                <h1
+                    className="text-center text-white py-4"
+                 
                   >
                     {" "}
                     Driver's Registration Form
                   </h1>{" "}
-                  <Form>
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>Car Brand</Form.Label>
+                </div>
+                 
+                  <Form className="p-3">
+                    <div className="row mb-3 shadow shadow-sm">
+                    <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >     <h2 className="text-success mb-3 text-center">
+                  Car Details
+                </h2>  
+                <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="text-dark fs-6">Car Brand</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                          className="text-secondary"
                           value={selectedCarBrand}
                           onChange={handleCarBrandChange}
                           required
-                          isValid={isCarBrandValid}
-                          isInvalid={!isCarBrandValid}
+                          
                         >
                           <option value="" hidden>Car Brand</option>
                           {carBrand?.map((car) => (
@@ -2420,49 +2424,27 @@ const DriverRegistration = () => {
                           ))}
                         </Form.Select>
                       </Form.Group>
-                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          Car Brand
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#000" }}
-                          value={selectedCarBrand}
-                          onChange={(e) => setSelectedCarBrand(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Car Brand</option>
-
-                          {carBrand?.map((car) => (
-                            <option key={car.id} value={car.brand_name}>
-                              {car.brand_name}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group> */}
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2" >
+                        <Form.Label className="text-dark fs-6">
                           Model Name
                         </Form.Label>
                         <Form.Control
                           required
                           type="text"
-                          className="colorplace"
+                          className="text-secondary"
                           value={selectedModelName}
                           onChange={(e) => setSelectedModelName(e.target.value)}
                           placeholder="Car Model"
                           defaultValue=""
                         />
                       </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="text-dark fs-6">
                           Manufacturing Year
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                           className="text-secondary"
                           value={selectedManYear}
                           onChange={(e) => setSelectedManYear(e.target.value)}
                           required
@@ -2475,73 +2457,13 @@ const DriverRegistration = () => {
                           ))}
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
-                          Registration Year
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#000" }}
-                          value={selectedRegYear}
-                          onChange={(e) => setSelectedRegYear(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Registration Year</option>
-                          {regYear?.map((reg) => (
-                            <option key={reg.id} value={reg.car_year_ranges}>
-                              {reg.car_year_ranges}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          Registration Car Year Ranges
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={selectedCarYearRanges}
-                          onChange={(e) => setSelectedCarYearRanges(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Select Car Year Ranges</option>
-                          {carYearRanges?.map((man) => (
-                            <option key={man.id} value={man.car_year_ranges}>
-                              {man.car_year_ranges}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                    </Row>
-
-                    {/* {selectedCarYearRanges} */}
-
-                    <Row className="mb-0">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          Registeration Number
-                        </Form.Label>
-                        <Form.Control
-                          required
-                          type="text"
-                          className="colorplace"
-                          value={selectedRegNumber}
-                          onChange={(e) => setSelectedRegNumber(e.target.value)}
-                          placeholder="Registeration Number"
-                          defaultValue=""
-                        />
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Label className="text-dark fs-6">
                           My Car has AC
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                           className="text-secondary"
                           value={selectedCarAC}
                           onChange={(e) => setSelectedCarAC(e.target.value)}
                           required
@@ -2551,29 +2473,13 @@ const DriverRegistration = () => {
                           <option value="No">No</option>
                         </Form.Select>
                       </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                      <Form.Group
-                        controlId="formFile"
-                        as={Col}
-                        md="6"
-                      >
-                        <Form.Label className="mt-3" style={{ color: "#000" }}>
-                          Upload Car Image with visible number plate
-                        </Form.Label>
-                        <Form.Control
-                          type="file"
-                          onChange={handleImageSelect}
-                          required
-                        />
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" className="mb-3" controlId="validationCustom02">
-                        <Form.Label className="mt-3" style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" className="mb-2" controlId="validationCustom02">
+                        <Form.Label className="text-dark fs-6" >
                           Car CC
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                           className="text-secondary"
                           value={selectedCarCC}
                           onChange={(e) => setSelectedCarCC(e.target.value)}
                           required
@@ -2586,18 +2492,102 @@ const DriverRegistration = () => {
                           ))}
                         </Form.Select>
                       </Form.Group>
-                    </Row>
+                      <Form.Group
+                        controlId="formFile"
+                        as={Col}
+                        md="12"
+                        className="mb-2"
+                      >
+                        <Form.Label className="text-dark fs-6">
+                          Upload Car Image with visible number plate
+                        </Form.Label>
+                        <Form.Control
+                          type="file"
+                          className="text-secondary"
+                          onChange={handleImageSelect}
+                          required
+                        />
+                      </Form.Group>
+                 </div>
+                    </div>
 
-                    {/* {selectedCarCC} */}
-
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
+                    <div className="row mb-3 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                            <h2 className="text-success mb-3 text-center">
+                      Car Registration
+                    </h2>
+                    <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Label className="text-dark">
+                          Registration Year
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          className="text-secondary"
+                          value={selectedRegYear}
+                          onChange={(e) => setSelectedRegYear(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Registration Year</option>
+                          {regYear?.map((reg) => (
+                            <option key={reg.id} value={reg.car_year_ranges}>
+                              {reg.car_year_ranges}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="text-dark fs-6">
+                          Registration Car Year Ranges
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                            className="text-secondary"
+                          value={selectedCarYearRanges}
+                          onChange={(e) => setSelectedCarYearRanges(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Select Car Year Ranges</option>
+                          {carYearRanges?.map((man) => (
+                            <option key={man.id} value={man.car_year_ranges}>
+                              {man.car_year_ranges}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="text-dark fs-6">
+                          Registration Number
+                        </Form.Label>
+                        <Form.Control
+                          required
+                          type="text"
+                          className="text-secondary"
+                          value={selectedRegNumber}
+                          onChange={(e) => setSelectedRegNumber(e.target.value)}
+                          placeholder="Registration Number"
+                          defaultValue=""
+                        />
+                      </Form.Group>
+                             </div></div>
+                
+                             <div className="row mb-3 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Available Seats
+                    </h2>      
+                    <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="text-dark fs-6" >
                           Seats Available
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                            className="text-secondary"
                           value={selectedSeat}
                           onChange={(e) => setSelectedSeat(e.target.value)}
                           required
@@ -2609,13 +2599,13 @@ const DriverRegistration = () => {
                           <option value="4">4</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Label className="text-dark fs-6">
                           Seats Available for (Male, Female, Both)
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                           className="text-secondary"
                           value={selectedSeatGender}
                           onChange={(e) => setSelectedSeatGender(e.target.value)}
                           required
@@ -2626,16 +2616,24 @@ const DriverRegistration = () => {
                           <option value="Both">Both</option>
                         </Form.Select>
                       </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
+                               </div></div>
+                
+                               <div className="row mb-3 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Route Partner
+                    </h2>
 
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
+                    <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="text-dark fs-6">
                           I accept one-route partner
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                          className="text-secondary"
                           value={selectedOneRoutePartner}
                           onChange={(e) => setSelectedOneRoutePartner(e.target.value)}
                           required
@@ -2646,13 +2644,13 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group>
 
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Label className="text-dark fs-6">
                           I also accept mid-route partner
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
-
+                           className="text-secondary"
                           value={selectedMidRoutePartner}
                           onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
                           required
@@ -2663,26 +2661,29 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group>
 
-                    </Row>
-                    <div className="tab">
-                      <div className="container">
-                        <div className="row justify-content-center mt-5">
-                          <div className="col-lg-12">
-                            <div className="card text-center" >
-                              <div className="card-body">
-                                <h5 className="card-title">Bank/Payment Details</h5>
-                                <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
-                                <div class="container">
+                 </div>
+                 </div>
+
+                 <div className="row mb-3 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                    Bank/Payment Details
+                    </h2> 
+                                                   <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                                                   <div class="container text-center">
                                   <img src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
                                   <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
                                   <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
                                   <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
-                                </div>
-                                <form id="paymentForm">
+
+                                  <form id="paymentForm">
                                   <div className="mt-4">
                                     <input
                                       type="text"
-                                      className="form-control mb-2 colorplace"
+                                      className="form-control mb-2 text-secondary"
                                       id="bankAccount"
                                       name="bankAccount"
                                       placeholder="Bank Account (IBAN)"
@@ -2694,7 +2695,7 @@ const DriverRegistration = () => {
                                   <div>
                                     <input
                                       type="text"
-                                      className="form-control mb-2 colorplace"
+                                      className="form-control mb-2 text-secondary"
                                       id="jazzCashAccount"
                                       name="jazzCashAccount"
                                       placeholder="Jazz Cash Account Number"
@@ -2706,7 +2707,7 @@ const DriverRegistration = () => {
                                   <div>
                                     <input
                                       type="text"
-                                      className="form-control mb-2 colorplace"
+                                      className="form-control mb-2 text-secondary"
                                       id="easypaisaAccount"
                                       name="easypaisaAccount"
                                       placeholder="EasyPaisa Account Number"
@@ -2718,7 +2719,7 @@ const DriverRegistration = () => {
                                   <div>
                                     <input
                                       type="text"
-                                      className="form-control mb-2 colorplace"
+                                      className="form-control mb-2 text-secondary"
                                       id="raastID"
                                       name="raastID"
                                       placeholder="Raast ID"
@@ -2727,18 +2728,18 @@ const DriverRegistration = () => {
                                     />
                                   </div>
                                 </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                                </div>
+                   
                     </div>
-                    <div className="row">
+                    </div>
+                    
+                  
+                    <div className="row " style={{ border: "1px solid #cddbd9" }}>
                       <div className="col">
-                        <div className="container text-center d-flex justify-content-center pt-2 flex-wrap">
+                        <div className="container text-center d-flex justify-content-center py-2 flex-wrap">
                           <Button
                             variant="outlined"
-                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"}  btn-toogle pt-2 mx-2 mt-3`}
+                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1`}
                             onClick={() => {
                               setshowmyself(true);
                               setshowmydriver(false);
@@ -2752,7 +2753,7 @@ const DriverRegistration = () => {
                           </Button>
                           <Button
                             variant="outlined"
-                            className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite"}  btn-toogle pt-2 mx-2 mt-3`}
+                            className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1`}
                             onClick={() => {
                               setshowmyself(false);
                               setshowmydriver(true);
@@ -2766,7 +2767,7 @@ const DriverRegistration = () => {
                           </Button>
                           <Button
                             variant="outlined"
-                            className={`btn ${showboth === true ? "btnDriver" : "btnWhite"}  btn-toogle pt-2 mx-2 mt-3`}
+                            className={`btn ${showboth === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1`}
                             onClick={() => {
                               setshowmydriver(false);
                               setshowmyself(false);
@@ -2786,108 +2787,117 @@ const DriverRegistration = () => {
 
                     {showmyself && (
                       <>
-                        <Row className="mb-3 mt-3">
-                          <Form.Group
+                           <div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Driving License Details
+                    </h2>    
+                    <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Driving Licence No.
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="License No."
                               value={inputDrivingLicenseMySelf}
                               onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Valid Upto
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="Enter Here"
                               value={inputValidUptoMySelf}
                               onChange={(e) => setInputValidUptoMySelf(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Place Issued
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="Enter Here"
                               value={inputPlaceIssueMySelf}
                               onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
-                        </Row>
-
-                        <Row className="mb-3">
                           <Form.Group
                             as={Col}
-                            md="6"
+                            md="12"
                             controlId="validationCustom01"
+                            className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Upload License (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
                           </Form.Group>
+
                           <Form.Group
                             as={Col}
-                            md="6"
+                            md="12"
                             controlId="validationCustom02"
+                            className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Upload License (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
-                        </Row>
-
+                    </div></div>
                       </>
                     )}
 
                     {showmydriver && (
                       <>
-                        <Row className="mb-3 mt-3">
-                          <Form.Group
+                         <div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Driver's Details
+                    </h2>
+                    <Form.Group
                             as={Col}
-                            md="6"
-                            controlId="validationCustom01"
+                            md="12"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Name
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="Name"
                               value={inputDriverName}
                               onChange={(e) => setInputDriverName(e.target.value)}
@@ -2896,16 +2906,16 @@ const DriverRegistration = () => {
                           </Form.Group>
                           <Form.Group
                             as={Col}
-                            md="6"
-                            controlId="validationCustom01"
+                            md="12"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               CNIC
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="CNIC: xxxxxxxxxxxxx"
                               value={inputDriverCnicNumber}
                               onChange={(e) => setInputDriverCnicNumber(e.target.value)}
@@ -2913,108 +2923,118 @@ const DriverRegistration = () => {
                               maxLength={13}
                             />
                           </Form.Group>
-                        </Row>
-
-                        <Row className="mb-3">
                           <Form.Group
                             as={Col}
-                            md="6"
-                            controlId="validationCustom01"
+                            md="12"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Upload CNIC (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
-                            md="6"
-                            controlId="validationCustom02"
+                            md="12"
+                            controlId="validationCustom02" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Upload CNIC (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicBackDriver} />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group
+                    </div></div>
+                    <div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     License Details
+                    </h2>
+                    <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Driving Licence No.
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="License No."
                               value={inputDriverLicenseNumber}
                               onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
+
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Valid Upto
                             </Form.Label>
                             <Form.Control
                               required
                               type="text"
-                              className="colorplace"
+                              className="text-secondary"
                               placeholder="Enter Here"
                               value={inputDriverValidUpto}
                               onChange={(e) => setInputDriverValidUpto(e.target.value)}
                               defaultValue=""
                             />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
+
                           <Form.Group
                             as={Col}
-                            md="6"
-                            controlId="validationCustom01"
+                            md="12"
+                            controlId="validationCustom01" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Upload License (front)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
-                            md="6"
-                            controlId="validationCustom02"
+                            md="12"
+                            controlId="validationCustom02" className="mb-2"
                           >
-                            <Form.Label style={{ color: "#000" }}>
+                            <Form.Label className="text-dark fs-6">
                               Upload License (back)
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
-                        </Row>
+                         </div>
+                         </div>
                       </>
                     )}
                     {showboth && (<>
-                      <Row className="mb-3 mt-3">
-                        <Form.Group
+                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Driver's Details
+                    </h2>
+                    <Form.Group
                           as={Col}
-                          md="6"
-                          controlId="validationCustom01"
+                          md="12"
+                          controlId="validationCustom01" className="mb-2"
                         >
-                          <Form.Label style={{ color: "#000" }}>
+                          <Form.Label className="text-dark fs-6">
                             Name
                           </Form.Label>
                           <Form.Control
                             required
                             type="text"
-                            className="colorplace"
+                            className="text-secondary"
                             placeholder="Name"
                             value={inputDriverName}
                             onChange={(e) => setInputDriverName(e.target.value)}
@@ -3023,16 +3043,16 @@ const DriverRegistration = () => {
                         </Form.Group>
                         <Form.Group
                           as={Col}
-                          md="6"
-                          controlId="validationCustom01"
+                          md="12"
+                          controlId="validationCustom01" className="mb-2"
                         >
-                          <Form.Label style={{ color: "#000" }}>
+                          <Form.Label className="text-dark fs-6">
                             CNIC
                           </Form.Label>
                           <Form.Control
                             required
                             type="text"
-                            className="colorplace"
+                            className="text-secondary"
                             placeholder="CNIC: xxxxxxxxxxxxx"
                             value={inputDriverCnicNumber}
                             onChange={(e) => setInputDriverCnicNumber(e.target.value)}
@@ -3040,93 +3060,96 @@ const DriverRegistration = () => {
                             maxLength={13}
                           />
                         </Form.Group>
-                      </Row>
-
-                      <Row className="mb-3">
                         <Form.Group
                           as={Col}
-                          md="6"
-                          controlId="validationCustom01"
+                          md="12"
+                          controlId="validationCustom01" className="mb-2"
                         >
-                          <Form.Label style={{ color: "#000" }}>
+                          <Form.Label className="text-dark fs-6">
                             Upload CNIC (front)
                           </Form.Label>
                           <Form.Control type="file" required onChange={handleCnicFrontDriver} />
                         </Form.Group>
                         <Form.Group
                           as={Col}
-                          md="6"
-                          controlId="validationCustom02"
+                          md="12"
+                          controlId="validationCustom02" className="mb-2"
                         >
-                          <Form.Label style={{ color: "#000" }}>
+                          <Form.Label className="text-dark fs-6">
                             Upload CNIC (back)
                           </Form.Label>
                           <Form.Control type="file" required onChange={handleCnicBackDriver} />
                         </Form.Group>
-                      </Row>
-                      <Row className="mb-3">
-                        <Form.Group
+                    </div>
+                    </div>
+                     
+                 <div className="row mb-3 mt-2 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                     Driver's License Details
+                    </h2> 
+                    <Form.Group
                           as={Col}
                           md="12"
-                          controlId="validationCustom01"
+                          controlId="validationCustom01" className="mb-2"
                         >
-                          <Form.Label style={{ color: "#000" }}>
+                          <Form.Label className="text-dark fs-6">
                             Driving Licence No.
                           </Form.Label>
                           <Form.Control
                             required
                             type="text"
-                            className="colorplace"
+                            className="text-secondary"
                             placeholder="License No."
                             value={inputDriverLicenseNumber}
                             onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
                             defaultValue=""
                           />
                         </Form.Group>
-                      </Row>
-                      <Row className="mb-3">
                         <Form.Group
                           as={Col}
                           md="12"
-                          controlId="validationCustom01"
+                          controlId="validationCustom01" className="mb-2"
                         >
-                          <Form.Label style={{ color: "#000" }}>
+                          <Form.Label className="text-dark fs-6">
                             Valid Upto
                           </Form.Label>
                           <Form.Control
                             required
                             type="text"
-                            className="colorplace"
+                            className="text-secondary"
                             placeholder="Enter Here"
                             value={inputDriverValidUpto}
                             onChange={(e) => setInputDriverValidUpto(e.target.value)}
                             defaultValue=""
                           />
                         </Form.Group>
-                      </Row>
-                      <Row className="mb-3">
                         <Form.Group
                           as={Col}
-                          md="6"
+                          md="12"
                           controlId="validationCustom01"
+                          className="mb-2"
                         >
-                          <Form.Label style={{ color: "#000" }}>
+                          <Form.Label className="text-dark fs-6">
                             Upload License (front)
                           </Form.Label>
                           <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
                         </Form.Group>
                         <Form.Group
                           as={Col}
-                          md="6"
+                          md="12"
                           controlId="validationCustom02"
+                          className="mb-2"
                         >
-                          <Form.Label style={{ color: "#000" }}>
+                          <Form.Label className="text-dark fs-6">
                             Upload License (back)
                           </Form.Label>
                           <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                         </Form.Group>
-                      </Row>
-
+                     </div></div>
                     </>)
                     }
                     <Stack

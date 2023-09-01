@@ -512,7 +512,7 @@ const BackendLayout = ({ children }) => {
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
-                                currentPage == "matchingupdate" ? "active" : ""
+                                currentPage == "driver" ? "active" : ""
                               }`}
                               to={"/driver"}
                               style={{
@@ -522,10 +522,10 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                                <i className="fas fa-solid fa-user fa-2x"></i>
+                              <i className="fa-solid fa-rotate-right"></i>
                               </span>
                               <span className="menu-title text-white">
-                                Update
+                                Update Matching Criteria
                               </span>
                             </Link>
                           </div>

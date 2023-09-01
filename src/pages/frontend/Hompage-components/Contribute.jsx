@@ -8,7 +8,7 @@ const Contribute = () => {
       <Navbar/>
       <section id="contribute" className="section-bg">
       <div className="section-title text-center">
-        <h2 className="heading-color">Contribute</h2>
+        <h2 className="text-dark">Contribute</h2>
         <p>
           Let's Do Our Part to Make Pakistan a Better Living Place for Future
           Generations

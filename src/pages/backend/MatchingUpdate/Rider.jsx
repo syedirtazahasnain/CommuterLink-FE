@@ -88,7 +88,7 @@ const Rider = () => {
       <div className="card p-4  p-2">
         <div className="card" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
           <div className="card-body text-dark">
-            <div className="container text-center">
+            <div className="container text-center mt-4">
 
               <Form className="text-center">
 
@@ -172,7 +172,7 @@ const Rider = () => {
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       color='success'
-                      value={returntime}
+                      value={preferedgender}
                       className="bg-light text-left"
                       label="Preferred Gender"
                       onChange={handleChange3}

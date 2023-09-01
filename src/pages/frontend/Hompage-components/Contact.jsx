@@ -22,7 +22,7 @@ const Contact = () => {
       <section id="contact" className="contact section-bg">
         <div className="container">
           <div className="section-title text-center">
-            <h2 className="heading-color">Contact Us</h2>
+            <h2 className="text-dark">Contact Us</h2>
             <p>
               At CommutersLink, we are always available to address your queries
               and would love to hear your suggestions or feedback if any. Feel
