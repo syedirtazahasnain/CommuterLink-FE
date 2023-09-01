@@ -21,6 +21,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import Swal from "sweetalert2";
 
 const RiderRegistration = () => {
   // const option0 = useSelector((s) => s.general.data.option0);
@@ -709,12 +710,27 @@ const RiderRegistration = () => {
       );
 
       console.log("Images Form Picture Body:", body);
+     
 
+      const registrationSuccessful = () => {
+        Swal.fire({
+          position: 'top',
+          title: 'Congratulations!',
+          text: 'Registration Form Submited Successfully',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      };
+     
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode === 200) {
         console.log("Images Form Response Picture:", jsonresponse);
-        alert("Registration Form Submitted Successfully");
+        registrationSuccessful();
         route();
       } else {
         alert("Error: " + jsonresponse.message);

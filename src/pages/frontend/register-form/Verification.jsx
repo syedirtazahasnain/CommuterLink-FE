@@ -100,6 +100,7 @@ const Verification = () => {
                     src={`${BASE_URL}/assets/images/signup.png`}
                     alt="First slide"
                   />
+                   <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                 </Carousel.Item>
 
                 <Carousel.Item interval={2000}>
@@ -108,6 +109,8 @@ const Verification = () => {
                     src={`${BASE_URL}/assets/images/signup-3.png`}
                     alt="First slide"
                   />
+                  <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+
                 </Carousel.Item>
                 <Carousel.Item interval={2000}>
                   <img
@@ -115,6 +118,8 @@ const Verification = () => {
                     src={`${BASE_URL}/assets/images/signup-4.png`}
                     alt="First slide"
                   />
+                 <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+
                 </Carousel.Item>
                 <Carousel.Item interval={2000}>
                   <img
@@ -122,6 +127,8 @@ const Verification = () => {
                     src={`${BASE_URL}/assets/images/signup-6.png`}
                     alt="First slide"
                   />
+                 <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+
                 </Carousel.Item>
               </Carousel>
               {/* </div> */}
@@ -130,12 +137,12 @@ const Verification = () => {
 
             <div className="col-md-6 pt-5" style={{marginTop: "6vh", marginBottom: "9vh"}}>
               <div className="container py-3">
-                <div className="card p-3" style={{ backgroundColor: "#cddbd9" }}>
+                <div className="card p-3 bg-white" >
                 <div className="mt-3">
                           <div className="text-center">
                             {" "}
                             <img
-                              src={`${IMAGE_URL}${image}`}
+                              src={image?`${IMAGE_URL}${image}`: `${BASE_URL}/assets/images/CL-logo-small.png` }
                               alt="photo"
                               style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '50%' }}
                             />
@@ -146,7 +153,7 @@ const Verification = () => {
                           </h3>
                         </div>
                         <div>
-                          <p className="text-dark text-justify">
+                          <p className="text-dark text-justify  p-4">
                             Thank you for providing all the information. Your membership
                             approval will be notified through email and your mobile
                             number after which, you will be able to access your

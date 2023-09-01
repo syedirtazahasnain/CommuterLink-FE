@@ -252,7 +252,7 @@ const BackendLayout = ({ children }) => {
                               href="#" onClick={logout}
                               className='mx-1 h-15px d-inline-block'
                             >
-                              <i className="fa-solid fa-power-off fs-5 icon-green mt-2"></i>
+                              <i className="fa-solid fa-power-off fs-5 icon-green mt-2" onClick={logout}></i>
                             </a>
                           </Tooltip>
                         </div>

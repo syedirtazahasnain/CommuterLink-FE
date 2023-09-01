@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { Checkbox } from '@mui/material';
 import { FormControlLabel } from '@mui/material';
+import Swal from "sweetalert2";
 
 const DriverRegistration = () => {
 
@@ -883,14 +884,27 @@ const DriverRegistration = () => {
           body: JSON.stringify(body),
         }
       );
-
+      const registrationSuccessful = () => {
+        Swal.fire({
+          position: 'top',
+          title: 'Congratulations!',
+          text: 'Registration Form Submited Successfully',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      };
       console.log("Images Form Picture Body:", body);
 
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Picture:", jsonresponse);
-        alert("Registration Form Submitted Successfully");
+        // alert("Registration Form Submitted Successfully");
+        registrationSuccessful();
       } else {
         alert("Error: " + jsonresponse.message);
       }
@@ -991,7 +1005,18 @@ const DriverRegistration = () => {
 
         if (jsonresponse.statusCode == 200) {
           console.log("Payment Form Response:", jsonresponse);
-          alert("Driver Form Submitted Successfully");
+          // alert("Driver Form Submitted Successfully");
+          Swal.fire({
+            position: 'top',
+            title: 'Congratulations!',
+            text: 'Driver Form Submited Successfully',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            },
+          });
           route();
         } else {
           alert("Error: " + jsonresponse.message);
@@ -1075,13 +1100,13 @@ const DriverRegistration = () => {
                           </Form.Select>
                         </Form.Group>
                         {cityStartId && (
-                        <Form.Group as={Col} md="4" controlId="validationCustom02">
-                          <Form.Label style={{ color: "#000" }}>
+                        <Form.Group as={Col} md="12" controlId="validationCustom02">
+                          <Form.Label className="text-dark fs-6">
                             Select Area from Dropdown
                           </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
-
+                            className="text-secondary"
                             value={locationStartString}
                             onChange={handleLocationStart}
                             required
@@ -1107,7 +1132,7 @@ const DriverRegistration = () => {
 
                           {addNewStart && (
                             <Row className="mb-3 mt-4">
-                              <Form.Group as={Col} md="12" controlId="validationCustom01">
+                              <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                                 <Autocomplete
                                   onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
                                   onPlaceChanged={handlePlaceSelectStart}
@@ -1307,13 +1332,13 @@ const DriverRegistration = () => {
                           </Form.Select>
                         </Form.Group>
                         {cityEndId && (
-                        <Form.Group as={Col} md="4" controlId="validationCustom02">
-                          <Form.Label style={{ color: "#000" }}>
+                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
                             Select Area from Dropdown
                           </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
-
+                            className="text-secondary"
                             value={locationEndString}
                             onChange={handleLocationEnd}
                             required
@@ -1362,7 +1387,7 @@ const DriverRegistration = () => {
                         </Form.Group>
                       )}
 
-<Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                    <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
                           <Form.Label className="text-black fs-6">
                             Timings (+/- 15 Minutes)
                           </Form.Label>
@@ -2114,128 +2139,7 @@ const DriverRegistration = () => {
                         )}
                       </Form.Group>
                     </Row>
-                    <Row
-                  className="mb-3 py-3 shadow shadow-sm"
-                  style={{ backgroundColor: " #cddbd9" }}
-                >
-                  <Form.Group
-                    as={Col}
-                    md="12"
-                    controlId="validationCustom01"
-                    className="mb-2"
-                  >
-                    <Form.Label className="fs-6 text-black">
-                      Year of Birth
-                    </Form.Label>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        label={"MM/DD/YY"}
-                        className="bg-white"
-                        slotProps={{
-                          textField: { size: "small", color: "success" },
-                        }}
-                        sx={{ width: "100%" }}
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                      />
-                      {/* <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              label={
-                                  "MM/DD/YY"
-                              }
-                              value={selectedDate}
-                              onChange={handleDateChange}
-                              sx={{ width: "100%" }}
-                              className="bg-white"
-                              slotProps={{ textField: { size: "small" } }}
-                              inputProps={{ style: { color: '#000' } }}
-                              required
-                              />
-                          </DemoContainer> */}
-                    </LocalizationProvider>
-                  </Form.Group>
-
-                  {/* {selectedDate} */}
-
-                  <Form.Group
-                    as={Col}
-                    md="12"
-                    controlId="validationCustom02"
-                    className="mb-2"
-                  >
-                    <Form.Label className="fs-6 text-black">
-                      Martial Status
-                    </Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      className="text-secondary"
-                      value={martialStatus}
-                      onChange={(e) => setMartialStatus(e.target.value)}
-                      required
-                    >
-                      <option value="" hidden>
-                        Martial Status
-                      </option>
-                      <option value="Married">Married</option>
-                      <option value="Single">Single</option>
-                    </Form.Select>
-                  </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    md="12"
-                    controlId="validationCustom01"
-                    className="mb-2"
-                  >
-                    <Form.Label className="fs-6 text-black">
-                      Education
-                    </Form.Label>
-                    <Form.Select
-                       aria-label="Default select example"
-                       className="text-secondary"
-                      value={education}
-                      onChange={(e) => setEducation(e.target.value)}
-                      required
-                    >
-                      <option value="" hidden>
-                        Education
-                      </option>
-                      <option value="Phd">Phd</option>
-                      <option value="Master">Master</option>
-                      <option value="Bachelor">Bachelor</option>
-                      <option value="BA">BA</option>
-                      <option value="BSC">BSC</option>
-                      <option value="FSC">FSC</option>
-                      <option value="FA">FA</option>
-                      <option value="I.Com">I.Com</option>
-                      <option value="Matric">Matric</option>
-                      <option value="Middle">Middle</option>
-                      <option value="Primary">Primary</option>
-                    </Form.Select>
-                  </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    md="12"
-                    controlId="validationCustom02"
-                    className="mb-2"
-                  >
-                    <Form.Label className="fs-6 text-black">
-                      Profession
-                    </Form.Label>
-                    <Form.Control
-                      required
-                      type="text"
-                      className={`${isValidProfession ? "" : "is-invalid"}`}
-                      placeholder="Profession (Engineer, Doctor, etc)"
-                      value={profession}
-                      onChange={handleProfessionChange}
-                    />
-                    {!isValidProfession && (
-                      <div className="invalid-feedback">
-                        Please enter a valid profession.
-                      </div>
-                    )}
-                  </Form.Group>
-                </Row>
+                  
                 <Row
                   className="mb-3 py-3 shadow shadow-sm"
                   style={{ backgroundColor: " #cddbd9" }}

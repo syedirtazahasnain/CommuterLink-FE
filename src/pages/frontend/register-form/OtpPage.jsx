@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { setsignupState } from "../../../redux/signupSlice";
+import Swal from "sweetalert2";
 
 const OtpPage = () => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
@@ -103,12 +104,27 @@ const OtpPage = () => {
       const enteredOTP = otp.join("");
     }
   };
+  const otpSuccessful = () => {
+    Swal.fire({
+      position: 'top',
+      title: 'Congratulations!',
+      text: 'Your OTP has been matched',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonText: 'OK',
+      customClass: {
+        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+      },
+    });
+  };
+  
   const validateOTP = () => {
     const enteredOTP = otp.join("");
     if (enteredOTP == userData.otp) {
       setIsOTPMatched(true);
-      alert("OTP is matched");
+      // alert("OTP is matched");
       // handleShowModal();
+      otpSuccessful();
       postData();
     } else {
       setIsOTPMatched(false);

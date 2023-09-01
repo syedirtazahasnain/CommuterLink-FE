@@ -15,6 +15,7 @@ import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-map
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import Swal from "sweetalert2";
 
 const DriverRegistration = () => {
 
@@ -855,12 +856,25 @@ const DriverRegistration = () => {
       );
 
       console.log("Images Form Picture Body:", body);
-
+      const registrationSuccessful = () => {
+        Swal.fire({
+          position: 'top',
+          title: 'Congratulations!',
+          text: 'Registration Form Submited Successfully',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      };
+     
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Picture:", jsonresponse);
-        alert("Registration Form Submitted Successfully");
+        registrationSuccessful();
       } else {
         alert("Error: " + jsonresponse.message);
       }
@@ -961,7 +975,17 @@ const DriverRegistration = () => {
 
         if (jsonresponse.statusCode == 200) {
           console.log("Payment Form Response:", jsonresponse);
-          alert("Driver Form Submitted Successfully");
+          Swal.fire({
+            position: 'top',
+            title: 'Congratulations!',
+            text: 'Driver Form Submited Successfully',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            },
+          });
           route();
         } else {
           alert("Error: " + jsonresponse.message);
@@ -979,7 +1003,7 @@ const DriverRegistration = () => {
 
   return (
     <>
-      {showDriverForm && (
+      {!showDriverForm && (
         <>
           <div style={{ backgroundColor: "#eee" }}>
             <div className="containter p-5">
@@ -1993,7 +2017,7 @@ const DriverRegistration = () => {
         </>
       )}
 
-      {!showDriverForm && (
+      {showDriverForm && (
         <>
           <div style={{ backgroundColor: "#eee" }}>
             <div className="containter p-5">

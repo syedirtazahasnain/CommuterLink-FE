@@ -107,6 +107,7 @@ const Router = () => {
         <Route path="/driverwhyprocesspayment" element={<BackendLayout children={<DriverWhyProcess />} />}></Route>
         <Route path="/driverfinalstep" element={<BackendLayout children={<DriverFinalStep />} />}></Route>
         <Route path="/school-driver-form" element={<FrontendLayout children={<SchoolDriverRegistration />} />}></Route>
+        <Route path="/verification" element={<FrontendLayout children={<Verification />} />}></Route>
 
         {userSignup && (
           <>
