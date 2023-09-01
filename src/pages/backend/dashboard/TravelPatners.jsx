@@ -83,10 +83,10 @@ const TravelPatners = () => {
     <div>
       <div className="card  mt-3 mb-5">
         <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
-          <h3 className="text-center text-warning m-auto">
+          <h4 className="text-center text-warning m-auto">
             {" "}
             MY TRAVEL PARTNERS{" "}
-          </h3>{" "}
+          </h4>{" "}
         </div>
         <div
           className="card-body"
@@ -287,9 +287,9 @@ const TravelPatners = () => {
                           className="card-header text-white"
                           style={{ backgroundColor: "#00917C" }}
                         >
-                          <h4 className="text-center text-white m-auto">
+                          <h5 className="text-center text-white m-auto">
                             MY WALLET
-                          </h4>
+                          </h5>
                         </div>
                         <div className="row d-flex justify-content-between px-5 py-3 ">
                           <div className="col-md-3">
@@ -346,9 +346,9 @@ const TravelPatners = () => {
                               className="card-header text-white"
                               style={{ backgroundColor: "#00917C" }}
                             >
-                              <h4 className="text-center text-white m-auto">
+                              <h5  className="text-center text-white m-auto">
                                 COST PER SEAT PER DAY
-                              </h4>
+                              </h5>
                             </div>
                             <div className="row d-flex justify-content-between">
                               <div className="col-md-12">

@@ -129,12 +129,12 @@ const CommuterLinkSuggestions = () => {
   return (
     <div>
       <div className="card  mt-3 mb-5">
-        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
-          <h3 className="text-center text-warning m-auto">
-            {" "}
-           {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
-          </h3>{" "}
-        </div>
+      <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
+    <h4 className="text-center text-warning m-auto" style={{ lineHeight: "1" }}>
+        {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
+    </h4>
+</div>
+
         <div
           className="card-body"
           // style={{
@@ -149,9 +149,9 @@ const CommuterLinkSuggestions = () => {
               // style={{ backgroundColor: "#2a402a" }}
               style={{ backgroundColor: '#00917C' }}
             >
-              <h3 className="text-white mt-4 mx-auto">
+              <h5 className="text-white mt-4 mx-auto">
                 COMMUTERSLINK SUGGESTION
-              </h3>
+              </h5>
             </div>
 
             <div className="card-body" style={{background:"rgb(191, 216, 210)"}}>
@@ -415,9 +415,9 @@ const CommuterLinkSuggestions = () => {
                 className="card-header "
                 style={{backgroundColor:'#00917C'}}
               >
-                <h3 className="text-white mt-4 mx-auto">
+                <h5 className="text-white mt-4 mx-auto">
                   REQUESTS BY MEMBERS
-                </h3>
+                </h5>
               </div>
 
             <div className="card-body" style={{background:"rgb(191, 216, 210)"}}>
