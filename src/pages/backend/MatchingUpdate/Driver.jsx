@@ -54,7 +54,7 @@ const Driver = () => {
     //   ];
 
     useEffect(() => {
-        dispatch(setCurrentPage("driver"));
+        dispatch(setCurrentPage("matchingupdate"));
         // getProfileData();
         document.getElementById("root").classList.remove("w-100");
         document.getElementById("root").classList.add("d-flex");
@@ -62,11 +62,6 @@ const Driver = () => {
         window.KTToggle.init();
         window.KTScroll.init();
     }, []);
-
-
-
-
-
 
     return (
         <div>
