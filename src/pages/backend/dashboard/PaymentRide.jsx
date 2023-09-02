@@ -64,10 +64,10 @@ const PaymentRide = () => {
             setMonthYear(`${month} ${year}`);
           }
 
-          // Add a delay of 2 seconds before removing the loading message
+          // Add a delay of 1.5 seconds before removing the loading message
           setTimeout(() => {
             setLoading(false);
-          }, 2000);
+          }, 1500);
         }
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -24,6 +24,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
 
 const RiderRegistration = () => {
+  
   // const option0 = useSelector((s) => s.general.data.option0);
   // console.log(option0);
   const backgroundStyle = {
@@ -35,6 +36,7 @@ const RiderRegistration = () => {
     height: "20vh",
     // Set the desired height of the background area
   };
+  
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
   const userToken = useSelector((s) => s.login.data.token);
