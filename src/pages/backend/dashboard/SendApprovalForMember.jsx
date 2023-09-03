@@ -4,6 +4,7 @@ import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
 
 const backgroundLogo = {
   backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -49,7 +50,12 @@ const SendApprovalForMember = () => {
     if (jsonresponse.statusCode === 200) {
       navigate("/dashboard");
     } else {
-      alert("Resend Error: " + jsonresponse.message);
+      // alert("Resend Error: " + jsonresponse.message);
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: `${jsonresponse.message}`}
+      )
     }
   };
 

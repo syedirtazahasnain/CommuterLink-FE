@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
 
 const customTheme = createTheme({
   palette: {
@@ -255,7 +256,12 @@ const CommuterProfile1 = () => {
   };
 
   const requestAccepeted = () => {
-    alert("Request is waiting for response!");
+    // alert("Request is waiting for response!");
+    Swal.fire({
+      position:'top',
+      icon: 'warning',
+     text: 'Request is waiting for response!'}
+    )
   };
 
   const sendRequest = () => {

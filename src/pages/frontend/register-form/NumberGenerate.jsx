@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 //import img from "../../../Images/contribute-1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
+import Swal from "sweetalert2";
 
 function NumberGenerate() {
   const dispatch = useDispatch();
@@ -65,10 +66,20 @@ function NumberGenerate() {
           navigate("/office_school");
         } else {
           console.log(jsonresponse);
-          alert("Error: " + jsonresponse.message);
+          // alert("Error: " + jsonresponse.message);
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: `${jsonresponse.message}`}
+          )
         }
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);

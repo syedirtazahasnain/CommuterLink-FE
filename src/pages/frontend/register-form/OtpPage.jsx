@@ -128,7 +128,12 @@ const OtpPage = () => {
       postData();
     } else {
       setIsOTPMatched(false);
-      alert("OTP does not match. Please try again.");
+      // alert("OTP does not match. Please try again.");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'OTP does not match. Please try again.'}
+      )
     }
   };
 
@@ -163,9 +168,19 @@ const OtpPage = () => {
         })
       );
     } else {
-      alert("Resend OTP Error: " + jsonresponse.message);
+      // alert("Resend OTP Error: " + jsonresponse.message);
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: `${jsonresponse.message}`}
+      )
     }
-    alert("OTP has been sent again!");
+    // alert("OTP has been sent again!");
+    Swal.fire({
+      position:'top',
+      icon: 'warning',
+     text: 'OTP has been sent again!'}
+    )
   };
 
   const handleShowModal = () => {

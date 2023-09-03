@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 import Form from "react-bootstrap/Form";
 import { Tooltip } from "@mui/material";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   
@@ -134,7 +135,12 @@ const Signup = () => {
         console.log("Google Response:",jsonresponse);
         navigate("/number-generate");
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log("Signup Error:", error.message);
@@ -145,7 +151,12 @@ const Signup = () => {
   const postData = async () => {
     try {
       if(fullName === "" || email === "" || phoneNumber === null || password === "" || confirmPassword === ""){
-        alert("Please Fill All Fields!");
+        // alert("Please Fill All Fields!");
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: 'Please Fill All Fields!'}
+        )
       }
       else{
         if (termsService) {
@@ -181,10 +192,20 @@ const Signup = () => {
             );
             navigate("/otp");
           } else {
-            alert("Error: " + jsonresponse.message);
+            // alert("Error: " + jsonresponse.message);
+            Swal.fire({
+              position:'top',
+              icon: 'warning',
+             text: `${jsonresponse.message}`}
+            )
           }
         } else {
-          alert("please check Terms of Service");
+          // alert("please check Terms of Service");
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: 'Please Check Terms of Service'}
+          )
         }
       }
     } catch (error) {

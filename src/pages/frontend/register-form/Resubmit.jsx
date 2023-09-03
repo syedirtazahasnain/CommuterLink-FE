@@ -13,6 +13,8 @@ import { setloginState } from "../../../redux/loginSlice";
 import   {Button as btnresubmit} from "@mui/base";
 import { Button, Input, Box, Typography } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
+import Swal from "sweetalert2";
+
 const Resubmit = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -86,7 +88,12 @@ const Resubmit = () => {
 
   const handleLogin = async () => {
     if (email === "" || password === "") {
-      alert("Please Fill All Fields!");
+      // alert("Please Fill All Fields!");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'Please Fill All Fields!'}
+      )
     } else {
       await postData();
     }
@@ -117,10 +124,20 @@ const Resubmit = () => {
           dispatch(setloginState(jsonresponse.access_token));
         } else {
           console.log(jsonresponse);
-          alert("Error: " + jsonresponse.message);
+          // alert("Error: " + jsonresponse.message);
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: `${jsonresponse.message}`}
+          )
         }
       } else {
-        alert("please check Terms of Service");
+        // alert("please check Terms of Service");
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: 'Please Check Terms of Service'}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -173,7 +190,12 @@ const Resubmit = () => {
           if (jsonresponse.statusCode === 200) {
             dispatch(setloginState(jsonresponse.access_token));
           } else {
-            alert("Error: " + jsonresponse.message);
+            // alert("Error: " + jsonresponse.message);
+            Swal.fire({
+              position:'top',
+              icon: 'warning',
+             text: `${jsonresponse.message}`}
+            )
           }
         } else {
           console.error("Profile request failed with status:", profile.status);

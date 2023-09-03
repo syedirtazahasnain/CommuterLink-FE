@@ -8,6 +8,7 @@ import { API_URL, BASE_URL, IMAGE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../redux/signupSlice";
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
 
 const customTheme = createTheme({
   palette: {
@@ -55,7 +56,29 @@ const BackendLayout = ({ children }) => {
   }
 
   const logout = () => {
-    if (window.confirm("You are about to logout from CommutersLink. Are you sure?")) {
+    if (
+      Swal.fire({
+        position:'top',
+        title: 'Are you sure?',
+        text: "You are about to logout from commuterLink",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Logout!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            position:'top',
+            title: 'Logout!',
+            text:'Successful'
+          }
+        
+          )
+        }
+      })
+  
+    ) {
       dispatch(setloginState(""));
       dispatch(setsignupState(""));
       navigate("/login");

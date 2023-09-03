@@ -512,7 +512,12 @@ const RiderRegistration = () => {
       await ImagesFormCnicBack();
       await ImagesFormPicture();
     } else {
-      alert("Please Fill All Fields!");
+      // alert("Please Fill All Fields!");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'Please Fill All Fields!'}
+      )
     }
   };
 
@@ -577,7 +582,12 @@ const RiderRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Location Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -619,7 +629,12 @@ const RiderRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Personal Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -652,7 +667,12 @@ const RiderRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Cnic Front:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -685,7 +705,12 @@ const RiderRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Cnic Back:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -735,7 +760,12 @@ const RiderRegistration = () => {
         registrationSuccessful();
         route();
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);

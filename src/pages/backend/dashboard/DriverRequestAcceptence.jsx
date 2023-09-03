@@ -3,14 +3,8 @@ import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import dayjs from 'dayjs';
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
 
 const theme = createTheme({
   palette: {
@@ -191,12 +185,22 @@ const DriverRequestAcceptence = () => {
       if (jsonresponse.statusCode === 200) {
         navigate("/dashboard");
       } else {
-        alert("Resend Error: " + jsonresponse.message);
+        // alert("Resend Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.error("An error occurred:", error);
       // Handle error appropriately, e.g., display an error message to the user
-      alert("An error occurred while sending the request.");
+      // alert("An error occurred while sending the request.");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'An error occured while sending the request.'}
+      )
     }
   };
 
