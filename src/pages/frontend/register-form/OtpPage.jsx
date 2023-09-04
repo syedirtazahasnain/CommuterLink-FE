@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { API_URL, BASE_URL } from "../../../constants";
 import FormControl from "@mui/material/FormControl";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import TextField from "@mui/material/TextField"; 
 import InputAdornment from "@mui/material/InputAdornment";
 import { Modal, Alert } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
@@ -21,15 +21,18 @@ import { setsignupState } from "../../../redux/signupSlice";
 import Swal from "sweetalert2";
 
 const OtpPage = () => {
+
   const [otp, setOTP] = useState(["", "", "", "", ""]);
   const [isOTPMatched, setIsOTPMatched] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const inputRefs = useRef([]);
+  const inputRefs = useRef([null, null, null, null, null]);
   const hardcodedOTP = "12345";
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.signup.data);
+
   console.log("Signup Data:", userData);
+
   const postData = async () => {
     try {
       let email = userData.email;
@@ -75,7 +78,7 @@ const OtpPage = () => {
         );
         const jsonresponse = await response.json();
 
-        if(jsonresponse.statusCode == 200){
+        if (jsonresponse.statusCode == 200) {
           console.log(jsonresponse);
           dispatch(setloginState(jsonresponse.access_token));
           navigate("/office_school");
@@ -95,10 +98,12 @@ const OtpPage = () => {
       newOTP[index] = value;
       return newOTP;
     });
-    if (e.nextSibling) {
-      e.nextSibling.focus();
-      //   inputRefs.current[index + 1].focus();
+    
+    if (value && index < otp.length - 1 && inputRefs.current[index + 1]) {
+      // Check if the value is not empty, not the last field, and the next field exists
+      inputRefs.current[index + 1].focus();
     }
+    
     if (index === 4) {
       // If the last input field is filled, validate the OTP
       const enteredOTP = otp.join("");
@@ -113,11 +118,11 @@ const OtpPage = () => {
       showCancelButton: false,
       confirmButtonText: 'OK',
       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
       },
     });
   };
-  
+
   const validateOTP = () => {
     const enteredOTP = otp.join("");
     if (enteredOTP == userData.otp) {
@@ -130,12 +135,13 @@ const OtpPage = () => {
       setIsOTPMatched(false);
       // alert("OTP does not match. Please try again.");
       Swal.fire({
-        position:'top',
+        position: 'top',
         icon: 'warning',
-       text: 'OTP does not match. Please try again.',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
+        text: 'OTP does not match. Please try again.',
+        customClass: {
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        },
+      }
       )
     }
   };
@@ -173,22 +179,24 @@ const OtpPage = () => {
     } else {
       // alert("Resend OTP Error: " + jsonresponse.message);
       Swal.fire({
-        position:'top',
+        position: 'top',
         icon: 'error',
-       text: `${jsonresponse.message}`,
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
+        text: `${jsonresponse.message}`,
+        customClass: {
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        },
+      }
       )
     }
     // alert("OTP has been sent again!");
     Swal.fire({
-      position:'top',
+      position: 'top',
       icon: 'warning',
-     text: 'OTP has been sent again!',
-     customClass: {
-      confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-    },}
+      text: 'OTP has been sent again!',
+      customClass: {
+        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+      },
+    }
     )
   };
 
@@ -217,48 +225,48 @@ const OtpPage = () => {
                   marginTop: "12vh",
                 }}
               >
-                
-                  <Carousel
-                    className="carousel-container main-bg"
-                    prevIcon={null}
-                    nextIcon={null}
-                    indicators={null}
-                  >
-                    <Carousel.Item interval={2000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
-                    </Carousel.Item>
 
-                    <Carousel.Item interval={2000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={2000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-4.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={2000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-6.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
-                    </Carousel.Item>
-                  </Carousel>
-                </div>
+                <Carousel
+                  className="carousel-container main-bg"
+                  prevIcon={null}
+                  nextIcon={null}
+                  indicators={null}
+                >
+                  <Carousel.Item interval={2000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                  </Carousel.Item>
+
+                  <Carousel.Item interval={2000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-3.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+                  </Carousel.Item>
+                  <Carousel.Item interval={2000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-4.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                  </Carousel.Item>
+                  <Carousel.Item interval={2000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-6.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                  </Carousel.Item>
+                </Carousel>
+              </div>
 
               <div className="col-md-6 py-5 mb-3 text-center d-flex justify-content-center">
                 <Card
@@ -297,7 +305,7 @@ const OtpPage = () => {
                             variant="outlined"
                             key={0}
                           >
-                            <OutlinedInput
+                            <TextField
                               id="outlined-adornment-weight"
                               className="otp-input"
                               aria-describedby="outlined-weight-helper-text"
@@ -305,11 +313,11 @@ const OtpPage = () => {
                               value={data}
                               onChange={(e) => handleInputChange(e, index)}
                               onFocus={(e) => e.target.select()}
-                              ref={(el) => inputRefs.current[index]}
                               inputProps={{
                                 "aria-label": "weight",
                                 maxLength: 1,
                               }}
+                              inputRef={(el) => (inputRefs.current[index] = el)}
                             />
                           </FormControl>
                         );
@@ -318,24 +326,24 @@ const OtpPage = () => {
                   </CardContent>
 
                   <CardActions className="container justify-content-center">
-                      <Button
-                        variant="outlined"
-                        type="submit"
-                        onClick={validateOTP}
-                        className="btn-custom px-4 py-2 rounded rounded-5 text-custom fw-bold"
-                      >
-                        Submit
-                      </Button>
+                    <Button
+                      variant="outlined"
+                      type="submit"
+                      onClick={validateOTP}
+                      className="btn-custom px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                    >
+                      Submit
+                    </Button>
                     {/* <div className="col-12 text-end">
                     </div> */}
                   </CardActions>
                   <div id="span-text" className="text-center mb-5">
-                  Didn't get the code? &nbsp;
-                        <Link onClick={resendOTP}>
-                          <span style={{ color: "#198754"}}>Resend</span>
-                        </Link>
-                      </div>
-               
+                    Didn't get the code? &nbsp;
+                    <Link onClick={resendOTP}>
+                      <span style={{ color: "#198754" }}>Resend</span>
+                    </Link>
+                  </div>
+
                 </Card>
               </div>
             </div>
