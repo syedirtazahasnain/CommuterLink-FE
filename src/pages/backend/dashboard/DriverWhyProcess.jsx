@@ -51,7 +51,7 @@ const DriverWhyProcess = () => {
         className="card p-4 bg-light p-2"
         
       >
-        <div class="card" style={{ backgroundColor: "#e5f8f3" }}>
+        <div className="card backgroundColor">
         
 
           <div

@@ -564,3 +564,7 @@ a.nav-link:hover {
 .image-upload-container {
   width: 400px; /* Adjust the width as needed */
 }
+
+.backgroundColor{
+  background-color:  rgb(191, 216, 210);
+}

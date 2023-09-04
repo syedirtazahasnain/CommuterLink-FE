@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button } from "@mui/base";
 import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -78,7 +78,7 @@ const Notifications = () => {
           <div className="row p-4">
             <div className="col">
               <div
-                className="card p-3" style={{ backgroundColor: '#e5f8f3' }}
+                className="card p-3 backgroundColor" 
               >
                 <div>
                   {notifications.map((notification, index) => (
@@ -94,7 +94,7 @@ const Notifications = () => {
                 <form id="numberForm">
                   <div className="container my-3 text-center">
                     <Button
-                      className="btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+                      className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3s"
                       onClick={route}
                     >
                       Back

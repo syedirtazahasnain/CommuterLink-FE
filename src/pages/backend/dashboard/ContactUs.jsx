@@ -27,14 +27,14 @@ const ContactUs = () => {
         </h5>
       </div>
       <div className="card p-4">
-        <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
+        <div className="card backgroundColor">
           <div className="card-body">
             <h1 className="text-center text-success">Contact Us</h1>
 
             <div className="row text-left">
               <div
-                className="col-md-12  p-5 mb-3 sha m-auto"
-                style={{ backgroundColor: "#e5f8f3" }}
+                className="col-md-12 backgroundColor  p-5 mb-3 sha m-auto"
+               
               >
                 <form action="#" method="post">
                   <div className="row">

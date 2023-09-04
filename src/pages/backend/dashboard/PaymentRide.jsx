@@ -98,13 +98,10 @@ const PaymentRide = () => {
           <h3 className="card p-4 text-success my-2 fw-bold">
             PAYMENT/RIDE HISTORY
           </h3>
-          <h5 className="card p-4 text-success my-2 fw-bold">
-          {`The ride history along with payment log`}
-        </h5>
-          {/* <h5 className="mx-4">{`The ride history along with payment log`}</h5> */}
+          <h5 className="card p-2 px-4 text-success ">{`The ride history along with payment log`}</h5>
         </div>
         <div className="card p-4 bg-light p-2">
-          <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
+          <div className="card backgroundColor">
             <div className="card-body">
               {loading ? (
                 <div className="text-center" style={{ height: "20vh", display: "flex", alignItems: "center", justifyContent: "center" }}>

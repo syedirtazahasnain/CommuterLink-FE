@@ -8,6 +8,8 @@ import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
 import Dashboard from "../../frontend/Dashboard/Dashboard";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/base";
+
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -51,21 +53,23 @@ const ReplyToConfirmDates1 = ({ children }) => {
   };
 
   return (
-    <div>
-      <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
-        <div className="card-body" style={{}}>
-          <div className="card-title">
-            <h2 className="text-success">MEMBERS REQUESTS</h2>
-          </div>
-        </div>
-      </div>
-      <div className="card px-5 py-5 bg-light" style={{ border: "0" }}>
-        <div class="card-header bg-light mb-2">
-          <div
-            className="card bg-light justify-content-center py-5"
-            style={{ border: "0" }}
-          >
-            <div className="card-body">
+   
+<div>
+<div className="page-title">
+  <h3 className="card p-4 text-success my-2 fw-bold">Member Request</h3>
+  
+</div>
+<div className="card p-4">
+  <div className="card backgroundColor">
+    <div className="card-body">
+    
+
+      <div className="row text-left">
+        <div
+          className="col-md-12 backgroundColor  p-5 mb-3 sha m-auto"
+         
+        >
+           <div className="card-body">
               <h5 className="py-3">Dear Yasir Abbas Mirza,</h5>
 
               <p>
@@ -92,15 +96,17 @@ const ReplyToConfirmDates1 = ({ children }) => {
               <p>Best regards</p>
               <p>Zafar Jamil</p>
             </div>
-            <div className="card-body">
-              <button href="/" className=" btn_view1 btn-lg ">
-                Reply to Confirm Dates
-              </button>
-            </div>
+          <div className="d-flex justify-content-center mt-4">
+            <Button className="btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3">
+            Reply to Confirm Dates
+            </Button>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+</div>
   );
 };
 

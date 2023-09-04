@@ -165,7 +165,7 @@ const Driver = () => {
                             </h3>
                         </div>
                         <div className="card p-4">
-                            <div className="card" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
+                            <div className="card" style={{ backgroundColor: " rgb(191, 216, 210)" }}>
                                 <div className="card-body text-dark">
                                     <div className="container text-center mt-4">
 

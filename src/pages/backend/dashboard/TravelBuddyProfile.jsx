@@ -6,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import DatePicker from '@mui/lab/DatePicker';
-import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+
 
 const customTheme = createTheme({
   palette: {
@@ -329,7 +327,7 @@ const TravelBuddyProfile = () => {
       </div>
 
       <div className="card p-4 bg-light p-2" >
-        <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }} >
+        <div className="card p-4 backgroundColor">
           <div className="row">
             <div className="col-md-1 mt-1">
               <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />

@@ -212,7 +212,7 @@ const DriverRequestAcceptence = () => {
         </h3>
       </div>
       <div className="card p-4 bg-light p-2">
-        <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
+        <div className="card backgroundColor">
           <div className="card-body">
 
             <h5>Dear {driverName}</h5><br />

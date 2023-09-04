@@ -19,7 +19,7 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const Rejection = ({ children }) => {
+const ConfirmYourRide = ({ children }) => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const dispatch = useDispatch();
@@ -89,4 +89,4 @@ const Rejection = ({ children }) => {
   );
 };
 
-export default Rejection;
+export default ConfirmYourRide;

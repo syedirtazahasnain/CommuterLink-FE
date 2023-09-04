@@ -126,11 +126,11 @@ const SendApprovalForMember = () => {
         </h3>
 
       </div>
-      <h5 className="card p-2 text-success text-center my-2 fw-bold">
+      <h5 className="card p-2 px-4 text-success my-2 fw-bold">
         SEND APPROVAL OF MEMBERS'S REQUEST
       </h5>
       <div className="card p-4 bg-light p-2">
-        <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
+        <div className="card  backgroundColor">
           <div className="card-body">
 
             <h5>Dear {name}</h5><br />

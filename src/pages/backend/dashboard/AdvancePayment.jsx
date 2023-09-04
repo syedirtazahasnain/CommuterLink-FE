@@ -230,7 +230,7 @@ const AdvancePayment = () => {
         </h3>
       </div>
       <div className="card p-4  p-2">
-        <div className="card" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
+        <div className="card backgroundColor">
           <div className="card-body text-dark">
             <p>
               Money will stay in your Wallet & will be transferred to car owner

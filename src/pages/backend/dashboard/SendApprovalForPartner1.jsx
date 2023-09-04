@@ -104,27 +104,56 @@ const SendApprovalForPartner1 = () => {
   };
 
   return (
-    <div>
-      <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
-        <div className="card-body py-5" style={{}}></div>
-      </div>
+    // <div>
+    //   <div className="page-title d-flex flex-column justify-content-center flex-wrap me-4 ml-4">
+    //     <div className="card-body py-5" style={{}}></div>
+    //   </div>
 
-      <div
-        className="card px-5 py-5 m-auto bg-light"
-        style={{
-          border: "0",
-          backgroundColor: "",
-          width: "50rem",
-        }}
-      >
-        <div class="card-header bg-light mb-2">
-          <h1 className="text-center text-success m-auto"></h1>
+    //   <div
+    //     className="card px-5 py-5 m-auto backgroundColor"
+    //     style={{
+    //      border:"0",
+    //       backgroundColor: "",
+    //       width: "50rem",
+    //     }}
+    //   >
+    //     <div class="card backgroundColor mb-2 ">
+         
 
-          <div
-            className="card bg-light justify-content-center"
-            style={{ border: "0" }}
-          >
-            <div className="card-body bg-light" style={{ backgroundColor: "" }}>
+        
+    //         <div className="card-body backgroundColor" style={{ backgroundColor: "" }}>
+    //           <h5>Dear {name},</h5>
+    //           <p className="">
+    //             I have gone through your profile and I feel that we are a good
+    //             match to commute together.
+    //           </p>
+
+    //           <p>
+    //             I have approved you as a partner and we can start as soon as you
+    //             also accept to share my car.
+    //           </p>
+    //         </div>
+    //         <div className="card-body backgroundColor">
+    //           <Button className=" btn_view1 btn-block" onClick={sendRequest}>
+    //             Send Request
+    //           </Button>
+    //         </div>
+          
+    //     </div>
+    //   </div>
+    // </div>
+
+
+<div> <div className="page-title">
+      <h3 className="card p-4 text-success my-2 fw-bold">SEND APPROVAL FOR PARTNER</h3>
+      
+    </div>
+ 
+        <div className="card p-4 bg-light p-2">
+        <div
+                      className="card backgroundColor"
+                    >
+                <div className="card-body ">
               <h5>Dear {name},</h5>
               <p className="">
                 I have gone through your profile and I feel that we are a good
@@ -136,15 +165,20 @@ const SendApprovalForPartner1 = () => {
                 also accept to share my car.
               </p>
             </div>
-            <div className="card-body bg-light" style={{ backgroundColor: "#D9D9D9E5" }}>
-              <Button className=" btn_view1 btn-block" onClick={sendRequest}>
+    
+          <div className="row text-left">
+          
+               
+              <div className="d-flex justify-content-center mt-4">
+                <Button className="btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
                 Send Request
-              </Button>
+                </Button>
+              
             </div>
           </div>
         </div>
-      </div>
-    </div>
+  
+    </div></div>
   );
 };
 

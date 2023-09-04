@@ -53,7 +53,7 @@ const PaymentOptions = ({ children }) => {
         <h5 className="card p-2 px-4 text-success">(15 Days Advance Rs 354/-)&nbsp (Commuter Charges + 2.5% Service Charges)</h5>
       </div>
       <div className="card p-4  p-2">
-        <div className="card" style={{ backgroundColor: "rgb(229, 248, 243)" }}>
+        <div className="card backgroundColor">
           <div className="card-body text-dark">
             <p >
               Money will stay in your Wallet & will be transferred to car owner
@@ -104,10 +104,10 @@ const PaymentOptions = ({ children }) => {
           </div>
 <div className="row">
     <div className="col justify-content-center d-flex justify-content-center mb-3 p-2">
-    <img  src={`${BASE_URL}/assets/images/ep.png`}></img>
-    <img src={`${BASE_URL}/assets/images/jazz.png`}></img>
-    <img src={`${BASE_URL}/assets/images/raast.png`}></img>
-    <img src={`${BASE_URL}/assets/images/iban.png`}></img>
+    <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`}></img>
+    <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`}></img>
+    <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`}></img>
+    <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`}></img>
     </div>
     
 </div>
