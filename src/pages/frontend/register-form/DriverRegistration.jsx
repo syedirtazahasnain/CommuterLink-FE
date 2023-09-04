@@ -23,7 +23,11 @@ const DriverRegistration = () => {
   const autocompleteRef = useRef(null);
   const userToken = useSelector((s) => s.login.data.token);
   const [addNewStart, setAddNewStart] = useState(false);
+  const [addNewStartDropdown, setAddNewStartDropdown] = useState(true);
+  const [addNewStartField, setAddNewStartField] = useState(true);
   const [addNewEnd, setAddNewEnd] = useState(false);
+  const [addNewEndDropdown, setAddNewEndDropdown] = useState(true);
+  const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
   const mapLibraries = ["places"];
 
@@ -37,12 +41,17 @@ const DriverRegistration = () => {
     setSelectedCarBrand(value);
     setIsCarBrandValid(value !== ''); // Set validation based on whether a value is selected or not
   };
+
   const AddNewStart = () => {
     setAddNewStart(true);
+    setAddNewStartDropdown(false);
+    setAddNewStartField(false);
   };
 
   const AddNewEnd = () => {
     setAddNewEnd(true);
+    setAddNewEndDropdown(false);
+    setAddNewEndField(false);
   };
 
 
@@ -333,6 +342,7 @@ const DriverRegistration = () => {
     const selectedId = selectedOption.getAttribute("data-id");
     setLocationStartString(selectedValue);
     setLocationStartStringId(selectedId);
+    setAddNewStartField(false);
     handleShowStartModal();
   };
 
@@ -362,6 +372,7 @@ const DriverRegistration = () => {
     const selectedId = selectedOption.getAttribute("data-id");
     setLocationEndString(selectedValue);
     setLocationEndStringId(selectedId);
+    setAddNewEndField(false);
     handleShowEndModal();
   };
 
@@ -642,15 +653,15 @@ const DriverRegistration = () => {
     if (requiredFieldsLogin.some(field => field === "" || field === null || field === undefined)) {
       // alert("Please Fill All Fields!");
       Swal.fire({
-        position:'top',
+        position: 'top',
         icon: 'warning',
-       text: 'Please Fill All Fields!',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },
+        text: 'Please Fill All Fields!',
+        customClass: {
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        },
       }
       )
-      
+
     } else {
       await LocationForm();
       await PersonalForm();
@@ -665,12 +676,13 @@ const DriverRegistration = () => {
     if (requiredFieldsDriver.some(field => field === "" || field === null || field === undefined)) {
       // alert("Please Fill All Driver Form Fields!");
       Swal.fire({
-        position:'top',
+        position: 'top',
         icon: 'warning',
-       text: 'Please Fill All Driver Form Fields!',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
+        text: 'Please Fill All Driver Form Fields!',
+        customClass: {
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        },
+      }
       )
     } else {
       await DriverForm();
@@ -741,12 +753,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -791,12 +804,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -832,12 +846,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -873,12 +888,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -915,11 +931,11 @@ const DriverRegistration = () => {
           showCancelButton: false,
           confirmButtonText: 'OK',
           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
           },
         });
       };
-     
+
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode == 200) {
@@ -928,12 +944,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -998,12 +1015,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -1049,31 +1067,33 @@ const DriverRegistration = () => {
             showCancelButton: false,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
             },
           });
           route();
         } else {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
-            position:'top',
+            position: 'top',
             icon: 'error',
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },}
+            text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            },
+          }
           )
         }
       }
       else {
         // alert("Please Enter Payment Details!");
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'warning',
-         text: 'Please Enter Payment Details!',
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: 'Please Enter Payment Details!',
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -1091,25 +1111,33 @@ const DriverRegistration = () => {
             <div className="containter p-5">
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white mt-5 mb-5">
-                  <div className="row shadow form-header" 
-                  // style={{ backgroundColor: '#1F5F5B' }}
-                  >   
-                  <h1 className="text-center text-white py-4">
+                  <div className="row shadow
+                " style={{ backgroundColor: 'rgb(42, 64, 42' }}>
+                    <h1 className="text-center text-white py-4">
                       Registration Form
                     </h1></div>
                   <Form className="p-3" noValidate validated={validated} onSubmit={handleSubmit}>
+
                     <div className="row mb-3 shadow shadow-sm">
-                      <div className="col-md-12 px-2 py-3 form-body" 
-                      // style={{ backgroundColor: "#cddbd9" }}
+                      <div
+                        className="col-md-12 px-2 py-3"
+                        style={{ backgroundColor: "#cddbd9" }}
                       >
-                        <h2 className="text-success mb-3 text-center">STARTING POINT</h2>
-                        <Form.Group as={Col} md={cityStartId ? '12' : '12'} controlId="validationCustom01" className="mb-2">
+                        <h2 className="text-success mb-3 text-center">
+                          STARTING POINT
+                        </h2>
+                        <Form.Group
+                          as={Col}
+                          md={cityStartId ? "12" : "12"}
+                          controlId="validationCustom01"
+                          className="mb-2"
+                        >
                           <Form.Label className="text-black fs-6">
                             Province
                           </Form.Label>
                           <Form.Select
-                             aria-label="Default select example"
-                             className="text-secondary"
+                            aria-label="Default select example"
+                            className="text-secondary"
                             value={provinceStartId}
                             onChange={handleProvinceStartChange}
                             required
@@ -1126,13 +1154,16 @@ const DriverRegistration = () => {
                             )}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md={cityStartId ? '12' : '12'} controlId="validationCustom02" className="mb-2">
-                          <Form.Label className="text-black fs-6">
-                            City
-                          </Form.Label>
+                        <Form.Group
+                          as={Col}
+                          md={cityStartId ? "12" : "12"}
+                          controlId="validationCustom02"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-black fs-6">City</Form.Label>
                           <Form.Select
-                             aria-label="Default select example"
-                             className="text-secondary"
+                            aria-label="Default select example"
+                            className="text-secondary"
                             value={cityStartId}
                             onChange={(e) => setCityStartId(e.target.value)}
                             required
@@ -1147,64 +1178,101 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        {cityStartId && (
-                          <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
-                            <Form.Label className="text-black fs-6">
-                              Area
-                            </Form.Label>
-                            <Form.Select
-                             aria-label="Default select example"
-                             className="text-secondary"
-                              value={locationStartString}
-                              onChange={handleLocationStart}
-                              required
-                            >
-                              <option value="" disabled hidden>
-                                Select Area from Dropdown
-                              </option>
-                              {selectedStartCityArea?.map((province) => (
-                                <option key={province.id} value={province.value} data-id={province.id}>
-                                  {province.value}
-                                </option>
-                              ))}
-                            </Form.Select>
 
-                            <div className="mt-3">
-                              <span className="colorplace text-danger" style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: "10px" }} onClick={AddNewStart}>
-                                Can't find your area?
-                                <a  >
-                                  {" "} Add Here
-                                </a>
-                              </span>
-                            </div>
+                        {cityStartId && (
+                          <>
+                            {addNewStartDropdown && (
+                              <Form.Group
+                                as={Col}
+                                md="12"
+                                controlId="validationCustom02"
+                              >
+                                <Form.Label style={{ color: "#000" }}>
+                                  Select Area from Dropdown
+                                </Form.Label>
+                                <Form.Select
+                                  aria-label="Default select example"
+                                  className="text-secondary"
+                                  value={locationStartString}
+                                  onChange={handleLocationStart}
+                                  required
+                                >
+                                  <option value="" disabled hidden>
+                                    Select Area from Dropdown
+                                  </option>
+                                  {selectedStartCityArea?.map((province) => (
+                                    <option
+                                      key={province.id}
+                                      value={province.value}
+                                      data-id={province.id}
+                                    >
+                                      {province.value}
+                                    </option>
+                                  ))}
+                                </Form.Select>
+                              </Form.Group>
+                            )}
+
+                            {addNewStartField && (
+                              <Form.Group
+                                as={Col}
+                                md="12"
+                                className="mt-3"
+                                controlId="validationCustom02"
+                              >
+                                <span
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                  }}
+                                  onClick={AddNewStart}
+                                >
+                                  Can't find your area?
+                                  <a> Add Here</a>
+                                </span>
+                              </Form.Group>
+                            )}
 
                             {addNewStart && (
-                              <Row className="mb-3 mt-4">
-                                <Form.Group as={Col} md="12" controlId="validationCustom01">
-                                  <Autocomplete
-                                    onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                    onPlaceChanged={handlePlaceSelectStart}
-                                    restrictions={{ country: 'PK' }}
-                                    options={{ strictBounds: true }}
-                                  >
-                                    <Form.Control
-                                      autoComplete="on"
-                                      required
-                                      type="text"
-                                      value={locationStartStringField}
-                                      onChange={handleLocationStartField}
-                                      className="colorplace"
-                                      placeholder="Enter your area"
-                                      autocomplete="on"
-                                      defaultValue=""
-                                    />
-                                  </Autocomplete>
-                                </Form.Group>
-                              </Row>
+                              <Form.Group
+                                as={Col}
+                                md="12"
+                                controlId="validationCustom01"
+                              >
+                                <Form.Label className="text-black">
+                                  Area
+                                </Form.Label>
+                                <Autocomplete
+                                  onLoad={(autocomplete) =>
+                                    (autocompleteRef.current = autocomplete)
+                                  }
+                                  onPlaceChanged={handlePlaceSelectStart}
+                                  restrictions={{ country: "PK" }}
+                                  options={{ strictBounds: true }}
+                                >
+                                  <Form.Control
+                                    autoComplete="on"
+                                    required
+                                    type="text"
+                                    value={locationStartStringField}
+                                    onChange={handleLocationStartField}
+                                    className="text-dark mt-1"
+                                    placeholder="Enter your area"
+                                    autocomplete="on"
+                                    defaultValue=""
+                                  />
+                                </Autocomplete>
+                              </Form.Group>
                             )}
-                          </Form.Group>
+                          </>
                         )}
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom01"
+                          className="mb-2 mt-3"
+                        >
                           <Form.Label className="text-black fs-6">
                             Timings (+/- 15 Minutes)
                           </Form.Label>
@@ -1225,17 +1293,24 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-
                       </div>
                     </div>
 
                     <div className="row mb-3 shadow shadow-sm">
-                      <div className="col-md-12 px-2 py-3 form-body" >
-                        <h2 className="text-success mb-3 text-center">DROP-OFF POINT</h2>
-                        <Form.Group as={Col} md={cityEndId ? '12' : '12'} controlId="validationCustom01" className="mb-2">
-                          <Form.Label
-                            className="text-black fs-6"
-                          >
+                      <div
+                        className="col-md-12 px-2 py-3"
+                        style={{ backgroundColor: "#cddbd9" }}
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          DROP-OFF POINT
+                        </h2>
+                        <Form.Group
+                          as={Col}
+                          md={cityEndId ? "12" : "12"}
+                          controlId="validationCustom01"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-black fs-6">
                             Province
                           </Form.Label>
                           <Form.Select
@@ -1257,10 +1332,13 @@ const DriverRegistration = () => {
                             )}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md={cityEndId ? '12' : '12'} controlId="validationCustom02" className="mb-2">
-                          <Form.Label className="text-black fs-6">
-                            City
-                          </Form.Label>
+                        <Form.Group
+                          as={Col}
+                          md={cityEndId ? "12" : "12"}
+                          controlId="validationCustom02"
+                          className="mb-2"
+                        >
+                          <Form.Label style={{ color: "#000" }}>City</Form.Label>
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
@@ -1278,62 +1356,101 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        {cityEndId && (
-                          <Form.Group as={Col} md="12" controlId="validationCustom02">
-                            <Form.Label className="text-black fs-6">
-                              Area
-                            </Form.Label>
-                            <Form.Select
-                              aria-label="Default select example"
-                              className="text-secondary"
-                              value={locationEndString}
-                              onChange={handleLocationEnd}
-                              required
-                            >
-                              <option value="" disabled hidden>
-                                Select Area from Dropdown
-                              </option>
-                              {selectedEndCityArea?.map((province) => (
-                                <option key={province.id} value={province.value} data-id={province.id}>
-                                  {province.value}
-                                </option>
-                              ))}
-                            </Form.Select>
 
-                            <div className="mt-3">
-                              <span className="colorplace text-danger" style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: "10px" }} onClick={AddNewEnd}>
-                                Can't find your area?
-                                <a  >
-                                  {" "} Add Here
-                                </a>
-                              </span>
-                            </div>
+                        {cityEndId && (
+                          <>
+                            {addNewEndDropdown && (
+                              <Form.Group
+                                as={Col}
+                                md="12"
+                                controlId="validationCustom02"
+                              >
+                                <Form.Label style={{ color: "#000" }}>
+                                  Select Area from Dropdown
+                                </Form.Label>
+                                <Form.Select
+                                  aria-label="Default select example"
+                                  className="text-secondary"
+                                  value={locationEndString}
+                                  onChange={handleLocationEnd}
+                                  required
+                                >
+                                  <option value="" disabled hidden>
+                                    Select Area from Dropdown
+                                  </option>
+                                  {selectedEndCityArea?.map((province) => (
+                                    <option
+                                      key={province.id}
+                                      value={province.value}
+                                      data-id={province.id}
+                                    >
+                                      {province.value}
+                                    </option>
+                                  ))}
+                                </Form.Select>
+                              </Form.Group>
+                            )}
+
+                            {addNewEndField && (
+                              <Form.Group
+                                as={Col}
+                                md="12"
+                                className="mt-3"
+                                controlId="validationCustom02"
+                              >
+                                <span
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                  }}
+                                  onClick={AddNewEnd}
+                                >
+                                  Can't find your area?
+                                  <a> Add Here</a>
+                                </span>
+                              </Form.Group>
+                            )}
 
                             {addNewEnd && (
-                              <Row className="mb-3 mt-4">
-                                <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                                  <Autocomplete
-                                    onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                    onPlaceChanged={handlePlaceSelectEnd}
-                                    restrictions={{ country: 'PK' }}
-                                    options={{ strictBounds: true }}
-                                  >
-                                    <Form.Control
-                                      required
-                                      type="text"
-                                      value={locationEndStringField}
-                                      onChange={handleLocationEndField}
-                                      className="colorplace"
-                                      placeholder="Enter your area"
-                                      defaultValue=""
-                                    />
-                                  </Autocomplete>
-                                </Form.Group>
-                              </Row>
+                              <Form.Group
+                                as={Col}
+                                md="12"
+                                controlId="validationCustom01"
+                              >
+                                <Form.Label className="text-black">
+                                  Area
+                                </Form.Label>
+                                <Autocomplete
+                                  onLoad={(autocomplete) =>
+                                    (autocompleteRef.current = autocomplete)
+                                  }
+                                  onPlaceChanged={handlePlaceSelectEnd}
+                                  restrictions={{ country: "PK" }}
+                                  options={{ strictBounds: true }}
+                                >
+                                  <Form.Control
+                                    autoComplete="on"
+                                    required
+                                    type="text"
+                                    value={locationEndStringField}
+                                    onChange={handleLocationEndField}
+                                    className="text-dark mt-1"
+                                    placeholder="Enter your area"
+                                    autocomplete="on"
+                                    defaultValue=""
+                                  />
+                                </Autocomplete>
+                              </Form.Group>
                             )}
-                          </Form.Group>
+                          </>
                         )}
-                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom01"
+                          className="mb-2 mt-3"
+                        >
                           <Form.Label className="text-black fs-6">
                             Timings (+/- 15 Minutes)
                           </Form.Label>
@@ -1344,7 +1461,7 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedOfficeTime(e.target.value)}
                             required
                           >
-                            <option value="" disabled hidden>
+                            <option value="" hidden>
                               Drop-off Timings
                             </option>
                             {officeTimeSlots?.map((time) => (
@@ -1355,220 +1472,7 @@ const DriverRegistration = () => {
                           </Form.Select>
                         </Form.Group>
                       </div>
-
                     </div>
-                    {/* <Row className="mb-3">
-                      <Form.Group as={Col} md={cityStartId ? '4' : '6'} controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          Starting Point
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={provinceStartId}
-                          onChange={handleProvinceStartChange}
-                          required
-                        >
-                          <option value="" disabled hidden>
-                            Select a Province
-                          </option>
-                          {dropdownStartdata?.countries[0]?.provinces?.map(
-                            (province) => (
-                              <option key={province.id} value={province.id}>
-                                {province.value}
-                              </option>
-                            )
-                          )}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md={cityStartId ? '4' : '6'} controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
-                          Select City
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={cityStartId}
-                          onChange={(e) => setCityStartId(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>
-                            Select a city
-                          </option>
-                          {selectedStartProvinceCities?.map((province) => (
-                            <option key={province.id} value={province.id}>
-                              {province.value}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-
-                      {cityStartId && (
-                        <Form.Group as={Col} md="4" controlId="validationCustom02">
-                          <Form.Label style={{ color: "#000" }}>
-                            Select Area from Dropdown
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-
-                            value={locationStartString}
-                            onChange={handleLocationStart}
-                            required
-                          >
-                            <option value="" disabled hidden>
-                              Select Area from Dropdown
-                            </option>
-                            {selectedStartCityArea?.map((province) => (
-                              <option key={province.id} value={province.value} data-id={province.id}>
-                                {province.value}
-                              </option>
-                            ))}
-                          </Form.Select>
-
-                          <div className="mt-3">
-                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={AddNewStart}>
-                              Can't find your area?
-                              <a  >
-                                {" "} Add Here
-                              </a>
-                            </span>
-                          </div>
-
-                          {addNewStart && (
-                            <Row className="mb-3 mt-4">
-                              <Form.Group as={Col} md="12" controlId="validationCustom01">
-                                <Autocomplete
-                                  onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                  onPlaceChanged={handlePlaceSelectStart}
-                                  restrictions={{ country: 'PK' }}
-                                  options={{ strictBounds: true }}
-                                >
-                                  <Form.Control
-                                    autoComplete="on"
-                                    required
-                                    type="text"
-                                    value={locationStartStringField}
-                                    onChange={handleLocationStartField}
-                                    className="colorplace"
-                                    placeholder="Enter your area"
-                                    autocomplete="on"
-                                    defaultValue=""
-                                  />
-                                </Autocomplete>
-                              </Form.Group>
-                            </Row>
-                          )}
-                        </Form.Group>
-                      )}
-                    </Row> */}
-
-
-
-                    {/* <Row className="mb-3">
-                      <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
-                        <Form.Label
-                          style={{ color: "#000" }}
-                        >
-                          Drop Off
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={provinceEndId}
-                          onChange={handleProvinceEndChange}
-                          required
-                        >
-                          <option value="" disabled hidden>
-                            Select a Province
-                          </option>
-                          {dropdownEnddata?.countries[0]?.provinces?.map(
-                            (province) => (
-                              <option key={province.id} value={province.id}>
-                                {province.value}
-                              </option>
-                            )
-                          )}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
-                          Select City
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={cityEndId}
-                          onChange={(e) => setCityEndId(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>
-                            Select a city
-                          </option>
-                          {selectedEndProvinceCities?.map((province) => (
-                            <option key={province.id} value={province.id}>
-                              {province.value}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-
-                      {cityEndId && (
-                        <Form.Group as={Col} md="4" controlId="validationCustom02">
-                          <Form.Label style={{ color: "#000" }}>
-                            Select Area from Dropdown
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-
-                            value={locationEndString}
-                            onChange={handleLocationEnd}
-                            required
-                          >
-                            <option value="" disabled hidden>
-                              Select Area from Dropdown
-                            </option>
-                            {selectedEndCityArea?.map((province) => (
-                              <option key={province.id} value={province.value} data-id={province.id}>
-                                {province.value}
-                              </option>
-                            ))}
-                          </Form.Select>
-
-                          <div className="mt-3">
-                            <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={AddNewEnd}>
-                              Can't find your area?
-                              <a  >
-                                {" "} Add Here
-                              </a>
-                            </span>
-                          </div>
-
-                          {addNewEnd && (
-                            <Row className="mb-3 mt-4">
-                              <Form.Group as={Col} md="12" controlId="validationCustom01">
-                                <Autocomplete
-                                  onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                                  onPlaceChanged={handlePlaceSelectEnd}
-                                  restrictions={{ country: 'PK' }}
-                                  options={{ strictBounds: true }}
-                                >
-                                  <Form.Control
-                                    required
-                                    type="text"
-                                    value={locationEndStringField}
-                                    onChange={handleLocationEndField}
-                                    className="colorplace"
-                                    placeholder="Enter your area"
-                                    defaultValue=""
-                                  />
-                                </Autocomplete>
-                              </Form.Group>
-                            </Row>
-                          )}
-                        </Form.Group>
-                      )}
-                    </Row> */}
-
                     <LoadScript
                       googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
                       libraries={mapLibraries}
@@ -1602,7 +1506,7 @@ const DriverRegistration = () => {
                         </Modal.Body>
                         <Modal.Footer>
                           <Button variant="contained" onClick={handleCloseStartModal}>
-                            Close
+                            Submit
                           </Button>
                         </Modal.Footer>
                       </Modal>
@@ -1641,7 +1545,7 @@ const DriverRegistration = () => {
                         </Modal.Body>
                         <Modal.Footer>
                           <Button variant="contained" onClick={handleCloseEndModal}>
-                            Close
+                            Submit
                           </Button>
                         </Modal.Footer>
                       </Modal>
@@ -1694,7 +1598,7 @@ const DriverRegistration = () => {
 
                     <Row className="my-3" style={{ border: '1px solid #cddbd9' }}>
                       <Form.Group as={Col} md="12" controlId="validationCustom01">
-                        <Form.Label  className="pt-3 px-3 text-black">
+                        <Form.Label className="pt-3 px-3 text-black">
                           I Commute (Select Days)
                         </Form.Label>
                       </Form.Group>
@@ -1885,8 +1789,8 @@ const DriverRegistration = () => {
                       <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                         <Form.Label className="fs-6 text-black">Gender</Form.Label>
                         <Form.Select
-                           aria-label="Default select example"
-                           className="text-secondary"
+                          aria-label="Default select example"
+                          className="text-secondary"
                           value={gender}
                           onChange={(e) => setGender(e.target.value)}
                           required
@@ -1901,8 +1805,8 @@ const DriverRegistration = () => {
                           Preferred Gender
                         </Form.Label>
                         <Form.Select
-                           aria-label="Default select example"
-                           className="text-secondary"
+                          aria-label="Default select example"
+                          className="text-secondary"
                           value={preferredGender}
                           onChange={(e) => setPreferredGender(e.target.value)}
                           required
@@ -2103,337 +2007,427 @@ const DriverRegistration = () => {
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div className="row shadow" style={{ backgroundColor: "rgb(42, 64, 42" }}>
-                  <h1
-                    className="text-center text-white py-4"
-                   
-                  >
-                    {" "}
-                    Driver's Registration Form
-                  </h1>{" "}
+                    <h1
+                      className="text-center text-white py-4"
+
+                    >
+                      {" "}
+                      Driver's Registration Form
+                    </h1>{" "}
                   </div>
-                 
+
                   <Form
-                  className=" p-3"
+                    className=" p-3"
                   >
-                  <div className="row mb-3 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                      Car Details
-                    </h2>
-                    <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                        <Form.Label className="text-dark fs-6">Car Brand</Form.Label>
-                        <Form.Select
-                         aria-label="Default select example"
-                         className="text-secondary"
-                          value={selectedCarBrand}
-                          onChange={handleCarBrandChange}
-                          required
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3 form-body"
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Car Details
+                        </h2>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">Car Brand</Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedCarBrand}
+                            onChange={handleCarBrandChange}
+                            required
                           // isValid={isCarBrandValid}
                           // isInvalid={!isCarBrandValid}
+                          >
+                            <option value="" hidden>Car Brand</option>
+                            {carBrand?.map((car) => (
+                              <option key={car.id} value={car.brand_name}>
+                                {car.brand_name}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Model Name
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            type="text"
+                            className="text-secondary"
+                            value={selectedModelName}
+                            onChange={(e) => setSelectedModelName(e.target.value)}
+                            placeholder="Car Model"
+                            defaultValue=""
+                          />
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Manufacturing Year
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedManYear}
+                            onChange={(e) => setSelectedManYear(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Manufacturing Year</option>
+                            {manYear?.map((man) => (
+                              <option key={man.id} value={man.car_year_ranges}>
+                                {man.car_year_ranges}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            My Car has AC
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedCarAC}
+                            onChange={(e) => setSelectedCarAC(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>AC</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Car CC
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedCarCC}
+                            onChange={(e) => setSelectedCarCC(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Select Car CC</option>
+                            {carCC?.map((car) => (
+                              <option key={car.id} value={car.car_cc}>
+                                {car.car_cc}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group controlId="formFile" as={Col} md="12"
                         >
-                          <option value="" hidden>Car Brand</option>
-                          {carBrand?.map((car) => (
-                            <option key={car.id} value={car.brand_name}>
-                              {car.brand_name}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          Model Name
-                        </Form.Label>
-                        <Form.Control
-                          required
-                          type="text"
-                          className="text-secondary"
-                          value={selectedModelName}
-                          onChange={(e) => setSelectedModelName(e.target.value)}
-                          placeholder="Car Model"
-                          defaultValue=""
-                        />
-                      </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          Manufacturing Year
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          className="text-secondary"
-                          value={selectedManYear}
-                          onChange={(e) => setSelectedManYear(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Manufacturing Year</option>
-                          {manYear?.map((man) => (
-                            <option key={man.id} value={man.car_year_ranges}>
-                              {man.car_year_ranges}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          My Car has AC
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                           className="text-secondary"
-                          value={selectedCarAC}
-                          onChange={(e) => setSelectedCarAC(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>AC</option>
-                          <option value="Yes">Yes</option>
-                          <option value="No">No</option>
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          Car CC
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                           className="text-secondary"
-                          value={selectedCarCC}
-                          onChange={(e) => setSelectedCarCC(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Select Car CC</option>
-                          {carCC?.map((car) => (
-                            <option key={car.id} value={car.car_cc}>
-                              {car.car_cc}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group controlId="formFile"as={Col} md="12"
+                          <Form.Label className="text-dark fs-6">
+                            Upload Car Image with visible number plate
+                          </Form.Label>
+                          <Form.Control
+                            type="file"
+                            onChange={handleImageSelect}
+                            required
+                          />
+                        </Form.Group>
+                      </div>
+                    </div>
+
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3 form-body"
                       >
-                        <Form.Label className="text-dark fs-6">
-                          Upload Car Image with visible number plate
-                        </Form.Label>
-                        <Form.Control
-                          type="file"
-                          onChange={handleImageSelect}
-                          required
-                        />
-                      </Form.Group>
-                    </div></div>
-
-                    <div className="row mb-3 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                      Car Registration
-                    </h2>
-                    <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          Registration Year
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                         className="text-secondary"
-                          value={selectedRegYear}
-                          onChange={(e) => setSelectedRegYear(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Registration Year</option>
-                          {regYear?.map((reg) => (
-                            <option key={reg.id} value={reg.car_year_ranges}>
-                              {reg.car_year_ranges}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          Registration Car Year Ranges
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
+                        <h2 className="text-success mb-3 text-center">
+                          Car Registration
+                        </h2>
+                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Registration Year
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
                             className="text-secondary"
-                          value={selectedCarYearRanges}
-                          onChange={(e) => setSelectedCarYearRanges(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Select Car Year Ranges</option>
-                          {carYearRanges?.map((man) => (
-                            <option key={man.id} value={man.car_year_ranges}>
-                              {man.car_year_ranges}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          Registeration Number
-                        </Form.Label>
-                        <Form.Control
-                          required
-                          type="text"
-                          className="text-secondary"
-                          value={selectedRegNumber}
-                          onChange={(e) => setSelectedRegNumber(e.target.value)}
-                          placeholder="Registeration Number"
-                          defaultValue=""
-                        />
-                      </Form.Group>
-                    </div></div>
-
-                    <div className="row mb-3 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                     Available Seats
-                    </h2>
-                    <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          Seats Available
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          className="text-secondary"
-                          value={selectedSeat}
-                          onChange={(e) => setSelectedSeat(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Seats Available</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          Seats Available for (Male, Female, Both)
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          className="text-secondary"
-                          value={selectedSeatGender}
-                          onChange={(e) => setSelectedSeatGender(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Seats Available</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Both">Both</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </div></div>
-
-                    <div className="row mb-3 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                     Route Partner
-                    </h2>
-                    <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          I accept one-route partner
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
+                            value={selectedRegYear}
+                            onChange={(e) => setSelectedRegYear(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Registration Year</option>
+                            {regYear?.map((reg) => (
+                              <option key={reg.id} value={reg.car_year_ranges}>
+                                {reg.car_year_ranges}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Registration Car Year Ranges
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
                             className="text-secondary"
-                          value={selectedOneRoutePartner}
-                          onChange={(e) => setSelectedOneRoutePartner(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>I accept one-route partner</option>
-                          <option value="Yes">Yes</option>
-                          <option value="No">No</option>
-                        </Form.Select>
-                      </Form.Group>
+                            value={selectedCarYearRanges}
+                            onChange={(e) => setSelectedCarYearRanges(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Select Car Year Ranges</option>
+                            {carYearRanges?.map((man) => (
+                              <option key={man.id} value={man.car_year_ranges}>
+                                {man.car_year_ranges}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Registeration Number
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            type="text"
+                            className="text-secondary"
+                            value={selectedRegNumber}
+                            onChange={(e) => setSelectedRegNumber(e.target.value)}
+                            placeholder="Registeration Number"
+                            defaultValue=""
+                          />
+                        </Form.Group>
+                      </div>
+                    </div>
 
-                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                        <Form.Label className="text-dark fs-6">
-                          I also accept mid-route partner
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          className="text-secondary"
-                          value={selectedMidRoutePartner}
-                          onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>I also accept mid-route partner</option>
-                          <option value="Yes">Yes</option>
-                          <option value="No">No</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </div></div>
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3 form-body"
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Available Seats
+                        </h2>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Seats Available
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedSeat}
+                            onChange={(e) => setSelectedSeat(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Seats Available</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Seats Available for (Male, Female, Both)
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedSeatGender}
+                            onChange={(e) => setSelectedSeatGender(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Seats Available</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Both">Both</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </div></div>
+
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3 form-body"
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Route Partner
+                        </h2>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            I accept one-route partner
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedCarYearRanges}
+                            onChange={(e) => setSelectedCarYearRanges(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Select Car Year Ranges</option>
+                            {carYearRanges?.map((man) => (
+                              <option key={man.id} value={man.car_year_ranges}>
+                                {man.car_year_ranges}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Registeration Number
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            type="text"
+                            className="text-secondary"
+                            value={selectedRegNumber}
+                            onChange={(e) => setSelectedRegNumber(e.target.value)}
+                            placeholder="Registeration Number"
+                            defaultValue=""
+                          />
+                        </Form.Group>
+                      </div></div>
+
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3"
+                        style={{ backgroundColor: "#cddbd9" }}
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Available Seats
+                        </h2>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Seats Available
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedSeat}
+                            onChange={(e) => setSelectedSeat(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Seats Available</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            Seats Available for (Male, Female, Both)
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedSeatGender}
+                            onChange={(e) => setSelectedSeatGender(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>Seats Available</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Both">Both</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </div></div>
+
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3"
+                        style={{ backgroundColor: "#cddbd9" }}
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Route Partner
+                        </h2>
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            I accept one-route partner
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedOneRoutePartner}
+                            onChange={(e) => setSelectedOneRoutePartner(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>I accept one-route partner</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            I also accept mid-route partner
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedMidRoutePartner}
+                            onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>I also accept mid-route partner</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </div></div>
 
 
                     <div className="row mb-3 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                    Bank/Payment Details
-                    </h2>
-                    <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
-                                <div class="container text-center">
-                                  <img src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
-                                  <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
-                                </div>
-                                <form id="paymentForm">
-                                  <div className="mt-4 px-3">
-                                    <input
-                                      type="text"
-                                      className="form-control mb-2 text-secondary"
-                                      id="bankAccount"
-                                      name="bankAccount"
-                                      placeholder="Bank Account (IBAN)"
-                                      value={inputBankAccount}
-                                      onChange={(e) => setInputBankAccount(e.target.value)}
-                                      required
-                                    />
-                                  </div>
-                                  <div className="px-3">
-                                    <input
-                                      type="text"
-                                      className="form-control mb-2 text-secondary "
-                                      id="jazzCashAccount"
-                                      name="jazzCashAccount"
-                                      placeholder="Jazz Cash Account Number"
-                                      value={inputJazzCash}
-                                      onChange={(e) => setInputJazzCash(e.target.value)}
-                                      required
-                                    />
-                                  </div>
-                                  <div className="px-3">
-                                    <input
-                                      type="text"
-                                      className="form-control mb-2 text-secondary"
-                                      id="easypaisaAccount"
-                                      name="easypaisaAccount"
-                                      placeholder="EasyPaisa Account Number"
-                                      value={inputEasyPaisa}
-                                      onChange={(e) => setInputEasyPaisa(e.target.value)}
-                                      required
-                                    />
-                                  </div>
-                                  <div className="px-3">
-                                    <input
-                                      type="text"
-                                      className="form-control mb-2 text-secondary"
-                                      id="raastID"
-                                      name="raastID"
-                                      placeholder="Raast ID"
-                                      value={inputRaastID}
-                                      onChange={(e) => setInputRaastID(e.target.value)}
-                                    />
-                                  </div>
-                                </form>
-                    </div></div>
+                      <div
+                        className="col-md-12 px-2 py-3 form-body"
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Bank/Payment Details
+                        </h2>
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                        <div class="container text-center">
+                          <img src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
+                          <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
+                          <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                          <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+                        </div>
+                        <form id="paymentForm">
+                          <div className="mt-4 px-3">
+                            <input
+                              type="text"
+                              className="form-control mb-2 text-secondary"
+                              id="bankAccount"
+                              name="bankAccount"
+                              placeholder="Bank Account (IBAN)"
+                              value={inputBankAccount}
+                              onChange={(e) => setInputBankAccount(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="px-3">
+                            <input
+                              type="text"
+                              className="form-control mb-2 text-secondary "
+                              id="jazzCashAccount"
+                              name="jazzCashAccount"
+                              placeholder="Jazz Cash Account Number"
+                              value={inputJazzCash}
+                              onChange={(e) => setInputJazzCash(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="px-3">
+                            <input
+                              type="text"
+                              className="form-control mb-2 text-secondary"
+                              id="easypaisaAccount"
+                              name="easypaisaAccount"
+                              placeholder="EasyPaisa Account Number"
+                              value={inputEasyPaisa}
+                              onChange={(e) => setInputEasyPaisa(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="px-3">
+                            <input
+                              type="text"
+                              className="form-control mb-2 text-secondary"
+                              id="raastID"
+                              name="raastID"
+                              placeholder="Raast ID"
+                              value={inputRaastID}
+                              onChange={(e) => setInputRaastID(e.target.value)}
+                            />
+                          </div>
+                        </form>
+                      </div></div>
                     <Row >
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>Car Brand</Form.Label>
@@ -2822,93 +2816,100 @@ const DriverRegistration = () => {
 
                     {showmyself && (
                       <>
-                      <div className="row mb-3 mt-2 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                     Driving License Details
-                    </h2>
-                    <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
+                        <div className="row mb-3 mt-2 shadow shadow-sm">
+                          <div
+                            className="col-md-12 px-2 py-3 form-body"
                           >
-                            <Form.Label className="text-dark fs-6">
-                              Driving Licence No.
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="License No."
-                              value={inputDrivingLicenseMySelf}
-                              onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Valid Upto
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Enter Here"
-                              value={inputValidUptoMySelf}
-                              onChange={(e) => setInputValidUptoMySelf(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>    
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
-                          >
-                            <Form.Label text-dark fs-6>
-                              Place Issued
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Enter Here"
-                              value={inputPlaceIssueMySelf}
-                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Upload License (front)
-                            </Form.Label>
-                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom02"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Upload License (back)
-                            </Form.Label>
-                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
-                          </Form.Group>
-                    </div></div>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <h2 className="text-success mb-3 text-center">
+                                Driving License Details
+                              </h2>
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Driving Licence No.
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="License No."
+                                value={inputDrivingLicenseMySelf}
+                                onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Valid Upto
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Enter Here"
+                                value={inputValidUptoMySelf}
+                                onChange={(e) => setInputValidUptoMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place Issued
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Enter Here"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (front)
+                              </Form.Label>
+                              <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom02"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (back)
+                              </Form.Label>
+                              <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                            </Form.Group>
+                          </div></div>
                         {/* <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
@@ -2999,144 +3000,158 @@ const DriverRegistration = () => {
                     {showmydriver && (
                       <>
 
-<div className="row mb-3 mt-2 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                     Driver's Details
-                    </h2>
-                    <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
+                        <div className="row mb-3 mt-2 shadow shadow-sm">
+                          <div
+                            className="col-md-12 px-2 py-3 form-body"
                           >
-                            <Form.Label className="text-dark fs-6">
-                              Name
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Name"
-                              value={inputDriverName}
-                              onChange={(e) => setInputDriverName(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              CNIC
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="CNIC: xxxxxxxxxxxxx"
-                              value={inputDriverCnicNumber}
-                              onChange={(e) => setInputDriverCnicNumber(e.target.value)}
-                              defaultValue=""
-                              maxLength={13}
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Upload CNIC (front)
-                            </Form.Label>
-                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom02"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark">
-                              Upload CNIC (back)
-                            </Form.Label>
-                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
-                          </Form.Group>
-                    </div></div>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <h2 className="text-success mb-3 text-center">
+                                Driver's Details
+                              </h2>
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Name
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Name"
+                                value={inputDriverName}
+                                onChange={(e) => setInputDriverName(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                CNIC
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="CNIC: xxxxxxxxxxxxx"
+                                value={inputDriverCnicNumber}
+                                onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                                defaultValue=""
+                                maxLength={13}
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Upload CNIC (front)
+                              </Form.Label>
+                              <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom02"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark">
+                                Upload CNIC (back)
+                              </Form.Label>
+                              <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                            </Form.Group>
+                          </div></div>
 
-                    <div className="row mb-3 mt-2 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                     License Details
-                    </h2>
-                    <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
+                        <div className="row mb-3 mt-2 shadow shadow-sm">
+                          <div
+                            className="col-md-12 px-2 py-3 form-body"
                           >
-                            <Form.Label className="text-dark fs-6">
-                              Driving Licence No.
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="License No."
-                              value={inputDriverLicenseNumber}
-                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Valid Upto
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Enter Here"
-                              value={inputDriverValidUpto}
-                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom01"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Upload License (front)
-                            </Form.Label>
-                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom02"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Upload License (back)
-                            </Form.Label>
-                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
-                          </Form.Group>
-                    </div></div>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <h2 className="text-success mb-3 text-center">
+                                License Details
+                              </h2>
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Driving Licence No.
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="License No."
+                                value={inputDriverLicenseNumber}
+                                onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Valid Upto
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Enter Here"
+                                value={inputDriverValidUpto}
+                                onChange={(e) => setInputDriverValidUpto(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (front)
+                              </Form.Label>
+                              <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom02"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (back)
+                              </Form.Label>
+                              <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                            </Form.Group>
+                          </div></div>
                         {/* <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
@@ -3290,13 +3305,13 @@ const DriverRegistration = () => {
                     {showboth && (<>
 
                       <div className="row mb-3 mt-2 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                     Driver's Details
-                    </h2>
-                    <Form.Group
+                        <div
+                          className="col-md-12 px-2 py-3 form-body"
+                        >
+                          <h2 className="text-success mb-3 text-center">
+                            Driver's Details
+                          </h2>
+                          <Form.Group
                             as={Col}
                             md="12"
                             controlId="validationCustom01"
@@ -3357,7 +3372,7 @@ const DriverRegistration = () => {
                             </Form.Label>
                             <Form.Control type="file" required onChange={handleCnicBackDriver} />
                           </Form.Group>
-                    </div></div>
+                        </div></div>
                       {/* <Row className="mb-3 mt-3">
                         <Form.Group
                           as={Col}
@@ -3421,136 +3436,81 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </Row> */}
 
-<div className="row mb-3 mt-2 shadow shadow-sm">
-                  <div
-                    className="col-md-12 px-2 py-3 form-body"
-                  >
-                    <h2 className="text-success mb-3 text-center">
-                     Driver's License Details
-                    </h2>
-                    <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom01"
-                          className="mb-2"
+                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                        <div
+                          className="col-md-12 px-2 py-3 form-body"
                         >
-                          <Form.Label className="text-dark fs-6">
-                            Driving Licence No.
-                          </Form.Label>
-                          <Form.Control
-                            required
-                            type="text"
-                            className="text-secondary"
-                            placeholder="License No."
-                            value={inputDriverLicenseNumber}
-                            onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
-                            defaultValue=""
-                          />
-                        </Form.Group>
-                        <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom01"
-                          className="mb-2"
-                        >
-                          <Form.Label className="text-dark fs-6">
-                            Valid Upto
-                          </Form.Label>
-                          <Form.Control
-                            required
-                            type="text"
-                            className="text-secondary"
-                            placeholder="Enter Here"
-                            value={inputDriverValidUpto}
-                            onChange={(e) => setInputDriverValidUpto(e.target.value)}
-                            defaultValue=""
-                          />
-                        </Form.Group>
-                        <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom01"
-                          className="mb-2"
-                        >
-                          <Form.Label className="text-dark fs-6">
-                            Upload License (front)
-                          </Form.Label>
-                          <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
-                        </Form.Group>
-                        <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom02"
-                          className="mb-2"
-                        >
-                          <Form.Label className="text-dark fs-6">
-                            Upload License (back)
-                          </Form.Label>
-                          <Form.Control type="file" required onChange={handleLicenseBackDriver} />
-                        </Form.Group>
-                    </div></div>
-                      {/* <Row className="mb-3">
-                        <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom01"
-                        >
-                          <Form.Label style={{ color: "#000" }}>
-                            Driving Licence No.
-                          </Form.Label>
-                          <Form.Control
-                            required
-                            type="text"
-                            className="colorplace"
-                            placeholder="License No."
-                            value={inputDriverLicenseNumber}
-                            onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
-                            defaultValue=""
-                          />
-                        </Form.Group>
-                      </Row>
-                      <Row className="mb-3">
-                        <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom01"
-                        >
-                          <Form.Label style={{ color: "#000" }}>
-                            Valid Upto
-                          </Form.Label>
-                          <Form.Control
-                            required
-                            type="text"
-                            className="colorplace"
-                            placeholder="Enter Here"
-                            value={inputDriverValidUpto}
-                            onChange={(e) => setInputDriverValidUpto(e.target.value)}
-                            defaultValue=""
-                          />
-                        </Form.Group>
-                      </Row>
-                      <Row className="mb-3">
-                        <Form.Group
-                          as={Col}
-                          md="6"
-                          controlId="validationCustom01"
-                        >
-                          <Form.Label style={{ color: "#000" }}>
-                            Upload License (front)
-                          </Form.Label>
-                          <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
-                        </Form.Group>
-                        <Form.Group
-                          as={Col}
-                          md="6"
-                          controlId="validationCustom02"
-                        >
-                          <Form.Label style={{ color: "#000" }}>
-                            Upload License (back)
-                          </Form.Label>
-                          <Form.Control type="file" required onChange={handleLicenseBackDriver} />
-                        </Form.Group>
-                      </Row> */}
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <h2 className="text-success mb-3 text-center">
+                              Driver's License Details
+                            </h2>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Driving Licence No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Valid Upto
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Enter Here"
+                              value={inputDriverValidUpto}
+                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom02"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                          </Form.Group>
+                        </div></div>
 
                     </>)
                     }

@@ -62,32 +62,23 @@ const BackendLayout = ({ children }) => {
         text: "You are about to logout from commuterLink",
         icon: 'warning',
         showCancelButton: true,
-        // confirmButtonColor: '#3085d6',
-        // cancelButtonColor: '#d33',
-        customClass: {
-          confirmButton: 'bg-success' , 
-          cancelButton:'bg-success'// Apply custom CSS class to the OK button
-        },
-        confirmButtonText: 'Logout!'
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Logout'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
             position:'top',
-            title: 'Logout!',
-            text:'Successful',
-            customClass: {
-              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-            },
-          }
-        
-          )
+            title: 'Logout',
+            text:'Successful'
+          })
+          dispatch(setloginState(""));
+          dispatch(setsignupState(""));
+          navigate("/login");
         }
       })
   
-    ) {
-      dispatch(setloginState(""));
-      dispatch(setsignupState(""));
-      navigate("/login");
+    ){
     }
   }
   
@@ -124,6 +115,15 @@ const BackendLayout = ({ children }) => {
         setName("");
         setImage("");
       }
+
+      if(jsonresponse.statusCode === 500){
+        Swal.fire({
+          position:'top',
+          icon: 'error',
+          text: `${jsonresponse.message}`
+        })
+      }
+
       console.log("Profile Data", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);

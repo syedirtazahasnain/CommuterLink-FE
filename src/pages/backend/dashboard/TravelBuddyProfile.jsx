@@ -295,21 +295,12 @@ const TravelBuddyProfile = () => {
     text: "You want to cancel",
     icon: 'warning',
     showCancelButton: true,
-    // confirmButtonColor: '#3085d6',
-    // cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes!',
-    customClass: {
-      confirmButton: 'bg-success' , 
-      cancelButton:'bg-success' // Apply custom CSS class to the OK button
-    },
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes'
   }).then((result) => {
     if (result.isConfirmed) {
-      // Swal.fire(
-      //   'Deleted!',
-      //   'Your file has been deleted.',
-      //   'success'
-      // )
-      calendarPicker();
+        calendarPicker();
     }
   })
  }
@@ -540,13 +531,12 @@ const TravelBuddyProfile = () => {
             </div>
           </div>
           <div className="text-center d-flex m-auto justify-content-between">
-          <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4" onClick={youSure}>
-              Cancel
-            </Button>
             <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
               Back
             </Button>
-         
+            <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4" onClick={youSure}>
+              Cancel Agreement
+            </Button>
           </div>
         </div>
         <div>

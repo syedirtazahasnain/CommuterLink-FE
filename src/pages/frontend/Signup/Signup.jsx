@@ -166,6 +166,14 @@ const Signup = () => {
       }
         )
       }
+      else if (password !== confirmPassword) {
+        // alert("Confirm password is not matched with new password!")
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+          text: 'Confirm password is not matched with new password!'
+        })
+      }
       else{
         if (termsService) {
           const body = {

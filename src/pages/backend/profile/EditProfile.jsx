@@ -94,6 +94,15 @@ const EditProfile = () => {
       else {
         setEmail("");
       }
+
+      if(jsonresponse.statusCode === 500){
+        Swal.fire({
+          position:'top',
+          icon: 'error',
+          text: `${jsonresponse.message}`
+        })
+      }
+
       console.log("Edit Profile Page Data", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
@@ -164,9 +173,17 @@ const EditProfile = () => {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
-            icon: 'warning',
-           text: `${jsonresponse.message}`}
-          )
+            icon: 'error',
+            text: `${jsonresponse.message}`
+          })
+        }
+
+        if(jsonresponse.statusCode === 500){
+          Swal.fire({
+            position:'top',
+            icon: 'error',
+            text: `${jsonresponse.message}`
+          })
         }
       }
     } catch (error) {

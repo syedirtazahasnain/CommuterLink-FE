@@ -71,8 +71,6 @@ const TravelConfirmation = () => {
 
     const jsonresponse = await response.json();
     console.log("Handle Confirm Status Response:", jsonresponse);
-    // if (jsonresponse.statusCode == 200) {
-    // }
     setDialogOpen(false);
   };
 
@@ -189,9 +187,9 @@ const TravelConfirmation = () => {
     );
   
     const marker =
-      statusForDay && statusForDay.status === 0 ? (
+      statusForDay && statusForDay.status === 1 ? (
         <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
-      ) : statusForDay && statusForDay.status === 1 ? (
+      ) : statusForDay && statusForDay.status === 0 ? (
         <i className="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
       ) : statusForDay && statusForDay.status === -1 ? (
         <i className="fa-solid fa-car text-danger mx-1 fs-2"></i>
@@ -266,9 +264,9 @@ const TravelConfirmation = () => {
                 className="card border-0"
                 style={{ backgroundColor: "#D9D9D9" }}
               >
-                <div className="card h-50">
+                <div className="card h-50 w-100">
                   <div className="container">
-                    <Box className="card  w-100">
+                    <Box className="card w-100">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateCalendar
                           value={selectedDate}
@@ -293,27 +291,23 @@ const TravelConfirmation = () => {
                               fontSize: "1.4rem",
                               fontWeight: 'bold',
                               color: '#1F5F5B',
-                              paddingTop: "1rem",
+                              // paddingTop: "1rem",
                               paddingBottom: "0.5rem",
-                              paddingLeft: "calc(5rem + 18px)",
-                              paddingRight: "calc(5rem + 18px)",
+                              padding: "calc(3rem + 18px)",
                               margin: 0,
                             },
                             "& .MuiPickersDay-dayWithMargin": {
                               fontSize: "1.3rem",
-                              // padding: "5rem",
                               margin: 0,
 
                             },
                             "& .MuiPickersDay-root:hover": {
                               backgroundColor: "#cbeddd",
-                              borderRadius: "50%", // Make the hover circle a perfect circle
-                              // width: "0.5rem", // Adjust the width of the hover circle
-                              // height: "0.5rem" // Adjust the height of the hover circle
+                              borderRadius: "50%",
                             },
                             "& .MuiPickersDay-root.Mui-selected": {
                               backgroundColor: "green",
-                              borderRadius: "90%",
+                              borderRadius: "100%",
                               color: "#fff",
                               display: "flex",
                               alignItems: "center",
@@ -323,9 +317,7 @@ const TravelConfirmation = () => {
                               fontSize: "1.5rem"
                             },
                             '& .MuiBadge-root ': {
-                              paddingLeft: '5rem',
-                              paddingRight: '5rem',
-                              paddingBottom: '3rem',
+                              padding: '3rem',
                             },
                             '& .MuiPickersYear-yearButton': {
                               backgroundColor: '#cbeddd'
@@ -350,12 +342,11 @@ const TravelConfirmation = () => {
                       <p className="text-success fs-5 px-4 cursor-pointer text-right">
                         No of Days Travelled 0
                       </p>
-                      {/* <p className="btn fs-5 px-4 text-success text-right fw-bold" onClick={route}>
-                        View Full History
-                      </p> */}
                       <div className="container my-3 text-end">
 
-                        <Link className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                        <Link 
+                          className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                          style={{ cursor: "pointer" }}
                           onClick={route}
                         >
                         View Full History
@@ -375,7 +366,7 @@ const TravelConfirmation = () => {
                   <div className="row px-2">
                     <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
                       <div>
-                        <button className="btn  text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(0)}>
+                        <button className="btn  text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(1)}>
                           <span>
                             <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
                           </span>
@@ -383,7 +374,7 @@ const TravelConfirmation = () => {
                         </button>
                       </div>
                       <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(1)}>
+                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(0)}>
                           <span>
                             <i class="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
                           </span>

@@ -37,7 +37,11 @@ const SchoolRegistration = () => {
   const autocompleteRef = useRef(null);
   const userToken = useSelector((s) => s.login.data.token);
   const [addNewStart, setAddNewStart] = useState(false);
+  const [addNewStartDropdown, setAddNewStartDropdown] = useState(true);
+  const [addNewStartField, setAddNewStartField] = useState(true);
   const [addNewEnd, setAddNewEnd] = useState(false);
+  const [addNewEndDropdown, setAddNewEndDropdown] = useState(true);
+  const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
   const mapLibraries = ["places"];
 
@@ -52,10 +56,14 @@ const SchoolRegistration = () => {
 
   const AddNewStart = () => {
     setAddNewStart(true);
+    setAddNewStartDropdown(false);
+    setAddNewStartField(false);
   };
 
   const AddNewEnd = () => {
     setAddNewEnd(true);
+    setAddNewEndDropdown(false);
+    setAddNewEndField(false);
   };
 
   function validateProfession(profession) {
@@ -125,9 +133,7 @@ const SchoolRegistration = () => {
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const selectedDateFormat = selectedDate
-    ? selectedDate.format("DD-MM-YYYY")
-    : "";
+  const selectedDateFormat = selectedDate ? selectedDate.format("DD-MM-YYYY") : "";
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
@@ -145,25 +151,20 @@ const SchoolRegistration = () => {
   // For Start Point
   const [locationStartString, setLocationStartString] = useState("");
   const [locationStartStringId, setLocationStartStringId] = useState("");
-  const [locationStartStringField, setLocationStartStringField] =
-    useState(locationStartString);
+  const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
-  const [selectedStartProvinceCities, setSelectedStartProvinceCities] =
-    useState([]);
+  const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
   const [cityStartId, setCityStartId] = useState("");
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
 
   // For End Point
   const [locationEndString, setLocationEndString] = useState("");
   const [locationEndStringId, setLocationEndStringId] = useState("");
-  const [locationEndStringField, setLocationEndStringField] =
-    useState(locationEndString);
+  const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
-  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState(
-    []
-  );
+  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
   const [cityEndId, setCityEndId] = useState("");
   const [selectedEndCityArea, setSelectedEndCityArea] = useState([]);
 
@@ -343,6 +344,7 @@ const SchoolRegistration = () => {
     const selectedId = selectedOption.getAttribute("data-id");
     setLocationStartString(selectedValue);
     setLocationStartStringId(selectedId);
+    setAddNewStartField(false);
     handleShowStartModal();
   };
 
@@ -371,6 +373,7 @@ const SchoolRegistration = () => {
     const selectedId = selectedOption.getAttribute("data-id");
     setLocationEndString(selectedValue);
     setLocationEndStringId(selectedId);
+    setAddNewEndField(false);
     handleShowEndModal();
   };
 
@@ -867,9 +870,9 @@ const SchoolRegistration = () => {
                         Province
                       </Form.Label>
                       <Form.Select
-                         aria-label="Default select example"
-                         className="text-secondary"
-                         value={provinceEndId}
+                        aria-label="Default select example"
+                        className="text-secondary"
+                        value={provinceStartId}
                         onChange={handleProvinceStartChange}
                         required
                       >
@@ -911,86 +914,98 @@ const SchoolRegistration = () => {
                     </Form.Group>
 
                     {cityStartId && (
-                      <Form.Group
-                        as={Col}
-                        md="12"
-                        controlId="validationCustom02" className="mb-2"
-                      >
-                        <Form.Label className="text-dark fs-6">
-                          Select Area from Dropdown
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          className="text-secondary"
-                          value={locationStartString}
-                          onChange={handleLocationStart}
-                          required
-                        >
-                          <option value="" disabled hidden>
-                            Select Area from Dropdown
-                          </option>
-                          {selectedStartCityArea?.map((province) => (
-                            <option
-                              key={province.id}
-                              value={province.value}
-                              data-id={province.id}
-                            >
-                              {province.value}
-                            </option>
-                          ))}
-                        </Form.Select>
-
-                        <div className="mt-3">
-                          <span
-                            className="colorplace"
-                            style={{
-                              cursor: "pointer",
-                              textDecoration: "underline",
-                            }}
-                            onClick={AddNewStart}
+                      <>
+                        {addNewStartDropdown && (
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom02"
                           >
-                            Can't find your area?
-                            <a> Add Here</a>
-                          </span>
-                        </div>
+                            <Form.Label style={{ color: "#000" }}>
+                              Select Area from Dropdown
+                            </Form.Label>
+                            <Form.Select
+                              aria-label="Default select example"
+                              className="text-secondary"
+                              value={locationStartString}
+                              onChange={handleLocationStart}
+                              required
+                            >
+                              <option value="" disabled hidden>
+                                Select Area from Dropdown
+                              </option>
+                              {selectedStartCityArea?.map((province) => (
+                                <option
+                                  key={province.id}
+                                  value={province.value}
+                                  data-id={province.id}
+                                >
+                                  {province.value}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          </Form.Group>
+                        )}
+
+                        {addNewStartField && (
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            className="mt-3"
+                            controlId="validationCustom02"
+                          >
+                            <span
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                              onClick={AddNewStart}
+                            >
+                              Can't find your area?
+                              <a> Add Here</a>
+                            </span>
+                          </Form.Group>
+                        )}
 
                         {addNewStart && (
-                          <Row className="mb-3 mt-4">
-                            <Form.Group
-                              as={Col}
-                              md="12"
-                              controlId="validationCustom01"
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label className="text-black">
+                              Area
+                            </Form.Label>
+                            <Autocomplete
+                              onLoad={(autocomplete) =>
+                                (autocompleteRef.current = autocomplete)
+                              }
+                              onPlaceChanged={handlePlaceSelectStart}
+                              restrictions={{ country: "PK" }}
+                              options={{ strictBounds: true }}
                             >
-                              <Autocomplete
-                                onLoad={(autocomplete) =>
-                                  (autocompleteRef.current = autocomplete)
-                                }
-                                onPlaceChanged={handlePlaceSelectStart}
-                                restrictions={{ country: "PK" }}
-                                options={{ strictBounds: true }}
-                              >
-                                <Form.Control
-                                  autoComplete="on"
-                                  required
-                                  type="text"
-                                  value={locationStartStringField}
-                                  onChange={handleLocationStartField}
-                                  className="colorplace"
-                                  placeholder="Enter your area"
-                                  autocomplete="on"
-                                  defaultValue=""
-                                />
-                              </Autocomplete>
-                            </Form.Group>
-                          </Row>
+                              <Form.Control
+                                autoComplete="on"
+                                required
+                                type="text"
+                                value={locationStartStringField}
+                                onChange={handleLocationStartField}
+                                className="text-dark mt-1"
+                                placeholder="Enter your area"
+                                autocomplete="on"
+                                defaultValue=""
+                              />
+                            </Autocomplete>
+                          </Form.Group>
                         )}
-                      </Form.Group>
+                      </>
                     )}
                     <Form.Group
                       as={Col}
                       md="12"
                       controlId="validationCustom01"
-                      className="mb-2"
+                      className="mb-2 mt-3"
                     >
                       <Form.Label className="text-black fs-6">
                         Timings (+/- 15 Minutes)
@@ -1015,107 +1030,6 @@ const SchoolRegistration = () => {
                   </div>
                 </div>
 
-                {/* <Row className="mb-3">
-                  <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom01">
-                    <Form.Label
-                      style={{ color: "#000" }}
-                    >
-                      Drop Off
-                    </Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      className="text-secondary" value={provinceEndId}
-                      onChange={handleProvinceEndChange}
-                      required
-                    >
-                      <option value="" disabled hidden>
-                        Select a Drop Off Point
-                      </option>
-                      {dropdownEnddata?.countries[0]?.provinces?.map(
-                        (province) => (
-                          <option key={province.id} value={province.id}>
-                            {province.value}
-                          </option>
-                        )
-                      )}
-                    </Form.Select>
-                  </Form.Group>
-                  <Form.Group as={Col} md={cityEndId ? '4' : '6'} controlId="validationCustom02">
-                    <Form.Label style={{ color: "#000" }}>
-                      Select City
-                    </Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      className="text-secondary" value={cityEndId}
-                      onChange={(e) => setCityEndId(e.target.value)}
-                      required
-                    >
-                      <option value="" hidden>
-                        Select a city
-                      </option>
-                      {selectedEndProvinceCities?.map((province) => (
-                        <option key={province.id} value={province.id}>
-                          {province.value}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-
-                  {cityEndId && (
-                    <Form.Group as={Col} md="4" controlId="validationCustom02">
-                      <Form.Label style={{ color: "#000" }}>
-                        Select Area from Dropdown
-                      </Form.Label>
-                      <Form.Select
-                        aria-label="Default select example"
-                        className="text-secondary" value={locationEndString}
-                        onChange={handleLocationEnd}
-                        required
-                      >
-                        <option value="" disabled hidden>
-                          Select Area from Dropdown
-                        </option>
-                        {selectedEndCityArea?.map((province) => (
-                          <option key={province.id} value={province.value} data-id={province.id}>
-                            {province.value}
-                          </option>
-                        ))}
-                      </Form.Select>
-
-                      <div className="mt-3">
-                        <span className="colorplace" style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={AddNewEnd}>
-                          Can't find your area?
-                          <a  >
-                            {" "} Add Here
-                          </a>
-                        </span>
-                      </div>
-
-                      {addNewEnd && (
-                        <Row className="mb-3 mt-4">
-                          <Form.Group as={Col} md="12" controlId="validationCustom01">
-                            <Autocomplete
-                              onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-                              onPlaceChanged={handlePlaceSelectEnd}
-                              restrictions={{ country: 'PK' }}
-                              options={{ strictBounds: true }}
-                            >
-                              <Form.Control
-                                required
-                                type="text"
-                                value={locationEndStringField}
-                                onChange={handleLocationEndField}
-                                className="colorplace"
-                                placeholder="Enter your area"
-                                defaultValue=""
-                              />
-                            </Autocomplete>
-                          </Form.Group>
-                        </Row>
-                      )}
-                    </Form.Group>
-                  )}
-                </Row> */}
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3"
@@ -1176,85 +1090,100 @@ const SchoolRegistration = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
+                    
                     {cityEndId && (
-                      <Form.Group
-                        as={Col}
-                        md="12"
-                        controlId="validationCustom02" className="mb-2"
-                      >
-                        <Form.Label className="text-dark fs-6">
-                          Select Area from Dropdown
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          className="text-secondary"
-                          value={locationEndString}
-                          onChange={handleLocationEnd}
-                          required
-                        >
-                          <option value="" disabled hidden>
-                            Select Area from Dropdown
-                          </option>
-                          {selectedEndCityArea?.map((province) => (
-                            <option
-                              key={province.id}
-                              value={province.value}
-                              data-id={province.id}
-                            >
-                              {province.value}
-                            </option>
-                          ))}
-                        </Form.Select>
-
-                        <div className="mt-3">
-                          <span
-                            className="colorplace"
-                            style={{
-                              cursor: "pointer",
-                              textDecoration: "underline",
-                            }}
-                            onClick={AddNewEnd}
+                      <>
+                        {addNewEndDropdown && (
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom02"
                           >
-                            Can't find your area?
-                            <a> Add Here</a>
-                          </span>
-                        </div>
+                            <Form.Label style={{ color: "#000" }}>
+                              Select Area from Dropdown
+                            </Form.Label>
+                            <Form.Select
+                              aria-label="Default select example"
+                              className="text-secondary"
+                              value={locationEndString}
+                              onChange={handleLocationEnd}
+                              required
+                            >
+                              <option value="" disabled hidden>
+                                Select Area from Dropdown
+                              </option>
+                              {selectedEndCityArea?.map((province) => (
+                                <option
+                                  key={province.id}
+                                  value={province.value}
+                                  data-id={province.id}
+                                >
+                                  {province.value}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          </Form.Group>
+                        )}
+
+                        {addNewEndField && (
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            className="mt-3"
+                            controlId="validationCustom02"
+                          >
+                            <span
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                              onClick={AddNewEnd}
+                            >
+                              Can't find your area?
+                              <a> Add Here</a>
+                            </span>
+                          </Form.Group>
+                        )}
 
                         {addNewEnd && (
-                          <Row className="mb-3 mt-4">
-                            <Form.Group
-                              as={Col}
-                              md="12"
-                              controlId="validationCustom01"
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label className="text-black">
+                              Area
+                            </Form.Label>
+                            <Autocomplete
+                              onLoad={(autocomplete) =>
+                                (autocompleteRef.current = autocomplete)
+                              }
+                              onPlaceChanged={handlePlaceSelectEnd}
+                              restrictions={{ country: "PK" }}
+                              options={{ strictBounds: true }}
                             >
-                              <Autocomplete
-                                onLoad={(autocomplete) =>
-                                  (autocompleteRef.current = autocomplete)
-                                }
-                                onPlaceChanged={handlePlaceSelectEnd}
-                                restrictions={{ country: "PK" }}
-                                options={{ strictBounds: true }}
-                              >
-                                <Form.Control
-                                  required
-                                  type="text"
-                                  value={locationEndStringField}
-                                  onChange={handleLocationEndField}
-                                  className="colorplace"
-                                  placeholder="Enter your area"
-                                  defaultValue=""
-                                />
-                              </Autocomplete>
-                            </Form.Group>
-                          </Row>
+                              <Form.Control
+                                autoComplete="on"
+                                required
+                                type="text"
+                                value={locationEndStringField}
+                                onChange={handleLocationEndField}
+                                className="text-dark mt-1"
+                                placeholder="Enter your area"
+                                autocomplete="on"
+                                defaultValue=""
+                              />
+                            </Autocomplete>
+                          </Form.Group>
                         )}
-                      </Form.Group>
+                      </>
                     )}
                     <Form.Group
                       as={Col}
                       md="12"
                       controlId="validationCustom01"
-                      className="mb-2"
+                      className="mb-2 mt-3"
                     >
                       <Form.Label className="text-black fs-6">
                         Timings (+/- 15 Minutes)
@@ -1318,7 +1247,7 @@ const SchoolRegistration = () => {
                         variant="contained"
                         onClick={handleCloseStartModal}
                       >
-                        Close
+                        Submit
                       </Button>
                     </Modal.Footer>
                   </Modal>
@@ -1332,9 +1261,6 @@ const SchoolRegistration = () => {
                         <Row style={{ height: "100%", width: "100%" }}>
                           <GoogleMap
                             zoom={12}
-                            // center={
-                            //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
-                            // }
                             center={defaultEndCenter}
                             mapContainerStyle={{
                               width: "100%",
@@ -1358,54 +1284,11 @@ const SchoolRegistration = () => {
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="contained" onClick={handleCloseEndModal}>
-                        Close
+                        Submit
                       </Button>
                     </Modal.Footer>
                   </Modal>
                 </LoadScript>
-
-                {/* <Row className="mb-3">
-                  <Form.Group as={Col} md="6" controlId="validationCustom01">
-                    <Form.Label style={{ color: "#000" }}>
-                      Timings (+/- 15 Minutes)
-                    </Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      className="text-secondary" value={selectedHomeTime}
-                      onChange={(e) => setSelectedHomeTime(e.target.value)}
-                      required
-                    >
-                      <option value="" hidden>
-                        Home to Office
-                      </option>
-                      {homeTimeSlots?.map((time) => (
-                        <option key={time.id} value={time.id}>
-                          {time.time_string}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                  <Form.Group as={Col} md="6" controlId="validationCustom02">
-                    <Form.Label style={{ color: "#000" }}>
-                      Drop-off Time
-                    </Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      className="text-secondary" value={selectedOfficeTime}
-                      onChange={(e) => setSelectedOfficeTime(e.target.value)}
-                      required
-                    >
-                      <option value="" disabled hidden>
-                        Office to Home
-                      </option>
-                      {officeTimeSlots?.map((time) => (
-                        <option key={time.id} value={time.id}>
-                          {time.time_string}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                </Row> */}
 
                 <Row className="mb-3" style={{ border: "1px solid #cddbd9" }}>
                   <Form.Group as={Col} md="12" controlId="validationCustom01">

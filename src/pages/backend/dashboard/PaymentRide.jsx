@@ -28,7 +28,6 @@ const backgroundLogo = {
 };
 
 const PaymentRide = () => {
-
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
   const dispatch = useDispatch();
@@ -80,14 +79,27 @@ const PaymentRide = () => {
 
   const getDisplay = (status) => {
     switch (status) {
-      case 1:
-        return "Not Travelled";
       case 0:
+        return "Not Travelled";
+      case 1:
         return "Travelled | Amount Transferred to Wallet";
       case -1:
         return "Driver Didn't Come";
       default:
         return "";
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 0:
+        return "#ccc";
+      case 1:
+        return "#5cb85c";
+      case -1:
+        return "#ff0000";
+      default:
+        return "white";
     }
   };
 
@@ -121,9 +133,12 @@ const PaymentRide = () => {
                       </TableHead>
                       <TableBody>
                         {data.map((item) => (
-                          <TableRow key={item.date}>
-                            <TableCell className="fs-6">{item.date}</TableCell>
-                            <TableCell className="fs-6">
+                          <TableRow
+                            key={item.date}
+                            style={{ backgroundColor: getStatusColor(item.status) }}
+                          >
+                            <TableCell>{item.date}</TableCell>
+                            <TableCell>
                               {`From Home to Office | Office to Home | ${getDisplay(
                                 item.status
                               )}`}

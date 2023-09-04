@@ -100,50 +100,57 @@ const Driver = () => {
 
     const sendRequest = async () => {
         try {
-
-            const body = {
-                days: daysSelected,
-                start_time_id: selectedHomeTime,
-                return_time_id: selectedOfficeTime,
-                prefer_genders: preferredGender,
-                car_cc: selectedCarCC,
-                car_make: selectedModelName,
-                car_reg_year: selectedRegYear
+            if(daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === ""
+              || preferredGender === "" || selectedCarCC === "" || selectedModelName === ""
+              || selectedRegYear === ""  ){
+            Swal.fire({
+                position:'top',
+                icon: "warning",
+                text: `Please fill all fields!`}
+                )
             }
-            console.log("sendRequest Body:", body);
-
-            const response = await fetch(
-                `${API_URL}/api/v1/update-matching-principles`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        'Accept': 'application/json',
-                        Authorization: `Bearer ${userToken}`,
-                    },
-                    body: JSON.stringify(body),
+            else {
+                const body = {
+                    days: daysSelected,
+                    start_time_id: selectedHomeTime,
+                    return_time_id: selectedOfficeTime,
+                    prefer_genders: preferredGender,
+                    car_cc: selectedCarCC,
+                    car_make: selectedModelName,
+                    car_reg_year: selectedRegYear
                 }
-            );
-
-            if (!response.ok) {
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
-
-            const jsonresponse = await response.json();
-            console.log("sendRequest API Response", jsonresponse);
-
-            if (jsonresponse.statusCode === 200) {
-                navigate("/dashboard");
-            } else {
-                // alert("Resend Error: " + jsonresponse.message);
-                Swal.fire({
-                    position:'top',
-                    icon: 'err0r',
-                   text: `${jsonresponse.message}`,
-                   customClass: {
-                    confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-                  },}
-                  )
+                console.log("sendRequest Body:", body);
+    
+                const response = await fetch(
+                    `${API_URL}/api/v1/update-matching-principles`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Accept': 'application/json',
+                            Authorization: `Bearer ${userToken}`,
+                        },
+                        body: JSON.stringify(body),
+                    }
+                );
+    
+                if (!response.ok) {
+                    throw new Error(`Request failed with status: ${response.status}`);
+                }
+    
+                const jsonresponse = await response.json();
+                console.log("sendRequest API Response", jsonresponse);
+    
+                if (jsonresponse.statusCode === 200) {
+                    navigate("/dashboard");
+                } else {
+                    // alert("Resend Error: " + jsonresponse.message);
+                    Swal.fire({
+                        position:'top',
+                        icon: "error",
+                       text: `${jsonresponse.message}`}
+                      )
+                }
             }
         } catch (error) {
             console.error("An error occurred:", error);
@@ -151,12 +158,9 @@ const Driver = () => {
             // alert("An error occurred while sending the request.");
             Swal.fire({
                 position:'top',
-                icon: 'error',
-               text: 'An error occured while sending the request.',
-               customClass: {
-                confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-              },}
-              )
+                icon: "error",
+                text: 'An error occured while sending the request.'
+            })
         }
     };
 

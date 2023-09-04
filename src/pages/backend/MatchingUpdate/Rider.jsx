@@ -64,46 +64,56 @@ const Rider = () => {
   const sendRequest = async () => {
     try {
 
-      const body = {
-        days: daysSelected,
-        start_time_id: selectedHomeTime,
-        return_time_id: selectedOfficeTime,
-        prefer_genders: preferredGender,
-      }
-      console.log("sendRequest Body:", body);
-
-      const response = await fetch(
-        `${API_URL}/api/v1/update-matching-principles`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json',
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-
-      const jsonresponse = await response.json();
-      console.log("sendRequest API Response", jsonresponse);
-
-      if (jsonresponse.statusCode === 200) {
-        navigate("/dashboard");
-      } else {
-        // alert("Resend Error: " + jsonresponse.message);
+      if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === "" || preferredGender === "") {
         Swal.fire({
           position:'top',
-          icon: 'error',
-         text: `${jsonresponse.message}`,
+          icon: 'warning',
+         text: `Please Fill All Fields!`,
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
         },}
         )
+      }
+      else {
+        const body = {
+          days: daysSelected,
+          start_time_id: selectedHomeTime,
+          return_time_id: selectedOfficeTime,
+          prefer_genders: preferredGender,
+        }
+        console.log("sendRequest Body:", body);
+
+        const response = await fetch(
+          `${API_URL}/api/v1/update-matching-principles`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+
+        const jsonresponse = await response.json();
+        console.log("sendRequest API Response", jsonresponse);
+
+        if (jsonresponse.statusCode === 200) {
+          navigate("/dashboard");
+        } else {
+          // alert("Resend Error: " + jsonresponse.message);
+          Swal.fire({
+            position: 'top',
+            icon: "error",
+            text: `${jsonresponse.message}`
+          }
+          )
+        }
       }
     } catch (error) {
       console.error("An error occurred:", error);
