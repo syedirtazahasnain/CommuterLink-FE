@@ -1055,24 +1055,21 @@ const DriverRegistration = () => {
     <>
       {!showDriverForm && (
         <>
-          <div style={{ backgroundColor: "#eee" }}>
+          <div className="main-bg">
             <div className="containter p-5">
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white mt-5 mb-5">
-                  <div className="row shadow
-                " style={{ backgroundColor: '#1F5F5B' }}>   <h1
-                      className="text-center text-white py-4"
-                    // style={{
-                    //   color: "#000",
-                    //   marginBottom: "5vh",
-                    //   marginTop: "5vh",
-                    // }}
-                    >
+                  <div className="row shadow form-header" 
+                  // style={{ backgroundColor: '#1F5F5B' }}
+                  >   
+                  <h1 className="text-center text-white py-4">
                       Registration Form
                     </h1></div>
                   <Form className="p-3" noValidate validated={validated} onSubmit={handleSubmit}>
                     <div className="row mb-3 shadow shadow-sm">
-                      <div className="col-md-12 px-2 py-3" style={{ backgroundColor: "#cddbd9" }}>
+                      <div className="col-md-12 px-2 py-3 form-body" 
+                      // style={{ backgroundColor: "#cddbd9" }}
+                      >
                         <h2 className="text-success mb-3 text-center">STARTING POINT</h2>
                         <Form.Group as={Col} md={cityStartId ? '12' : '12'} controlId="validationCustom01" className="mb-2">
                           <Form.Label className="text-black fs-6">
@@ -1201,7 +1198,7 @@ const DriverRegistration = () => {
                     </div>
 
                     <div className="row mb-3 shadow shadow-sm">
-                      <div className="col-md-12 px-2 py-3" style={{ backgroundColor: "#cddbd9" }}>
+                      <div className="col-md-12 px-2 py-3 form-body" >
                         <h2 className="text-success mb-3 text-center">DROP-OFF POINT</h2>
                         <Form.Group as={Col} md={cityEndId ? '12' : '12'} controlId="validationCustom01" className="mb-2">
                           <Form.Label
@@ -1665,7 +1662,7 @@ const DriverRegistration = () => {
 
                     <Row className="my-3" style={{ border: '1px solid #cddbd9' }}>
                       <Form.Group as={Col} md="12" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
+                        <Form.Label  className="pt-3 px-3 text-black">
                           I Commute (Select Days)
                         </Form.Label>
                       </Form.Group>
@@ -1852,7 +1849,7 @@ const DriverRegistration = () => {
 
                     {/* {daysSelected} */}
 
-                    <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
+                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
                       <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                         <Form.Label className="fs-6 text-black">Gender</Form.Label>
                         <Form.Select
@@ -1886,7 +1883,7 @@ const DriverRegistration = () => {
                       </Form.Group>
                     </Row>
 
-                    <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
+                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
                       <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Year of Birth
@@ -1983,7 +1980,7 @@ const DriverRegistration = () => {
                     {/* 
                     <Row className="mb-3">
                     </Row> */}
-                    <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
+                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
 
                       <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                         <Form.Label className="fs-6 text-black">CNIC</Form.Label>
@@ -2069,7 +2066,7 @@ const DriverRegistration = () => {
 
       {showDriverForm && (
         <>
-          <div style={{ backgroundColor: "#eee" }}>
+          <div className="main-bg">
             <div className="containter p-5">
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
@@ -2088,8 +2085,7 @@ const DriverRegistration = () => {
                   >
                   <div className="row mb-3 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                       Car Details
@@ -2196,8 +2192,7 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                       Car Registration
@@ -2258,8 +2253,7 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                      Available Seats
@@ -2303,8 +2297,7 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                      Route Partner
@@ -2347,8 +2340,7 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                     Bank/Payment Details
@@ -2800,8 +2792,7 @@ const DriverRegistration = () => {
                       <>
                       <div className="row mb-3 mt-2 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                      Driving License Details
@@ -2978,8 +2969,7 @@ const DriverRegistration = () => {
 
 <div className="row mb-3 mt-2 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                      Driver's Details
@@ -3049,8 +3039,7 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 mt-2 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                      License Details
@@ -3270,8 +3259,7 @@ const DriverRegistration = () => {
 
                       <div className="row mb-3 mt-2 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                      Driver's Details
@@ -3403,8 +3391,7 @@ const DriverRegistration = () => {
 
 <div className="row mb-3 mt-2 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-body"
                   >
                     <h2 className="text-success mb-3 text-center">
                      Driver's License Details

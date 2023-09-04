@@ -353,12 +353,10 @@ const BackendLayout = ({ children }) => {
                     data-kt-drawer-width="225px"
                     data-kt-drawer-direction="start"
                     data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle"
-                    style={{ backgroundColor: "#198754" }}
                   >
                     <div
-                      className="app-sidebar-logo  border-1" style={{background: "#06373A"}}
+                      className="app-sidebar-logo sidebar-bg border-1"
                       id="kt_app_sidebar_logo"
-                      // style={backgroundLogo}
                     >
                       <div className="container text-center" id="kt_app_sidebar_logo">
                         <img
@@ -371,7 +369,6 @@ const BackendLayout = ({ children }) => {
                           src={`${BASE_URL}/assets/images/CL-logo-small.png`}
                           className="h-40px app-sidebar-logo-minimize img-fluid w-auto"
                           style={{ height: "50px", width: "auto" }}
-                          // style={{ height: "50px", width: "auto" }}
                           alt=""
                         />
                       </div>
@@ -404,7 +401,7 @@ const BackendLayout = ({ children }) => {
                         </span>
                       </button>
                     </div>
-                    <div className="app-sidebar-menu overflow-hidden fw-normal flex-column-fluid bg-dark-green" style={{background: "#06373A"}}>
+                    <div className="app-sidebar-menu overflow-hidden fw-normal flex-column-fluid sidebar-bg">
                       <div
                         id="kt_app_sidebar_menu_wrapper"
                         className="app-sidebar-wrapper fw-normal hover-scroll-overlay-y d-flex flex-column"

@@ -24,8 +24,7 @@ const ShareRide = () => {
         <div>
         <section
           id="sign-up"
-          // className="mt-5"
-          style={{ backgroundColor: "#eee" }}
+          className="mt-5 main-bg"
         >
         <div className="container">
             {" "}
@@ -38,10 +37,7 @@ const ShareRide = () => {
               >
                 
                   <Carousel
-                    style={{
-                      backgroundColor: "#eee",
-                    }}
-                    className="carousel-container"
+                    className="carousel-container main-bg"
                     prevIcon={null}
                     nextIcon={null}
                     indicators={null}

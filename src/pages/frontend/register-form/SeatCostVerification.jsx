@@ -96,7 +96,7 @@ const SeatCostVerification = () => {
   return (
 
     <div>
-      <section id="sign-up" class="mt-5" style={{ backgroundColor: "#eee" }}>
+      <section id="sign-up" class="mt-5 main-bg">
         <div className="container">
           {" "}
           <div className="row">
@@ -108,10 +108,7 @@ const SeatCostVerification = () => {
             >
 
               <Carousel
-                style={{
-                  backgroundColor: "#eee",
-                }}
-                className="carousel-container"
+                className="carousel-container main-bg"
                 prevIcon={null}
                 nextIcon={null}
                 indicators={null}

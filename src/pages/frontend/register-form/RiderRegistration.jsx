@@ -774,7 +774,7 @@ const RiderRegistration = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: "#eee" }}>
+      <div className="main-bg">
         <div className="containter p-5">
           <div className="row justify-content-center ">
             <div className="col-md-6 shadow bg-white  mt-5 mb-5">

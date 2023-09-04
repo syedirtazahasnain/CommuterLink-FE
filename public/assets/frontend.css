@@ -7,6 +7,15 @@
    color: var(--bs-primary);
  }
 
+ .form-header{
+  background-color: #1f5f5b;
+ }
+ .form-body{
+  background-color: #cddbd9;
+ }
+ .main-bg{
+  background-color: #eee;
+ }
  .btn-custom{
    border: 1px solid #198754;
    background: none;
