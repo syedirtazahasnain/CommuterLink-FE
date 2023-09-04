@@ -50,6 +50,7 @@ import TravelBuddyProfile from "./pages/backend/dashboard/TravelBuddyProfile";
 import TermsCondition from "./pages/backend/dashboard/TermsCondition";
 import Rider from "./pages/backend/MatchingUpdate/Rider";
 import Driver from "./pages/backend/MatchingUpdate/Driver";
+import PartnerCancellation from "./pages/backend/dashboard/PartnerCancellation";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -107,6 +108,8 @@ const Router = () => {
         <Route path="/driverwhyprocesspayment" element={<BackendLayout children={<DriverWhyProcess />} />}></Route>
         <Route path="/driverfinalstep" element={<BackendLayout children={<DriverFinalStep />} />}></Route>
         <Route path="/school-driver-form" element={<FrontendLayout children={<SchoolDriverRegistration />} />}></Route>
+        <Route path="/verification" element={<FrontendLayout children={<Verification />} />}></Route>
+        <Route path="/partner-cancellation" element={<BackendLayout children={<PartnerCancellation />} />}></Route>
 
         {userSignup && (
           <>

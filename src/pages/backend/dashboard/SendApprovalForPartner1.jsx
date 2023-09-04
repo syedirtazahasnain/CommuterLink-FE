@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
 
 const customTheme = createTheme({
   palette: {
@@ -93,7 +94,12 @@ const SendApprovalForPartner1 = () => {
     if (jsonresponse.statusCode == 200) {
       navigate("/dashboard");
     } else {
-      alert("Resend Error: " + jsonresponse.message);
+      // alert("Resend Error: " + jsonresponse.message);
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: `${jsonresponse.message}`}
+      )
     }
   };
 

@@ -8,6 +8,7 @@ import { API_URL, BASE_URL, IMAGE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../redux/signupSlice";
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
 
 const customTheme = createTheme({
   palette: {
@@ -55,9 +56,33 @@ const BackendLayout = ({ children }) => {
   }
 
   const logout = () => {
-    dispatch(setloginState(""));
-    dispatch(setsignupState(""));
-    navigate("/login");
+    if (
+      Swal.fire({
+        position:'top',
+        title: 'Are you sure?',
+        text: "You are about to logout from commuterLink",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Logout!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            position:'top',
+            title: 'Logout!',
+            text:'Successful'
+          }
+        
+          )
+        }
+      })
+  
+    ) {
+      dispatch(setloginState(""));
+      dispatch(setsignupState(""));
+      navigate("/login");
+    }
   }
   
   useEffect(() => {
@@ -229,8 +254,9 @@ const BackendLayout = ({ children }) => {
 
                           <Tooltip title="Notifications">
                             <Link
-                              to='/portal/profile'
+                              to='/notification'
                               className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
                             >
                               <i className="fa-regular fs-5 fa-bell icon-green mt-2"></i>
                             </Link>
@@ -239,6 +265,7 @@ const BackendLayout = ({ children }) => {
                             <Link
                               to='/portal/profile'
                               className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
                             >
                               <img className=" mb-2"
                             src={`${BASE_URL}/assets/images/settings.png`}
@@ -249,8 +276,9 @@ const BackendLayout = ({ children }) => {
 
                           <Tooltip title="Logout">
                             <a
-                              href="#" onClick={logout}
+                              onClick={logout}
                               className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
                             >
                               <i className="fa-solid fa-power-off fs-5 icon-green mt-2"></i>
                             </a>
@@ -512,7 +540,7 @@ const BackendLayout = ({ children }) => {
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${
-                                currentPage == "driver" ? "active" : ""
+                                currentPage == "matchingupdate" ? "active" : ""
                               }`}
                               to={"/driver"}
                               style={{
@@ -522,7 +550,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon">
-                              <i className="fa-solid fa-rotate-right"></i>
+                                <i className="fas fa-solid fa-user fa-2x"></i>
                               </span>
                               <span className="menu-title text-white">
                                 Update Matching Criteria

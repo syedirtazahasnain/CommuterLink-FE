@@ -15,6 +15,7 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const EditProfile = () => {
   const { id } = useParams();
@@ -102,10 +103,20 @@ const EditProfile = () => {
   const ResetPassword = async () => {
     try {
       if (currentPassword === "" || newPassword === "" || confirmPassword === "") {
-        alert("Please Fill All Fields!");
+        // alert("Please Fill All Fields!");
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: 'Please Fill All Fields!'}
+        )
       }
       else if (newPassword !== confirmPassword) {
-        alert("Confirm password is not matched with new password!")
+        // alert("Confirm password is not matched with new password!")
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: 'Confirm password is not matched with new password!'}
+        )
       }
       else {
         const body = {
@@ -131,12 +142,22 @@ const EditProfile = () => {
         const jsonresponse = await response.json();
 
         if (jsonresponse.message === "Password updated successfully") {
-          alert(jsonresponse.message);
+          // alert(jsonresponse.message);
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: `${jsonresponse.message}`}
+          )
           setCurrentPassword("");
           setNewPassword("");
           setConfirmPassword("");
         } else {
-          alert("Error: " + jsonresponse.message);
+          // alert("Error: " + jsonresponse.message);
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: `${jsonresponse.message}`}
+          )
         }
       }
     } catch (error) {

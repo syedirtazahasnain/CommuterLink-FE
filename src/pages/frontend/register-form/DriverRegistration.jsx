@@ -15,6 +15,7 @@ import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-map
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import Swal from "sweetalert2";
 
 const DriverRegistration = () => {
 
@@ -639,7 +640,12 @@ const DriverRegistration = () => {
 
   const handleLogin = async () => {
     if (requiredFieldsLogin.some(field => field === "" || field === null || field === undefined)) {
-      alert("Please Fill All Fields!");
+      // alert("Please Fill All Fields!");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'Please Fill All Fields!'}
+      )
     } else {
       await LocationForm();
       await PersonalForm();
@@ -652,7 +658,12 @@ const DriverRegistration = () => {
 
   const handleDriver = async () => {
     if (requiredFieldsDriver.some(field => field === "" || field === null || field === undefined)) {
-      alert("Please Fill All Driver Form Fields!");
+      // alert("Please Fill All Driver Form Fields!");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'Please Fill All Driver Form Fields!'}
+      )
     } else {
       await DriverForm();
       await PaymentForm();
@@ -720,7 +731,12 @@ const DriverRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Location Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -762,7 +778,12 @@ const DriverRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Personal Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -795,7 +816,12 @@ const DriverRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Cnic Front:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -828,7 +854,12 @@ const DriverRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Cnic Back:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -855,14 +886,32 @@ const DriverRegistration = () => {
       );
 
       console.log("Images Form Picture Body:", body);
-
+      const registrationSuccessful = () => {
+        Swal.fire({
+          position: 'top',
+          title: 'Congratulations!',
+          text: 'Registration Form Submited Successfully',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      };
+     
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Picture:", jsonresponse);
-        alert("Registration Form Submitted Successfully");
+        registrationSuccessful();
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -924,7 +973,12 @@ const DriverRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Driver Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -961,14 +1015,34 @@ const DriverRegistration = () => {
 
         if (jsonresponse.statusCode == 200) {
           console.log("Payment Form Response:", jsonresponse);
-          alert("Driver Form Submitted Successfully");
+          Swal.fire({
+            position: 'top',
+            title: 'Congratulations!',
+            text: 'Driver Form Submited Successfully',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            },
+          });
           route();
         } else {
-          alert("Error: " + jsonresponse.message);
+          // alert("Error: " + jsonresponse.message);
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: `${jsonresponse.message}`}
+          )
         }
       }
       else {
-        alert("Please Enter Payment Details!");
+        // alert("Please Enter Payment Details!");
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: 'Please Enter Payment Details!'}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -979,7 +1053,7 @@ const DriverRegistration = () => {
 
   return (
     <>
-      {showDriverForm && (
+      {!showDriverForm && (
         <>
           <div style={{ backgroundColor: "#eee" }}>
             <div className="containter p-5">
@@ -1993,7 +2067,7 @@ const DriverRegistration = () => {
         </>
       )}
 
-      {!showDriverForm && (
+      {showDriverForm && (
         <>
           <div style={{ backgroundColor: "#eee" }}>
             <div className="containter p-5">

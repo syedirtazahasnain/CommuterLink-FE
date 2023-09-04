@@ -21,8 +21,10 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import Swal from "sweetalert2";
 
 const RiderRegistration = () => {
+  
   // const option0 = useSelector((s) => s.general.data.option0);
   // console.log(option0);
   const backgroundStyle = {
@@ -34,6 +36,7 @@ const RiderRegistration = () => {
     height: "20vh",
     // Set the desired height of the background area
   };
+  
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
   const userToken = useSelector((s) => s.login.data.token);
@@ -509,7 +512,12 @@ const RiderRegistration = () => {
       await ImagesFormCnicBack();
       await ImagesFormPicture();
     } else {
-      alert("Please Fill All Fields!");
+      // alert("Please Fill All Fields!");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'Please Fill All Fields!'}
+      )
     }
   };
 
@@ -574,7 +582,12 @@ const RiderRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Location Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -616,7 +629,12 @@ const RiderRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Personal Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -649,7 +667,12 @@ const RiderRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Cnic Front:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -682,7 +705,12 @@ const RiderRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Cnic Back:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -709,15 +737,35 @@ const RiderRegistration = () => {
       );
 
       console.log("Images Form Picture Body:", body);
+     
 
+      const registrationSuccessful = () => {
+        Swal.fire({
+          position: 'top',
+          title: 'Congratulations!',
+          text: 'Registration Form Submited Successfully',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      };
+     
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode === 200) {
         console.log("Images Form Response Picture:", jsonresponse);
-        alert("Registration Form Submitted Successfully");
+        registrationSuccessful();
         route();
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);

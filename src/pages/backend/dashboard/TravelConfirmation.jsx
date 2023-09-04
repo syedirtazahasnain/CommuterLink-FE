@@ -8,7 +8,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import dayjs from "dayjs";
 import Badge from "@mui/material/Badge";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -21,21 +20,62 @@ import { width } from "@mui/system";
 import { API_URL } from "../../../constants";
 
 const TravelConfirmation = () => {
+  const initialValue = dayjs();
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn, setSubmit] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(initialValue);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState(0); 
+  const [dateChanged, setDateChanged] = useState(false);
+  const [statusData, setStatusData] = useState([]);
 
   const handleDateChange = (date) => {
-    if (!dialogOpen) {
-      setDialogOpen(true);
-      setSelectedDate(date);
-    }
+    console.log("Selected Date in handleDateChange:", date);
+    setSelectedDate(dayjs(date));
+    setDateChanged(true);
+    setDialogOpen(true);
   };
+  
   const handleCloseDialog = () => {
     setDialogOpen(false);
   };
+
+  const handleStatusSelect = (status) => {
+    setSelectedStatus(status);
+    handleConfirmStatus();
+  };
+
+  const handleConfirmStatus = async () => {    
+    // Create the data object for the POST request
+    const body = {
+      date: selectedDate.format('DD-MM-YYYY'),
+      day: selectedDate.format('dddd'),
+      status: selectedStatus,
+    };
+    
+    console.log("Handle Confirm Status Body:", body);
+
+    const response = await fetch(
+      `${API_URL}/api/v1/travelhistory`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    const jsonresponse = await response.json();
+    console.log("Handle Confirm Status Response:", jsonresponse);
+    // if (jsonresponse.statusCode == 200) {
+    // }
+    setDialogOpen(false);
+  };
+
   // For Dashboard Data
   const [contactId, setContactId] = useState("");
 
@@ -43,11 +83,40 @@ const TravelConfirmation = () => {
     getDashboardData();
   }, []);
 
+  useEffect(() => {
+    // Fetch status data from the API
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/v1/mytravelhistory`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
+  
+        const jsonresponse = await response.json();
+        console.log("Date History:", jsonresponse);
+        if (jsonresponse.success === true) {
+          setStatusData(jsonresponse.data);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    };
+  
+    fetchData();
+  }, [userToken]);
+
   const route = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/commuter-profile");
+      navigate("/paymentride");
     }
   };
 
@@ -79,37 +148,11 @@ const TravelConfirmation = () => {
     }
   };
 
-  const TravelConfirmation = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/profile`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      console.log(jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-  {
-    /* Second Calendar */
-  }
   function getRandomNumber(min, max) {
     return Math.round(Math.random() * (max - min) + min);
   }
 
-  /**
-   * Mimic fetch with abort controller https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort
-   * ⚠️ No IE11 support
-   */
+
   function fakeFetch(date, { signal }) {
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
@@ -128,20 +171,37 @@ const TravelConfirmation = () => {
     });
   }
 
-  const initialValue = dayjs("2022-04-17");
+  const isWeekend = (date) => {
+    const day = date.day();
+    return day === 0 || day === 6;
+  };
 
   function ServerDay(props) {
     const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
-
+  
     const isSelected =
       !props.outsideCurrentMonth &&
       highlightedDays.indexOf(props.day.date()) >= 0;
-
+  
+    // Find the status for the current day in statusData
+    const statusForDay = statusData.find((item) =>
+      day.isSame(dayjs(item.date), "day")
+    );
+  
+    const marker =
+      statusForDay && statusForDay.status === 0 ? (
+        <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
+      ) : statusForDay && statusForDay.status === 1 ? (
+        <i className="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
+      ) : statusForDay && statusForDay.status === -1 ? (
+        <i className="fa-solid fa-car text-danger mx-1 fs-2"></i>
+      ) : null;
+  
     return (
       <Badge
         key={props.day.toString()}
         overlap="circular"
-        badgeContent={isSelected ? "🌚" : undefined}
+        badgeContent={isSelected ? marker : undefined}
       >
         <PickersDay
           {...other}
@@ -151,6 +211,7 @@ const TravelConfirmation = () => {
       </Badge>
     );
   }
+
   const requestAbortController = React.useRef(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 15]);
@@ -174,117 +235,16 @@ const TravelConfirmation = () => {
     requestAbortController.current = controller;
   };
 
-  React.useEffect(() => {
-    fetchHighlightedDays(initialValue);
-    // abort request on unmount
-    return () => requestAbortController.current?.abort();
-  }, []);
-
   const handleMonthChange = (date) => {
-    if (requestAbortController.current) {
-      // make sure that you are aborting useless requests
-      // because it is possible to switch between months pretty quickly
-      requestAbortController.current.abort();
+    if (dateChanged) {
+      setIsLoading(true);
+      setHighlightedDays([]);
+      fetchHighlightedDays(date);
     }
-
-    setIsLoading(true);
-    setHighlightedDays([]);
-    fetchHighlightedDays(date);
   };
 
   return (
     <div>
-      {/* <div className="card bg-light-green mt-3 mb-5">
-        <div className="card-header " style={{ backgroundColor: "#2a402a" }}>
-          <h3 className="text-center text-warning m-auto">
-            {" "}
-            TRAVEL CONFIRMATION{" "}
-          </h3>{" "}
-        </div>
-        <div
-          className="card-body"
-          style={{
-            borderWidth: "0 2px 2px 2px",
-            borderStyle: "solid",
-            borderColor: "#066539",
-          }}
-        >
-          <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
-            <div className="card-body">
-              <div
-                className="card p-4 border-0  p-2"
-                style={{ backgroundColor: "#D9D9D9" }}
-              >
-                <div className="card ">
-                 
-                  <div className="container">
-                    <Datepicker
-                      calendarType="week"
-                      calendarSize={1}
-                      select="date"
-                      display="inline"
-                      onCellClick={handleDateChange}
-                     
-                    />
-                    <div className="row py-2">
-                      <p className="text-success fs-5 cursor-pointer text-right">
-                        No of Days Travelled 0
-                      </p>
-                      <p className="btn fs-5 text-success text-right">
-                        {" "}
-                        View Full History
-                      </p>
-                    </div>
-                  </div>
-
-                 
-                </div>
-              </div>
-              <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-                <DialogTitle>Select Any Options</DialogTitle>
-                <DialogContent></DialogContent>
-
-                <div className="container text-center px-2">
-                  <div className="row px-2">
-                    <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
-                      <div>
-                        <button className="btn  text-success fw-bold fs-5 lh-1">
-                          <span>
-                            <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
-                          </span>
-                          Travelled
-                        </button>
-                      </div>
-                      <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
-                          <span>
-                            <i class="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
-                          </span>
-                          Not Travelled
-                        </button>
-                      </div>
-                      <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
-                          <span>
-                            <i class="fa-solid fa-car text-danger mx-1 fs-2"></i>
-                          </span>
-                          Driver Didn't Come
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <DialogActions>
-                  <Button className="text-dark" onClick={handleCloseDialog}>
-                    Cancel
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* Second Calendar */}
       <div className="card bg-light-green mt-3 mb-5">
         <div className="card-header " style={{ backgroundColor: "#1F5F5B" }}>
           <h3 className="text-center text-warning m-auto">
@@ -311,19 +271,19 @@ const TravelConfirmation = () => {
                     <Box className="card  w-100">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateCalendar
-                          defaultValue={initialValue}
+                          value={selectedDate}
+                          onChange={handleDateChange}
                           loading={isLoading}
                           className="w-100"
                           onMonthChange={handleMonthChange}
-                          // onChange={handleDateChange}
                           renderLoading={() => <DayCalendarSkeleton />}
+                          shouldDisableDate={isWeekend}
                           slots={{
                             day: ServerDay,
                           }}
                           slotProps={{
                             day: {
                               highlightedDays,
-                              onClick: handleDateChange,
                             },
                           }}
                           sx={{
@@ -359,6 +319,9 @@ const TravelConfirmation = () => {
                             "& .MuiPickersCalendarHeader-labelContainer": {
                               fontSize: "16px"
                             },
+                            "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
+                              border: "0px solid rgba(0, 0, 0, 0.6)",
+                            },
 
                           }}
                         />
@@ -368,8 +331,7 @@ const TravelConfirmation = () => {
                       <p className="text-success fs-5 px-4 cursor-pointer text-right">
                         No of Days Travelled 0
                       </p>
-                      <p className="btn fs-5 px-4 text-success text-right fw-bold">
-                        {" "}
+                      <p className="btn fs-5 px-4 text-success text-right fw-bold" onClick={route}>
                         View Full History
                       </p>
                     </div>
@@ -385,7 +347,7 @@ const TravelConfirmation = () => {
                   <div className="row px-2">
                     <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
                       <div>
-                        <button className="btn  text-success fw-bold fs-5 lh-1">
+                        <button className="btn  text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(0)}>
                           <span>
                             <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
                           </span>
@@ -393,7 +355,7 @@ const TravelConfirmation = () => {
                         </button>
                       </div>
                       <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
+                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(1)}>
                           <span>
                             <i class="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
                           </span>
@@ -401,7 +363,7 @@ const TravelConfirmation = () => {
                         </button>
                       </div>
                       <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
+                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(-1)}>
                           <span>
                             <i class="fa-solid fa-car text-danger mx-1 fs-2"></i>
                           </span>
@@ -421,52 +383,6 @@ const TravelConfirmation = () => {
           </div>
         </div>
       </div>
-      {/* <Box className="card bg-light w-100">
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar
-            defaultValue={initialValue}
-            loading={isLoading}
-            className="w-50"
-            onMonthChange={handleMonthChange}
-            renderLoading={() => <DayCalendarSkeleton />}
-            slots={{
-              day: ServerDay,
-            }}
-            slotProps={{
-              day: {
-                highlightedDays,
-              },
-            }}
-            sx={{
-              "& .MuiDayCalendar-weekDayLabel": {
-                fontSize: "1.5rem",
-                paddingTop: "2rem",
-                paddingBottom:"1rem",
-                paddingLeft:"4rem",
-                paddingRight:"4rem",
-                margin: 0,
-              },
-              "& .MuiPickersDay-dayWithMargin": {
-                fontSize: "1.5rem",
-                padding:"4rem",
-                margin: 0,
-                
-              },
-              "& .MuiPickersDay-root.Mui-selected:hover":{
-                backgroundColor:"green",
-                paddding:"5rem"
-               
-                
-              },
-              "& .MuiPickersDay-root.Mui-selected":{
-                backgroundColor:"green"
-                
-              },
-              
-            }}
-          />
-        </LocalizationProvider>
-      </Box> */}
     </div>
   );
 };

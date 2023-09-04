@@ -104,6 +104,13 @@ section {
   height: 150px;
 }
 
+/* Add this CSS to change the color of the OK button */
+/* .custom-ok-button {
+  background-color: #0f6c40 !important; 
+  color: #fff; 
+} */
+
+
 img.crousel {
   width: 100%;
 }

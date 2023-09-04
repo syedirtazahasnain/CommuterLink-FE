@@ -21,6 +21,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import Swal from "sweetalert2";
 
 const SchoolRegistration = () => {
   const backgroundStyle = {
@@ -526,6 +527,8 @@ const SchoolRegistration = () => {
     universityAddress,
   ];
 
+  console.log("Required Fields", requiredFields);
+
   const handleLogin = async () => {
     if (
       requiredFields.every(
@@ -538,7 +541,12 @@ const SchoolRegistration = () => {
       await ImagesFormCnicBack();
       await ImagesFormPicture();
     } else {
-      alert("Please Fill All Fields!");
+      // alert("Please Fill All Fields!");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'Please Fill All Fields!'}
+      )
     }
   };
 
@@ -603,7 +611,12 @@ const SchoolRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Location Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -645,7 +658,12 @@ const SchoolRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Personal Form Response:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -678,7 +696,12 @@ const SchoolRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Cnic Front:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -711,7 +734,12 @@ const SchoolRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Cnic Back:", jsonresponse);
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -736,17 +764,45 @@ const SchoolRegistration = () => {
           body: JSON.stringify(body),
         }
       );
-
+      const registrationSuccessful = () => {
+        Swal.fire({
+          position: 'top',
+          title: 'Congratulations!',
+          text: 'Registration Form Submited Successfully',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      };
       console.log("Images Form Picture Body:", body);
 
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Picture:", jsonresponse);
-        alert("Registration Form Submitted Successfully");
+        // alert("Registration Form Submitted Successfully");
+        Swal.fire({
+          position: 'top',
+          title: 'Congratulations!',
+          text: 'Registration Form Submitted Successfully',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
         route();
       } else {
-        alert("Error: " + jsonresponse.message);
+        // alert("Error: " + jsonresponse.message);
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: `${jsonresponse.message}`}
+        )
       }
     } catch (error) {
       console.log(error.message);
@@ -838,10 +894,10 @@ const SchoolRegistration = () => {
                     {cityStartId && (
                       <Form.Group
                         as={Col}
-                        md="4"
-                        controlId="validationCustom02"
+                        md="12"
+                        controlId="validationCustom02" className="mb-2"
                       >
-                        <Form.Label style={{ color: "#000" }}>
+                        <Form.Label className="text-dark fs-6">
                           Select Area from Dropdown
                         </Form.Label>
                         <Form.Select
@@ -1104,10 +1160,10 @@ const SchoolRegistration = () => {
                     {cityEndId && (
                       <Form.Group
                         as={Col}
-                        md="4"
-                        controlId="validationCustom02"
+                        md="12"
+                        controlId="validationCustom02" className="mb-2"
                       >
-                        <Form.Label style={{ color: "#000" }}>
+                        <Form.Label className="text-dark fs-6">
                           Select Area from Dropdown
                         </Form.Label>
                         <Form.Select
@@ -1187,14 +1243,14 @@ const SchoolRegistration = () => {
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
-                        value={selectedHomeTime}
-                        onChange={(e) => setSelectedHomeTime(e.target.value)}
+                        value={selectedOfficeTime}
+                        onChange={(e) => setSelectedOfficeTime(e.target.value)}
                         required
                       >
                         <option value="" hidden>
                           Drop-off Timings
                         </option>
-                        {homeTimeSlots?.map((time) => (
+                        {officeTimeSlots?.map((time) => (
                           <option key={time.id} value={time.id}>
                             {time.time_string}
                           </option>

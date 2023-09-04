@@ -11,6 +11,7 @@ import { Checkbox, FormControlLabel, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -74,10 +75,15 @@ const Login = () => {
   const handleFailure = (response) => {
     console.log("handleFailure", response);
   };
-
+  
   const handleLogin = async () => {
     if(email === "" || password === ""){
-      alert("Please Fill All Fields!");
+      // alert("Please Fill All Fields!");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'Please Fill All Fields'}
+      )
     }
     else {
       await postData();
@@ -109,12 +115,24 @@ const Login = () => {
           dispatch(setloginState(jsonresponse.access_token));
         } else {
           console.log(jsonresponse);
-          alert("Error: " + jsonresponse.message);
+          // alert("Error: " + jsonresponse.message);
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: `${jsonresponse.message}`}
+          )
         }
-      }
+        }
+      
       else {
-        alert("please check Terms of Service");
+        // alert("please check Terms of Service");
+        Swal.fire({
+          position:'top',
+          icon: 'warning',
+         text: 'Please Fill All Fields'}
+        )
       }
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -166,7 +184,13 @@ const Login = () => {
           if (jsonresponse.statusCode === 200) {
             dispatch(setloginState(jsonresponse.access_token));
           } else {
-            alert("Error: " + jsonresponse.message);
+            // alert("Error: " + jsonresponse.message);
+            Swal.fire({
+              position:'top',
+              icon: 'warning',
+             text: `${jsonresponse.message}`}
+            )
+          
           }
         } else {
           console.error("Profile request failed with status:", profile.status);

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { createTheme } from "@mui/material";
+import { TextField, createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
+import DatePicker from '@mui/lab/DatePicker';
+import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 const customTheme = createTheme({
   palette: {
@@ -25,6 +30,7 @@ const TravelBuddyProfile = () => {
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
   const [requestStage, setRequestStage] = useState("");
+
 
   const route = async () => {
     if (requestedAs === "rider") {
@@ -280,6 +286,31 @@ const TravelBuddyProfile = () => {
     navigate(-1);
   };
 
+
+  const calendarPicker = ()=>{
+    navigate("/partner-cancellation");
+
+  };
+ const youSure=()=>{
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You want to cancel",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Swal.fire(
+      //   'Deleted!',
+      //   'Your file has been deleted.',
+      //   'success'
+      // )
+      calendarPicker();
+    }
+  })
+ }
   const sendRequest = () => {
     setSubmit(true);
 
@@ -506,10 +537,14 @@ const TravelBuddyProfile = () => {
               </p>
             </div>
           </div>
-          <div className="text-center">
+          <div className="text-center d-flex m-auto justify-content-between">
+          <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4" onClick={youSure}>
+              Cancel
+            </Button>
             <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
               Back
             </Button>
+         
           </div>
         </div>
         <div>

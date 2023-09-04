@@ -11,6 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import { Button } from "@mui/base";
+import Swal from "sweetalert2";
 
 const theme = createTheme({
   palette: {
@@ -163,7 +164,12 @@ const FinalStep = () => {
         if (jsonresponse.statusCode === 200) {
           navigate("/dashboard");
         } else {
-          alert("Resend Error: " + jsonresponse.message);
+          // alert("Resend Error: " + jsonresponse.message);
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: `${jsonresponse.message}`}
+          )
         }
       }
       else{
@@ -198,13 +204,23 @@ const FinalStep = () => {
         if (jsonresponse.statusCode === 200) {
           navigate("/dashboard");
         } else {
-          alert("Resend Error: " + jsonresponse.message);
+          // alert("Resend Error: " + jsonresponse.message);
+          Swal.fire({
+            position:'top',
+            icon: 'warning',
+           text: `${jsonresponse.message}`}
+          )
         }
       }
     } catch (error) {
       console.error("An error occurred:", error);
       // Handle error appropriately, e.g., display an error message to the user
-      alert("An error occurred while sending the request.");
+      // alert("An error occurred while sending the request.");
+      Swal.fire({
+        position:'top',
+        icon: 'warning',
+       text: 'An error occured while sending the request.'}
+      )
     }
   };
 
