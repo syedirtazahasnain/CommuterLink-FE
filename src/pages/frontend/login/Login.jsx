@@ -118,7 +118,7 @@ const Login = () => {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
-            icon: 'warning',
+            icon: 'error',
            text: `${jsonresponse.message}`}
           )
         }
@@ -187,7 +187,7 @@ const Login = () => {
             // alert("Error: " + jsonresponse.message);
             Swal.fire({
               position:'top',
-              icon: 'warning',
+              icon: 'error',
              text: `${jsonresponse.message}`}
             )
           
@@ -364,7 +364,7 @@ const Login = () => {
                             </a>
                                 </Tooltip>
                           </li>
-                          <li className="mr-3">
+                          {/* <li className="mr-3">
                           <Tooltip title="Login With Facebook">
                             <a href="https://www.facebook.com/Sysreforms">
                               <img
@@ -374,8 +374,8 @@ const Login = () => {
                               />
                             </a>
                                 </Tooltip>
-                          </li>
-                          <li>
+                          </li> */}
+                          {/* <li>
                           <Tooltip title="Login With Twitter">
                             <a href="https://instagram.com/sysreforms_international?igshid=YmMyMTA2M2Y= ">
                               <img
@@ -385,7 +385,7 @@ const Login = () => {
                               />
                             </a>
                             </Tooltip>
-                          </li>
+                          </li> */}
                         </ul>
                       </div>
                     </div>
