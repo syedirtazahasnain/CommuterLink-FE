@@ -17,18 +17,18 @@ const Rejection = () => {
 
   return (
     <>
-      <div>
-        <div className="container pt-5">
+      <div style={{ backgroundColor: "#eee" }}>
+        <div className="container pt-5" >
           <div className="row justify-content-center">
-            <div className="col-md-7 bg-light mt-5 mb-5">
+            <div className="col-md-7 bg-light mt-5 mb-5"  >
               <div className="row shadow 
-                " style={{ backgroundColor: 'rgb(42, 64, 42' }}>
+                " style={{ backgroundColor: '#1F5F5B' }}>
                 <h1 className="text-center text-white py-4">
                   Why Request has not been Approved
                 </h1>
               </div>
               <div className="container py-3">
-                <div className="card p-3" style={{ backgroundColor: "#cddbd9" }}>
+                <div className="card p-3" style={{ backgroundColor: " rgb(191, 216, 210)" }}>
                   <p>
                     Your Request has not been approved due to the following
                     reasons

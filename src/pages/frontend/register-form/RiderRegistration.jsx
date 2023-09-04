@@ -780,7 +780,7 @@ const RiderRegistration = () => {
             <div className="col-md-6 shadow bg-white  mt-5 mb-5">
               <div
                 className="row shadow"
-                style={{ backgroundColor: "rgb(42, 64, 42" }}
+                style={{ backgroundColor: '#1F5F5B' }}
               >
                 <h1 className="text-center text-white py-4">
                   Registration Form
