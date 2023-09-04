@@ -107,7 +107,10 @@ const EditProfile = () => {
         Swal.fire({
           position:'top',
           icon: 'warning',
-         text: 'Please Fill All Fields!'}
+         text: 'Please Fill All Fields!',
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
       else if (newPassword !== confirmPassword) {
@@ -115,7 +118,10 @@ const EditProfile = () => {
         Swal.fire({
           position:'top',
           icon: 'warning',
-         text: 'Confirm password is not matched with new password!'}
+         text: 'Confirm password is not matched with new password!',
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
       else {
@@ -146,7 +152,10 @@ const EditProfile = () => {
           Swal.fire({
             position:'top',
             icon: 'warning',
-           text: `${jsonresponse.message}`}
+           text: `${jsonresponse.message}`,
+           customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },}
           )
           setCurrentPassword("");
           setNewPassword("");

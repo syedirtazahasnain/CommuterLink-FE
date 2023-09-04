@@ -139,7 +139,10 @@ const Signup = () => {
         Swal.fire({
           position:'top',
           icon: 'error',
-         text: `${jsonresponse.message}`}
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -155,7 +158,12 @@ const Signup = () => {
         Swal.fire({
           position:'top',
           icon: 'warning',
-         text: 'Please Fill All Fields!'}
+         text: 'Please Fill All Fields!',
+         customClass: {
+          confirmButton: 'bg-success' ,
+          // icon:'bg-secondary' // Apply custom CSS class to the OK button
+        },
+      }
         )
       }
       else{
@@ -196,7 +204,12 @@ const Signup = () => {
             Swal.fire({
               position:'top',
               icon: 'error',
-             text: `${jsonresponse.message}`}
+             text: `${jsonresponse.message}`,
+             customClass: {
+              confirmButton: 'bg-success' , 
+              // Apply custom CSS class to the OK button
+            },
+          }
             )
           }
         } else {
@@ -204,8 +217,12 @@ const Signup = () => {
           Swal.fire({
             position:'top',
             icon: 'warning',
-           text: 'Please Check Terms of Service'}
-          )
+           text: 'Please Check Terms of Service',
+           customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        }
+          ) 
         }
       }
     } catch (error) {

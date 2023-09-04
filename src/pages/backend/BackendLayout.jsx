@@ -62,15 +62,22 @@ const BackendLayout = ({ children }) => {
         text: "You are about to logout from commuterLink",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        // confirmButtonColor: '#3085d6',
+        // cancelButtonColor: '#d33',
+        customClass: {
+          confirmButton: 'bg-success' , 
+          cancelButton:'bg-success'// Apply custom CSS class to the OK button
+        },
         confirmButtonText: 'Logout!'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
             position:'top',
             title: 'Logout!',
-            text:'Successful'
+            text:'Successful',
+            customClass: {
+              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            },
           }
         
           )

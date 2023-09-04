@@ -545,7 +545,10 @@ const SchoolRegistration = () => {
       Swal.fire({
         position:'top',
         icon: 'warning',
-       text: 'Please Fill All Fields!'}
+       text: 'Please Fill All Fields!',
+       customClass: {
+        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+      },}
       )
     }
   };
@@ -614,8 +617,11 @@ const SchoolRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -661,8 +667,11 @@ const SchoolRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -699,8 +708,11 @@ const SchoolRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -737,8 +749,12 @@ const SchoolRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },
+      }
         )
       }
     } catch (error) {
@@ -800,8 +816,11 @@ const SchoolRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {

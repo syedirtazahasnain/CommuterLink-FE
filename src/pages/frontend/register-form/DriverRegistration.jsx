@@ -644,7 +644,11 @@ const DriverRegistration = () => {
       Swal.fire({
         position:'top',
         icon: 'warning',
-       text: 'Please Fill All Fields!'}
+       text: 'Please Fill All Fields!',
+       customClass: {
+        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+      },
+      }
       )
       
     } else {
@@ -663,7 +667,10 @@ const DriverRegistration = () => {
       Swal.fire({
         position:'top',
         icon: 'warning',
-       text: 'Please Fill All Driver Form Fields!'}
+       text: 'Please Fill All Driver Form Fields!',
+       customClass: {
+        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+      },}
       )
     } else {
       await DriverForm();
@@ -735,8 +742,11 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -782,8 +792,11 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -820,8 +833,11 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -858,8 +874,11 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -910,8 +929,11 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -977,8 +999,11 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'warning',
-         text: `${jsonresponse.message}`}
+          icon: 'error',
+         text: `${jsonresponse.message}`,
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {
@@ -1032,8 +1057,11 @@ const DriverRegistration = () => {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
-            icon: 'warning',
-           text: `${jsonresponse.message}`}
+            icon: 'error',
+           text: `${jsonresponse.message}`,
+           customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },}
           )
         }
       }
@@ -1042,7 +1070,10 @@ const DriverRegistration = () => {
         Swal.fire({
           position:'top',
           icon: 'warning',
-         text: 'Please Enter Payment Details!'}
+         text: 'Please Enter Payment Details!',
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },}
         )
       }
     } catch (error) {

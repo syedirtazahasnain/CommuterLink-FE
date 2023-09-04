@@ -82,7 +82,11 @@ const Login = () => {
       Swal.fire({
         position:'top',
         icon: 'warning',
-       text: 'Please Fill All Fields'}
+       text: 'Please Fill All Fields',
+       customClass: {
+        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+      },
+    }
       )
     }
     else {
@@ -119,7 +123,11 @@ const Login = () => {
           Swal.fire({
             position:'top',
             icon: 'error',
-           text: `${jsonresponse.message}`}
+           text: `${jsonresponse.message}`,
+           customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        }
           )
         }
         }
@@ -129,7 +137,11 @@ const Login = () => {
         Swal.fire({
           position:'top',
           icon: 'warning',
-         text: 'Please Fill All Fields'}
+         text: 'Please Fill All Fields',
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },
+      }
         )
       }
       
@@ -188,7 +200,11 @@ const Login = () => {
             Swal.fire({
               position:'top',
               icon: 'error',
-             text: `${jsonresponse.message}`}
+             text: `${jsonresponse.message}`,
+             customClass: {
+              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            },
+          }
             )
           
           }

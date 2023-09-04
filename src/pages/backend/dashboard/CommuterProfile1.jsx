@@ -260,7 +260,10 @@ const CommuterProfile1 = () => {
     Swal.fire({
       position:'top',
       icon: 'warning',
-     text: 'Request is waiting for response!'}
+     text: 'Request is waiting for response!',
+     customClass: {
+      confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+    },}
     )
   };
 

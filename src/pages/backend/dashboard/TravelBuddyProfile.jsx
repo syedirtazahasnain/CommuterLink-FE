@@ -295,9 +295,13 @@ const TravelBuddyProfile = () => {
     text: "You want to cancel",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes!'
+    // confirmButtonColor: '#3085d6',
+    // cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes!',
+    customClass: {
+      confirmButton: 'bg-success' , 
+      cancelButton:'bg-success' // Apply custom CSS class to the OK button
+    },
   }).then((result) => {
     if (result.isConfirmed) {
       // Swal.fire(
@@ -320,10 +324,10 @@ const TravelBuddyProfile = () => {
   return (
     <div>
       <div className="page-title">
-        <p className="card p-4 text-dark my-2 fw-bold fs-6">
+        <h1 className="card p-4 text-success my-2 fw-bold fs-4">
           You are looking for travel buddles to ride your car, others who want
           to share their car and to connect with members with whom you can take{" "}
-        </p>
+        </h1>
       </div>
 
       <div className="card p-4 bg-light p-2" >
