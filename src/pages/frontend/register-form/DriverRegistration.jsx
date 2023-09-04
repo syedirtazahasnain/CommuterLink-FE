@@ -646,6 +646,7 @@ const DriverRegistration = () => {
         icon: 'warning',
        text: 'Please Fill All Fields!'}
       )
+      
     } else {
       await LocationForm();
       await PersonalForm();
