@@ -19,7 +19,6 @@ const customTheme = createTheme({
   },
 });
 
-
 const BackendLayout = ({ children }) => {
   
   const navigate = useNavigate();
@@ -233,7 +232,7 @@ const BackendLayout = ({ children }) => {
                         </div> */}
                       </div>
                       <div className="text-center">
-                        <div className="symbol symbol-50px symbol-circle me-3">
+                        <div className="symbol symbol-50px symbol-circle me-4" style={{height:"15px"}}>
                               {image ? 
                                 (
                                   <img
@@ -243,13 +242,13 @@ const BackendLayout = ({ children }) => {
                                 (
                                   <img
                                     src={`${BASE_URL}/assets/images/pic.png`}
-                                    style={{height:"40px", width:"40px"}}
+                                    style={{height:"35px", width:"35px"}}
                                   />
                                 )} 
                               </div>                        
                         {/* <div className="border border-pvs border-1 cursor-pointer symbol symbol symbol-circle symbol-35px mb-2">
                               </div> */}
-                        <div className="h-15px me-3">
+                        <div className="h-15px me-3 mt-3">
                           {/* <Notifications /> */}
 
                           <Tooltip title="Notifications">
@@ -258,7 +257,7 @@ const BackendLayout = ({ children }) => {
                               className='mx-1 h-15px d-inline-block'
                               style={{ cursor: "pointer" }}
                             >
-                              <i className="fa-regular fs-5 fa-bell icon-green mt-2"></i>
+                              <i className="fa-regular fs-6 fa-bell icon-green mt-2"></i>
                             </Link>
                           </Tooltip>
                           <Tooltip title="Settings">
@@ -280,7 +279,7 @@ const BackendLayout = ({ children }) => {
                               className='mx-1 h-15px d-inline-block'
                               style={{ cursor: "pointer" }}
                             >
-                              <i className="fa-solid fa-power-off fs-5 icon-green mt-2"></i>
+                              <i className="fa-solid fa-power-off fs-6 icon-green mt-2"></i>
                             </a>
                           </Tooltip>
                         </div>

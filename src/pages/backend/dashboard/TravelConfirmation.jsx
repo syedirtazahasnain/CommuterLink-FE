@@ -15,7 +15,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
-import { Box } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import { width } from "@mui/system";
 import { API_URL } from "../../../constants";
 
@@ -287,26 +287,29 @@ const TravelConfirmation = () => {
                             },
                           }}
                           sx={{
+
                             display: "grid",
                             "& .MuiDayCalendar-weekDayLabel": {
-                              fontSize: "1.5rem",
-                              paddingTop: "2rem",
-                              paddingBottom: "1rem",
-                              paddingLeft: "5rem",
-                              paddingRight: "5rem",
+                              fontSize: "1.4rem",
+                              fontWeight: 'bold',
+                              color: '#1F5F5B',
+                              paddingTop: "1rem",
+                              paddingBottom: "0.5rem",
+                              paddingLeft: "calc(5rem + 18px)",
+                              paddingRight: "calc(5rem + 18px)",
                               margin: 0,
                             },
                             "& .MuiPickersDay-dayWithMargin": {
-                              fontSize: "1.5rem",
-                              padding: "5rem",
+                              fontSize: "1.3rem",
+                              // padding: "5rem",
                               margin: 0,
 
                             },
                             "& .MuiPickersDay-root:hover": {
                               backgroundColor: "#cbeddd",
-                              paddding: "5rem"
-
-
+                              borderRadius: "50%", // Make the hover circle a perfect circle
+                              // width: "0.5rem", // Adjust the width of the hover circle
+                              // height: "0.5rem" // Adjust the height of the hover circle
                             },
                             "& .MuiPickersDay-root.Mui-selected": {
                               backgroundColor: "green",
@@ -317,25 +320,50 @@ const TravelConfirmation = () => {
                               justifyContent: "center",
                             },
                             "& .MuiPickersCalendarHeader-labelContainer": {
-                              fontSize: "16px"
+                              fontSize: "1.5rem"
+                            },
+                            '& .MuiBadge-root ': {
+                              paddingLeft: '5rem',
+                              paddingRight: '5rem',
+                              paddingBottom: '3rem',
+                            },
+                            '& .MuiPickersYear-yearButton': {
+                              backgroundColor: '#cbeddd'
+                            },
+                            "& .MuiPickersYear-yearButton.Mui-selected": {
+                              backgroundColor: "green", 
+                            },
+                            '& .MuiPickersYear-yearButton.Mui-selected:hover': {
+                              backgroundColor: '#cbeddd'
+                            },
+                            "& .MuiPickersDay-root.Mui-selected:hover": {
+                              backgroundColor: "green", 
                             },
                             "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
                               border: "0px solid rgba(0, 0, 0, 0.6)",
                             },
-
                           }}
                         />
                       </LocalizationProvider>
                     </Box>
-                    <div className="row py-2">
+                    <div className="row pt-5 pb-3">
                       <p className="text-success fs-5 px-4 cursor-pointer text-right">
                         No of Days Travelled 0
                       </p>
-                      <p className="btn fs-5 px-4 text-success text-right fw-bold" onClick={route}>
+                      {/* <p className="btn fs-5 px-4 text-success text-right fw-bold" onClick={route}>
                         View Full History
-                      </p>
+                      </p> */}
+                      <div className="container my-3 text-end">
+
+                        <Link className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                          onClick={route}
+                        >
+                        View Full History
+
+                        </Link>
+                      </div>
                     </div>
-                    </div>
+                  </div>
 
                 </div>
               </div>
