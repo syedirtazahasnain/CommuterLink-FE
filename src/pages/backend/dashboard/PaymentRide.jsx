@@ -98,7 +98,10 @@ const PaymentRide = () => {
           <h3 className="card p-4 text-success my-2 fw-bold">
             PAYMENT/RIDE HISTORY
           </h3>
-          <h5 className="mx-4">{`The ride history along with payment log`}</h5>
+          <h5 className="card p-4 text-success my-2 fw-bold">
+          {`The ride history along with payment log`}
+        </h5>
+          {/* <h5 className="mx-4">{`The ride history along with payment log`}</h5> */}
         </div>
         <div className="card p-4 bg-light p-2">
           <div className="card" style={{ backgroundColor: "#e5f8f3" }}>
@@ -109,26 +112,26 @@ const PaymentRide = () => {
                 </div>
               ) : (
                 <>
-                  <h5 className="text-center">{monthYear}</h5>
+                  <h5 className="text-center pb-2 fw-bold text-dark">{monthYear}</h5>
                   <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 300 }} aria-label="simple table">
                       <TableHead>
                         <TableRow>
-                          <TableCell>Date</TableCell>
-                          <TableCell>Message</TableCell>
-                          <TableCell>Amount</TableCell>
+                          <TableCell className="fw-bold fs-5 text-success">Date</TableCell>
+                          <TableCell className="fw-bold fs-5 text-success">Message</TableCell>
+                          <TableCell className="fw-bold fs-5 text-success">Amount</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {data.map((item) => (
                           <TableRow key={item.date}>
-                            <TableCell>{item.date}</TableCell>
-                            <TableCell>
+                            <TableCell className="fs-6">{item.date}</TableCell>
+                            <TableCell className="fs-6">
                               {`From Home to Office | Office to Home | ${getDisplay(
                                 item.status
                               )}`}
                             </TableCell>
-                            <TableCell>{`Rs ${item.wallet_transfer}/-`}</TableCell>
+                            <TableCell className="fs-6">{`Rs ${item.wallet_transfer}/-`}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -139,7 +142,7 @@ const PaymentRide = () => {
             </div>
             <div className="text-center">
               <Button
-                className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+                className="btn btn-sm fs-7 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
                 onClick={() => navigate(-1)}
               >
                 Back
