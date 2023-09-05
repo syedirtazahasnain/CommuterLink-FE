@@ -26,56 +26,8 @@ const TravelConfirmation = () => {
   const [submitbtn, setSubmit] = useState(false);
   const [selectedDate, setSelectedDate] = useState(initialValue);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState(0); 
   const [dateChanged, setDateChanged] = useState(false);
   const [statusData, setStatusData] = useState([]);
-
-  const handleDateChange = (date) => {
-    console.log("Selected Date in handleDateChange:", date);
-    setSelectedDate(dayjs(date));
-    setDateChanged(true);
-    setDialogOpen(true);
-  };
-  
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
-
-  const handleStatusSelect = (status) => {
-    setSelectedStatus(status);
-    handleConfirmStatus();
-  };
-
-  const handleConfirmStatus = async () => {    
-    // Create the data object for the POST request
-    const body = {
-      date: selectedDate.format('DD-MM-YYYY'),
-      day: selectedDate.format('dddd'),
-      status: selectedStatus,
-    };
-    
-    console.log("Handle Confirm Status Body:", body);
-
-    const response = await fetch(
-      `${API_URL}/api/v1/travelhistory`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify(body),
-      }
-    );
-
-    const jsonresponse = await response.json();
-    console.log("Handle Confirm Status Response:", jsonresponse);
-    setDialogOpen(false);
-  };
-
-  // For Dashboard Data
-  const [contactId, setContactId] = useState("");
 
   useEffect(() => {
     getDashboardData();
@@ -109,6 +61,52 @@ const TravelConfirmation = () => {
   
     fetchData();
   }, [userToken]);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(dayjs(date));
+    setDateChanged(true);
+    setDialogOpen(true);
+  };
+  
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
+  const handleStatusSelect = (value) => {
+    handleConfirmStatus(value);
+  };
+
+  const handleConfirmStatus = async (selectedStatus) => {  
+    // Create the data object for the POST request
+    const body = {
+      date: selectedDate.format('DD-MM-YYYY'),
+      day: selectedDate.format('dddd'),
+      status: selectedStatus,
+    };
+
+    console.log("handleConfirmStatus Body:", body);
+
+    const response = await fetch(
+      `${API_URL}/api/v1/travelhistory`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    const jsonresponse = await response.json();
+    console.log("handleConfirmStatus Response:", jsonresponse);
+    setDialogOpen(false);
+    return;
+  };
+
+  // For Dashboard Data
+  const [contactId, setContactId] = useState("");
 
   const route = () => {
     setSubmit(true);
@@ -212,7 +210,7 @@ const TravelConfirmation = () => {
 
   const requestAbortController = React.useRef(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 15]);
+  const [highlightedDays, setHighlightedDays] = React.useState([1, 5, 12]);
 
   const fetchHighlightedDays = (date) => {
     const controller = new AbortController();
@@ -366,7 +364,10 @@ const TravelConfirmation = () => {
                   <div className="row px-2">
                     <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
                       <div>
-                        <button className="btn  text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(1)}>
+                        <button 
+                          className="btn  text-success fw-bold fs-5 lh-1" 
+                          onClick={() => handleStatusSelect("1")}
+                        >
                           <span>
                             <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
                           </span>
@@ -374,17 +375,17 @@ const TravelConfirmation = () => {
                         </button>
                       </div>
                       <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(0)}>
+                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("0")}>
                           <span>
-                            <i class="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
+                            <i className="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
                           </span>
                           Not Travelled
                         </button>
                       </div>
                       <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect(-1)}>
+                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("-1")}>
                           <span>
-                            <i class="fa-solid fa-car text-danger mx-1 fs-2"></i>
+                            <i className="fa-solid fa-car text-danger mx-1 fs-2"></i>
                           </span>
                           Driver Didn't Come
                         </button>
