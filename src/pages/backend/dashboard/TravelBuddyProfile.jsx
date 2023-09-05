@@ -316,11 +316,18 @@ const TravelBuddyProfile = () => {
   return (
     <div>
       <div className="page-title">
-        <h1 className="card p-4 text-success my-2 fw-bold fs-4">
+          <h3 className="card p-4 text-success my-2 fw-bold">
+            Travel Buddy Profile
+          </h3>
+          <h6 className="card p-2 px-4 text-success ">{`You are looking for travel buddles to ride your car, others who want
+          to share their car and to connect with members with whom you can take turns to use each other's car`}</h6>
+        </div>
+      {/* <div className="page-title">
+        <h4 className="card p-2 px text-success my-2">
           You are looking for travel buddles to ride your car, others who want
-          to share their car and to connect with members with whom you can take{" "}
-        </h1>
-      </div>
+          to share their car and to connect with members with whom you can take turns to use each other's car
+        </h4>
+      </div> */}
 
       <div className="card p-4 bg-light p-2" >
         <div className="card p-4 backgroundColor">
@@ -332,7 +339,7 @@ const TravelBuddyProfile = () => {
               <div className="px-5">
                 {name !== "" ? (
                   <div>
-                    <h3 className="text-success ">{name}</h3>
+                    <h3 className="text-success fw-bold">{name}</h3>
                   </div>
                 ) : (
                   <>
@@ -342,7 +349,7 @@ const TravelBuddyProfile = () => {
               <p className="px-5">
                 {gender !== "" ? (
                   <>
-                    <b>Gender:</b> <u>{gender}</u>
+                    <b className="text-black">Gender:</b> <u>{gender}</u>
                   </>
                 ) : (
                   <>
@@ -351,7 +358,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {age !== "" ? (
                   <>
-                    <b> Age:</b> <u>{age}</u>
+                    <b className="text-black"> Age:</b> <u>{age}</u>
                   </>
                 ) : (
                   <>
@@ -360,7 +367,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {profession !== "" ? (
                   <>
-                    <b>Profession:</b> <u>{profession}</u>
+                    <b className="text-black">Profession:</b> <u>{profession}</u>
                   </>
                 ) : (
                   <>
@@ -369,7 +376,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {mobileNo !== "" ? (
                   <>
-                    <b>Cell:</b> <u>{mobileNo}</u>
+                    <b className="text-black">Cell:</b> <u>{mobileNo}</u>
                   </>
                 ) : (
                   <></>
@@ -385,7 +392,7 @@ const TravelBuddyProfile = () => {
               <p>
                 {preferredGender !== "" ? (
                   <>
-                    <b>Preferred Gender: </b> <u>{preferredGender}</u>
+                    <b className="text-black">Preferred Gender: </b> <u className="">{preferredGender}</u>
                   </>
                 ) : (
                   <>
@@ -394,7 +401,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {origin !== "" ? (
                   <>
-                    <b>Point of Origin: </b>
+                    <b className="text-black">Point of Origin: </b>
                     <u>{origin}</u>
                   </>
                 ) : (
@@ -404,7 +411,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {timeDepart !== "" ? (
                   <>
-                    <b>Pickup Timings:</b> <u>{timeDepart}</u>
+                    <b className="text-black">Pickup Timings:</b> <u>{timeDepart}</u>
                   </>
                 ) : (
                   <>
@@ -414,7 +421,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {destination !== "" ? (
                   <>
-                    <b>Destination:</b>
+                    <b className="text-black">Destination:</b>
                     <u>{destination}</u>
                   </>
                 ) : (
@@ -425,7 +432,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {timeReturn !== "" ? (
                   <>
-                    <b>Return Timings:</b> <u>{timeReturn}</u>
+                    <b className="text-black">Return Timings:</b> <u>{timeReturn}</u>
                   </>
                 ) : (
                   <>
@@ -435,7 +442,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {days !== "" ? (
                   <>
-                    <b>Days:</b> <u>{days}</u>
+                    <b className="text-black">Days:</b> <u>{days}</u>
                   </>
                 ) : (
                   <>
@@ -445,7 +452,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {mobileNo !== "" ? (
                   <>
-                    <b>Contact No:</b> <u>{mobileNo}</u>
+                    <b className="text-black">Contact No:</b> <u>{mobileNo}</u>
                   </>
                 ) : (
                   <></>
@@ -457,7 +464,7 @@ const TravelBuddyProfile = () => {
               <p>
                 {seats !== "" ? (
                   <>
-                    <b>No.of Seats:</b> {seats}
+                    <b className="text-black">No.of Seats:</b> <u>{seats}</u>
                   </>
                 ) : (
                   <>

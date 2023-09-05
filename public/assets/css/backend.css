@@ -230,12 +230,22 @@ body{
  .app-header{
   background-color:rgb(217, 217, 217)!important;
   /* color: #df0707ef; */
+  font-family: 'Roboto', sans-serif;
  }
 
  .sidebar-bg{
   background-color: #06373A;
+ 
  }
 
+
+.font-custom{
+  font-family: 'Roboto', sans-serif;
+  /* font-family: 'GFS Didot', serif; */
+}
+.backgroundColor{
+  background-color: rgb(205,219,217) !important;
+}
 
 
  

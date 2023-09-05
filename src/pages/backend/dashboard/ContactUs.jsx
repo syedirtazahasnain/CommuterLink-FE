@@ -34,7 +34,7 @@ const ContactUs = () => {
         </div>
       </div>
       <div className="page-title">
-        <h5 className="card p-4 text-success my-2 fw-bold">
+        <h5 className="card p-2 px-4 text-success">
           At CommutersLink, we are always available to address your queries and
           would love to hear your suggestions or feedback if any. Feel free to
           connect with us
@@ -47,7 +47,7 @@ const ContactUs = () => {
 
             <div className="row text-left">
               <div
-                className="col-md-12 backgroundColor  p-5 mb-3 sha m-auto"
+                className="col-md-12 backgroundColor  p-5  py-5 sha"
                
               >
                 <form action="#" method="post">
@@ -105,8 +105,8 @@ const ContactUs = () => {
                     </div>
                   </div>
                 </form>
-                <div className="d-flex justify-content-center mt-4">
-                  <Button className="btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3">
+                <div className="d-flex justify-content-center">
+                  <Button className="btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3">
                     Send
                   </Button>
                 </div>

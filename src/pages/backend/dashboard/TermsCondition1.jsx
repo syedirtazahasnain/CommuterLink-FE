@@ -75,7 +75,7 @@ const TermsCondition1 = () => {
         </h3>
       </div>
       <div className="card p-4 bg-light p-2">
-        <div className="card"  style={{ backgroundColor: " rgb(191, 216, 210)" }}>
+        <div className="card backgroundColor">
           <div className="card-body">
             <p>1. Your car is in a good shape and is roadworthy</p>
             <p className="">

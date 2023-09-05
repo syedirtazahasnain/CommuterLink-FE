@@ -596,3 +596,6 @@ a.btn:hover {
 .image-upload-container {
   width: 400px; /* Adjust the width as needed */
 }
+.font-custom{
+  font-family: 'Roboto', sans-serif;
+}

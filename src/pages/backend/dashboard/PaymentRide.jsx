@@ -119,7 +119,8 @@ const PaymentRide = () => {
             </Link>
           </div>
         </div>
-            <h5 className="card p-2 px-4 text-success ">{`The ride history along with payment log`}</h5>
+          <h6 className="card p-2 px-4 text-success ">{`The ride history along with payment log`}</h6>
+      </div>
       </div>
         <div className="card p-4 bg-light p-2">
           <div className="card backgroundColor">
@@ -172,7 +173,7 @@ const PaymentRide = () => {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

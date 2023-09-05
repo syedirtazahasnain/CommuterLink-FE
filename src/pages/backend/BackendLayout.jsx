@@ -131,7 +131,7 @@ const BackendLayout = ({ children }) => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid font-custom">
       <div className="row">
         <div className="col-12 bg-light-lime" >
           <ThemeProvider theme={customTheme}>
@@ -187,7 +187,7 @@ const BackendLayout = ({ children }) => {
                       </button>
                     </div>
                     <div className="header shadow shadow-sm card-dashboardheader bg-white d-flex py-1 w-100 ps-4">
-                      <div className="header-left mr-auto mx-4 d-flex flex-grow-1 py-2">
+                      <div className="header-left mr-auto mx-2 d-flex flex-grow-1 py-2">
                         <div className="d-block">
                           <p className=" my-auto fw-normal text-uppercase">
                             {formattedDate}
@@ -207,14 +207,15 @@ const BackendLayout = ({ children }) => {
                       data-kt-menu-placement="bottom-end"
                     >
                       <div className="text-end d-none d-sm-flex flex-column justify-content-start py-2">
-                        <span className="align-self-end lead">
+                        <div className="align-self-end lead">
                         <div className="d-block">
                           {/* <p className=" my-auto fw-normal text-uppercase">
                             {formattedDate}
-                          </p> */}
-                          {name ? (<h6 className="fs-7 fw-bold"> {name}</h6>) : (<h6 className="fs-7 fw-bold">Yasir Abbas Mirza</h6>)}
-                          <p className="fw-bold fs-6 text-dark">USER ROLE</p>
-                        </div>                        </span>
+                          </p> */}    
+                   {name ? (<h6 className="fs-6 fw-bold font-custom"> {name}</h6>) : (<h6 className="fs-6 font-custom fw-bold">Yasir Abbas Mirza</h6>)}
+
+                          <p className="fw-bold font-custom fs-7 text-dark">USER ROLE</p>
+                        </div>                        </div>
                         {/* <div>
                           <span
                             className="{font-family-default cursor-pointer text-decoration-underline"
@@ -469,10 +470,10 @@ const BackendLayout = ({ children }) => {
                                 marginRight: "0%",
                               }}
                             >
-                              <span className="menu-icon">
+                              <span className="menu-icon font-custom">
                                 <i className="fas fa-home fa-2x"></i>
                               </span>
-                              <span className="menu-title text-white">
+                              <span className="menu-title text-white font-custom mt-1">
                                 Dashboard
                               </span>
                             </Link>
@@ -489,10 +490,10 @@ const BackendLayout = ({ children }) => {
                                 marginRight: "0%",
                               }}
                             >
-                              <span className="menu-icon">
+                              <span className="menu-icon font-custom">
                                 <i className="fas fa-solid fa-user fa-2x"></i>
                               </span>
-                              <span className="menu-title text-white">
+                              <span className="menu-title text-white font-custom mt-1">
                                 Profile
                               </span>
                             </Link>
@@ -511,11 +512,11 @@ const BackendLayout = ({ children }) => {
                                 marginRight: "0%",
                               }}
                             >
-                              <span className="menu-icon">
+                              <span className="menu-icon font-custom">
                               <i class="fa-regular fa-file-lines"></i>
                               {/* <i className="fa-solid fa-terminal"></i> */}
                               </span>
-                              <span className="menu-title text-white">
+                              <span className="menu-title text-white font-custom">
                                 Terms and Conditions
                               </span>
                             </Link>
@@ -532,11 +533,11 @@ const BackendLayout = ({ children }) => {
                                 marginRight: "0%",
                               }}
                             >
-                              <span className="menu-icon">
+                              <span className="menu-icon font-custom">
                                 <i className="fa-solid fa-bell"></i>
                               </span>
 
-                              <span className="menu-title text-white">
+                              <span className="menu-title text-white font-custom">
                                 Notifications
                               </span>
                             </Link>
@@ -553,10 +554,10 @@ const BackendLayout = ({ children }) => {
                                 marginRight: "0%",
                               }}
                             >
-                              <span className="menu-icon">
+                              <span className="menu-icon font-custom">
                                 <i className="fas fa-solid fa-user fa-2x"></i>
                               </span>
-                              <span className="menu-title text-white">
+                              <span className="menu-title text-white font-custom">
                                 Update Matching Criteria
                               </span>
                             </Link>
@@ -573,10 +574,10 @@ const BackendLayout = ({ children }) => {
                                 marginRight: "0%",
                               }}
                             >
-                              <span className="menu-icon">
+                              <span className="menu-icon font-custom">
                               <i className="fa-solid fa-address-card"></i>
                               </span>
-                              <span className="menu-title text-white">
+                              <span className="menu-title text-white font-custom">
                                 Contact Us
                               </span>
                             </Link>
@@ -593,10 +594,10 @@ const BackendLayout = ({ children }) => {
                                 marginRight: "0%",
                               }}
                             >
-                              <span className="menu-icon">
+                              <span className="menu-icon font-custom">
                                 <i className="fa-solid fa-phone"></i>
                               </span>
-                              <span className="menu-title text-white">
+                              <span className="menu-title text-white font-custom">
                                 WhatsApp
                               </span>
                             </Link>
