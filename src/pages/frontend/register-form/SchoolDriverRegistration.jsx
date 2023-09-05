@@ -30,6 +30,7 @@ const DriverRegistration = () => {
   const [addNewEndDropdown, setAddNewEndDropdown] = useState(true);
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const mapLibraries = ["places"];
 
   const [isValidUniversityName, setIsValidUniversityName] = useState(true);
@@ -680,40 +681,65 @@ const DriverRegistration = () => {
   ];
 
   const handleLogin = async () => {
-    if (requiredFieldsLogin.some(field => field === "" || field === null || field === undefined)) {
+    if (
+      requiredFieldsLogin.every(
+        (field) => field !== "" && field !== null && field !== undefined
+      )
+    ) {
+      setIsLoading(true); // Start loading
+
+      try {
+        await LocationForm();
+        await PersonalForm();
+        await ImagesFormCnicFront();
+        await ImagesFormCnicBack();
+        await ImagesFormPicture();
+        setIsLoading(false);
+        setShowDriverForm(true);
+      } catch (error) {
+        setIsLoading(false);
+        // Handle the error appropriately, e.g., show an error message
+        console.error('API call error:', error);
+      }
+    } else {
+      setIsLoading(false);
       // alert("Please Fill All Fields!");
       Swal.fire({
-        position:'top',
+        position: 'top',
         icon: 'warning',
-       text: 'Please Fill All Fields!',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
+        text: 'Please Fill All Fields!',
+        customClass: {
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        },
+      }
       )
-    } else {
-      await LocationForm();
-      await PersonalForm();
-      await ImagesFormCnicFront();
-      await ImagesFormCnicBack();
-      await ImagesFormPicture();
-      setShowDriverForm(true);
     }
   };
 
   const handleDriver = async () => {
-    if (requiredFieldsDriver.some(field => field === "" || field === null || field === undefined)) {
+    if (requiredFieldsDriver.every(field => field !== "" && field !== null && field !== undefined)) {
+      setIsLoading(true); // Start loading
+      try {
+        await DriverForm();
+        await PaymentForm();
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        // Handle the error appropriately, e.g., show an error message
+        console.error('API call error:', error);
+      }
+    } else {
+      setIsLoading(false);
       // alert("Please Fill All Driver Form Fields!");
       Swal.fire({
-        position:'top',
+        position: 'top',
         icon: 'warning',
-       text: 'Please Fill All Driver Form Fields!',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
+        text: 'Please Fill All Driver Form Fields!',
+        customClass: {
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        },
+      }
       )
-    } else {
-      await DriverForm();
-      await PaymentForm();
     }
   };
 
@@ -2251,8 +2277,16 @@ const DriverRegistration = () => {
                         className="btnregistration"
                         onClick={() => {
                           handleLogin();
-                        }}>
-                        Next
+                        }}
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <span>
+                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                          </span>
+                        ) : (
+                          'Next'
+                        )}
                       </Button>
                     </Stack>
                   </Form>
@@ -3041,8 +3075,14 @@ const DriverRegistration = () => {
                       spacing={2}
                       style={{ justifyContent: "right" }}
                     >
-                      <Button variant="" className="btnregistration" onClick={handleDriver}>
-                        Submit
+                      <Button variant="" className="btnregistration" onClick={handleDriver} disabled={isLoading}>
+                        {isLoading ? (
+                          <span>
+                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                          </span>
+                        ) : (
+                          'Submit'
+                        )}
                       </Button>
                     </Stack>
                   </Form>

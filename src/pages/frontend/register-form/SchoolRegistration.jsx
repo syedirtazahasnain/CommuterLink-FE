@@ -43,6 +43,7 @@ const SchoolRegistration = () => {
   const [addNewEndDropdown, setAddNewEndDropdown] = useState(true);
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const mapLibraries = ["places"];
 
   const [isValidProfession, setIsValidProfession] = useState(true);
@@ -538,20 +539,32 @@ const SchoolRegistration = () => {
         (field) => field !== "" && field !== null && field !== undefined
       )
     ) {
-      await LocationForm();
-      await PersonalForm();
-      await ImagesFormCnicFront();
-      await ImagesFormCnicBack();
-      await ImagesFormPicture();
+      setIsLoading(true); // Start loading
+
+      try {
+        await LocationForm();
+        await PersonalForm();
+        await ImagesFormCnicFront();
+        await ImagesFormCnicBack();
+        await ImagesFormPicture();
+
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        // Handle the error appropriately, e.g., show an error message
+        console.error('API call error:', error);
+      }
     } else {
+      setIsLoading(false);
       // alert("Please Fill All Fields!");
       Swal.fire({
-        position:'top',
+        position: 'top',
         icon: 'warning',
-       text: 'Please Fill All Fields!',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
+        text: 'Please Fill All Fields!',
+        customClass: {
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        },
+      }
       )
     }
   };
@@ -1905,8 +1918,15 @@ const SchoolRegistration = () => {
                     size="large"
                     className="btnregistration"
                     onClick={handleLogin}
+                    disabled={isLoading}
                   >
-                    Submit
+                    {isLoading ? (
+                      <span>
+                        <i className="fa fa-spinner fa-spin" /> Submitting...
+                      </span>
+                    ) : (
+                      'Submit'
+                    )}
                   </Button>
                 </Stack>
               </Form>

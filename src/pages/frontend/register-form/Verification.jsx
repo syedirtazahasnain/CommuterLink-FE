@@ -3,7 +3,6 @@ import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { resetsignupState } from "../../../redux/signupSlice";
 import { resetloginState } from "../../../redux/loginSlice";
-import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 
@@ -11,7 +10,6 @@ import Carousel from "react-bootstrap/Carousel";
 const Verification = () => {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
   const name = useSelector((s) => s.signup.data.name);
   const email = useSelector((s) => s.signup.data.email);
@@ -22,7 +20,7 @@ const Verification = () => {
   const route = () => {
     dispatch(resetsignupState());
     dispatch(resetloginState());
-    navigate("/");
+    window.location.href = "/";
   };
 
   useEffect(() => {
