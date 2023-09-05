@@ -239,11 +239,12 @@ const BackendLayout = ({ children }) => {
                         </div> */}
                       </div>
                       <div className="text-center">
-                        <div className="symbol symbol-50px symbol-circle me-4" style={{height:"15px"}}>
+                        <div className="symbol symbol-50px symbol-circle me-3" style={{height:"10px"}}>
                               {image ? 
                                 (
                                   <img
                                     src={`${IMAGE_URL}${image}`}
+                                    style={{height:"35px", width:"35px"}}
                                   />
                                 ) : 
                                 (
