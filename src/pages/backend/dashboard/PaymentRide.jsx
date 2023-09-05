@@ -93,11 +93,11 @@ const PaymentRide = () => {
   const getStatusColor = (status) => {
     switch (status) {
       case 0:
-        return "#FFFACD";
+        return "#eeeec4";
       case 1:
-        return "#90EE90";
+        return "#ccffcc";
       case -1:
-        return "#FA8072";
+        return "#ffc2b3";
       default:
         return "white";
     }
