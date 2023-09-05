@@ -12,12 +12,12 @@ import dayjs from "dayjs";
 const PartnerCancellation = () => {
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
-  const [name, setName] = useState('');
-  const [image, setImage] = useState('');
-  const [contactId, setContactId] = useState('');
-  const [driver, setDriver] = useState('');
-  const [rider, setRider] = useState('');
-  const [checkStatus, setCheckStatus] = useState('');
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [contactId, setContactId] = useState("");
+  const [driver, setDriver] = useState("");
+  const [rider, setRider] = useState("");
+  const [checkStatus, setCheckStatus] = useState("");
   const [selectedDate, setSelectedDate] = useState(dayjs());
 
   useEffect(() => {
@@ -81,8 +81,6 @@ const PartnerCancellation = () => {
 
         console.log('sendRequest Body:', body);
 
-        return;
-
         const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${contactId}`, {
           method: 'POST',
           headers: {
@@ -118,8 +116,6 @@ const PartnerCancellation = () => {
         };
 
         console.log('sendRequest Body:', body);
-
-        return;
 
         const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${contactId}`, {
           method: 'POST',
