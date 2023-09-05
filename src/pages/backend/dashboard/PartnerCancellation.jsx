@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers';
 import { Button } from '@mui/base';
+import { Box } from "@mui/material";
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import dayjs from "dayjs";
@@ -161,30 +162,72 @@ const PartnerCancellation = () => {
         <h3 className="card p-4 text-success my-2 fw-bold">Cancellation Date</h3>
       </div>
       <div className="card p-4  p-2">
-        <div className="card" style={{ backgroundColor: 'rgb(229, 248, 243)' }}>
+        <div className="card backgroundColor">
           <div className="card-body text-dark">
             <div className="container text-center">
               <img src={`${IMAGE_URL}${image}`} style={{ height: '150px', width: '150px' }} className="border border-2 rounded rounded-circle" />
               <p className="py-2">{name}</p>
-              <Form className="text-center">
+              {/* <Form className="text-center"> */}
+              <div className="">
+                  <div className="container">
+              <Box className="card  w-100">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateCalendar
                     value={selectedDate}
                     onChange={handleDateChange}
+                    className="w-100"
                     sx={{
+
+                      display: "grid",
+                      "& .MuiDayCalendar-weekDayLabel": {
+                        fontSize: "1.4rem",
+                        fontWeight: 'bold',
+                        color: '#1F5F5B',
+                        // paddingTop: "1rem",
+                        paddingBottom: "0.5rem",
+                        padding: "calc(3rem + 18px)",
+                        margin: 0,
+                      },
+                        
+                      "& .MuiPickersDay-dayWithMargin": {
+                        fontSize: "1.0rem",
+                        margin: 0,
+                        // fontWeight: 'bold',
+                        color: '#1F5F5B',
+                        // paddingTop: "1rem",
+                        paddingBottom: "0.5rem",
+                        padding: "calc(3rem + 18px)",
+
+                      },
                       "& .MuiPickersDay-root:hover": {
                         backgroundColor: "#cbeddd",
-                        paddding: "5rem"
-
-
+                        borderRadius: "50%",
                       },
                       "& .MuiPickersDay-root.Mui-selected": {
                         backgroundColor: "green",
-                        borderRadius: "90%",
+                        borderRadius: "50%",
                         color: "#fff",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                      },
+                      "& .MuiPickersCalendarHeader-labelContainer": {
+                        fontSize: "1.5rem"
+                      },
+                      '& .MuiBadge-root ': {
+                        padding: '1rem',
+                      },
+                      '& .MuiPickersYear-yearButton': {
+                        backgroundColor: '#cbeddd'
+                      },
+                      "& .MuiPickersYear-yearButton.Mui-selected": {
+                        backgroundColor: "green", 
+                      },
+                      '& .MuiPickersYear-yearButton.Mui-selected:hover': {
+                        backgroundColor: '#cbeddd'
+                      },
+                      "& .MuiPickersDay-root.Mui-selected:hover": {
+                        backgroundColor: "green", 
                       },
                       "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
                         border: "0px solid rgba(0, 0, 0, 0.6)",
@@ -192,13 +235,14 @@ const PartnerCancellation = () => {
                     }}
                   />
                 </LocalizationProvider>
+                
                 {/* {selectedDate ? selectedDate.format('YYYY-MM-DD') : ""} */}
                 <div className="container">
                   {checkStatus === 0 ?
                     (
-                      <>
+                      <div className="py-5">
                         <Button
-                          className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                          className="text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4"
                           style={{ cursor: 'pointer' }}
                           onClick={()=> {
                             sendRequest();
@@ -208,7 +252,7 @@ const PartnerCancellation = () => {
                           Cancel Now
                         </Button>
                         <Button
-                          className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3 ml-3"
+                          className="text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4"
                           style={{ cursor: 'pointer' }}
                           onClick={()=> {
                             sendRequest();
@@ -217,7 +261,7 @@ const PartnerCancellation = () => {
                         >
                           Week Notice
                         </Button>
-                      </>
+                      </div>
                     )
                     :
                     (<Button
@@ -232,7 +276,9 @@ const PartnerCancellation = () => {
                     </Button>
                     )}
                 </div>
-              </Form>
+              {/* </Form> */}</Box>
+              </div>
+              </div>
             </div>
           </div>
         </div>

@@ -291,12 +291,13 @@ const TravelBuddyProfile = () => {
   };
  const youSure=()=>{
   Swal.fire({
+    position:'top',
     title: 'Are you sure?',
     text: "You want to cancel",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
+    confirmButtonColor: '#037e03',
+    cancelButtonColor: '#037e03',
     confirmButtonText: 'Yes'
   }).then((result) => {
     if (result.isConfirmed) {
