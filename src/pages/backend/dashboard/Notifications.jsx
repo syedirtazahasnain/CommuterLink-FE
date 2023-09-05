@@ -69,7 +69,7 @@ const Notifications = () => {
   return (
     <>
       <div>
-      <div className="page-title">
+      <div className="">
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
             <h3 className="text-success my-2 fw-bold m-0">Notifications</h3>
@@ -83,7 +83,7 @@ const Notifications = () => {
           </div>
         </div>
       </div>
-        <div className="card bg-light-green my-2">
+        <div className="card  my-2">
           <div className="row p-4">
             <div className="col">
               <div

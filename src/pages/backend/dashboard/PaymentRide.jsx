@@ -119,7 +119,7 @@ const PaymentRide = () => {
             </Link>
           </div>
         </div>
-          <h6 className="card p-2 px-4 text-success ">{`The ride history along with payment log`}</h6>
+          <h5 className="card p-2 px-4 text-success ">{`The ride history along with payment log`}</h5>
       </div>
       </div>
         <div className="card p-4 bg-light p-2">
