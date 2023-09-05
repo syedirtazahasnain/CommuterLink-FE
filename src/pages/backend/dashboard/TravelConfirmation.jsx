@@ -31,6 +31,7 @@ const TravelConfirmation = () => {
 
   useEffect(() => {
     getDashboardData();
+    FetchDates();
   }, []);
 
   useEffect(() => {
@@ -60,7 +61,14 @@ const TravelConfirmation = () => {
     };
   
     fetchData();
-  }, [userToken]);
+  }, [userToken, selectedDate]);
+
+  useEffect(() => {
+    if(statusData){
+    fetchHighlightedDays();
+    }
+  }, [statusData]);
+  
 
   const handleDateChange = (date) => {
     setSelectedDate(dayjs(date));
@@ -144,26 +152,14 @@ const TravelConfirmation = () => {
     }
   };
 
-  function getRandomNumber(min, max) {
-    return Math.round(Math.random() * (max - min) + min);
-  }
 
-
-  function fakeFetch(date, { signal }) {
+  function FetchDates() {
     return new Promise((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        const daysInMonth = date.daysInMonth();
-        const daysToHighlight = [1, 2, 3].map(() =>
-          getRandomNumber(1, daysInMonth)
-        );
+      setTimeout(() => {
+        const daysToHighlight = highlightedDays;
 
         resolve({ daysToHighlight });
       }, 500);
-
-      signal.onabort = () => {
-        clearTimeout(timeout);
-        reject(new DOMException("aborted", "AbortError"));
-      };
     });
   }
 
@@ -210,26 +206,34 @@ const TravelConfirmation = () => {
 
   const requestAbortController = React.useRef(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [highlightedDays, setHighlightedDays] = React.useState([1, 5, 12]);
+  const [highlightedDays, setHighlightedDays] = React.useState([]);
 
   const fetchHighlightedDays = (date) => {
     const controller = new AbortController();
-    fakeFetch(date, {
-      signal: controller.signal,
-    })
-      .then(({ daysToHighlight }) => {
-        setHighlightedDays(daysToHighlight);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // ignore the error if it's caused by `controller.abort`
-        if (error.name !== "AbortError") {
-          throw error;
-        }
-      });
-
+  
+    // Filter the statusData to find the dates that match the current month
+    const statusForMonth = statusData.filter((item) =>
+      dayjs(item.date, "YYYY-MM-DD").isSame(date, "month")
+    );
+    console.log({statusForMonth});
+  
+    // Map the status data to an object with date and status
+    const highlightedDates = statusForMonth.map((item) => ({
+      date: dayjs(item.date, "YYYY-MM-DD").date(),
+      status: item.status,
+    }));
+  
+    // Extract the dates to highlight based on status
+    const daysToHighlight = highlightedDates
+      .filter((item) => item.status !== null)
+      .map((item) => item.date);
+      
+    setHighlightedDays(daysToHighlight);
+    setIsLoading(false);
+  
     requestAbortController.current = controller;
   };
+
 
   const handleMonthChange = (date) => {
     if (dateChanged) {
