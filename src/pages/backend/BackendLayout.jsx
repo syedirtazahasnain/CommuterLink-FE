@@ -3,10 +3,10 @@ import { ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { setSidebarState } from "../../redux/generalSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { resetloginState } from "../../redux/loginSlice";
+import { setloginState } from "../../redux/loginSlice";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
-import { resetsignupState } from "../../redux/signupSlice";
+import { setsignupState } from "../../redux/signupSlice";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 
@@ -72,9 +72,9 @@ const BackendLayout = ({ children }) => {
             title: 'Logout',
             text:'Successful'
           })
-          dispatch(resetsignupState());
-          dispatch(resetloginState());
-          window.location.href = "/";
+          dispatch(setloginState(""));
+          dispatch(setsignupState(""));
+          navigate("/login");
         }
       })
   
