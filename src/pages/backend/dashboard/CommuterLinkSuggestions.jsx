@@ -145,7 +145,7 @@ const CommuterLinkSuggestions = () => {
         >
           <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
             <div
-              className="card-header "
+              className="card-header"
               // style={{ backgroundColor: "#2a402a" }}
               style={{ backgroundColor: '#00917C' }}
             >
