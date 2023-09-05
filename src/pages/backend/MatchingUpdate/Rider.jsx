@@ -4,7 +4,7 @@ import { Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Breadcrumbs, Checkbox, FormControl, FormControlLabel, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from '@mui/material'
 import { Button } from "@mui/base";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Rider = () => {
@@ -66,12 +66,13 @@ const Rider = () => {
 
       if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === "" || preferredGender === "") {
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'warning',
-         text: `Please Fill All Fields!`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `Please Fill All Fields!`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
       else {
@@ -120,12 +121,13 @@ const Rider = () => {
       // Handle error appropriately, e.g., display an error message to the user
       // alert("An error occurred while sending the request.");
       Swal.fire({
-        position:'top',
+        position: 'top',
         icon: 'error',
-       text: 'An error occured while sending the request.',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
+        text: 'An error occured while sending the request.',
+        customClass: {
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        },
+      }
       )
     }
   };
@@ -133,9 +135,18 @@ const Rider = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
-          Update Matching Criteria
-        </h3>
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-success my-2 fw-bold m-0">Update Matching Criteria</h3>
+            <Link
+              to={"/dashboard"} >
+              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
       <div className="card p-4  p-2">
         <div className="card" style={{ backgroundColor: " rgb(191, 216, 210)" }}>

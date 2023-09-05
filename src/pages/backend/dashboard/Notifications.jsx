@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/base";
 import { API_URL, BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../../redux/generalSlice";
 
@@ -69,11 +69,20 @@ const Notifications = () => {
   return (
     <>
       <div>
-        <div className="page-title">
-          <h3 className="card p-4 text-success my-2 fw-bold">
-            Notifications
-          </h3>
+      <div className="page-title">
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-success my-2 fw-bold m-0">Notifications</h3>
+            <Link
+              to={"/dashboard"} >
+              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
         </div>
+      </div>
         <div className="card bg-light-green my-2">
           <div className="row p-4">
             <div className="col">
@@ -91,7 +100,7 @@ const Notifications = () => {
                   ))}
                 </div>
 
-                <form id="numberForm">
+                {/* <form id="numberForm">
                   <div className="container my-3 text-center">
                     <Button
                       className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3s"
@@ -100,7 +109,7 @@ const Notifications = () => {
                       Back
                     </Button>
                   </div>
-                </form>
+                </form> */}
               </div>
             </div>
           </div>

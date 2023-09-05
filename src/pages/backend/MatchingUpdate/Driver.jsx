@@ -6,7 +6,7 @@ import { Box, Breadcrumbs, Checkbox, FormControl, FormControlLabel, IconButton, 
 import { setCurrentPage } from "../../../redux/generalSlice";
 import { Button } from "@mui/base";
 import Rider from './Rider';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Driver = () => {
@@ -100,13 +100,14 @@ const Driver = () => {
 
     const sendRequest = async () => {
         try {
-            if(daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === ""
-              || preferredGender === "" || selectedCarCC === "" || selectedModelName === ""
-              || selectedRegYear === ""  ){
-            Swal.fire({
-                position:'top',
-                icon: "warning",
-                text: `Please fill all fields!`}
+            if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === ""
+                || preferredGender === "" || selectedCarCC === "" || selectedModelName === ""
+                || selectedRegYear === "") {
+                Swal.fire({
+                    position: 'top',
+                    icon: "warning",
+                    text: `Please fill all fields!`
+                }
                 )
             }
             else {
@@ -120,7 +121,7 @@ const Driver = () => {
                     car_reg_year: selectedRegYear
                 }
                 console.log("sendRequest Body:", body);
-    
+
                 const response = await fetch(
                     `${API_URL}/api/v1/update-matching-principles`,
                     {
@@ -133,23 +134,24 @@ const Driver = () => {
                         body: JSON.stringify(body),
                     }
                 );
-    
+
                 if (!response.ok) {
                     throw new Error(`Request failed with status: ${response.status}`);
                 }
-    
+
                 const jsonresponse = await response.json();
                 console.log("sendRequest API Response", jsonresponse);
-    
+
                 if (jsonresponse.statusCode === 200) {
                     navigate("/dashboard");
                 } else {
                     // alert("Resend Error: " + jsonresponse.message);
                     Swal.fire({
-                        position:'top',
+                        position: 'top',
                         icon: "error",
-                       text: `${jsonresponse.message}`}
-                      )
+                        text: `${jsonresponse.message}`
+                    }
+                    )
                 }
             }
         } catch (error) {
@@ -157,7 +159,7 @@ const Driver = () => {
             // Handle error appropriately, e.g., display an error message to the user
             // alert("An error occurred while sending the request.");
             Swal.fire({
-                position:'top',
+                position: 'top',
                 icon: "error",
                 text: 'An error occured while sending the request.'
             })
@@ -170,9 +172,18 @@ const Driver = () => {
                 (
                     <>
                         <div className="page-title">
-                            <h3 className="card p-4 text-success my-2 fw-bold">
-                                Update Matching Criteria
-                            </h3>
+                            <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+                                <div className="d-flex justify-content-between align-items-xl-baseline">
+                                    <h3 className="text-success my-2 fw-bold m-0">Update Matching Criteria</h3>
+                                    <Link
+                                        to={"/dashboard"} >
+                                        <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                                            <i className="fas fa-angle-left text-white" />
+                                            Back
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
                         <div className="card p-4">
                             <div className="card" style={{ backgroundColor: " rgb(191, 216, 210)" }}>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, createTheme } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -106,12 +106,21 @@ const PaymentRide = () => {
   return (
     <div>
       <div>
-        <div className="page-title">
-          <h3 className="card p-4 text-success my-2 fw-bold">
-            PAYMENT/RIDE HISTORY
-          </h3>
-          <h5 className="card p-2 px-4 text-success ">{`The ride history along with payment log`}</h5>
+      <div className="page-title">
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-success my-2 fw-bold m-0">Payment/Ride History</h3>
+            <Link
+              onClick={() => navigate(-1)} >
+              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
         </div>
+            <h5 className="card p-2 px-4 text-success ">{`The ride history along with payment log`}</h5>
+      </div>
         <div className="card p-4 bg-light p-2">
           <div className="card backgroundColor">
             <div className="card-body">
@@ -152,14 +161,14 @@ const PaymentRide = () => {
                 </>
               )}
             </div>
-            <div className="text-center">
+            {/* <div className="text-center">
               <Button
                 className="btn btn-sm fs-7 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
                 onClick={() => navigate(-1)}
               >
                 Back
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

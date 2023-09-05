@@ -100,9 +100,18 @@ const ViewProfile = () => {
         </h3>
       </div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
-          User Profile
-        </h3>
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-success my-2 fw-bold m-0">User Profile</h3>
+            <Link
+              to={"/dashboard"} >
+              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
       <div className="card p-4  p-2">
         <div className="card" style={{ backgroundColor: " rgb(191, 216, 210)" }}>

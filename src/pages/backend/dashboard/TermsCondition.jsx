@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import { setCurrentPage } from "../../../redux/generalSlice";
 
@@ -44,9 +44,18 @@ const TermsCondition = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
-          Terms And Conditions
-        </h3>
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-success my-2 fw-bold m-0">Terms And Conditions</h3>
+            <Link
+              to={"/dashboard"} >
+              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
       <div className="card p-4 bg-light p-2">
         <div className="card"  style={{ backgroundColor: " rgb(191, 216, 210)" }}>
@@ -95,14 +104,14 @@ const TermsCondition = () => {
             11. Any complaints, grievances will be addressed to CommutersLink
             for resolution
           </div>
-          <div className="text-center">
+          {/* <div className="text-center">
             <Button
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={route}
             >
               Back
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

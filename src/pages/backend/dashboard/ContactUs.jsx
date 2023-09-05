@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/base";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../../redux/generalSlice";
+import { Link } from "react-router-dom";
 
 const ContactUs = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,20 @@ const ContactUs = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">Contact Us</h3>
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-success my-2 fw-bold m-0">Contact Us</h3>
+            <Link
+              to={"/dashboard"} >
+              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="page-title">
         <h5 className="card p-4 text-success my-2 fw-bold">
           At CommutersLink, we are always available to address your queries and
           would love to hear your suggestions or feedback if any. Feel free to
