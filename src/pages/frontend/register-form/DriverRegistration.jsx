@@ -29,6 +29,7 @@ const DriverRegistration = () => {
   const [addNewEndDropdown, setAddNewEndDropdown] = useState(true);
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const mapLibraries = ["places"];
 
   const route = () => {
@@ -650,7 +651,28 @@ const DriverRegistration = () => {
   ];
 
   const handleLogin = async () => {
-    if (requiredFieldsLogin.some(field => field === "" || field === null || field === undefined)) {
+    if (
+      requiredFieldsLogin.every(
+        (field) => field !== "" && field !== null && field !== undefined
+      )
+    ) {
+      setIsLoading(true); // Start loading
+
+      try {
+        await LocationForm();
+        await PersonalForm();
+        await ImagesFormCnicFront();
+        await ImagesFormCnicBack();
+        await ImagesFormPicture();
+        setIsLoading(false);
+        setShowDriverForm(true);
+      } catch (error) {
+        setIsLoading(false);
+        // Handle the error appropriately, e.g., show an error message
+        console.error('API call error:', error);
+      }
+    } else {
+      setIsLoading(false);
       // alert("Please Fill All Fields!");
       Swal.fire({
         position: 'top',
@@ -661,19 +683,24 @@ const DriverRegistration = () => {
         },
       }
       )
-
-    } else {
-      await LocationForm();
-      await PersonalForm();
-      await ImagesFormCnicFront();
-      await ImagesFormCnicBack();
-      await ImagesFormPicture();
-      setShowDriverForm(true);
     }
   };
 
+
   const handleDriver = async () => {
-    if (requiredFieldsDriver.some(field => field === "" || field === null || field === undefined)) {
+    if (requiredFieldsDriver.every(field => field !== "" && field !== null && field !== undefined)) {
+      setIsLoading(true); // Start loading
+      try {
+        await DriverForm();
+        await PaymentForm();
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        // Handle the error appropriately, e.g., show an error message
+        console.error('API call error:', error);
+      }
+    } else {
+      setIsLoading(false);
       // alert("Please Fill All Driver Form Fields!");
       Swal.fire({
         position: 'top',
@@ -684,9 +711,6 @@ const DriverRegistration = () => {
         },
       }
       )
-    } else {
-      await DriverForm();
-      await PaymentForm();
     }
   };
 
@@ -1976,6 +2000,7 @@ const DriverRegistration = () => {
                         </Form.Text>
                       </Form.Group>
                     </Row>
+                    
                     <Stack
                       direction="row"
                       className="mb-4"
@@ -1988,8 +2013,16 @@ const DriverRegistration = () => {
                         className="btnregistration"
                         onClick={() => {
                           handleLogin();
-                        }}>
-                        Next
+                        }}
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <span>
+                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                          </span>
+                        ) : (
+                          'Next'
+                        )}
                       </Button>
                     </Stack>
                   </Form>
@@ -2193,92 +2226,6 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </div>
                     </div>
-
-                    <div className="row mb-3 shadow shadow-sm">
-                      <div
-                        className="col-md-12 px-2 py-3 form-body"
-                      >
-                        <h2 className="text-success mb-3 text-center">
-                          Available Seats
-                        </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                          <Form.Label className="text-dark fs-6">
-                            Seats Available
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={selectedSeat}
-                            onChange={(e) => setSelectedSeat(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>Seats Available</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                          </Form.Select>
-                        </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
-                          <Form.Label className="text-dark fs-6">
-                            Seats Available for (Male, Female, Both)
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={selectedSeatGender}
-                            onChange={(e) => setSelectedSeatGender(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>Seats Available</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Both">Both</option>
-                          </Form.Select>
-                        </Form.Group>
-                      </div></div>
-
-                    <div className="row mb-3 shadow shadow-sm">
-                      <div
-                        className="col-md-12 px-2 py-3 form-body"
-                      >
-                        <h2 className="text-success mb-3 text-center">
-                          Route Partner
-                        </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                          <Form.Label className="text-dark fs-6">
-                            I accept one-route partner
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={selectedCarYearRanges}
-                            onChange={(e) => setSelectedCarYearRanges(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>Select Car Year Ranges</option>
-                            {carYearRanges?.map((man) => (
-                              <option key={man.id} value={man.car_year_ranges}>
-                                {man.car_year_ranges}
-                              </option>
-                            ))}
-                          </Form.Select>
-                        </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                          <Form.Label className="text-dark fs-6">
-                            Registeration Number
-                          </Form.Label>
-                          <Form.Control
-                            required
-                            type="text"
-                            className="text-secondary"
-                            value={selectedRegNumber}
-                            onChange={(e) => setSelectedRegNumber(e.target.value)}
-                            placeholder="Registeration Number"
-                            defaultValue=""
-                          />
-                        </Form.Group>
-                      </div></div>
 
                     <div className="row mb-3 shadow shadow-sm">
                       <div
@@ -3525,8 +3472,14 @@ const DriverRegistration = () => {
                       spacing={2}
                       style={{ justifyContent: "right" }}
                     >
-                      <Button variant="" className="btnregistration" onClick={handleDriver}>
-                        Submit
+                      <Button variant="" className="btnregistration" onClick={handleDriver} disabled={isLoading}>
+                        {isLoading ? (
+                          <span>
+                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                          </span>
+                        ) : (
+                          'Submit'
+                        )}
                       </Button>
                     </Stack>
                   </Form>
