@@ -1111,8 +1111,10 @@ const DriverRegistration = () => {
             <div className="containter p-5">
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white mt-5 mb-5">
-                  <div className="row shadow
-                " style={{ backgroundColor: 'rgb(42, 64, 42' }}>
+                  <div 
+                    className="row shadow" 
+                    style={{ backgroundColor: '#1F5F5B' }}
+                >
                     <h1 className="text-center text-white py-4">
                       Registration Form
                     </h1></div>
@@ -2006,7 +2008,10 @@ const DriverRegistration = () => {
             <div className="containter p-5">
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
-                  <div className="row shadow" style={{ backgroundColor: "rgb(42, 64, 42" }}>
+                  <div 
+                    className="row shadow" 
+                    style={{ backgroundColor: '#1F5F5B' }}
+                  >
                     <h1
                       className="text-center text-white py-4"
 
