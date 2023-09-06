@@ -1373,7 +1373,7 @@ const DriverRegistration = () => {
                             required
                           >
                             <option value="" hidden>
-                              Select a city
+                              Select a City
                             </option>
                             {selectedEndProvinceCities?.map((province) => (
                               <option key={province.id} value={province.id}>
@@ -1828,7 +1828,7 @@ const DriverRegistration = () => {
                       </Form.Group>
                       <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
                         <Form.Label className="fs-6 text-black">
-                          Preferred Gender
+                          Preferred gender of travel partner
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
@@ -1837,7 +1837,7 @@ const DriverRegistration = () => {
                           onChange={(e) => setPreferredGender(e.target.value)}
                           required
                         >
-                          <option value="" hidden>Gender</option>
+                          <option value="" hidden>Preferred Gender</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                           <option value="Both">Both</option>
@@ -2093,7 +2093,7 @@ const DriverRegistration = () => {
                             className="text-secondary"
                             value={selectedModelName}
                             onChange={(e) => setSelectedModelName(e.target.value)}
-                            placeholder="Car Model"
+                            placeholder="Model Name (Civic, City etc)"
                             defaultValue=""
                           />
                         </Form.Group>
@@ -2191,7 +2191,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        {/* <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Car Year Ranges
                           </Form.Label>
@@ -2209,7 +2209,7 @@ const DriverRegistration = () => {
                               </option>
                             ))}
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registeration Number
@@ -2297,22 +2297,7 @@ const DriverRegistration = () => {
                           </Form.Select>
                         </Form.Group>
 
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
-                          <Form.Label className="text-dark fs-6">
-                            I also accept mid-route partner
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={selectedMidRoutePartner}
-                            onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>I also accept mid-route partner</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                          </Form.Select>
-                        </Form.Group>
+                     
                       </div></div>
 
 
@@ -2323,12 +2308,12 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Bank/Payment Details
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. At-least one field must be filled. </p>
                         <div class="container text-center">
-                          <img src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
-                          <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                          <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
-                          <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
+                          <img clasName="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
                         </div>
                         <form id="paymentForm">
                           <div className="mt-4 px-3">
@@ -2717,10 +2702,10 @@ const DriverRegistration = () => {
                     </div> */}
                     <div className="row" style={{ border: "1px solid #cddbd9" }}>
                       <div className="col">
-                        <div className="container text-center d-flex justify-content-center  flex-wrap py-2">
+                        <div className="container text-center d-flex justify-content-center flex-wrap py-2">
                           <Button
                             variant="outlined"
-                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"} py-2 btn-toogle  mx-2 mt-1`}
+                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"} py-2 btn-toogle  mx-2 mt-1 fw-bold`}
                             onClick={() => {
                               setshowmyself(true);
                               setshowmydriver(false);
@@ -2734,7 +2719,7 @@ const DriverRegistration = () => {
                           </Button>
                           <Button
                             variant="outlined"
-                            className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1`}
+                            className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1 fw-bold`}
                             onClick={() => {
                               setshowmyself(false);
                               setshowmydriver(true);
@@ -2748,7 +2733,7 @@ const DriverRegistration = () => {
                           </Button>
                           <Button
                             variant="outlined"
-                            className={`btn ${showboth === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1`}
+                            className={`btn ${showboth === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1 fw-bold`}
                             onClick={() => {
                               setshowmydriver(false);
                               setshowmyself(false);
@@ -2789,7 +2774,7 @@ const DriverRegistration = () => {
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
-                                Driving Licence No.
+                                Driving License No.
                               </Form.Label>
                               <Form.Control
                                 required
@@ -2827,7 +2812,7 @@ const DriverRegistration = () => {
                               className="mb-2"
                             >
                               <Form.Label text-dark fs-6>
-                                Place Issued
+                                Place of Issued
                               </Form.Label>
                               <Form.Control
                                 required
@@ -3050,7 +3035,7 @@ const DriverRegistration = () => {
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
-                                Driving Licence No.
+                                Driving License No.
                               </Form.Label>
                               <Form.Control
                                 required
@@ -3078,6 +3063,25 @@ const DriverRegistration = () => {
                                 placeholder="Enter Here"
                                 value={inputDriverValidUpto}
                                 onChange={(e) => setInputDriverValidUpto(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place of Issued
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Enter Here"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
                                 defaultValue=""
                               />
                             </Form.Group>
@@ -3409,7 +3413,7 @@ const DriverRegistration = () => {
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
-                              Driving Licence No.
+                              Driving License No.
                             </Form.Label>
                             <Form.Control
                               required
@@ -3440,6 +3444,25 @@ const DriverRegistration = () => {
                               defaultValue=""
                             />
                           </Form.Group>
+                          <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom01"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place of Issued
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Enter Here"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
                           <Form.Group
                             as={Col}
                             md="12"

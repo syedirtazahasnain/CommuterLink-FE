@@ -341,7 +341,7 @@ const TravelBuddyProfile = () => {
       <div className="card p-4 bg-light" >
         <div className="card p-4 backgroundColor">
           <div className="row px-3">
-            <div className="col-md-1  border border-1 border-success">
+            <div className="col-md-1 ">
               <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />
             </div>
             <div className="col-md-11 px-5">
