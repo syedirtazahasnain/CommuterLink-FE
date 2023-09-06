@@ -604,6 +604,7 @@ const BackendLayout = ({ children }) => {
                           </div>
                          
                         </div>
+                     
                         <div
                           className={
                             sidebarOpened
@@ -612,8 +613,28 @@ const BackendLayout = ({ children }) => {
                           }
                         >
                         </div>
+                       
                       </div>
+                      
                     </div>
+                    <div
+                      className="app-sidebar-logo sidebar-bg border-0"
+                      id="kt_app_sidebar_logo"
+                    >
+                    <div className="container text-center " id="kt_app_sidebar_logo" style={{backgroundColor:"#06373A"}}>
+                        <img
+                          src={`${BASE_URL}/assets/images/Sysreformslogo2.png`}
+                          className="img-fluid app-sidebar-logo-default py-2 mb-4"
+                          style={{ height: "70px", width: "auto" }}
+                          alt=""
+                        />
+                         <img
+                          src={`${BASE_URL}/assets/images/Sysreformssmlogo.png`}
+                          className="h-40px app-sidebar-logo-minimize w-auto"
+                          style={{ height: "80px", width: "auto",backgroundColor:"#06373A" }}
+                          alt=""
+                        />
+                      </div></div>
                   </div>
 
                   {/* Dashboard Content */}

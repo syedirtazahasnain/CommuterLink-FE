@@ -255,7 +255,7 @@ const Driver = () => {
                                                     </Select>
                                                 </FormControl>
                                             </Box>
-                                            <Row className="my-3 mx-0 px-1" style={{ border: '1px solid #cddbd9' }}>
+                                            <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
                                                 <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
                                                     <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
                                                         I Commute (Select Days)

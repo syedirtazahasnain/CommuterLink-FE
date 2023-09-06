@@ -338,10 +338,10 @@ const TravelBuddyProfile = () => {
         </h4>
       </div> */}
 
-      <div className="card p-4 bg-light p-2" >
+      <div className="card p-4 bg-light" >
         <div className="card p-4 backgroundColor">
-          <div className="row">
-            <div className="col-md-1 mt-1">
+          <div className="row px-3">
+            <div className="col-md-1  border border-1 border-success">
               <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />
             </div>
             <div className="col-md-11 px-5">
@@ -394,7 +394,7 @@ const TravelBuddyProfile = () => {
 
             </div>
           </div>
-          <hr style={{ color: "grey" }} />
+          <hr style={{ color: "green", fontWeight:"bolder" }} />
           <div className="row">
             <h2 className="text-success py-2 fw-bold">{profileType === "rider" ? ("Rider Details") : ("Driver Details")}</h2>
             <div className="col-md-6">
@@ -551,7 +551,7 @@ const TravelBuddyProfile = () => {
             {/* <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
               Back
             </Button> */}
-            <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4" onClick={youSure}>
+            <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3" onClick={youSure}>
               Cancel Agreement
             </Button>
           </div>
