@@ -587,12 +587,12 @@ a.btn:hover {
 .nav-link {
   cursor: pointer;
 }
-.newdashboard {
+/* .newdashboard {
   background-color: #8fc4b7 !important;
 }
 .app-header {
   background-color: #8fc4b7 !important;
-}
+} */
 .image-upload-container {
   width: 400px; /* Adjust the width as needed */
 }
