@@ -1373,7 +1373,7 @@ const DriverRegistration = () => {
                             required
                           >
                             <option value="" hidden>
-                              Select a city
+                              Select a City
                             </option>
                             {selectedEndProvinceCities?.map((province) => (
                               <option key={province.id} value={province.id}>
