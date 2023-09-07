@@ -2191,7 +2191,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        {/* <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Car Year Ranges
                           </Form.Label>
@@ -2209,7 +2209,7 @@ const DriverRegistration = () => {
                               </option>
                             ))}
                           </Form.Select>
-                        </Form.Group> */}
+                        </Form.Group>
                         <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registeration Number
@@ -2297,7 +2297,22 @@ const DriverRegistration = () => {
                           </Form.Select>
                         </Form.Group>
 
-                     
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            I also accept mid-route partner
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedMidRoutePartner}
+                            onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>I also accept mid-route partner</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </Form.Select>
+                        </Form.Group>
                       </div></div>
 
 
@@ -2308,11 +2323,11 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Bank/Payment Details
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. At-least one field must be filled. </p>
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
                         <div class="container text-center">
                           <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                          <img clasName="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
                         </div>
                         <form id="paymentForm">
@@ -2702,7 +2717,7 @@ const DriverRegistration = () => {
                     </div> */}
                     <div className="row" style={{ border: "1px solid #cddbd9" }}>
                       <div className="col">
-                        <div className="container text-center d-flex justify-content-center flex-wrap py-2">
+                        <div className="container text-center d-flex justify-content-center  flex-wrap py-2">
                           <Button
                             variant="outlined"
                             className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"} py-2 btn-toogle  mx-2 mt-1 fw-bold`}
@@ -3072,25 +3087,6 @@ const DriverRegistration = () => {
                               controlId="validationCustom01"
                               className="mb-2"
                             >
-                              <Form.Label text-dark fs-6>
-                                Place of Issued
-                              </Form.Label>
-                              <Form.Control
-                                required
-                                type="text"
-                                className="text-secondary"
-                                placeholder="Enter Here"
-                                value={inputPlaceIssueMySelf}
-                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
-                                defaultValue=""
-                              />
-                            </Form.Group>
-                            <Form.Group
-                              as={Col}
-                              md="12"
-                              controlId="validationCustom01"
-                              className="mb-2"
-                            >
                               <Form.Label className="text-dark fs-6">
                                 Upload License (front)
                               </Form.Label>
@@ -3444,25 +3440,6 @@ const DriverRegistration = () => {
                               defaultValue=""
                             />
                           </Form.Group>
-                          <Form.Group
-                              as={Col}
-                              md="12"
-                              controlId="validationCustom01"
-                              className="mb-2"
-                            >
-                              <Form.Label text-dark fs-6>
-                                Place of Issued
-                              </Form.Label>
-                              <Form.Control
-                                required
-                                type="text"
-                                className="text-secondary"
-                                placeholder="Enter Here"
-                                value={inputPlaceIssueMySelf}
-                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
-                                defaultValue=""
-                              />
-                            </Form.Group>
                           <Form.Group
                             as={Col}
                             md="12"
