@@ -237,13 +237,15 @@ const Signup = () => {
   const handleFullNameChange = (e) => {
     const value = e.target.value;
     setFullName(value);
-
-    if (value.length < 4 && value.trim() !== "") {
-      setFullNameError("Full Name must be at least 4 characters");
+    if (!/^[a-zA-Z]+$/.test(value)) {
+      setFullNameError("Full Name must contain only alphabetic characters");
+    } else if (value.length < 4 && value.trim() !== "") {
+      setFullNameError("Full Name must be at least 4 alphabetic characters");
     } else {
       setFullNameError("");
     }
   };
+
 
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
@@ -490,38 +492,35 @@ const Signup = () => {
                     className="mt-3 text-center"
                     controlId="formBasicEmail"
                   >
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          value="termsService"
-                          style={{ borderColor: "#198754" }}
-                          required
-                          onChange={(e) => setTermsService(e.target.checked)}
-                          size="small"
-                        />
-                      }
-                      label={
-                        <div id="span-text" className="mr-5 small">
-                          I agree with all statements in
-                          <a href="" style={{ textDecoration: "none" }}>
-                            <span
-                              style={{
-                                color: "#198754",
-                                textDecoration: "none",
-                              }}
-                            >
-                              Terms of service
-                            </span>
-                          </a>
-                        </div>
-                      }
-                    />
-                  </Form.Group>
-                  <div className="col-md-12  mt-3 text-center">
-                    <Button
-                      className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
-                      onClick={() => postData()}
-                    >
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value="termsService"
+                            style={{ borderColor: "#198754" }}
+                            required
+                            onChange={(e) => setTermsService(e.target.checked)}
+                            size="small"
+                          />
+                        }
+                        label={
+                          <div id="span-text" className="mr-5 small">
+                            I agree with all statements in
+                            <a href="" style={{ textDecoration: "none" }}>
+                              <span
+                                style={{
+                                  color: "#198754",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                Terms of service
+                              </span>
+                            </a>
+                          </div>
+                        }
+                      />
+                    </Form.Group>
+                    <div className="col-md-12  mt-3 text-center">
+                    <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={() => postData()}>
                       Sign up
                     </Button>
                   </div>

@@ -344,7 +344,9 @@ const Login = () => {
                                   textDecoration: "none",
                                 }}
                               >
-                               {" "} Terms of service
+                               {" "} 
+                               &nbsp;
+                               Terms of service
                               </span>
                             </a>
                           </div>

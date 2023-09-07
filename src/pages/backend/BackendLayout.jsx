@@ -525,7 +525,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon font-custom">
-                                <i className="fas fa-solid fa-user fa-2x"></i>
+                              <i class="fa-solid fa-rotate"></i>
                               </span>
                               <span className="menu-title text-white font-custom">
                                 Update Matching Criteria
@@ -592,14 +592,14 @@ const BackendLayout = ({ children }) => {
                     <div className="container text-center " id="kt_app_sidebar_logo" style={{backgroundColor:"#06373A"}}>
                         <img
                           src={`${BASE_URL}/assets/images/Sysreformslogo2.png`}
-                          className="img-fluid app-sidebar-logo-default py-2 mb-4"
-                          style={{ height: "70px", width: "auto" }}
+                          className="img-fluid app-sidebar-logo-default py-2 "
+                          style={{ height: "50px", width: "auto" }}
                           alt=""
                         />
                          <img
                           src={`${BASE_URL}/assets/images/Sysreformssmlogo.png`}
-                          className="h-40px app-sidebar-logo-minimize w-auto"
-                          style={{ height: "80px", width: "auto",backgroundColor:"#06373A" }}
+                          className=" app-sidebar-logo-minimize w-auto"
+                          style={{ height: "40px", width: "auto",backgroundColor:"#06373A" }}
                           alt=""
                         />
                       </div></div>

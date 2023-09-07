@@ -1,6 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const  Register=()=> {
+
+  const navigate = useNavigate();
+  const loginRoute = () => {
+  navigate("/login");
+
+};
   return (
     <div>
         <section className="mt-5">
@@ -12,6 +19,7 @@ const  Register=()=> {
               <p>Care to Share - Carpool with Your Neighbourhood</p>
               <button
                 className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
+              onClick={loginRoute}
               >
                 JOIN NOW
               </button>

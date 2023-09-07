@@ -138,7 +138,7 @@ function HowWorks() {
             <section id="working" className="my-0">
               <div className="container">
                 <div className="mt-3 text-center">
-                  <Link className="link-custom fs-5" to="">To Learn More Please Visit FAQs</Link>
+                  <Link  className="link-custom fs-5" to="/faq">To Learn More Please Visit FAQs</Link>
                 </div>
               </div>
             </section>
