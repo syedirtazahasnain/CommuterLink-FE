@@ -62,15 +62,18 @@ const BackendLayout = ({ children }) => {
         text: "You are about to logout from commuterLink",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: 'green',
+        cancelButtonColor: 'green',
         confirmButtonText: 'Logout'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
             position:'top',
             title: 'Logout',
-            text:'Successful'
+            text:'Successful',
+            customClass: {
+              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            },
           })
           dispatch(setloginState(""));
           dispatch(setsignupState(""));
@@ -604,6 +607,7 @@ const BackendLayout = ({ children }) => {
                           </div>
                          
                         </div>
+                     
                         <div
                           className={
                             sidebarOpened
@@ -612,8 +616,28 @@ const BackendLayout = ({ children }) => {
                           }
                         >
                         </div>
+                       
                       </div>
+                      
                     </div>
+                    <div
+                      className="app-sidebar-logo sidebar-bg border-0"
+                      id="kt_app_sidebar_logo"
+                    >
+                    <div className="container text-center " id="kt_app_sidebar_logo" style={{backgroundColor:"#06373A"}}>
+                        <img
+                          src={`${BASE_URL}/assets/images/Sysreformslogo2.png`}
+                          className="img-fluid app-sidebar-logo-default py-2 mb-4"
+                          style={{ height: "70px", width: "auto" }}
+                          alt=""
+                        />
+                         <img
+                          src={`${BASE_URL}/assets/images/Sysreformssmlogo.png`}
+                          className="h-40px app-sidebar-logo-minimize w-auto"
+                          style={{ height: "80px", width: "auto",backgroundColor:"#06373A" }}
+                          alt=""
+                        />
+                      </div></div>
                   </div>
 
                   {/* Dashboard Content */}

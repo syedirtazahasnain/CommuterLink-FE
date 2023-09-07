@@ -149,7 +149,7 @@ const Rider = () => {
         </div>
       </div>
       <div className="card p-4  p-2">
-        <div className="card" style={{ backgroundColor: " rgb(191, 216, 210)" }}>
+        <div className="card backgroundColor">
           <div className="card-body text-dark">
             <div className="container text-center mt-4">
 
@@ -218,7 +218,7 @@ const Rider = () => {
                     </Select>
                   </FormControl>
                 </Box>
-                <Row className="my-3 mx-0 px-1" style={{ border: '1px solid #cddbd9' }}>
+                <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
                   <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
                     <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
                       I Commute (Select Days)

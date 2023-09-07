@@ -1094,7 +1094,7 @@ const SchoolRegistration = () => {
                         required
                       >
                         <option value="" hidden>
-                          Select a city
+                          Select a City
                         </option>
                         {selectedEndProvinceCities?.map((province) => (
                           <option key={province.id} value={province.id}>
@@ -1629,7 +1629,7 @@ const SchoolRegistration = () => {
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
-                      Preferred Gender
+                      Preferred gender of travel partner
                     </Form.Label>
                     <Form.Select
                        aria-label="Default select example"
@@ -1639,7 +1639,7 @@ const SchoolRegistration = () => {
                       required
                     >
                       <option value="" hidden>
-                        Gender
+                       Preferred Gender
                       </option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>

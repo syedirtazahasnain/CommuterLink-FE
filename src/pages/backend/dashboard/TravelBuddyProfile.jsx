@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TextField, createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import DatePicker from '@mui/lab/DatePicker';
@@ -316,11 +316,20 @@ const TravelBuddyProfile = () => {
   return (
     <div>
       <div className="page-title">
-          <h3 className="card p-4 text-success my-2 fw-bold">
-            Travel Buddy Profile
-          </h3>
-          <h6 className="card p-2 px-4 text-success ">{`You are looking for travel buddles to ride your car, others who want
-          to share their car and to connect with members with whom you can take turns to use each other's car`}</h6>
+      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-success my-2 fw-bold m-0">Travel Buddy Profile</h3>
+            <Link
+              to={"/dashboard"} >
+              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
+        </div>
+          <h5 className="card p-2 px-4 text-success ">{`You are looking for travel buddles to ride your car, others who want
+          to share their car and to connect with members with whom you can take turns to use each other's car`}</h5>
         </div>
       {/* <div className="page-title">
         <h4 className="card p-2 px text-success my-2">
@@ -329,10 +338,10 @@ const TravelBuddyProfile = () => {
         </h4>
       </div> */}
 
-      <div className="card p-4 bg-light p-2" >
+      <div className="card p-4 bg-light" >
         <div className="card p-4 backgroundColor">
-          <div className="row">
-            <div className="col-md-1 mt-1">
+          <div className="row px-3">
+            <div className="col-md-1 ">
               <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />
             </div>
             <div className="col-md-11 px-5">
@@ -385,7 +394,7 @@ const TravelBuddyProfile = () => {
 
             </div>
           </div>
-          <hr style={{ color: "grey" }} />
+          <hr style={{ color: "green", fontWeight:"bolder" }} />
           <div className="row">
             <h2 className="text-success py-2 fw-bold">{profileType === "rider" ? ("Rider Details") : ("Driver Details")}</h2>
             <div className="col-md-6">
@@ -539,10 +548,10 @@ const TravelBuddyProfile = () => {
             </div>
           </div>
           <div className="text-center d-flex m-auto justify-content-between">
-            <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
+            {/* <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
               Back
-            </Button>
-            <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4" onClick={youSure}>
+            </Button> */}
+            <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3" onClick={youSure}>
               Cancel Agreement
             </Button>
           </div>

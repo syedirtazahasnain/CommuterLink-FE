@@ -219,10 +219,10 @@ body{
  background-color: rgb(217, 217, 217)!important;
 }
 
-.Profile{
+/* .Profile{
   background-color: #9ccfc3;
   
- }
+ } */
  .Profile:hover{
   background-color: #c2ccc9;
   

@@ -49,11 +49,11 @@ const Office_School = () => {
           id="sign-up"
           className="mt-5 main-bg">
           <div className="container">
-            <div className="row">
+            <div className="row py-5">
               <div
                 className="col-md-6 d-flex fixed"
                 style={{
-                  marginTop: "12vh",
+                  marginTop: "",
                 }}
               >
                 <Carousel
@@ -81,7 +81,7 @@ const Office_School = () => {
                     </Carousel.Item>
                     <Carousel.Item interval={2000}>
                       <img
-                        className="d-block img-fluid w-auto"
+                        className="d-block  img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
                         alt="First slide"
                       />

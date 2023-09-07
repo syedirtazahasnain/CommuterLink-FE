@@ -105,8 +105,8 @@ const ContactUs = () => {
                     </div>
                   </div>
                 </form>
-                <div className="d-flex justify-content-center">
-                  <Button className="btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3">
+                <div className="d-flex justify-content-center mt-3">
+                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3">
                     Send
                   </Button>
                 </div>

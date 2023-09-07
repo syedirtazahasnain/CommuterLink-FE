@@ -69,7 +69,10 @@ const PartnerCancellation = () => {
         Swal.fire({
           position: 'top',
           icon: 'warning',
-          text: 'Please select a date',
+          text: 'Please select a date', 
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
         });
         return;
       }
@@ -105,8 +108,11 @@ const PartnerCancellation = () => {
         else {
           Swal.fire({
             position: 'top',
-            icon: 'warning',
+            icon: 'error',
             text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            },
           });
         }
       }
@@ -141,8 +147,11 @@ const PartnerCancellation = () => {
         else {
           Swal.fire({
             position: 'top',
-            icon: 'warning',
+            icon: 'error',
             text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            },
           });
         }
       }
@@ -152,6 +161,9 @@ const PartnerCancellation = () => {
         position: 'top',
         icon: 'error',
         text: 'An error occurred while sending the request.',
+         customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },
       });
     }
   };

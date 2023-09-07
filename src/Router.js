@@ -51,6 +51,7 @@ import TermsCondition from "./pages/backend/dashboard/TermsCondition";
 import Rider from "./pages/backend/MatchingUpdate/Rider";
 import Driver from "./pages/backend/MatchingUpdate/Driver";
 import PartnerCancellation from "./pages/backend/dashboard/PartnerCancellation";
+import AmShareRide from "./pages/frontend/register-form/AmShareRide";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -93,6 +94,7 @@ const Router = () => {
         <Route path="/driver-registration" element={<FrontendLayout children={<DriverRegistration />} />} />
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />} />
         <Route path="/shareride" element={<FrontendLayout children={<ShareRide />} />}></Route>
+        <Route path="/amshareride" element={<FrontendLayout children={<AmShareRide />} />}></Route>
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />} />
         <Route path="/beforeapprovalterms" element={<BackendLayout children={<BeforeApprovalTerms />} />}></Route>
         <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
