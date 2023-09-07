@@ -20,15 +20,15 @@ const customTheme = createTheme({
 });
 
 const BackendLayout = ({ children }) => {
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const currentPage = useSelector((s) => s.general.currentPage);
-  const sidebarOpened = useSelector((s) =>s.general.sidebarOpened);
-  const [name , setName] = useState("");
-  const [image , setImage] = useState("");
-  const [submitbtn , setSubmit] = useState(false); 
+  const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [submitbtn, setSubmit] = useState(false);
 
   // For getting current date
   const currentDate = new Date();
@@ -48,8 +48,8 @@ const BackendLayout = ({ children }) => {
 
   const route = () => {
     setSubmit(true);
-    
-    if(!submitbtn){
+
+    if (!submitbtn) {
       navigate("/commuter-profile");
     }
   }
@@ -57,7 +57,7 @@ const BackendLayout = ({ children }) => {
   const logout = () => {
     if (
       Swal.fire({
-        position:'top',
+        position: 'top',
         title: 'Are you sure?',
         text: "You are about to logout from commuterLink",
         icon: 'warning',
@@ -68,9 +68,9 @@ const BackendLayout = ({ children }) => {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
-            position:'top',
+            position: 'top',
             title: 'Logout',
-            text:'Successful',
+            text: 'Successful',
             customClass: {
               confirmButton: 'bg-success', // Apply custom CSS class to the OK button
             },
@@ -80,11 +80,11 @@ const BackendLayout = ({ children }) => {
           navigate("/login");
         }
       })
-  
-    ){
+
+    ) {
     }
   }
-  
+
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
@@ -95,7 +95,7 @@ const BackendLayout = ({ children }) => {
   }, []);
 
   const getProfileData = async () => {
-    try{
+    try {
       const response = await fetch(
         `${API_URL}/api/v1/profile`,
         {
@@ -103,13 +103,13 @@ const BackendLayout = ({ children }) => {
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            Authorization : `Bearer ${userToken}`,
+            Authorization: `Bearer ${userToken}`,
           },
         }
       );
 
       const jsonresponse = await response.json();
-      if(jsonresponse){
+      if (jsonresponse) {
         setName(jsonresponse[0].name);
         setImage(jsonresponse[0].contact.commuter_image);
         //console.log("Image", jsonresponse[0].contact.commuter_image);
@@ -119,9 +119,9 @@ const BackendLayout = ({ children }) => {
         setImage("");
       }
 
-      if(jsonresponse.statusCode === 500){
+      if (jsonresponse.statusCode === 500) {
         Swal.fire({
-          position:'top',
+          position: 'top',
           icon: 'error',
           text: `${jsonresponse.message}`
         })
@@ -195,110 +195,82 @@ const BackendLayout = ({ children }) => {
                           <p className=" my-auto fw-normal text-uppercase">
                             {formattedDate}
                           </p>
-                          {name ? (<h5 className="fw-bold">Welcome {name}!</h5>) : (<h5 className="fw-bold">Welcome Yasir Abbas Mirza!</h5>)}
+                          {name ? (<h5 className="fw-bold">Welcome {name}!</h5>) : (<h5 className="fw-bold">Welcome CL User!</h5>)}
                         </div>
                       </div>
                       <div className="header-right">
-                  <div
-                    className="app-navbar-item"
-                    id="kt_header_user_menu_toggle"
-                  >
-                    <div
-                      className="d-flex"
-                      data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                      data-kt-menu-attach="parent"
-                      data-kt-menu-placement="bottom-end"
-                    >
-                      <div className="text-end d-none d-sm-flex flex-column justify-content-start py-2">
-                        <div className="align-self-end lead">
-                        <div className="d-block">
-                          {/* <p className=" my-auto fw-normal text-uppercase">
-                            {formattedDate}
-                          </p> */}    
-                   {name ? (<h6 className="fs-6 fw-bold font-custom"> {name}</h6>) : (<h6 className="fs-6 font-custom fw-bold">Yasir Abbas Mirza</h6>)}
-
-                          <p className="fw-bold font-custom fs-7 text-dark">USER ROLE</p>
-                        </div>                        </div>
-                        {/* <div>
-                          <span
-                            className="{font-family-default cursor-pointer text-decoration-underline"
-                                
+                        <div
+                          className="app-navbar-item"
+                          id="kt_header_user_menu_toggle"
+                        >
+                          <div
+                            className="d-flex"
+                            data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+                            data-kt-menu-attach="parent"
+                            data-kt-menu-placement="bottom-end"
                           >
-                            EN
-                          </span>
-                          <span className="line">|</span>
-                          <span
-                            className="{font-family-default cursor-pointer text-decoration-underline"
-                                
-                          >
-                            FR
-                          </span>
-                          <span className="line">|</span>
-                          <span
-                            className="{font-family-default cursor-pointer text-decoration-underline"
-                                
-                          >
-                            ES
-                          </span>
-                        </div> */}
-                      </div>
-                      <div className="text-center">
-                        <div className="symbol symbol-50px symbol-circle me-3" style={{height:"10px"}}>
-                              {image ? 
-                                (
-                                  <img
-                                    src={`${IMAGE_URL}${image}`}
-                                    style={{height:"35px", width:"35px"}}
-                                  />
-                                ) : 
-                                (
-                                  <img
-                                    src={`${BASE_URL}/assets/images/pic.png`}
-                                    style={{height:"35px", width:"35px"}}
-                                  />
-                                )} 
-                              </div>                        
-                        {/* <div className="border border-pvs border-1 cursor-pointer symbol symbol symbol-circle symbol-35px mb-2">
-                              </div> */}
-                        <div className="h-15px me-3 mt-3">
-                          {/* <Notifications /> */}
+                            <div className="text-end d-none d-sm-flex flex-column justify-content-start py-2">
+                              <div className="align-self-end lead">
+                                <div className="d-block">
+                                  {name ? (<h6 className="fs-6 fw-bold font-custom"> {name}</h6>) : (<h6 className="fs-6 font-custom fw-bold">CL User</h6>)}
 
-                          <Tooltip title="Notifications">
-                            <Link
-                              to='/notification'
-                              className='mx-1 h-15px d-inline-block'
-                              style={{ cursor: "pointer" }}
-                            >
-                              <i className="fa-regular fs-6 fa-bell icon-green mt-2"></i>
-                            </Link>
-                          </Tooltip>
-                          <Tooltip title="Settings">
-                            <Link
-                              to='/portal/profile'
-                              className='mx-1 h-15px d-inline-block'
-                              style={{ cursor: "pointer" }}
-                            >
-                              <img className=" mb-2"
-                            src={`${BASE_URL}/assets/images/settings.png`}
-                          />
-                              {/* <i className="fa-solid fa-gear icon-green mt-2"></i> */}
-                            </Link>
-                          </Tooltip>
+                                  <p className="fw-bold font-custom fs-7 text-dark">USER ROLE</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="text-center">
+                              <div className="symbol symbol-50px symbol-circle me-3" style={{ height: "10px" }}>
+                                {image ?
+                                  (
+                                    <img
+                                      src={`${IMAGE_URL}${image}`}
+                                      style={{ height: "35px", width: "35px" }}
+                                    />
+                                  ) :
+                                  (
+                                    <img
+                                      src={`${BASE_URL}/assets/images/pic.png`}
+                                      style={{ height: "35px", width: "35px" }}
+                                    />
+                                  )}
+                              </div>
+                              <div className="h-15px me-3 mt-3">
+                                <Tooltip title="Notifications">
+                                  <Link
+                                    to='/notification'
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="fa-regular fs-6 fa-bell icon-green mt-2"></i>
+                                  </Link>
+                                </Tooltip>
+                                <Tooltip title="Settings">
+                                  <Link
+                                    to='/portal/profile'
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <img className=" mb-2"
+                                      src={`${BASE_URL}/assets/images/settings.png`}
+                                    />
+                                    {/* <i className="fa-solid fa-gear icon-green mt-2"></i> */}
+                                  </Link>
+                                </Tooltip>
 
-                          <Tooltip title="Logout">
-                            <a
-                              onClick={logout}
-                              className='mx-1 h-15px d-inline-block'
-                              style={{ cursor: "pointer" }}
-                            >
-                              <i className="fa-solid fa-power-off fs-6 icon-green mt-2"></i>
-                            </a>
-                          </Tooltip>
+                                <Tooltip title="Logout">
+                                  <a
+                                    onClick={logout}
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="fa-solid fa-power-off fs-6 icon-green mt-2"></i>
+                                  </a>
+                                </Tooltip>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
                       {/* <div className="header-right">
                         <div
                           className="app-navbar-item"
@@ -377,7 +349,7 @@ const BackendLayout = ({ children }) => {
                           style={{ height: "50px", width: "auto" }}
                           alt=""
                         />
-                         <img
+                        <img
                           src={`${BASE_URL}/assets/images/CL-logo-small.png`}
                           className="h-40px app-sidebar-logo-minimize img-fluid w-auto"
                           style={{ height: "50px", width: "auto" }}
@@ -463,9 +435,8 @@ const BackendLayout = ({ children }) => {
 
                           <div className="menu-item border-custom">
                             <Link
-                              className={`menu-link ${
-                                currentPage == "dashboard" ? "active" : ""
-                              }`}
+                              className={`menu-link ${currentPage == "dashboard" ? "active" : ""
+                                }`}
                               to={"/dashboard"}
                               style={{
                                 borderRadius: "0%",
@@ -483,9 +454,8 @@ const BackendLayout = ({ children }) => {
                           </div>
                           <div className="menu-item border-custom">
                             <Link
-                              className={`menu-link ${
-                                currentPage == "profile" ? "active" : ""
-                              }`}
+                              className={`menu-link ${currentPage == "profile" ? "active" : ""
+                                }`}
                               to={"/viewprofile"}
                               style={{
                                 borderRadius: "0%",
@@ -503,11 +473,10 @@ const BackendLayout = ({ children }) => {
                           </div>
                           <div className="menu-item border-custom">
                             <Link
-                              className={`menu-link ${
-                                currentPage == "termscondition"
+                              className={`menu-link ${currentPage == "termscondition"
                                   ? "active"
                                   : ""
-                              }`}
+                                }`}
                               to={"/termscondition"}
                               style={{
                                 borderRadius: "0%",
@@ -516,8 +485,8 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon font-custom">
-                              <i class="fa-regular fa-file-lines"></i>
-                              {/* <i className="fa-solid fa-terminal"></i> */}
+                                <i class="fa-regular fa-file-lines"></i>
+                                {/* <i className="fa-solid fa-terminal"></i> */}
                               </span>
                               <span className="menu-title text-white font-custom">
                                 Terms and Conditions
@@ -526,9 +495,8 @@ const BackendLayout = ({ children }) => {
                           </div>
                           <div className="menu-item border-custom">
                             <Link
-                              className={`menu-link ${
-                                currentPage == "notification" ? "active" : ""
-                              }`}
+                              className={`menu-link ${currentPage == "notification" ? "active" : ""
+                                }`}
                               to={"/notification"}
                               style={{
                                 borderRadius: "0%",
@@ -547,9 +515,8 @@ const BackendLayout = ({ children }) => {
                           </div>
                           <div className="menu-item border-custom">
                             <Link
-                              className={`menu-link ${
-                                currentPage == "matchingupdate" ? "active" : ""
-                              }`}
+                              className={`menu-link ${currentPage == "matchingupdate" ? "active" : ""
+                                }`}
                               to={"/driver"}
                               style={{
                                 borderRadius: "0%",
@@ -567,9 +534,8 @@ const BackendLayout = ({ children }) => {
                           </div>
                           <div className="menu-item border-custom">
                             <Link
-                              className={`menu-link ${
-                                currentPage == "contactus" ? "active" : ""
-                              }`}
+                              className={`menu-link ${currentPage == "contactus" ? "active" : ""
+                                }`}
                               to={"/contactus"}
                               style={{
                                 borderRadius: "0%",
@@ -578,7 +544,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon font-custom">
-                              <i className="fa-solid fa-address-card"></i>
+                                <i className="fa-solid fa-address-card"></i>
                               </span>
                               <span className="menu-title text-white font-custom">
                                 Contact Us
@@ -587,9 +553,8 @@ const BackendLayout = ({ children }) => {
                           </div>
                           <div className="menu-item border-custom">
                             <Link
-                              className={`menu-link ${
-                                currentPage == "whatsapp" ? "active" : ""
-                              }`}
+                              className={`menu-link ${currentPage == "whatsapp" ? "active" : ""
+                                }`}
                               to={"/whatsapp"}
                               style={{
                                 borderRadius: "0%",
@@ -605,7 +570,7 @@ const BackendLayout = ({ children }) => {
                               </span>
                             </Link>
                           </div>
-                         
+
                         </div>
                      
                         <div
