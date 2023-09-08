@@ -83,7 +83,7 @@
 }
 
 [data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-logo {
-  border-bottom: 1px dashed rgb(118, 118, 118) !important;
+  border-bottom: 1px dashed rgb(118, 118, 118);
 }
 
 /* .menu-item:active{

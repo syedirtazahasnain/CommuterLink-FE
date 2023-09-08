@@ -3,9 +3,15 @@ import { Carousel } from "react-bootstrap";
 import { BASE_URL } from "../../../constants";
 import Navbar from "./Navbar";
 import Button from '@mui/material/Button';
+import { useNavigate } from "react-router-dom";
 
 const CarouselSlider = () => {
-  // const images=[imgSlider1,imgSlider2,imgSlider3,imgSlider4,imgSlider5]
+  
+  const navigate = useNavigate();
+  const loginRoute = () => {
+  navigate("/login");
+
+};
   return (
     <div id="carousel">
    <section>
@@ -26,6 +32,7 @@ const CarouselSlider = () => {
               <button className="animate__animated animate__fadeInUp scrollto mt-5 my-sm-0 mr-2 btn-custom px-4 py-2 rounded rounded-5 text-custom fw-bold" 
               variant="outlined" 
               type="submit"
+              onClick={loginRoute}
               >
               GET STARTED
               </button>

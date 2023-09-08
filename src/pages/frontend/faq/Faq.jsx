@@ -18,7 +18,7 @@ const Faq = () => {
 
               <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                  <Typography style={{ color: '#198754' }}>1. How is CommutersLink different than other carpooling Apps?</Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}>1. How is CommutersLink different than other carpooling Apps?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
@@ -42,9 +42,9 @@ const Faq = () => {
                   </Typography>
                 </AccordionDetails>
               </Accordion>
-              <Accordion className="accordianfaqs">
+              <Accordion  className="accordianfaqs">
                 <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                  <Typography style={{ color: '#198754' }}> 2. How the cost is calculated and distributed? </Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}> 2. How the cost is calculated and distributed? </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
@@ -71,7 +71,7 @@ const Faq = () => {
               </Accordion>
               <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography style={{ color: '#198754' }}>  3. As a travel buddy with someone who owns a car, how my payment is calculated and paid?</Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}>  3. As a travel buddy with someone who owns a car, how my payment is calculated and paid?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
@@ -96,7 +96,7 @@ const Faq = () => {
               </Accordion>
               <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography style={{ color: '#198754' }}>4. Will I be picked up from Home and dropped at my exact office location on daily basis?</Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}>4. Will I be picked up from Home and dropped at my exact office location on daily basis?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
@@ -117,7 +117,7 @@ const Faq = () => {
               </Accordion>
               <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography style={{ color: '#198754' }}>5. What are the benefits of paying through CommutersLink Wallet System?</Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}>5. What are the benefits of paying through CommutersLink Wallet System?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
@@ -146,7 +146,7 @@ const Faq = () => {
               </Accordion>
               <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography style={{ color: '#198754' }}> 6. What if I wish to change my Travel buddy?</Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}> 6. What if I wish to change my Travel buddy?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
@@ -160,7 +160,7 @@ const Faq = () => {
               </Accordion>
               <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography style={{ color: '#198754' }}>7. Will my profile be publically visible? </Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}>7. Will my profile be publically visible? </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
@@ -174,7 +174,7 @@ const Faq = () => {
               </Accordion>
               <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography style={{ color: '#198754' }}>8. Can I withdraw any balance amount from my Wallet?</Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}>8. Can I withdraw any balance amount from my Wallet?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
@@ -188,7 +188,7 @@ const Faq = () => {
               </Accordion>
               <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography style={{ color: '#198754' }}> 9. How much CommutersLink will charge me for provision of services and coordination?</Typography>
+                  <Typography className='fw-bold' style={{ color: '#198754' }}> 9. How much CommutersLink will charge me for provision of services and coordination?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>

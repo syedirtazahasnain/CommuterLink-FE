@@ -202,7 +202,7 @@ const PartnerCancellation = () => {
                       },
                         
                       "& .MuiPickersDay-dayWithMargin": {
-                        fontSize: "1.0rem",
+                        fontSize: "1.3rem",
                         margin: 0,
                         // fontWeight: 'bold',
                         color: '#1F5F5B',
