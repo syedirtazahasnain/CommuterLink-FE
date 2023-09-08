@@ -78,13 +78,12 @@ const Login = () => {
   
   const handleLogin = async () => {
     if(email === "" || password === ""){
-      // alert("Please Fill All Fields!");
       Swal.fire({
         position:'top',
         icon: 'warning',
        text: 'Please Fill All Fields',
        customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        confirmButton: 'bg-success' ,
       },
     }
       )
@@ -125,7 +124,7 @@ const Login = () => {
             icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'bg-success' ,
           },
         }
           )
@@ -133,13 +132,12 @@ const Login = () => {
         }
       
       else {
-        // alert("please check Terms of Service");
         Swal.fire({
           position:'top',
           icon: 'warning',
          text: 'Please Check Terms of Services',
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'bg-success' ,
         },
       }
         )

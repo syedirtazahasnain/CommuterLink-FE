@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const TravelPatners = () => {
   const navigate = useNavigate();
@@ -14,11 +15,28 @@ const TravelPatners = () => {
   const [price, setPrice] = useState("");
   const [date, setDate] = useState("");
   const [walletAmount, setWalletAmount] = useState("");
+  const [userType, setUserType] = useState("");
 
   useEffect(() => {
-    getTravelData();
-    getProfileData();
+    // Define a function that contains the code to execute
+    const fetchData = () => {
+      getTravelData();
+      getProfileData();
+    };
+
+    // Initial call when the component mounts
+    fetchData();
+
+    // Set up a 40-second setInterval to call the fetchData function
+    const intervalId = setInterval(fetchData, 40000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
+
+  const onNavigate = () => {
+    navigate("/rechargewallet");
+  };
 
   const route = () => {
     setSubmit(true);
@@ -49,6 +67,26 @@ const TravelPatners = () => {
         setPrice(jsonresponse.data[0].price);
         setDate(jsonresponse.data[0].aggreement_date);
       }
+      else if (jsonresponse.status_code === 100) {
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      }
+      else if (jsonresponse.status_code === 500) {
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      }
       console.log("Travel Data:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
@@ -72,6 +110,7 @@ const TravelPatners = () => {
       const jsonresponse = await response.json();
       if (jsonresponse) {
         setWalletAmount(jsonresponse[0].wallet.wallet_amount);
+        setUserType(jsonresponse[0].userlist.vehicle_option);
       }
       console.log("Travel Profile Data", jsonresponse);
     } catch (error) {
@@ -315,11 +354,18 @@ const TravelPatners = () => {
                         <div className="row py-5 w-100">
                           <div className="col-md-3 px-1 m-auto ">
                             <div className="w-100">
-                              <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
-                                Recharge
-                              </button>
+                              {userType === 0 ?
+                                (
+                                  <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5" onClick={onNavigate}>
+                                    Recharge
+                                  </button>
+                                ) :
+                                (
+                                  <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
+                                    Recharge
+                                  </button>
+                                )}
                             </div>
-
                           </div>
                         </div>
                         <div className="row w-100">

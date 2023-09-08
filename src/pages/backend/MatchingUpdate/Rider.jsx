@@ -106,7 +106,16 @@ const Rider = () => {
 
         if (jsonresponse.statusCode === 200) {
           navigate("/dashboard");
-        } else {
+        } else if (jsonresponse.statusCode === 100) {
+          // alert("Resend Error: " + jsonresponse.message);
+          Swal.fire({
+            position: 'top',
+            icon: "error",
+            text: `${jsonresponse.message}`
+          }
+          )
+        }
+        else if (jsonresponse.statusCode === 500) {
           // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position: 'top',

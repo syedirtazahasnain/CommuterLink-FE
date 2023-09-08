@@ -20,7 +20,7 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const AdvancePayment = () => {
+const RechargeWallet = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const [windowClosedManually, setWindowClosedManually] = useState(false);
@@ -35,7 +35,7 @@ const AdvancePayment = () => {
     setSubmit(true);
 
     if (!submitbtn) {
-      navigate("/congratulations");
+      navigate("/dashboard");
     }
   };
   
@@ -282,7 +282,7 @@ const AdvancePayment = () => {
           <div className="text-center">
             <Button
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
-              onClick={() => navigate("/finalstep")}
+              onClick={() => navigate("/dashboard")}
             >
               Skip Payment
             </Button>
@@ -291,7 +291,7 @@ const AdvancePayment = () => {
               onClick={route}
               disabled={!windowClosedManually}
             >
-              Next
+              Back
             </Button>
           </div>
         </div>
@@ -300,4 +300,4 @@ const AdvancePayment = () => {
   );
 };
 
-export default AdvancePayment;
+export default RechargeWallet;

@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const navigate = useNavigate();
-  const home=()=>{
+  
+  const home=()=> {
     navigate("/")
   }
+
   return (
     <div>
         <footer id="footer">
@@ -24,37 +26,37 @@ const Footer = () => {
                 <strong>Email:</strong> info@commuterslink.com<br/>
               </p>
               <div className="social-links mt-3">
-                <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
-                <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>
-                <a href="#" className="instagram">
+                <a className="twitter"><i className="bx bxl-twitter"></i></a>
+                <a className="facebook"><i className="bx bxl-facebook"></i></a>
+                <a className="instagram">
                   <i className="bx bxl-instagram"></i>
                 </a>
-                <a href="#" className="google-plus"><i className="bx bxl-skype"></i></a>
-                <a href="#" className="linkedin"><i className="bx bxl-linkedin"></i></a>
+                <a className="google-plus"><i className="bx bxl-skype"></i></a>
+                <a className="linkedin"><i className="bx bxl-linkedin"></i></a>
               </div>
             </div>
 
             <div className="col-lg-2 col-md-6 footer-links">
               <h4>Useful Links</h4>
               <ul>
-                <li>
-                  <i className="bx bx-chevron-right"></i> <DomLink to="/" >Home</DomLink>
+                <li className='cursor-pointer'>
+                  <i className="bx bx-chevron-right cursor-pointer"></i> <DomLink to="carousel" onClick={home} smooth="true" offset={20} duration={50}>Home</DomLink>
                 </li>
-                <li>
-                  <i className="bx bx-chevron-right"></i>
-                  <Link to="concept" onClick={home} smooth="true" offset={30} duration={50}>Concept</Link>
+                <li className='cursor-pointer'>
+                  <i className="bx bx-chevron-right cursor-pointer"></i>
+                  <DomLink to="carousel" onClick={home} smooth="true" offset={20} duration={50}>Concept</DomLink>
                 </li>
-                <li>
+                <li className='cursor-pointer'>
                   <i className="bx bx-chevron-right"></i>
-                  <Link to="howworks" onClick={home}  offset={30} duration={50}>How It Works?</Link>
+                  <DomLink to="howworks" onClick={home} offset={20} duration={50}>How It Works?</DomLink>
                 </li>
-                <li>
+                <li className='cursor-pointer'>
                   <i className="bx bx-chevron-right"></i>
-                  <Link to="contribure" smooth="true" onClick={home}  offset={30} duration={50}>Contribute</Link>
+                  <DomLink to="contribute" smooth="true" onClick={home} offset={20} duration={50}>Contribute</DomLink>
                 </li>
-                <li>
+                <li className='cursor-pointer'>
                   <i className="bx bx-chevron-right"></i>
-                  <Link to="contact" smooth="true" onClick={home} offset={30} duration={50}>Contact</Link>
+                  <DomLink to="contact" onClick={home} smooth="true" offset={20} duration={50}>Contact</DomLink>
                 </li>
               </ul>
             </div>
@@ -62,29 +64,29 @@ const Footer = () => {
             <div className="col-lg-3 col-md-6 footer-links">
               <h4>FAQs</h4>
               <ul>
-                <li>
+                <li className='cursor-pointer'>
                   <i className="bx bx-chevron-right1 mb-3"></i>
-                  <Link to="/faq">
+                  <Link to="/Faq">
                     How is CommutersLink different than other carpooling
                     Apps?</Link>
                  
                 </li>
-                <li>
+                <li className='cursor-pointer'>
                   <i className="bx bx-chevron-right1 "></i>
-                  <Link to="/faq">
+                  <Link to="/Faq">
                     How the cost is calculated and distributed?</Link>
                   
                 </li>
-                <li>
+                <li className='cursor-pointer'>
                   <i className="bx bx-chevron-right1"></i>
-                  <Link to="/faq">
+                  <Link to="/Faq">
                     As a travel buddy with someone who owns a car, how my
                     payment is calculated and paid?</Link>
                  
                 </li>
-                <li>
+                <li className='cursor-pointer'>
                   <i className="bx bx-chevron-right1"></i>
-                  <Link to="/faq">Click here for more FAQs </Link>
+                  <Link to="/Faq">Click here for more FAQs </Link>
                 </li>
                 
               </ul>

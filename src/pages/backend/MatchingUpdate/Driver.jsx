@@ -144,8 +144,15 @@ const Driver = () => {
 
                 if (jsonresponse.statusCode === 200) {
                     navigate("/dashboard");
-                } else {
-                    // alert("Resend Error: " + jsonresponse.message);
+                } else if (jsonresponse.statusCode === 100) {
+                    Swal.fire({
+                        position: 'top',
+                        icon: "error",
+                        text: `${jsonresponse.message}`
+                    }
+                    )
+                }
+                else if (jsonresponse.statusCode === 500) {
                     Swal.fire({
                         position: 'top',
                         icon: "error",

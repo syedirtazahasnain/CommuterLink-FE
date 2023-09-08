@@ -264,6 +264,26 @@ const TravelBuddyProfile = () => {
         setTimeDepart(jsonresponse.data[0].time_depart);
         setTimeReturn(jsonresponse.data[0].time_return);
       }
+      else if (jsonresponse.status_code === 100) {
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      }
+      if (jsonresponse.status_code === 500) {
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          },
+        });
+      }
       console.log("Travel Data:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);

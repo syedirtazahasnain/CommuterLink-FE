@@ -55,6 +55,7 @@ import AmShareRide from "./pages/frontend/register-form/AmShareRide";
 import CarouselSlider from "./pages/frontend/Hompage-components/Carousel";
 import HowWorks from "./pages/frontend/Hompage-components/HowWorks";
 import Contribute from "./pages/frontend/Hompage-components/Contribute";
+import RechargeWallet from "./pages/backend/dashboard/RechargeWallet";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -89,15 +90,16 @@ const Router = () => {
         <Route path="/rejection" element={<FrontendLayout children={<Rejection />} />} />
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />} />} />
 
-        <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />} />
         {/* <Route path="/contact" element={<BackendLayout children={<Contact />} />} /> */}
+        <Route path="/rechargewallet" element={<BackendLayout children={<RechargeWallet />} />} />
+        <Route path="/contact" element={<BackendLayout children={<Contact />} />} />
         <Route path="/driver-registration" element={<FrontendLayout children={<DriverRegistration />} />} />
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />} />
         <Route path="/requestcarowner" element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
         <Route path="/rejection" element={<FrontendLayout children={<Rejection />} />} />
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />} />} />
         <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />} />
-        {/* <Route path="/contact" element={<BackendLayout children={<Contact />} />} /> */}
+        <Route path="/contact" element={<BackendLayout children={<Contact />} />} />
         <Route path="/driver-registration" element={<FrontendLayout children={<DriverRegistration />} />} />
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />} />
         <Route path="/shareride" element={<FrontendLayout children={<ShareRide />} />}></Route>
@@ -158,6 +160,8 @@ const Router = () => {
             <Route path="/driverfinalstep" element={<BackendLayout children={<DriverFinalStep />} />}></Route>
             <Route path='/termscondition1' element={<BackendLayout children={<TermsCondition1 />} />} />
             <Route path='/termscondition' element={<BackendLayout children={<TermsCondition />} />} />
+            <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />} />
+            <Route path="/rechargewallet" element={<BackendLayout children={<RechargeWallet />} />} />
           </>
         )}
         {!userLogin && <Route path="*" element={<Navigate to="/" />} />}

@@ -142,34 +142,34 @@ const PaymentRide = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {data.map((item) => (
-                          <TableRow
-                            key={item.date}
-                            style={{ backgroundColor: getStatusColor(item.status) }}
-                          >
-                            <TableCell>{item.date}</TableCell>
-                            <TableCell>
-                              {`From Home to Office | Office to Home | ${getDisplay(
-                                item.status
-                              )}`}
+                        {data.length === 0 ? (
+                          <TableRow>
+                            <TableCell colSpan={3} className="text-center text-dark fw-bold">
+                              No Data Found
                             </TableCell>
-                            <TableCell className="fs-6">{`Rs ${item.wallet_transfer}/-`}</TableCell>
                           </TableRow>
-                        ))}
+                        ) : (
+                          data.map((item) => (
+                            <TableRow
+                              key={item.date}
+                              style={{ backgroundColor: getStatusColor(item.status) }}
+                            >
+                              <TableCell>{item.date}</TableCell>
+                              <TableCell>
+                                {`From Home to Office | Office to Home | ${getDisplay(
+                                  item.status
+                                )}`}
+                              </TableCell>
+                              <TableCell className="fs-6">{`Rs ${item.wallet_transfer}/-`}</TableCell>
+                            </TableRow>
+                          ))
+                        )}
                       </TableBody>
                     </Table>
                   </TableContainer>
                 </>
               )}
             </div>
-            {/* <div className="text-center">
-              <Button
-                className="btn btn-sm fs-7 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
-                onClick={() => navigate(-1)}
-              >
-                Back
-              </Button>
-            </div> */}
           </div>
         </div>
       </div>

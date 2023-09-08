@@ -58,9 +58,9 @@ const Navbar = () => {
               >
                 <ul className="navbar-nav ml-auto  font-size:'12px' font-family:'Poppins, sans-serif'">
                   <li className="nav-item">
-                    <DomLink className="nav-link mr-3 ml-3" to="/" onClick={home}>
+                    <Link className="nav-link mr-3 ml-3" to="carousel" onClick={home}>
                       HOME
-                    </DomLink>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link mr-3 ml-3" to="carousel" onClick={home} smooth="true" offset={20} duration={50}>

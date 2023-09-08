@@ -772,9 +772,10 @@ const DriverRegistration = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         console.log("Location Form Response:", jsonresponse);
-      } else {
+      }
+      else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
@@ -823,9 +824,10 @@ const DriverRegistration = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         console.log("Personal Form Response:", jsonresponse);
-      } else {
+      }
+      else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
@@ -865,9 +867,10 @@ const DriverRegistration = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         console.log("Images Form Response Cnic Front:", jsonresponse);
-      } else {
+      }
+      else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
@@ -907,9 +910,10 @@ const DriverRegistration = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         console.log("Images Form Response Cnic Back:", jsonresponse);
-      } else {
+      }
+      else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
@@ -962,10 +966,11 @@ const DriverRegistration = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         console.log("Images Form Response Picture:", jsonresponse);
         registrationSuccessful();
-      } else {
+      }
+      else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
@@ -1034,16 +1039,16 @@ const DriverRegistration = () => {
 
       const jsonresponse = await response.json();
 
-      if (jsonresponse.statusCode == 200) {
+      if (jsonresponse.statusCode === 200) {
         console.log("Driver Form Response:", jsonresponse);
-      } else {
-        // alert("Error: " + jsonresponse.message);
+      }
+      else if(jsonresponse.statusCode === 500)  {
         Swal.fire({
           position: 'top',
           icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'bg-success',
           },
         }
         )
@@ -1081,7 +1086,7 @@ const DriverRegistration = () => {
 
         const jsonresponse = await response.json();
 
-        if (jsonresponse.statusCode == 200) {
+        if (jsonresponse.statusCode === 200) {
           console.log("Payment Form Response:", jsonresponse);
           Swal.fire({
             position: 'top',
@@ -1091,31 +1096,31 @@ const DriverRegistration = () => {
             showCancelButton: false,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'bg-success',
             },
           });
           route();
-        } else {
+        }
+        else if (jsonresponse.statusCode === 500) {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
             position: 'top',
             icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'bg-success',
             },
           }
           )
         }
       }
       else {
-        // alert("Please Enter Payment Details!");
         Swal.fire({
           position: 'top',
           icon: 'warning',
           text: 'Please Enter Payment Details!',
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'bg-success',
           },
         }
         )
@@ -1124,8 +1129,6 @@ const DriverRegistration = () => {
       console.log(error.message);
     }
   };
-
-  //console.log("Days Selected:", daysSelected);
 
   return (
     <>

@@ -18,6 +18,7 @@ import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import { Box, Link } from "@mui/material";
 import { width } from "@mui/system";
 import { API_URL } from "../../../constants";
+import Swal from "sweetalert2";
 
 const TravelConfirmation = () => {
   const initialValue = dayjs();
@@ -30,9 +31,22 @@ const TravelConfirmation = () => {
   const [statusData, setStatusData] = useState([]);
 
   useEffect(() => {
-    getDashboardData();
-    FetchDates();
+    // Define a function that contains the code to execute
+    const fetchData = () => {
+      getDashboardData();
+      FetchDates();
+    };
+
+    // Initial call when the component mounts
+    fetchData();
+
+    // Set up a 40-second setInterval to call the fetchData function
+    const intervalId = setInterval(fetchData, 40000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
+  
 
   useEffect(() => {
     // Fetch status data from the API
@@ -64,9 +78,21 @@ const TravelConfirmation = () => {
   }, [userToken, selectedDate]);
 
   useEffect(() => {
-    if(statusData){
-    fetchHighlightedDays();
-    }
+    // Define a function that contains the code to execute
+    const fetchData = () => {
+      if(statusData){
+        fetchHighlightedDays();
+      }
+    };
+
+    // Initial call when the component mounts
+    fetchData();
+
+    // Set up a 20-second setInterval to call the fetchData function
+    const intervalId = setInterval(fetchData, 20000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, [statusData]);
   
 
@@ -108,6 +134,26 @@ const TravelConfirmation = () => {
     );
 
     const jsonresponse = await response.json();
+    if (jsonresponse.status_code === 100) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        text: `${jsonresponse.message}`,
+        customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },
+      });
+    }
+    else if (jsonresponse.status_code === 500) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        text: `${jsonresponse.message}`,
+        customClass: {
+          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        },
+      });
+    }
     console.log("handleConfirmStatus Response:", jsonresponse);
     setDialogOpen(false);
     return;

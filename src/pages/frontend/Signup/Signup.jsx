@@ -187,7 +187,7 @@ const Signup = () => {
           });
 
           const jsonresponse = await response.json();
-          if (jsonresponse.statusCode == 200) {
+          if (jsonresponse.statusCode === 200) {
             dispatch(
               setsignupState({
                 name: fullName,
@@ -204,7 +204,6 @@ const Signup = () => {
           } else {
             const errors = jsonresponse.errors;
             for (const field of Object.keys(errors)) {
-            // alert("Error: " + jsonresponse.message);
             Swal.fire({
               position: "top",
               icon: "error",
@@ -235,15 +234,17 @@ const Signup = () => {
   };
 
   const handleFullNameChange = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.replace(/[^a-z]/gi, '');
     setFullName(value);
-
-    if (value.length < 4 && value.trim() !== "") {
-      setFullNameError("Full Name must be at least 4 characters");
+    
+    if (!/^[a-zA-Z]+$/.test(value) || value.length < 4) {
+      setFullNameError("Full Name must contain only alphabetic characters and be at least 4 characters long");
     } else {
       setFullNameError("");
     }
   };
+  
+  
 
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
@@ -308,14 +309,6 @@ const Signup = () => {
                   marginTop: "12vh",
                 }}
               >
-                {/* <div
-                  className="col-md-6"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "5vh",
-                  }}
-                > */}
                 <Carousel
                   style={{
                     backgroundColor: "#eee",
@@ -392,6 +385,7 @@ const Signup = () => {
                       className="bg-light"
                       variant="outlined"
                       label="Full Name"
+                      type="text"
                       value={fullName}
                       onChange={handleFullNameChange}
                       required
