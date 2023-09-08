@@ -271,7 +271,7 @@ const Signup = () => {
   const validatePassword = (password) => {
     // Regular expression pattern for validating passwords
     const passwordPattern =
-      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
     if (password === "" || passwordPattern.test(password)) {
       setPassword(password);
       setIsValidPassword(true);
@@ -495,7 +495,7 @@ const Signup = () => {
                         <Checkbox
                           value="termsService"
                           style={{ borderColor: "#198754" }}
-                          required
+                          // required
                           onChange={(e) => setTermsService(e.target.checked)}
                           size="small"
                         />
