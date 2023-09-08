@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -321,9 +321,17 @@ const TravelPatners = () => {
                     </div>
                   </div>
                 </div>
-                <button className="btn btn_view d-flex justify-content-end me-5">
-                  VIEW MORE
-                </button>
+                <div className="container my-5 text-end">
+
+                  <Link
+                    className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                    style={{ cursor: "pointer" }}
+                  // onClick={route}
+                  >
+                    View More
+
+                  </Link>
+                </div>
               </div>
               <div className="row">
                 <div className="col-sm-6">
@@ -400,7 +408,7 @@ const TravelPatners = () => {
                               className="card-header text-white"
                               style={{ backgroundColor: "#00917C" }}
                             >
-                              <h5  className="text-center text-white m-auto">
+                              <h5 className="text-center text-white m-auto">
                                 COST PER SEAT PER DAY
                               </h5>
                             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CommuterLinkSuggestions = () => {
@@ -153,14 +153,19 @@ const CommuterLinkSuggestions = () => {
   return (
     <div>
       <div className="card  mt-3 mb-5">
-        <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
-          <h4 className="text-center text-warning m-auto" style={{ lineHeight: "1" }}>
-            {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
-          </h4>
-        </div>
+          <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
+                <h4 className="text-center text-warning m-auto" style={{ lineHeight: "1" }}>
+                {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
+                </h4>
+                </div>
 
         <div
           className="card-body"
+          // style={{
+          //   borderWidth: "0 2px 2px 2px",
+          //   borderStyle: "solid",
+          //   borderColor: "#066539",
+          // }}
         >
           <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
             <div
@@ -173,7 +178,7 @@ const CommuterLinkSuggestions = () => {
               </h5>
             </div>
 
-            <div className="card-body" style={{ background: "rgb(191, 216, 210)" }}>
+            <div className="card-body" style={{  background:  "rgb(191, 216, 210)"  }}>
               <p>
                 Based upon your Profile, We have Following{" "}
                 <strong> MATCHES</strong> to Offer
@@ -262,7 +267,7 @@ const CommuterLinkSuggestions = () => {
                                   className="card-title text-center text-light"
                                   style={{ width: "6rem" }}
                                 >
-                                  {contactId}
+                                   {contactId}
                                 </div>
                               </>
                             )
@@ -426,9 +431,17 @@ const CommuterLinkSuggestions = () => {
                     </div>
                   </div>
                 </div>
-                <button className="btn btn_view d-flex justify-content-end me-5">
-                  VIEW MORE
-                </button>
+                <div className="container mt-5 text-end">
+
+                  <Link
+                    className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                    style={{ cursor: "pointer" }}
+                  // onClick={route}
+                  >
+                    View More
+
+                  </Link>
+                </div>
               </div>
               <div>
               </div>
@@ -679,9 +692,17 @@ const CommuterLinkSuggestions = () => {
                     </div>
                   </div>
                 </div>
-                <button className="btn btn_view d-flex justify-content-end me-5">
-                  VIEW MORE
-                </button>
+                <div className="container mt-5 text-end">
+
+                  <Link
+                    className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                    style={{ cursor: "pointer" }}
+                  // onClick={route}
+                  >
+                    View More
+
+                  </Link>
+                </div>
               </div>
               <div>
               </div>

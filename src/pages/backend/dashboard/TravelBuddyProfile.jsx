@@ -357,6 +357,7 @@ const TravelBuddyProfile = () => {
           to share their car and to connect with members with whom you can take turns to use each other's car
         </h4>
       </div> */}
+
       <div className="card p-4 bg-light" >
         <div className="card p-4 backgroundColor">
           <div className="row px-3">
@@ -364,7 +365,79 @@ const TravelBuddyProfile = () => {
               <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />
             </div>
             <div className="col-md-11 px-5">
-              <div className="col-md-5 px-5">
+              <div className="row px-5">
+                <div className="col-md-3 mt-3">
+                {name !== "" ? (
+                  <div>
+                    <h3 className="text-success fw-bold">{name}</h3>
+                  </div>
+                ) : (
+                  <>
+                  </>
+                )}                </div>
+                <div className="col-md-9">
+                </div>
+              </div>
+              <div className="row px-5 mb-2">
+                <div className="col-md-1">
+                {gender !== "" ? (
+                  <>
+                    <b className="text-black">Gender:</b> 
+                  </>
+                ) : (
+                  <>
+                  </>
+                )}             
+                </div>
+                <div className="col-md-11">
+                {gender}
+                </div>
+              </div>
+              <div className="row px-5 mb-2">
+                <div className="col-md-1">
+                {age !== "" ? (
+                  <>
+                    <b className="text-black"> Age:</b> 
+                  </>
+                ) : (
+                  <>
+                  </>
+                )}           
+                </div>
+                <div className="col-md-11">
+                {age}
+                </div>
+              </div>
+              <div className="row px-5 mb-2">
+                <div className="col-md-1">
+                {profession !== "" ? (
+                  <>
+                    <b className="text-black">Profession:</b> 
+                  </>
+                ) : (
+                  <>
+                  </>
+                )}         
+                </div>
+                <div className="col-md-11">
+                {profession}  
+                </div>
+              </div>
+              <div className="row px-5 mb-2">
+                <div className="col-md-1">
+                {mobileNo !== "" ? (
+                  <>
+                    <b className="text-black">Cell:</b>
+                  </>
+                ) : (
+                  <></>
+                )}      
+                </div>
+                <div className="col-md-11">
+                {mobileNo}  
+                </div>
+              </div>
+              {/* <div className="px-5">
                 {name !== "" ? (
                   <div>
                     <h3 className="text-success fw-bold">{name}</h3>
@@ -373,11 +446,11 @@ const TravelBuddyProfile = () => {
                   <>
                   </>
                 )}
-              </div>
-              <p className="px-5">
+              </div> */}
+              {/* <p className="px-5">
                 {gender !== "" ? (
                   <>
-                    <b className="text-black">Gender:</b>{ gender}
+                    <b className="text-black">Gender:</b> <u>{gender}</u>
                   </>
                 ) : (
                   <>
@@ -386,7 +459,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {age !== "" ? (
                   <>
-                    <b className="text-black"> Age:</b> {age}
+                    <b className="text-black"> Age:</b> <u>{age}</u>
                   </>
                 ) : (
                   <>
@@ -395,7 +468,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {profession !== "" ? (
                   <>
-                    <b className="text-black">Profession:</b> {profession}
+                    <b className="text-black">Profession:</b> <u>{profession}</u>
                   </>
                 ) : (
                   <>
@@ -404,12 +477,12 @@ const TravelBuddyProfile = () => {
                 <br />
                 {mobileNo !== "" ? (
                   <>
-                    <b className="text-black">Cell:</b> {mobileNo}
+                    <b className="text-black">Cell:</b> <u>{mobileNo}</u>
                   </>
                 ) : (
                   <></>
                 )}
-              </p>
+              </p> */}
 
             </div>
           </div>
@@ -417,10 +490,118 @@ const TravelBuddyProfile = () => {
           <div className="row">
             <h2 className="text-success py-2 fw-bold">{profileType === "rider" ? ("Rider Details") : ("Driver Details")}</h2>
             <div className="col-md-6">
-              <p>
+            <div className="row mb-2">
+                <div className="col-md-3">
                 {preferredGender !== "" ? (
                   <>
-                    <b className="text-black">Preferred Gender: </b> {preferredGender}
+                    <b className="text-black">Preferred Gender: </b> 
+                  </>
+                ) : (
+                  <>
+                  </>
+                )} 
+                </div>
+                <div className="col-md-9">
+                {preferredGender}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {origin !== "" ? (
+                  <>
+                    <b className="text-black">Point of Origin: </b>
+                  </>
+                ) : (
+                  <>
+                  </>
+                )}
+                </div>
+                <div className="col-md-9">
+                {origin}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {timeDepart !== "" ? (
+                  <>
+                    <b className="text-black">Pickup Timings:</b>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                </div>
+                <div className="col-md-9">
+                {timeDepart}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {destination !== "" ? (
+                  <>
+                    <b className="text-black">Destination:</b>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                </div>
+                <div className="col-md-9">
+                {destination}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {timeReturn !== "" ? (
+                  <>
+                    <b className="text-black">Return Timings:</b>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                </div>
+                <div className="col-md-9">
+                {timeReturn}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {days !== "" ? (
+                  <>
+                    <b className="text-black">Days:</b>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                </div>
+                <div className="col-md-9">
+                {days}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {mobileNo !== "" ? (
+                  <>
+                    <b className="text-black">Contact No:</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {mobileNo}  
+                </div>
+              </div>
+              {/* <p>
+                {preferredGender !== "" ? (
+                  <>
+                    <b className="text-black">Preferred Gender: </b> <u className="">{preferredGender}</u>
                   </>
                 ) : (
                   <>
@@ -430,7 +611,7 @@ const TravelBuddyProfile = () => {
                 {origin !== "" ? (
                   <>
                     <b className="text-black">Point of Origin: </b>
-                    {origin}
+                    <u>{origin}</u>
                   </>
                 ) : (
                   <>
@@ -439,7 +620,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {timeDepart !== "" ? (
                   <>
-                    <b className="text-black">Pickup Timings:</b> {timeDepart}
+                    <b className="text-black">Pickup Timings:</b> <u>{timeDepart}</u>
                   </>
                 ) : (
                   <>
@@ -450,7 +631,7 @@ const TravelBuddyProfile = () => {
                 {destination !== "" ? (
                   <>
                     <b className="text-black">Destination:</b>
-                    {destination}
+                    <u>{destination}</u>
                   </>
                 ) : (
                   <>
@@ -460,7 +641,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {timeReturn !== "" ? (
                   <>
-                    <b className="text-black">Return Timings:</b> {timeReturn}
+                    <b className="text-black">Return Timings:</b> <u>{timeReturn}</u>
                   </>
                 ) : (
                   <>
@@ -470,7 +651,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {days !== "" ? (
                   <>
-                    <b className="text-black">Days:</b> {days}
+                    <b className="text-black">Days:</b> <u>{days}</u>
                   </>
                 ) : (
                   <>
@@ -480,19 +661,146 @@ const TravelBuddyProfile = () => {
                 <br />
                 {mobileNo !== "" ? (
                   <>
-                    <b className="text-black">Contact No:</b> {mobileNo}
+                    <b className="text-black">Contact No:</b> <u>{mobileNo}</u>
                   </>
                 ) : (
                   <></>
                 )}
-              </p>
+              </p> */}
 
             </div>
             <div className="col-md-6">
-              <p>
+            <div className="row mb-2">
+                <div className="col-md-3">
                 {seats !== "" ? (
                   <>
-                    <b className="text-black">No.of Seats:</b> {seats}
+                    <b className="text-black">No.of Seats:</b>
+                  </>
+                ) : (
+                  <>
+
+                  </>
+                )}
+                </div>
+                <div className="col-md-9">
+                {seats}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {price !== "" ? (
+                  <>
+                    <b>Payment Terms (perDay):</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {price}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {carAC !== "" ? (
+                  <>
+                    <b>Car have AC:</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {carAC}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {carBrand !== "" ? (
+                  <>
+                    <b>Car Brand:</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {carBrand}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {carCC !== "" ? (
+                  <>
+                    <b>Car CC:</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {carCC}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {carModel !== "" ? (
+                  <>
+                    <b>Car Model:</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {carModel}  
+                </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {RegNo !== "" ? (
+                  <>
+                    <b>Registration Number:</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {RegNo}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {RegYear !== "" ? (
+                  <>
+                    <b>Registration Year:</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {RegYear}  
+                </div>
+              </div>
+            <div className="row mb-2">
+                <div className="col-md-3">
+                {carRegYear !== "" ? (
+                  <>
+                    <b>Car Registration Year:</b>
+                  </>
+                ) : (
+                  <></>
+                )}
+                </div>
+                <div className="col-md-9">
+                {carRegYear}  
+                </div>
+              </div>
+              {/* <p>
+                {seats !== "" ? (
+                  <>
+                    <b className="text-black">No.of Seats:</b> <u>{seats}</u>
                   </>
                 ) : (
                   <>
@@ -502,7 +810,7 @@ const TravelBuddyProfile = () => {
                 <br />
                 {price !== "" ? (
                   <>
-                    <b>Payment Terms (perDay):</b> {price}
+                    <b>Payment Terms (perDay):</b> <u>{price}</u>
                   </>
                 ) : (
                   <></>
@@ -563,10 +871,10 @@ const TravelBuddyProfile = () => {
                 ) : (
                   <></>
                 )}
-              </p>
+              </p> */}
             </div>
           </div>
-          <div className="text-center d-flex m-auto justify-content-between">
+          <div className="container text-center">
             {/* <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
               Back
             </Button> */}
@@ -578,6 +886,7 @@ const TravelBuddyProfile = () => {
         <div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
