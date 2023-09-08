@@ -510,6 +510,7 @@ const Signup = () => {
                                 textDecoration: "none",
                               }}
                             >
+                            &nbsp;
                               Terms of service
                             </span>
                           </a>
