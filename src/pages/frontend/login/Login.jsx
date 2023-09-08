@@ -137,7 +137,7 @@ const Login = () => {
         Swal.fire({
           position:'top',
           icon: 'warning',
-         text: 'Please Fill All Fields',
+         text: 'Please Check Terms of Services',
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
         },

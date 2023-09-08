@@ -11,6 +11,9 @@ const Navbar = () => {
     navigate("/signup");
 
   };
+  const home=()=>{
+    navigate("/")
+  }
 
   const loginRoute = () => {
     navigate("/login");
@@ -55,22 +58,22 @@ const Navbar = () => {
               >
                 <ul className="navbar-nav ml-auto  font-size:'12px' font-family:'Poppins, sans-serif'">
                   <li className="nav-item">
-                    <DomLink className="nav-link mr-3 ml-3" to="/">
+                    <DomLink className="nav-link mr-3 ml-3" to="/" onClick={home}>
                       HOME
                     </DomLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="carousel" smooth="true" offset={30} duration={100}>
+                    <Link className="nav-link mr-3 ml-3" to="carousel" onClick={home} smooth="true" offset={20} duration={50}>
                       CONCEPT
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="howworks" offset={30} duration={100}>
+                    <Link className="nav-link mr-3 ml-3" to="howworks" onClick={home} offset={20} duration={50}>
                       HOW IT WORKS?
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="contribute" smooth="true" offset={30} duration={100}>
+                    <Link className="nav-link mr-3 ml-3" to="contribute" smooth="true" onClick={home} offset={20} duration={50}>
                       CONTRIBUTE
                     </Link>
                    
@@ -81,7 +84,7 @@ const Navbar = () => {
                     </DomLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="contact" smooth="true" offset={30} duration={100}>
+                    <Link className="nav-link mr-3 ml-3" to="contact" onClick={home} smooth="true" offset={20} duration={50}>
                       CONTACT
                     </Link>
                   </li>
