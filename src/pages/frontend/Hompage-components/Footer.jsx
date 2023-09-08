@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Link as DomLink, useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const home=()=>{
+    navigate("/")
+  }
   return (
     <div>
         <footer id="footer">
@@ -31,23 +36,23 @@ const Footer = () => {
               <h4>Useful Links</h4>
               <ul>
                 <li>
-                  <i className="bx bx-chevron-right"></i> <a href="#hero">Home</a>
+                  <i className="bx bx-chevron-right"></i> <DomLink to="/" >Home</DomLink>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right"></i>
-                  <a href="#concept">Concept</a>
+                  <Link to="concept" smooth="true" offset={30} duration={50}>Concept</Link>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right"></i>
-                  <a href="#hiw">How It Works?</a>
+                  <Link to="howworks"  offset={30} duration={50}>How It Works?</Link>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right"></i>
-                  <a href="#contribute">Contribute</a>
+                  <DomLink to="contribure"smooth="true"  offset={30} duration={50}>Contribute</DomLink>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right"></i>
-                  <a href="#contact">Contact</a>
+                  <Link to="contact" smooth="true" offset={30} duration={50}>Contact</Link>
                 </li>
               </ul>
             </div>

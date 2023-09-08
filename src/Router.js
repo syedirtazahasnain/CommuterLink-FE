@@ -52,6 +52,9 @@ import Rider from "./pages/backend/MatchingUpdate/Rider";
 import Driver from "./pages/backend/MatchingUpdate/Driver";
 import PartnerCancellation from "./pages/backend/dashboard/PartnerCancellation";
 import AmShareRide from "./pages/frontend/register-form/AmShareRide";
+import CarouselSlider from "./pages/frontend/Hompage-components/Carousel";
+import HowWorks from "./pages/frontend/Hompage-components/HowWorks";
+import Contribute from "./pages/frontend/Hompage-components/Contribute";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -61,6 +64,10 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<FrontendLayout children={<Home />} />} />
+        {/* <Route path="contact" element={<FrontendLayout children={<Contact/>} />} /> */}
+        {/* <Route path="concept" element={<FrontendLayout children={<CarouselSlider/>} />} />
+        <Route path="howitworks" element={<FrontendLayout children={<HowWorks/>} />} />
+        <Route path="contribute" element={<FrontendLayout children={<Contribute/>} />} /> */}
         <Route path="/signup" element={<FrontendLayout children={<Signup />} />} />
         <Route path="/login" element={<FrontendLayout children={<Login />} />} />
         <Route path="/faq" element={<FrontendLayout children={<Faq />} />} />
@@ -83,14 +90,14 @@ const Router = () => {
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />} />} />
 
         <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />} />
-        <Route path="/contact" element={<BackendLayout children={<Contact />} />} />
+        {/* <Route path="/contact" element={<BackendLayout children={<Contact />} />} /> */}
         <Route path="/driver-registration" element={<FrontendLayout children={<DriverRegistration />} />} />
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />} />
         <Route path="/requestcarowner" element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
         <Route path="/rejection" element={<FrontendLayout children={<Rejection />} />} />
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />} />} />
         <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />} />
-        <Route path="/contact" element={<BackendLayout children={<Contact />} />} />
+        {/* <Route path="/contact" element={<BackendLayout children={<Contact />} />} /> */}
         <Route path="/driver-registration" element={<FrontendLayout children={<DriverRegistration />} />} />
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />} />
         <Route path="/shareride" element={<FrontendLayout children={<ShareRide />} />}></Route>
