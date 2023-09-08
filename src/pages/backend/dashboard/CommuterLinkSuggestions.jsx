@@ -220,7 +220,7 @@ const CommuterLinkSuggestions = () => {
                       <div className="col-sm-2">
                         <div
                           className="card"
-                          style={{ width: "6rem", backgroundColor: requestStage === 2 ? "#5ab387" : "#F8A175" }}
+                          style={{ width: "6rem", backgroundColor: requestStage === 0 ?  "#F8A175" : "#5ab387" }}
                         >
                           {requestStatus === "yes" ? (
                             requestStage === 2 ? (
