@@ -183,7 +183,7 @@ const TravelPatners = () => {
                         <div
                           className="card"
                           style={{ width: "6rem",
-                          backgroundColor:'#33A989'
+                          backgroundColor:"#5ab387"
                         }}
                         >
                           <img
@@ -211,7 +211,7 @@ const TravelPatners = () => {
                       <div
                         className="card"
                         style={{ width: "6rem",
-                        backgroundColor:"#F8A175"  }}
+                        backgroundColor:"#5ab387"  }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
