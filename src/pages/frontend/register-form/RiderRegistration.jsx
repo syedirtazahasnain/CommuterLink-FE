@@ -505,7 +505,7 @@ const RiderRegistration = () => {
     picture,
   ];
 
-  console.log("required Fields:", requiredFields);
+  console.log({requiredFields});
 
   const handleLogin = async () => {
     if (

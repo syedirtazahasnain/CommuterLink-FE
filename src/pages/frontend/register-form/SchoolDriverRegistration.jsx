@@ -680,6 +680,8 @@ const DriverRegistration = () => {
     inputValidUptoMySelf, inputPlaceIssueMySelf
   ];
 
+  console.log({requiredFieldsDriver});
+
   const handleLogin = async () => {
     if (
       requiredFieldsLogin.every(
@@ -2455,7 +2457,7 @@ const DriverRegistration = () => {
                           ))}
                         </Form.Select>
                       </Form.Group>
-                      {/* <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                         <Form.Label className="text-dark fs-6">
                           Registration Car Year Ranges
                         </Form.Label>
@@ -2473,7 +2475,7 @@ const DriverRegistration = () => {
                             </option>
                           ))}
                         </Form.Select>
-                      </Form.Group> */}
+                      </Form.Group>
                       <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
                         <Form.Label className="text-dark fs-6">
                           Registration Number
@@ -2560,6 +2562,23 @@ const DriverRegistration = () => {
                           <option value="No">No</option>
                         </Form.Select>
                       </Form.Group>
+
+                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
+                            I also accept mid-route partner
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedMidRoutePartner}
+                            onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>I also accept mid-route partner</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </Form.Select>
+                        </Form.Group>
 
                  </div>
                  </div>
