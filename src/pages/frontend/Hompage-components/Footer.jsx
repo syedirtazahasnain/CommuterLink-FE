@@ -1,6 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Link as DomLink, useNavigate } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Link as DomLink } from 'react-scroll';
+import { useNavigate } from 'react-router-dom';
+
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -40,19 +42,19 @@ const Footer = () => {
                 </li>
                 <li>
                   <i className="bx bx-chevron-right"></i>
-                  <Link to="concept" smooth="true" offset={30} duration={50}>Concept</Link>
+                  <Link to="concept" onClick={home} smooth="true" offset={30} duration={50}>Concept</Link>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right"></i>
-                  <Link to="howworks"  offset={30} duration={50}>How It Works?</Link>
+                  <Link to="howworks" onClick={home}  offset={30} duration={50}>How It Works?</Link>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right"></i>
-                  <DomLink to="contribure"smooth="true"  offset={30} duration={50}>Contribute</DomLink>
+                  <Link to="contribure" smooth="true" onClick={home}  offset={30} duration={50}>Contribute</Link>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right"></i>
-                  <Link to="contact" smooth="true" offset={30} duration={50}>Contact</Link>
+                  <Link to="contact" smooth="true" onClick={home} offset={30} duration={50}>Contact</Link>
                 </li>
               </ul>
             </div>
