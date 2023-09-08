@@ -1299,7 +1299,7 @@ const DriverRegistration = () => {
                         <Form.Group
                           as={Col}
                           md="12"
-                          controlId="validationCustom01"
+                          controlId="validationCustom03"
                           className="mb-2 mt-3"
                         >
                           <Form.Label className="text-black fs-6">
@@ -1336,7 +1336,7 @@ const DriverRegistration = () => {
                         <Form.Group
                           as={Col}
                           md={cityEndId ? "12" : "12"}
-                          controlId="validationCustom01"
+                          controlId="validationCustom04"
                           className="mb-2"
                         >
                           <Form.Label className="text-black fs-6">
@@ -1364,7 +1364,7 @@ const DriverRegistration = () => {
                         <Form.Group
                           as={Col}
                           md={cityEndId ? "12" : "12"}
-                          controlId="validationCustom02"
+                          controlId="validationCustom05"
                           className="mb-2"
                         >
                           <Form.Label style={{ color: "#000" }}>City</Form.Label>
@@ -1392,7 +1392,7 @@ const DriverRegistration = () => {
                               <Form.Group
                                 as={Col}
                                 md="12"
-                                controlId="validationCustom02"
+                                controlId="validationCustom06"
                               >
                                 <Form.Label style={{ color: "#000" }}>
                                   Select Area from Dropdown
@@ -1425,7 +1425,7 @@ const DriverRegistration = () => {
                                 as={Col}
                                 md="12"
                                 className="mt-3"
-                                controlId="validationCustom02"
+                                controlId="validationCustom07"
                               >
                                 <span
                                   className="colorplace text-danger"
@@ -1445,7 +1445,7 @@ const DriverRegistration = () => {
                               <Form.Group
                                 as={Col}
                                 md="12"
-                                controlId="validationCustom01"
+                                controlId="validationCustom08"
                               >
                                 <Form.Label className="text-black">
                                   Area
@@ -1477,7 +1477,7 @@ const DriverRegistration = () => {
                         <Form.Group
                           as={Col}
                           md="12"
-                          controlId="validationCustom01"
+                          controlId="validationCustom09"
                           className="mb-2 mt-3"
                         >
                           <Form.Label className="text-black fs-6">
@@ -1626,7 +1626,7 @@ const DriverRegistration = () => {
                     </Row> */}
 
                     <Row className="my-3" style={{ border: '1px solid #cddbd9' }}>
-                      <Form.Group as={Col} md="12" controlId="validationCustom01">
+                      <Form.Group as={Col} md="12" controlId="validationCustom10">
                         <Form.Label className="pt-3 px-3 text-black">
                           I Commute (Select Days)
                         </Form.Label>
@@ -1815,7 +1815,7 @@ const DriverRegistration = () => {
                     {/* {daysSelected} */}
 
                     <Row className="mb-3 py-3 shadow shadow-sm form-body">
-                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom11" className="mb-2">
                         <Form.Label className="fs-6 text-black">Gender</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
@@ -1829,7 +1829,7 @@ const DriverRegistration = () => {
                           <option value="Female">Female</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom12" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Preferred gender of travel partner
                         </Form.Label>
@@ -1849,7 +1849,7 @@ const DriverRegistration = () => {
                     </Row>
 
                     <Row className="mb-3 py-3 shadow shadow-sm form-body">
-                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom13" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Year of Birth
                         </Form.Label>
@@ -1882,7 +1882,7 @@ const DriverRegistration = () => {
 
                       {/* {selectedDate} */}
 
-                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom14" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Martial Status
                         </Form.Label>
@@ -1898,7 +1898,7 @@ const DriverRegistration = () => {
                           <option value="Single">Single</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom15" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Education
                         </Form.Label>
@@ -1923,7 +1923,7 @@ const DriverRegistration = () => {
                           <option value="Primary">Primary</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom16" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Profession
                         </Form.Label>
@@ -1947,7 +1947,7 @@ const DriverRegistration = () => {
                     </Row> */}
                     <Row className="mb-3 py-3 shadow shadow-sm form-body">
 
-                      <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom17" className="mb-2">
                         <Form.Label className="fs-6 text-black">CNIC</Form.Label>
                         <Form.Control
                           required
@@ -2067,7 +2067,7 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Car Details
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom18" className="mb-2">
                           <Form.Label className="text-dark fs-6">Car Brand</Form.Label>
                           <Form.Select
                             aria-label="Default select example"
@@ -2086,7 +2086,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom19" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Model Name
                           </Form.Label>
@@ -2100,7 +2100,7 @@ const DriverRegistration = () => {
                             defaultValue=""
                           />
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom20" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Manufacturing Year
                           </Form.Label>
@@ -2119,7 +2119,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom21" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             My Car has AC
                           </Form.Label>
@@ -2135,7 +2135,7 @@ const DriverRegistration = () => {
                             <option value="No">No</option>
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom22" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Car CC
                           </Form.Label>
@@ -2175,7 +2175,7 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Car Registration
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom23" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Year
                           </Form.Label>
@@ -2194,7 +2194,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom24" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Car Year Ranges
                           </Form.Label>
@@ -2213,7 +2213,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom25" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registeration Number
                           </Form.Label>
@@ -2238,7 +2238,7 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Available Seats
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom26" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Seats Available
                           </Form.Label>
@@ -2256,7 +2256,7 @@ const DriverRegistration = () => {
                             <option value="4">4</option>
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom02" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom27" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Seats Available for (Male, Female, Both)
                           </Form.Label>
@@ -2283,7 +2283,7 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Route Partner
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             I accept one-route partner
                           </Form.Label>
@@ -2300,7 +2300,7 @@ const DriverRegistration = () => {
                           </Form.Select>
                         </Form.Group>
 
-                        <Form.Group as={Col} md="12" controlId="validationCustom01" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom29" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             I also accept mid-route partner
                           </Form.Label>
@@ -2778,7 +2778,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom30"
                               className="mb-2"
                             >
                               <h2 className="text-success mb-3 text-center">
@@ -2788,7 +2788,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom31"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -2807,7 +2807,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom32"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -2826,7 +2826,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom33"
                               className="mb-2"
                             >
                               <Form.Label text-dark fs-6>
@@ -2845,7 +2845,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom34"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -2856,7 +2856,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom02"
+                              controlId="validationCustom35"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -2962,7 +2962,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom36"
                               className="mb-2"
                             >
                               <h2 className="text-success mb-3 text-center">
@@ -2972,7 +2972,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom37"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -2991,7 +2991,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom38"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -3011,7 +3011,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom39"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -3022,7 +3022,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom02"
+                              controlId="validationCustom40"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark">
@@ -3039,7 +3039,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom41"
                               className="mb-2"
                             >
                               <h2 className="text-success mb-3 text-center">
@@ -3049,7 +3049,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom42"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -3068,7 +3068,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom43"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -3087,7 +3087,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom01"
+                              controlId="validationCustom44"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -3098,7 +3098,7 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom02"
+                              controlId="validationCustom45"
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
@@ -3269,7 +3269,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom46"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
@@ -3288,7 +3288,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom47"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
@@ -3308,7 +3308,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom48"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
@@ -3319,7 +3319,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom02"
+                            controlId="validationCustom49"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark">
@@ -3398,7 +3398,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom50"
                             className="mb-2"
                           >
                             <h2 className="text-success mb-3 text-center">
@@ -3408,7 +3408,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom51"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
@@ -3427,7 +3427,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom52"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
@@ -3446,7 +3446,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom53"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
@@ -3457,7 +3457,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom02"
+                            controlId="validationCustom54"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">

@@ -145,23 +145,28 @@ const TravelPatners = () => {
                     backgroundColor: "#BFD8D2",
                   }}
                 >
-                  <div class="row d-flex justify-content-center">
+                  <div className="row d-flex justify-content-center">
                     <div className="col-sm-2">
                       {name && image ? (
                         <div
-                          className="card bg-success"
+                          className="card"
                           style={{
-                            width: "6rem",
-                            fontWeight: "bold",
-                            backgroundColor: "rgb(32 155 98)",
+                            width: "6rem", 
+                            // backgroundColor: "rgb(32 155 98)",
+                            backgroundColor:"#f9f0c1"
+                            // backgroundImage:`${BASE_URL}`
+                            // backgroundImage: `url("BASE_URL/assets/images/Sir-Zafar.png")` 
+                            // backgroundImage: `url("${BASE_URL}/assets/images/Sir-Zafar.png")`,
+                            // backgroundSize:'cover'
                           }}
                         >
                           <img
                             src={`${IMAGE_URL}${image}`}
+                            // src={`${BASE_URL}/assets/images/Sir Zafar.png`}
                             className="card-img-top w-40px m-auto py-3 h-65px h-fixed"
                           />
                           <div
-                            className="card-title text-light text-center"
+                            className="card-title text-dark text-center"
                             style={{ width: "6rem", cursor: "pointer" }}
                             onClick={() => {
                               route();
@@ -176,8 +181,10 @@ const TravelPatners = () => {
                         </div>
                       ) : (
                         <div
-                          className="card bg-success"
-                          style={{ width: "6rem" }}
+                          className="card"
+                          style={{ width: "6rem",
+                          backgroundColor:'#33A989'
+                        }}
                         >
                           <img
                             src={`${BASE_URL}/assets/images/Vector.png`}
@@ -202,8 +209,9 @@ const TravelPatners = () => {
 
                     <div className="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem",
+                        backgroundColor:"#F8A175"  }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -226,8 +234,8 @@ const TravelPatners = () => {
                     </div>
                     <div className="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -248,8 +256,8 @@ const TravelPatners = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -269,8 +277,8 @@ const TravelPatners = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card "
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -291,8 +299,8 @@ const TravelPatners = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}

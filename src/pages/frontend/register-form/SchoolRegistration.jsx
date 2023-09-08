@@ -932,7 +932,7 @@ const SchoolRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom02"
+                            controlId="validationCustom03"
                           >
                             <Form.Label style={{ color: "#000" }}>
                               Select Area from Dropdown
@@ -965,7 +965,7 @@ const SchoolRegistration = () => {
                             as={Col}
                             md="12"
                             className="mt-3"
-                            controlId="validationCustom02"
+                            controlId="validationCustom04"
                           >
                             <span
                               className="colorplace text-danger"
@@ -985,7 +985,7 @@ const SchoolRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom05"
                           >
                             <Form.Label className="text-black">
                               Area
@@ -1017,7 +1017,7 @@ const SchoolRegistration = () => {
                     <Form.Group
                       as={Col}
                       md="12"
-                      controlId="validationCustom01"
+                      controlId="validationCustom06"
                       className="mb-2 mt-3"
                     >
                       <Form.Label className="text-black fs-6">
@@ -1054,7 +1054,7 @@ const SchoolRegistration = () => {
                     <Form.Group
                       as={Col}
                       md={cityEndId ? "12" : "12"}
-                      controlId="validationCustom01"
+                      controlId="validationCustom07"
                       className="mb-2"
                     >
                       <Form.Label className="text-black fs-6">
@@ -1082,7 +1082,7 @@ const SchoolRegistration = () => {
                     <Form.Group
                       as={Col}
                       md={cityEndId ? "12" : "12"}
-                      controlId="validationCustom02"
+                      controlId="validationCustom07"
                       className="mb-2"
                     >
                       <Form.Label style={{ color: "#000" }}>City</Form.Label>
@@ -1110,7 +1110,7 @@ const SchoolRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom02"
+                            controlId="validationCustom08"
                           >
                             <Form.Label style={{ color: "#000" }}>
                               Select Area from Dropdown
@@ -1143,7 +1143,7 @@ const SchoolRegistration = () => {
                             as={Col}
                             md="12"
                             className="mt-3"
-                            controlId="validationCustom02"
+                            controlId="validationCustom09"
                           >
                             <span
                               className="colorplace text-danger"
@@ -1163,7 +1163,7 @@ const SchoolRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom01"
+                            controlId="validationCustom10"
                           >
                             <Form.Label className="text-black">
                               Area
@@ -1195,7 +1195,7 @@ const SchoolRegistration = () => {
                     <Form.Group
                       as={Col}
                       md="12"
-                      controlId="validationCustom01"
+                      controlId="validationCustom11"
                       className="mb-2 mt-3"
                     >
                       <Form.Label className="text-black fs-6">
@@ -1304,7 +1304,7 @@ const SchoolRegistration = () => {
                 </LoadScript>
 
                 <Row className="mb-3" style={{ border: "1px solid #cddbd9" }}>
-                  <Form.Group as={Col} md="12" controlId="validationCustom01">
+                  <Form.Group as={Col} md="12" controlId="validationCustom12">
                     <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
                       I commute (Select Days)
                     </Form.Label>
@@ -1603,7 +1603,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom01"
+                    controlId="validationCustom14"
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">Gender</Form.Label>
@@ -1625,7 +1625,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom02"
+                    controlId="validationCustom15"
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
@@ -1655,7 +1655,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom01"
+                    controlId="validationCustom16"
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
@@ -1694,7 +1694,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom02"
+                    controlId="validationCustom17"
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
@@ -1717,7 +1717,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom01"
+                    controlId="validationCustom18"
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
@@ -1749,7 +1749,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom02"
+                    controlId="validationCustom19"
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
@@ -1777,7 +1777,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom01"
+                    controlId="validationCustom20"
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">CNIC</Form.Label>
@@ -1858,7 +1858,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom02"
+                    controlId="validationCustom21"
                     className="mb-2"
                   >
                     <Form.Label style={{ color: "#000" }}>
@@ -1883,7 +1883,7 @@ const SchoolRegistration = () => {
                   <Form.Group
                     as={Col}
                     md="12"
-                    controlId="validationCustom02"
+                    controlId="validationCustom22"
                     className="mb-2"
                   >
                     <Form.Label style={{ color: "#000" }}>
