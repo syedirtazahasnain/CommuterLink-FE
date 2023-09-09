@@ -1973,7 +1973,10 @@ const DriverRegistration = () => {
                           {" "}
                           Upload CNIC (Front)
                         </Form.Label>
-                        <Form.Control type="file" required onChange={handleCnicFront} />
+                        <Form.Control type="file"  accept="image/png, image/jpeg" required onChange={handleCnicFront} />
+                        <Form.Text className="text-danger" style={{ color: "#000" }}>
+                          The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                       </Form.Group>
                       <Form.Group
                         controlId="formFile"
@@ -1985,7 +1988,10 @@ const DriverRegistration = () => {
                           {" "}
                           Upload CNIC (back)
                         </Form.Label>
-                        <Form.Control type="file" required onChange={handleCnicBack} />
+                        <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
+                        <Form.Text className="text-danger" style={{ color: "#000" }}>
+                        The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                       </Form.Group>
                       <Form.Group
                         controlId="formFile"
@@ -1996,7 +2002,7 @@ const DriverRegistration = () => {
                         <Form.Label className="fs-6 text-black">
                           Upload Your Picture
                         </Form.Label>
-                        <Form.Control type="file" required onChange={handlePicture} />
+                        <Form.Control type="file"  accept="image/png, image/jpeg" required onChange={handlePicture} />
                         <Form.Text className="text-danger" style={{ color: "#000" }}>
                           The picture will only be shown to members with whom you
                           agree to commute
@@ -2161,9 +2167,13 @@ const DriverRegistration = () => {
                           </Form.Label>
                           <Form.Control
                             type="file"
+                            accept="image/png, image/jpeg"
                             onChange={handleImageSelect}
                             required
                           />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                         </Form.Group>
                       </div>
                     </div>
@@ -2851,7 +2861,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload License (front)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -2862,7 +2875,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload License (back)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                           </div></div>
                         {/* <Row className="mb-3 mt-3">
@@ -3017,7 +3033,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload CNIC (front)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3028,7 +3047,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark">
                                 Upload CNIC (back)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                           </div></div>
 
@@ -3093,7 +3115,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload License (front)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3104,7 +3129,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload License (back)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                           </div></div>
                         {/* <Row className="mb-3 mt-3">
@@ -3314,7 +3342,10 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark fs-6">
                               Upload CNIC (front)
                             </Form.Label>
-                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -3325,7 +3356,10 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark">
                               Upload CNIC (back)
                             </Form.Label>
-                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                           </Form.Group>
                         </div></div>
                       {/* <Row className="mb-3 mt-3">
@@ -3452,7 +3486,10 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark fs-6">
                               Upload License (front)
                             </Form.Label>
-                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -3463,7 +3500,7 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark fs-6">
                               Upload License (back)
                             </Form.Label>
-                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div></div>
 

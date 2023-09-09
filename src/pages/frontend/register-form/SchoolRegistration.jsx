@@ -1807,9 +1807,13 @@ const SchoolRegistration = () => {
                     </Form.Label>
                     <Form.Control
                       type="file"
+                      accept="image/png, image/jpeg"
                       required
                       onChange={handleCnicFront}
                     />
+                    <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
@@ -1823,9 +1827,13 @@ const SchoolRegistration = () => {
                     </Form.Label>
                     <Form.Control
                       type="file"
+                      accept="image/png, image/jpeg"
                       required
                       onChange={handleCnicBack}
                     />
+                    <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
@@ -1838,6 +1846,7 @@ const SchoolRegistration = () => {
                     </Form.Label>
                     <Form.Control
                       type="file"
+                      accept="image/png, image/jpeg"
                       required
                       onChange={handlePicture}
                     />
