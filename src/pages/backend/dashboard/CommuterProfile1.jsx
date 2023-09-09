@@ -203,6 +203,7 @@ const CommuterProfile1 = () => {
 
   const UserProfile = ({ user, userDetails }) => {
     const {
+      contact_id,
       commuter_image,
       name,
       gender,
@@ -242,14 +243,26 @@ const CommuterProfile1 = () => {
         <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }}>
           <div className="row">
             <div className="col-md-1 mt-1">
-              <img src={`${IMAGE_URL}${commuter_image}`} style={{ height: "115px", width: "115px" }} />
+              {req_stage === 0 ? (
+                <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px", backgroundColor: "yellow"}} />
+              ) :
+                (
+                  <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
+                )}
             </div>
             <div className="col-md-11 px-5">
               <div className="col-md-5 px-5">
-                {name !== "" ? (
-                  <div>
-                    <h3 className="text-success fw-bold">{name}</h3>
-                  </div>
+                {contact_id !== "" ? (
+                   req_stage === 0 ?(
+                    <div>
+                      <h3 className="text-warning fw-bold">{contact_id}</h3>
+                    </div>
+                  ):
+                  (
+                    <div>
+                      <h3 className="text-success fw-bold">{contact_id}</h3>
+                    </div>
+                  )
                 ) : (
                   <>
                   </>
@@ -283,7 +296,7 @@ const CommuterProfile1 = () => {
                   </>
                 )}
                 <br />
-                {mobile ? (
+                {/* {mobile ? (
                   <>
                     {mobile && (
                       <>
@@ -293,7 +306,7 @@ const CommuterProfile1 = () => {
                   </>
                 ) : (
                   <></>
-                )}
+                )} */}
               </p>
             </div>
           </div>
@@ -304,7 +317,7 @@ const CommuterProfile1 = () => {
               <p>
                 {preferred_gender !== "" ? (
                   <>
-                    <b className="text-black">Preferred Gender: </b> {preferred_gender}
+                    <b className="text-black">Seats For: </b> {preferred_gender}
                   </>
                 ) : (
                   <>
@@ -362,7 +375,7 @@ const CommuterProfile1 = () => {
                   </>
                 )}
                 <br />
-                {mobile ? (
+                {/* {mobile ? (
                   <>
                     {mobile && (
                       <>
@@ -372,7 +385,7 @@ const CommuterProfile1 = () => {
                   </>
                 ) : (
                   <></>
-                )}
+                )} */}
               </p>
             </div>
             <div className="col-md-6">
@@ -504,18 +517,21 @@ const CommuterProfile1 = () => {
               <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={viewRequest}>
                 View Request
               </Button>
+            ) : req_stage === 0 ? (
+              <Button className="btn btn-sm fs-6 fw-bold bg-warning text-white rounded-4 px-3 py-2 mb-3">
+                Request Sent
+              </Button>
+            ) : req_stage === 2 ? (
+              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={requestViewDriver}>
+                View Request
+              </Button>
             ) : (
-              req_stage === 2 ? (
-                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={requestViewDriver}>
-                  View Request
-                </Button>
-              ) : (
-                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
-                  Send Request
-                </Button>
-              )
+              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
+                Send Request
+              </Button>
             )}
           </div>
+
         </div>
       </div>
     );

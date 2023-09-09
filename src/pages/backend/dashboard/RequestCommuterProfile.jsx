@@ -87,51 +87,54 @@ const RequestCommuterProfile = () => {
 
     const UserProfileCard = ({ profile }) => {
         const {
-            user: {
-                name,
-                contact_id,
-                preferred_gender,
-                seats,
-                seats_left,
-                car_ac,
-                car_brand,
-                car_cc,
-                car_model,
-                reg_no,
-                reg_year,
-                car_reg_year,
-                commuter_image,
-                gender,
-                age,
-                profession,
-                origin,
-                destination,
-                time_depart,
-                time_return,
-                days,
-                mobile,
-                price,
-            },
+            contact_id,
             requested_as,
             request_stage,
             vehicle,
         } = profile;
 
+        const { 
+            name,
+            preferred_gender,
+            seats,
+            seats_left,
+            car_ac,
+            car_brand,
+            car_cc,
+            car_model,
+            reg_no,
+            reg_year,
+            car_reg_year,
+            commuter_image,
+            gender,
+            age,
+            profession,
+            origin,
+            destination,
+            time_depart,
+            time_return,
+            days,
+            mobile,
+            price,
+    } = profile.user[0];
+
+        console.log({profile});
+
         return (
-            <div className="col-md-6">
+            <div className="col-md-12">
                 <div className="card p-4 bg-light p-2">
                     <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }}>
                         {/* Render profile details here */}
                         {/* You can use the extracted properties to display the profile data */}
                         <div className="row">
                             <div className="col-md-1 mt-1">
-                                <img src={`${IMAGE_URL}${commuter_image}`} style={{ height: "115px", width: "115px" }} />
+                                <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
                             </div>
                             <div className="col-md-11 px-5">
                                 <div className="col-md-5 px-5">
-                                    {name !== "" ? (
+                                    {contact_id !== "" ? (
                                         <div>
-                                            <h3 className="text-success fw-bold">{name}</h3>
+                                            <h3 className="text-success fw-bold">{contact_id}</h3>
                                         </div>
                                     ) : (
                                         <>
@@ -187,7 +190,7 @@ const RequestCommuterProfile = () => {
                                 <p>
                                     {preferred_gender !== "" ? (
                                         <>
-                                            <b className="text-black">Preferred Gender: </b> {preferred_gender}
+                                            <b className="text-black">Seats For: </b> {preferred_gender}
                                         </>
                                     ) : (
                                         <>

@@ -420,7 +420,7 @@ const TravelBuddyProfile = () => {
               <p>
                 {preferredGender !== "" ? (
                   <>
-                    <b className="text-black">Preferred Gender: </b> {preferredGender}
+                    <b className="text-black">Seats For: </b> {preferredGender}
                   </>
                 ) : (
                   <>

@@ -281,6 +281,36 @@ const CommuterLinkSuggestions = () => {
     );
   }
 
+  const RequestDefaultCard = () => {
+    // Render a default card when user type is not recognized
+    return (
+      <div className="col-sm-2">
+        <div
+          className="card"
+          style={{ width: "6rem", backgroundColor: "#5ab387" }}
+        >
+          <img
+            src={`${BASE_URL}/assets/images/Vector.png`}
+            className="card-img-top w-40px m-auto mt-3"
+          />
+
+          <div
+            className="card-title text-center text-light"
+            style={{
+              width: "6rem",
+            }}
+          >
+            Member ID
+          </div>
+          <img
+            className=""
+            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <div className="card  mt-3 mb-5">
@@ -325,6 +355,10 @@ const CommuterLinkSuggestions = () => {
                     return null;
                   }
                 })}
+                {/* Add default cards to reach a total of 6 if necessary */}
+                {userData.length < 6 && Array.from({ length: 6 - userData.length }, (_, i) => (
+                  <DefaultCard key={`default-${i}`} />
+                ))}
               </div>
               <div>
               </div>
@@ -348,6 +382,10 @@ const CommuterLinkSuggestions = () => {
               <div className="row">
                 {requests.map((request, index) => (
                   <RequestCard key={index} request={request} />
+                ))}
+                 {/* Add default cards to reach a total of 6 if necessary */}
+                 {requests.length < 6 && Array.from({ length: 6 - requests.length }, (_, i) => (
+                  <RequestDefaultCard key={`default-${i}`} />
                 ))}
               </div>
               <div>
