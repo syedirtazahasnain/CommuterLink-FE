@@ -4,6 +4,7 @@ import { API_URL, BASE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../../redux/generalSlice";
+import { CircularProgress } from "@mui/material";
 
 const backgroundStyle = {
   backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -21,6 +22,7 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const [submitbtn, setSubmit] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const route = () => {
     setSubmit(true);
@@ -60,21 +62,20 @@ const Notifications = () => {
         setNotifications(notificationsArray);
       }
       console.log("Notifications:", jsonresponse);
+      setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error);
+      setLoading(false);
     }
   };
 
-
   return (
-    <>
-      <div>
+    <div>
       <div className="">
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
             <h3 className="text-success my-2 fw-bold m-0">Notifications</h3>
-            <Link
-              to={"/dashboard"} >
+            <Link to={"/dashboard"}>
               <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
@@ -83,39 +84,42 @@ const Notifications = () => {
           </div>
         </div>
       </div>
-        <div className="card  my-2">
-          <div className="row p-4">
-            <div className="col">
-              <div
-                className="card p-3 backgroundColor" 
-              >
+      <div className="card my-2">
+        <div className="row p-4">
+          <div className="col">
+            <div className="card p-3 backgroundColor">
+              {loading ? (
+                <div className="text-center">
+                    {/* // Render CircularProgress while loading */}
+                  <CircularProgress />
+                </div>
+              ) : (
                 <div>
                   {notifications.map((notification, index) => (
-                    <>
+                    <div key={index}> {/* Add a key prop */}
                       <h5 className="card-title text-dark py-1">
-                        {index + 1}: {" "} {notification}
+                        {index + 1}: {notification}
                       </h5>
                       <hr style={{ color: "grey" }} />
-                    </>
+                    </div>
                   ))}
                 </div>
-
-                {/* <form id="numberForm">
-                  <div className="container my-3 text-center">
-                    <Button
-                      className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3s"
-                      onClick={route}
-                    >
-                      Back
-                    </Button>
-                  </div>
-                </form> */}
-              </div>
+              )}
             </div>
+            {/* <form id="numberForm">
+              <div className="container my-3 text-center">
+                <Button
+                  className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3s"
+                  onClick={route}
+                >
+                  Back
+                </Button>
+              </div>
+            </form> */}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

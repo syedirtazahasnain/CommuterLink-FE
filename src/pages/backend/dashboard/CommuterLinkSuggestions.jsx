@@ -194,7 +194,7 @@ const CommuterLinkSuggestions = () => {
                           style={{
                             width: "6rem",
                             fontWeight: "bold",
-                            backgroundColor: "rgb(32 155 98)",
+                            backgroundColor:"#5ab387",
                           }}
                         >
                           <img
@@ -219,8 +219,8 @@ const CommuterLinkSuggestions = () => {
                     ) : contactId !== "" ? (
                       <div className="col-sm-2">
                         <div
-                          className="card bg-success"
-                          style={{ width: "6rem" }}
+                          className="card"
+                          style={{ width: "6rem", backgroundColor: requestStage === 0 ?  "#F8A175" : "#5ab387" }}
                         >
                           {requestStatus === "yes" ? (
                             requestStage === 2 ? (
@@ -243,11 +243,11 @@ const CommuterLinkSuggestions = () => {
                               <>
                                 <img
                                   src={`${BASE_URL}/assets/images/Vector.png`}
-                                  className="card-img-top w-40px m-auto mt-3 bg-warning"
+                                  className="card-img-top w-40px m-auto mt-3"
                                 />
                                 <div
-                                  className="card-title text-center text-warning"
-                                  style={{ width: "6rem" }}
+                                  className="card-title text-center"
+                                  style={{ width: "6rem", color: "#F8A175" }}
                                 >
                                   {contactId}
                                 </div>
@@ -262,7 +262,7 @@ const CommuterLinkSuggestions = () => {
                                   className="card-title text-center text-light"
                                   style={{ width: "6rem" }}
                                 >
-                                  {contactId}
+                                  Member ID
                                 </div>
                               </>
                             )
@@ -292,8 +292,8 @@ const CommuterLinkSuggestions = () => {
                     ) : (
                       <div className="col-sm-2">
                         <div
-                          className="card bg-success"
-                          style={{ width: "6rem" }}
+                          className="card"
+                          style={{ width: "6rem", backgroundColor:"#5ab387" }}
                         >
                           <img
                             src={`${BASE_URL}/assets/images/Vector.png`}
@@ -314,8 +314,8 @@ const CommuterLinkSuggestions = () => {
                     )}
                     <div className="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -338,8 +338,8 @@ const CommuterLinkSuggestions = () => {
                     </div>
                     <div className="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -360,8 +360,8 @@ const CommuterLinkSuggestions = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -382,8 +382,8 @@ const CommuterLinkSuggestions = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -404,8 +404,8 @@ const CommuterLinkSuggestions = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -465,7 +465,7 @@ const CommuterLinkSuggestions = () => {
                           style={{
                             width: "6rem",
                             fontWeight: "bold",
-                            backgroundColor: "rgb(32, 155, 98)",
+                            backgroundColor: "#f9f0c1",
                           }}
                         >
                           <img
@@ -492,8 +492,8 @@ const CommuterLinkSuggestions = () => {
                         requestStageMember === 3 ? (
                           <div className="col-sm-2">
                             <div
-                              className="card bg-success"
-                              style={{ width: "6rem" }}
+                              className="card"
+                              style={{ width: "6rem", backgroundColor: "#5ab387" }}
                             >
                               <img
                                 src={`${BASE_URL}/assets/images/Vector.png`}
@@ -515,8 +515,8 @@ const CommuterLinkSuggestions = () => {
                         ) : (
                           <div className="col-sm-2">
                             <div
-                              className="card bg-success"
-                              style={{ width: "6rem", cursor: "pointer" }}
+                              className="card"
+                              style={{ width: "6rem", cursor: "pointer", backgroundColor: "#5ab387" }}
                             >
                               <img
                                 src={`${BASE_URL}/assets/images/Vector.png`}
@@ -542,8 +542,8 @@ const CommuterLinkSuggestions = () => {
                       ) : (
                         <div className="col-sm-2">
                           <div
-                            className="card bg-success"
-                            style={{ width: "6rem" }}
+                            className="card"
+                            style={{ width: "6rem", backgroundColor: "#5ab387" }}
                           >
                             <img
                               src={`${BASE_URL}/assets/images/Vector.png`}
@@ -567,8 +567,8 @@ const CommuterLinkSuggestions = () => {
 
                     <div className="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor: "#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -591,8 +591,8 @@ const CommuterLinkSuggestions = () => {
                     </div>
                     <div className="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor: "#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -613,8 +613,8 @@ const CommuterLinkSuggestions = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor: "#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -635,8 +635,8 @@ const CommuterLinkSuggestions = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor: "#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
@@ -657,8 +657,8 @@ const CommuterLinkSuggestions = () => {
                     </div>
                     <div class="col-sm-2">
                       <div
-                        className="card bg-success"
-                        style={{ width: "6rem" }}
+                        className="card"
+                        style={{ width: "6rem", backgroundColor: "#5ab387" }}
                       >
                         <img
                           src={`${BASE_URL}/assets/images/Vector.png`}
