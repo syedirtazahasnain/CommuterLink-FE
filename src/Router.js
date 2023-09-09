@@ -56,6 +56,7 @@ import CarouselSlider from "./pages/frontend/Hompage-components/Carousel";
 import HowWorks from "./pages/frontend/Hompage-components/HowWorks";
 import Contribute from "./pages/frontend/Hompage-components/Contribute";
 import RechargeWallet from "./pages/backend/dashboard/RechargeWallet";
+import RequestCommuterProfile from "./pages/backend/dashboard/RequestCommuterProfile";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -149,6 +150,7 @@ const Router = () => {
             <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />}></Route>
             <Route path='/notification' element={<BackendLayout children={<Notifications />} />}></Route>
             <Route path='/commuter-profile' element={<BackendLayout children={<CommuterProfile1 />} />}></Route>
+            <Route path='/request-commuter-profile' element={<BackendLayout children={<RequestCommuterProfile />} />}></Route>
             <Route path='/seatcostverification' element={<FrontendLayout children={<SeatCostVerification />} />}></Route>
             <Route path='/requestcarowner' element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
             <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>

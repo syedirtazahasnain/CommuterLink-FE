@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { API_URL, BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
@@ -25,7 +25,12 @@ const CommuterProfile1 = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
-  const [requestStage, setRequestStage] = useState("");
+  // For Profile Page Data
+  const [option, setOption] = useState(null);
+  const [profileType, setProfileType] = useState("");
+  const [userType, setUserType] = useState("");
+  const [userProfiles, setUserProfiles] = useState([]);
+  const [userProfileDetails, setUserProfileDetails] = useState([]);
 
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
@@ -35,102 +40,103 @@ const CommuterProfile1 = () => {
     window.KTScroll.init();
   }, []);
 
-  // For Dashboard Data
-  const [profileType, setProfileType] = useState("");
-  const [contactId, setContactId] = useState("");
-  const [memberId, setMemberId] = useState("");
-  const [id, setId] = useState("");
-  const [requestedAs, setRequestedAs] = useState("");
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [profession, setProfession] = useState("");
-  const [preferredGender, setPreferredGender] = useState("");
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [seats, setSeats] = useState("");
-  const [timeDepart, setTimeDepart] = useState("");
-  const [timeReturn, setTimeReturn] = useState("");
-  const [days, setDays] = useState("");
-  const [price, setPrice] = useState("");
-  const [mobileNo, setMobileNo] = useState("");
-  const [seatsLeft, setSeatsLeft] = useState("");
-  const [carAC, setCarAC] = useState("");
-  const [carBrand, setCarBrand] = useState("");
-  const [carCC, setCarCC] = useState("");
-  const [carModel, setCarModel] = useState("");
-  const [carRegYear, setCarRegYear] = useState("");
-  const [RegNo, setRegNo] = useState("");
-  const [RegYear, setRegYear] = useState("");
 
-  const route = async () => {
-    if (requestedAs === "rider") {
-      navigate("/termscondition1");
+  useEffect(() => {
+    if (option !== "") {
+      // Fetch dashboard data only after getting the user's vehicle_option
+      getDashboardData();
     }
-    else if (requestedAs === "driver") {
-      navigate("/beforeapprovalterms");
-    }
-  };
+  }, [option, userToken]);
 
-  const getDashboardData = async () => {
+  useEffect(() => {
+    getProfileData();
+  }, []);
+
+  useEffect(() => {
+    if (userProfiles.length > 0) {
+      // Fetch details for each profile and accumulate them
+      const fetchDetailsPromises = userProfiles.map(async (profile) => {
+        return await getCommuterProfileData(profile);
+      });
+  
+      Promise.all(fetchDetailsPromises)
+        .then((details) => {
+          // Set the profiles and details in the state
+          setUserProfileDetails(details);
+        })
+        .catch((error) => {
+          console.error("An error occurred:", error);
+        });
+    }
+  }, [userProfiles]);
+
+  const getProfileData = async () => {
     try {
       const response = await fetch(
-        `${API_URL}/api/v1/matches/office`,
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
+            "Accept": "application/json",
             Authorization: `Bearer ${userToken}`,
           },
         }
       );
 
       const jsonresponse = await response.json();
-      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
-        setProfileType("Rider");
-        setContactId(jsonresponse.rider[0].contact_id);
-        setName(jsonresponse.rider[0].name);
-        setImage(jsonresponse.rider[0].commuter_image);
-        setGender(jsonresponse.rider[0].gender);
-        setAge(jsonresponse.rider[0].age);
-        setProfession(jsonresponse.rider[0].profession);
-        setRequestStage(jsonresponse.rider[0].req_stage);
-        setPreferredGender(jsonresponse.rider[0].preferred_gender);
-        setSeats(jsonresponse.rider[0].seats);
-        setOrigin(jsonresponse.rider[0].origin);
-        setDestination(jsonresponse.rider[0].destination);
-        setTimeDepart(jsonresponse.rider[0].time_depart);
-        setTimeReturn(jsonresponse.rider[0].time_return);
-        setDays(jsonresponse.rider[0].days);
-      } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
-        setProfileType("Driver");
-        setContactId(jsonresponse.drivers[0].contact_id);
-        setName(jsonresponse.drivers[0].name);
-        setImage(jsonresponse.drivers[0].commuter_image);
-        setGender(jsonresponse.drivers[0].gender);
-        setAge(jsonresponse.drivers[0].age);
-        setRequestStage(jsonresponse.drivers[0].req_stage);
-        setProfession(jsonresponse.drivers[0].profession);
-        setPreferredGender(jsonresponse.drivers[0].preferred_gender);
-        setSeats(jsonresponse.drivers[0].seats);
-        setOrigin(jsonresponse.drivers[0].origin);
-        setDestination(jsonresponse.drivers[0].destination);
-        setTimeDepart(jsonresponse.drivers[0].time_depart);
-        setTimeReturn(jsonresponse.drivers[0].time_return);
+      if (jsonresponse) {
+        setOption(jsonresponse[0].userlist.vehicle_option);
       }
-      console.log("Commuter Profile Data:", jsonresponse);
+      console.log("Commuter Profile Data", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
   };
 
-  const getProfileData = async () => {
+  // Modify the getDashboardData function to accumulate user details
+  const getDashboardData = async () => {
     try {
-      if (profileType === "Driver") {
+      const response = await fetch(`${API_URL}/api/v1/matches/office`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+
+      const jsonresponse = await response.json();
+      let profiles = [];
+
+      if (option === 0) {
+        // User is a rider, show driver data
+        setProfileType("Rider");
+        setUserType("Driver");
+        profiles = jsonresponse.drivers;
+
+        // Set the profiles in the state
+        setUserProfiles(profiles);
+      } else if (option === 1) {
+        // User is a driver, show rider data
+        setProfileType("Driver");
+        setUserType("Rider");
+        profiles = jsonresponse.rider;
+        
+        // Set the profiles in the state
+        setUserProfiles(profiles);
+      }
+      console.log("Commuter Matches Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const getCommuterProfileData = async (profile) => {
+    try {
+      if (option === 0) {
         const response = await fetch(
-          `${API_URL}/api/v1/commuter/profile/${contactId}/driver`,
+          `${API_URL}/api/v1/commuter/profile/${profile.contact_id}/driver`,
           {
             method: "get",
             headers: {
@@ -143,23 +149,12 @@ const CommuterProfile1 = () => {
 
         const jsonresponse = await response.json();
         if (jsonresponse.data && jsonresponse.data.length > 0) {
-          setDays(jsonresponse.data[0].days);
-          setPrice(jsonresponse.data[0].price);
-          setMobileNo(jsonresponse.data[0].mobile);
-          setSeatsLeft(jsonresponse.data[0].vehicle[0].seats_left);
-          setCarAC(jsonresponse.data[0].vehicle[0].car_ac);
-          setCarBrand(jsonresponse.data[0].vehicle[0].car_brand);
-          setCarCC(jsonresponse.data[0].vehicle[0].car_cc);
-          setCarModel(jsonresponse.data[0].vehicle[0].car_model);
-          setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
-          setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
-          setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
+          return jsonresponse.data;
         }
         console.log("Driver Profile Data:", jsonresponse);
-      }
-      else if (profileType === "Rider") {
+      } else if (option === 1) {
         const response = await fetch(
-          `${API_URL}/api/v1/commuter/profile/${contactId}/rider`,
+          `${API_URL}/api/v1/commuter/profile/${profile.contact_id}/rider`,
           {
             method: "get",
             headers: {
@@ -172,72 +167,15 @@ const CommuterProfile1 = () => {
 
         const jsonresponse = await response.json();
         if (jsonresponse.data && jsonresponse.data.length > 0) {
-          setDays(jsonresponse.data[0].days);
-          setPrice(jsonresponse.data[0].price);
-          setMobileNo(jsonresponse.data[0].mobile);
-          setSeatsLeft(jsonresponse.data[0].vehicle[0].seats_left);
-          setCarAC(jsonresponse.data[0].vehicle[0].car_ac);
-          setCarBrand(jsonresponse.data[0].vehicle[0].car_brand);
-          setCarCC(jsonresponse.data[0].vehicle[0].car_cc);
-          setCarModel(jsonresponse.data[0].vehicle[0].car_model);
-          setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
-          setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
-          setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
+          return jsonresponse.data;
         }
         console.log("Rider Profile Data:", jsonresponse);
       }
     } catch (error) {
       console.error("An error occurred:", error);
+      return null;
     }
   };
-
-  const getMemberData = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/requests`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse.data && jsonresponse.data.length > 0) {
-        setMemberId(jsonresponse.data[0].contact_id);
-        setId(jsonresponse.data[0].id);
-        setRequestedAs(jsonresponse.data[0].requested_as);
-        setRequestStage(jsonresponse.data[0].request_stage);
-        setName(jsonresponse.data[0].user[0].name);
-        setImage(jsonresponse.data[0].user[0].commuter_image);
-        setGender(jsonresponse.data[0].user[0].gender);
-        setAge(jsonresponse.data[0].user[0].age);
-        setProfession(jsonresponse.data[0].user[0].profession);
-        setOrigin(jsonresponse.data[0].user[0].origin);
-        setDestination(jsonresponse.data[0].user[0].destination);
-        setTimeDepart(jsonresponse.data[0].user[0].time_depart);
-        setTimeReturn(jsonresponse.data[0].user[0].time_return);
-        setDays(jsonresponse.data[0].user[0].days);
-      }
-      console.log("Request Member Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (contactId) {
-      getProfileData();
-    }
-  }, [contactId]);
-
-  useEffect(() => {
-    getDashboardData();
-    getMemberData();
-  }, []);
 
   const viewRequest = () => {
     setSubmit(true);
@@ -255,18 +193,6 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const requestAccepeted = () => {
-    // alert("Request is waiting for response!");
-    Swal.fire({
-      position:'top',
-      icon: 'warning',
-     text: 'Request is waiting for response!',
-     customClass: {
-      confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-    },}
-    )
-  };
-
   const sendRequest = () => {
     setSubmit(true);
 
@@ -275,26 +201,54 @@ const CommuterProfile1 = () => {
     }
   };
 
-  return (
-    <div>
-      <div className="page-title">
-        <p className="card p-4 text-dark my-2 fw-bold fs-6">
-          You are looking for travel buddles to ride your car, others who want
-          to share their car and to connect with members with whom you can take{" "}
-        </p>
-      </div>
+  const UserProfile = ({ user, userDetails }) => {
+    const {
+      commuter_image,
+      name,
+      gender,
+      age,
+      profession,
+      preferred_gender,
+      origin,
+      time_depart,
+      destination,
+      time_return,
+      seats,
+      req_stage,
+    } = user;
 
-      <div className="card p-4 bg-light p-2" >
-        <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }} >
+    const {
+      days,
+      price,
+      mobile,
+    } = userDetails[0];
+    
+    const {
+      seats_left,
+      reg_no,
+      reg_year,
+      car_ac,
+      car_brand,
+      car_cc,
+      car_model,
+      car_reg_year,
+    } = (userDetails[0]?.vehicle?.[0] || {}) || {};
+
+    console.log({ user });
+    console.log(userDetails[0]);
+
+    return (
+      <div className="card p-4 bg-light p-2">
+        <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }}>
           <div className="row">
             <div className="col-md-1 mt-1">
-              <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
+              <img src={`${IMAGE_URL}${commuter_image}`} style={{ height: "115px", width: "115px" }} />
             </div>
             <div className="col-md-11 px-5">
-              <div className="px-5">
+              <div className="col-md-5 px-5">
                 {name !== "" ? (
                   <div>
-                    <h3 className="text-success ">{name}</h3>
+                    <h3 className="text-success fw-bold">{name}</h3>
                   </div>
                 ) : (
                   <>
@@ -304,7 +258,7 @@ const CommuterProfile1 = () => {
               <p className="px-5">
                 {gender !== "" ? (
                   <>
-                    <b>Gender:</b> <u>{gender}</u>
+                    <b className="text-black">Gender:</b> {gender}
                   </>
                 ) : (
                   <>
@@ -313,7 +267,7 @@ const CommuterProfile1 = () => {
                 <br />
                 {age !== "" ? (
                   <>
-                    <b> Age:</b> <u>{age}</u>
+                    <b className="text-black"> Age:</b> {age}
                   </>
                 ) : (
                   <>
@@ -322,32 +276,35 @@ const CommuterProfile1 = () => {
                 <br />
                 {profession !== "" ? (
                   <>
-                    <b>Profession:</b> <u>{profession}</u>
+                    <b className="text-black">Profession:</b> {profession}
                   </>
                 ) : (
                   <>
                   </>
                 )}
                 <br />
-                {mobileNo !== "" ? (
+                {mobile ? (
                   <>
-                    <b>Cell:</b> <u>{mobileNo}</u>
+                    {mobile && (
+                      <>
+                        <b className="text-black">Cell:</b> {mobile}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
               </p>
-
             </div>
           </div>
           <hr style={{ color: "grey" }} />
           <div className="row">
-            <h2 className="text-success py-2 fw-bold">{profileType ? profileType : "Commuter"} Details</h2>
+            <h2 className="text-success py-2 fw-bold">{userType ? userType : "Commuter"} Details</h2>
             <div className="col-md-6">
               <p>
-                {preferredGender !== "" ? (
+                {preferred_gender !== "" ? (
                   <>
-                    <b>Preferred Gender: </b> <u>{preferredGender}</u>
+                    <b className="text-black">Preferred Gender: </b> {preferred_gender}
                   </>
                 ) : (
                   <>
@@ -356,17 +313,17 @@ const CommuterProfile1 = () => {
                 <br />
                 {origin !== "" ? (
                   <>
-                    <b>Point of Origin: </b>
-                    <u>{origin}</u>
+                    <b className="text-black">Point of Origin: </b>
+                    {origin}
                   </>
                 ) : (
                   <>
                   </>
                 )}
                 <br />
-                {timeDepart !== "" ? (
+                {time_depart !== "" ? (
                   <>
-                    <b>Pickup Timings:</b> <u>{timeDepart}</u>
+                    <b className="text-black">Pickup Timings:</b> {time_depart}
                   </>
                 ) : (
                   <>
@@ -376,8 +333,8 @@ const CommuterProfile1 = () => {
                 <br />
                 {destination !== "" ? (
                   <>
-                    <b>Destination:</b>
-                    <u>{destination}</u>
+                    <b className="text-black">Destination:</b>
+                    {destination}
                   </>
                 ) : (
                   <>
@@ -385,9 +342,9 @@ const CommuterProfile1 = () => {
                   </>
                 )}
                 <br />
-                {timeReturn !== "" ? (
+                {time_return !== "" ? (
                   <>
-                    <b>Return Timings:</b> <u>{timeReturn}</u>
+                    <b className="text-black">Return Timings:</b> {time_return}
                   </>
                 ) : (
                   <>
@@ -397,7 +354,7 @@ const CommuterProfile1 = () => {
                 <br />
                 {days !== "" ? (
                   <>
-                    <b>Days:</b> <u>{days}</u>
+                    <b className="text-black">Days:</b> {days}
                   </>
                 ) : (
                   <>
@@ -405,31 +362,40 @@ const CommuterProfile1 = () => {
                   </>
                 )}
                 <br />
-                {mobileNo !== "" ? (
+                {mobile ? (
                   <>
-                    <b>Contact No:</b> <u>{mobileNo}</u>
+                    {mobile && (
+                      <>
+                        <b className="text-black">Contact No:</b> {mobile}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
               </p>
-
             </div>
             <div className="col-md-6">
               <p>
-                {seats !== "" ? (
+                {seats ? (
                   <>
-                    <b>No.of Seats:</b> {seats}
+                    {seats && (
+                      <>
+                        <b>No.of Seats:</b> {seats}
+                      </>
+                    )}
                   </>
                 ) : (
-                  <>
-
-                  </>
+                  <></>
                 )}
                 <br />
-                {seatsLeft !== "" ? (
+                {seats_left !== "" ? (
                   <>
-                    <b>No.of Seats Left:</b> {seatsLeft}
+                    {seats_left && (
+                      <>
+                        <b>No.of Seats Left:</b> {seats_left}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
@@ -437,63 +403,95 @@ const CommuterProfile1 = () => {
                 <br />
                 {price !== "" ? (
                   <>
-                    <b>Payment Terms (perDay):</b> <u>{price}</u>
+                    {price && (
+                      <>
+                        <b>Payment Terms (perDay):</b> {price}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
                 <br />
-                {carAC !== "" ? (
+                {car_ac !== "" ? (
                   <>
-                    <b>Car have AC:</b> {carAC}
+                    {car_ac && (
+                      <>
+                        <b>Car have AC:</b> {car_ac}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
                 <br />
-                {carBrand !== "" ? (
+                {car_brand !== "" ? (
                   <>
-                    <b>Car Brand:</b> {carBrand}
+                    {car_brand && (
+                      <>
+                        <b>Car Brand:</b> {car_brand}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
                 <br />
-                {carCC !== "" ? (
+                {car_cc !== "" ? (
                   <>
-                    <b>Car CC:</b> {carCC}
+                    {car_cc && (
+                      <>
+                        <b>Car CC:</b> {car_cc}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
                 <br />
-                {carModel !== "" ? (
+                {car_model !== "" ? (
                   <>
-                    <b>Car Model:</b> {carModel}
+                    {car_model && (
+                      <>
+                        <b>Car Model:</b> {car_model}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
                 <br />
-                {RegNo !== "" ? (
+                {reg_no !== "" ? (
                   <>
-                    <b>Registration Number:</b> {RegNo}
+                    {reg_no && (
+                      <>
+                        <b>Registration Number:</b> {reg_no}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
                 <br />
-                {RegYear !== "" ? (
+                {reg_year !=="" ? (
                   <>
-                    <b>Registration Year:</b> {RegYear}
+                    {reg_year && (
+                      <>
+                        <b>Registration Year:</b> {reg_year}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
                 )}
                 <br />
-                {carRegYear !== "" ? (
+                {car_reg_year !== "" ? (
                   <>
-                    <b>Car Registration Year:</b> {carRegYear}
+                    {car_reg_year && (
+                      <>
+                        <b>Car Registration Year:</b> {car_reg_year}
+                      </>
+                    )}
                   </>
                 ) : (
                   <></>
@@ -501,44 +499,47 @@ const CommuterProfile1 = () => {
               </p>
             </div>
           </div>
-          {memberId !== "" ? (
-            (
-              requestStage === 1 || requestStage === 2 ? (
-                <div className="text-center">
-                  <Button className="btn btn-sm fs-6 fw-bold btn-warning text-gray rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted}>
-                    Request Accepted
-                  </Button>
-                </div>
-              ) : (
-                <div className="text-center">
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={route}>
-                    Accept Request
-                  </Button>
-                </div>
-              )
-            )
-          ) : (
-            <div className="text-center">
-              {requestStage === 1 ? (
-                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={viewRequest}>
+          <div className="text-center">
+            {req_stage === 1 ? (
+              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={viewRequest}>
+                View Request
+              </Button>
+            ) : (
+              req_stage === 2 ? (
+                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={requestViewDriver}>
                   View Request
                 </Button>
               ) : (
-                requestStage === 2 ? (
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={requestViewDriver}>
-                    View Request
-                  </Button>
-                ) : (
-                  <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
-                    Send Request
-                  </Button>
-                )
-              )}
-            </div>
-          )}
+                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
+                  Send Request
+                </Button>
+              )
+            )}
+          </div>
         </div>
-        <div>
-        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <div className="page-title">
+        <p className="card p-4 text-dark my-2 fw-bold fs-6">
+        "The below suggestion is based upon the start point and destination which match yours". Exact details will be shown after both have accepted to share.
+        </p>
+      </div>
+
+      <div className="row">
+        {userProfiles.length > 0 && userProfileDetails.length > 0 ? (
+          userProfiles.map((user, index) => {
+            // Find the corresponding userDetails
+            return (
+              <UserProfile user={user} key={index} userDetails={userProfileDetails[index]} />
+            );
+          })
+        ) : (
+          null
+        )}
       </div>
     </div>
   );

@@ -22,6 +22,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
+import moment from "moment/moment";
+
+const eighteenYearsAgo = dayjs().subtract(18, "years");
 
 const RiderRegistration = () => {
   
@@ -1549,21 +1552,9 @@ const RiderRegistration = () => {
                         sx={{ width: "100%" }}
                         value={selectedDate}
                         onChange={handleDateChange}
+                        maxDate={eighteenYearsAgo}
+                        disableFuture
                       />
-                      {/* <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              label={
-                                  "MM/DD/YY"
-                              }
-                              value={selectedDate}
-                              onChange={handleDateChange}
-                              sx={{ width: "100%" }}
-                              className="bg-white"
-                              slotProps={{ textField: { size: "small" } }}
-                              inputProps={{ style: { color: '#000' } }}
-                              required
-                              />
-                          </DemoContainer> */}
                     </LocalizationProvider>
                   </Form.Group>
 

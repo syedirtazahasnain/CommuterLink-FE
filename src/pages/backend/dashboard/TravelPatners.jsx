@@ -67,16 +67,16 @@ const TravelPatners = () => {
         setPrice(jsonresponse.data[0].price);
         setDate(jsonresponse.data[0].aggreement_date);
       }
-      else if (jsonresponse.status_code === 100) {
-        Swal.fire({
-          position: 'top',
-          icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },
-        });
-      }
+      // else if (jsonresponse.status_code === 100) {
+      //   Swal.fire({
+      //     position: 'top',
+      //     icon: 'error',
+      //     text: `${jsonresponse.message}`,
+      //     customClass: {
+      //       confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+      //     },
+      //   });
+      // }
       else if (jsonresponse.status_code === 500) {
         Swal.fire({
           position: 'top',
@@ -145,24 +145,18 @@ const TravelPatners = () => {
                     backgroundColor: "#BFD8D2",
                   }}
                 >
-                  <div className="row d-flex justify-content-center">
+                  <div className="row d-flex justify-content-left mb-3">
                     <div className="col-sm-2">
                       {name && image ? (
                         <div
                           className="card"
                           style={{
                             width: "6rem", 
-                            // backgroundColor: "rgb(32 155 98)",
                             backgroundColor:"#f9f0c1"
-                            // backgroundImage:`${BASE_URL}`
-                            // backgroundImage: `url("BASE_URL/assets/images/Sir-Zafar.png")` 
-                            // backgroundImage: `url("${BASE_URL}/assets/images/Sir-Zafar.png")`,
-                            // backgroundSize:'cover'
                           }}
                         >
                           <img
                             src={`${IMAGE_URL}${image}`}
-                            // src={`${BASE_URL}/assets/images/Sir Zafar.png`}
                             className="card-img-top w-40px m-auto py-3 h-65px h-fixed"
                           />
                           <div
@@ -180,150 +174,12 @@ const TravelPatners = () => {
                           />
                         </div>
                       ) : (
-                        <div
-                          className="card"
-                          style={{ width: "6rem",
-                          backgroundColor:"#5ab387"
-                        }}
-                        >
-                          <img
-                            src={`${BASE_URL}/assets/images/Vector.png`}
-                            className="card-img-top w-40px m-auto mt-3"
-                          />
-
-                          <div
-                            className="card-title text-center text-light"
-                            style={{
-                              width: "6rem",
-                            }}
-                          >
-                            Member ID
-                          </div>
-                          <img
-                            className=""
-                            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                          />
-                        </div>
+                        <>
+                        </>
                       )}
-                    </div>
-
-                    <div className="col-sm-2">
-                      <div
-                        className="card"
-                        style={{ width: "6rem",
-                        backgroundColor:"#5ab387"  }}
-                      >
-                        <img
-                          src={`${BASE_URL}/assets/images/Vector.png`}
-                          className="card-img-top w-40px m-auto mt-3"
-                        />
-
-                        <div
-                          className="card-title text-center text-light"
-                          style={{
-                            width: "6rem",
-                          }}
-                        >
-                          Member ID
-                        </div>
-                        <img
-                          className=""
-                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-sm-2">
-                      <div
-                        className="card"
-                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
-                      >
-                        <img
-                          src={`${BASE_URL}/assets/images/Vector.png`}
-                          className="card-img-top w-40px m-auto mt-3"
-                        />
-
-                        <div
-                          className="card-title text-center text-light"
-                          style={{ width: "6rem" }}
-                        >
-                          Member ID
-                        </div>
-                        <img
-                          className=""
-                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <div
-                        className="card"
-                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
-                      >
-                        <img
-                          src={`${BASE_URL}/assets/images/Vector.png`}
-                          className="card-img-top w-40px m-auto mt-3"
-                        />
-                        <div
-                          className="card-title text-center text-light"
-                          style={{ width: "6rem" }}
-                        >
-                          Member ID
-                        </div>
-                        <img
-                          className=""
-                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <div
-                        className="card "
-                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
-                      >
-                        <img
-                          src={`${BASE_URL}/assets/images/Vector.png`}
-                          className="card-img-top w-40px m-auto mt-3"
-                        />
-
-                        <div
-                          className="card-title text-center text-light"
-                          style={{ width: "6rem" }}
-                        >
-                          Member ID
-                        </div>
-                        <img
-                          className=""
-                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                        />
-                      </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <div
-                        className="card"
-                        style={{ width: "6rem", backgroundColor:"#5ab387" }}
-                      >
-                        <img
-                          src={`${BASE_URL}/assets/images/Vector.png`}
-                          className="card-img-top w-40px m-auto mt-3"
-                        />
-
-                        <div
-                          className="card-title text-center text-light"
-                          style={{ width: "6rem" }}
-                        >
-                          Member ID
-                        </div>
-                        <img
-                          className=""
-                          src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                        />
-                      </div>
                     </div>
                   </div>
                 </div>
-                <button className="btn btn_view d-flex justify-content-end me-5">
-                  VIEW MORE
-                </button>
               </div>
               <div className="row">
                 <div className="col-sm-6">
@@ -345,12 +201,6 @@ const TravelPatners = () => {
                           <div className="col-md-3">
                             <div
                               className="card border-0 w-100"
-                              style={
-                                {
-                                  // width: "6rem",
-                                  // backgroundColor: "#D9D9D9",
-                                }
-                              }
                             >
                               {" "}
                               <p className="py-3 text-center fw-bold text-success fs-3">
@@ -449,17 +299,6 @@ const TravelPatners = () => {
                                   <li>Wear & Tear (10%): Rs. 29/-</li>
                                 </ol>
                               </div>
-                              {/* <div className="card-body  d-flex justify-content-between h-50 fw-bold text-success">
-                                  <div className="px-4"
-                                  >
-                                    <p className="text-dark">Add Services Charges(2.5%):</p>
-                                    <p className="text-dark">Daily Received per seat:</p>
-
-                                  </div>
-                                  <div className="px-4"><p className="text-dark">RS. 9/-</p>
-                                    <p className="text-dark">RS. 335/-</p>
-                                  </div>
-                                </div> */}
                             </div>
                           </div>
                         </div>
