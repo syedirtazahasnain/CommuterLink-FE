@@ -1316,32 +1316,7 @@ const DriverRegistration = () => {
                             )}
                           </>
                         )}
-                        <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom06"
-                          className="mb-2 mt-3"
-                        >
-                          <Form.Label className="text-black fs-6">
-                            Timings (+/- 15 Minutes)
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={selectedHomeTime}
-                            onChange={(e) => setSelectedHomeTime(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>
-                              Pickup Timings
-                            </option>
-                            {homeTimeSlots?.map((time) => (
-                              <option key={time.id} value={time.id}>
-                                {time.time_string}
-                              </option>
-                            ))}
-                          </Form.Select>
-                        </Form.Group>
+                        
                       </div>
                     </div> 
                     
@@ -1494,7 +1469,7 @@ const DriverRegistration = () => {
                             )}
                           </>
                         )}
-                        <Form.Group
+                        {/* <Form.Group
                           as={Col}
                           md="12"
                           controlId="validationCustom12"
@@ -1519,7 +1494,7 @@ const DriverRegistration = () => {
                               </option>
                             ))}
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
                       </div>
                     </div>
 
@@ -1645,8 +1620,70 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group>
                     </Row> */}
-
-                      <Row className="my-3" style={{ border: '1px solid #cddbd9' }}>
+ <div className="row mb-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3"
+                        style={{ backgroundColor: "#cddbd9" }}
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Timing
+                        </h2>
+                     
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustomtime1"
+                          className="mb-2 mt-3"
+                        >
+                          <Form.Label className="text-black fs-6">
+                            Start Time (From start point to destination +/- 30 Minutes)
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary drop-down"
+                            value={selectedHomeTime}
+                            onChange={(e) => setSelectedHomeTime(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>
+                              Start Time
+                            </option>
+                            {homeTimeSlots?.map((time) => (
+                              <option key={time.id} value={time.id}>
+                                {time.time_string}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom12"
+                          className="mb-2 mt-3"
+                        >
+                          <Form.Label className="text-black fs-6">
+                            Return Time (From destination to start point +/- 30 Minutes)
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedOfficeTime}
+                            onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>
+                              Return Time
+                            </option>
+                            {officeTimeSlots?.map((time) => (
+                              <option key={time.id} value={time.id}>
+                                {time.time_string}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                      </div>
+                    </div> 
+                      <Row className="my-3" style={{ border: '1px solid #cddbd9',backgroundColor:'#cddbd9' }}>
                       <Form.Group as={Col} md="12" controlId="validationCustom13">
                         <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
                           I Commute (Select Days)
@@ -1788,6 +1825,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
+                                    disabled
                                   // required
                                   />
                                 }
@@ -1812,6 +1850,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
+                                    disabled
                                   // required
                                   />
                                 }
@@ -2020,7 +2059,7 @@ const DriverRegistration = () => {
                   
                   <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
                       <Form.Group as={Col} md="12" controlId="validationCustom14" className="mb-2">
-                        <Form.Label className="fs-6 text-black">Gender</Form.Label>
+                        <Form.Label className="fs-6 text-black">My Gender</Form.Label>
                         <Form.Select
                            aria-label="Default select example"
                            className="text-secondary"

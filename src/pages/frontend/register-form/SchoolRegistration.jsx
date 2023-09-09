@@ -1014,7 +1014,7 @@ const SchoolRegistration = () => {
                         )}
                       </>
                     )}
-                    <Form.Group
+                    {/* <Form.Group
                       as={Col}
                       md="12"
                       controlId="validationCustom06"
@@ -1039,7 +1039,7 @@ const SchoolRegistration = () => {
                           </option>
                         ))}
                       </Form.Select>
-                    </Form.Group>
+                    </Form.Group> */}
                   </div>
                 </div>
 
@@ -1192,7 +1192,7 @@ const SchoolRegistration = () => {
                         )}
                       </>
                     )}
-                    <Form.Group
+                    {/* <Form.Group
                       as={Col}
                       md="12"
                       controlId="validationCustom11"
@@ -1217,7 +1217,7 @@ const SchoolRegistration = () => {
                           </option>
                         ))}
                       </Form.Select>
-                    </Form.Group>
+                    </Form.Group> */}
                   </div>
                 </div>
 
@@ -1302,8 +1302,70 @@ const SchoolRegistration = () => {
                     </Modal.Footer>
                   </Modal>
                 </LoadScript>
-
-                <Row className="mb-3" style={{ border: "1px solid #cddbd9" }}>
+                <div className="row mb-3 shadow shadow-sm">
+                  <div
+                    className="col-md-12 px-2 py-3"
+                    style={{ backgroundColor: "#cddbd9" }}
+                  >
+                    <h2 className="text-success mb-3 text-center">
+                      Timing
+                    </h2>
+                
+                    <Form.Group
+                      as={Col}
+                      md="12"
+                      controlId="validationCustomtime1"
+                      className="mb-2 mt-3"
+                    >
+                      <Form.Label className="text-black fs-6">
+                        Start Time (From start point to destination +/- 30 Minutes)
+                      </Form.Label>
+                      <Form.Select
+                         aria-label="Default select example"
+                         className="text-secondary"
+                        value={selectedHomeTime}
+                        onChange={(e) => setSelectedHomeTime(e.target.value)}
+                        required
+                      >
+                        <option value="" hidden>
+                          Start Time
+                        </option>
+                        {homeTimeSlots?.map((time) => (
+                          <option key={time.id} value={time.id}>
+                            {time.time_string}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Form.Group>
+                    <Form.Group
+                      as={Col}
+                      md="12"
+                      controlId="validationCustomtime2"
+                      className="mb-2 mt-3"
+                    >
+                      <Form.Label className="text-black fs-6">
+                       Return Time (From destination to start point +/- 30 Minutes)
+                      </Form.Label>
+                      <Form.Select
+                        aria-label="Default select example"
+                        className="text-secondary"
+                        value={selectedOfficeTime}
+                        onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                        required
+                      >
+                        <option value="" hidden>
+                          Return Time
+                        </option>
+                        {officeTimeSlots?.map((time) => (
+                          <option key={time.id} value={time.id}>
+                            {time.time_string}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Form.Group>
+                  </div>
+                </div>
+                <Row className="mb-3" style={{ border: "1px solid #cddbd9", backgroundColor:'#cddbd9' }}>
                   <Form.Group as={Col} md="12" controlId="validationCustom12">
                     <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
                       I commute (Select Days)
@@ -1414,6 +1476,7 @@ const SchoolRegistration = () => {
                                 id={`inline-${type}-5`}
                                 checked={daysSelected.includes("Saturday")}
                                 onChange={handleCheckboxChange}
+                                disabled
                                 // required
                               />
                             }
@@ -1431,6 +1494,7 @@ const SchoolRegistration = () => {
                                 id={`inline-${type}-6`}
                                 checked={daysSelected.includes("Sunday")}
                                 onChange={handleCheckboxChange}
+                                disabled
                                 // required
                               />
                             }
@@ -1606,7 +1670,7 @@ const SchoolRegistration = () => {
                     controlId="validationCustom14"
                     className="mb-2"
                   >
-                    <Form.Label className="fs-6 text-black">Gender</Form.Label>
+                    <Form.Label className="fs-6 text-black">My Gender</Form.Label>
                     <Form.Select
                        aria-label="Default select example"
                        className="text-secondary"
@@ -1629,7 +1693,7 @@ const SchoolRegistration = () => {
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
-                      Preferred gender of travel partner
+                      Preferred gender of Travel partner
                     </Form.Label>
                     <Form.Select
                        aria-label="Default select example"
