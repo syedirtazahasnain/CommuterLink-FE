@@ -126,7 +126,7 @@ const Office_School = () => {
                                     
                                   >
                                     {email ?
-                                    (<p>{email}</p>)
+                                    (<p className="text-success fw-small">{email}</p>)
                                     :
                                     (<></>)
                                   }
@@ -134,11 +134,11 @@ const Office_School = () => {
                                 </div>
                                 <div className="">
                                   <h5 className="text-dark mb-4">
-                                  I want to commute to office - school/university
+                                  I want to commute to
                                   </h5>
                                <div>   <Button
                                     variant="success"
-                                    className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                                    className="btn-custom mx-2 w-150px px-4 py-2 rounded rounded-5 text-custom fw-bold"
                                     onClick={officeRoute}
                                   >
                                     Office
@@ -158,8 +158,11 @@ const Office_School = () => {
                                 </div>
                                 <form id="numberForm">
                                   <div>
+                                    <p className="my-3  fs-7 text-success cursor-pointer">
+                                      On long term basis (daily)
+                                    </p>
                                     <p className="my-3  fs-7 text-danger cursor-pointer">
-                                      On long term basis
+                                      You must be 18 years old or elder to register 
                                     </p>
                                   </div>
                                 </form>

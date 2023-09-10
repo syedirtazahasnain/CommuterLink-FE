@@ -779,8 +779,8 @@ const RiderRegistration = () => {
       const registrationSuccessful = () => {
         Swal.fire({
           position: 'top',
-          title: 'Congratulations!',
-          text: 'Registration Form Submited Successfully',
+          // title: 'Congratulations!',
+          text: 'Registration Form Submitted Successfully',
           icon: 'success',
           showCancelButton: false,
           confirmButtonText: 'OK',
@@ -1193,9 +1193,11 @@ const RiderRegistration = () => {
                   libraries={mapLibraries}
                 >
                   <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                    <Modal.Header closeButton>
+                    <Modal.Header className="d-block" >
                       <Modal.Title>Select Starting Location</Modal.Title>
+                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                     </Modal.Header>
+                    
                     <Modal.Body>
                       <Container className="d-flex justify-content-center align-items-center mb-3">
                         <Row style={{ height: "100%", width: "100%" }}>
@@ -1233,8 +1235,10 @@ const RiderRegistration = () => {
                   </Modal>
 
                   <Modal show={showEndModal} onHide={handleCloseEndModal}>
-                    <Modal.Header closeButton>
+                   
+                   <Modal.Header className="d-block">
                       <Modal.Title>Select Drop-off Location</Modal.Title>
+                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1447,7 +1451,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-5`}
                                 checked={daysSelected.includes("Saturday")}
                                 onChange={handleCheckboxChange}
-                                disabled
+                                // disabled
                                 // required
                               />
                             }
@@ -1465,7 +1469,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-6`}
                                 checked={daysSelected.includes("Sunday")}
                                 onChange={handleCheckboxChange}
-                                disabled
+                                // disabled
                                 // required
                               />
                             }

@@ -44,6 +44,7 @@ const WouldYouLikeTo = () => {
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "12vh",
+                    
                   }}
                 > 
                
@@ -104,13 +105,13 @@ const WouldYouLikeTo = () => {
                   <CardContent>
                     <Typography>
                     <form id="regForm" className="multipstepform p-4 mt-3 mb-3">
-                        <h3 className="text-center text-custom mb-3" style={{color:'#198754'}}>Would you like to</h3>
+                        <h3 className="text-center text-custom fw-bold mb-3" style={{color:'#198754'}}>Would you like to</h3>
                       <div className="text-left"> </div>
                        
                           <div className="text-left"> <div>
                             <label className="radio-button ">
                              <input type="radio" id="option1" name="option" value={radio1} onClick={setRadio1} />
-                                <span className="ml-3"><strong>Ride in other’s car</strong> </span>
+                                <span className="ml-3"><strong>Looking for a Car</strong> </span>
                                
                               </label></div>
                               <span className="text-green"style={{color:'#198754', fontSize:'12px'}}>CommutersLink will match you with car owners offering available seats based upon Gender, Route and Timings on cost sharing basis</span>
@@ -119,7 +120,7 @@ const WouldYouLikeTo = () => {
                               <div className="text-left"><div>
                               <label className="radio-button ">
                                 <input type="radio" id="option2" name="option" value={radio2} onClick={setRadio2}/>
-                                <span className="ml-3"><strong>Use your car and offer available seats</strong></span>
+                                <span className="ml-3"><strong>Offering your Car</strong></span>
                               </label>
                               </div>
                               
