@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -12,6 +12,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { setContactIdState, setIdState, setRequestAsState } from "../../../redux/generalSlice";
 
 const theme = createTheme({
   palette: {
@@ -29,8 +30,13 @@ const backgroundLogo = {
 
 const FinalStep = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
+  const requestId = useSelector((s) => s.general.data.id);
+  const requestContactId = useSelector((s) => s.general.data.contact_id);
+  const requested_As = useSelector((s) => s.general.data.request_as);
   const [name, setName] = useState("");
+  const [contactId, setContactId] = useState("");
   const [driverName, setDriverName] = useState("");
   const [id, setId] = useState("");
   const [requestAs, setRequestAs] = useState("");
@@ -39,7 +45,6 @@ const FinalStep = () => {
   const selectedDateFormat = selectedDate ? selectedDate.format('YYYY-MM-DD') : '';
 
   useEffect(() => {
-    getDashboardData();
     getProfileData();
     getMemberData();
     document.getElementById("root").classList.remove("w-100");
@@ -48,35 +53,6 @@ const FinalStep = () => {
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-
-  const getDashboardData = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/matches/office`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
-        setId(jsonresponse.rider[0].request_id);
-        setDriverName(jsonresponse.rider[0].name);
-      } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
-        setId(jsonresponse.drivers[0].request_id);
-        setDriverName(jsonresponse.drivers[0].name);
-      }
-      console.log("Final Step Dashboard Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
 
   const getProfileData = async () => {
     try {
@@ -95,8 +71,8 @@ const FinalStep = () => {
       const jsonresponse = await response.json();
       if (jsonresponse) {
         setName(jsonresponse[0].name);
+        setContactId(jsonresponse[0].contact.contact_id);
         setAmount(jsonresponse[0].wallet.wallet_amount);
-        // setId(jsonresponse[0].id);
       }
       console.log("Final Step Profile Data", jsonresponse);
     } catch (error) {
@@ -132,9 +108,9 @@ const FinalStep = () => {
 
   const sendRequest = async () => {
     try {
-      if(requestAs === "driver"){
+      if(requested_As === "driver"){
         const body = {
-          request_id: id,
+          request_id: requestId,
           start_date: selectedDateFormat,
           message: "I accept your request",
           status: 2,
@@ -162,9 +138,11 @@ const FinalStep = () => {
         console.log("API Response", jsonresponse);
   
         if (jsonresponse.statusCode === 200) {
+          dispatch(setRequestAsState(""));
+          dispatch(setIdState(""));
+          dispatch(setContactIdState(""));
           navigate("/dashboard");
         } else if (jsonresponse.statusCode === 100) {
-          // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
             icon: 'error',
@@ -175,7 +153,6 @@ const FinalStep = () => {
           )
         }
         else if (jsonresponse.statusCode === 500) {
-          // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
             icon: 'error',
@@ -188,7 +165,7 @@ const FinalStep = () => {
       }
       else{
         const body = {
-          request_id: id,
+          request_id: requestId,
           start_date: selectedDateFormat,
           message: "I accept your request",
           status: 3,
@@ -216,6 +193,9 @@ const FinalStep = () => {
         console.log("API Response", jsonresponse);
   
         if (jsonresponse.statusCode === 200) {
+          dispatch(setRequestAsState(""));
+          dispatch(setIdState(""));
+          dispatch(setContactIdState(""));
           navigate("/dashboard");
         } else if (jsonresponse.statusCode === 100) {
           // alert("Resend Error: " + jsonresponse.message);
@@ -273,7 +253,7 @@ const FinalStep = () => {
         <div className="card backgroundColor">
           <div className="card-body">
 
-            <h5>Dear {driverName}</h5><br />
+            <h5>Dear {requestContactId}</h5><br />
             <p className="">
               Thank you very much for accepting me as a travel buddy to ride on your car.
               I also think that we are a suitable match to commute together. so I also formally
@@ -311,7 +291,7 @@ const FinalStep = () => {
               Best Regards
             </p>
             <p>
-              {name}
+              {contactId}
             </p>
           </div>
 
