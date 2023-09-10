@@ -282,7 +282,7 @@ const AdvancePayment = () => {
           <div className="text-center">
             <Button
               className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
-              onClick={() => navigate("/finalstep")}
+              onClick={() => navigate("/dashboard")}
             >
               Skip Payment
             </Button>
