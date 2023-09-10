@@ -220,7 +220,7 @@ const CommuterLinkSuggestions = () => {
       <div className="col-sm-2">
         <div
           className="card"
-          style={{ width: "6rem", backgroundColor: "#5ab387" }}
+          style={{ width: "6rem", backgroundColor: "grey" }}
         >
           <img
             src={`${BASE_URL}/assets/images/Vector.png`}
@@ -287,7 +287,7 @@ const CommuterLinkSuggestions = () => {
       <div className="col-sm-2">
         <div
           className="card"
-          style={{ width: "6rem", backgroundColor: "#5ab387" }}
+          style={{ width: "6rem", backgroundColor: "grey" }}
         >
           <img
             src={`${BASE_URL}/assets/images/Vector.png`}
