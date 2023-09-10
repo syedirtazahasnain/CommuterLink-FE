@@ -151,8 +151,8 @@ const Verification = () => {
                           <p className="text-dark text-justify  p-4">
                             Thank you for providing all the information. Your membership
                             approval will be notified through email and your mobile
-                            number after which, you will be able to access your
-                            dashboard and available choices to commute with
+                            number. After which, you will be able to access your
+                            dashboard and available choices to commute with.
                           </p>
                         </div>
 
