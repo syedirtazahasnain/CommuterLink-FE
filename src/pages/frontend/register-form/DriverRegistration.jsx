@@ -145,7 +145,8 @@ const DriverRegistration = () => {
 
   // I Drive Myself Fields
   const [inputDrivingLicenseMySelf, setInputDrivingLicenseMySelf] = useState("");
-  const [inputValidUptoMySelf, setInputValidUptoMySelf] = useState("");
+  const [inputValidUptoMySelf, setInputValidUptoMySelf] = useState(null);
+  const inputValidUptoMySelfFormat = inputValidUptoMySelf ? inputValidUptoMySelf.format('DD-MM-YYYY') : '';
   const [inputPlaceIssueMySelf, setInputPlaceIssueMySelf] = useState("");
 
   // For Driver & Both Fields
@@ -156,7 +157,8 @@ const DriverRegistration = () => {
   const [inputDriverCnicBack, setInputDriverCnicBack] = useState("");
   const [inputDriverCnicBackExt, setInputDriverCnicBackExt] = useState("");
   const [inputDriverLicenseNumber, setInputDriverLicenseNumber] = useState("");
-  const [inputDriverValidUpto, setInputDriverValidUpto] = useState("");
+  const [inputDriverValidUpto, setInputDriverValidUpto] = useState(null);
+  const inputDriverValidUptoFormat = inputDriverValidUpto ? inputDriverValidUpto.format('DD-MM-YYYY') : '';
 
   // For License Fields
   const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
@@ -435,6 +437,20 @@ const DriverRegistration = () => {
     if (newDate) {
       const newDateObject = dayjs(newDate);
       setSelectedDate(newDateObject);
+    }
+  };
+
+  const handleValidChange = (newDate) => {
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setInputValidUptoMySelf(newDateObject);
+    }
+  };
+
+  const handleValidDriverChange = (newDate) => {
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setInputDriverValidUpto(newDateObject);
     }
   };
 
@@ -1010,12 +1026,12 @@ const DriverRegistration = () => {
         one_side: selectedOneRoutePartner,
         drive_option: "Driver",
         license_no: inputDrivingLicenseMySelf,
-        valid_upto: inputValidUptoMySelf,
+        valid_upto: inputValidUptoMySelfFormat,
         place_issue: inputPlaceIssueMySelf,
         driver_name: inputDriverName,
         driver_cnic: inputDriverCnicNumber,
         driver_license_no: inputDriverLicenseNumber,
-        driver_license_validity: inputDriverValidUpto,
+        driver_license_validity: inputDriverValidUptoFormat,
         driver_cnic_front_image: inputDriverCnicFront,
         driver_cnic_back_image: inputDriverCnicBack,
         driver_cnic_front_ext: inputDriverCnicFrontExt,
@@ -2829,15 +2845,19 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Valid Upto
                               </Form.Label>
-                              <Form.Control
-                                required
-                                type="text"
-                                className="text-secondary"
-                                placeholder="Enter Here"
-                                value={inputValidUptoMySelf}
-                                onChange={(e) => setInputValidUptoMySelf(e.target.value)}
-                                defaultValue=""
-                              />
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputValidUptoMySelf}
+                                  onChange={handleValidChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3102,7 +3122,20 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Valid Upto
                               </Form.Label>
-                              <Form.Control
+                              <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputDriverValidUpto}
+                                  onChange={handleValidDriverChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
+                              {/* <Form.Control
                                 required
                                 type="text"
                                 className="text-secondary"
@@ -3110,7 +3143,7 @@ const DriverRegistration = () => {
                                 value={inputDriverValidUpto}
                                 onChange={(e) => setInputDriverValidUpto(e.target.value)}
                                 defaultValue=""
-                              />
+                              /> */}
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3473,7 +3506,20 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark fs-6">
                               Valid Upto
                             </Form.Label>
-                            <Form.Control
+                            <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputDriverValidUpto}
+                                  onChange={handleValidDriverChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
+                            {/* <Form.Control
                               required
                               type="text"
                               className="text-secondary"
@@ -3481,7 +3527,7 @@ const DriverRegistration = () => {
                               value={inputDriverValidUpto}
                               onChange={(e) => setInputDriverValidUpto(e.target.value)}
                               defaultValue=""
-                            />
+                            /> */}
                           </Form.Group>
                           <Form.Group
                             as={Col}
