@@ -81,7 +81,8 @@ function NumberGenerate() {
         Swal.fire({
           position:'top',
           icon: 'error',
-         text: `${jsonresponse.message}`,
+        //  text: `${jsonresponse.message}`,
+        text: "Number already exists",
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
         },}
