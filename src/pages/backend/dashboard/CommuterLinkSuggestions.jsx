@@ -246,7 +246,9 @@ const CommuterLinkSuggestions = () => {
 
   const RequestCard = ({ request }) => {
     // Extract relevant data from the request object
-    const { commuter_image, name, contact_id, request_stage } = request;
+    const { contact_id, request_stage } = request;
+    const { commuter_image, name } = request.user[0];
+    console.log({request});
   
     return (
       <div className="col-sm-2">
@@ -264,7 +266,7 @@ const CommuterLinkSuggestions = () => {
             <img  src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
           <div
-            className="card-title text-light text-center"
+            className={`card-title ${request_stage === 2 ? "text-dark" : "text-light"} text-center`}
             style={{ width: "6rem", cursor: "pointer" }}
             onClick={() => {
               requestRoute();
