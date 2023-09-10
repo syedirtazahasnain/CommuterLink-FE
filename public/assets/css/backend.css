@@ -16,6 +16,19 @@
   border-radius: 0;
 }
 
+.corner-rounded {
+  border-radius: 20px 0px !important;
+}
+.btn-menu-blue-left {
+  background-color: #5a9b87;
+  /* background-image: url(../images/CL-logo-small.png);
+  background-repeat: no-repeat;
+  background-position: 6% 0%; */
+}
+.btn-menu-blue-left:hover, .btn-menu-blue-left:focus, .btn-menu-blue-left:active {
+  background-color: #275e4e;
+}
+
 .btn-dark-green{
   background-color:rgb(42, 64, 42);
 }

@@ -225,14 +225,17 @@ const TravelPatners = () => {
                             <div className="w-100">
                               {userType === 0 ?
                                 (
-                                  <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5" onClick={onNavigate}>
-                                    Recharge
-                                  </button>
+                                  <button class="d-block border-0 text-center fs-7 btn-menu-blue-left corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm" onClick={onNavigate}><span class="text-uppercase">Recharge</span></button>
+                                  // <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5" onClick={onNavigate}>
+                                  //   Recharge
+                                  // </button>
                                 ) :
                                 (
-                                  <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
-                                    Recharge
-                                  </button>
+                                  <button class="d-block border-0 text-center fs-7 btn-menu-blue-left corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm" ><span class="text-uppercase">Recharge</span></button>
+
+                                  // <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
+                                  //   Recharge
+                                  // </button>
                                 )}
                             </div>
                           </div>
@@ -241,9 +244,11 @@ const TravelPatners = () => {
                         <div className="row w-100">
                           <div className="col-md-6 px-1 m-auto">
                             <div className="w-100">
-                              <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
+                            <button class="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-3 px-10 w-100 shadow-sm"><span class="text-uppercase">View Transaction History</span></button>
+
+                              {/* <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
                                 View Transaction History
-                              </button>
+                              </button> */}
                             </div>
 
                           </div>
