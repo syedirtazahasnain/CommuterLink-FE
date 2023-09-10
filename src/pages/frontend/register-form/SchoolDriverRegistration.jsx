@@ -129,7 +129,7 @@ const DriverRegistration = () => {
   const [regYear, setRegYear] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
   const [carYearRanges, setCarYearRanges] = useState([]);
-  const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
+  // const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
   const [selectedRegNumber, setSelectedRegNumber] = useState("");
   const [selectedCarAC, setSelectedCarAC] = useState("");
   const [selectedCarImage, setSelectedCarImage] = useState("");
@@ -690,7 +690,7 @@ const DriverRegistration = () => {
   ];
 
   const requiredFieldsDriver = [
-    selectedCarBrand, selectedCarCC, selectedCarYearRanges,
+    selectedCarBrand, selectedCarCC,
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
     selectedCarImageExt, selectedSeat, selectedSeatGender,
@@ -1037,7 +1037,7 @@ const DriverRegistration = () => {
         option: 1,
         car_brand: selectedCarBrand,
         car_cc: selectedCarCC,
-        car_year_ranges: selectedCarYearRanges,
+        // car_year_ranges: selectedCarYearRanges,
         car_model: selectedModelName,
         reg_year: selectedRegYear,
         reg_no: selectedRegNumber,
@@ -2525,7 +2525,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom29" className="mb-2">
+                        {/* <Form.Group as={Col} md="12" controlId="validationCustom29" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Car Year Ranges
                           </Form.Label>
@@ -2543,7 +2543,7 @@ const DriverRegistration = () => {
                               </option>
                             ))}
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group as={Col} md="12" controlId="validationCustom30" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Number
