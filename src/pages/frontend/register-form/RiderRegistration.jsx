@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
-import moment from "moment/moment";
+// import moment from "moment/moment";
 
 const eighteenYearsAgo = dayjs().subtract(18, "years");
 
