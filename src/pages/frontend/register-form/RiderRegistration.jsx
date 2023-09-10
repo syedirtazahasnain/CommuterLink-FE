@@ -536,7 +536,7 @@ const RiderRegistration = () => {
       // alert("Please Fill All Fields!");
       Swal.fire({
         position: 'top',
-        icon: 'warning',
+        // icon: 'warning',
         text: 'Please Fill All Fields!',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -610,7 +610,7 @@ const RiderRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'error',
+          // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -660,7 +660,7 @@ const RiderRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'error',
+          // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -701,7 +701,7 @@ const RiderRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'error',
+          // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -742,7 +742,7 @@ const RiderRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'error',
+          // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -800,7 +800,7 @@ const RiderRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'error',
+          // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button

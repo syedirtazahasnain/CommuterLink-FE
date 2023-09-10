@@ -60,7 +60,7 @@ const BackendLayout = ({ children }) => {
         position: 'top',
         title: 'Are you sure?',
         text: "You are about to logout from commuterLink",
-        icon: 'warning',
+        // // icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: 'green',
         cancelButtonColor: 'green',
@@ -122,7 +122,7 @@ const BackendLayout = ({ children }) => {
       if (jsonresponse.statusCode === 500) {
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // // icon: 'error',
           text: `${jsonresponse.message}`
         })
       }

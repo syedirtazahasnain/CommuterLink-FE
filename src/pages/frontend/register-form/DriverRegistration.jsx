@@ -695,7 +695,7 @@ const DriverRegistration = () => {
       // alert("Please Fill All Fields!");
       Swal.fire({
         position: 'top',
-        icon: 'warning',
+        // // icon: 'warning',
         text: 'Please Fill All Fields!',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -723,7 +723,7 @@ const DriverRegistration = () => {
       // alert("Please Fill All Driver Form Fields!");
       Swal.fire({
         position: 'top',
-        icon: 'warning',
+        // icon: 'warning',
         text: 'Please Fill All Driver Form Fields!',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -798,7 +798,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -850,7 +850,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -893,7 +893,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -936,7 +936,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -993,7 +993,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -1064,7 +1064,7 @@ const DriverRegistration = () => {
       else if(jsonresponse.statusCode === 500)  {
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success',
@@ -1124,7 +1124,7 @@ const DriverRegistration = () => {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
             position: 'top',
-            icon: 'error',
+            // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
               confirmButton: 'bg-success',
@@ -1136,7 +1136,7 @@ const DriverRegistration = () => {
       else {
         Swal.fire({
           position: 'top',
-          icon: 'warning',
+          // icon: 'warning',
           text: 'Please Enter Payment Details!',
           customClass: {
             confirmButton: 'bg-success',

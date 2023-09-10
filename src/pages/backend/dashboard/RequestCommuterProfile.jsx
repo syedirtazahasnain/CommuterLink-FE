@@ -84,7 +84,7 @@ const RequestCommuterProfile = () => {
         // alert("Request is waiting for response!");
         Swal.fire({
             position: 'top',
-            icon: 'warning',
+            // // icon: 'warning',
             text: 'Request is waiting for response!',
             customClass: {
                 confirmButton: 'bg-success', // Apply custom CSS class to the OK button

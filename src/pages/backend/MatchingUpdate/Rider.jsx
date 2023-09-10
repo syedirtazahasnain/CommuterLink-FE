@@ -67,7 +67,7 @@ const Rider = () => {
       if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === "" || preferredGender === "") {
         Swal.fire({
           position: 'top',
-          icon: 'warning',
+          // // icon: 'warning',
           text: `Please Fill All Fields!`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -110,7 +110,7 @@ const Rider = () => {
           // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position: 'top',
-            icon: "error",
+            // icon: "error",
             text: `${jsonresponse.message}`
           }
           )
@@ -119,7 +119,7 @@ const Rider = () => {
           // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position: 'top',
-            icon: "error",
+            // icon: "error",
             text: `${jsonresponse.message}`
           }
           )
@@ -131,7 +131,7 @@ const Rider = () => {
       // alert("An error occurred while sending the request.");
       Swal.fire({
         position: 'top',
-        icon: 'error',
+        // // icon: 'error',
         text: 'An error occured while sending the request.',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button

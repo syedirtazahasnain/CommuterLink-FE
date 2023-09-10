@@ -188,7 +188,7 @@ const DriverRequestAcceptence = () => {
         // alert("Resend Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'error',
+          // // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -201,7 +201,7 @@ const DriverRequestAcceptence = () => {
       // alert("An error occurred while sending the request.");
       Swal.fire({
         position:'top',
-        icon: 'error',
+        // // icon: 'error',
        text: 'An error occured while sending the request.',
        customClass: {
         confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
