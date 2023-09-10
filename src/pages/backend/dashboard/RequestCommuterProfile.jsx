@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { setContactIdState, setIdState, setRequestAsState } from "../../../redux/generalSlice";
 
 const customTheme = createTheme({
     palette: {
@@ -23,6 +24,7 @@ const backgroundLogo = {
 
 const RequestCommuterProfile = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [submitbtn, setSubmit] = useState(false);
     const userToken = useSelector((s) => s.login.data.token);
     const [profiles, setProfiles] = useState([]);
@@ -35,11 +37,17 @@ const RequestCommuterProfile = () => {
         window.KTScroll.init();
     }, []);
 
-    const route = async (requested_as) => {
+    const route = async (requested_as,id, contact_id) => {
         if (requested_as === "rider") {
+            dispatch(setRequestAsState(requested_as));
+            dispatch(setIdState(id));
+            dispatch(setContactIdState(contact_id));
             navigate("/termscondition1");
         }
         else if (requested_as === "driver") {
+            dispatch(setRequestAsState(requested_as));
+            dispatch(setIdState(id));
+            dispatch(setContactIdState(contact_id));
             navigate("/beforeapprovalterms");
         }
     };
@@ -88,6 +96,7 @@ const RequestCommuterProfile = () => {
     const UserProfileCard = ({ profile }) => {
         const {
             contact_id,
+            id,
             requested_as,
             request_stage,
             vehicle,
@@ -190,11 +199,14 @@ const RequestCommuterProfile = () => {
                                 <p>
                                     {preferred_gender !== "" ? (
                                         <>
-                                            <b className="text-black">Seats For: </b> {preferred_gender}
+                                            {preferred_gender && (
+                                                <>
+                                                    <b className="text-black">Seats For: </b> {preferred_gender}
+                                                </>
+                                            )}
                                         </>
                                     ) : (
-                                        <>
-                                        </>
+                                        <></>
                                     )}
                                     <br />
                                     {origin !== "" ? (
@@ -392,7 +404,7 @@ const RequestCommuterProfile = () => {
                                     Request Accepted
                                 </Button>
                             ) : (
-                                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { route(requested_as) }}>
+                                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { route(requested_as,id,contact_id) }}>
                                     Accept Request
                                 </Button>
                             )}
