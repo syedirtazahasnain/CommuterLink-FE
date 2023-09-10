@@ -17,6 +17,8 @@ import { API_URL, BASE_URL } from "../../../constants";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
 
+const eighteenYearsAgo = dayjs().subtract(18, "years");
+
 const DriverRegistration = () => {
 
   const navigate = useNavigate();
@@ -31,6 +33,7 @@ const DriverRegistration = () => {
   const [daysSelected, setDaysSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const mapLibraries = ["places"];
+  
 
   const route = () => {
     navigate("/seatcostverification");
@@ -142,7 +145,8 @@ const DriverRegistration = () => {
 
   // I Drive Myself Fields
   const [inputDrivingLicenseMySelf, setInputDrivingLicenseMySelf] = useState("");
-  const [inputValidUptoMySelf, setInputValidUptoMySelf] = useState("");
+  const [inputValidUptoMySelf, setInputValidUptoMySelf] = useState(null);
+  const inputValidUptoMySelfFormat = inputValidUptoMySelf ? inputValidUptoMySelf.format('DD-MM-YYYY') : '';
   const [inputPlaceIssueMySelf, setInputPlaceIssueMySelf] = useState("");
 
   // For Driver & Both Fields
@@ -153,7 +157,8 @@ const DriverRegistration = () => {
   const [inputDriverCnicBack, setInputDriverCnicBack] = useState("");
   const [inputDriverCnicBackExt, setInputDriverCnicBackExt] = useState("");
   const [inputDriverLicenseNumber, setInputDriverLicenseNumber] = useState("");
-  const [inputDriverValidUpto, setInputDriverValidUpto] = useState("");
+  const [inputDriverValidUpto, setInputDriverValidUpto] = useState(null);
+  const inputDriverValidUptoFormat = inputDriverValidUpto ? inputDriverValidUpto.format('DD-MM-YYYY') : '';
 
   // For License Fields
   const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
@@ -432,6 +437,20 @@ const DriverRegistration = () => {
     if (newDate) {
       const newDateObject = dayjs(newDate);
       setSelectedDate(newDateObject);
+    }
+  };
+
+  const handleValidChange = (newDate) => {
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setInputValidUptoMySelf(newDateObject);
+    }
+  };
+
+  const handleValidDriverChange = (newDate) => {
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setInputDriverValidUpto(newDateObject);
     }
   };
 
@@ -1007,12 +1026,12 @@ const DriverRegistration = () => {
         one_side: selectedOneRoutePartner,
         drive_option: "Driver",
         license_no: inputDrivingLicenseMySelf,
-        valid_upto: inputValidUptoMySelf,
+        valid_upto: inputValidUptoMySelfFormat,
         place_issue: inputPlaceIssueMySelf,
         driver_name: inputDriverName,
         driver_cnic: inputDriverCnicNumber,
         driver_license_no: inputDriverLicenseNumber,
-        driver_license_validity: inputDriverValidUpto,
+        driver_license_validity: inputDriverValidUptoFormat,
         driver_cnic_front_image: inputDriverCnicFront,
         driver_cnic_back_image: inputDriverCnicBack,
         driver_cnic_front_ext: inputDriverCnicFrontExt,
@@ -1296,32 +1315,7 @@ const DriverRegistration = () => {
                             )}
                           </>
                         )}
-                        <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom03"
-                          className="mb-2 mt-3"
-                        >
-                          <Form.Label className="text-black fs-6">
-                            Timings (+/- 15 Minutes)
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={selectedHomeTime}
-                            onChange={(e) => setSelectedHomeTime(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>
-                              Pickup Timings
-                            </option>
-                            {homeTimeSlots?.map((time) => (
-                              <option key={time.id} value={time.id}>
-                                {time.time_string}
-                              </option>
-                            ))}
-                          </Form.Select>
-                        </Form.Group>
+                        
                       </div>
                     </div>
 
@@ -1474,32 +1468,7 @@ const DriverRegistration = () => {
                             )}
                           </>
                         )}
-                        <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom09"
-                          className="mb-2 mt-3"
-                        >
-                          <Form.Label className="text-black fs-6">
-                            Timings (+/- 15 Minutes)
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={selectedOfficeTime}
-                            onChange={(e) => setSelectedOfficeTime(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>
-                              Drop-off Timings
-                            </option>
-                            {officeTimeSlots?.map((time) => (
-                              <option key={time.id} value={time.id}>
-                                {time.time_string}
-                              </option>
-                            ))}
-                          </Form.Select>
-                        </Form.Group>
+                        
                       </div>
                     </div>
                     <LoadScript
@@ -1624,15 +1593,78 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group>
                     </Row> */}
-
-                    <Row className="my-3" style={{ border: '1px solid #cddbd9' }}>
+                    <div className="row mb-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3"
+                        style={{ backgroundColor: "#cddbd9" }}
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Timing
+                        </h2>
+                     
+       
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustomtime1"
+                          className="mb-2 mt-3"
+                        >
+                          <Form.Label className="text-black fs-6">
+                            Start Time (From start point to destination +/- 30 Minutes)
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedHomeTime}
+                            onChange={(e) => setSelectedHomeTime(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>
+                              Start Time
+                            </option>
+                            {homeTimeSlots?.map((time) => (
+                              <option key={time.id} value={time.id}>
+                                {time.time_string}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustomtime2"
+                          className="mb-2 mt-3"
+                        >
+                          <Form.Label className="text-black fs-6">
+                            Return Time (From destination to start point +/- 30 Minutes)
+                          </Form.Label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            className="text-secondary"
+                            value={selectedOfficeTime}
+                            onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                            required
+                          >
+                            <option value="" hidden>
+                              Return Time
+                            </option>
+                            {officeTimeSlots?.map((time) => (
+                              <option key={time.id} value={time.id}>
+                                {time.time_string}
+                              </option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                      </div>
+                    </div>
+                    <Row className="my-3" style={{ border: '1px solid #cddbd9',backgroundColor: "#cddbd9" }}>
                       <Form.Group as={Col} md="12" controlId="validationCustom10">
                         <Form.Label className="pt-3 px-3 text-black">
                           I Commute (Select Days)
                         </Form.Label>
                       </Form.Group>
 
-                      <div className="row d-flex px-4">
+                      <div className="row d-flex px-4" >
                         <div className="col">
                           {["checkbox"].map((type) => (
                             <div key={`inline-${type}`} className="mb-3 d-flex flex-wrap">
@@ -1767,6 +1799,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
+                                    disabled
                                   // required
                                   />
                                 }
@@ -1792,6 +1825,7 @@ const DriverRegistration = () => {
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
                                   // required
+                                  disabled
                                   />
                                 }
                                 label="Sunday"
@@ -1816,7 +1850,7 @@ const DriverRegistration = () => {
 
                     <Row className="mb-3 py-3 shadow shadow-sm form-body">
                       <Form.Group as={Col} md="12" controlId="validationCustom11" className="mb-2">
-                        <Form.Label className="fs-6 text-black">Gender</Form.Label>
+                        <Form.Label className="fs-6 text-black">My Gender</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
                           className="text-secondary"
@@ -1859,24 +1893,12 @@ const DriverRegistration = () => {
                           }
                             className="bg-white"
                             slotProps={{ textField: { size: "small", color: "success" } }}
-                            sx={{ width: "100%", }}
+                            sx={{ width: "100%" }}
                             value={selectedDate}
                             onChange={handleDateChange}
+                            maxDate={eighteenYearsAgo}
+                            disableFuture
                           />
-                          {/* <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              label={
-                                  "MM/DD/YY"
-                              }
-                              value={selectedDate}
-                              onChange={handleDateChange}
-                              sx={{ width: "100%" }}
-                              className="bg-white"
-                              slotProps={{ textField: { size: "small" } }}
-                              inputProps={{ style: { color: '#000' } }}
-                              required
-                              />
-                          </DemoContainer> */}
                         </LocalizationProvider>
                       </Form.Group>
 
@@ -1973,7 +1995,10 @@ const DriverRegistration = () => {
                           {" "}
                           Upload CNIC (Front)
                         </Form.Label>
-                        <Form.Control type="file" required onChange={handleCnicFront} />
+                        <Form.Control type="file"  accept="image/png, image/jpeg" required onChange={handleCnicFront} />
+                        <Form.Text className="text-danger" style={{ color: "#000" }}>
+                          The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                       </Form.Group>
                       <Form.Group
                         controlId="formFile"
@@ -1985,7 +2010,10 @@ const DriverRegistration = () => {
                           {" "}
                           Upload CNIC (back)
                         </Form.Label>
-                        <Form.Control type="file" required onChange={handleCnicBack} />
+                        <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
+                        <Form.Text className="text-danger" style={{ color: "#000" }}>
+                        The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                       </Form.Group>
                       <Form.Group
                         controlId="formFile"
@@ -1996,7 +2024,7 @@ const DriverRegistration = () => {
                         <Form.Label className="fs-6 text-black">
                           Upload Your Picture
                         </Form.Label>
-                        <Form.Control type="file" required onChange={handlePicture} />
+                        <Form.Control type="file"  accept="image/png, image/jpeg" required onChange={handlePicture} />
                         <Form.Text className="text-danger" style={{ color: "#000" }}>
                           The picture will only be shown to members with whom you
                           agree to commute
@@ -2161,9 +2189,13 @@ const DriverRegistration = () => {
                           </Form.Label>
                           <Form.Control
                             type="file"
+                            accept="image/png, image/jpeg"
                             onChange={handleImageSelect}
                             required
                           />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                         </Form.Group>
                       </div>
                     </div>
@@ -2813,15 +2845,19 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Valid Upto
                               </Form.Label>
-                              <Form.Control
-                                required
-                                type="text"
-                                className="text-secondary"
-                                placeholder="Enter Here"
-                                value={inputValidUptoMySelf}
-                                onChange={(e) => setInputValidUptoMySelf(e.target.value)}
-                                defaultValue=""
-                              />
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputValidUptoMySelf}
+                                  onChange={handleValidChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -2851,7 +2887,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload License (front)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -2862,7 +2901,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload License (back)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                           </div></div>
                         {/* <Row className="mb-3 mt-3">
@@ -3017,7 +3059,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload CNIC (front)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3028,7 +3073,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark">
                                 Upload CNIC (back)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                           </div></div>
 
@@ -3074,7 +3122,20 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Valid Upto
                               </Form.Label>
-                              <Form.Control
+                              <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputDriverValidUpto}
+                                  onChange={handleValidDriverChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
+                              {/* <Form.Control
                                 required
                                 type="text"
                                 className="text-secondary"
@@ -3082,7 +3143,7 @@ const DriverRegistration = () => {
                                 value={inputDriverValidUpto}
                                 onChange={(e) => setInputDriverValidUpto(e.target.value)}
                                 defaultValue=""
-                              />
+                              /> */}
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3093,7 +3154,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload License (front)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3104,7 +3168,10 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Upload License (back)
                               </Form.Label>
-                              <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                             </Form.Group>
                           </div></div>
                         {/* <Row className="mb-3 mt-3">
@@ -3314,7 +3381,10 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark fs-6">
                               Upload CNIC (front)
                             </Form.Label>
-                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -3325,7 +3395,10 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark">
                               Upload CNIC (back)
                             </Form.Label>
-                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                           </Form.Group>
                         </div></div>
                       {/* <Row className="mb-3 mt-3">
@@ -3433,7 +3506,20 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark fs-6">
                               Valid Upto
                             </Form.Label>
-                            <Form.Control
+                            <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputDriverValidUpto}
+                                  onChange={handleValidDriverChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
+                            {/* <Form.Control
                               required
                               type="text"
                               className="text-secondary"
@@ -3441,7 +3527,7 @@ const DriverRegistration = () => {
                               value={inputDriverValidUpto}
                               onChange={(e) => setInputDriverValidUpto(e.target.value)}
                               defaultValue=""
-                            />
+                            /> */}
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -3452,7 +3538,10 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark fs-6">
                               Upload License (front)
                             </Form.Label>
-                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -3463,7 +3552,7 @@ const DriverRegistration = () => {
                             <Form.Label className="text-dark fs-6">
                               Upload License (back)
                             </Form.Label>
-                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div></div>
 

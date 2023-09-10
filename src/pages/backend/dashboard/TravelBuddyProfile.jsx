@@ -601,7 +601,7 @@ const TravelBuddyProfile = () => {
               {/* <p>
                 {preferredGender !== "" ? (
                   <>
-                    <b className="text-black">Preferred Gender: </b> <u className="">{preferredGender}</u>
+                    <b className="text-black">Seats For: </b> {preferredGender}
                   </>
                 ) : (
                   <>

@@ -62,9 +62,10 @@ const BeforeApprovalTerms = () => {
               emergency this can be waived off under exceptional circumstances
             </p>
             <p>
-              4. You will pay are month in advance. The money will remain in your
-              wallet and will be transferred to car owner on daily basis after confirmation
-              that the service was provided.
+              4. You will pay 15 days cost in advance. The money will remain in your
+              wallet and will be transferred to car owner every week after confirmation 
+              that the service was provided , you will recharge your wallet every week to maintain
+              15 days commuting balance in wallet all the time.
             </p>
             <p>
               5. You will charged on daily basis for actual number of days that you share
@@ -72,17 +73,16 @@ const BeforeApprovalTerms = () => {
               that the car owner does not turn up.
             </p>
             <p>
-              6. You will update the scheduler in your dashboard on daily (as and when required
-              basis.)
+              6. No changes will be levied for public holidays or number of days that the 
+              car owner does not turn up.
             </p>
             <p>
-              7. You will pay your share of fee through Commuterslink and there will be no direct
-              transaction between you and your commuting partner. (insert a llink here "why to
-              receive payment through commutersLink")
+              7. You will pay your share of cost through Commuterslink and there will be no direct
+              transaction between you and your commuting partner.
             </p>
             <p>
               8. If you wish to discontinue your partnership with a memeber due a reason or other
-              CommutersLink will inform the partner an your behalf
+              CommutersLink will inform the partner an your behalf.
             </p>
             <p>
               9. Any complaints, grievances will be addressed to CommutersLink for resolution.

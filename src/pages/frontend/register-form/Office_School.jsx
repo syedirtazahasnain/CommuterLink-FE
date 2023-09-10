@@ -134,7 +134,7 @@ const Office_School = () => {
                                 </div>
                                 <div className="">
                                   <h5 className="text-dark mb-4">
-                                    I want to share ride for
+                                  I want to commute to office - school/university
                                   </h5>
                                <div>   <Button
                                     variant="success"
