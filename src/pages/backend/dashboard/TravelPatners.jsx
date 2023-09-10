@@ -135,14 +135,14 @@ const TravelPatners = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="card" style={{ backgroundColor: "#BFD8D2" }}>
+          <div className="card" style={{ backgroundColor: "rgb(214 219 218)" }}>
             <div className="card-body">
               <div className="row">
                 <div
                   className="card  border-0 w-100"
                   style={{
                     width: "auto",
-                    backgroundColor: "#BFD8D2",
+                    backgroundColor: "rgb(214 219 218)",
                   }}
                 >
                   <div className="row d-flex justify-content-left mb-3">
@@ -221,7 +221,7 @@ const TravelPatners = () => {
                           </div>
                         </div>
                         <div className="row py-5 w-100">
-                          <div className="col-md-3 px-1 m-auto ">
+                          <div className="col-md-6 px-1 m-auto ">
                             <div className="w-100">
                               {userType === 0 ?
                                 (
@@ -236,11 +236,12 @@ const TravelPatners = () => {
                                 )}
                             </div>
                           </div>
+                          
                         </div>
                         <div className="row w-100">
-                          <div className="col-md-5 px-1 m-auto">
+                          <div className="col-md-6 px-1 m-auto">
                             <div className="w-100">
-                              <button className="btn btn_view text-light btn-block bg-success">
+                              <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
                                 View Transaction History
                               </button>
                             </div>

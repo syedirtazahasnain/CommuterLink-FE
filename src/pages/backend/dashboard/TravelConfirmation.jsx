@@ -306,7 +306,7 @@ const TravelConfirmation = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="card h-50" style={{ backgroundColor: "rgb(191, 216, 210)" }}>
+          <div className="card h-50" style={{ backgroundColor: "rgb(214 219 218)" }}>
             <div className="card-body">
               <div
                 className="card border-0"

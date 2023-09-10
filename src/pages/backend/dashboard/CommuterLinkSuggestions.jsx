@@ -322,11 +322,11 @@ const CommuterLinkSuggestions = () => {
 
         <div
           className="card-body"
-          // style={{
-          //   borderWidth: "0 2px 2px 2px",
-          //   borderStyle: "solid",
-          //   borderColor: "#066539",
-          // }}
+          style={{
+            borderWidth: "0 2px 2px 2px",
+            borderStyle: "solid",
+            borderColor: "#066539",
+          }}
         >
           <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
             <div
@@ -339,7 +339,7 @@ const CommuterLinkSuggestions = () => {
               </h5>
             </div>
 
-            <div className="card-body" style={{  background:  "rgb(191, 216, 210)"  }}>
+            <div className="card-body" style={{  background:  "rgb(214 219 218)"  }}>
               <p>
                 Based upon your Profile, We have Following{" "}
                 <strong> MATCHES</strong> to Offer
@@ -379,7 +379,7 @@ const CommuterLinkSuggestions = () => {
               </h5>
             </div>
 
-            <div className="card-body" style={{ background: "rgb(191, 216, 210)" }}>
+            <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
               <p>
                 Based upon your Profile, We have Following{" "}
                 <strong>Requests</strong> to Offer
