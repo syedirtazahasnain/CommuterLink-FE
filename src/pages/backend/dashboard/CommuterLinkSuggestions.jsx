@@ -382,9 +382,12 @@ const CommuterLinkSuggestions = () => {
                 <strong>Requests</strong> to Offer
               </p>
               <div className="row">
-                {requests.map((request, index) => (
-                  <RequestCard key={index} request={request} />
-                ))}
+                {requests.map((request, index) => {
+                   if (request.request_stage !== 3) {
+                    // Show Request card when req_stage is not 3
+                    return <RequestCard key={index} request={request} />;
+                  }
+                  })}
                  {/* Add default cards to reach a total of 6 if necessary */}
                  {requests.length < 6 && Array.from({ length: 6 - requests.length }, (_, i) => (
                   <RequestDefaultCard key={`default-${i}`} />
