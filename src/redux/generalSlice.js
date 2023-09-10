@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     data : {
-        option0 : "",
-        option1 : "",
+        id : "",
+        contact_id : "",
+        request_as : "",
     },
 };
 
@@ -16,12 +17,16 @@ export const generalSlice = createSlice({
     },
     reducers: {
         
-        setOption0State : (state , payload = true) => {
-            state.data.option0 = payload.payload;
+        setIdState : (state , payload = true) => {
+            state.data.id = payload.payload;
         },
         
-        setOption1State : (state , payload = true) => {
-            state.data.option1 = payload.payload;
+        setContactIdState : (state , payload = true) => {
+            state.data.contact_id = payload.payload;
+        },
+
+        setRequestAsState : (state , payload = true) => {
+          state.data.request_as = payload.payload;
         },
 
         setSidebarState: (state, payload = false) => {
@@ -34,5 +39,5 @@ export const generalSlice = createSlice({
     },
 });
 
-export const { setOption0State, setOption1State, setSidebarState, setCurrentPage  } = generalSlice.actions;
+export const { setIdState, setContactIdState, setRequestAsState, setSidebarState, setCurrentPage  } = generalSlice.actions;
 export default generalSlice.reducer;

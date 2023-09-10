@@ -45,8 +45,6 @@ const backgroundLogo={
     setSubmit(true);
     dispatch(setsignupState(""));
     dispatch(setloginState(""));
-    dispatch(setOption0State(""));
-    dispatch(setOption1State(""));
     navigate("/");
     
     if(!submitbtn){

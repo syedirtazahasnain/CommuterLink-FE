@@ -134,7 +134,8 @@ const Signup = () => {
         Swal.fire({
           position: "top",
           icon: "error",
-          text: `${jsonresponse.message}`,
+          // text: `${jsonresponse.message}`,
+          text: "Email Already Exists",
           customClass: {
             confirmButton: "bg-success", // Apply custom CSS class to the OK button
           },
