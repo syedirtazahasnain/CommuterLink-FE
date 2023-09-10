@@ -380,7 +380,7 @@ const Login = () => {
                             </a>
                                 </Tooltip>
                           </li>
-                          {/* <li className="mr-3">
+                          <li className="mr-3">
                           <Tooltip title="Login With Facebook">
                             <a href="https://www.facebook.com/Sysreforms">
                               <img
@@ -390,18 +390,18 @@ const Login = () => {
                               />
                             </a>
                                 </Tooltip>
-                          </li> */}
-                          {/* <li>
-                          <Tooltip title="Login With Twitter">
-                            <a href="https://instagram.com/sysreforms_international?igshid=YmMyMTA2M2Y= ">
+                          </li>
+                          <li>
+                          <Tooltip title="Login With Linkedin">
+                            <a href="https://www.linkedin.com/company/sysreforms-international/mycompany/">
                               <img
-                                src={`${BASE_URL}/assets/images/twitter.png`}
+                                src={`${BASE_URL}/assets/images/linkedin.png`}
                                 alt=""
-                                style={{ height: "27px", width: "27px" }}
+                                style={{ height: "35px", width: "35px" }}
                               />
                             </a>
                             </Tooltip>
-                          </li> */}
+                          </li>
                         </ul>
                       </div>
                     </div>

@@ -133,7 +133,7 @@ const Signup = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: "top",
-          icon: "error",
+          icon: "",
           // text: `${jsonresponse.message}`,
           text: "Email Already Exists",
           customClass: {
@@ -551,7 +551,7 @@ const Signup = () => {
                               </a>
                             </Tooltip>
                           </li>
-                          {/* <li className="mr-3">
+                          <li className="mr-3">
                             <Tooltip title="Signup With Facebook">
                             
                               <a href="https://www.facebook.com/Sysreforms">
@@ -562,19 +562,19 @@ const Signup = () => {
                                 />
                               </a>
                             </Tooltip>
-                            </li> */}
-                          {/* <li>
-                            <Tooltip title="Signup With Twitter">
+                            </li>
+                          <li>
+                            <Tooltip title="Signup With Linkedin">
                             
-                              <a href="https://instagram.com/sysreforms_international?igshid=YmMyMTA2M2Y= ">
+                              <a href="https://www.linkedin.com/company/sysreforms-international/mycompany/">
                                 <img
-                                  src={`${BASE_URL}/assets/images/twitter.png`}
+                                  src={`${BASE_URL}/assets/images/linkedin.png`}
                                   alt=""
-                                  style={{ height: "27px", width: "27px" }}
+                                  style={{ height: "35px", width: "35px" }}
                                 />
                               </a>
                             </Tooltip>
-                            </li> */}
+                            </li>
                         </ul>
                       </div>
                     </div>
