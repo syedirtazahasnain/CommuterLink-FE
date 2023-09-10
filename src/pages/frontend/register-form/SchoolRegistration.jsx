@@ -23,6 +23,8 @@ import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
 
+const eighteenYearsAgo = dayjs().subtract(18, "years");
+
 const SchoolRegistration = () => {
   const backgroundStyle = {
     backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -1726,30 +1728,18 @@ const SchoolRegistration = () => {
                       Year of Birth
                     </Form.Label>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        label={"MM/DD/YY"}
+                      <DatePicker 
+                        label={
+                          "MM/DD/YY"
+                        }
                         className="bg-white"
-                        slotProps={{
-                          textField: { size: "small", color: "success" },
-                        }}
+                        slotProps={{ textField: { size: "small", color: "success" } }}
                         sx={{ width: "100%" }}
                         value={selectedDate}
                         onChange={handleDateChange}
+                        maxDate={eighteenYearsAgo}
+                        disableFuture
                       />
-                      {/* <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              label={
-                                  "MM/DD/YY"
-                              }
-                              value={selectedDate}
-                              onChange={handleDateChange}
-                              sx={{ width: "100%" }}
-                              className="bg-white"
-                              slotProps={{ textField: { size: "small" } }}
-                              inputProps={{ style: { color: '#000' } }}
-                              required
-                              />
-                          </DemoContainer> */}
                     </LocalizationProvider>
                   </Form.Group>
 
