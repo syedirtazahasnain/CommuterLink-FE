@@ -201,7 +201,7 @@ const TravelPatners = () => {
                           </div>
                         </div>
                         <div className="row py-5 w-100">
-                          <div className="col-md-3 px-1 m-auto ">
+                          <div className="col-md-5 px-1 m-auto ">
                             <div className="w-100">
                               {userType === 0 ? (
                                 <button
@@ -221,7 +221,7 @@ const TravelPatners = () => {
                         <div className="row w-100">
                           <div className="col-md-5 px-1 m-auto">
                             <div className="w-100">
-                            <button className="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-3 px-10 w-100 shadow-sm"><span className="text-uppercase">View Transaction History</span></button>
+                            <button className="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm"><span className="text-uppercase">View Transaction History</span></button>
                             </div>
                           </div>
                         </div>
