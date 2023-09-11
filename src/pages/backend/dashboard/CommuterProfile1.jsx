@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { setContactIdState, setIdState } from "../../../redux/generalSlice";
@@ -247,10 +247,12 @@ const CommuterProfile1 = () => {
     console.log(userDetails[0]);
 
     return (
-      <div className="card p-4 bg-light p-2">
-        <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }}>
-          <div className="row">
-            <div className="col-md-1 mt-1">
+      <div> 
+
+      <div className="card p-4 bg-light">
+        <div className="card p-4 backgroundColor">
+          <div className="row px-3">
+            <div className="col-md-1">
               {req_stage === 0 ? (
                 <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px", backgroundColor: "yellow"}} />
               ) :
@@ -278,7 +280,7 @@ const CommuterProfile1 = () => {
               </div>
               <p className="px-5">
                 {gender !== "" ? (
-                  <>
+                                    <>
                     <b className="text-black">Gender:</b> {gender}
                   </>
                 ) : (
@@ -542,15 +544,28 @@ const CommuterProfile1 = () => {
 
         </div>
       </div>
+      </div>
     );
   };
 
   return (
     <div>
       <div className="page-title">
-        <p className="card p-4 text-dark my-2 fw-bold fs-6">
-        "The below suggestion is based upon the start point and destination which match yours". Exact details will be shown after both have accepted to share.
-        </p>
+      
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+          <h3 className="text-success my-2 fw-bold m-0">Commuter's Profile</h3>
+            <Link
+              to={"/dashboard"} >
+              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
+         
+        </div>
+        <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours". Exact details will be shown after both have accepted to share.`}</h5>
       </div>
 
       <div className="row">

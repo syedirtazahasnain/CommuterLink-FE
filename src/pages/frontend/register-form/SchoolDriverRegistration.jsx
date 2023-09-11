@@ -1853,7 +1853,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
-                                    disabled
+                                    // disabled
                                   // required
                                   />
                                 }
@@ -1878,7 +1878,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
-                                    disabled
+                                    // disabled
                                   // required
                                   />
                                 }

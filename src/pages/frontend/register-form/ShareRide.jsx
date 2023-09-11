@@ -42,7 +42,7 @@ const ShareRide = () => {
                     nextIcon={null}
                     indicators={null}
                   >
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={4000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup.png`}
@@ -51,7 +51,7 @@ const ShareRide = () => {
                       <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                     </Carousel.Item>
 
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={4000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
@@ -59,7 +59,7 @@ const ShareRide = () => {
                       />
                       <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
                     </Carousel.Item>
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={4000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
@@ -67,7 +67,7 @@ const ShareRide = () => {
                       />
                       <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
                     </Carousel.Item>
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={4000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-6.png`}
