@@ -124,7 +124,7 @@ const DriverRegistration = () => {
   const [regYear, setRegYear] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
   const [carYearRanges, setCarYearRanges] = useState([]);
-  //const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
+  const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
   const [selectedRegNumber, setSelectedRegNumber] = useState("");
   const [selectedCarAC, setSelectedCarAC] = useState("");
   const [selectedCarImage, setSelectedCarImage] = useState("");
@@ -665,7 +665,7 @@ const DriverRegistration = () => {
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
     selectedCarImageExt, selectedSeat, selectedSeatGender,
-    selectedMidRoutePartner, selectedOneRoutePartner, inputDrivingLicenseMySelf,
+    selectedMidRoutePartner, inputDrivingLicenseMySelf,
     inputValidUptoMySelf, inputPlaceIssueMySelf
   ];
 
@@ -1012,7 +1012,7 @@ const DriverRegistration = () => {
         option: 1,
         car_brand: selectedCarBrand,
         car_cc: selectedCarCC,
-        //car_year_ranges: selectedCarYearRanges,
+        car_year_ranges: selectedRegYear,
         car_model: selectedModelName,
         reg_year: selectedRegYear,
         reg_no: selectedRegNumber,
@@ -1023,7 +1023,7 @@ const DriverRegistration = () => {
         seats_available: selectedSeat,
         seats_for: selectedSeatGender,
         mid_route: selectedMidRoutePartner,
-        one_side: selectedOneRoutePartner,
+        //one_side: selectedOneRoutePartner,
         drive_option: "Driver",
         license_no: inputDrivingLicenseMySelf,
         valid_upto: inputValidUptoMySelfFormat,
@@ -1477,7 +1477,8 @@ const DriverRegistration = () => {
                     >
                       <Modal show={showStartModal} onHide={handleCloseStartModal}>
                         <Modal.Header closeButton>
-                          <Modal.Title>Select Starting Location</Modal.Title>
+                        <Modal.Title>Select Starting Location</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1512,6 +1513,7 @@ const DriverRegistration = () => {
                       <Modal show={showEndModal} onHide={handleCloseEndModal}>
                         <Modal.Header closeButton>
                           <Modal.Title>Select Drop-off Location</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1799,8 +1801,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
-                                    disabled
-                                  // required
+                                    //required
                                   />
                                 }
                                 label="Saturday"
@@ -1824,8 +1825,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
-                                  // required
-                                  disabled
+                                    //required
                                   />
                                 }
                                 label="Sunday"
@@ -2315,7 +2315,7 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Route Partner
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
+                        {/* <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             I accept one-route partner
                           </Form.Label>
@@ -2330,7 +2330,7 @@ const DriverRegistration = () => {
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <Form.Group as={Col} md="12" controlId="validationCustom29" className="mb-2">
                           <Form.Label className="text-dark fs-6">

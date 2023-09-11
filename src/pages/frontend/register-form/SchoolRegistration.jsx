@@ -1230,6 +1230,7 @@ const SchoolRegistration = () => {
                   <Modal show={showStartModal} onHide={handleCloseStartModal}>
                     <Modal.Header closeButton>
                       <Modal.Title>Select Starting Location</Modal.Title>
+                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1270,6 +1271,7 @@ const SchoolRegistration = () => {
                   <Modal show={showEndModal} onHide={handleCloseEndModal}>
                     <Modal.Header closeButton>
                       <Modal.Title>Select Drop-off Location</Modal.Title>
+                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Container className="d-flex justify-content-center align-items-center mb-3">
