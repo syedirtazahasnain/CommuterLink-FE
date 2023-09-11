@@ -1060,7 +1060,7 @@ const RiderRegistration = () => {
                         onChange={(e) => setCityEndId(e.target.value)}
                         required
                       >
-                        <option value="" disabled>
+                        <option value="" disabled hidden>
                           Select a City
                         </option>
                         {selectedEndProvinceCities?.map((province) => (

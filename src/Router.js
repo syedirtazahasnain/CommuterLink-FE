@@ -1,5 +1,6 @@
 import Home from "./pages/frontend/Home";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 import Signup from "./pages/frontend/Signup/Signup";
 import DriverRegistration from "./pages/frontend/register-form/DriverRegistration";
 import ShareRide from "./pages/frontend/register-form/ShareRide";
@@ -66,6 +67,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<FrontendLayout children={<Home />} />} />
+        <Route exact path="/linkedin" component={LinkedInCallback} />
         {/* <Route path="contact" element={<FrontendLayout children={<Contact/>} />} /> */}
         {/* <Route path="concept" element={<FrontendLayout children={<CarouselSlider/>} />} />
         <Route path="howitworks" element={<FrontendLayout children={<HowWorks/>} />} />
