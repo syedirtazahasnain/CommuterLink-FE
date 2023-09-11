@@ -48,17 +48,14 @@ const TravelPatners = () => {
 
   const getTravelData = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/travelbuddy`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/travelbuddy`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
@@ -80,10 +77,10 @@ const TravelPatners = () => {
       else if (jsonresponse.status_code === 500) {
         Swal.fire({
           position: 'top',
-          // // icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: "bg-success", // Apply custom CSS class to the OK button
           },
         });
       }
@@ -95,17 +92,14 @@ const TravelPatners = () => {
 
   const getProfileData = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/profile`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/profile`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
       if (jsonresponse) {
@@ -151,8 +145,8 @@ const TravelPatners = () => {
                         <div
                           className="card"
                           style={{
-                            width: "6rem", 
-                            backgroundColor:"#f9f0c1"
+                            width: "6rem",
+                            backgroundColor: "#f9f0c1",
                           }}
                         >
                           <img
@@ -174,8 +168,7 @@ const TravelPatners = () => {
                           />
                         </div>
                       ) : (
-                        <>
-                        </>
+                        <></>
                       )}
                     </div>
                   </div>
@@ -199,9 +192,7 @@ const TravelPatners = () => {
                             <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
                           </div>
                           <div className="col-md-3">
-                            <div
-                              className="card border-0 w-100"
-                            >
+                            <div className="card border-0 w-100">
                               {" "}
                               <p className="py-3 text-center fw-bold text-success fs-3">
                                 Rs. {walletAmount}
@@ -212,28 +203,26 @@ const TravelPatners = () => {
                         <div className="row py-5 w-100">
                           <div className="col-md-3 px-1 m-auto ">
                             <div className="w-100">
-                              {userType === 0 ?
-                                (
-                                  <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5" onClick={onNavigate}>
-                                    Recharge
-                                  </button>
-                                ) :
-                                (
-                                  <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
-                                    Recharge
-                                  </button>
-                                )}
+                              {userType === 0 ? (
+                                <button
+                                  className="d-block border-0 text-center fs-7 btn-menu-blue-left corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm"
+                                  onClick={onNavigate}
+                                >
+                                  <span className="text-uppercase">Recharge</span>
+                                </button>
+                              ) : (
+                                <button className="d-block border-0 text-center fs-7 btn-menu-blue-left corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm">
+                                  <span className="text-uppercase">Recharge</span>
+                                </button>
+                              )}
                             </div>
                           </div>
                         </div>
                         <div className="row w-100">
                           <div className="col-md-5 px-1 m-auto">
                             <div className="w-100">
-                              <button className="btn btn_view text-light btn-block bg-success">
-                                View Transaction History
-                              </button>
+                            <button className="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-3 px-10 w-100 shadow-sm"><span className="text-uppercase">View Transaction History</span></button>
                             </div>
-
                           </div>
                         </div>
                       </div>
@@ -250,7 +239,7 @@ const TravelPatners = () => {
                               className="card-header text-white"
                               style={{ backgroundColor: "#00917C" }}
                             >
-                              <h5  className="text-center text-white m-auto">
+                              <h5 className="text-center text-white m-auto">
                                 COST PER SEAT PER DAY
                               </h5>
                             </div>
@@ -258,22 +247,19 @@ const TravelPatners = () => {
                               <div className="col-md-12">
                                 <div
                                   className="p-3 px-5 h-fixed"
-                                // style={{ width: "4rem" }}
+                                  // style={{ width: "4rem" }}
                                 >
-                                  {image ?
-                                    (
-                                      <img
-                                        src={`${IMAGE_URL}${image}`}
-                                        className="card-img-top w-50px m-auto border border-1 border-success "
-                                      />
-                                    ) :
-                                    (
-                                      <img
-                                        src={`${BASE_URL}/assets/images/Vector.png`}
-                                        className="card-img-top w-50px m-auto border border-1 border-success bg-success"
-                                      />
-                                    )
-                                  }
+                                  {image ? (
+                                    <img
+                                      src={`${IMAGE_URL}${image}`}
+                                      className="card-img-top w-50px m-auto border border-1 border-success "
+                                    />
+                                  ) : (
+                                    <img
+                                      src={`${BASE_URL}/assets/images/Vector.png`}
+                                      className="card-img-top w-50px m-auto border border-1 border-success bg-success"
+                                    />
+                                  )}
                                 </div>
                                 <div className="px-5">
                                   <h3 className="py-1">{name}</h3>

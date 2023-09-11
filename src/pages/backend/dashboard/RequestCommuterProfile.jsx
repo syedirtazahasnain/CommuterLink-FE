@@ -25,9 +25,11 @@ const backgroundLogo = {
 const RequestCommuterProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [option, setOption] = useState(null);
     const [submitbtn, setSubmit] = useState(false);
     const userToken = useSelector((s) => s.login.data.token);
     const [profiles, setProfiles] = useState([]);
+    const [userProfileDetails, setUserProfileDetails] = useState([]);
 
     useEffect(() => {
         document.getElementById("root").classList.remove("w-100");
@@ -37,7 +39,30 @@ const RequestCommuterProfile = () => {
         window.KTScroll.init();
     }, []);
 
-    const route = async (requested_as,id, contact_id) => {
+    useEffect(() => {
+        getMemberData();
+        getProfileData();
+    }, []);
+
+    useEffect(() => {
+        if (profiles.length > 0) {
+          // Fetch details for each profile and accumulate them
+          const fetchDetailsPromises = profiles.map(async (profile) => {
+            return await getCommuterProfileData(profile);
+          });
+      
+          Promise.all(fetchDetailsPromises)
+            .then((details) => {
+              // Set the profiles and details in the state
+              setUserProfileDetails(details);
+            })
+            .catch((error) => {
+              console.error("An error occurred:", error);
+            });
+        }
+      }, [profiles]);
+
+    const route = async (requested_as, id, contact_id) => {
         if (requested_as === "rider") {
             dispatch(setRequestAsState(requested_as));
             dispatch(setIdState(id));
@@ -51,6 +76,30 @@ const RequestCommuterProfile = () => {
             navigate("/beforeapprovalterms");
         }
     };
+
+    const getProfileData = async () => {
+        try {
+          const response = await fetch(
+            `${API_URL}/api/v1/profile`,
+            {
+              method: "get",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${userToken}`,
+              },
+            }
+          );
+    
+          const jsonresponse = await response.json();
+          if (jsonresponse) {
+            setOption(jsonresponse[0].userlist.vehicle_option);
+          }
+          console.log("Commuter Profile Data", jsonresponse);
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      };
 
     const getMemberData = async () => {
         try {
@@ -76,12 +125,52 @@ const RequestCommuterProfile = () => {
         }
     };
 
-    useEffect(() => {
-        getMemberData();
-    }, []);
+    const getCommuterProfileData = async (profile) => {
+        try {
+          if (option === 0) {
+            const response = await fetch(
+              `${API_URL}/api/v1/commuter/profile/${profile.contact_id}/driver`,
+              {
+                method: "get",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  Authorization: `Bearer ${userToken}`,
+                },
+              }
+            );
+    
+            const jsonresponse = await response.json();
+            if (jsonresponse.data && jsonresponse.data.length > 0) {
+              return jsonresponse.data;
+            }
+            console.log("Driver Profile Data:", jsonresponse);
+          } else if (option === 1) {
+            const response = await fetch(
+              `${API_URL}/api/v1/commuter/profile/${profile.contact_id}/rider`,
+              {
+                method: "get",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  Authorization: `Bearer ${userToken}`,
+                },
+              }
+            );
+    
+            const jsonresponse = await response.json();
+            if (jsonresponse.data && jsonresponse.data.length > 0) {
+              return jsonresponse.data;
+            }
+            console.log("Rider Profile Data:", jsonresponse);
+          }
+        } catch (error) {
+          console.error("An error occurred:", error);
+          return null;
+        }
+    };
 
     const requestAccepeted = () => {
-        // alert("Request is waiting for response!");
         Swal.fire({
             position: 'top',
             // // icon: 'warning',
@@ -93,7 +182,7 @@ const RequestCommuterProfile = () => {
         )
     };
 
-    const UserProfileCard = ({ profile }) => {
+    const UserProfileCard = ({ profile, userDetails }) => {
         const {
             contact_id,
             id,
@@ -102,18 +191,10 @@ const RequestCommuterProfile = () => {
             vehicle,
         } = profile;
 
-        const { 
+        const {
             name,
             preferred_gender,
             seats,
-            seats_left,
-            car_ac,
-            car_brand,
-            car_cc,
-            car_model,
-            reg_no,
-            reg_year,
-            car_reg_year,
             commuter_image,
             gender,
             age,
@@ -122,12 +203,27 @@ const RequestCommuterProfile = () => {
             destination,
             time_depart,
             time_return,
-            days,
-            mobile,
-            price,
-    } = profile.user[0];
+        } = profile.user[0];
 
-        console.log({profile});
+        const {
+            days,
+            price,
+            mobile,
+          } = (userDetails && userDetails[0]) || {};
+          
+          const {
+            seats_left,
+            reg_no,
+            reg_year,
+            car_ac,
+            car_brand,
+            car_cc,
+            car_model,
+            car_reg_year,
+          } = (userDetails && userDetails[0]?.vehicle?.[0])|| {};
+
+        console.log({ profile });
+        //console.log(userDetails[0]);
 
         return (
             <div className="col-md-12">
@@ -178,7 +274,7 @@ const RequestCommuterProfile = () => {
                                         </>
                                     )}
                                     <br />
-                                    {mobile ? (
+                                    {/* {mobile ? (
                                         <>
                                             {mobile && (
                                                 <>
@@ -188,7 +284,7 @@ const RequestCommuterProfile = () => {
                                         </>
                                     ) : (
                                         <></>
-                                    )}
+                                    )} */}
                                 </p>
                             </div>
                         </div>
@@ -260,7 +356,7 @@ const RequestCommuterProfile = () => {
                                         </>
                                     )}
                                     <br />
-                                    {mobile ? (
+                                    {/* {mobile ? (
                                         <>
                                             {mobile && (
                                                 <>
@@ -270,7 +366,7 @@ const RequestCommuterProfile = () => {
                                         </>
                                     ) : (
                                         <></>
-                                    )}
+                                    )} */}
                                 </p>
                             </div>
                             <div className="col-md-6">
@@ -404,7 +500,7 @@ const RequestCommuterProfile = () => {
                                     Request Accepted
                                 </Button>
                             ) : (
-                                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { route(requested_as,id,contact_id) }}>
+                                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { route(requested_as, id, contact_id) }}>
                                     Accept Request
                                 </Button>
                             )}
@@ -419,13 +515,13 @@ const RequestCommuterProfile = () => {
         <div>
             <div className="page-title">
                 <p className="card p-4 text-dark my-2 fw-bold fs-6">
-                "The below suggestion is based upon the start point and destination which match yours". Exact details will be shown after both have accepted to share.
+                    "The below suggestion is based upon the start point and destination which match yours". Exact details will be shown after both have accepted to share.
                 </p>
             </div>
 
             <div className="row">
-                {profiles.map((profile) => (
-                    <UserProfileCard key={profile.id} profile={profile} />
+                {profiles.map((profile, index) => (
+                    <UserProfileCard key={index} profile={profile} userDetails={userProfileDetails[index]} />
                 ))}
             </div>
         </div>
