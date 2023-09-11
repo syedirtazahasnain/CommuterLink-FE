@@ -179,10 +179,12 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const viewRequest = () => {
+  const viewRequest = (contact_id,request_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
+      dispatch(setContactIdState(contact_id));
+      dispatch(setIdState(request_id));
       navigate("/beforeapprovalterms");
     }
   };
@@ -522,7 +524,7 @@ const CommuterProfile1 = () => {
           </div>
           <div className="text-center">
             {req_stage === 1 ? (
-              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={viewRequest}>
+              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {viewRequest(contact_id,request_id)}}>
                 View Request
               </Button>
             ) : req_stage === 0 ? (

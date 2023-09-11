@@ -142,7 +142,7 @@ const SendApprovalForMember = () => {
             </p>
             <p>
               Based upon your profile, I feel that we are a good match. I approve your request
-              to commute togeter.
+              to commute together.
             </p>
             <p>
               Looking forward to sharing
