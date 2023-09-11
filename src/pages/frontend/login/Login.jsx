@@ -386,7 +386,7 @@ const Login = () => {
                               <img
                                src={`${BASE_URL}/assets/images/facebook.png`}
                                 alt=""
-                                style={{ height: "27px", width: "27px" }}
+                                style={{ height: "27px", width: "27px" , cursor: "pointer"}}
                               />
                             </a>
                                 </Tooltip>
@@ -397,7 +397,7 @@ const Login = () => {
                               <img
                                 src={`${BASE_URL}/assets/images/linkedin.png`}
                                 alt=""
-                                style={{ height: "35px", width: "35px" }}
+                                style={{ height: "35px", width: "35px", cursor: "pointer" }}
                               />
                             </a>
                             </Tooltip>
