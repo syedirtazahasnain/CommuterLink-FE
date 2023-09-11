@@ -62,7 +62,7 @@ const WouldYouLikeToSchool = () => {
                     />
                   </Carousel.Item>
 
-                  <Carousel.Item interval={2000}>
+                  <Carousel.Item interval={4000}>
                     <img
                       className="Carousel_image img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup-3.png`}

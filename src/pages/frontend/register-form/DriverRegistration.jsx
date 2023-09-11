@@ -1801,7 +1801,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
-                                    //required
+                                    // //required
                                   />
                                 }
                                 label="Saturday"
@@ -1825,7 +1825,8 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
-                                    //required
+                                  // required
+                                  disabled
                                   />
                                 }
                                 label="Sunday"
@@ -2765,7 +2766,7 @@ const DriverRegistration = () => {
                             }}
                             data-toggle="buttons"
                           >
-                            I Driver MySelf
+                            I Drive MySelf
                           </Button>
                           <Button
                             variant="outlined"
@@ -2866,13 +2867,13 @@ const DriverRegistration = () => {
                               className="mb-2"
                             >
                               <Form.Label text-dark fs-6>
-                                Place of Issued
+                                Place of Issue
                               </Form.Label>
                               <Form.Control
                                 required
                                 type="text"
                                 className="text-secondary"
-                                placeholder="Enter Here"
+                                placeholder="Place of issue"
                                 value={inputPlaceIssueMySelf}
                                 onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
                                 defaultValue=""
@@ -3145,6 +3146,25 @@ const DriverRegistration = () => {
                                 defaultValue=""
                               /> */}
                             </Form.Group>
+                            {/* <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom33"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place of Issue
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Place of issue"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group> */}
                             <Form.Group
                               as={Col}
                               md="12"
@@ -3325,6 +3345,109 @@ const DriverRegistration = () => {
                       </>
                     )}
                     {showboth && (<>
+
+                      {/* <div className="row mb-3 mt-2 shadow shadow-sm">
+                        <div
+                          className="col-md-12 px-2 py-3 form-body"
+                        >
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom50"
+                            className="mb-2"
+                          >
+                            <h2 className="text-success mb-3 text-center">
+                              My Driver Details
+                            </h2>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom51"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Driving License No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom52"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Valid Upto
+                            </Form.Label>
+                            <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputDriverValidUpto}
+                                  onChange={handleValidDriverChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
+                        
+                          </Form.Group>
+                          <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom33"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place of Issue
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Place of issue"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom53"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (front)
+                            </Form.Label>
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom54"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (back)
+                            </Form.Label>
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                          </Form.Group>
+                        </div></div> */}
 
                       <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
@@ -3529,6 +3652,25 @@ const DriverRegistration = () => {
                               defaultValue=""
                             /> */}
                           </Form.Group>
+                          {/* <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom33"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place of Issue
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Place of issue"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group> */}
                           <Form.Group
                             as={Col}
                             md="12"

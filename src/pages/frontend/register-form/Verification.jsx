@@ -89,7 +89,7 @@ const Verification = () => {
                 nextIcon={null}
                 indicators={null}
               >
-                <Carousel.Item interval={2000}>
+                <Carousel.Item interval={4000}>
                   <img
                     className="d-block img-fluid w-auto"
                     src={`${BASE_URL}/assets/images/signup.png`}
@@ -98,7 +98,7 @@ const Verification = () => {
                    <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                 </Carousel.Item>
 
-                <Carousel.Item interval={2000}>
+                <Carousel.Item interval={4000}>
                   <img
                     className="d-block img-fluid w-auto"
                     src={`${BASE_URL}/assets/images/signup-3.png`}
@@ -107,7 +107,7 @@ const Verification = () => {
                   <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
 
                 </Carousel.Item>
-                <Carousel.Item interval={2000}>
+                <Carousel.Item interval={4000}>
                   <img
                     className="d-block img-fluid w-auto"
                     src={`${BASE_URL}/assets/images/signup-4.png`}
@@ -116,7 +116,7 @@ const Verification = () => {
                  <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
 
                 </Carousel.Item>
-                <Carousel.Item interval={2000}>
+                <Carousel.Item interval={4000}>
                   <img
                     className="d-block img-fluid w-auto"
                     src={`${BASE_URL}/assets/images/signup-6.png`}
@@ -161,73 +161,13 @@ const Verification = () => {
                         Close
                       </Button>
                     </div>
-                        <form id="numberForm">
-                          {/* <div className="mb-3">
-
-                            <Button variant="success" className="btn-sm" onClick={route}>
-                              Close
-                            </Button>
-                          </div> */}
-                        </form>
+                       
 
 
                   </div>
                 </div>
               </div>
            
-              {/* <div
-                className="card text-center border-1 border-success rounded rounded-4"
-              >
-                <div className="container">
-                  <div className="row">
-                    <div className="col px-4">
-                      <div style={backgroundStyle}></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="container">
-                  <div className="row">
-                    <div className="col">
-                      <div
-                        className="card-body cardpadding mb-5 py-5 rounded rounded-4"
-                        style={{ background: "rgb(22,70,57)" }}
-                      >
-                        <div>
-                          <div>
-                            {" "}
-                            <img
-                              src={`${IMAGE_URL}${image}`}
-                              alt="Sample photo"
-                              style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '60%' }}
-                            />
-                          </div>
-                          <div className="text-white">{name ? name : verificationName}<br />{email ? email : verificationEmail}</div>
-                          <h5 className="card-title mt-4" style={{ color: "yellow" }}>
-                            Pending Verificaiton
-                          </h5>
-                        </div>
-                        <div>
-                          <p className="text-white text-justify">
-                            Thank you for providing all the information. Your membership
-                            approval will be notified through email and your mobile
-                            number after which, you will be able to access your
-                            dashboard and available choices to commute with
-                          </p>
-                        </div>
-
-                        <form id="numberForm">
-                          <div className="mb-3">
-
-                            <Button variant="success" className="btn-sm" onClick={route}>
-                              Close
-                            </Button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
       </section>

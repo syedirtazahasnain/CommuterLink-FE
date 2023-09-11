@@ -1480,7 +1480,7 @@ const SchoolRegistration = () => {
                                 id={`inline-${type}-5`}
                                 checked={daysSelected.includes("Saturday")}
                                 onChange={handleCheckboxChange}
-                                disabled
+                                // disabled
                                 // required
                               />
                             }
@@ -1498,7 +1498,7 @@ const SchoolRegistration = () => {
                                 id={`inline-${type}-6`}
                                 checked={daysSelected.includes("Sunday")}
                                 onChange={handleCheckboxChange}
-                                disabled
+                                // disabled
                                 // required
                               />
                             }
