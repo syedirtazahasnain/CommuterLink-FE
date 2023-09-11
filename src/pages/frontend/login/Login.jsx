@@ -386,7 +386,7 @@ const Login = () => {
                               <img
                                src={`${BASE_URL}/assets/images/facebook.png`}
                                 alt=""
-                                style={{ height: "27px", width: "27px", cursor: "pointer" }}
+                                style={{ height: "27px", width: "27px" , cursor: "pointer"}}
                               />
                             </a>
                                 </Tooltip>

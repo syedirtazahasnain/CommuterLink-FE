@@ -338,25 +338,25 @@ const TravelBuddyProfile = () => {
       <div className="page-title">
       <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">Travel Buddy Profile</h3>
+            <h3 className="text-success my-2 fw-bold m-0">TRAVEL BUDDY PROFILE</h3>
             <Link
               to={"/dashboard"} >
-              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
               </button>
             </Link>
           </div>
         </div>
-          <h5 className="card p-2 px-4 text-success ">{`You are looking for travel buddles to ride your car, others who want
-          to share their car and to connect with members with whom you can take turns to use each other's car`}</h5>
-        </div>
       {/* <div className="page-title">
         <h4 className="card p-2 px text-success my-2">
-          You are looking for travel buddles to ride your car, others who want
-          to share their car and to connect with members with whom you can take turns to use each other's car
+        You are looking for travel buddles to ride your car, others who want
+        to share their car and to connect with members with whom you can take turns to use each other's car
         </h4>
       </div> */}
+      <h5 className="card p-2 px-4 text-success ">{`You are looking for travel buddles to ride your car, others who want
+      to share their car and to connect with members with whom you can take turns to use each other's car`}</h5>
+    </div>
       <div className="card p-4 bg-light" >
         <div className="card p-4 backgroundColor">
           <div className="row px-3">
@@ -570,7 +570,7 @@ const TravelBuddyProfile = () => {
             {/* <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
               Back
             </Button> */}
-            <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3" onClick={youSure}>
+            <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3" onClick={youSure}>
               Cancel Agreement
             </Button>
           </div>

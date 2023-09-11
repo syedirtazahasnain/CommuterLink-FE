@@ -158,19 +158,19 @@ const DriverFinalStep = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-danger my-2 fw-bold">
-          FINAL STEP - YOU ARE RIGHT THERE!
-        </h3>
         <h3 className="card p-4 text-success my-2 fw-bold">
-          SEND FOLLOWING REQUEST AND START COMMUTING TOGETHER
+          FINAL STEP - YOU ARE RIGHT THERE!
         </h3>
       </div>
       
       <div className="card p-4 bg-light p-2">
+        <h5 className="text-success pb-2">
+          Send following request and start commuting together
+        </h5>
         <div className="card backgroundColor">
           <div className="card-body">
 
-            <h5>Dear {driverName}</h5><br />
+            <p>Dear {driverName}</p>
             <p className="">
              Glad to know that we shall be commuting together. The date you have proposed to start
              sharing suits me as well.
@@ -181,8 +181,6 @@ const DriverFinalStep = () => {
             <p>
              Looking forward and best regards
             </p>
-           
-            <br />
             <p>
               Looking forward to a long term association for mutual benefit.
             </p>
@@ -194,7 +192,7 @@ const DriverFinalStep = () => {
 
           <div className="text-center">
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={sendRequest}
             >
               Send

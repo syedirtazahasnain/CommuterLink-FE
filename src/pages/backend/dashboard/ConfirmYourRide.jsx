@@ -48,7 +48,8 @@ const ConfirmYourRide = ({ children }) => {
     <div>
            <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-        CONFIRM YOUR RIDE      </h3>
+        CONFIRM YOUR RIDE      
+        </h3>
       </div>
       <div className="card p-4 bg-light p-2">
         <div className="card bg-danger">

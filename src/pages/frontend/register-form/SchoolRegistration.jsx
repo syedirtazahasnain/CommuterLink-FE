@@ -866,6 +866,7 @@ const SchoolRegistration = () => {
                 noValidate
                 validated={validated}
                 onSubmit={handleSubmit}
+                
               >
                 <div className="row mb-3 shadow shadow-sm">
                   <div
