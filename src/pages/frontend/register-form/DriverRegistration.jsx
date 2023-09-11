@@ -1826,6 +1826,7 @@ const DriverRegistration = () => {
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
                                   // required
+                                  
                                   />
                                 }
                                 label="Sunday"

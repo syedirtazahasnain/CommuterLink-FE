@@ -43,11 +43,12 @@ const BeforeApprovalTerms = () => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Terms And Conditions
+          TERMS AND CONDITIONS
         </h3>
-        <h5 className="card px-4 text-success p-2">Before Sending The Request Accept Terms</h5>
+        <h5 className="card px-4 text-success p-2">BEFORE SENDING THE REQUEST ACCEPT TERMS</h5>
       </div>
       <div className="card p-4 bg-light p-2">
+        <h5 className="text-success pb-2">Before sending the request accept these terms</h5>
         <div className="card backgroundColor" >
           <div className="card-body">
 
@@ -65,24 +66,24 @@ const BeforeApprovalTerms = () => {
               4. You will pay 15 days cost in advance. The money will remain in your
               wallet and will be transferred to car owner every week after confirmation 
               that the service was provided , you will recharge your wallet every week to maintain
-              15 days commuting balance in wallet all the time.
+              15 days commuting balance in wallet all the time
             </p>
             <p>
               5. You will charged on daily basis for actual number of days that you share
               the car. No charges will be levied for public holidays or number of days
-              that the car owner does not turn up.
+              that the car owner does not turn up
             </p>
             <p>
               6. No changes will be levied for public holidays or number of days that the 
-              car owner does not turn up.
+              car owner does not turn up
             </p>
             <p>
               7. You will pay your share of cost through Commuterslink and there will be no direct
-              transaction between you and your commuting partner.
+              transaction between you and your commuting partner
             </p>
             <p>
               8. If you wish to discontinue your partnership with a memeber due a reason or other
-              CommutersLink will inform the partner an your behalf.
+              CommutersLink will inform the partner an your behalf
             </p>
             <p>
               9. Any complaints, grievances will be addressed to CommutersLink for resolution.
@@ -92,7 +93,7 @@ const BeforeApprovalTerms = () => {
           </div>
           <div className="text-center">
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={route}
             >
               I Accept

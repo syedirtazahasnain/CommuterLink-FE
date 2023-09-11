@@ -144,7 +144,7 @@ const Verification = () => {
                           </div>
                           <div className="text-dark text-center mt-2">{name ? name : verificationName}<br />{email ? email : verificationEmail}</div>
                           <h3 className="card-title mt-4 mb-3 text-center text-success" >
-                            Pending Verificaiton
+                            Pending Verification
                           </h3>
                         </div>
                         <div>

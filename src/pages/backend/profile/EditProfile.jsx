@@ -225,7 +225,7 @@ const EditProfile = () => {
                 marginRight: "0%",
               }}
             >
-              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
               </button>
@@ -361,7 +361,7 @@ const EditProfile = () => {
                 </Form.Group>
                 <div className="container my-5">
                   <Button 
-                    className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 py-2 mb-3" 
+                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 py-2 mb-3" 
                     onClick={ResetPassword}
                   >
                     Save

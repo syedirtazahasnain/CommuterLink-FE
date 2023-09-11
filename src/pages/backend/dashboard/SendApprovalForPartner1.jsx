@@ -216,7 +216,7 @@ const SendApprovalForPartner1 = () => {
           className="card backgroundColor"
         >
           <div className="card-body ">
-            <h5>Dear {requestId},</h5>
+            <p>Dear {requestId},</p>
             <p className="">
               Commuterslink has found that we are a possible match to commute together.
             </p>
@@ -239,7 +239,7 @@ const SendApprovalForPartner1 = () => {
 
 
             <div className="d-flex justify-content-center mt-4">
-              <Button className="btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
+              <Button className="font-custom border-0 btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
                 Send Request
               </Button>
 

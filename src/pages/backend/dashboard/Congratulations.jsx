@@ -33,14 +33,14 @@ const Congratulations = () => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Congratulations!
+          CONGRATULATIONS!
         </h3>
 
       </div>
-      <h5 className="card p-2 text-success text-center my-2 fw-bold">
+      <div className="card p-4 bg-light p-2">
+      <h5 className="pb-2 text-success text-center my-2 fw-bold">
         Your Payment has been Received Successfully and credited to your Wallet
       </h5>
-      <div className="card p-4 bg-light p-2">
         <div className="card backgroundColor">
           <div className="card-body">
 
@@ -52,7 +52,7 @@ const Congratulations = () => {
 
             <div className="text-center">
               <Button
-                className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mt-4 mb-3"
+                className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mt-4"
                 onClick={route}
               >
                 Next

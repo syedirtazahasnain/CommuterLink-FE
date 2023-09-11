@@ -191,14 +191,14 @@ const DriverRequestAcceptence = () => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Driver Request Acceptence
+          DRIVER REQUEST ACCEPTANCE
         </h3>
       </div>
       <div className="card p-4 bg-light p-2">
         <div className="card backgroundColor">
           <div className="card-body">
 
-            <h5>Dear {requestContactId}</h5><br />
+            <h5>Dear {requestContactId}</h5>
             <p className="">
               Thank you very much for accepting me as a travel buddy to ride on your car.
               I also think that we are a suitable match to commute together. so I also formally
@@ -211,8 +211,6 @@ const DriverRequestAcceptence = () => {
             <p>
               I wish to start commuting with your starting from {selectedDate}
             </p>
-
-            <br />
             <p>
               Looking forward to a long term association for mutual benefit.
             </p>
@@ -226,7 +224,7 @@ const DriverRequestAcceptence = () => {
 
           <div className="text-center">
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={sendRequest}
             >
               I Accept
