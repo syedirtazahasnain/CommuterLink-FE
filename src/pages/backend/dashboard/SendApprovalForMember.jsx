@@ -17,6 +17,7 @@ const SendApprovalForMember = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
+  const [contactId, setContactId] = useState("");
   const [loginName, setLoginName] = useState("");
   const [id, setId] = useState("");
 
@@ -89,6 +90,7 @@ const SendApprovalForMember = () => {
       const jsonresponse = await response.json();
       if (jsonresponse) {
         setLoginName(jsonresponse[0].name);
+        setContactId(jsonresponse[0].contact.contact_id);
       }
       console.log("Profile Send Member Approval Data", jsonresponse);
     } catch (error) {
