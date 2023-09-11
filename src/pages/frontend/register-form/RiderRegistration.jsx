@@ -912,7 +912,7 @@ const RiderRegistration = () => {
                               onChange={handleLocationStart}
                               required
                             >
-                              <option value="" disabled>
+                              <option value="" disabled hidden>
                                 Select Area from Dropdown
                               </option>
                               {selectedStartCityArea?.map((province) => (
