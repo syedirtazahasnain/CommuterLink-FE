@@ -45,15 +45,15 @@ const BeforeApprovalTerms = () => {
         <h3 className="card p-4 text-success my-2 fw-bold">
           Terms And Conditions
         </h3>
-        <h5 className="card px-4 text-success p-2">BEFORE SENDING THE REQUEST ACCEPT TERMS</h5>
+        <h5 className="card px-4 text-success p-2">Before Sending The Request Accept Terms</h5>
       </div>
       <div className="card p-4 bg-light p-2">
         <div className="card backgroundColor" >
           <div className="card-body">
 
-            <p>1. The car offer will wait 15 mins after agreed time for you to join.</p>
+            <p>1. The car offerer will wait 15 mins after agreed time for you to join.</p>
             <p className="">
-              2. If due to anyunforeseen reason you cannot commute an a certain day, fee will be still be charged on
+              2. If due to any unforeseen reason you cannot commute an a certain day, fee will be still be charged on
               on your seat remains reserved for you.
             </p>
             <p>
