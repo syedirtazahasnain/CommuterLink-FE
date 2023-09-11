@@ -299,7 +299,7 @@ const Login = () => {
                       type="email"
                       label="Email"
                       onChange={(e) => validateEmail(e.target.value)}
-                      required
+                      // required
                       error={!isValidEmail}
                       helperText={!isValidEmail && "Please enter a valid email"}
                       size='small'

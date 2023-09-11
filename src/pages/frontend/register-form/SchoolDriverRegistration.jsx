@@ -1272,7 +1272,7 @@ const DriverRegistration = () => {
                                   onChange={handleLocationStart}
                                   required
                                 >
-                                  <option value="" disabled hidden>
+                                  <option value="" disabled>
                                     Select Area from Dropdown
                                   </option>
                                   {selectedStartCityArea?.map((province) => (
@@ -1425,7 +1425,7 @@ const DriverRegistration = () => {
                                   onChange={handleLocationEnd}
                                   required
                                 >
-                                  <option value="" disabled hidden>
+                                  <option value="" disabled>
                                     Select Area from Dropdown
                                   </option>
                                   {selectedEndCityArea?.map((province) => (

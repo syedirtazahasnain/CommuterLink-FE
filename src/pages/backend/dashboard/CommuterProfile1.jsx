@@ -254,7 +254,7 @@ const CommuterProfile1 = () => {
           <div className="row px-3">
             <div className="col-md-1">
               {req_stage === 0 ? (
-                <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px", backgroundColor: "yellow"}} />
+                <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px", backgroundColor: "#FF8A00" }} />
               ) :
                 (
                   <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
@@ -265,7 +265,7 @@ const CommuterProfile1 = () => {
                 {contact_id !== "" ? (
                    req_stage === 0 ?(
                     <div>
-                      <h3 className="text-warning fw-bold">{contact_id}</h3>
+                      <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
                     </div>
                   ):
                   (
@@ -528,7 +528,7 @@ const CommuterProfile1 = () => {
                 View Request
               </Button>
             ) : req_stage === 0 ? (
-              <Button className="btn btn-sm fs-6 fw-bold bg-warning text-white rounded-4 px-3 py-2 mb-3">
+              <Button className="btn btn-sm fs-6 fw-bold text-light rounded-4 px-3 py-2 mb-3" style={{ backgroundColor: "#FF8A00" }}>
                 Request Sent
               </Button>
             ) : req_stage === 2 ? (

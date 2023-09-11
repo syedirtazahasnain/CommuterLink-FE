@@ -496,7 +496,7 @@ const RequestCommuterProfile = () => {
                         {/* Render action buttons based on the request stage */}
                         <div className="text-center">
                             {request_stage === 1 || request_stage === 2 ? (
-                                <Button className="btn btn-sm fs-6 fw-bold btn-warning text-gray rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted}>
+                                <Button className="btn btn-sm fs-6 fw-bold text-gray rounded-4 px-3 py-2 mb-3" style={{ backgroundColor: "#F8A175" }} onClick={requestAccepeted}>
                                     Request Accepted
                                 </Button>
                             ) : (
