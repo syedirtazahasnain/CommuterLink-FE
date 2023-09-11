@@ -48,17 +48,14 @@ const TravelPatners = () => {
 
   const getTravelData = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/travelbuddy`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/travelbuddy`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
@@ -70,7 +67,7 @@ const TravelPatners = () => {
       // else if (jsonresponse.status_code === 100) {
       //   Swal.fire({
       //     position: 'top',
-      //     icon: 'error',
+      //     // icon: 'error',
       //     text: `${jsonresponse.message}`,
       //     customClass: {
       //       confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -80,10 +77,10 @@ const TravelPatners = () => {
       else if (jsonresponse.status_code === 500) {
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: "bg-success", // Apply custom CSS class to the OK button
           },
         });
       }
@@ -95,17 +92,14 @@ const TravelPatners = () => {
 
   const getProfileData = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/profile`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/profile`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
       if (jsonresponse) {
@@ -151,8 +145,8 @@ const TravelPatners = () => {
                         <div
                           className="card"
                           style={{
-                            width: "6rem", 
-                            backgroundColor:"#f9f0c1"
+                            width: "6rem",
+                            backgroundColor: "#f9f0c1",
                           }}
                         >
                           <img
@@ -174,8 +168,7 @@ const TravelPatners = () => {
                           />
                         </div>
                       ) : (
-                        <>
-                        </>
+                        <></>
                       )}
                     </div>
                   </div>
@@ -210,9 +203,7 @@ const TravelPatners = () => {
                             <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
                           </div>
                           <div className="col-md-3">
-                            <div
-                              className="card border-0 w-100"
-                            >
+                            <div className="card border-0 w-100">
                               {" "}
                               <p className="py-3 text-center fw-bold text-success fs-3">
                                 Rs. {walletAmount}
@@ -250,7 +241,6 @@ const TravelPatners = () => {
                                 View Transaction History
                               </button> */}
                             </div>
-
                           </div>
                         </div>
                       </div>
@@ -275,22 +265,19 @@ const TravelPatners = () => {
                               <div className="col-md-12">
                                 <div
                                   className="p-3 px-5 h-fixed"
-                                // style={{ width: "4rem" }}
+                                  // style={{ width: "4rem" }}
                                 >
-                                  {image ?
-                                    (
-                                      <img
-                                        src={`${IMAGE_URL}${image}`}
-                                        className="card-img-top w-50px m-auto border border-1 border-success "
-                                      />
-                                    ) :
-                                    (
-                                      <img
-                                        src={`${BASE_URL}/assets/images/Vector.png`}
-                                        className="card-img-top w-50px m-auto border border-1 border-success bg-success"
-                                      />
-                                    )
-                                  }
+                                  {image ? (
+                                    <img
+                                      src={`${IMAGE_URL}${image}`}
+                                      className="card-img-top w-50px m-auto border border-1 border-success "
+                                    />
+                                  ) : (
+                                    <img
+                                      src={`${BASE_URL}/assets/images/Vector.png`}
+                                      className="card-img-top w-50px m-auto border border-1 border-success bg-success"
+                                    />
+                                  )}
                                 </div>
                                 <div className="px-5">
                                   <h3 className="py-1">{name}</h3>

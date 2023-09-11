@@ -158,7 +158,7 @@ const Signup = () => {
         // alert("Please Fill All Fields!");
         Swal.fire({
           position: "top",
-          icon: "warning",
+          // icon: "warning",
           text: "Please Fill All Fields!",
           customClass: {
             confirmButton: "bg-success",
@@ -169,7 +169,7 @@ const Signup = () => {
         // alert("Confirm password is not matched with new password!")
         Swal.fire({
           position: "top",
-          icon: "warning",
+          // icon: "warning",
           text: "Confirm password is not matched with new password!",
         });
       } else {
@@ -207,7 +207,7 @@ const Signup = () => {
             for (const field of Object.keys(errors)) {
             Swal.fire({
               position: "top",
-              icon: "error",
+              // icon: "error",
               // text: `${jsonresponse.message}`,
               text: `${errors[field][0]}`,
               customClass: {
@@ -221,7 +221,7 @@ const Signup = () => {
           // alert("please check Terms of Service");
           Swal.fire({
             position: "top",
-            icon: "warning",
+            // icon: "warning",
             text: "Please Check Terms of Service",
             customClass: {
               confirmButton: "bg-success", // Apply custom CSS class to the OK button
@@ -235,10 +235,10 @@ const Signup = () => {
   };
 
   const handleFullNameChange = (e) => {
-    const value = e.target.value.replace(/[^a-z]/gi, '');
+    const value = e.target.value.replace(/[^a-z" "]/gi, '');
     setFullName(value);
     
-    if (!/^[a-zA-Z]+$/.test(value) || value.length < 4) {
+    if (!/^[a-zA-Z" "]+$/.test(value) || value.length < 4) {
       setFullNameError("Full Name must contain only alphabetic characters and be at least 4 characters long");
     } else {
       setFullNameError("");
@@ -319,7 +319,7 @@ const Signup = () => {
                   nextIcon={null}
                   indicators={null}
                 >
-                  <Carousel.Item interval={2000}>
+                  <Carousel.Item interval={4000}>
                     <img
                       className="d-block img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup.png`}
@@ -330,7 +330,7 @@ const Signup = () => {
                     </h4>
                   </Carousel.Item>
 
-                  <Carousel.Item interval={2000}>
+                  <Carousel.Item interval={4000}>
                     <img
                       className="d-block img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup-3.png`}
@@ -340,7 +340,7 @@ const Signup = () => {
                       Offer Your Car or Get a Seat in Other's Car
                     </h4>
                   </Carousel.Item>
-                  <Carousel.Item interval={2000}>
+                  <Carousel.Item interval={4000}>
                     <img
                       className="d-block img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup-4.png`}
@@ -350,7 +350,7 @@ const Signup = () => {
                       Share Ride for School University
                     </h4>
                   </Carousel.Item>
-                  <Carousel.Item interval={2000}>
+                  <Carousel.Item interval={4000}>
                     <img
                       className="d-block img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup-6.png`}

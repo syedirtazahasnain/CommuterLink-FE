@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { setContactIdState, setIdState } from "../../../redux/generalSlice";
 
 const customTheme = createTheme({
   palette: {
@@ -23,6 +24,7 @@ const backgroundLogo = {
 
 const CommuterProfile1 = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
   // For Profile Page Data
@@ -185,18 +187,21 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const requestViewDriver = () => {
+  const requestViewDriver = (contact_id,request_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
+      dispatch(setContactIdState(contact_id));
+      dispatch(setIdState(request_id));
       navigate("/driver-acceptance");
     }
   };
 
-  const sendRequest = () => {
+  const sendRequest = (contact_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
+      dispatch(setContactIdState(contact_id));
       navigate("/termscondition1");
     }
   };
@@ -216,6 +221,7 @@ const CommuterProfile1 = () => {
       time_return,
       seats,
       req_stage,
+      request_id,
     } = user;
 
     const {
@@ -522,11 +528,11 @@ const CommuterProfile1 = () => {
                 Request Sent
               </Button>
             ) : req_stage === 2 ? (
-              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={requestViewDriver}>
+              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {requestViewDriver(contact_id,request_id)}}>
                 View Request
               </Button>
             ) : (
-              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={sendRequest}>
+              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {sendRequest(contact_id)}}>
                 Send Request
               </Button>
             )}

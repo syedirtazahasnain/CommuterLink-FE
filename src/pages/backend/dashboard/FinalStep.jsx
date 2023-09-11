@@ -145,7 +145,7 @@ const FinalStep = () => {
         } else if (jsonresponse.statusCode === 100) {
           Swal.fire({
             position:'top',
-            icon: 'error',
+            // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -155,7 +155,7 @@ const FinalStep = () => {
         else if (jsonresponse.statusCode === 500) {
           Swal.fire({
             position:'top',
-            icon: 'error',
+            // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -201,7 +201,7 @@ const FinalStep = () => {
           // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
-            icon: 'error',
+            // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -212,7 +212,7 @@ const FinalStep = () => {
           // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
-            icon: 'error',
+            // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -226,7 +226,7 @@ const FinalStep = () => {
       // alert("An error occurred while sending the request.");
       Swal.fire({
         position:'top',
-        icon: 'error',
+        // // icon: 'error',
        text: 'An error occured while sending the request.',
        customClass: {
         confirmButton: 'bg-success' , // Apply custom CSS class to the OK button

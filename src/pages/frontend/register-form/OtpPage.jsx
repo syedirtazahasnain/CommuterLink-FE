@@ -136,7 +136,7 @@ const OtpPage = () => {
       // alert("OTP does not match. Please try again.");
       Swal.fire({
         position: 'top',
-        icon: 'warning',
+        // icon: 'warning',
         text: 'OTP does not match. Please try again.',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -180,7 +180,7 @@ const OtpPage = () => {
       // alert("Resend OTP Error: " + jsonresponse.message);
       Swal.fire({
         position: 'top',
-        icon: 'error',
+        // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -191,7 +191,7 @@ const OtpPage = () => {
     // alert("OTP has been sent again!");
     Swal.fire({
       position: 'top',
-      icon: 'warning',
+      // icon: 'warning',
       text: 'OTP has been sent again!',
       customClass: {
         confirmButton: 'bg-success', // Apply custom CSS class to the OK button

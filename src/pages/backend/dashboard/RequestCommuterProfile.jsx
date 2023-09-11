@@ -173,7 +173,7 @@ const RequestCommuterProfile = () => {
     const requestAccepeted = () => {
         Swal.fire({
             position: 'top',
-            icon: 'warning',
+            // // icon: 'warning',
             text: 'Request is waiting for response!',
             customClass: {
                 confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -209,7 +209,7 @@ const RequestCommuterProfile = () => {
             days,
             price,
             mobile,
-          } = userDetails[0];
+          } = (userDetails && userDetails[0]) || {};
           
           const {
             seats_left,
@@ -220,10 +220,10 @@ const RequestCommuterProfile = () => {
             car_cc,
             car_model,
             car_reg_year,
-          } = (userDetails[0]?.vehicle?.[0] || {}) || {};
+          } = (userDetails && userDetails[0]?.vehicle?.[0])|| {};
 
         console.log({ profile });
-        console.log(userDetails[0]);
+        //console.log(userDetails[0]);
 
         return (
             <div className="col-md-12">

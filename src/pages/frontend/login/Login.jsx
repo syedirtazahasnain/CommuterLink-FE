@@ -80,7 +80,7 @@ const Login = () => {
     if(email === "" || password === ""){
       Swal.fire({
         position:'top',
-        icon: 'warning',
+        // // icon: 'warning',
        text: 'Please Fill All Fields',
        customClass: {
         confirmButton: 'bg-success' ,
@@ -121,7 +121,7 @@ const Login = () => {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
-            icon: 'error',
+            // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
             confirmButton: 'bg-success' ,
@@ -134,7 +134,7 @@ const Login = () => {
       else {
         Swal.fire({
           position:'top',
-          icon: 'warning',
+          // // icon: 'warning',
          text: 'Please Check Terms of Services',
          customClass: {
           confirmButton: 'bg-success' ,
@@ -197,7 +197,7 @@ const Login = () => {
             // alert("Error: " + jsonresponse.message);
             Swal.fire({
               position:'top',
-              icon: 'error',
+              // // icon: 'error',
              text: `${jsonresponse.message}`,
              customClass: {
               confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -238,7 +238,7 @@ const Login = () => {
                     nextIcon={null}
                     indicators={null}
                   >
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={4000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup.png`}
@@ -247,7 +247,7 @@ const Login = () => {
                       <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                     </Carousel.Item>
 
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={4000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
@@ -255,7 +255,7 @@ const Login = () => {
                       />
                       <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
                     </Carousel.Item>
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={4000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-4.png`}
@@ -263,7 +263,7 @@ const Login = () => {
                       />
                       <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
                     </Carousel.Item>
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={4000}>
                       <img
                         className="d-block img-fluid w-auto"
                         src={`${BASE_URL}/assets/images/signup-6.png`}

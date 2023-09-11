@@ -137,7 +137,7 @@ const TravelConfirmation = () => {
     if (jsonresponse.status_code === 100) {
       Swal.fire({
         position: 'top',
-        icon: 'error',
+        // // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -147,7 +147,7 @@ const TravelConfirmation = () => {
     else if (jsonresponse.status_code === 500) {
       Swal.fire({
         position: 'top',
-        icon: 'error',
+        // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { setContactIdState, setIdState } from "../../../redux/generalSlice";
 
 const theme = createTheme({
   palette: {
@@ -22,7 +23,10 @@ const backgroundLogo = {
 
 const DriverRequestAcceptence = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
+  const requestContactId = useSelector((s) => s.general.data.contact_id);
+  const requestId = useSelector((s) => s.general.data.id);
   const [name, setName] = useState("");
   const [driverName, setDriverName] = useState("");
   const [id, setId] = useState("");
@@ -33,7 +37,7 @@ const DriverRequestAcceptence = () => {
   useEffect(() => {
     getProfileData();
     getMemberData();
-    getDashboardData();
+    //getDashboardData();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
@@ -42,10 +46,10 @@ const DriverRequestAcceptence = () => {
   }, []);
 
   useEffect(() => {
-    if (contactId) {
+    if (requestContactId) {
       getDateData();
     }
-  }, [contactId]);
+  }, [requestContactId]);
 
   const getProfileData = async () => {
     try {
@@ -64,6 +68,7 @@ const DriverRequestAcceptence = () => {
       const jsonresponse = await response.json();
       if (jsonresponse) {
         setName(jsonresponse[0].name);
+        setContactId(jsonresponse[0].contact.contact_id);
         // setProfileStatus(jsonresponse[0].profile_status);
       }
       console.log("Final Step Profile Data", jsonresponse);
@@ -97,40 +102,10 @@ const DriverRequestAcceptence = () => {
     }
   };
 
-  const getDashboardData = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/matches/office`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
-        setDriverName(jsonresponse.rider[0].name);
-        setContactId(jsonresponse.rider[0].contact_id);
-        setId(jsonresponse.rider[0].request_id);
-      } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
-        setDriverName(jsonresponse.drivers[0].name);
-        setContactId(jsonresponse.drivers[0].contact_id);
-        setId(jsonresponse.drivers[0].request_id);
-      }
-      console.log("Final Step Dashboard Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
   const getDateData = async () => {
     try {
       const response = await fetch(
-        `${API_URL}/api/v1/suggestedDate/${contactId}`,
+        `${API_URL}/api/v1/suggestedDate/${requestContactId}`,
         {
           method: "get",
           headers: {
@@ -154,7 +129,7 @@ const DriverRequestAcceptence = () => {
   const sendRequest = async () => {
     try {
       const body = {
-        request_id: id,
+        request_id: requestId,
         start_date: selectedDate,
         message: "I accept your request",
         status: 3
@@ -183,12 +158,14 @@ const DriverRequestAcceptence = () => {
       console.log("API Response", jsonresponse);
 
       if (jsonresponse.statusCode === 200) {
+        dispatch(setIdState(""));
+        dispatch(setContactIdState(""));
         navigate("/dashboard");
       } else {
         // alert("Resend Error: " + jsonresponse.message);
         Swal.fire({
           position:'top',
-          icon: 'error',
+          // // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -201,7 +178,7 @@ const DriverRequestAcceptence = () => {
       // alert("An error occurred while sending the request.");
       Swal.fire({
         position:'top',
-        icon: 'error',
+        // // icon: 'error',
        text: 'An error occured while sending the request.',
        customClass: {
         confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -221,7 +198,7 @@ const DriverRequestAcceptence = () => {
         <div className="card backgroundColor">
           <div className="card-body">
 
-            <h5>Dear {driverName}</h5><br />
+            <h5>Dear {requestContactId}</h5><br />
             <p className="">
               Thank you very much for accepting me as a travel buddy to ride on your car.
               I also think that we are a suitable match to commute together. so I also formally
@@ -243,7 +220,7 @@ const DriverRequestAcceptence = () => {
               Best Regards
             </p>
             <p>
-              {name}
+              {contactId}
             </p>
           </div>
 

@@ -124,7 +124,7 @@ const DriverRegistration = () => {
   const [regYear, setRegYear] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
   const [carYearRanges, setCarYearRanges] = useState([]);
-  const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
+  //const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
   const [selectedRegNumber, setSelectedRegNumber] = useState("");
   const [selectedCarAC, setSelectedCarAC] = useState("");
   const [selectedCarImage, setSelectedCarImage] = useState("");
@@ -661,7 +661,7 @@ const DriverRegistration = () => {
   ];
 
   const requiredFieldsDriver = [
-    selectedCarBrand, selectedCarCC, selectedCarYearRanges,
+    selectedCarBrand, selectedCarCC,
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
     selectedCarImageExt, selectedSeat, selectedSeatGender,
@@ -695,7 +695,7 @@ const DriverRegistration = () => {
       // alert("Please Fill All Fields!");
       Swal.fire({
         position: 'top',
-        icon: 'warning',
+        // // icon: 'warning',
         text: 'Please Fill All Fields!',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -723,7 +723,7 @@ const DriverRegistration = () => {
       // alert("Please Fill All Driver Form Fields!");
       Swal.fire({
         position: 'top',
-        icon: 'warning',
+        // icon: 'warning',
         text: 'Please Fill All Driver Form Fields!',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -798,7 +798,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -850,7 +850,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -893,7 +893,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -936,7 +936,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -993,7 +993,7 @@ const DriverRegistration = () => {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -1012,7 +1012,7 @@ const DriverRegistration = () => {
         option: 1,
         car_brand: selectedCarBrand,
         car_cc: selectedCarCC,
-        car_year_ranges: selectedCarYearRanges,
+        //car_year_ranges: selectedCarYearRanges,
         car_model: selectedModelName,
         reg_year: selectedRegYear,
         reg_no: selectedRegNumber,
@@ -1064,7 +1064,7 @@ const DriverRegistration = () => {
       else if(jsonresponse.statusCode === 500)  {
         Swal.fire({
           position: 'top',
-          icon: 'error',
+          // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success',
@@ -1124,7 +1124,7 @@ const DriverRegistration = () => {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
             position: 'top',
-            icon: 'error',
+            // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
               confirmButton: 'bg-success',
@@ -1136,7 +1136,7 @@ const DriverRegistration = () => {
       else {
         Swal.fire({
           position: 'top',
-          icon: 'warning',
+          // icon: 'warning',
           text: 'Please Enter Payment Details!',
           customClass: {
             confirmButton: 'bg-success',
@@ -2226,7 +2226,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom24" className="mb-2">
+                        {/* <Form.Group as={Col} md="12" controlId="validationCustom24" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Car Year Ranges
                           </Form.Label>
@@ -2244,7 +2244,7 @@ const DriverRegistration = () => {
                               </option>
                             ))}
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group as={Col} md="12" controlId="validationCustom25" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registeration Number

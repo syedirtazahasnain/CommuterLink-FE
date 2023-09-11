@@ -24,7 +24,9 @@ const backgroundLogo = {
 const SendApprovalForPartner1 = () => {
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
+  const requestId = useSelector((s) => s.general.data.contact_id);
   const [name, setName] = useState("");
+  const [option, setOption] = useState(null);
   const [contactId, setContactId] = useState("");
   const [requestContactId, setRequestContactId] = useState("");
   const [requestType, setRequestType] = useState("");
@@ -87,6 +89,7 @@ const SendApprovalForPartner1 = () => {
 
       const jsonresponse = await response.json();
       if (jsonresponse) {
+        setOption(jsonresponse[0].userlist.vehicle_option);
         setContactId(jsonresponse[0].contact.contact_id);
       }
       console.log("Commuter Profile Data", jsonresponse);
@@ -96,52 +99,108 @@ const SendApprovalForPartner1 = () => {
   };
 
   const sendRequest = async () => {
-    const body = {
-      reciever_contact_id: contactId,
-      request_type: requestType,
-      message: "Dear CL Member, CL have found us as matching xyz",
-      start_date: "2023-06-10",
-    };
-
-    const response = await fetch(
-      `${API_URL}/api/v1/request`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': 'application/json',
-          Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify(body),
+    if(option === 0){
+      const body = {
+        reciever_contact_id: requestId,
+        request_type: "rider",
+        message: "Dear CL Member, CL have found us as matching xyz",
+        start_date: "2023-06-10",
+      };
+  
+      console.log({body});
+  
+      const response = await fetch(
+        `${API_URL}/api/v1/request`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      const jsonresponse = await response.json();
+      console.log("API Response", jsonresponse);
+      if (jsonresponse.statusCode === 200) {
+        navigate("/dashboard");
+      } else if (jsonresponse.statusCode === 100) {
+        // alert("Resend Error: " + jsonresponse.message);
+        Swal.fire({
+          position: 'top',
+          // icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
+        )
       }
-    );
-    const jsonresponse = await response.json();
-    console.log("API Response", jsonresponse);
-    if (jsonresponse.statusCode === 200) {
-      navigate("/dashboard");
-    } else if (jsonresponse.statusCode === 100) {
-      // alert("Resend Error: " + jsonresponse.message);
-      Swal.fire({
-        position: 'top',
-        icon: 'error',
-        text: `${jsonresponse.message}`,
-        customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-        },
+      else if (jsonresponse.statusCode === 500) {
+        // alert("Resend Error: " + jsonresponse.message);
+        Swal.fire({
+          position: 'top',
+          // icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
+        )
       }
-      )
     }
-    else if (jsonresponse.statusCode === 500) {
-      // alert("Resend Error: " + jsonresponse.message);
-      Swal.fire({
-        position: 'top',
-        icon: 'error',
-        text: `${jsonresponse.message}`,
-        customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-        },
+    else if(option === 1) {
+      
+      const body = {
+        reciever_contact_id: requestId,
+        request_type: "driver",
+        message: "Dear CL Member, CL have found us as matching xyz",
+        start_date: "2023-06-10",
+      };
+  
+      console.log({body});
+  
+      const response = await fetch(
+        `${API_URL}/api/v1/request`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      const jsonresponse = await response.json();
+      console.log("API Response", jsonresponse);
+      if (jsonresponse.statusCode === 200) {
+        navigate("/dashboard");
+      } else if (jsonresponse.statusCode === 100) {
+        // alert("Resend Error: " + jsonresponse.message);
+        Swal.fire({
+          position: 'top',
+          // icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
+        )
       }
-      )
+      else if (jsonresponse.statusCode === 500) {
+        // alert("Resend Error: " + jsonresponse.message);
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
+        )
+      }
     }
   };
 
@@ -157,7 +216,7 @@ const SendApprovalForPartner1 = () => {
           className="card backgroundColor"
         >
           <div className="card-body ">
-            <h5>Dear {contactId},</h5>
+            <h5>Dear {requestId},</h5>
             <p className="">
               Commuterslink has found that we are a possible match to commute together.
             </p>
@@ -172,7 +231,7 @@ const SendApprovalForPartner1 = () => {
               Regards,
             </p>
             <p className="">
-              Member {requestContactId},
+              Member {contactId},
             </p>
           </div>
 
