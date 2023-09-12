@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { Container, Row, Modal } from 'react-bootstrap';
@@ -1253,9 +1253,23 @@ const DriverRegistration = () => {
                                 md="12"
                                 controlId="validationCustom02"
                               >
-                                <Form.Label style={{ color: "#000" }}>
-                                  Select Area from Dropdown
-                                </Form.Label>
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                                  {addNewStartField && (
+                                    <p
+                                    className="colorplace text-danger"
+                                    style={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                    onClick={AddNewStart}
+                                  >
+                                    Can't find your area?
+                                    <a> Add Here</a>
+                                  </p>
+                                  )}
+                                </div>
+
                                 <Form.Select
                                   aria-label="Default select example"
                                   className="text-secondary"
@@ -1280,26 +1294,15 @@ const DriverRegistration = () => {
                               
                             )}
 
-{addNewStartField && (
-                            <Form.Group
-                              as={Col}
-                              md="12"
-                              className="mt-3"
-                              controlId="validationCustom02"
-                            >
-                              <span
-                                className="colorplace text-danger"
-                                style={{
-                                  cursor: "pointer",
-                                  textDecoration: "underline",
-                                }}
-                                onClick={AddNewStart}
+                            {/* {addNewStartField && (
+                              <Form.Group
+                                as={Col}
+                                md="12"
+                                className="mt-3"
+                                controlId="validationCustom02"
                               >
-                                Can't find your area?
-                                <a> Add Here</a>
-                              </span>
-                            </Form.Group>
-                          )}
+                              </Form.Group>
+                            )} */}
 
                             {addNewStart && (
                               <Form.Group
@@ -1407,9 +1410,22 @@ const DriverRegistration = () => {
                                 md="12"
                                 controlId="validationCustom06"
                               >
-                                <Form.Label style={{ color: "#000" }}>
-                                  Select Area from Dropdown
-                                </Form.Label>
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                                  {addNewEndField && (
+                                    <p
+                                    className="colorplace text-danger"
+                                    style={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                    onClick={AddNewStart}
+                                  >
+                                    Can't find your area?
+                                    <a> Add Here</a>
+                                  </p>
+                                  )}
+                                </div>
                                 <Form.Select
                                   aria-label="Default select example"
                                   className="text-secondary"
@@ -1433,7 +1449,7 @@ const DriverRegistration = () => {
                               </Form.Group>
                             )}
 
-                            {addNewEndField && (
+                            {/* {addNewEndField && (
                               <Form.Group
                                 as={Col}
                                 md="12"
@@ -1452,7 +1468,7 @@ const DriverRegistration = () => {
                                   <a> Add Here</a>
                                 </span>
                               </Form.Group>
-                            )}
+                            )} */}
 
                             {addNewEnd && (
                               <Form.Group
@@ -1496,8 +1512,8 @@ const DriverRegistration = () => {
                     >
                       <Modal show={showStartModal} onHide={handleCloseStartModal}>
                         <Modal.Header closeButton>
-                        <Modal.Title>Select Starting Location</Modal.Title>
-                        <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                          <Modal.Title>Select Starting Location</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1820,7 +1836,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
-                                    // //required
+                                  // //required
                                   />
                                 }
                                 label="Saturday"
@@ -1844,8 +1860,8 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
-                                    // required
-                                    // disabled
+                                  // required
+                                  // disabled
                                   />
                                 }
                                 label="Sunday"
