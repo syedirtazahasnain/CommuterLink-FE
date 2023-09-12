@@ -40,8 +40,8 @@ const TravelConfirmation = () => {
     // Initial call when the component mounts
     fetchData();
 
-    // Set up a 40-second setInterval to call the fetchData function
-    const intervalId = setInterval(fetchData, 40000);
+    // Set up a 1 minute 20-second setInterval to call the fetchData function
+    const intervalId = setInterval(fetchData, 120000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
