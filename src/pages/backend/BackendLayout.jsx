@@ -26,6 +26,7 @@ const BackendLayout = ({ children }) => {
   const userToken = useSelector((s) => s.login.data.token);
   const currentPage = useSelector((s) => s.general.currentPage);
   const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
+  const [option, setOption] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [submitbtn, setSubmit] = useState(false);
@@ -112,6 +113,7 @@ const BackendLayout = ({ children }) => {
       if (jsonresponse) {
         setName(jsonresponse[0].name);
         setImage(jsonresponse[0].contact.commuter_image);
+        setOption(jsonresponse[0].userlist.vehicle_option);
         //console.log("Image", jsonresponse[0].contact.commuter_image);
       }
       else {
@@ -214,7 +216,7 @@ const BackendLayout = ({ children }) => {
                                 <div className="d-block">
                                   {name ? (<h6 className="fs-6 fw-bold font-custom"> {name}</h6>) : (<h6 className="fs-6 font-custom fw-bold">CL User</h6>)}
 
-                                  <p className="fw-bold font-custom fs-7 text-dark">USER ROLE</p>
+                                  <p className="fw-bold font-custom fs-7 text-dark">{option === 0 ? (<h6 className="fs-6 fw-bold font-custom">Rider</h6>) : (<h6 className="fs-6 font-custom fw-bold">Car Offerer</h6>)}</p>
                                 </div>
                               </div>
                             </div>

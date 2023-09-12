@@ -378,7 +378,7 @@ const Login = () => {
                                 style={{ height: "25px", width: "25px", cursor: "pointer" }}
                               />
                             </a>
-                                </Tooltip>
+                          </Tooltip>
                           </li>
                           <li className="mr-3">
                           <Tooltip title="Login With Facebook">
