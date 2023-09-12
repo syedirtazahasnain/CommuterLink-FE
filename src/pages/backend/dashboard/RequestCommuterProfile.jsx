@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { setContactIdState, setIdState, setRequestAsState } from "../../../redux/generalSlice";
@@ -226,6 +226,7 @@ const RequestCommuterProfile = () => {
         //console.log(userDetails[0]);
 
         return (
+            
             <div className="col-md-12">
                 <div className="card p-4 bg-light p-2">
                     <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }}>
@@ -496,11 +497,11 @@ const RequestCommuterProfile = () => {
                         {/* Render action buttons based on the request stage */}
                         <div className="text-center">
                             {request_stage === 1 || request_stage === 2 ? (
-                                <Button className="btn btn-sm fs-6 fw-bold btn-warning text-gray rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted}>
+                                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-warning text-gray rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted}>
                                     Request Accepted
                                 </Button>
                             ) : (
-                                <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { route(requested_as, id, contact_id) }}>
+                                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { route(requested_as, id, contact_id) }}>
                                     Accept Request
                                 </Button>
                             )}
@@ -513,11 +514,28 @@ const RequestCommuterProfile = () => {
 
     return (
         <div>
-            <div className="page-title">
+             <div className="page-title">
+      
+      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+        <div className="d-flex justify-content-between align-items-xl-baseline">
+        <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
+          <Link
+            to={"/dashboard"} >
+            <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+              <i className="fas fa-angle-left text-white" />
+              Back
+            </button>
+          </Link>
+        </div>
+       
+      </div>
+      <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
+    </div>
+            {/* <div className="page-title">
                 <p className="card p-4 text-dark my-2 fw-bold fs-6">
-                    "The below suggestion is based upon the start point and destination which match yours". Exact details will be shown after both have accepted to share.
+                    The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.
                 </p>
-            </div>
+            </div> */}
 
             <div className="row">
                 {profiles.map((profile, index) => (

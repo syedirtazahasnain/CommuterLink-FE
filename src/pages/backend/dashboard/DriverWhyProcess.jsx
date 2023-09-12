@@ -93,7 +93,7 @@ const DriverWhyProcess = () => {
             
             </div>
             <div className="text-center">
-              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={route}>
+              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={route}>
                 Next
               </Button>
             </div>

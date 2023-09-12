@@ -866,6 +866,7 @@ const SchoolRegistration = () => {
                 noValidate
                 validated={validated}
                 onSubmit={handleSubmit}
+                
               >
                 <div className="row mb-3 shadow shadow-sm">
                   <div
@@ -946,7 +947,7 @@ const SchoolRegistration = () => {
                               onChange={handleLocationStart}
                               required
                             >
-                              <option value="" disabled hidden>
+                              <option value="" disabled>
                                 Select Area from Dropdown
                               </option>
                               {selectedStartCityArea?.map((province) => (
@@ -1124,7 +1125,7 @@ const SchoolRegistration = () => {
                               onChange={handleLocationEnd}
                               required
                             >
-                              <option value="" disabled hidden>
+                              <option value="" disabled>
                                 Select Area from Dropdown
                               </option>
                               {selectedEndCityArea?.map((province) => (

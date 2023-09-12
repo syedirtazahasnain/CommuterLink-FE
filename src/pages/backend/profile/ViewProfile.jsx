@@ -105,7 +105,7 @@ const ViewProfile = () => {
             <h3 className="text-success my-2 fw-bold m-0">User Profile</h3>
             <Link
               to={"/dashboard"} >
-              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
               </button>
@@ -188,7 +188,7 @@ const ViewProfile = () => {
                 </Form.Group>
                 <div className="container my-5">
 
-                  <Link className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                  <Link className="font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
                     to={"/editprofile"}
                   >
                     Change Password

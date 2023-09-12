@@ -226,7 +226,8 @@ const RechargeWallet = () => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Two Weeks Advance Min. Payment Due: Rs.{payment}/-{" "}
+          TWO WEEKS ADVANCE MIN. PAYMENT DUE: RS {payment}/-{" "}
+          {/* Two Weeks Advance Min. Payment Due: Rs.{payment}/-{" "} */}
         </h3>
       </div>
       <div className="card p-4  p-2">
@@ -234,9 +235,9 @@ const RechargeWallet = () => {
           <div className="card-body text-dark">
             <p>
               Money will stay in your Wallet & will be transferred to car owner
-              on weekly basis after you have availed the services
+              on weekly basis after you have availed the services.
             </p>
-            <p className="">
+            <p className="text-dark">
               At any given point in time wallet must have 2 weeks balance, so
               keep checking and keep loading.
             </p>
@@ -246,13 +247,13 @@ const RechargeWallet = () => {
               </h5>
             </div>
             <div className="page-title">
-              <div className="card p-2 text-success text-center my-2 fw-bold">
+              <div className="p-2 text-success text-center my-2 fw-bold">
                 <div className="container text-center p-2">
                   <div className="row">
-                    <div className="col-12 mb-2  border border-success rounded rounded-3">
+                    <div className="col-12 mb-2  border border-success rounded rounded-3 bg-light">
                       <div>
                         <button 
-                          className="btn  text-success fw-bold fs-5 lh-1" 
+                          className="font-custom btn  text-success fw-bold fs-5 lh-1" 
                           onClick={openAndCloseWindow}
                         >
                           <span><i className="fa-solid fs-3 fa-wallet text-success mx-2" /></span>
@@ -260,10 +261,10 @@ const RechargeWallet = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="col-12 border advancecolor border-success rounded rounded-3">
+                    <div className="col-12 border advancecolor border-success rounded rounded-3 bg-light">
                       <div>
                         <button 
-                          className="btn btncol advancecolor text-success fw-bold fs-5 lh-1"
+                          className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
                           onClick={openAndCloseWindow} 
                         >
                           <span><img
@@ -281,13 +282,13 @@ const RechargeWallet = () => {
           </div>
           <div className="text-center">
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={() => navigate("/dashboard")}
             >
               Skip Payment
             </Button>
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2"
               onClick={route}
               disabled={!windowClosedManually}
             >

@@ -48,11 +48,11 @@ const PaymentOptions = ({ children }) => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Min. Payment Due: Rs 5,310/- 
+          MIN. PAYMENT DUE: RS 5,310/-
         </h3>
-        <h5 className="card p-2 px-4 text-success">(15 Days Advance Rs 354/-)&nbsp (Commuter Charges + 2.5% Service Charges)</h5>
       </div>
       <div className="card p-4  p-2">
+        <h5 className="pb-2 text-success">(15 Days Advance Rs 354/-)&nbsp (Commuter Charges + 2.5% Service Charges)</h5>
         <div className="card backgroundColor">
           <div className="card-body text-dark">
             <p >
@@ -69,10 +69,10 @@ const PaymentOptions = ({ children }) => {
               </h5>
             </div>
             <div className="page-title">
-              <div className="card p-2 text-success text-center my-2 fw-bold">
+              <div className="p-2 text-success text-center my-2 fw-bold">
                 <div className="container text-center p-2">
                  <div className="row">
-                 <div className="col-12 mb-2  border border-success rounded rounded-3">
+                 <div className="col-12 mb-2  border border-success rounded rounded-3 bg-light">
                     <div>
                     <button className="btn  text-success fw-bold fs-5 lh-1">
                     <span>
@@ -81,7 +81,7 @@ const PaymentOptions = ({ children }) => {
                   </button>
                         </div>
                     </div>
-                    <div className="col-12 border advancecolor border-success rounded rounded-3">
+                    <div className="col-12 border advancecolor border-success rounded rounded-3 bg-light">
                     <div>
                     <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1">
                     <span>

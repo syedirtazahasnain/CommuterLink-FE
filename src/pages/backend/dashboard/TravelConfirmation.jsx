@@ -393,7 +393,7 @@ const TravelConfirmation = () => {
                       <div className="container my-3 text-end">
 
                         <Link 
-                          className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                          className= "font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
                           style={{ cursor: "pointer" }}
                           onClick={route}
                         >

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../../redux/signupSlice";
 import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
+// import { useLinkedIn } from 'react-linkedin-login-oauth2';
 import Form from "react-bootstrap/Form";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
@@ -55,6 +56,17 @@ const Signup = () => {
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
     onError: (codeResponse) => handleFailure(codeResponse),
   });
+
+  // const { linkedInLogin } = useLinkedIn({
+  //   clientId: '86th1m5dtehgx3',
+  //   redirectUri: `${window.location.origin}/linkedin`,
+  //   onSuccess: (code) => {
+  //     console.log(code);
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //   },
+  // });
 
   const handleFailure = (response) => {
     console.log("handleFailure", response);
@@ -558,19 +570,29 @@ const Signup = () => {
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
-                                  style={{ height: "27px", width: "27px" }}
+                                  style={{ height: "27px", width: "27px", cursor: "pointer" }}
                                 />
                               </a>
                             </Tooltip>
                             </li>
                           <li>
-                            <Tooltip title="Signup With Linkedin">
+                            {/* <Tooltip title="Signup With Linkedin">
                             
-                              <a href="https://www.linkedin.com/company/sysreforms-international/mycompany/">
+                              <a onClick={linkedInLogin}>
                                 <img
                                   src={`${BASE_URL}/assets/images/linkedin.png`}
                                   alt=""
-                                  style={{ height: "35px", width: "35px" }}
+                                  style={{ height: "35px", width: "35px", cursor: "pointer" }}
+                                />
+                              </a>
+                            </Tooltip> */}
+                            <Tooltip title="Signup With Linkedin">
+                            
+                              <a>
+                                <img
+                                  src={`${BASE_URL}/assets/images/linkedin.png`}
+                                  alt=""
+                                  style={{ height: "35px", width: "35px", cursor: "pointer" }}
                                 />
                               </a>
                             </Tooltip>

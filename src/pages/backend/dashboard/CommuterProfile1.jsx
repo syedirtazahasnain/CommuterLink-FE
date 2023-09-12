@@ -254,7 +254,7 @@ const CommuterProfile1 = () => {
           <div className="row px-3">
             <div className="col-md-1">
               {req_stage === 0 ? (
-                <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px", backgroundColor: "yellow"}} />
+                <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00"}} />
               ) :
                 (
                   <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
@@ -265,7 +265,7 @@ const CommuterProfile1 = () => {
                 {contact_id !== "" ? (
                    req_stage === 0 ?(
                     <div>
-                      <h3 className="text-warning fw-bold">{contact_id}</h3>
+                      <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
                     </div>
                   ):
                   (
@@ -524,19 +524,19 @@ const CommuterProfile1 = () => {
           </div>
           <div className="text-center">
             {req_stage === 1 ? (
-              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {viewRequest(contact_id,request_id)}}>
+              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {viewRequest(contact_id,request_id)}}>
                 View Request
               </Button>
             ) : req_stage === 0 ? (
-              <Button className="btn btn-sm fs-6 fw-bold bg-warning text-white rounded-4 px-3 py-2 mb-3">
+              <Button className="font-custom btn btn-sm fs-6 fw-bold text-white rounded-4 px-3 py-2 mb-3" style={{background:"#ff8a00"}}>
                 Request Sent
               </Button>
             ) : req_stage === 2 ? (
-              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {requestViewDriver(contact_id,request_id)}}>
+              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {requestViewDriver(contact_id,request_id)}}>
                 View Request
               </Button>
             ) : (
-              <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {sendRequest(contact_id)}}>
+              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {sendRequest(contact_id)}}>
                 Send Request
               </Button>
             )}
@@ -554,10 +554,10 @@ const CommuterProfile1 = () => {
       
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-          <h3 className="text-success my-2 fw-bold m-0">Commuter's Profile</h3>
+          <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
             <Link
               to={"/dashboard"} >
-              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
               </button>

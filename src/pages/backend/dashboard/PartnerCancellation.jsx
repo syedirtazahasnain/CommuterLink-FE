@@ -211,7 +211,7 @@ const PartnerCancellation = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">Cancellation Date</h3>
+        <h3 className="card p-4 text-success my-2 fw-bold">CANCELLATION DATE</h3>
       </div>
       <div className="card p-4  p-2">
         <div className="card backgroundColor">
@@ -294,7 +294,7 @@ const PartnerCancellation = () => {
                     (
                       <div className="py-5">
                         <Button
-                          className="text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4"
+                          className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4"
                           style={{ cursor: 'pointer' }}
                           onClick={()=> {
                             sendRequest();
@@ -304,7 +304,7 @@ const PartnerCancellation = () => {
                           Cancel Now
                         </Button>
                         <Button
-                          className="text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4"
+                          className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 mx-4"
                           style={{ cursor: 'pointer' }}
                           onClick={()=> {
                             sendRequest();

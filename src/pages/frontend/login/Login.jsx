@@ -299,7 +299,7 @@ const Login = () => {
                       type="email"
                       label="Email"
                       onChange={(e) => validateEmail(e.target.value)}
-                      required
+                      // required
                       error={!isValidEmail}
                       helperText={!isValidEmail && "Please enter a valid email"}
                       size='small'
@@ -378,7 +378,7 @@ const Login = () => {
                                 style={{ height: "25px", width: "25px", cursor: "pointer" }}
                               />
                             </a>
-                                </Tooltip>
+                          </Tooltip>
                           </li>
                           <li className="mr-3">
                           <Tooltip title="Login With Facebook">
@@ -386,7 +386,7 @@ const Login = () => {
                               <img
                                src={`${BASE_URL}/assets/images/facebook.png`}
                                 alt=""
-                                style={{ height: "27px", width: "27px" }}
+                                style={{ height: "27px", width: "27px" , cursor: "pointer"}}
                               />
                             </a>
                                 </Tooltip>
@@ -397,7 +397,7 @@ const Login = () => {
                               <img
                                 src={`${BASE_URL}/assets/images/linkedin.png`}
                                 alt=""
-                                style={{ height: "35px", width: "35px" }}
+                                style={{ height: "35px", width: "35px", cursor: "pointer" }}
                               />
                             </a>
                             </Tooltip>

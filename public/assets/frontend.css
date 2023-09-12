@@ -15,6 +15,7 @@
  }
  .main-bg{
   background-color: #eee;
+  position: top!important;
  }
  .btn-custom{
    border: 1px solid #198754;

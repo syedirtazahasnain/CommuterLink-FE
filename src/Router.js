@@ -1,5 +1,6 @@
 import Home from "./pages/frontend/Home";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 import Signup from "./pages/frontend/Signup/Signup";
 import DriverRegistration from "./pages/frontend/register-form/DriverRegistration";
 import ShareRide from "./pages/frontend/register-form/ShareRide";
@@ -57,6 +58,7 @@ import HowWorks from "./pages/frontend/Hompage-components/HowWorks";
 import Contribute from "./pages/frontend/Hompage-components/Contribute";
 import RechargeWallet from "./pages/backend/dashboard/RechargeWallet";
 import RequestCommuterProfile from "./pages/backend/dashboard/RequestCommuterProfile";
+import Loading from "./pages/frontend/register-form/Loading";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -66,6 +68,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<FrontendLayout children={<Home />} />} />
+        <Route exact path="/linkedin" component={LinkedInCallback} />
         {/* <Route path="contact" element={<FrontendLayout children={<Contact/>} />} /> */}
         {/* <Route path="concept" element={<FrontendLayout children={<CarouselSlider/>} />} />
         <Route path="howitworks" element={<FrontendLayout children={<HowWorks/>} />} />
@@ -77,20 +80,20 @@ const Router = () => {
         <Route path="/resubmit" element={<FrontendLayout children={<Resubmit />} />} />
         <Route path="/rider" element={<BackendLayout children={<Rider />} />}></Route>
         <Route path="/driver" element={<BackendLayout children={<Driver />} />}></Route>
-
+        <Route path="/loading" element={<FrontendLayout children={<Loading />} />} />
         {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />
         <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} />
         <Route path='/replytoconfirmdates1' element={<BackendLayout children={<ReplyToConfirmDates1 />} />} />
         <Route path='/sendapprovalforpartner1' element={<BackendLayout children={<SendApprovalForPartner1 />} />} />
         <Route path='/sharetocare1' element={<BackendLayout children={<ShareToCare1 />} />} />
-        <Route path='/verification1' element={<BackendLayout children={<Verification1 />} />} />
+        {/* <Route path='/verification1' element={<BackendLayout children={<Verification1 />} />} /> */}
         <Route path='/whyprocesspayment1' element={<BackendLayout children={<WhyProcessPayment1 />} />} />
         <Route path='/new-dashboard' element={<BackendLayout children={<CommuterDetails />} />} />
         <Route path="/requestcarowner" element={<BackendLayout children={<RequestApprovalByCarOwner />} />} />
         <Route path="/rejection" element={<FrontendLayout children={<Rejection />} />} />
         <Route path="/otp" element={<FrontendLayout children={<OtpPage />} />} />
-
+        <Route path="/loading" element={<BackendLayout children={<Loading />} />} />
         {/* <Route path="/contact" element={<BackendLayout children={<Contact />} />} /> */}
         <Route path="/rechargewallet" element={<BackendLayout children={<RechargeWallet />} />} />
         <Route path="/contact" element={<BackendLayout children={<Contact />} />} />

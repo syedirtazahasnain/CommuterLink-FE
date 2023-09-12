@@ -71,7 +71,7 @@ const TermsCondition1 = () => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Terms And Conditions
+          TERMS AND CONDITIONS
         </h3>
       </div>
       <div className="card p-4 bg-light p-2">
@@ -123,7 +123,7 @@ const TermsCondition1 = () => {
           </div>
           <div className="text-center">
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={route}
             >
               I Accept

@@ -17,6 +17,7 @@ const SendApprovalForMember = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
+  const [contactId, setContactId] = useState("");
   const [loginName, setLoginName] = useState("");
   const [id, setId] = useState("");
 
@@ -89,6 +90,7 @@ const SendApprovalForMember = () => {
       const jsonresponse = await response.json();
       if (jsonresponse) {
         setLoginName(jsonresponse[0].name);
+        setContactId(jsonresponse[0].contact.contact_id);
       }
       console.log("Profile Send Member Approval Data", jsonresponse);
     } catch (error) {
@@ -129,10 +131,11 @@ const SendApprovalForMember = () => {
         </h3>
 
       </div>
-      <h5 className="card p-2 px-4 text-success my-2 fw-bold">
-        SEND APPROVAL OF MEMBERS'S REQUEST
-      </h5>
       <div className="card p-4 bg-light p-2">
+      <h5 className="text-success pb-2 fw-bold">
+        {/* SEND APPROVAL OF MEMBERS'S REQUEST */}
+        Send approval for member's request
+      </h5>
         <div className="card  backgroundColor">
           <div className="card-body">
 
@@ -160,7 +163,7 @@ const SendApprovalForMember = () => {
 
           <div className="text-center">
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={route}
             >
               Send

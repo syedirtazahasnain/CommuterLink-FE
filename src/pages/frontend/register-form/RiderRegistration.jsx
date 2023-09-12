@@ -1060,7 +1060,7 @@ const RiderRegistration = () => {
                         onChange={(e) => setCityEndId(e.target.value)}
                         required
                       >
-                        <option value="" hidden>
+                        <option value="" disabled hidden>
                           Select a City
                         </option>
                         {selectedEndProvinceCities?.map((province) => (
@@ -1089,7 +1089,7 @@ const RiderRegistration = () => {
                               onChange={handleLocationEnd}
                               required
                             >
-                              <option value="" disabled hidden>
+                              <option value="" disabled>
                                 Select Area from Dropdown
                               </option>
                               {selectedEndCityArea?.map((province) => (
