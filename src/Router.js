@@ -59,6 +59,8 @@ import Contribute from "./pages/frontend/Hompage-components/Contribute";
 import RechargeWallet from "./pages/backend/dashboard/RechargeWallet";
 import RequestCommuterProfile from "./pages/backend/dashboard/RequestCommuterProfile";
 import Loading from "./pages/frontend/register-form/Loading";
+import DataSecurity from "./pages/frontend/register-form/DataSecurity";
+import VerifiedMember from "./pages/frontend/register-form/VerifiedMember";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -81,6 +83,9 @@ const Router = () => {
         <Route path="/rider" element={<BackendLayout children={<Rider />} />}></Route>
         <Route path="/driver" element={<BackendLayout children={<Driver />} />}></Route>
         <Route path="/loading" element={<FrontendLayout children={<Loading />} />} />
+        <Route path="/datasecurity" element={<FrontendLayout children={<DataSecurity />} />} />
+        <Route path="/verifiedmember" element={<FrontendLayout children={<VerifiedMember />} />} />
+
         {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />
         <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} />

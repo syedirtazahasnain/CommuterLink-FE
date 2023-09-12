@@ -257,7 +257,7 @@ const CommuterProfile1 = () => {
                 <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00"}} />
               ) :
                 (
-                  <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
+                  <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px",backgroundColor: "#198754"}} />
                 )}
             </div>
             <div className="col-md-11 px-5">

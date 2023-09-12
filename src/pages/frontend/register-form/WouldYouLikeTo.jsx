@@ -111,7 +111,7 @@ const WouldYouLikeTo = () => {
                           <div className="text-left"> <div>
                             <label className="radio-button ">
                              <input type="radio" id="option1" name="option" value={radio1} onClick={setRadio1} />
-                                <span className="ml-3"><strong>Looking for a Car</strong> </span>
+                                <span className="ml-3"><strong>Look for a Car</strong> </span>
                                
                               </label></div>
                               <span className="text-green"style={{color:'#198754', fontSize:'12px'}}>CommutersLink will match you with car owners offering available seats based upon Gender, Route and Timings on cost sharing basis</span>
@@ -120,7 +120,7 @@ const WouldYouLikeTo = () => {
                               <div className="text-left"><div>
                               <label className="radio-button ">
                                 <input type="radio" id="option2" name="option" value={radio2} onClick={setRadio2}/>
-                                <span className="ml-3"><strong>Offering your Car</strong></span>
+                                <span className="ml-3"><strong>Offer your Car</strong></span>
                               </label>
                               </div>
                               

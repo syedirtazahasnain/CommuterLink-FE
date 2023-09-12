@@ -388,9 +388,18 @@ const Signup = () => {
                   {" "}
                   Sign up
                 </h1>{" "}
+                <p
+                  className="text-center fs-6 text-danger text-custom"
+                  style={{
+               
+                  }}
+                >
+                  {" "}
+                  You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register
+                </p>{" "}
                 <Form className="text-center">
                   <Form.Group
-                    className="mt-5 mb-1 text-center"
+                    className="mt-3 mb-1 text-center"
                     controlId="formfullName"
                   >
                     <TextField
@@ -401,7 +410,7 @@ const Signup = () => {
                       type="text"
                       value={fullName}
                       onChange={handleFullNameChange}
-                      required
+                      // required
                       size="small"
                       error={!!fullNameError}
                       helperText={fullNameError}
@@ -420,7 +429,7 @@ const Signup = () => {
                       label="Email"
                       value={email}
                       onChange={(e) => validateEmail(e.target.value)}
-                      required
+                      // required
                       size="small"
                       error={!isValidEmail}
                       helperText={!isValidEmail && "Please enter a valid email"}
@@ -441,7 +450,7 @@ const Signup = () => {
                           validatePhoneNumber(e.target.value);
                         }
                       }}
-                      required
+                      // required
                       size="small"
                       error={!isValidPhoneNumber && phoneNumber !== ""}
                       helperText={
@@ -463,7 +472,7 @@ const Signup = () => {
                       label="Password"
                       value={password}
                       onChange={(e) => validatePassword(e.target.value)}
-                      required
+                      // required
                       size="small"
                       error={!isValidPassword}
                       helperText={
@@ -484,7 +493,7 @@ const Signup = () => {
                       label="Confirm Password"
                       value={confirmPassword}
                       onChange={(e) => checkconfirmPassword(e.target.value)}
-                      required
+                      // required
                       size="small"
                       error={!isValidConfirmPassword}
                       helperText={

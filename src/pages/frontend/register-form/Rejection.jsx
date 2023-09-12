@@ -47,7 +47,7 @@ const Rejection = () => {
                       can also update any other data.
                     </h5>
                     <div className="text-center">
-                      <Button className="btn btn-sm fs-6 fw-bold btn-dark text-white rounded-4 px-3 py-2 mb-3">
+                      <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark text-white rounded-4 px-3 py-2 mb-3">
                         Next
                       </Button>
                     </div>

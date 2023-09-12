@@ -5,83 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import { useSelector } from "react-redux";
 
-const SeatCostVerification = () => {
+const DataSecurity = () => {
 
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
   const [contactId, setContactId] = useState("");
   const [price, setPrice] = useState("");
   const [option, setOption] = useState("");
-
-  const onSubmit = () => {
-    navigate("/verification");
-  };
-
-  useEffect(() => {
-    getProfileData();
-  }, []);
-
-  useEffect(() => {
-    if (contactId) {
-      getPriceData();
-    }
-  }, [contactId]);
-
-
-  const getProfileData = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/profile`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse) {
-        setContactId(jsonresponse[0].contact.contact_id);
-        setOption(jsonresponse[0].userlist.vehicle_option);
-      }
-      else {
-        setContactId("");
-        setOption("");
-      }
-      console.log("Seat Cost Verification Page Data", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
-  const getPriceData = async () => {
-    try {
-      if (option === 1) {
-        const response = await fetch(
-          `${API_URL}/api/v1/commuter/profile/${contactId}/driver`,
-          {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${userToken}`,
-            },
-          }
-        );
-
-        const jsonresponse = await response.json();
-        if (jsonresponse.data && jsonresponse.data.length > 0) {
-          setPrice(jsonresponse.data[0].price);
-        }
-        console.log("Seat Cost Price Data:", jsonresponse);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
 
   const backgroundStyle = {
     backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
@@ -156,7 +86,7 @@ const SeatCostVerification = () => {
               <div
                 className="container py-3"
               >
-               <div className="card p-3 bg-white"><div className="mt-3" >
+               <div className="card p-3 bg-white border border-2 shadow"><div className="mt-3" >
                   <div
                     className="text-center"
                     // style={{ background: "rgb(22,70,57)" }}
@@ -164,32 +94,28 @@ const SeatCostVerification = () => {
                     <div>
                       <div>
                         {" "}
-                        {/* <img
-                          src={`${BASE_URL}/assets/images/signup-5.png`}
+                        <img
+                          src={`${BASE_URL}/assets/images/data_security_icon.png`}
                           alt="Sample photo"
                           style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '60%' }}
-                        /> */}
-                         <h3 className="card-title mt-4 mb-3 text-center text-success" >
-                            Seat Cost Information
+                        />
+                           <h3 className="card-title py-2 text-center fw-bold text-success" >
+                            DATA SECURITY
                           </h3>
                       </div>
                     </div>
                     <div className="text-white p-4 ">
-                      <p className="text-black text-justify">
-                        According to the information you provided regarding your car and route, the system has calculated
-                        your per seat per day cost is <strong>Rs. {price}/-</strong> on cost sharing basis.
+                      <p className="text-black text-justify fs-5 ">
+                       CommutersLink has established strict security policies across our processes,
+                       systems, resources and offices that ensure your data is 100% secure.
                       </p>
                     </div>
-                    <div className="text-black p-4">
-                      <p className="text-black text-justify">
-                        The cost will be adjusted fortnightly according to changes in the fuel price.
-                      </p>
-                    </div>
+                   
                     <form id="numberForm">
                       <div className="mb-5">
-                        <Button variant="success" className="font-custom btn-custom mx-2 text-white bg-success px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={onSubmit}>
-                          Okay
-                        </Button>
+                        <button  className="btnregistration px-4 fs-6 py-2">
+                          Next
+                        </button>
                       </div>
                     </form>
                   </div>
@@ -238,4 +164,4 @@ const SeatCostVerification = () => {
   );
 };
 
-export default SeatCostVerification;
+export default DataSecurity;

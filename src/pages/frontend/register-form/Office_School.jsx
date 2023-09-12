@@ -158,12 +158,12 @@ const Office_School = () => {
                                 </div>
                                 <form id="numberForm">
                                   <div>
-                                    <p className="my-3  fs-7 text-success cursor-pointer">
+                                    <p className="my-3  fs-5  text-success cursor-pointer">
                                       On long term basis (daily)
                                     </p>
-                                    <p className="my-3  fs-7 text-danger cursor-pointer">
+                                    {/* <p className="my-3 fw-bold fs-6 text-danger cursor-pointer">
                                       You must be 18 years old or elder to register 
-                                    </p>
+                                    </p> */}
                                   </div>
                                 </form>
                               </div>

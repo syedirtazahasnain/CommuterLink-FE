@@ -1246,7 +1246,7 @@ const DriverRegistration = () => {
                         </Form.Group>
 
                         {cityStartId && (
-                          <>
+                          <>  
                             {addNewStartDropdown && (
                               <Form.Group
                                 as={Col}
@@ -1274,31 +1274,32 @@ const DriverRegistration = () => {
                                     >
                                       {province.value}
                                     </option>
-                                  ))}
+                                  ))} 
                                 </Form.Select>
                               </Form.Group>
+                              
                             )}
 
-                            {addNewStartField && (
-                              <Form.Group
-                                as={Col}
-                                md="12"
-                                className="mt-3"
-                                controlId="validationCustom02"
+{addNewStartField && (
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              className="mt-3"
+                              controlId="validationCustom02"
+                            >
+                              <span
+                                className="colorplace text-danger"
+                                style={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+                                }}
+                                onClick={AddNewStart}
                               >
-                                <span
-                                  className="colorplace text-danger"
-                                  style={{
-                                    cursor: "pointer",
-                                    textDecoration: "underline",
-                                  }}
-                                  onClick={AddNewStart}
-                                >
-                                  Can't find your area?
-                                  <a> Add Here</a>
-                                </span>
-                              </Form.Group>
-                            )}
+                                Can't find your area?
+                                <a> Add Here</a>
+                              </span>
+                            </Form.Group>
+                          )}
 
                             {addNewStart && (
                               <Form.Group
