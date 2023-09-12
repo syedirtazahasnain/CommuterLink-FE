@@ -344,7 +344,7 @@ const CommuterLinkSuggestions = () => {
             <div className="card-body" style={{  background:  "rgb(214 219 218)"  }}>
               <p>
                 Based upon your Profile, We have Following{" "}
-                <strong> MATCHES</strong> to Offer
+                <strong> Matches</strong> to Offer
               </p>
               <div className="row">
                 {userData.map((user, index) => {

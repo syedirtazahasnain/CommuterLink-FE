@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { setContactIdState, setIdState } from "../../../redux/generalSlice";
@@ -60,7 +60,7 @@ const CommuterProfile1 = () => {
       const fetchDetailsPromises = userProfiles.map(async (profile) => {
         return await getCommuterProfileData(profile);
       });
-  
+
       Promise.all(fetchDetailsPromises)
         .then((details) => {
           // Set the profiles and details in the state
@@ -124,7 +124,7 @@ const CommuterProfile1 = () => {
         setProfileType("Driver");
         setUserType("Rider");
         profiles = jsonresponse.rider;
-        
+
         // Set the profiles in the state
         setUserProfiles(profiles);
       }
@@ -179,7 +179,7 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const viewRequest = (contact_id,request_id) => {
+  const viewRequest = (contact_id, request_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
@@ -189,7 +189,7 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const requestViewDriver = (contact_id,request_id) => {
+  const requestViewDriver = (contact_id, request_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
@@ -231,7 +231,7 @@ const CommuterProfile1 = () => {
       price,
       mobile,
     } = userDetails[0];
-    
+
     const {
       seats_left,
       reg_no,
@@ -247,66 +247,91 @@ const CommuterProfile1 = () => {
     console.log(userDetails[0]);
 
     return (
-      <div> 
+      <div>
 
-      <div className="card p-4 bg-light">
-        <div className="card p-4 backgroundColor">
-          <div className="row px-3">
-            <div className="col-md-1">
-              {req_stage === 0 ? (
-                <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00"}} />
-              ) :
-                (
-                  <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px",backgroundColor: "#198754"}} />
-                )}
-            </div>
-            <div className="col-md-11 px-5">
-              <div className="col-md-5 px-5">
-                {contact_id !== "" ? (
-                   req_stage === 0 ?(
-                    <div>
-                      <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
-                    </div>
-                  ):
+        <div className="card p-4 bg-light">
+          <div className="card p-4 backgroundColor">
+            <div className="row px-3">
+              <div className="col-md-1">
+                {req_stage === 0 ? (
+                  <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00" }} />
+                ) :
                   (
-                    <div>
-                      <h3 className="text-success fw-bold">{contact_id}</h3>
-                    </div>
-                  )
-                ) : (
-                  <>
-                  </>
-                )}
+                    <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#198754" }} />
+                  )}
               </div>
-              <p className="px-5">
-                {gender !== "" ? (
-                                    <>
-                    <b className="text-black">Gender:</b> {gender}
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {age !== "" ? (
-                  <>
-                    <b className="text-black"> Age:</b> {age}
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {profession !== "" ? (
-                  <>
-                    <b className="text-black">Profession:</b> {profession}
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {/* {mobile ? (
+              <div className="col-md-11 px-5">
+                <div className="row px-5">
+                  <div className="col-md-3 mt-3">
+                    {contact_id !== "" ? (
+                      req_stage === 0 ? (
+                        <div>
+                          <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
+                        </div>
+                      ) :
+                        (
+                          <div>
+                            <h3 className="text-success fw-bold">{contact_id}</h3>
+                          </div>
+                        )
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-9">
+
+                  </div>
+                </div>
+
+                <div className="row px-5">
+                  <div className="col-md-2">
+                    {gender !== "" ? (
+                      <>
+                        <b className="text-black">Gender:</b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-10">{gender}
+                  </div>
+                  </div>
+
+
+                  <div className="row px-5 mb-2">
+                    <div className="col-md-2">
+                      {age !== "" ? (
+                        <>
+                          <b className="text-black"> Age:</b>
+                        </>
+                      ) : (
+                        <>
+                        </>
+                      )}
+                    </div>
+                    <div className="col-md-10">{age}
+                    </div>
+                  </div>
+                  <div className="row px-5 mb-2">
+                    <div className="col-md-2">
+                      {profession !== "" ? (
+                        <>
+                          <b className="text-black">Profession:</b>
+                        </>
+                      ) : (
+                        <>
+                        </>
+                      )}
+                    </div>
+                    <div className="col-md-10"> {profession}
+                    </div>
+                  </div>
+
+
+
+                  {/* {mobile ? (
                   <>
                     {mobile && (
                       <>
@@ -317,233 +342,300 @@ const CommuterProfile1 = () => {
                 ) : (
                   <></>
                 )} */}
-              </p>
+              </div>
             </div>
-          </div>
-          <hr style={{ color: "grey" }} />
-          <div className="row">
-            <h2 className="text-success py-2 fw-bold">{userType ? userType : "Commuter"} Details</h2>
-            <div className="col-md-6">
-              <p>
-                {preferred_gender !== "" ? (
-                  <>
-                    <b className="text-black">Seats For: </b> {preferred_gender}
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {origin !== "" ? (
-                  <>
-                    <b className="text-black">Point of Origin: </b>
+            <hr style={{ color: "grey" }} />
+            <div className="row">
+              <h2 className="text-success py-2 fw-bold">{userType ? userType : "Commuter"} Details</h2>
+              <div className="col-md-6">
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {preferred_gender !== "" ? (
+                      <>
+                        <b className="text-black">Seats For: </b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {preferred_gender}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {origin !== "" ? (
+                      <>
+                        <b className="text-black">Point of Origin: </b>
+
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
                     {origin}
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {time_depart !== "" ? (
-                  <>
-                    <b className="text-black">Pickup Timings:</b> {time_depart}
-                  </>
-                ) : (
-                  <>
+                  </div>
+                </div>
 
-                  </>
-                )}
-                <br />
-                {destination !== "" ? (
-                  <>
-                    <b className="text-black">Destination:</b>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {time_depart !== "" ? (
+                      <>
+                        <b className="text-black">Pickup Timings:</b>
+                      </>
+                    ) : (
+                      <>
+
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {time_depart}
+                  </div>
+                </div>
+
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {destination !== "" ? (
+                      <>
+                        <b className="text-black">Destination:</b>
+
+                      </>
+                    ) : (
+                      <>
+
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
                     {destination}
-                  </>
-                ) : (
-                  <>
+                  </div>
+                </div>
 
-                  </>
-                )}
-                <br />
-                {time_return !== "" ? (
-                  <>
-                    <b className="text-black">Return Timings:</b> {time_return}
-                  </>
-                ) : (
-                  <>
-
-                  </>
-                )}
-                <br />
-                {days !== "" ? (
-                  <>
-                    <b className="text-black">Days:</b> {days}
-                  </>
-                ) : (
-                  <>
-
-                  </>
-                )}
-                <br />
-                {/* {mobile ? (
-                  <>
-                    {mobile && (
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {time_return !== "" ? (
                       <>
-                        <b className="text-black">Contact No:</b> {mobile}
+                        <b className="text-black">Return Timings:</b>
+                      </>
+                    ) : (
+                      <>
+
                       </>
                     )}
-                  </>
-                ) : (
-                  <></>
-                )} */}
-              </p>
+                  </div>
+                  <div className="col-md-8">
+                    {time_return}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {days !== "" ? (
+                      <>
+                        <b className="text-black">Days:</b>
+                      </>
+                    ) : (
+                      <>
+
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {days}
+                  </div>
+                </div>
+
+
+
+
+              </div>
+              <div className="col-md-6">
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {seats ? (
+                      <>
+                        {seats && (
+                          <>
+                            <b>No.of Seats:</b>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {seats}
+                  </div>
+                </div>
+
+
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {seats_left !== "" ? (
+                      <>
+                        {seats_left && (
+                          <>
+                            <b>No.of Seats Left:</b>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {seats_left}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {price !== "" ? (
+                      <>
+                        {price && (
+                          <>
+                            <b>Payment Terms (perDay):</b>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {price}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {car_ac !== "" ? (
+                      <>
+                        {car_ac && (
+                          <>
+                            <b>Car have AC:</b>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {car_ac}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {car_brand !== "" ? (
+                      <>
+                        {car_brand && (
+                          <>
+                            <b>Car Brand:</b>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {car_brand}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {car_cc !== "" ? (
+                      <>
+                        {car_cc && (
+                          <>
+                            <b>Car CC:</b>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {car_cc}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {reg_year !== "" ? (
+                      <>
+                        {reg_year && (
+                          <>
+                            <b>Registration Year:</b>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {reg_year}
+                  </div>
+                </div>
+
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {car_reg_year !== "" ? (
+                      <>
+                        {car_reg_year && (
+                          <>
+                            <b>Car Registration Year:</b>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {car_reg_year}
+                  </div>
+                </div>
+
+              </div>
             </div>
-            <div className="col-md-6">
-              <p>
-                {seats ? (
-                  <>
-                    {seats && (
-                      <>
-                        <b>No.of Seats:</b> {seats}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {seats_left !== "" ? (
-                  <>
-                    {seats_left && (
-                      <>
-                        <b>No.of Seats Left:</b> {seats_left}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {price !== "" ? (
-                  <>
-                    {price && (
-                      <>
-                        <b>Payment Terms (perDay):</b> {price}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {car_ac !== "" ? (
-                  <>
-                    {car_ac && (
-                      <>
-                        <b>Car have AC:</b> {car_ac}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {car_brand !== "" ? (
-                  <>
-                    {car_brand && (
-                      <>
-                        <b>Car Brand:</b> {car_brand}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {car_cc !== "" ? (
-                  <>
-                    {car_cc && (
-                      <>
-                        <b>Car CC:</b> {car_cc}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {car_model !== "" ? (
-                  <>
-                    {car_model && (
-                      <>
-                        <b>Car Model:</b> {car_model}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {reg_no !== "" ? (
-                  <>
-                    {reg_no && (
-                      <>
-                        <b>Registration Number:</b> {reg_no}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {reg_year !=="" ? (
-                  <>
-                    {reg_year && (
-                      <>
-                        <b>Registration Year:</b> {reg_year}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {car_reg_year !== "" ? (
-                  <>
-                    {car_reg_year && (
-                      <>
-                        <b>Car Registration Year:</b> {car_reg_year}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-              </p>
+            <div className="text-center">
+              {req_stage === 1 ? (
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
+                  View Request
+                </Button>
+              ) : req_stage === 0 ? (
+                <Button className="font-custom btn btn-sm fs-6 fw-bold text-white rounded-4 px-3 py-2 mb-3" style={{ background: "#ff8a00" }}>
+                  Request Sent
+                </Button>
+              ) : req_stage === 2 ? (
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
+                  View Request
+                </Button>
+              ) : (
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
+                  Send Request
+                </Button>
+              )}
             </div>
-          </div>
-          <div className="text-center">
-            {req_stage === 1 ? (
-              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {viewRequest(contact_id,request_id)}}>
-                View Request
-              </Button>
-            ) : req_stage === 0 ? (
-              <Button className="font-custom btn btn-sm fs-6 fw-bold text-white rounded-4 px-3 py-2 mb-3" style={{background:"#ff8a00"}}>
-                Request Sent
-              </Button>
-            ) : req_stage === 2 ? (
-              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {requestViewDriver(contact_id,request_id)}}>
-                View Request
-              </Button>
-            ) : (
-              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={()=> {sendRequest(contact_id)}}>
-                Send Request
-              </Button>
-            )}
-          </div>
 
+          </div>
         </div>
-      </div>
       </div>
     );
   };
@@ -551,10 +643,10 @@ const CommuterProfile1 = () => {
   return (
     <div>
       <div className="page-title">
-      
+
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-          <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
+            <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
             <Link
               to={"/dashboard"} >
               <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
@@ -563,7 +655,7 @@ const CommuterProfile1 = () => {
               </button>
             </Link>
           </div>
-         
+
         </div>
         <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours". Exact details will be shown after both have accepted to share.`}</h5>
       </div>

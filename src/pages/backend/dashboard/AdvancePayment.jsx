@@ -226,7 +226,7 @@ const AdvancePayment = () => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Two Weeks Advance Min. Payment Due: Rs.{payment}/-{" "}
+          Two Weeks Advance Min. Payment Due: Rs. {payment}/-{" "}
         </h3>
       </div>
       <div className="card p-4  p-2">
@@ -252,10 +252,10 @@ const AdvancePayment = () => {
                     <div className="col-12 mb-2  border border-success rounded rounded-3">
                       <div>
                         <button 
-                          className="btn  text-success fw-bold fs-5 lh-1" 
+                          className="font-custom btn  text-success fw-bold fs-5 lh-1" 
                           onClick={openAndCloseWindow}
                         >
-                          <span><i className="fa-solid fs-3 fa-wallet text-success mx-2" /></span>
+                          <span className="font-custom"><i className="fa-solid fs-3 fa-wallet text-success mx-2" /></span>
                           Credit/Debit Card
                         </button>
                       </div>
@@ -263,12 +263,12 @@ const AdvancePayment = () => {
                     <div className="col-12 border advancecolor border-success rounded rounded-3">
                       <div>
                         <button 
-                          className="btn btncol advancecolor text-success fw-bold fs-5 lh-1"
+                          className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
                           onClick={openAndCloseWindow} 
                         >
                           <span><img
                             src={`${BASE_URL}/assets/images/jazz.png`}
-                            className="card-img-top w-40px m-auto mx-4"
+                            className="font-custom card-img-top w-40px m-auto mx-4"
                           /></span>
                           Jazz Cash
                         </button>
@@ -281,13 +281,13 @@ const AdvancePayment = () => {
           </div>
           <div className="text-center">
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={() => navigate("/dashboard")}
             >
               Skip Payment
             </Button>
             <Button
-              className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2"
               onClick={route}
               disabled={!windowClosedManually}
             >

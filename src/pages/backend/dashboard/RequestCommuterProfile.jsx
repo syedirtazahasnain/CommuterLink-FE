@@ -232,13 +232,14 @@ const RequestCommuterProfile = () => {
                     <div className="card p-4 backgroundColor">
                         {/* Render profile details here */}
                         {/* You can use the extracted properties to display the profile data */}
-                        <div className="row">
+                        <div className="row px-3">
                             <div className="col-md-1 mt-1">
                                 <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00" }} />
                             </div>
                             <div className="col-md-11 px-5">
-                                <div className="col-md-5 px-5">
-                                    {contact_id !== "" ? (
+                            <div className="row px-5"> 
+                            <div className="col-md-3 mt-3">
+                            {contact_id !== "" ? (
                                         <div>
                                             <h3 className="text-success fw-bold">{contact_id}</h3>
                                         </div>
@@ -246,252 +247,377 @@ const RequestCommuterProfile = () => {
                                         <>
                                         </>
                                     )}
-                                </div>
-                                <p className="px-5">
-                                    {gender !== "" ? (
+
+                            </div>
+                            </div>
+                            <div className="row px-5">
+                  <div className="col-md-2">
+                    {gender !== "" ? (
+                      <>
+                        <b className="text-black">Gender:</b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-10">{gender}
+                  </div>
+                  </div>
+
+                  <div className="row px-5">
+                  <div className="col-md-2">
+                  {age !== "" ? (
                                         <>
-                                            <b className="text-black">Gender:</b> {gender}
+                                            <b className="text-black"> Age:</b>
                                         </>
                                     ) : (
                                         <>
                                         </>
                                     )}
-                                    <br />
-                                    {age !== "" ? (
+                  </div>
+                  <div className="col-md-10"> {age}
+                  </div>
+                  </div>
+
+
+                  <div className="row px-5">
+                  <div className="col-md-2">
+                  {profession !== "" ? (
                                         <>
-                                            <b className="text-black"> Age:</b> {age}
+                                            <b className="text-black">Profession:</b> 
                                         </>
                                     ) : (
                                         <>
                                         </>
                                     )}
-                                    <br />
-                                    {profession !== "" ? (
-                                        <>
-                                            <b className="text-black">Profession:</b> {profession}
-                                        </>
-                                    ) : (
-                                        <>
-                                        </>
-                                    )}
-                                    <br />
-                                    {/* {mobile ? (
-                                        <>
-                                            {mobile && (
-                                                <>
-                                                    <b className="text-black">Cell:</b> {mobile}
-                                                </>
-                                            )}
-                                        </>
-                                    ) : (
-                                        <></>
-                                    )} */}
-                                </p>
+                  </div>
+                  <div className="col-md-10">{profession}
+                  </div>
+                  </div>
+
+                              
                             </div>
                         </div>
                         <hr style={{ color: "grey" }} />
+
                         <div className="row">
                             <h2 className="text-success py-2 fw-bold">{"Commuter"} Details</h2>
                             <div className="col-md-6">
-                                <p>
-                                    {preferred_gender !== "" ? (
+
+                            <div className="row mb-2">
+                  <div className="col-md-4">
+                  {preferred_gender !== "" ? (
                                         <>
                                             {preferred_gender && (
                                                 <>
-                                                    <b className="text-black">Seats For: </b> {preferred_gender}
+                                                    <b className="text-black">Seats For: </b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {origin !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {preferred_gender}
+                  </div>
+                </div>
+
+                          
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                  {origin !== "" ? (
                                         <>
                                             <b className="text-black">Point of Origin: </b>
-                                            {origin}
+                                        
                                         </>
                                     ) : (
                                         <>
                                         </>
                                     )}
-                                    <br />
-                                    {time_depart !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {origin}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                  {time_depart !== "" ? (
                                         <>
-                                            <b className="text-black">Pickup Timings:</b> {time_depart}
+                                            <b className="text-black">Pickup Timings:</b>
                                         </>
                                     ) : (
                                         <>
 
                                         </>
                                     )}
-                                    <br />
-                                    {destination !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {time_depart}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                  {destination !== "" ? (
                                         <>
                                             <b className="text-black">Destination:</b>
-                                            {destination}
+                                         
                                         </>
                                     ) : (
                                         <>
 
                                         </>
                                     )}
-                                    <br />
-                                    {time_return !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {destination}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                   
+                  {time_return !== "" ? (
                                         <>
-                                            <b className="text-black">Return Timings:</b> {time_return}
+                                            <b className="text-black">Return Timings:</b> 
                                         </>
                                     ) : (
                                         <>
 
                                         </>
                                     )}
-                                    <br />
-                                    {days !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {time_return}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                   
+                  {days !== "" ? (
                                         <>
-                                            <b className="text-black">Days:</b> {days}
+                                            <b className="text-black">Days:</b>
                                         </>
                                     ) : (
                                         <>
 
                                         </>
                                     )}
-                                    <br />
-                                    {/* {mobile ? (
-                                        <>
-                                            {mobile && (
-                                                <>
-                                                    <b className="text-black">Contact No:</b> {mobile}
-                                                </>
-                                            )}
-                                        </>
-                                    ) : (
-                                        <></>
-                                    )} */}
-                                </p>
-                            </div>
-                            <div className="col-md-6">
-                                <p>
-                                    {seats ? (
+                  </div>
+                  <div className="col-md-8">
+                  {days}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                   
+                  {seats ? (
                                         <>
                                             {seats && (
                                                 <>
-                                                    <b>No.of Seats:</b> {seats}
+                                                    <b>No.of Seats:</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {seats_left !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {seats}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                   
+                  {seats_left !== "" ? (
                                         <>
                                             {seats_left && (
                                                 <>
-                                                    <b>No.of Seats Left:</b> {seats_left}
+                                                    <b>No.of Seats Left:</b> 
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {price !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {seats_left}
+                  </div>
+                </div>
+                               
+
+
+
+                            </div>
+                            <div className="col-md-6">
+
+
+
+                            <div className="row mb-2 mt-2">
+                  <div className="col-md-4">
+                   
+                  {price !== "" ? (
                                         <>
                                             {price && (
                                                 <>
-                                                    <b>Payment Terms (perDay):</b> {price}
+                                                    <b>Payment Terms (perDay):</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {car_ac !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {price}
+                  </div>
+                </div>
+
+                
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                   
+                  {car_ac !== "" ? (
                                         <>
                                             {car_ac && (
                                                 <>
-                                                    <b>Car have AC:</b> {car_ac}
+                                                    <b>Car have AC:</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {car_brand !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {car_ac}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                  {car_brand !== "" ? (
                                         <>
                                             {car_brand && (
                                                 <>
-                                                    <b>Car Brand:</b> {car_brand}
+                                                    <b>Car Brand:</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {car_cc !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {car_brand}
+                  </div>
+                </div>
+
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                  {car_cc !== "" ? (
                                         <>
                                             {car_cc && (
                                                 <>
-                                                    <b>Car CC:</b> {car_cc}
+                                                    <b>Car CC:</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {car_model !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {car_cc}
+                  </div>
+                </div>
+    
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                  {car_model !== "" ? (
                                         <>
                                             {car_model && (
                                                 <>
-                                                    <b>Car Model:</b> {car_model}
+                                                    <b>Car Model:</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {reg_no !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {car_model}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                 
+                  {reg_no !== "" ? (
                                         <>
                                             {reg_no && (
                                                 <>
-                                                    <b>Registration Number:</b> {reg_no}
+                                                    <b>Registration Number:</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {reg_year !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {reg_no}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                  {reg_year !== "" ? (
                                         <>
                                             {reg_year && (
                                                 <>
-                                                    <b>Registration Year:</b> {reg_year}
+                                                    <b>Registration Year:</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                    <br />
-                                    {car_reg_year !== "" ? (
+                  </div>
+                  <div className="col-md-8">
+                  {reg_year}
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                   
+                  {car_reg_year !== "" ? (
                                         <>
                                             {car_reg_year && (
                                                 <>
-                                                    <b>Car Registration Year:</b> {car_reg_year}
+                                                    <b>Car Registration Year:</b>
                                                 </>
                                             )}
                                         </>
                                     ) : (
                                         <></>
                                     )}
-                                </p>
+                  </div>
+                  <div className="col-md-8">
+                  {car_reg_year}
+                  </div>
+                </div>
                             </div>
                         </div>
                         {/* Render action buttons based on the request stage */}

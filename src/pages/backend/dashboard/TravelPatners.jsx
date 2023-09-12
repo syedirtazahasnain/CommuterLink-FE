@@ -151,7 +151,8 @@ const TravelPatners = () => {
                         >
                           <img
                             src={`${IMAGE_URL}${image}`}
-                            className="card-img-top w-80px m-auto py-3 h-80px h-fixed"
+                            className="card-img-top  m-auto py-3 h-80px h-fixed image-fluid"
+                            style={{maxWidth:'80px'}}
                           />
                           <div
                             className="card-title text-dark text-center"
@@ -254,7 +255,7 @@ const TravelPatners = () => {
 
                             <div className="row d-flex justify-content-between px-5 py-3 ">
                               <div className="col-md-6">
-                              {image ? (
+                              {/* {image ? (
                                     <img
                                       src={`${IMAGE_URL}${image}`}
                                       className="card-img-top w-70px m-auto border border-1 border-success h-70px bg-success"
@@ -262,9 +263,30 @@ const TravelPatners = () => {
                                   ) : (
                                     <img
                                       src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-70px m-auto border border-1 h-70px border-success bg-success"
+                                      className="card-img-top w-60px p-3 m-auto border border-1 h-70px border-success bg-success"
                                     />
-                                  )}                              </div>
+                                  )}                              */}
+
+<div
+          className="card"
+          style={{ width: "6rem",height:"6rem", backgroundColor: "grey" }}
+        >
+          {image ? (
+                                    <img
+                                      src={`${IMAGE_URL}${image}`}
+                                      className="card-img-top w-70px m-auto h-70px"
+                                    />
+                                  ) : (
+                                    <img
+                                      src={`${BASE_URL}/assets/images/Vector.png`}
+                                      className="card-img-top w-40px m-auto mt-3 "
+                                    />
+                                  )} 
+
+          
+          </div>
+                                  
+                                   </div>
                               <div className="col-md-6">
                                 <p className="fw-bold">{name}</p>
                                   <p className="fw-bold">RS &nbsp; {price}/-</p>

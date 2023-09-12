@@ -187,8 +187,8 @@ const SeatCostVerification = () => {
                     </div>
                     <form id="numberForm">
                       <div className="mb-5">
-                        <Button variant="success" className="font-custom btn-custom mx-2 text-white bg-success px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={onSubmit}>
-                          Okay
+                        <Button variant="success" className="btnregistration fs-6 py-2 px-4" onClick={onSubmit}>
+                          Next
                         </Button>
                       </div>
                     </form>
