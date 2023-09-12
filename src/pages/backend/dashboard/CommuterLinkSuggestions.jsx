@@ -257,7 +257,7 @@ const CommuterLinkSuggestions = () => {
           style={{
             width: "6rem",
             backgroundColor:
-              request_stage === 1 || request_stage === 2 ? "#f9f0c1" : "#5ab387",
+              request_stage === 1 || request_stage === 2 ? "#FF8A00" : "#5ab387",
           }}
         >
            {request_stage === 1 || request_stage === 2 ? (
@@ -317,7 +317,7 @@ const CommuterLinkSuggestions = () => {
     <div>
       <div className="card  mt-3 mb-5">
           <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
-                <h4 className="text-center text-warning m-auto" style={{ lineHeight: "1" }}>
+                <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
                 {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
                 </h4>
                 </div>

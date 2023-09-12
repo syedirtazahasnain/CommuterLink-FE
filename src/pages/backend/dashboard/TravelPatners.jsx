@@ -116,7 +116,7 @@ const TravelPatners = () => {
     <div>
       <div className="card  mt-3 mb-5">
         <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
-          <h4 className="text-center text-warning m-auto">
+          <h4 className="text-center fw-bold text-warning m-auto">
             {" "}
             MY TRAVEL PARTNERS{" "}
           </h4>{" "}
