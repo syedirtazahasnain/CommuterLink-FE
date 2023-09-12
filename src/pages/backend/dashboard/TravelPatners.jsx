@@ -178,7 +178,6 @@ const TravelPatners = () => {
                   <Link
                     className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
                     style={{ cursor: "pointer" }}
-                  // onClick={route}
                   >
                     View More
 
@@ -235,7 +234,7 @@ const TravelPatners = () => {
                         <div className="row w-100">
                           <div className="col-md-6 px-1 m-auto">
                             <div className="w-100">
-                            <button class="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-3 px-10 w-100 shadow-sm"><span class="text-uppercase">View Transaction History</span></button>
+                            <button class="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm"><span class="text-uppercase">View Transaction History</span></button>
 
                               {/* <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
                                 View Transaction History

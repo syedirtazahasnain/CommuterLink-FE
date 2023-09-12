@@ -267,7 +267,7 @@ const TravelBuddyProfile = () => {
       else if (jsonresponse.status_code === 100) {
         Swal.fire({
           position: 'top',
-          // // icon: 'error',
+          icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -277,7 +277,7 @@ const TravelBuddyProfile = () => {
       if (jsonresponse.status_code === 500) {
         Swal.fire({
           position: 'top',
-          // // icon: 'error',
+          icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -314,7 +314,7 @@ const TravelBuddyProfile = () => {
     position:'top',
     title: 'Are you sure?',
     text: "You want to cancel",
-    // // icon: 'warning',
+    icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#037e03',
     cancelButtonColor: '#037e03',
