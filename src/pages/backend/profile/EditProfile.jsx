@@ -216,7 +216,7 @@ const EditProfile = () => {
       <div className="page-title">
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">Edit Profile</h3>
+            <h3 className="text-success my-2 fw-bold m-0">EDIT PROFILE</h3>
             <Link
               to={"/viewprofile"}
               style={{

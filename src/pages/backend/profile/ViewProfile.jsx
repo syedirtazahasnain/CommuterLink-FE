@@ -102,7 +102,7 @@ const ViewProfile = () => {
       <div className="page-title">
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">User Profile</h3>
+            <h3 className="text-success my-2 fw-bold m-0">USER PROFILE</h3>
             <Link
               to={"/dashboard"} >
               <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">

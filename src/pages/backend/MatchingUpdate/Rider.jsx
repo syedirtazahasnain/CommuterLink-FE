@@ -146,10 +146,10 @@ const Rider = () => {
       <div className="page-title">
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">Update Matching Criteria</h3>
+            <h3 className="text-success my-2 fw-bold m-0">UPDATE MATCHING CRITERIA</h3>
             <Link
               to={"/dashboard"} >
-              <button className="btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
               </button>
@@ -369,7 +369,7 @@ const Rider = () => {
 
                 <div className="container my-5">
                   <Button
-                    className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
                     onClick={sendRequest}
                   >
                     Update

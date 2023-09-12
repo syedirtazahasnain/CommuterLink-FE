@@ -365,7 +365,9 @@ const TravelConfirmation = () => {
                               fontSize: "1.5rem"
                             },
                             '& .MuiBadge-root ': {
-                              padding: '3rem',
+                              paddingLeft: '3rem',
+                              paddingRight: '3rem',
+                              // paddingBottom: '.3rem'
                             },
                             '& .MuiPickersYear-yearButton': {
                               backgroundColor: '#cbeddd'

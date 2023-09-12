@@ -146,12 +146,12 @@ const TravelPatners = () => {
                           className="card"
                           style={{
                             width: "6rem",
-                            backgroundColor: "#f9f0c1",
+                            backgroundColor: "#F2D450",
                           }}
                         >
                           <img
                             src={`${IMAGE_URL}${image}`}
-                            className="card-img-top w-40px m-auto py-3 h-65px h-fixed"
+                            className="card-img-top w-100 m-auto py-3 h-100 h-fixed"
                           />
                           <div
                             className="card-title text-dark text-center"
@@ -159,12 +159,12 @@ const TravelPatners = () => {
                             onClick={() => {
                               route();
                             }}
-                          >
+                          > 
                             {name}
                           </div>
                           <img
                             className=""
-                            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+                            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
                           />
                         </div>
                       ) : (
@@ -173,7 +173,7 @@ const TravelPatners = () => {
                     </div>
                   </div>
                 </div>
-                <div className="container my-5 text-end">
+                {/* <div className="container my-5 text-end">
 
                   <Link
                     className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
@@ -182,7 +182,7 @@ const TravelPatners = () => {
                     View More
 
                   </Link>
-                </div>
+                </div> */}
               </div>
               <div className="row">
                 <div className="col-sm-6">
@@ -204,7 +204,7 @@ const TravelPatners = () => {
                           <div className="col-md-3">
                             <div className="card border-0 w-100">
                               {" "}
-                              <p className="py-3 text-center fw-bold text-success fs-3">
+                              <p className="py-3  fw-bold text-success fs-5">
                                 Rs. {walletAmount}
                               </p>
                             </div>
@@ -229,12 +229,12 @@ const TravelPatners = () => {
                                 )}
                             </div>
                           </div>
-                          
+
                         </div>
                         <div className="row w-100">
                           <div className="col-md-6 px-1 m-auto">
                             <div className="w-100">
-                            <button class="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm"><span class="text-uppercase">View Transaction History</span></button>
+                              <button class="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm"><span class="text-uppercase">View Transaction History</span></button>
 
                               {/* <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
                                 View Transaction History
@@ -260,30 +260,28 @@ const TravelPatners = () => {
                                 COST PER SEAT PER DAY
                               </h5>
                             </div>
-                            <div className="row d-flex justify-content-between">
-                              <div className="col-md-12">
-                                <div
-                                  className="p-3 px-5 h-fixed"
-                                  // style={{ width: "4rem" }}
-                                >
-                                  {image ? (
+
+                            <div className="row d-flex justify-content-between px-5 py-3 ">
+                              <div className="col-md-6">
+                              {image ? (
                                     <img
                                       src={`${IMAGE_URL}${image}`}
-                                      className="card-img-top w-50px m-auto border border-1 border-success "
+                                      className="card-img-top w-100 m-auto border border-1 border-success h-100 bg-success"
                                     />
                                   ) : (
                                     <img
                                       src={`${BASE_URL}/assets/images/Vector.png`}
                                       className="card-img-top w-50px m-auto border border-1 border-success bg-success"
                                     />
-                                  )}
-                                </div>
-                                <div className="px-5">
-                                  <h3 className="py-1">{name}</h3>
-                                  <h3 className="py-1">RS.{price}/-</h3>
-                                  <h3 className="py-1">Start Date: {date}</h3>
-                                </div>
+                                  )}                              </div>
+                              <div className="col-md-6">
+                                <p className="fw-bold">{name}</p>
+                                  <p className="fw-bold">RS &nbsp; {price}/-</p>
+                                  <p className="fw-bold">Start Date: {date}</p>
                               </div>
+                            </div>
+
+                            <div className="row d-flex justify-content-between py-5">
                               <div className="card-body  d-flex justify-content-between h-50 fw-bold text-success">
                                 <div className="px-4">
                                   <p className="text-dark">

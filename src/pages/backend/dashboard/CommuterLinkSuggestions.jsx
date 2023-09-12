@@ -171,7 +171,7 @@ const CommuterLinkSuggestions = () => {
           >
             {req_stage === 1 || req_stage === 2 ? name : contact_id}
           </div>
-          <img className="" src={`${BASE_URL}/assets/images/downlineofmembericon.png`} />
+          {/* <img className="" src={`${BASE_URL}/assets/images/downlineofmembericon.png`} /> */}
         </div>
       </div>
     );
@@ -206,7 +206,7 @@ const CommuterLinkSuggestions = () => {
           </div>
           <img
             className=""
-            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
           />
         </div>
       </div>
@@ -237,7 +237,7 @@ const CommuterLinkSuggestions = () => {
           </div>
           <img
             className=""
-            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
           />
         </div>
       </div>
@@ -276,7 +276,7 @@ const CommuterLinkSuggestions = () => {
           </div>
           <img
             className=""
-            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
           />
         </div>
       </div>
@@ -306,7 +306,7 @@ const CommuterLinkSuggestions = () => {
           </div>
           <img
             className=""
-            src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
           />
         </div>
       </div>
