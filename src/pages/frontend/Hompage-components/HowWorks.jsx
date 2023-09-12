@@ -17,7 +17,7 @@ function HowWorks() {
         <div className="container">
           <div className="section-title text-center">
             <h2 className="heading-color text-black">How It Works?</h2>
-            <span>
+            <span className="fs-5">
               It’s a long term commitment between the car owner and travel
               buddies for ride sharing and not a one-time drop-off
             </span>
@@ -37,9 +37,9 @@ function HowWorks() {
                     />
                     <CardContent>
                       <Typography className="heading" gutterBottom variant="h5" component="div">
-                        <a href="">Sign Up &amp; Match</a>{" "}
+                        <a href="" className="fs-4">Sign Up &amp; Match</a>{" "}
                       </Typography>
-                      <Typography className="Typography1" variant="body2" color="text.secondary">
+                      <Typography className="Typography1 fs-6" variant="body2" color="text.secondary">
                         CommutersLink, based upon your gender, area of
                         residence, start point (usually home address), start
                         timings, destination (office/school/university) and
@@ -64,9 +64,9 @@ function HowWorks() {
                     />
                     <CardContent>
                       <Typography className="heading" gutterBottom variant="h5" component="div">
-                        <a href="">Connect</a>{" "}
+                        <a href="" className="fs-4">Connect</a>{" "}
                       </Typography>
-                      <Typography className="Typography1" variant="body2" color="text.secondary">
+                      <Typography className="Typography1 fs-6" variant="body2" color="text.secondary">
                         You connect with matches offered through your personal
                         dashboard in the system. And if both members find each
                         other suitable then they give formal consent to share
@@ -91,9 +91,9 @@ function HowWorks() {
                     />
                     <CardContent>
                       <Typography className="heading" gutterBottom variant="h5" component="div">
-                        <a href="">Share Cost</a>
+                        <a href=""className="fs-4">Share Cost</a>
                       </Typography>
-                      <Typography className="Typography1" variant="body2" color="text.secondary">
+                      <Typography className="Typography1 fs-6" variant="body2" color="text.secondary">
                         System calculates “cost per seat” considering type of
                         car, distance (average fuel consumption) and offers
                         this system generated cost to car owners and travel
@@ -119,9 +119,9 @@ function HowWorks() {
                     <CardContent>
                       <Typography className="heading" gutterBottom variant="h5" component="div">
 
-                        <a href="">Pay</a>
+                        <a href=""className="fs-4">Pay</a>
                       </Typography>
-                      <Typography className="Typography1" variant="body2" color="text.secondary">
+                      <Typography className="Typography1 fs-6" variant="body2" color="text.secondary">
                         Payment is also system generated and reimbursed to the
                         car owner on daily basis. You only pay for the number
                         of days travelled (public holidays and school holidays

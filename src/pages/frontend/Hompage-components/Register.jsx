@@ -16,7 +16,7 @@ const  Register=()=> {
           <div className="container">
             <div className="text-center text-white">
               <h3>Register</h3>
-              <p>Care to Share - Carpool with Your Neighbourhood</p>
+              <p className="fs-5">Care to Share - Carpool with Your Neighbourhood</p>
               <button
                 className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
               onClick={loginRoute}

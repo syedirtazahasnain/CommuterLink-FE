@@ -229,12 +229,12 @@ const RequestCommuterProfile = () => {
             
             <div className="col-md-12">
                 <div className="card p-4 bg-light p-2">
-                    <div className="card p-4" style={{ backgroundColor: '#e5f8f3' }}>
+                    <div className="card p-4 backgroundColor">
                         {/* Render profile details here */}
                         {/* You can use the extracted properties to display the profile data */}
                         <div className="row">
                             <div className="col-md-1 mt-1">
-                                <img src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "115px", width: "115px" }} />
+                                <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00" }} />
                             </div>
                             <div className="col-md-11 px-5">
                                 <div className="col-md-5 px-5">
@@ -497,7 +497,7 @@ const RequestCommuterProfile = () => {
                         {/* Render action buttons based on the request stage */}
                         <div className="text-center">
                             {request_stage === 1 || request_stage === 2 ? (
-                                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-warning text-gray rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted}>
+                                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-warning text-gray rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted} style={{background:"#ff8a00"}}>
                                     Request Accepted
                                 </Button>
                             ) : (

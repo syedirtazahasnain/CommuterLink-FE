@@ -23,7 +23,7 @@ const Contact = () => {
         <div className="container">
           <div className="section-title text-center">
             <h2 className="text-dark">Contact Us</h2>
-            <p>
+            <p className="fs-5">
               At CommutersLink, we are always available to address your queries
               and would love to hear your suggestions or feedback if any. Feel
               free to connect with us
