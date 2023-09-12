@@ -248,7 +248,7 @@ const BackendLayout = ({ children }) => {
                                 </Tooltip>
                                 <Tooltip title="Settings">
                                   <Link
-                                    to='/portal/profile'
+                                    to='/editprofile'
                                     className='mx-1 h-15px d-inline-block'
                                     style={{ cursor: "pointer" }}
                                   >

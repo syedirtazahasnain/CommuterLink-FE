@@ -378,7 +378,7 @@ const TravelBuddyProfile = () => {
                 </div>
               </div>
               <div className="row px-5 mb-2">
-                <div className="col-md-1">
+                <div className="col-md-2">
                 {gender !== "" ? (
                   <>
                     <b className="text-black">Gender:</b> 
@@ -388,12 +388,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}             
                 </div>
-                <div className="col-md-11">
+                <div className="col-md-10">
                 {gender}
                 </div>
               </div>
               <div className="row px-5 mb-2">
-                <div className="col-md-1">
+                <div className="col-md-2">
                 {age !== "" ? (
                   <>
                     <b className="text-black"> Age:</b> 
@@ -403,12 +403,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}           
                 </div>
-                <div className="col-md-11">
+                <div className="col-md-10">
                 {age}
                 </div>
               </div>
               <div className="row px-5 mb-2">
-                <div className="col-md-1">
+                <div className="col-md-2">
                 {profession !== "" ? (
                   <>
                     <b className="text-black">Profession:</b> 
@@ -418,12 +418,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}         
                 </div>
-                <div className="col-md-11">
+                <div className="col-md-10">
                 {profession}  
                 </div>
               </div>
               <div className="row px-5 mb-2">
-                <div className="col-md-1">
+                <div className="col-md-2">
                 {mobileNo !== "" ? (
                   <>
                     <b className="text-black">Cell:</b>
@@ -432,57 +432,10 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}      
                 </div>
-                <div className="col-md-11">
+                <div className="col-md-10">
                 {mobileNo}  
                 </div>
               </div>
-              {/* <div className="px-5">
-                {name !== "" ? (
-                  <div>
-                    <h3 className="text-success fw-bold">{name}</h3>
-                  </div>
-                ) : (
-                  <>
-                  </>
-                )}
-              </div> */}
-              {/* <p className="px-5">
-                {gender !== "" ? (
-                  <>
-                    <b className="text-black">Gender:</b> <u>{gender}</u>
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {age !== "" ? (
-                  <>
-                    <b className="text-black"> Age:</b> <u>{age}</u>
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {profession !== "" ? (
-                  <>
-                    <b className="text-black">Profession:</b> <u>{profession}</u>
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {mobileNo !== "" ? (
-                  <>
-                    <b className="text-black">Cell:</b> <u>{mobileNo}</u>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </p> */}
-
             </div>
           </div>
           <hr style={{ color: "green", fontWeight:"bolder" }} />
@@ -490,7 +443,7 @@ const TravelBuddyProfile = () => {
             <h2 className="text-success py-2 fw-bold">{profileType === "rider" ? ("Rider Details") : ("Driver Details")}</h2>
             <div className="col-md-6">
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {preferredGender !== "" ? (
                   <>
                     <b className="text-black">Preferred Gender: </b> 
@@ -500,12 +453,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )} 
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {preferredGender}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {origin !== "" ? (
                   <>
                     <b className="text-black">Point of Origin: </b>
@@ -515,12 +468,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {origin}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {timeDepart !== "" ? (
                   <>
                     <b className="text-black">Pickup Timings:</b>
@@ -531,12 +484,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {timeDepart}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {destination !== "" ? (
                   <>
                     <b className="text-black">Destination:</b>
@@ -547,12 +500,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {destination}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {timeReturn !== "" ? (
                   <>
                     <b className="text-black">Return Timings:</b>
@@ -563,12 +516,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {timeReturn}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {days !== "" ? (
                   <>
                     <b className="text-black">Days:</b>
@@ -579,12 +532,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {days}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {mobileNo !== "" ? (
                   <>
                     <b className="text-black">Contact No:</b>
@@ -593,84 +546,14 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {mobileNo}  
                 </div>
               </div>
-              {/* <p>
-                {preferredGender !== "" ? (
-                  <>
-                    <b className="text-black">Seats For: </b> {preferredGender}
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {origin !== "" ? (
-                  <>
-                    <b className="text-black">Point of Origin: </b>
-                    <u>{origin}</u>
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                <br />
-                {timeDepart !== "" ? (
-                  <>
-                    <b className="text-black">Pickup Timings:</b> <u>{timeDepart}</u>
-                  </>
-                ) : (
-                  <>
-
-                  </>
-                )}
-                <br />
-                {destination !== "" ? (
-                  <>
-                    <b className="text-black">Destination:</b>
-                    <u>{destination}</u>
-                  </>
-                ) : (
-                  <>
-
-                  </>
-                )}
-                <br />
-                {timeReturn !== "" ? (
-                  <>
-                    <b className="text-black">Return Timings:</b> <u>{timeReturn}</u>
-                  </>
-                ) : (
-                  <>
-
-                  </>
-                )}
-                <br />
-                {days !== "" ? (
-                  <>
-                    <b className="text-black">Days:</b> <u>{days}</u>
-                  </>
-                ) : (
-                  <>
-
-                  </>
-                )}
-                <br />
-                {mobileNo !== "" ? (
-                  <>
-                    <b className="text-black">Contact No:</b> <u>{mobileNo}</u>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </p> */}
-
             </div>
             <div className="col-md-6">
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {seats !== "" ? (
                   <>
                     <b className="text-black">No.of Seats:</b>
@@ -681,12 +564,12 @@ const TravelBuddyProfile = () => {
                   </>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {seats}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {price !== "" ? (
                   <>
                     <b>Payment Terms (perDay):</b>
@@ -695,12 +578,12 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {price}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {carAC !== "" ? (
                   <>
                     <b>Car have AC:</b>
@@ -709,12 +592,12 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {carAC}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {carBrand !== "" ? (
                   <>
                     <b>Car Brand:</b>
@@ -723,12 +606,12 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {carBrand}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {carCC !== "" ? (
                   <>
                     <b>Car CC:</b>
@@ -737,12 +620,12 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {carCC}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {carModel !== "" ? (
                   <>
                     <b>Car Model:</b>
@@ -751,11 +634,11 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {carModel}  
                 </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {RegNo !== "" ? (
                   <>
                     <b>Registration Number:</b>
@@ -764,12 +647,12 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {RegNo}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {RegYear !== "" ? (
                   <>
                     <b>Registration Year:</b>
@@ -778,12 +661,12 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {RegYear}  
                 </div>
               </div>
             <div className="row mb-2">
-                <div className="col-md-3">
+                <div className="col-md-4">
                 {carRegYear !== "" ? (
                   <>
                     <b>Car Registration Year:</b>
@@ -792,85 +675,10 @@ const TravelBuddyProfile = () => {
                   <></>
                 )}
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                 {carRegYear}  
                 </div>
               </div>
-              {/* <p>
-                {seats !== "" ? (
-                  <>
-                    <b className="text-black">No.of Seats:</b> <u>{seats}</u>
-                  </>
-                ) : (
-                  <>
-
-                  </>
-                )}
-                <br />
-                {price !== "" ? (
-                  <>
-                    <b>Payment Terms (perDay):</b> <u>{price}</u>
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {carAC !== "" ? (
-                  <>
-                    <b>Car have AC:</b> {carAC}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {carBrand !== "" ? (
-                  <>
-                    <b>Car Brand:</b> {carBrand}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {carCC !== "" ? (
-                  <>
-                    <b>Car CC:</b> {carCC}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {carModel !== "" ? (
-                  <>
-                    <b>Car Model:</b> {carModel}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {RegNo !== "" ? (
-                  <>
-                    <b>Registration Number:</b> {RegNo}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {RegYear !== "" ? (
-                  <>
-                    <b>Registration Year:</b> {RegYear}
-                  </>
-                ) : (
-                  <></>
-                )}
-                <br />
-                {carRegYear !== "" ? (
-                  <>
-                    <b>Car Registration Year:</b> {carRegYear}
-                  </>
-                ) : (
-                  <></>
-                )}
-              </p> */}
             </div>
           </div>
           <div className="container text-center">
