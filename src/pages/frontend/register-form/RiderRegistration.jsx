@@ -863,7 +863,25 @@ const RiderRegistration = () => {
   return (
     <>
       <div className="main-bg">
-        <div className="containter p-5">
+        <div className="containter p-5 position-relative">
+        <div className="area" >
+                <ul className="circles">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div >
           <div className="row justify-content-center ">
             <div className="col-md-6 shadow bg-white  mt-5 mb-5">
               <div
@@ -959,9 +977,22 @@ const RiderRegistration = () => {
                             md="12"
                             controlId="validationCustom03"
                           >
-                            <Form.Label style={{ color: "#000" }}>
-                              Select Area from Dropdown
-                            </Form.Label>
+                            <div className="d-flex justify-content-between align-items-center">
+                                  <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                                  {addNewStartField && (
+                                    <p
+                                    className="colorplace text-danger"
+                                    style={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                    onClick={AddNewStart}
+                                  >
+                                    Can't find your area?
+                                    <a> Add Here</a>
+                                  </p>
+                                  )}
+                                </div>
                             <Form.Select
                               aria-label="Default select example"
                               className="text-secondary"
@@ -985,7 +1016,7 @@ const RiderRegistration = () => {
                           </Form.Group>
                         )}
 
-                        {addNewStartField && (
+                        {/* {addNewStartField && (
                           <Form.Group
                             as={Col}
                             md="12"
@@ -1004,7 +1035,7 @@ const RiderRegistration = () => {
                               <a> Add Here</a>
                             </span>
                           </Form.Group>
-                        )}
+                        )} */}
 
                         {addNewStart && (
                           <Form.Group
@@ -1145,9 +1176,22 @@ const RiderRegistration = () => {
                             md="12"
                             controlId="validationCustom09"
                           >
-                            <Form.Label style={{ color: "#000" }}>
-                              Select Area from Dropdown
-                            </Form.Label>
+                           <div className="d-flex justify-content-between align-items-center">
+                                  <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                                  {addNewEndField && (
+                                    <p
+                                    className="colorplace text-danger"
+                                    style={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                    onClick={AddNewEnd}
+                                  >
+                                    Can't find your area?
+                                    <a> Add Here</a>
+                                  </p>
+                                  )}
+                                </div>
                             <Form.Select
                               aria-label="Default select example"
                               className="text-secondary"
@@ -1170,8 +1214,8 @@ const RiderRegistration = () => {
                             </Form.Select>
                           </Form.Group>
                         )}
-
-                        {addNewEndField && (
+                      
+                        {/* {addNewEndField && (
                           <Form.Group
                             as={Col}
                             md="12"
@@ -1190,7 +1234,7 @@ const RiderRegistration = () => {
                               <a> Add Here</a>
                             </span>
                           </Form.Group>
-                        )}
+                        )} */}
 
                         {addNewEnd && (
                           <Form.Group

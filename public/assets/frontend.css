@@ -745,3 +745,7 @@ a.nav-link:hover {
 .backgroundColor{
   background-color:  rgb(191, 216, 210);
 }
+
+.font-custom{
+  font-family: 'Roboto', sans-serif;
+}

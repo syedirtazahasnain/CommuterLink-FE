@@ -1230,7 +1230,25 @@ const DriverRegistration = () => {
       {!showDriverForm && (
         <>
           <div className="main-bg">
-            <div className="containter p-5">
+            <div className="containter p-5 position-relative">
+            <div className="area" >
+                <ul className="circles">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div >
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white mt-5 mb-5">
                   <div className="row shadow
@@ -1319,9 +1337,23 @@ const DriverRegistration = () => {
                                 md="12"
                                 controlId="validationCustom03"
                               >
-                                <Form.Label style={{ color: "#000" }}>
-                                  Select Area from Dropdown
-                                </Form.Label>
+                                  <div className="d-flex justify-content-between align-items-center">
+                                  <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                                  {addNewStartField && (
+                                    <p
+                                    className="colorplace text-danger"
+                                    style={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                    onClick={AddNewStart}
+                                  >
+                                    Can't find your area?
+                                    <a> Add Here</a>
+                                  </p>
+                                  )}
+                                </div>
+                                
                                 <Form.Select
                                   aria-label="Default select example"
                                   className="text-secondary"
@@ -1345,7 +1377,7 @@ const DriverRegistration = () => {
                               </Form.Group>
                             )}
 
-                            {addNewStartField && (
+                            {/* {addNewStartField && (
                               <Form.Group
                                 as={Col}
                                 md="12"
@@ -1364,7 +1396,7 @@ const DriverRegistration = () => {
                                   <a> Add Here</a>
                                 </span>
                               </Form.Group>
-                            )}
+                            )} */}
 
                             {addNewStart && (
                               <Form.Group
@@ -1481,9 +1513,22 @@ const DriverRegistration = () => {
                                 md="12"
                                 controlId="validationCustom09"
                               >
-                                <Form.Label style={{ color: "#000" }}>
-                                  Select Area from Dropdown
-                                </Form.Label>
+                                   <div className="d-flex justify-content-between align-items-center">
+                                  <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                                  {addNewEndField && (
+                                    <p
+                                    className="colorplace text-danger"
+                                    style={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                    onClick={AddNewEnd}
+                                  >
+                                    Can't find your area?
+                                    <a> Add Here</a>
+                                  </p>
+                                  )}
+                                </div>
                                 <Form.Select
                                   aria-label="Default select example"
                                   className="text-secondary"
@@ -1507,7 +1552,7 @@ const DriverRegistration = () => {
                               </Form.Group>
                             )}
 
-                            {addNewEndField && (
+                            {/* {addNewEndField && (
                               <Form.Group
                                 as={Col}
                                 md="12"
@@ -1526,7 +1571,7 @@ const DriverRegistration = () => {
                                   <a> Add Here</a>
                                 </span>
                               </Form.Group>
-                            )}
+                            )} */}
 
                             {addNewEnd && (
                               <Form.Group
@@ -2436,7 +2481,25 @@ const DriverRegistration = () => {
       {showDriverForm && (
         <>
           <div className="main-bg">
-            <div className="containter p-5">
+            <div className="containter p-5 position-relative">
+            <div className="area" >
+                <ul className="circles">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div >
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div className="row shadow" style={{ backgroundColor: '#1F5F5B' }}>
@@ -2718,76 +2781,6 @@ const DriverRegistration = () => {
 
                       </div>
                     </div>
-
-                    <div className="row mb-3 shadow shadow-sm">
-                      <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
-                      >
-                        <h2 className="text-success mb-3 text-center">
-                          Bank/Payment Details
-                        </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
-                        <div class="container text-center">
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
-
-                          <form id="paymentForm">
-                            <div className="mt-4">
-                              <input
-                                type="text"
-                                className="form-control mb-2 text-secondary"
-                                id="bankAccount"
-                                name="bankAccount"
-                                placeholder="Bank Account (IBAN)"
-                                value={inputBankAccount}
-                                onChange={(e) => setInputBankAccount(e.target.value)}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <input
-                                type="text"
-                                className="form-control mb-2 text-secondary"
-                                id="jazzCashAccount"
-                                name="jazzCashAccount"
-                                placeholder="Jazz Cash Account Number"
-                                value={inputJazzCash}
-                                onChange={(e) => setInputJazzCash(e.target.value)}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <input
-                                type="text"
-                                className="form-control mb-2 text-secondary"
-                                id="easypaisaAccount"
-                                name="easypaisaAccount"
-                                placeholder="EasyPaisa Account Number"
-                                value={inputEasyPaisa}
-                                onChange={(e) => setInputEasyPaisa(e.target.value)}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <input
-                                type="text"
-                                className="form-control mb-2 text-secondary"
-                                id="raastID"
-                                name="raastID"
-                                placeholder="Raast ID"
-                                value={inputRaastID}
-                                onChange={(e) => setInputRaastID(e.target.value)}
-                              />
-                            </div>
-                          </form>
-                        </div>
-
-                      </div>
-                    </div>
-
 
                     <div className="row " style={{ border: "1px solid #cddbd9" }}>
                       <div className="col">
@@ -3311,6 +3304,76 @@ const DriverRegistration = () => {
                         </div></div>
                     </>)
                     }
+
+                       <div className="row mb-3 mt-3 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3"
+                        style={{ backgroundColor: "#cddbd9" }}
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Bank/Payment Details
+                        </h2>
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                        <div class="container text-center">
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+
+                          <form id="paymentForm">
+                            <div className="mt-4">
+                              <input
+                                type="text"
+                                className="form-control mb-2 text-secondary"
+                                id="bankAccount"
+                                name="bankAccount"
+                                placeholder="Bank Account (IBAN)"
+                                value={inputBankAccount}
+                                onChange={(e) => setInputBankAccount(e.target.value)}
+                                required
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type="text"
+                                className="form-control mb-2 text-secondary"
+                                id="jazzCashAccount"
+                                name="jazzCashAccount"
+                                placeholder="Jazz Cash Account Number"
+                                value={inputJazzCash}
+                                onChange={(e) => setInputJazzCash(e.target.value)}
+                                required
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type="text"
+                                className="form-control mb-2 text-secondary"
+                                id="easypaisaAccount"
+                                name="easypaisaAccount"
+                                placeholder="EasyPaisa Account Number"
+                                value={inputEasyPaisa}
+                                onChange={(e) => setInputEasyPaisa(e.target.value)}
+                                required
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type="text"
+                                className="form-control mb-2 text-secondary"
+                                id="raastID"
+                                name="raastID"
+                                placeholder="Raast ID"
+                                value={inputRaastID}
+                                onChange={(e) => setInputRaastID(e.target.value)}
+                              />
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+
                     <Stack
                       direction="row"
                       className="mb-4 mt-3"

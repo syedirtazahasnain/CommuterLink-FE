@@ -151,7 +151,7 @@ const TravelPatners = () => {
                         >
                           <img
                             src={`${IMAGE_URL}${image}`}
-                            className="card-img-top w-100 m-auto py-3 h-100 h-fixed"
+                            className="card-img-top w-80px m-auto py-3 h-80px h-fixed"
                           />
                           <div
                             className="card-title text-dark text-center"
@@ -173,16 +173,7 @@ const TravelPatners = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="container my-5 text-end">
-
-                  <Link
-                    className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
-                    style={{ cursor: "pointer" }}
-                  >
-                    View More
-
-                  </Link>
-                </div> */}
+               
               </div>
               <div className="row">
                 <div className="col-sm-6">
@@ -266,12 +257,12 @@ const TravelPatners = () => {
                               {image ? (
                                     <img
                                       src={`${IMAGE_URL}${image}`}
-                                      className="card-img-top w-100 m-auto border border-1 border-success h-100 bg-success"
+                                      className="card-img-top w-70px m-auto border border-1 border-success h-70px bg-success"
                                     />
                                   ) : (
                                     <img
                                       src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-50px m-auto border border-1 border-success bg-success"
+                                      className="card-img-top w-70px m-auto border border-1 h-70px border-success bg-success"
                                     />
                                   )}                              </div>
                               <div className="col-md-6">

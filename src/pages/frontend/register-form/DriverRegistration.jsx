@@ -1233,8 +1233,8 @@ const DriverRegistration = () => {
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
-              <div class="area" >
-                <ul class="circles">
+              <div className="area" >
+                <ul className="circles">
                   <li></li>
                   <li></li>
                   <li></li>
@@ -1540,7 +1540,7 @@ const DriverRegistration = () => {
                                       cursor: "pointer",
                                       textDecoration: "underline",
                                     }}
-                                    onClick={AddNewStart}
+                                    onClick={AddNewEnd}
                                   >
                                     Can't find your area?
                                     <a> Add Here</a>
@@ -2224,7 +2224,25 @@ const DriverRegistration = () => {
       {showDriverForm && (
         <>
           <div className="main-bg">
-            <div className="containter p-5">
+            <div className="containter p-5 position-relative">
+            <div className="area" >
+                <ul className="circles">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div >
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div
@@ -2506,70 +2524,7 @@ const DriverRegistration = () => {
                       </div></div>
 
 
-                    <div className="row mb-3 shadow shadow-sm">
-                      <div
-                        className="col-md-12 px-2 py-3 form-body"
-                      >
-                        <h2 className="text-success mb-3 text-center">
-                          Bank/Payment Details
-                        </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
-                        <div class="container text-center">
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
-                        </div>
-                        <form id="paymentForm">
-                          <div className="mt-4 px-3">
-                            <input
-                              type="text"
-                              className="form-control mb-2 text-secondary"
-                              id="bankAccount"
-                              name="bankAccount"
-                              placeholder="Bank Account (IBAN)"
-                              value={inputBankAccount}
-                              onChange={(e) => setInputBankAccount(e.target.value)}
-                              required
-                            />
-                          </div>
-                          <div className="px-3">
-                            <input
-                              type="text"
-                              className="form-control mb-2 text-secondary "
-                              id="jazzCashAccount"
-                              name="jazzCashAccount"
-                              placeholder="Jazz Cash Account Number"
-                              value={inputJazzCash}
-                              onChange={(e) => setInputJazzCash(e.target.value)}
-                              required
-                            />
-                          </div>
-                          <div className="px-3">
-                            <input
-                              type="text"
-                              className="form-control mb-2 text-secondary"
-                              id="easypaisaAccount"
-                              name="easypaisaAccount"
-                              placeholder="EasyPaisa Account Number"
-                              value={inputEasyPaisa}
-                              onChange={(e) => setInputEasyPaisa(e.target.value)}
-                              required
-                            />
-                          </div>
-                          <div className="px-3">
-                            <input
-                              type="text"
-                              className="form-control mb-2 text-secondary"
-                              id="raastID"
-                              name="raastID"
-                              placeholder="Raast ID"
-                              value={inputRaastID}
-                              onChange={(e) => setInputRaastID(e.target.value)}
-                            />
-                          </div>
-                        </form>
-                      </div></div>
+                   
                     <Row >
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>Car Brand</Form.Label>
@@ -3851,9 +3806,75 @@ const DriverRegistration = () => {
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div></div>
+                         
+
 
                     </>)
                     }
+                     <div className="row mb-3 mt-2 shadow shadow-sm">
+                      <div
+                        className="col-md-12 px-2 py-3 form-body"
+                      >
+                        <h2 className="text-success mb-3 text-center">
+                          Bank/Payment Details
+                        </h2>
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                        <div class="container text-center">
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+                        </div>
+                        <form id="paymentForm">
+                          <div className="mt-4 px-3">
+                            <input
+                              type="text"
+                              className="form-control mb-2 text-secondary"
+                              id="bankAccount"
+                              name="bankAccount"
+                              placeholder="Bank Account (IBAN)"
+                              value={inputBankAccount}
+                              onChange={(e) => setInputBankAccount(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="px-3">
+                            <input
+                              type="text"
+                              className="form-control mb-2 text-secondary "
+                              id="jazzCashAccount"
+                              name="jazzCashAccount"
+                              placeholder="Jazz Cash Account Number"
+                              value={inputJazzCash}
+                              onChange={(e) => setInputJazzCash(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="px-3">
+                            <input
+                              type="text"
+                              className="form-control mb-2 text-secondary"
+                              id="easypaisaAccount"
+                              name="easypaisaAccount"
+                              placeholder="EasyPaisa Account Number"
+                              value={inputEasyPaisa}
+                              onChange={(e) => setInputEasyPaisa(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="px-3">
+                            <input
+                              type="text"
+                              className="form-control mb-2 text-secondary"
+                              id="raastID"
+                              name="raastID"
+                              placeholder="Raast ID"
+                              value={inputRaastID}
+                              onChange={(e) => setInputRaastID(e.target.value)}
+                            />
+                          </div>
+                        </form>
+                      </div></div>
                     <Stack
                       direction="row"
                       className="mb-4 mt-3"

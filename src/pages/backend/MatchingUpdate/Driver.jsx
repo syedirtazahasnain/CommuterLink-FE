@@ -371,7 +371,7 @@ const Driver = () => {
                                                                             value="Saturday"
                                                                             color="success"
                                                                             id={`inline-${type}-5`}
-                                                                            disabled
+                                                                   
                                                                             checked={daysSelected.includes("Saturday")}
                                                                             onChange={handleCheckboxChange}
                                                                         // required
@@ -388,7 +388,6 @@ const Driver = () => {
                                                                             type={type}
                                                                             value="Sunday"
                                                                             color="success"
-                                                                            disabled
                                                                             id={`inline-${type}-6`}
                                                                             checked={daysSelected.includes("Sunday")}
                                                                             onChange={handleCheckboxChange}

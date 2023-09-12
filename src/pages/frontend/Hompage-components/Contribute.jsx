@@ -15,7 +15,7 @@ const Contribute = () => {
       <section id="contribute" className="section-bg">
         <div className="section-title text-center">
           <h2 className="text-dark">Contribute</h2>
-          <p>
+          <p className="fs-5">
             Let's Do Our Part to Make Pakistan a Better Living Place for Future
             Generations
           </p>
