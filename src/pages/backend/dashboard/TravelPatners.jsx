@@ -283,13 +283,11 @@ const TravelPatners = () => {
                                     />
                                   )} 
 
-          
-          </div>
-                                  
+                                         </div>
                                    </div>
                               <div className="col-md-6">
                                 <p className="fw-bold">{name}</p>
-                                  <p className="fw-bold">RS &nbsp; {price}/-</p>
+                                  <p className="fw-bold">Rs. &nbsp; {price}/-</p>
                                   <p className="fw-bold">Start Date: {date}</p>
                               </div>
                             </div>

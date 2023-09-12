@@ -238,7 +238,7 @@ const RequestCommuterProfile = () => {
                             </div>
                             <div className="col-md-11 px-5">
                             <div className="row px-5"> 
-                            <div className="col-md-3 mt-3">
+                            <div className="col-md-3">
                             {contact_id !== "" ? (
                                         <div>
                                             <h3 className="text-success fw-bold">{contact_id}</h3>
@@ -276,7 +276,7 @@ const RequestCommuterProfile = () => {
                                         </>
                                     )}
                   </div>
-                  <div className="col-md-10"> {age}
+                  <div className="col-md-10"> {age} years
                   </div>
                   </div>
 
@@ -468,7 +468,7 @@ const RequestCommuterProfile = () => {
                                         <>
                                             {price && (
                                                 <>
-                                                    <b>Payment Terms (perDay):</b>
+                                                    <b>Payment Terms (per day):</b>
                                                 </>
                                             )}
                                         </>
@@ -477,7 +477,7 @@ const RequestCommuterProfile = () => {
                                     )}
                   </div>
                   <div className="col-md-8">
-                  {price}
+                  Rs. {price}/-
                   </div>
                 </div>
 

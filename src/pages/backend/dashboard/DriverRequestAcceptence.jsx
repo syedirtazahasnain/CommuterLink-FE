@@ -198,7 +198,7 @@ const DriverRequestAcceptence = () => {
         <div className="card backgroundColor">
           <div className="card-body">
 
-            <h5>Dear {requestContactId}</h5>
+            <p>Dear {requestContactId}</p>
             <p className="">
               Thank you very much for accepting me as a travel buddy to ride on your car.
               I also think that we are a suitable match to commute together. so I also formally

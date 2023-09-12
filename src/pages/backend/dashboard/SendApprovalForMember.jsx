@@ -139,7 +139,7 @@ const SendApprovalForMember = () => {
         <div className="card  backgroundColor">
           <div className="card-body">
 
-            <h5>Dear {name}</h5><br />
+            <p>Dear {name}</p><br />
             <p className="">
               Thank you for sending me the request for sharing my car.
             </p>

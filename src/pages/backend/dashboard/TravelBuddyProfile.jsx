@@ -365,7 +365,7 @@ const TravelBuddyProfile = () => {
             </div>
             <div className="col-md-11 px-5">
               <div className="row px-5">
-                <div className="col-md-3 mt-3">
+                <div className="col-md-3">
                 {name !== "" ? (
                   <div>
                     <h3 className="text-success fw-bold">{name}</h3>
@@ -404,7 +404,7 @@ const TravelBuddyProfile = () => {
                 )}           
                 </div>
                 <div className="col-md-10">
-                {age}
+                {age} years
                 </div>
               </div>
               <div className="row px-5 mb-2">
@@ -426,7 +426,7 @@ const TravelBuddyProfile = () => {
                 <div className="col-md-2">
                 {mobileNo !== "" ? (
                   <>
-                    <b className="text-black">Cell:</b>
+                    <b className="text-black">Contact No:</b>
                   </>
                 ) : (
                   <></>
@@ -540,14 +540,14 @@ const TravelBuddyProfile = () => {
                 <div className="col-md-4">
                 {mobileNo !== "" ? (
                   <>
-                    <b className="text-black">Contact No:</b>
+                    {/* <b className="text-black">Contact No:</b> */}
                   </>
                 ) : (
                   <></>
                 )}
                 </div>
                 <div className="col-md-8">
-                {mobileNo}  
+                {/* {mobileNo}   */}
                 </div>
               </div>
             </div>
@@ -572,14 +572,14 @@ const TravelBuddyProfile = () => {
                 <div className="col-md-4">
                 {price !== "" ? (
                   <>
-                    <b>Payment Terms (perDay):</b>
+                    <b>Payment Terms (per day):</b>
                   </>
                 ) : (
                   <></>
                 )}
                 </div>
                 <div className="col-md-8">
-                {price}  
+              Rs. {price}/-  
                 </div>
               </div>
             <div className="row mb-2">

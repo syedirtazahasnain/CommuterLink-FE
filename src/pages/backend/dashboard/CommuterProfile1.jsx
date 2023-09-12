@@ -262,7 +262,7 @@ const CommuterProfile1 = () => {
               </div>
               <div className="col-md-11 px-5">
                 <div className="row px-5">
-                  <div className="col-md-3 mt-3">
+                  <div className="col-md-3">
                     {contact_id !== "" ? (
                       req_stage === 0 ? (
                         <div>
@@ -311,7 +311,7 @@ const CommuterProfile1 = () => {
                         </>
                       )}
                     </div>
-                    <div className="col-md-10">{age}
+                    <div className="col-md-10">{age} years
                     </div>
                   </div>
                   <div className="row px-5 mb-2">
@@ -503,7 +503,7 @@ const CommuterProfile1 = () => {
                       <>
                         {price && (
                           <>
-                            <b>Payment Terms (perDay):</b>
+                            <b>Payment Terms (per day):</b>
                           </>
                         )}
                       </>
@@ -512,7 +512,7 @@ const CommuterProfile1 = () => {
                     )}
                   </div>
                   <div className="col-md-8">
-                    {price}
+                    Rs. {price}/-
                   </div>
                 </div>
 

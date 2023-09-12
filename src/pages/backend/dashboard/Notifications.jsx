@@ -97,9 +97,9 @@ const Notifications = () => {
                 <div>
                   {notifications.map((notification, index) => (
                     <div key={index}> {/* Add a key prop */}
-                      <h5 className="card-title text-dark py-1">
+                      <p className="card-title text-dark py-1">
                         {index + 1}: {notification}
-                      </h5>
+                      </p>
                       <hr style={{ color: "grey" }} />
                     </div>
                   ))}
