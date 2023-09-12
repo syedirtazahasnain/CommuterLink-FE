@@ -132,6 +132,7 @@ const RiderRegistration = () => {
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
   const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
+  const [cityStart, setCityStart] = useState("");
   const [cityStartId, setCityStartId] = useState("");
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
 
@@ -141,9 +142,8 @@ const RiderRegistration = () => {
   const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
-  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState(
-    []
-  );
+  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
+  const [cityEnd, setCityEnd] = useState("");
   const [cityEndId, setCityEndId] = useState("");
   const [selectedEndCityArea, setSelectedEndCityArea] = useState([]);
 
@@ -335,15 +335,39 @@ const RiderRegistration = () => {
 
   const handlePlaceSelectStart = () => {
     const place = autocompleteRef.current.getPlace();
-    // Handle the selected place here, you can update the state with the selected place value.
-    if (place && place.geometry && place.geometry.location) {
-      setMarkerPositionStart({
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-      });
-      setLocationStartStringField(place.formatted_address);
-      setLocationStartString(place.formatted_address);
-      handleShowStartModal();
+  
+    // Check if place is defined and has address_components.
+    if (place && place.address_components) {
+      const isIslamabad =
+        place.address_components.some((component) =>
+          component.types.includes("locality") &&
+          component.long_name.toLowerCase() === cityStart.toLowerCase()
+        );
+  
+      if (isIslamabad) {
+        // The selected place is in Islamabad.
+        if (place.geometry && place.geometry.location) {
+          setMarkerPositionStart({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+          });
+          setLocationStartStringField(place.formatted_address);
+          setLocationStartString(place.formatted_address);
+          handleShowStartModal();
+        }
+      } else if (!isIslamabad) {
+        Swal.fire({
+          position: 'top',
+          // // icon: 'warning',
+          text: `Please select a place in ${cityStart}.`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        });
+      }
+    } else {
+      // Handle the case when place is not valid.
+      console.error('Invalid place object:', place);
     }
   };
 
@@ -364,15 +388,39 @@ const RiderRegistration = () => {
 
   const handlePlaceSelectEnd = () => {
     const place = autocompleteRef.current.getPlace();
-    // Handle the selected place here, you can update the state with the selected place value.
-    if (place && place.geometry && place.geometry.location) {
-      setMarkerPositionEnd({
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-      });
-      setLocationEndStringField(place.formatted_address);
-      setLocationEndString(place.formatted_address);
-      handleShowEndModal();
+  
+    // Check if place is defined and has address_components.
+    if (place && place.address_components) {
+      const isIslamabad =
+        place.address_components.some((component) =>
+          component.types.includes("locality") &&
+          component.long_name.toLowerCase() === cityEnd.toLowerCase()
+        );
+  
+      if (isIslamabad) {
+        // The selected place is in Islamabad.
+        if (place.geometry && place.geometry.location) {
+          setMarkerPositionEnd({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+          });
+          setLocationEndStringField(place.formatted_address);
+          setLocationEndString(place.formatted_address);
+          handleShowEndModal();
+        }
+      } else if (!isIslamabad) {
+        Swal.fire({
+          position: 'top',
+          // // icon: 'warning',
+          text: `Please select a place in ${cityEnd}.`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        });
+      }
+    } else {
+      // Handle the case when place is not valid.
+      console.error('Invalid place object:', place);
     }
   };
 
@@ -869,25 +917,34 @@ const RiderRegistration = () => {
                         )}
                       </Form.Select>
                     </Form.Group>
-                    <Form.Group
-                      as={Col}
-                      md={cityStartId ? "12" : "12"}
-                      controlId="validationCustom02"
-                      className="mb-2"
-                    >
+                    <Form.Group as={Col} md={cityStartId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
                       <Form.Label className="text-black fs-6">City</Form.Label>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
                         value={cityStartId}
-                        onChange={(e) => setCityStartId(e.target.value)}
+                        onChange={(e) => {
+                          const selectedOption = e.target.options[e.target.selectedIndex];
+                          const selectedValue = selectedOption.value;
+                          const selectedId = selectedOption.getAttribute("data-id");
+
+                          // Set the ID
+                          setCityStartId(selectedValue);
+
+                          // Set the value
+                          setCityStart(selectedId);
+                        }}
                         required
                       >
-                        <option value="" hidden>
+                        <option value="" disabled hidden>
                           Select a City
                         </option>
                         {selectedStartProvinceCities?.map((province) => (
-                          <option key={province.id} value={province.id}>
+                          <option
+                            key={province.id}
+                            value={province.id}
+                            data-id={province.value}
+                          >
                             {province.value}
                           </option>
                         ))}
@@ -1046,25 +1103,34 @@ const RiderRegistration = () => {
                         )}
                       </Form.Select>
                     </Form.Group>
-                    <Form.Group
-                      as={Col}
-                      md={cityEndId ? "12" : "12"}
-                      controlId="validationCustom08"
-                      className="mb-2"
-                    >
-                      <Form.Label style={{ color: "#000" }}>City</Form.Label>
+                    <Form.Group as={Col} md={cityEndId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
+                      <Form.Label className="text-black fs-6">City</Form.Label>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
                         value={cityEndId}
-                        onChange={(e) => setCityEndId(e.target.value)}
+                        onChange={(e) => {
+                          const selectedOption = e.target.options[e.target.selectedIndex];
+                          const selectedValue = selectedOption.value;
+                          const selectedId = selectedOption.getAttribute("data-id");
+
+                          // Set the ID
+                          setCityEndId(selectedValue);
+
+                          // Set the value
+                          setCityEnd(selectedId);
+                        }}
                         required
                       >
                         <option value="" disabled hidden>
                           Select a City
                         </option>
                         {selectedEndProvinceCities?.map((province) => (
-                          <option key={province.id} value={province.id}>
+                          <option
+                            key={province.id}
+                            value={province.id}
+                            data-id={province.value}
+                          >
                             {province.value}
                           </option>
                         ))}
