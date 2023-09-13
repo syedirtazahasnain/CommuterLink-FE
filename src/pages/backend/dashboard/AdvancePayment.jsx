@@ -287,7 +287,7 @@ const AdvancePayment = () => {
               Skip Payment
             </Button>
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2" style={{ backgroundColor: "rgb(42, 64, 42)"}}
               onClick={route}
               disabled={!windowClosedManually}
             >

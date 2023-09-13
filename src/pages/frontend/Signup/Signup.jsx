@@ -519,7 +519,7 @@ const Signup = () => {
                       label={
                         <div id="span-text" className="mr-5 small">
                           I agree with all statements in
-                          <a href="" style={{ textDecoration: "none" }}>
+                          <Link to={'/terms_services'} style={{ textDecoration: "none" }}>
                             <span
                               style={{
                                 color: "#198754",
@@ -529,7 +529,7 @@ const Signup = () => {
                             &nbsp;
                               Terms of service
                             </span>
-                          </a>
+                          </Link>
                         </div>
                       }
                     />

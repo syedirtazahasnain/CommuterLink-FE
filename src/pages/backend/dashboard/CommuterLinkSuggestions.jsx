@@ -330,13 +330,13 @@ const CommuterLinkSuggestions = () => {
             borderColor: "#066539",
           }}
         >
-          <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
+          <div className="card  mt-3 mb-5" style={{ backgroundColor: "#D9D9D9" }}>
             <div
               className="card-header"
               // style={{ backgroundColor: "#2a402a" }}
               style={{ backgroundColor: '#00917C' }}
             >
-              <h5 className="text-white mt-4 mx-auto">
+              <h5 className="text-white pt-4 mt-2 mx-auto">
                 COMMUTERSLINK SUGGESTION
               </h5>
             </div>
@@ -376,7 +376,7 @@ const CommuterLinkSuggestions = () => {
               className="card-header "
               style={{ backgroundColor: '#00917C' }}
             >
-              <h5 className="text-white mt-4 mx-auto">
+              <h5 className="text-white pt-4 mt-2 mx-auto">
                 REQUESTS BY MEMBERS
               </h5>
             </div>

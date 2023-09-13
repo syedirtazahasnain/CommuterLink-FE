@@ -61,6 +61,7 @@ import RequestCommuterProfile from "./pages/backend/dashboard/RequestCommuterPro
 import Loading from "./pages/frontend/register-form/Loading";
 import DataSecurity from "./pages/frontend/register-form/DataSecurity";
 import VerifiedMember from "./pages/frontend/register-form/VerifiedMember";
+import Terms_Services from "./pages/frontend/terms-services/Terms_Services";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -70,6 +71,9 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<FrontendLayout children={<Home />} />} />
+        <Route path="/terms_services" element={<FrontendLayout children={<Terms_Services />} />} />
+       
+       
         <Route exact path="/linkedin" component={LinkedInCallback} />
         {/* <Route path="contact" element={<FrontendLayout children={<Contact/>} />} /> */}
         {/* <Route path="concept" element={<FrontendLayout children={<CarouselSlider/>} />} />
