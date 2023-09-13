@@ -267,7 +267,6 @@ const TravelBuddyProfile = () => {
       else if (jsonresponse.status_code === 100) {
         Swal.fire({
           position: 'top',
-          icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -314,7 +313,6 @@ const TravelBuddyProfile = () => {
     position:'top',
     title: 'Are you sure?',
     text: "You want to cancel",
-    icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#037e03',
     cancelButtonColor: '#037e03',
@@ -360,14 +358,14 @@ const TravelBuddyProfile = () => {
       <div className="card p-4 bg-light" >
         <div className="card p-4 backgroundColor">
           <div className="row px-3">
-            <div className="col-md-1 ">
+            <div className="col-md-1 mt-1">
               <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />
             </div>
             <div className="col-md-11 px-5">
               <div className="row px-5">
                 <div className="col-md-3">
                 {name !== "" ? (
-                  <div>
+                  <div className="mt-0">
                     <h3 className="text-success fw-bold">{name}</h3>
                   </div>
                 ) : (
@@ -446,7 +444,7 @@ const TravelBuddyProfile = () => {
                 <div className="col-md-4">
                 {preferredGender !== "" ? (
                   <>
-                    <b className="text-black">Preferred Gender: </b> 
+                    <b className="text-black">Seats For: </b> 
                   </>
                 ) : (
                   <>
@@ -536,20 +534,20 @@ const TravelBuddyProfile = () => {
                 {days}  
                 </div>
               </div>
-            <div className="row mb-2">
+              {/* <div className="row mb-2">
                 <div className="col-md-4">
                 {mobileNo !== "" ? (
                   <>
-                    {/* <b className="text-black">Contact No:</b> */}
+                    <b className="text-black">Contact No:</b>
                   </>
                 ) : (
                   <></>
                 )}
                 </div>
                 <div className="col-md-8">
-                {/* {mobileNo}   */}
+                {mobileNo}  
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="col-md-6">
             <div className="row mb-2">
@@ -579,7 +577,7 @@ const TravelBuddyProfile = () => {
                 )}
                 </div>
                 <div className="col-md-8">
-              Rs. {price}/-  
+                Rs. {price}/-
                 </div>
               </div>
             <div className="row mb-2">

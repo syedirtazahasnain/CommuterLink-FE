@@ -216,7 +216,7 @@ const BackendLayout = ({ children }) => {
                                 <div className="d-block">
                                   {name ? (<h6 className="fs-6 fw-bold font-custom"> {name}</h6>) : (<h6 className="fs-6 font-custom fw-bold">CL User</h6>)}
 
-                                  <p className="fw-bold font-custom fs-7 text-dark">{option === 0 ? (<h6 className="fs-6 fw-bold font-custom">Rider</h6>) : (<h6 className="fs-6 font-custom fw-bold">Car Offerer</h6>)}</p>
+                                  <p className="fw-bold font-custom fs-7 text-dark">{option === 0 ? (<h6 className="fs-6 fw-bold font-custom">Traveller</h6>) : (<h6 className="fs-6 font-custom fw-bold">Car Offerer</h6>)}</p>
                                 </div>
                               </div>
                             </div>

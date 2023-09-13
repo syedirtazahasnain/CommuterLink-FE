@@ -1338,7 +1338,7 @@ const DriverRegistration = () => {
                               <Form.Group
                                 as={Col}
                                 md="12"
-                                controlId="validationCustom02"
+                                controlId="validationCustom55"
                               >
                                 <div className="d-flex justify-content-between align-items-center">
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
@@ -1395,7 +1395,7 @@ const DriverRegistration = () => {
                               <Form.Group
                                 as={Col}
                                 md="12"
-                                controlId="validationCustom01"
+                                controlId="validationCustom56"
                               >
                                 <Form.Label className="text-black">
                                   Area
@@ -1439,7 +1439,7 @@ const DriverRegistration = () => {
                         <Form.Group
                           as={Col}
                           md={cityEndId ? "12" : "12"}
-                          controlId="validationCustom04"
+                          controlId="validationCustom57"
                           className="mb-2"
                         >
                           <Form.Label className="text-black fs-6">
@@ -1464,7 +1464,7 @@ const DriverRegistration = () => {
                             )}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md={cityEndId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
+                        <Form.Group as={Col} md={cityEndId ? "12" : "12"} controlId="validationCustom58" className="mb-2">
                           <Form.Label className="text-black fs-6">City</Form.Label>
                           <Form.Select
                             aria-label="Default select example"
@@ -2259,7 +2259,7 @@ const DriverRegistration = () => {
                   </div>
 
                   <Form
-                    className=" p-3"
+                    className=" p-3" noValidate validated={validated} onSubmit={handleSubmit}
                   >
                     <div className="row mb-3 shadow shadow-sm">
                       <div

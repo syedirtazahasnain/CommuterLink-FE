@@ -3,6 +3,7 @@ import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 
 const TravelPatners = () => {
   const navigate = useNavigate();
@@ -111,218 +112,166 @@ const TravelPatners = () => {
       console.error("An error occurred:", error);
     }
   };
+  const tableCellStyle = {
+    color: 'black', // Set the text color to white
+    fontWeight: 'bold',
+    paddingBottom: '7px',
+    paddingTop: '7px',
+    fontSize: '13px' // Make the text bold
+  };
 
   return (
     <div>
-      <div className="card  mt-3 mb-5">
-        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
+      <div className="card mb-5">
+        <div className="card-header" style={{ backgroundColor: "#1F5F5B"  }}>
           <h4 className="text-center fw-bold text-warning m-auto">
             {" "}
-            MY TRAVEL PARTNERS{" "}
+            AGREEMENT INFORMATION{" "}
           </h4>{" "}
         </div>
-        <div
-          className="card-body"
-          style={{
-            borderWidth: "0 2px 2px 2px",
-            borderStyle: "solid",
-            borderColor: "#066539",
-          }}
-        >
-          <div className="card" style={{ backgroundColor: "rgb(214 219 218)" }}>
-            <div className="card-body">
-              <div className="row">
-                <div
-                  className="card  border-0 w-100"
-                  style={{
-                    width: "auto",
-                    backgroundColor: "rgb(214 219 218)",
-                  }}
-                >
-                  <div className="row d-flex justify-content-left mb-3">
-                    <div className="col-sm-2">
-                      {name && image ? (
-                        <div
-                          className="card"
-                          style={{
-                            width: "6rem",
-                            backgroundColor: "#F2D450",
+        <div className="card my-4 mx-4" style={{ backgroundColor: "#D9D9D9",
+            
+          }}>
+            
+
+            <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
+            <div className="d-flex flex-column">
+            <div className="card-body-inner green-card">
+              <div className="d-flex flex-column">
+                <div className="row">
+                  <div className="col-md-2">
+                    <div
+                      className="card"
+                      style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
+                    >
+                      {image ? (
+                        <img
+                          src={`${IMAGE_URL}${image}`}
+                          className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                          onClick={() => {
+                            route();
                           }}
-                        >
-                          <img
-                            src={`${IMAGE_URL}${image}`}
-                            className="card-img-top  m-auto py-3 h-80px h-fixed image-fluid"
-                            style={{maxWidth:'80px'}}
-                          />
-                          <div
-                            className="card-title text-dark text-center"
-                            style={{ width: "6rem", cursor: "pointer" }}
-                            onClick={() => {
-                              route();
-                            }}
-                          > 
-                            {name}
-                          </div>
-                          <img
-                            className=""
-                            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
-                          />
-                        </div>
+                        />
                       ) : (
-                        <></>
+                        <img
+                          src={`${BASE_URL}/assets/images/Vector.png`}
+                          className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
+                        />
                       )}
+
                     </div>
+                  </div>
+                  <div className="col-md-10">
+                    <p className="fw-bold fs-5">Name: {name}</p>
+                    <p className="fw-bold fs-5">Rs. &nbsp; {price}/-</p>
+                    <p className="fw-bold fs-5">Start Date: {date}</p>
                   </div>
                 </div>
-               
-              </div>
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="card h-100">
-                    <div className="card-body-inner green-card">
-                      <div className="d-flex flex-column">
-                        <div
-                          className="card-header text-white"
-                          style={{ backgroundColor: "#00917C" }}
-                        >
-                          <h5 className="text-center text-white m-auto">
-                            MY WALLET
-                          </h5>
-                        </div>
-                        <div className="row d-flex justify-content-between px-5 py-3 ">
-                          <div className="col-md-3">
-                            <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
-                          </div>
-                          <div className="col-md-3">
-                            <div className="card border-0 w-100">
-                              {" "}
-                              <p className="py-3  fw-bold text-success fs-5">
-                                Rs. {walletAmount}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row py-5 w-100">
-                          <div className="col-md-6 px-1 m-auto ">
-                            <div className="w-100">
-                              {userType === 0 ?
-                                (
-                                  <button class="d-block border-0 text-center fs-7 btn-menu-blue-left corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm" onClick={onNavigate}><span class="text-uppercase">Recharge</span></button>
-                                  // <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5" onClick={onNavigate}>
-                                  //   Recharge
-                                  // </button>
-                                ) :
-                                (
-                                  <button class="d-block border-0 text-center fs-7 btn-menu-blue-left corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm" ><span class="text-uppercase">Recharge</span></button>
 
-                                  // <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
-                                  //   Recharge
-                                  // </button>
-                                )}
-                            </div>
-                          </div>
 
-                        </div>
-                        <div className="row w-100">
-                          <div className="col-md-6 px-1 m-auto">
-                            <div className="w-100">
-                              <button class="d-block border-0 text-center btn-menu-blue-left mb-2 fs-7 corner-rounded text-white fw-bold py-4 px-10 w-100 shadow-sm"><span class="text-uppercase">View Transaction History</span></button>
 
-                              {/* <button className="btn btn_view text-light btn-block bg-success btn-hover-success fs-5">
-                                View Transaction History
-                              </button> */}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6">
-                  <div className="card">
-                    <div className="card-body-inner green-card">
-                      <div className="d-flex flex-column">
-                        <div className="card-body-inner green-card">
-                          <div className="d-flex flex-column">
-                            <div
-                              className="card-header text-white"
-                              style={{ backgroundColor: "#00917C" }}
-                            >
-                              <h5 className="text-center text-white m-auto">
-                                COST PER SEAT PER DAY
-                              </h5>
-                            </div>
-
-                            <div className="row d-flex justify-content-between px-5 py-3 ">
-                              <div className="col-md-6">
-                              {/* {image ? (
-                                    <img
-                                      src={`${IMAGE_URL}${image}`}
-                                      className="card-img-top w-70px m-auto border border-1 border-success h-70px bg-success"
-                                    />
-                                  ) : (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-60px p-3 m-auto border border-1 h-70px border-success bg-success"
-                                    />
-                                  )}                              */}
-
-<div
-          className="card"
-          style={{ width: "6rem",height:"6rem", backgroundColor: "grey" }}
-        >
-          {image ? (
-                                    <img
-                                      src={`${IMAGE_URL}${image}`}
-                                      className="card-img-top w-70px m-auto h-70px"
-                                    />
-                                  ) : (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-40px m-auto mt-3 "
-                                    />
-                                  )} 
-
-                                         </div>
-                                   </div>
-                              <div className="col-md-6">
-                                <p className="fw-bold">{name}</p>
-                                  <p className="fw-bold">Rs. &nbsp; {price}/-</p>
-                                  <p className="fw-bold">Start Date: {date}</p>
-                              </div>
-                            </div>
-
-                            <div className="row d-flex justify-content-between py-5">
-                              <div className="card-body  d-flex justify-content-between h-50 fw-bold text-success">
-                                <div className="px-4">
-                                  <p className="text-dark">
-                                    Daily Commuting Cost
-                                  </p>
-                                </div>
-
-                                <p className="text-dark px-4">RS. 346/-</p>
-                              </div>
-                              <div className="align-items-center px-5">
-                                <ol style={{ listStyleType: "disc" }}>
-                                  <li>Distance: 50km</li>
-                                  <li>Avg. Fuel consumption: 10km/Ltr</li>
-                                  <li>Fuel Price: Rs. 230/Ltr (Rs. 288/-)</li>
-                                  <li>Maintenance (10%): Rs.29/-</li>
-                                  <li>Wear & Tear (10%): Rs. 29/-</li>
-                                </ol>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="row d-flex justify-content-between pt-5">
+                  <TableContainer component={Paper} style={{ backgroundColor: "#ECF8F9", border: '1px solid gray' }}>
+                    <Table>
+                      <TableBody>
+                        <TableRow style={{ fontSize: '15px' }}>
+                          <TableCell style={tableCellStyle}> Daily Commuting Cost</TableCell>
+                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>RS. 346/-</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell style={tableCellStyle}>Distance</TableCell>
+                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>50km</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell style={tableCellStyle}>Avg. Fuel consumption</TableCell>
+                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>10km/Ltr</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell style={tableCellStyle}>Fuel Price</TableCell>
+                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
+                            Rs. 230/Ltr
+                            <br />
+                            (Rs. 288/-)
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell style={tableCellStyle}>Maintenance (10%)</TableCell>
+                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell style={tableCellStyle}>Wear & Tear (10%)</TableCell>
+                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </div>
               </div>
             </div>
           </div>
+              
+              <div>
+              </div>
+            </div>
+          </div>
+        
+      </div>
+      <div className="card  mt-3 mb-5">
+        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
+          <h4 className="text-center fw-bold text-warning m-auto">
+            {" "}
+            MY WALLET{" "}
+          </h4>{" "}
+        </div>
+        <div className="card mx-4 my-4" style={{ background: "rgb(214 219 218)" }}>
+          <div className="row py-3">
+            <div className="col-md-8">
+              <div className="row">
+                <div className="col-md-2">
+                  <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
+                </div>
+                <div className="col-md-10">
+
+                <p className="py-3 fw-bold text-success fs-3">
+                Rs. &nbsp; {walletAmount} /-
+                </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4 text-end mt-4">
+                {userType === 0 ?
+                  (
+                    <button className="font-custom me-4 btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" onClick={onNavigate} >
+                    Recharge
+                  </button>
+                  ) :
+                  (
+                    <button className="font-custom btn me-4 btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" >
+                    Recharge
+                  </button>
+                  )}
+              <button className="font-custom btn btn-sm me-3 fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" >
+              View Transaction History
+                  </button>
+              {/* <div className="row mt-3">
+              <div className="col-md-6 px-1">
+              <div className="w-100">
+              </div>
+            </div>
+            <div className="col-md-6">
+
+              <div className="w-100">
+              </div>
+            </div>
+
+              </div> */}
+
+            </div>
+          </div>
         </div>
       </div>
+
+      
     </div>
   );
 };

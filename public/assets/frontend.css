@@ -7,6 +7,9 @@
    color: var(--bs-primary);
  }
 
+ .navbar-light-300{
+  background-color: #d5e7df;
+ }
  .form-header{
   background-color: #1f5f5b;
  }

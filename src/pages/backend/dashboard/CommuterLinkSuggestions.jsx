@@ -187,7 +187,7 @@ const CommuterLinkSuggestions = () => {
           className="card"
           style={{
             width: "6rem",
-            backgroundColor: req_stage === 1 ? "#5ab387" : req_stage === 0 ? "#F8A175" : "#5ab387",
+            backgroundColor: req_stage === 1 ? "#5ab387" : req_stage === 0 ? "#ff8a00" : "#5ab387",
           }}
         >
           {req_stage === 1 || req_stage === 2  ? (
@@ -324,19 +324,15 @@ const CommuterLinkSuggestions = () => {
 
         <div
           className="card-body"
-          style={{
-            borderWidth: "0 2px 2px 2px",
-            borderStyle: "solid",
-            borderColor: "#066539",
-          }}
+         
         >
-          <div className="card" style={{ backgroundColor: "#D9D9D9" }}>
+          <div className="card  mt-3 mb-5" style={{ backgroundColor: "#D9D9D9" }}>
             <div
               className="card-header"
               // style={{ backgroundColor: "#2a402a" }}
               style={{ backgroundColor: '#00917C' }}
             >
-              <h5 className="text-white mt-4 mx-auto">
+              <h5 className="text-white pt-4 mt-2 mx-auto">
                 COMMUTERSLINK SUGGESTION
               </h5>
             </div>
@@ -376,7 +372,7 @@ const CommuterLinkSuggestions = () => {
               className="card-header "
               style={{ backgroundColor: '#00917C' }}
             >
-              <h5 className="text-white mt-4 mx-auto">
+              <h5 className="text-white pt-4 mt-2 mx-auto">
                 REQUESTS BY MEMBERS
               </h5>
             </div>

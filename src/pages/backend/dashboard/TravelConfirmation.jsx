@@ -46,7 +46,7 @@ const TravelConfirmation = () => {
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
-  
+
 
   useEffect(() => {
     // Fetch status data from the API
@@ -63,7 +63,7 @@ const TravelConfirmation = () => {
             },
           }
         );
-  
+
         const jsonresponse = await response.json();
         console.log("Date History:", jsonresponse);
         if (jsonresponse.success === true) {
@@ -73,14 +73,14 @@ const TravelConfirmation = () => {
         console.error("An error occurred:", error);
       }
     };
-  
+
     fetchData();
   }, [userToken, selectedDate]);
 
   useEffect(() => {
     // Define a function that contains the code to execute
     const fetchData = () => {
-      if(statusData){
+      if (statusData) {
         fetchHighlightedDays();
       }
     };
@@ -94,14 +94,14 @@ const TravelConfirmation = () => {
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, [statusData]);
-  
+
 
   const handleDateChange = (date) => {
     setSelectedDate(dayjs(date));
     setDateChanged(true);
     setDialogOpen(true);
   };
-  
+
   const handleCloseDialog = () => {
     setDialogOpen(false);
   };
@@ -110,7 +110,7 @@ const TravelConfirmation = () => {
     handleConfirmStatus(value);
   };
 
-  const handleConfirmStatus = async (selectedStatus) => {  
+  const handleConfirmStatus = async (selectedStatus) => {
     // Create the data object for the POST request
     const body = {
       date: selectedDate.format('DD-MM-YYYY'),
@@ -140,7 +140,7 @@ const TravelConfirmation = () => {
         // // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
         },
       });
     }
@@ -150,7 +150,7 @@ const TravelConfirmation = () => {
         // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
         },
       });
     }
@@ -216,16 +216,16 @@ const TravelConfirmation = () => {
 
   function ServerDay(props) {
     const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
-  
+
     const isSelected =
       !props.outsideCurrentMonth &&
       highlightedDays.indexOf(props.day.date()) >= 0;
-  
+
     // Find the status for the current day in statusData
     const statusForDay = statusData.find((item) =>
       day.isSame(dayjs(item.date), "day")
     );
-  
+
     const marker =
       statusForDay && statusForDay.status === 1 ? (
         <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
@@ -234,7 +234,7 @@ const TravelConfirmation = () => {
       ) : statusForDay && statusForDay.status === -1 ? (
         <i className="fa-solid fa-car text-danger mx-1 fs-2"></i>
       ) : null;
-  
+
     return (
       <Badge
         key={props.day.toString()}
@@ -256,27 +256,27 @@ const TravelConfirmation = () => {
 
   const fetchHighlightedDays = (date) => {
     const controller = new AbortController();
-  
+
     // Filter the statusData to find the dates that match the current month
     const statusForMonth = statusData.filter((item) =>
       dayjs(item.date, "YYYY-MM-DD").isSame(date, "month")
     );
-    console.log({statusForMonth});
-  
+    console.log({ statusForMonth });
+
     // Map the status data to an object with date and status
     const highlightedDates = statusForMonth.map((item) => ({
       date: dayjs(item.date, "YYYY-MM-DD").date(),
       status: item.status,
     }));
-  
+
     // Extract the dates to highlight based on status
     const daysToHighlight = highlightedDates
       .filter((item) => item.status !== null)
       .map((item) => item.date);
-      
+
     setHighlightedDays(daysToHighlight);
     setIsLoading(false);
-  
+
     requestAbortController.current = controller;
   };
 
@@ -300,11 +300,6 @@ const TravelConfirmation = () => {
         </div>
         <div
           className="card-body"
-          style={{
-            borderWidth: "0 2px 2px 2px",
-            borderStyle: "solid",
-            borderColor: "#066539",
-          }}
         >
           <div className="card h-50" style={{ backgroundColor: "rgb(214 219 218)" }}>
             <div className="card-body">
@@ -314,6 +309,7 @@ const TravelConfirmation = () => {
               >
                 <div className="card h-50 w-100">
                   <div className="container">
+                    <div className="mt-4 text-center text-danger fw-bold fs-5">Once the date is marked on Calendar, it remains fixed and cannot be altered.</div>
                     <Box className="card w-100">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateCalendar
@@ -373,13 +369,13 @@ const TravelConfirmation = () => {
                               backgroundColor: '#cbeddd'
                             },
                             "& .MuiPickersYear-yearButton.Mui-selected": {
-                              backgroundColor: "green", 
+                              backgroundColor: "green",
                             },
                             '& .MuiPickersYear-yearButton.Mui-selected:hover': {
                               backgroundColor: '#cbeddd'
                             },
                             "& .MuiPickersDay-root.Mui-selected:hover": {
-                              backgroundColor: "green", 
+                              backgroundColor: "green",
                             },
                             "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
                               border: "0px solid rgba(0, 0, 0, 0.6)",
@@ -388,22 +384,70 @@ const TravelConfirmation = () => {
                         />
                       </LocalizationProvider>
                     </Box>
-                    <div className="row pt-5 pb-3">
-                      <p className="text-success fs-5 px-4 cursor-pointer text-right">
-                        No of Days Travelled 0
-                      </p>
-                      <div className="container my-3 text-end">
+                    {/* <div className="row"> <div className="col-md-12 py-4 px-5 text-end">
 
-                        <Link 
-                          className= "font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                      <Link
+                        className="font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                        style={{ cursor: "pointer" }}
+                        onClick={route}
+                      >
+                        View Full History
+
+                      </Link>
+                    </div></div> */}
+                    <div className="row px-2 mt-4">
+                      <div className="col-md-6 d-flex mt-2 border border-success rounded rounded-3">
+                        <div>
+                          <button
+                            className="btn font-custom  text-success fw-bold fs-5 lh-1"
+                          // onClick={() => handleStatusSelect("1")}
+                          >
+                            <span className="font-custom">
+                              <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
+                            </span>
+                            Travelled
+                          </button>
+                        </div>
+                        <div>
+                          <button className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
+                          // onClick={() => handleStatusSelect("0")}
+                          >
+                            <span className="font-custom">
+                              <i className="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
+                            </span>
+                            Not Travelled
+                          </button>
+                        </div>
+                        <div>
+                          <button className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
+                          // onClick={() => handleStatusSelect("-1")}
+                          >
+                            <span className="font-custom">
+                              <i className="fa-solid fa-car text-danger mx-1 fs-2"></i>
+                            </span>
+                            Driver Didn't Come
+                          </button>
+                        </div>
+                      </div>
+                      {/* <div className="col-6 pt-3 pb-1 lh-1">
+                        <p className="text-success fs-5 px-4 cursor-pointer fw-bold text-right">
+                          No of Days Travelled 0
+                        </p>
+
+                      </div> */}
+                      <div className="col-md-6 py-3 px-5 text-end">
+
+                        <Link
+                          className="font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
                           style={{ cursor: "pointer" }}
                           onClick={route}
                         >
-                        View Full History
+                          View Full History
 
                         </Link>
                       </div>
                     </div>
+
                   </div>
 
                 </div>
@@ -416,8 +460,8 @@ const TravelConfirmation = () => {
                   <div className="row px-2">
                     <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
                       <div>
-                        <button 
-                          className="btn  text-success fw-bold fs-5 lh-1" 
+                        <button
+                          className="btn  text-success fw-bold fs-5 lh-1"
                           onClick={() => handleStatusSelect("1")}
                         >
                           <span>

@@ -71,7 +71,7 @@ const TermsCondition = () => {
             </p>
             <p>
               4. You will inform the partners well in advance (atleast 12 hours)
-              about your inability to cummute on a certain day. In case of an
+              about your inability to commute on a certain day. In case of an
               emergency this can be waived off under exceptional circumstances
             </p>
             <p>
@@ -102,7 +102,7 @@ const TermsCondition = () => {
               commutersLink")
             </p>
             11. Any complaints, grievances will be addressed to CommutersLink
-            for resolution
+            for resolution.
           </div>
           {/* <div className="text-center">
             <Button

@@ -2512,7 +2512,7 @@ const DriverRegistration = () => {
                     </h1>{" "}
                   </div>
 
-                  <Form className="p-3">
+                  <Form className="p-3" noValidate validated={validated} onSubmit={handleSubmit}>
                     <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3"
