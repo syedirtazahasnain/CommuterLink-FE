@@ -444,7 +444,7 @@ const TravelBuddyProfile = () => {
                 <div className="col-md-4">
                 {preferredGender !== "" ? (
                   <>
-                    <b className="text-black">Preferred Gender: </b> 
+                    <b className="text-black">Seats For: </b> 
                   </>
                 ) : (
                   <>
@@ -534,20 +534,20 @@ const TravelBuddyProfile = () => {
                 {days}  
                 </div>
               </div>
-            <div className="row mb-2">
+              {/* <div className="row mb-2">
                 <div className="col-md-4">
                 {mobileNo !== "" ? (
                   <>
-                    {/* <b className="text-black">Contact No:</b> */}
+                    <b className="text-black">Contact No:</b>
                   </>
                 ) : (
                   <></>
                 )}
                 </div>
                 <div className="col-md-8">
-                {/* {mobileNo}   */}
+                {mobileNo}  
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="col-md-6">
             <div className="row mb-2">
@@ -577,7 +577,7 @@ const TravelBuddyProfile = () => {
                 )}
                 </div>
                 <div className="col-md-8">
-              Rs. {price}/-  
+                Rs. {price}/-
                 </div>
               </div>
             <div className="row mb-2">

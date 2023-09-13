@@ -187,7 +187,7 @@ const CommuterLinkSuggestions = () => {
           className="card"
           style={{
             width: "6rem",
-            backgroundColor: req_stage === 1 ? "#5ab387" : req_stage === 0 ? "#F8A175" : "#5ab387",
+            backgroundColor: req_stage === 1 ? "#5ab387" : req_stage === 0 ? "#ff8a00" : "#5ab387",
           }}
         >
           {req_stage === 1 || req_stage === 2  ? (

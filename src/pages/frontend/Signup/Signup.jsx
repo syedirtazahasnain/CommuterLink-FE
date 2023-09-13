@@ -15,6 +15,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import Form from "react-bootstrap/Form";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
+import { LoginSocialFacebook } from "reactjs-social-login";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -574,14 +575,21 @@ const Signup = () => {
                           </li>
                           <li className="mr-3">
                             <Tooltip title="Signup With Facebook">
-                            
-                              <a href="https://www.facebook.com/Sysreforms">
+                              <LoginSocialFacebook
+                                appId="866892254777576"
+                                onResolve={(response) => {
+                                  console.log("Response", response);
+                                }}
+                                onReject={(error) => {
+                                  console.log("Error Message:", error);
+                                }}
+                              >
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px", cursor: "pointer" }}
                                 />
-                              </a>
+                              </LoginSocialFacebook>
                             </Tooltip>
                             </li>
                           <li>
@@ -596,7 +604,6 @@ const Signup = () => {
                               </a>
                             </Tooltip> */}
                             <Tooltip title="Signup With Linkedin">
-                            
                               <a>
                                 <img
                                   src={`${BASE_URL}/assets/images/linkedin.png`}

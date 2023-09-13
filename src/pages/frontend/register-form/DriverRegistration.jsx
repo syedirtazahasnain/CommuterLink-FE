@@ -2259,7 +2259,7 @@ const DriverRegistration = () => {
                   </div>
 
                   <Form
-                    className=" p-3"
+                    className=" p-3" noValidate validated={validated} onSubmit={handleSubmit}
                   >
                     <div className="row mb-3 shadow shadow-sm">
                       <div
