@@ -113,108 +113,204 @@ const TravelPatners = () => {
     }
   };
   const tableCellStyle = {
-    color: 'black', // Set the text color to white
+    color: 'black',
     fontWeight: 'bold',
     paddingBottom: '7px',
     paddingTop: '7px',
-    fontSize: '13px' // Make the text bold
+    fontSize: '13px'
   };
 
   return (
     <div>
       <div className="card mb-5">
-        <div className="card-header" style={{ backgroundColor: "#1F5F5B"  }}>
+        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
           <h4 className="text-center fw-bold text-warning m-auto">
             {" "}
             AGREEMENT INFORMATION{" "}
           </h4>{" "}
         </div>
-        <div className="card my-4 mx-4" style={{ backgroundColor: "#D9D9D9",
-            
-          }}>
-            
+        <div className="card my-4 mx-4" style={{
+          backgroundColor: "#D9D9D9",
 
-            <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
+        }}>
+
+
+          <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
             <div className="d-flex flex-column">
-            <div className="card-body-inner green-card">
-              <div className="d-flex flex-column">
-                <div className="row">
-                  <div className="col-md-2">
-                    <div
-                      className="card"
-                      style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
-                    >
-                      {image ? (
-                        <img
-                          src={`${IMAGE_URL}${image}`}
-                          className="card-img-top w-100px m-auto h-100px cursor-pointer"
-                          onClick={() => {
-                            route();
-                          }}
-                        />
-                      ) : (
-                        <img
-                          src={`${BASE_URL}/assets/images/Vector.png`}
-                          className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
-                        />
-                      )}
+              <div className="card-body-inner green-card">
+                <div className="d-flex flex-column">
+                  <div className="row mb-3">
+                    <div className="col-md-6">
+                      <div className="row">
+                        <div className="col-md-3">
+                          <div
+                            className="card"
+                            style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
+                          >
+                            {image ? (
+                              <img
+                                src={`${IMAGE_URL}${image}`}
+                                className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                onClick={() => {
+                                  route();
+                                }}
+                              />
+                            ) : (
+                              <img
+                                src={`${BASE_URL}/assets/images/Vector.png`}
+                                className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className="col-md-9">
+                          <p className="fw-bold fs-5">Name: {name}</p>
+                          <p className="fw-bold fs-5">Daily Commuting Cost Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-5">Start Date: {date}</p>
+                        </div>
 
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="row">
+                        <div className="col-md-3">
+                          <div
+                            className="card"
+                            style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
+                          >
+                            {image ? (
+                              <img
+                                src={`${IMAGE_URL}${image}`}
+                                className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                onClick={() => {
+                                  route();
+                                }}
+                              />
+                            ) : (
+                              <img
+                                src={`${BASE_URL}/assets/images/Vector.png`}
+                                className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className="col-md-9">
+                          <p className="fw-bold fs-5">Name: {name}</p>
+                          <p className="fw-bold fs-5">Daily Commuting Cost Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-5">Start Date: {date}</p>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
-                  <div className="col-md-10">
-                    <p className="fw-bold fs-5">Name: {name}</p>
-                    <p className="fw-bold fs-5">Rs. &nbsp; {price}/-</p>
-                    <p className="fw-bold fs-5">Start Date: {date}</p>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="row">
+                        <div className="col-md-3">
+                          <div
+                            className="card"
+                            style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
+                          >
+                            {image ? (
+                              <img
+                                src={`${IMAGE_URL}${image}`}
+                                className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                onClick={() => {
+                                  route();
+                                }}
+                              />
+                            ) : (
+                              <img
+                                src={`${BASE_URL}/assets/images/Vector.png`}
+                                className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className="col-md-9">
+                          <p className="fw-bold fs-5">Name: {name}</p>
+                          <p className="fw-bold fs-5">Daily Commuting Cost Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-5">Start Date: {date}</p>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="row">
+                        <div className="col-md-3">
+                          <div
+                            className="card"
+                            style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
+                          >
+                            {image ? (
+                              <img
+                                src={`${IMAGE_URL}${image}`}
+                                className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                onClick={() => {
+                                  route();
+                                }}
+                              />
+                            ) : (
+                              <img
+                                src={`${BASE_URL}/assets/images/Vector.png`}
+                                className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className="col-md-9">
+                          <p className="fw-bold fs-5">Name: {name}</p>
+                          <p className="fw-bold fs-5">Daily Commuting Cost Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-5">Start Date: {date}</p>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div className="row d-flex justify-content-between pt-5">
+                    <TableContainer component={Paper} style={{ backgroundColor: "#ECF8F9", border: '1px solid gray' }}>
+                      <Table>
+                        <TableBody>
+                          <TableRow>
+                            <TableCell style={tableCellStyle}>Distance</TableCell>
+                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>50km</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={tableCellStyle}>Avg. Fuel consumption</TableCell>
+                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>10km/Ltr</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={tableCellStyle}>Fuel Price</TableCell>
+                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
+                              Rs. 230/Ltr
+                              <br />
+                              (Rs. 288/-)
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={tableCellStyle}>Maintenance (10%)</TableCell>
+                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell style={tableCellStyle}>Wear & Tear (10%)</TableCell>
+                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
                   </div>
                 </div>
-
-
-
-                <div className="row d-flex justify-content-between pt-5">
-                  <TableContainer component={Paper} style={{ backgroundColor: "#ECF8F9", border: '1px solid gray' }}>
-                    <Table>
-                      <TableBody>
-                        <TableRow style={{ fontSize: '15px' }}>
-                          <TableCell style={tableCellStyle}> Daily Commuting Cost</TableCell>
-                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>RS. 346/-</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell style={tableCellStyle}>Distance</TableCell>
-                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>50km</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell style={tableCellStyle}>Avg. Fuel consumption</TableCell>
-                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>10km/Ltr</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell style={tableCellStyle}>Fuel Price</TableCell>
-                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
-                            Rs. 230/Ltr
-                            <br />
-                            (Rs. 288/-)
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell style={tableCellStyle}>Maintenance (10%)</TableCell>
-                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell style={tableCellStyle}>Wear & Tear (10%)</TableCell>
-                          <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </div>
               </div>
             </div>
-          </div>
-              
-              <div>
-              </div>
+
+            <div>
             </div>
           </div>
-        
+        </div>
+
       </div>
       <div className="card  mt-3 mb-5">
         <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
@@ -232,46 +328,33 @@ const TravelPatners = () => {
                 </div>
                 <div className="col-md-10">
 
-                <p className="py-3 fw-bold text-success fs-3">
-                Rs. &nbsp; {walletAmount} /-
-                </p>
+                  <p className="py-3 fw-bold text-success fs-3">
+                    Rs. &nbsp; {walletAmount} /-
+                  </p>
                 </div>
               </div>
             </div>
             <div className="col-md-4 text-end mt-4">
-                {userType === 0 ?
-                  (
-                    <button className="font-custom me-4 btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" onClick={onNavigate} >
+              {userType === 0 ?
+                (
+                  <button className="font-custom me-4 btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" onClick={onNavigate} >
                     Recharge
                   </button>
-                  ) :
-                  (
-                    <button className="font-custom btn me-4 btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" >
+                ) :
+                (
+                  <button className="font-custom btn me-4 btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" >
                     Recharge
                   </button>
-                  )}
+                )}
               <button className="font-custom btn btn-sm me-3 fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" >
-              View Transaction History
-                  </button>
-              {/* <div className="row mt-3">
-              <div className="col-md-6 px-1">
-              <div className="w-100">
-              </div>
-            </div>
-            <div className="col-md-6">
-
-              <div className="w-100">
-              </div>
-            </div>
-
-              </div> */}
-
+                View Transaction History
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      
+
     </div>
   );
 };
