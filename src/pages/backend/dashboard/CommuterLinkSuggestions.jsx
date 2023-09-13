@@ -324,11 +324,7 @@ const CommuterLinkSuggestions = () => {
 
         <div
           className="card-body"
-          style={{
-            borderWidth: "0 2px 2px 2px",
-            borderStyle: "solid",
-            borderColor: "#066539",
-          }}
+         
         >
           <div className="card  mt-3 mb-5" style={{ backgroundColor: "#D9D9D9" }}>
             <div

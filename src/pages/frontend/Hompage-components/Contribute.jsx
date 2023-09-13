@@ -29,16 +29,7 @@ const Contribute = () => {
                 </div>
                 <article className="text-left">
                   <h2>Help Reduce Traffic Congestion</h2>
-                  <button
-                    // onClick={() => {
-                    //   window.location.href = 'signup.html';
-                    // }}
-                    className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
-                    onClick={signupRoute}
-                    type="submit"
-                  >
-                    JOIN NOW
-                  </button>
+                  
                 </article>
                 <img src={`${BASE_URL}/assets/images/contribute-1.jpg`} alt="" />
               </div>
@@ -50,16 +41,6 @@ const Contribute = () => {
                 </div>
                 <article className="text-left">
                   <h2>Help Reduce Air & Noise Pollution</h2>
-                  <button
-                    // onClick={() => {
-                    //   window.location.href = 'signup.html';
-                    // }}
-                    className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
-                    onClick={signupRoute}
-                    type="submit"
-                  >
-                    JOIN NOW
-                  </button>
                 </article>
                 <img src={`${BASE_URL}/assets/images/contribute-2.jpg`} alt="" />
               </div>
@@ -71,16 +52,6 @@ const Contribute = () => {
                 </div>
                 <article className="text-left">
                   <h2>Help Conserve Energy</h2>
-                  <button
-                    // onClick={() => {
-                    //   window.location.href = 'signup.html';
-                    // }}
-                    className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
-                    onClick={signupRoute}
-                    type="submit"
-                  >
-                    JOIN NOW
-                  </button>
                 </article>
                 <img src={`${BASE_URL}/assets/images/contribute-3.jpg`} alt="" />
               </div>

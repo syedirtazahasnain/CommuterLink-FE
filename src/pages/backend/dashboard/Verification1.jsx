@@ -5,7 +5,7 @@ import { setCurrentPage, setSidebarState, setOption0State, setOption1State } fro
 import { useSelector, useDispatch } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { BASE_URL } from "../../../constants";
-import Dashboard from "../../frontend/Dashboard/Dashboard";
+// import Dashboard from "../../frontend/Dashboard/Dashboard";
 import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../../redux/signupSlice";
 import { Button } from "react-bootstrap";

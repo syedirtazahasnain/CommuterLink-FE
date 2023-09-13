@@ -300,11 +300,6 @@ const TravelConfirmation = () => {
         </div>
         <div
           className="card-body"
-          style={{
-            borderWidth: "0 2px 2px 2px",
-            borderStyle: "solid",
-            borderColor: "#066539",
-          }}
         >
           <div className="card h-50" style={{ backgroundColor: "rgb(214 219 218)" }}>
             <div className="card-body">

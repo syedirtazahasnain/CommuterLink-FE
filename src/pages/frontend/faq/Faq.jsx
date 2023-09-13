@@ -1,15 +1,18 @@
 import React from 'react'
-import imgfaqs from '../../../Images/question.png'
+// import imgfaqs from '../../../Images/question.png'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { BASE_URL } from '../../../constants';
 const Faq = () => {
   return (
     <div>
       <div className="container text-center mt-5 pt-5 fw-bold fs-1 mb-5">
-        <span><img src={imgfaqs} alt="" /> Frequently Asked Questions</span>
+        <span><img src={`${BASE_URL}/assets/images/question.png`}
+        />
+          Frequently Asked Questions</span>
       </div>
       <div>
         <div className="container">
@@ -42,7 +45,7 @@ const Faq = () => {
                   </Typography>
                 </AccordionDetails>
               </Accordion>
-              <Accordion  className="accordianfaqs">
+              <Accordion className="accordianfaqs">
                 <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
                   <Typography className='fw-bold' style={{ color: '#198754' }}> 2. How the cost is calculated and distributed? </Typography>
                 </AccordionSummary>

@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 const MyAccordion = () => {
 
   const navigate = useNavigate();
-  const loginRoute = () => {
-  navigate("/login");
+  const signupRoute = () => {
+  navigate("/signup");
 
 };
   return (
@@ -122,7 +122,7 @@ const MyAccordion = () => {
               <p>It's not about EARNING but cost sharing and SAVING</p>
               <button
                 className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
-                onClick={loginRoute}
+                onClick={signupRoute}
               >
                 JOIN NOW
               </button>

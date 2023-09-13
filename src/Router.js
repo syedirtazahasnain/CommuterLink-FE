@@ -9,7 +9,7 @@ import OtpPage from "./pages/frontend/register-form/OtpPage";
 import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 import RiderRegistration from "./pages/frontend/register-form/RiderRegistration";
 import Verification from "./pages/frontend/register-form/Verification";
-import CommuterProfile from "./pages/frontend/Dashboard/CommuterProfile";
+// import CommuterProfile from "./pages/frontend/Dashboard/CommuterProfile";
 import { useSelector } from "react-redux";
 import Faq from "./pages/frontend/faq/Faq";
 import Login from "./pages/frontend/login/Login";

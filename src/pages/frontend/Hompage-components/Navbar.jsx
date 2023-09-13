@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="row">
 
           <div className="pos-f-t">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <nav className="navbar navbar-expand-lg navbar-light-300  fixed-top">
               <DomLink
                 className="navbar-brand ml-3"
                 to="/"
