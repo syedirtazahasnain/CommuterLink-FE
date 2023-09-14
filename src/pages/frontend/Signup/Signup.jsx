@@ -396,7 +396,10 @@ const Signup = () => {
                   }}
                 >
                   {" "}
-                  You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register
+                  <div class="alert alert-danger  text-center alert-dismissible text-danger fs-6" role="alert">
+                            <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register
+                          </div>
+                 
                 </p>{" "}
                 <Form className="text-center">
                   <Form.Group

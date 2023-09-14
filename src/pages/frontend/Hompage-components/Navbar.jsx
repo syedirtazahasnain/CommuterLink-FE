@@ -79,7 +79,7 @@ const Navbar = () => {
                    
                   </li>
                   <li className="nav-item">
-                    <DomLink className="nav-link mr-3 ml-3" to="/Faq">
+                    <DomLink className="nav-link mr-3 ml-3 text-dark" to="/Faq">
                       FAQS
                     </DomLink>
                   </li>
