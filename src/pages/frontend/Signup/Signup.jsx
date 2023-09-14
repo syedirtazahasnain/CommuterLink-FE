@@ -579,7 +579,7 @@ const Signup = () => {
                           <li className="mr-3">
                             <Tooltip title="Signup With Facebook">
                               <LoginSocialFacebook
-                                appId="866892254777576"
+                                appId="264760359845922"
                                 onResolve={(response) => {
                                   console.log("Response", response);
                                 }}

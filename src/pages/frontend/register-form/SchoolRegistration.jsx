@@ -943,7 +943,7 @@ const SchoolRegistration = () => {
                         onChange={handleProvinceStartChange}
                         required
                       >
-                        <option value="" disabled hidden>
+                        <option value="" hidden>
                           Select a Province
                         </option>
                         {dropdownStartdata?.countries[0]?.provinces?.map(
@@ -974,7 +974,7 @@ const SchoolRegistration = () => {
                         }}
                         required
                       >
-                        <option value="" disabled hidden>
+                        <option value="" hidden>
                           Select a City
                         </option>
                         {selectedStartProvinceCities?.map((province) => (
@@ -1007,7 +1007,7 @@ const SchoolRegistration = () => {
                               onChange={handleLocationStart}
                               required
                             >
-                              <option value="" disabled>
+                              <option value="" hidden>
                                 Select Area from Dropdown
                               </option>
                               {selectedStartCityArea?.map((province) => (
@@ -1130,7 +1130,7 @@ const SchoolRegistration = () => {
                         onChange={handleProvinceEndChange}
                         required
                       >
-                        <option value="" disabled hidden>
+                        <option value="" hidden>
                           Select a Province
                         </option>
                         {dropdownEnddata?.countries[0]?.provinces?.map(
@@ -1161,7 +1161,7 @@ const SchoolRegistration = () => {
                         }}
                         required
                       >
-                        <option value="" disabled hidden>
+                        <option value="" hidden>
                           Select a City
                         </option>
                         {selectedEndProvinceCities?.map((province) => (
@@ -1194,7 +1194,7 @@ const SchoolRegistration = () => {
                               onChange={handleLocationEnd}
                               required
                             >
-                              <option value="" disabled>
+                              <option value="" hidden>
                                 Select Area from Dropdown
                               </option>
                               {selectedEndCityArea?.map((province) => (

@@ -142,24 +142,28 @@ const Driver = () => {
                 const jsonresponse = await response.json();
                 console.log("sendRequest API Response", jsonresponse);
 
-                if (jsonresponse.statusCode === 200) {
+                if (jsonresponse.status_code === 200) {
                     navigate("/dashboard");
-                } else if (jsonresponse.statusCode === 100) {
+                } else if (jsonresponse.status_code === 100) {
                     Swal.fire({
-                        position: 'top',
-                        icon: "error",
-                        text: `${jsonresponse.message}`
-                    }
-                    )
-                }
-                else if (jsonresponse.statusCode === 500) {
+                      position: 'top',
+                      // // icon: 'error',
+                      text: `${jsonresponse.message}`,
+                      customClass: {
+                        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+                      },
+                    });
+                  }
+                  else if (jsonresponse.status_code === 500) {
                     Swal.fire({
-                        position: 'top',
-                        icon: "error",
-                        text: `${jsonresponse.message}`
-                    }
-                    )
-                }
+                      position: 'top',
+                      // icon: 'error',
+                      text: `${jsonresponse.message}`,
+                      customClass: {
+                        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+                      },
+                    });
+                  }
             }
         } catch (error) {
             console.error("An error occurred:", error);
