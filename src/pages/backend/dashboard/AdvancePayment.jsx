@@ -29,7 +29,7 @@ const AdvancePayment = () => {
   const [payment, setPayment] = useState("");
   const [profileType, setProfileType] = useState("");
   const userToken = useSelector((s) => s.login.data.token);
-  const paymentURL =`https://staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
+  const paymentURL = `https://staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
 
   const route = () => {
     setSubmit(true);
@@ -38,7 +38,7 @@ const AdvancePayment = () => {
       navigate("/congratulations");
     }
   };
-  
+
   useEffect(() => {
     getDashboardData();
     getMemberData();
@@ -52,7 +52,7 @@ const AdvancePayment = () => {
   }, []);
 
   useEffect(() => {
-    if(memberId){
+    if (memberId) {
       getPaymentDetails();
     }
   }, [memberId]);
@@ -86,7 +86,7 @@ const AdvancePayment = () => {
       );
 
       const jsonresponse = await response.json();
-       if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
+      if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
         setProfileType("Driver");
         setMemberId(jsonresponse.drivers[0].contact_id);
       }
@@ -97,7 +97,7 @@ const AdvancePayment = () => {
   };
 
   const getProfileData = async () => {
-    try{
+    try {
       const response = await fetch(
         `${API_URL}/api/v1/profile`,
         {
@@ -105,13 +105,13 @@ const AdvancePayment = () => {
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            Authorization : `Bearer ${userToken}`,
+            Authorization: `Bearer ${userToken}`,
           },
         }
       );
 
       const jsonresponse = await response.json();
-      if(jsonresponse){
+      if (jsonresponse) {
         setUserId(jsonresponse[0].contact.user_id);
       }
       console.log("Advance Payment Profile Data", jsonresponse);
@@ -136,10 +136,10 @@ const AdvancePayment = () => {
 
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
-        if(profileType === "Driver"){
+        if (profileType === "Driver") {
           setMemberId("");
         }
-        else{
+        else {
           setMemberId(jsonresponse.data[0].contact_id);
         }
       }
@@ -164,7 +164,7 @@ const AdvancePayment = () => {
       );
 
       const jsonresponse = await response.json();
-      if(jsonresponse){
+      if (jsonresponse) {
         setPayment(jsonresponse);
       }
       console.log("Payment Details:", jsonresponse);
@@ -181,7 +181,7 @@ const AdvancePayment = () => {
     const windowHeight = 600; // Height of the new window
     const leftPosition = (screenWidth - windowWidth) / 2;
     const topPosition = (screenHeight - windowHeight) / 2;
-  
+
     // Open a new window at the center
     const newWindow = window.open(
       paymentURL,
@@ -194,10 +194,10 @@ const AdvancePayment = () => {
       if (newWindow && newWindow.closed) {
         clearInterval(intervalId);
         getPaymentSuccess();
-        };
+      };
     }, 1000);
   };
-  
+
   const getPaymentSuccess = async () => {
     try {
       const response = await fetch(
@@ -213,7 +213,7 @@ const AdvancePayment = () => {
       );
 
       const jsonresponse = await response.json();
-      if(jsonresponse.success === true){
+      if (jsonresponse.success === true) {
         setWindowClosedManually(true);
       }
       console.log("Payment Success Message:", jsonresponse);
@@ -240,39 +240,39 @@ const AdvancePayment = () => {
               At any given point in time wallet must have 2 weeks balance, so
               keep checking and keep loading.
             </p>
-              <h5 className="container bg-white py-3 text-success text-center fw-bold">
-                PAYMENT OPTIONS{" "}
-              </h5>
+            <h5 className="container bg-white py-3 text-success text-center fw-bold">
+              PAYMENT OPTIONS{" "}
+            </h5>
             <div className="page-title">
-                <div className="container text-center p-2">
-                  <div className="row">
-                    <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
-                      <div>
-                        <button 
-                          className="font-custom btn  text-success fw-bold fs-5 lh-1" 
-                          onClick={openAndCloseWindow}
-                        >
-                          <span className="font-custom"><i className="fa-solid fs-3 fa-wallet text-success mx-2" /></span>
-                          Credit/Debit Card
-                        </button>
-                      </div>
+              <div className="container text-center p-2">
+                <div className="row">
+                  <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
+                    <div>
+                      <button
+                        className="font-custom btn  text-success fw-bold fs-5 lh-1"
+                        onClick={openAndCloseWindow} >
+                        <span className="font-custom">
+                          <i className="fa-solid fs-3 fa-wallet text-success mx-2" />
+                        </span>
+                        Credit/Debit Card
+                      </button>
                     </div>
-                    <div className="col-12 border bg-light advancecolor border-success rounded rounded-3">
-                      <div>
-                        <button 
-                          className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
-                          onClick={openAndCloseWindow} 
-                        >
-                          <span><img
-                            src={`${BASE_URL}/assets/images/jazz.png`}
-                            className="font-custom card-img-top w-40px m-auto mx-4"
-                          /></span>
-                          Jazz Cash
-                        </button>
-                      </div>
+                  </div>
+                  <div className="col-12 border bg-light advancecolor border-success rounded rounded-3">
+                    <div>
+                      <button
+                        className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
+                        onClick={openAndCloseWindow} >
+                        <span><img
+                          src={`${BASE_URL}/assets/images/jazz.png`}
+                          className="font-custom card-img-top w-40px m-auto mx-4" />
+                        </span>
+                        Jazz Cash
+                      </button>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
           <div className="text-center">
@@ -284,7 +284,7 @@ const AdvancePayment = () => {
               Skip Payment
             </Button>
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2" style={{ backgroundColor: "rgb(42, 64, 42)"}}
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2" style={{ backgroundColor: "rgb(42, 64, 42)" }}
               onClick={route}
               disabled={!windowClosedManually}
             >

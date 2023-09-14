@@ -232,7 +232,6 @@ const TravelPatners = () => {
                           <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
                           <p className="fw-bold fs-6">Start Date: {date}</p>
                         </div>
-
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -263,13 +262,9 @@ const TravelPatners = () => {
                           <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
                           <p className="fw-bold fs-6">Start Date: {date}</p>
                         </div>
-
                       </div>
                     </div>
                   </div>
-
-
-
                   <div className="row d-flex justify-content-between pt-5">
                     <TableContainer component={Paper} style={{ backgroundColor: "#ECF8F9", border: '1px solid gray' }}>
                       <Table>
