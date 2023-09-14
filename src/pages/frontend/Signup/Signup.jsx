@@ -218,18 +218,18 @@ const Signup = () => {
           } else {
             const errors = jsonresponse.errors;
             for (const field of Object.keys(errors)) {
-            Swal.fire({
-              position: "top",
-              // icon: "error",
-              // text: `${jsonresponse.message}`,
-              text: `${errors[field][0]}`,
-              customClass: {
-                confirmButton: "bg-success",
-                // Apply custom CSS class to the OK button
-              },
-            });
+              Swal.fire({
+                position: "top",
+                // icon: "error",
+                // text: `${jsonresponse.message}`,
+                text: `${errors[field][0]}`,
+                customClass: {
+                  confirmButton: "bg-success",
+                  // Apply custom CSS class to the OK button
+                },
+              });
+            }
           }
-        }
         } else {
           // alert("please check Terms of Service");
           Swal.fire({
@@ -250,15 +250,15 @@ const Signup = () => {
   const handleFullNameChange = (e) => {
     const value = e.target.value.replace(/[^a-z" "]/gi, '');
     setFullName(value);
-    
+
     if (!/^[a-zA-Z" "]+$/.test(value) || value.length < 4) {
       setFullNameError("Full Name must contain only alphabetic characters and be at least 4 characters long");
     } else {
       setFullNameError("");
     }
   };
-  
-  
+
+
 
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
@@ -392,7 +392,7 @@ const Signup = () => {
                 <p
                   className="text-center fs-6 text-danger text-custom"
                   style={{
-               
+
                   }}
                 >
                   {" "}
@@ -527,7 +527,7 @@ const Signup = () => {
                                 textDecoration: "none",
                               }}
                             >
-                            &nbsp;
+                              &nbsp;
                               Terms of service
                             </span>
                           </Link>
@@ -591,7 +591,7 @@ const Signup = () => {
                                 />
                               </LoginSocialFacebook>
                             </Tooltip>
-                            </li>
+                          </li>
                           <li>
                             {/* <Tooltip title="Signup With Linkedin">
                             
@@ -612,7 +612,7 @@ const Signup = () => {
                                 />
                               </a>
                             </Tooltip>
-                            </li>
+                          </li>
                         </ul>
                       </div>
                     </div>

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { setsignupState } from "../../redux/signupSlice";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { BsGear, BsPower, BsBell } from "react-icons/bs";
 
 const customTheme = createTheme({
   palette: {
@@ -236,14 +237,14 @@ const BackendLayout = ({ children }) => {
                                     />
                                   )}
                               </div>
-                              <div className="h-15px me-3 mt-3">
+                              <div className="h-15px me-3 mt-4">
                                 <Tooltip title="Notifications">
                                   <Link
                                     to='/notification'
                                     className='mx-1 h-15px d-inline-block'
                                     style={{ cursor: "pointer" }}
                                   >
-                                    <i className="fa-regular fs-6 fa-bell icon-green mt-2"></i>
+                                    <BsBell className="align-top text-dark" />
                                   </Link>
                                 </Tooltip>
                                 <Tooltip title="Settings">
@@ -252,10 +253,7 @@ const BackendLayout = ({ children }) => {
                                     className='mx-1 h-15px d-inline-block'
                                     style={{ cursor: "pointer" }}
                                   >
-                                    <img className=" mb-2"
-                                      src={`${BASE_URL}/assets/images/settings.png`}
-                                    />
-                                    {/* <i className="fa-solid fa-gear icon-green mt-2"></i> */}
+                                    <BsGear className="align-top text-dark" />
                                   </Link>
                                 </Tooltip>
 
@@ -265,7 +263,7 @@ const BackendLayout = ({ children }) => {
                                     className='mx-1 h-15px d-inline-block'
                                     style={{ cursor: "pointer" }}
                                   >
-                                    <i className="fa-solid fa-power-off fs-6 icon-green mt-2"></i>
+                                    <BsPower className="align-top text-dark" />
                                   </a>
                                 </Tooltip>
                               </div>
@@ -476,8 +474,8 @@ const BackendLayout = ({ children }) => {
                           <div className="menu-item border-custom">
                             <Link
                               className={`menu-link ${currentPage == "termscondition"
-                                  ? "active"
-                                  : ""
+                                ? "active"
+                                : ""
                                 }`}
                               to={"/termscondition"}
                               style={{
@@ -527,7 +525,7 @@ const BackendLayout = ({ children }) => {
                               }}
                             >
                               <span className="menu-icon font-custom">
-                              <i class="fa-solid fa-rotate"></i>
+                                <i class="fa-solid fa-rotate"></i>
                               </span>
                               <span className="menu-title text-white font-custom">
                                 Update Matching Criteria
@@ -574,7 +572,7 @@ const BackendLayout = ({ children }) => {
                           </div>
 
                         </div>
-                     
+
                         <div
                           className={
                             sidebarOpened
@@ -583,25 +581,25 @@ const BackendLayout = ({ children }) => {
                           }
                         >
                         </div>
-                       
+
                       </div>
-                      
+
                     </div>
                     <div
                       className="app-sidebar-logo sidebar-bg border-0"
                       id="kt_app_sidebar_logo"
                     >
-                    <div className="container text-center " id="kt_app_sidebar_logo" style={{backgroundColor:"#06373A"}}>
+                      <div className="container text-center " id="kt_app_sidebar_logo" style={{ backgroundColor: "#06373A" }}>
                         <img
                           src={`${BASE_URL}/assets/images/Sysreformslogo2.png`}
                           className="img-fluid app-sidebar-logo-default py-2 "
                           style={{ height: "50px", width: "auto" }}
                           alt=""
                         />
-                         <img
+                        <img
                           src={`${BASE_URL}/assets/images/Sysreformssmlogo.png`}
                           className=" app-sidebar-logo-minimize w-auto"
-                          style={{ height: "40px", width: "auto",backgroundColor:"#06373A" }}
+                          style={{ height: "40px", width: "auto", backgroundColor: "#06373A" }}
                           alt=""
                         />
                       </div></div>

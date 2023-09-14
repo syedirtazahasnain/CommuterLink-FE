@@ -227,7 +227,6 @@ const RechargeWallet = () => {
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
           TWO WEEKS ADVANCE MIN. PAYMENT DUE: RS {payment}/-{" "}
-          {/* Two Weeks Advance Min. Payment Due: Rs.{payment}/-{" "} */}
         </h3>
       </div>
       <div className="card p-4  p-2">
@@ -242,7 +241,7 @@ const RechargeWallet = () => {
               keep checking and keep loading.
             </p>
             <div className="page-title">
-              <h5 className="card p-2 text-success text-center my-2 fw-bold">
+              <h5 className="container bg-white py-3 text-success text-center fw-bold">
                 PAYMENT OPTIONS{" "}
               </h5>
             </div>

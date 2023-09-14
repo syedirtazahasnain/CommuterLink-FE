@@ -237,7 +237,7 @@ const EditProfile = () => {
         <div className="card backgroundColor">
           <div className="card-body text-dark">
             <div className="container text-center">
-              <h2 className="text-success">Change Password</h2>
+              <h2 className="text-success fw-bold">Change Password</h2>
               <Form className="text-center">
                 <Form.Group
                   className=" mt-4 text-center"

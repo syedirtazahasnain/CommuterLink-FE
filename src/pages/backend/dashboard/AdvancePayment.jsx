@@ -226,7 +226,7 @@ const AdvancePayment = () => {
     <div>
       <div className="page-title">
         <h3 className="card p-4 text-success my-2 fw-bold">
-          Two Weeks Advance Min. Payment Due: Rs. {payment}/-{" "}
+          TWO WEEKS ADVANCE MIN. PAYMENT DUE: RS. {payment}/-{" "}
         </h3>
       </div>
       <div className="card p-4  p-2">
@@ -240,16 +240,13 @@ const AdvancePayment = () => {
               At any given point in time wallet must have 2 weeks balance, so
               keep checking and keep loading.
             </p>
-            <div className="page-title">
-              <h5 className="card p-2 text-success text-center my-2 fw-bold">
+              <h5 className="container bg-white py-3 text-success text-center fw-bold">
                 PAYMENT OPTIONS{" "}
               </h5>
-            </div>
             <div className="page-title">
-              <div className="card p-2 text-success text-center my-2 fw-bold">
                 <div className="container text-center p-2">
                   <div className="row">
-                    <div className="col-12 mb-2  border border-success rounded rounded-3">
+                    <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
                       <div>
                         <button 
                           className="font-custom btn  text-success fw-bold fs-5 lh-1" 
@@ -260,7 +257,7 @@ const AdvancePayment = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="col-12 border advancecolor border-success rounded rounded-3">
+                    <div className="col-12 border bg-light advancecolor border-success rounded rounded-3">
                       <div>
                         <button 
                           className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
@@ -276,7 +273,6 @@ const AdvancePayment = () => {
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
           <div className="text-center">

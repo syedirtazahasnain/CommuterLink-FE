@@ -59,15 +59,9 @@ const PaymentOptions = ({ children }) => {
               Money will stay in your Wallet & will be transferred to car owner
               on weekly basis after you have availed the services
             </p>
-            {/* <p className="">
-              At any given point in time wallet must have 2 weeks balance, so
-              keep checking and keep loading.
-            </p> */}
-            <div className="page-title">
-              <h5 className="card p-2 text-success text-center my-2 fw-bold">
+              <h5 className="container bg-white py-3 text-success text-center fw-bold">
                 PAYMENT OPTIONS{" "}
               </h5>
-            </div>
             <div className="page-title">
               <div className="p-2 text-success text-center my-2 fw-bold">
                 <div className="container text-center p-2">
