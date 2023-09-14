@@ -350,7 +350,7 @@ const TravelConfirmation = () => {
                                 marginTop: "16px",
                                 marginBottom: "8px",
                                 paddingLeft: "150px",
-                                paddingRight: "135px",
+                                paddingRight: "130px",
                                 backgroundColor: "#CDF0EA",
                                 paddingY: "20px"
                               },
@@ -396,27 +396,27 @@ const TravelConfirmation = () => {
                         <div className="h-100">
                           <div className="row text-center h-50 py-2 ">
                             <div className="col-md-4 mb-2">
-                              <button className="btn text-success fw-bold fs-6 lh-1">
-                                <span className="align-middle ">
+                              <button className="font-custom btn text-success fw-bold fs-6 lh-1">
+                                <span className="d-flex">
                                   <i className="fa-regular fa-circle-check text-success mx-1 fs-5"></i>
-                                </span>
-                                <span className="align-middle">Travelled</span>
+                              
+                                <div className="align-middle">Travelled</div>  </span>
                               </button>
                             </div>
                             <div className="col-md-4 mb-2">
-                              <button className=" btn btncol advancecolor text-success fw-bold fs-6 lh-1">
-                                <span>
+                              <button className=" font-custom btn btncol advancecolor text-success fw-bold fs-6 lh-1">
+                                <span className="d-flex">
                                   <i className="fa-solid fa-circle-minus text-success mx-1 fs-5"></i>
-                                </span>
-                                <span className="align-middle">Not Travelled</span>
+                              
+                                <div className="align-middle">Not Travelled</div>  </span>
                               </button>
                             </div>
                             <div className="col-md-4 mb-2">
-                              <button className="btn btncol advancecolor text-success fw-bold fs-6 lh-1">
-                                <span>
-                                  <i className="fa-solid fa-car text-danger mx-1 fs-5"></i>
-                                </span>
-                                <span className="align-middle">Driver Didn't Come</span>
+                              <button className="font-custom btn btncol advancecolor text-success fw-bold fs-6 lh-1">
+                                <span className="d-flex">
+                                  <i className="fa-solid fa-car text-danger mx-1"></i>
+                             
+                                <div className="align-middle">Driver Didn't Come</div>   </span>
                               </button>
                             </div>
 
@@ -453,7 +453,7 @@ const TravelConfirmation = () => {
                     <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
                       <div>
                         <button
-                          className="btn  text-success fw-bold fs-5 lh-1"
+                          className="btn font-custom   text-success fw-bold fs-5 lh-1"
                           onClick={() => handleStatusSelect("1")}
                         >
                           <span>
@@ -463,7 +463,7 @@ const TravelConfirmation = () => {
                         </button>
                       </div>
                       <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("0")}>
+                        <button className="btn btncol font-custom  advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("0")}>
                           <span>
                             <i className="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
                           </span>
@@ -471,7 +471,7 @@ const TravelConfirmation = () => {
                         </button>
                       </div>
                       <div>
-                        <button className="btn btncol advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("-1")}>
+                        <button className="btn btncol font-custom advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("-1")}>
                           <span>
                             <i className="fa-solid fa-car text-danger mx-1 fs-2"></i>
                           </span>
