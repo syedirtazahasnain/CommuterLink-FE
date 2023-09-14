@@ -35,22 +35,22 @@ const Login = () => {
           },
         }
       );
-        
-        const jsonresponse = await response.json();
 
-        console.log(jsonresponse);
+      const jsonresponse = await response.json();
 
-        if(jsonresponse.statusCode === 200){
-          if(jsonresponse.data[0] === 1){
-            navigate("/dashboard");
-          }
-          else if(jsonresponse.data[0] === 0){
-            navigate("/verification");
-          }
-          else if(jsonresponse.data[0] === -1){
-            navigate("/rejection");
-          }
+      console.log(jsonresponse);
+
+      if (jsonresponse.statusCode === 200) {
+        if (jsonresponse.data[0] === 1) {
+          navigate("/dashboard");
         }
+        else if (jsonresponse.data[0] === 0) {
+          navigate("/verification");
+        }
+        else if (jsonresponse.data[0] === -1) {
+          navigate("/rejection");
+        }
+      }
 
     } catch (error) {
       console.error("An error occurred:", error);
@@ -58,34 +58,33 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if(userToken)
-    {
+    if (userToken) {
       checkUserStatus();
     }
-    else{
+    else {
       navigate("/login");
     }
   }, [userToken]);
 
   const googlesignup = useGoogleLogin({
-    clientId:"380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
+    clientId: "380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
     onError: (codeResponse) => handleFailure(codeResponse),
   });
   const handleFailure = (response) => {
     console.log("handleFailure", response);
   };
-  
+
   const handleLogin = async () => {
-    if(email === "" || password === ""){
+    if (email === "" || password === "") {
       Swal.fire({
-        position:'top',
+        position: 'top',
         // // icon: 'warning',
-       text: 'Please Fill All Fields',
-       customClass: {
-        confirmButton: 'bg-success' ,
-      },
-    }
+        text: 'Please Fill All Fields',
+        customClass: {
+          confirmButton: 'bg-success',
+        },
+      }
       )
     }
     else {
@@ -95,7 +94,7 @@ const Login = () => {
 
   const postData = async () => {
     try {
-      if(termsService){
+      if (termsService) {
         const body = {
           email: email,
           password: password,
@@ -113,36 +112,36 @@ const Login = () => {
         );
         const jsonresponse = await response.json();
         //console.log(jsonresponse);
-  
+
         if (jsonresponse.statusCode === 200) {
           dispatch(setloginState(jsonresponse.access_token));
         } else {
           console.log(jsonresponse);
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
-            position:'top',
+            position: 'top',
             // // icon: 'error',
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'bg-success' ,
-          },
-        }
+            text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: 'bg-success',
+            },
+          }
           )
         }
-        }
-      
+      }
+
       else {
         Swal.fire({
-          position:'top',
+          position: 'top',
           // // icon: 'warning',
-         text: 'Please Check Terms of Services',
-         customClass: {
-          confirmButton: 'bg-success' ,
-        },
-      }
+          text: 'Please Check Terms of Services',
+          customClass: {
+            confirmButton: 'bg-success',
+          },
+        }
         )
       }
-      
+
     } catch (error) {
       console.log(error.message);
     }
@@ -157,7 +156,7 @@ const Login = () => {
       setIsValidEmail(false);
     }
   };
-  
+
   const handleSuccess = async (response) => {
     try {
       if (response && response.access_token) {
@@ -170,14 +169,14 @@ const Login = () => {
             method: "get",
           }
         );
-        
+
         if (profile.ok) {
           const userObject = await profile.json();
           const body = {
             email: userObject.email,
             provider: "google",
           };
-  
+
           const res = await fetch(
             `${API_URL}/api/v1/auth`,
             {
@@ -188,23 +187,23 @@ const Login = () => {
               body: JSON.stringify(body),
             }
           );
-  
+
           const jsonresponse = await res.json();
-  
+
           if (jsonresponse.statusCode === 200) {
             dispatch(setloginState(jsonresponse.access_token));
           } else {
             // alert("Error: " + jsonresponse.message);
             Swal.fire({
-              position:'top',
+              position: 'top',
               // // icon: 'error',
-             text: `${jsonresponse.message}`,
-             customClass: {
-              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-            },
-          }
+              text: `${jsonresponse.message}`,
+              customClass: {
+                confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              },
+            }
             )
-          
+
           }
         } else {
           console.error("Profile request failed with status:", profile.status);
@@ -214,7 +213,7 @@ const Login = () => {
       console.error("Error:", error.message);
     }
   };
-  
+
   return (
     <div>
       <div>
@@ -228,50 +227,50 @@ const Login = () => {
                   marginTop: "12vh"
                 }}
               >
-               
-                  <Carousel
-                    style={{
-                      backgroundColor: "#eee",
-                    }}
-                    className="carousel-container"
-                    prevIcon={null}
-                    nextIcon={null}
-                    indicators={null}
-                  >
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
-                    </Carousel.Item>
 
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-4.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-6.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
-                    </Carousel.Item>
-                  </Carousel>
+                <Carousel
+                  style={{
+                    backgroundColor: "#eee",
+                  }}
+                  className="carousel-container"
+                  prevIcon={null}
+                  nextIcon={null}
+                  indicators={null}
+                >
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                  </Carousel.Item>
+
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-3.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+                  </Carousel.Item>
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-4.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                  </Carousel.Item>
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-6.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                  </Carousel.Item>
+                </Carousel>
                 {/* </div> */}
               </div>
 
@@ -304,7 +303,7 @@ const Login = () => {
                       helperText={!isValidEmail && "Please enter a valid email"}
                       size='small'
                       sx={{ width: '100%' }}
-                      />
+                    />
                   </Form.Group>
                   <Form.Group
                     className="mt-3 text-center"
@@ -322,35 +321,35 @@ const Login = () => {
                     />
                   </Form.Group>
                   <div className="col-md-12 text-center mt-3">
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            value="termsService"
-                            style={{ borderColor: "#198754" }}
-                            // required
-                            onChange={(e) => setTermsService(e.target.checked)}
-                            size="small"
-                          />
-                        }
-                        label={
-                          <div id="span-text" className="mr-5 small">
-                            I agree with all statements in
-                            <Link to={'/terms_services'} style={{ textDecoration: "none" }}>
-                              <span
-                                style={{
-                                  color: "#198754",
-                                  textDecoration: "none",
-                                }}
-                              >
-                               {" "} 
-                               &nbsp;
-                            Terms of service
-                              </span>
-                            </Link>
-                          </div>
-                        }
-                      />
-                    </div>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value="termsService"
+                          style={{ borderColor: "#198754" }}
+                          // required
+                          onChange={(e) => setTermsService(e.target.checked)}
+                          size="small"
+                        />
+                      }
+                      label={
+                        <div id="span-text" className="mr-5 small">
+                          I agree with all statements in
+                          <Link to={'/terms_services'} style={{ textDecoration: "none" }}>
+                            <span
+                              style={{
+                                color: "#198754",
+                                textDecoration: "none",
+                              }}
+                            >
+                              {" "}
+                              &nbsp;
+                              Terms of service
+                            </span>
+                          </Link>
+                        </div>
+                      }
+                    />
+                  </div>
                   <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
                     Login
                   </Button>
@@ -370,36 +369,36 @@ const Login = () => {
                           }}
                         >
                           <li className="mr-3">
-                          <Tooltip title="Login With Google">
-                          <a onClick={googlesignup}>
-                              <img
-                                src={`${BASE_URL}/assets/images/google.png`}
-                                alt=""
-                                style={{ height: "25px", width: "25px", cursor: "pointer" }}
-                              />
-                            </a>
-                          </Tooltip>
+                            <Tooltip title="Login With Google">
+                              <a onClick={googlesignup}>
+                                <img
+                                  src={`${BASE_URL}/assets/images/google.png`}
+                                  alt=""
+                                  style={{ height: "25px", width: "25px", cursor: "pointer" }}
+                                />
+                              </a>
+                            </Tooltip>
                           </li>
                           <li className="mr-3">
-                          <Tooltip title="Login With Facebook">
-                            <a href="https://www.facebook.com/Sysreforms">
-                              <img
-                               src={`${BASE_URL}/assets/images/facebook.png`}
-                                alt=""
-                                style={{ height: "27px", width: "27px" , cursor: "pointer"}}
-                              />
-                            </a>
-                                </Tooltip>
+                            <Tooltip title="Login With Facebook">
+                              <a href="https://www.facebook.com/Sysreforms">
+                                <img
+                                  src={`${BASE_URL}/assets/images/facebook.png`}
+                                  alt=""
+                                  style={{ height: "27px", width: "27px", cursor: "pointer" }}
+                                />
+                              </a>
+                            </Tooltip>
                           </li>
                           <li>
-                          <Tooltip title="Login With Linkedin">
-                            <a href="https://www.linkedin.com/company/sysreforms-international/mycompany/">
-                              <img
-                                src={`${BASE_URL}/assets/images/linkedin.png`}
-                                alt=""
-                                style={{ height: "35px", width: "35px", cursor: "pointer" }}
-                              />
-                            </a>
+                            <Tooltip title="Login With Linkedin">
+                              <a href="https://www.linkedin.com/company/sysreforms-international/mycompany/">
+                                <img
+                                  src={`${BASE_URL}/assets/images/linkedin.png`}
+                                  alt=""
+                                  style={{ height: "35px", width: "35px", cursor: "pointer" }}
+                                />
+                              </a>
                             </Tooltip>
                           </li>
                         </ul>
@@ -415,7 +414,7 @@ const Login = () => {
                   </div>
                 </Form>
               </div>
-             
+
             </div>
           </div>
         </section>
