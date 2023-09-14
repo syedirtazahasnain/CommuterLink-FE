@@ -29,7 +29,7 @@ const RechargeWallet = () => {
   const [payment, setPayment] = useState("");
   const [profileType, setProfileType] = useState("");
   const userToken = useSelector((s) => s.login.data.token);
-  const paymentURL =`https://staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
+  const paymentURL =`https://be.staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
 
   const route = () => {
     setSubmit(true);
