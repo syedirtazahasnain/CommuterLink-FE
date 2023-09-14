@@ -142,7 +142,7 @@ const TravelPatners = () => {
                   <div className="row mb-3">
                     <div className="col-md-6">
                       <div className="row">
-                        <div className="col-md-3">
+                        <div className="col-md-4">
                           <div
                             className="card"
                             style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
@@ -163,17 +163,17 @@ const TravelPatners = () => {
                             )}
                           </div>
                         </div>
-                        <div className="col-md-9">
-                          <p className="fw-bold fs-5">Name: {name}</p>
-                          <p className="fw-bold fs-5">Daily Commuting Cost Rs. &nbsp; {price}/-</p>
-                          <p className="fw-bold fs-5">Start Date: {date}</p>
+                        <div className="col-md-8">
+                          <p className="fw-bold fs-6">Name: {name}</p>
+                          <p className="fw-bold fs-6">Daily Commuting Cost: Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-6">Start Date: {date}</p>
                         </div>
 
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="row">
-                        <div className="col-md-3">
+                        <div className="col-md-4">
                           <div
                             className="card"
                             style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
@@ -194,10 +194,10 @@ const TravelPatners = () => {
                             )}
                           </div>
                         </div>
-                        <div className="col-md-9">
-                          <p className="fw-bold fs-5">Name: {name}</p>
-                          <p className="fw-bold fs-5">Daily Commuting Cost Rs. &nbsp; {price}/-</p>
-                          <p className="fw-bold fs-5">Start Date: {date}</p>
+                        <div className="col-md-8">
+                          <p className="fw-bold fs-6">Name: {name}</p>
+                          <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-6">Start Date: {date}</p>
                         </div>
 
                       </div>
@@ -206,7 +206,7 @@ const TravelPatners = () => {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="row">
-                        <div className="col-md-3">
+                        <div className="col-md-4">
                           <div
                             className="card"
                             style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
@@ -227,17 +227,17 @@ const TravelPatners = () => {
                             )}
                           </div>
                         </div>
-                        <div className="col-md-9">
-                          <p className="fw-bold fs-5">Name: {name}</p>
-                          <p className="fw-bold fs-5">Daily Commuting Cost Rs. &nbsp; {price}/-</p>
-                          <p className="fw-bold fs-5">Start Date: {date}</p>
+                        <div className="col-md-8">
+                          <p className="fw-bold fs-6">Name: {name}</p>
+                          <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-6">Start Date: {date}</p>
                         </div>
 
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="row">
-                        <div className="col-md-3">
+                        <div className="col-md-4">
                           <div
                             className="card"
                             style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
@@ -258,10 +258,10 @@ const TravelPatners = () => {
                             )}
                           </div>
                         </div>
-                        <div className="col-md-9">
-                          <p className="fw-bold fs-5">Name: {name}</p>
-                          <p className="fw-bold fs-5">Daily Commuting Cost Rs. &nbsp; {price}/-</p>
-                          <p className="fw-bold fs-5">Start Date: {date}</p>
+                        <div className="col-md-8">
+                          <p className="fw-bold fs-6">Name: {name}</p>
+                          <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-6">Start Date: {date}</p>
                         </div>
 
                       </div>

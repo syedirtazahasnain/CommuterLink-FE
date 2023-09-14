@@ -147,7 +147,7 @@ const CommuterLinkSuggestions = () => {
   const RiderCard = ({ user }) => {
     // Extract relevant data from the user object
     const { commuter_image, name, contact_id, req_stage, req_status } = user;
-  
+
     return (
       <div className="col-sm-2">
         <div
@@ -160,7 +160,7 @@ const CommuterLinkSuggestions = () => {
           {req_stage === 1 || req_stage === 2 ? (
             <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" />
           ) : (
-            <img  src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
+            <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
           <div
             className="card-title text-light text-center"
@@ -176,11 +176,11 @@ const CommuterLinkSuggestions = () => {
       </div>
     );
   };
-  
+
   const DriverCard = ({ user }) => {
     // Extract relevant data from the user object
     const { commuter_image, name, contact_id, req_stage, req_status } = user;
-  
+
     return (
       <div className="col-sm-2">
         <div
@@ -190,10 +190,10 @@ const CommuterLinkSuggestions = () => {
             backgroundColor: req_stage === 1 ? "#5ab387" : req_stage === 0 ? "#ff8a00" : "#5ab387",
           }}
         >
-          {req_stage === 1 || req_stage === 2  ? (
+          {req_stage === 1 || req_stage === 2 ? (
             <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" />
           ) : (
-            <img  src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
+            <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
           <div
             className="card-title text-center text-light"
@@ -206,13 +206,13 @@ const CommuterLinkSuggestions = () => {
           </div>
           <img
             className=""
-            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+          // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
           />
         </div>
       </div>
     );
-  };  
-  
+  };
+
 
   const DefaultCard = () => {
     // Render a default card when user type is not recognized
@@ -237,7 +237,7 @@ const CommuterLinkSuggestions = () => {
           </div>
           <img
             className=""
-            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+          // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
           />
         </div>
       </div>
@@ -248,8 +248,8 @@ const CommuterLinkSuggestions = () => {
     // Extract relevant data from the request object
     const { contact_id, request_stage } = request;
     const { commuter_image, name } = request.user[0];
-    console.log({request});
-  
+    console.log({ request });
+
     return (
       <div className="col-sm-2">
         <div
@@ -260,10 +260,10 @@ const CommuterLinkSuggestions = () => {
               request_stage === 1 || request_stage === 2 ? "#FF8A00" : "#5ab387",
           }}
         >
-           {request_stage === 1 || request_stage === 2 ? (
+          {request_stage === 1 || request_stage === 2 ? (
             <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" />
           ) : (
-            <img  src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
+            <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
           <div
             className={`card-title ${request_stage === 2 ? "text-dark" : "text-light"} text-center`}
@@ -276,7 +276,7 @@ const CommuterLinkSuggestions = () => {
           </div>
           <img
             className=""
-            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+          // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
           />
         </div>
       </div>
@@ -306,7 +306,7 @@ const CommuterLinkSuggestions = () => {
           </div>
           <img
             className=""
-            // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
+          // src={`${BASE_URL}/assets/images/downlineofmembericon.png`}
           />
         </div>
       </div>
@@ -316,15 +316,15 @@ const CommuterLinkSuggestions = () => {
   return (
     <div>
       <div className="card  mt-3 mb-5">
-          <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
-                <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
-                {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
-                </h4>
-                </div>
+        <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
+          <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
+            {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
+          </h4>
+        </div>
 
         <div
           className="card-body"
-         
+
         >
           <div className="card  mt-3 mb-5" style={{ backgroundColor: "#D9D9D9" }}>
             <div
@@ -337,7 +337,7 @@ const CommuterLinkSuggestions = () => {
               </h5>
             </div>
 
-            <div className="card-body" style={{  background:  "rgb(214 219 218)"  }}>
+            <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
               <p>
                 Based upon your Profile, We have Following{" "}
                 <strong> Matches</strong> to Offer
@@ -384,13 +384,13 @@ const CommuterLinkSuggestions = () => {
               </p>
               <div className="row">
                 {requests.map((request, index) => {
-                   if (request.request_stage !== 3) {
+                  if (request.request_stage !== 3) {
                     // Show Request card when req_stage is not 3
                     return <RequestCard key={index} request={request} />;
                   }
-                  })}
-                 {/* Add default cards to reach a total of 6 if necessary */}
-                 {requests.length < 6 && Array.from({ length: 6 - requests.length }, (_, i) => (
+                })}
+                {/* Add default cards to reach a total of 6 if necessary */}
+                {requests.length < 6 && Array.from({ length: 6 - requests.length }, (_, i) => (
                   <RequestDefaultCard key={`default-${i}`} />
                 ))}
               </div>
