@@ -408,8 +408,8 @@ const Login = () => {
                     <hr id="hrline2" />
                     <div id="span-text" className="text-center mb-5">
                       Not have account on CommutersLink? &nbsp;
-                      <Link to="/signup">
-                        <span className="reg-text">Signup</span>
+                      <Link to="/signup" style={{textDecoration:'none'}}>
+                        <span className="reg-text" style={{textDecoration:'none'}}>Signup</span>
                       </Link>
                     </div>
                   </div>

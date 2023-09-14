@@ -348,8 +348,8 @@ const OtpPage = () => {
                   </CardActions>
                   <div id="span-text" className="text-center mb-5">
                     Didn't get the code? &nbsp;
-                    <Link onClick={resendOTP}>
-                      <span style={{ color: "#198754" }}>Resend</span>
+                    <Link onClick={resendOTP} style={{textDecoration:'none'}}>
+                      <span style={{ color: "#198754", textDecoration:'none' }}>Resend</span>
                     </Link>
                   </div>
 

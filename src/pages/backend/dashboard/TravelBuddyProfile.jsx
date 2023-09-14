@@ -276,7 +276,7 @@ const TravelBuddyProfile = () => {
       if (jsonresponse.status_code === 500) {
         Swal.fire({
           position: 'top',
-          icon: 'error',
+        
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button

@@ -105,8 +105,11 @@ const Driver = () => {
                 || selectedRegYear === "") {
                 Swal.fire({
                     position: 'top',
-                    icon: "warning",
-                    text: `Please fill all fields!`
+                 
+                    text: `Please fill all fields!`,
+                    customClass:{
+                        confirmButton:'bg-success'
+                      }
                 }
                 )
             }
@@ -146,24 +149,26 @@ const Driver = () => {
                     navigate("/dashboard");
                 } else if (jsonresponse.status_code === 100) {
                     Swal.fire({
-                      position: 'top',
-                      // // icon: 'error',
-                      text: `${jsonresponse.message}`,
-                      customClass: {
-                        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-                      },
-                    });
-                  }
-                  else if (jsonresponse.status_code === 500) {
+                        position: 'top',
+                      
+                        text: `${jsonresponse.message}`,
+                        customClass:{
+                            confirmButton:'bg-success'
+                          }
+                    }
+                    )
+                }
+                else if (jsonresponse.statusCode === 500) {
                     Swal.fire({
-                      position: 'top',
-                      // icon: 'error',
-                      text: `${jsonresponse.message}`,
-                      customClass: {
-                        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-                      },
-                    });
-                  }
+                        position: 'top',
+                       
+                        text: `${jsonresponse.message}`,
+                        customClass:{
+                            confirmButton:'bg-success'
+                          }
+                    }
+                    )
+                }
             }
         } catch (error) {
             console.error("An error occurred:", error);
@@ -171,8 +176,11 @@ const Driver = () => {
             // alert("An error occurred while sending the request.");
             Swal.fire({
                 position: 'top',
-                // icon: "error",
-                text: 'An error occured while sending the request.'
+              
+                text: 'An error occured while sending the request.',
+                customClass:{
+                    confirmButton:'bg-success'
+                  }
             })
         }
     };

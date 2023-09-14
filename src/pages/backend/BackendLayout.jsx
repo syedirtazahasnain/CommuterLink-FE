@@ -72,7 +72,7 @@ const BackendLayout = ({ children }) => {
           Swal.fire({
             position: 'top',
             title: 'Logout',
-            text: 'Successful',
+            
             customClass: {
               confirmButton: 'bg-success', // Apply custom CSS class to the OK button
             },
@@ -271,37 +271,7 @@ const BackendLayout = ({ children }) => {
                           </div>
                         </div>
                       </div>
-                      {/* <div className="header-right">
-                        <div
-                          className="app-navbar-item"
-                          id="kt_header_user_menu_toggle"
-                        >
-                          <div
-                            className="d-flex"
-                            data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                            data-kt-menu-attach="parent"
-                            data-kt-menu-placement="bottom-end"
-                          >
-                            <div className="text-center">
-                              <div className="mt-3 px-4">
-                                <Tooltip title="Notifications">
-                                  <Link to="/notification" className="d-inline-block">
-                                    <i className="fa-solid fa-bell fs-3 icon-green mt-2 mx-4"></i>
-                                  </Link>
-                                </Tooltip>
-                                <Tooltip title="Logout">
-                                  <Button
-                                    className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
-                                    onClick={logout}
-                                  >
-                                    LOG OUT
-                                  </Button>
-                                </Tooltip>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> */}
+                      
                     </div>
                     <div
                       className="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
@@ -403,35 +373,7 @@ const BackendLayout = ({ children }) => {
                           data-kt-menu="true"
                           data-kt-menu-expand="false"
                         >
-                          {/* <div >
-                            <div className="d-flex align-items-center mx-3  me-xl-13">
-                              <div className="symbol symbol-50px symbol-circle me-3">
-                              {image ? 
-                                (
-                                  <img
-                                    src={`${IMAGE_URL}${image}`}
-                                  />
-                                ) : 
-                                (
-                                  <img
-                                    src={`${BASE_URL}/assets/images/pic.png`}
-                                  />
-                                )} 
-                              </div>
-                              <div className="m-0">
-                                <span className="fw-semibold text-white d-block fs-5 mb-1">
-                                {name ? (name) : ("Yasir Abbas Mirza")}
-                                </span>
-                                <Link
-                                  to="/viewprofile"
-                                  className=" btn-sm Profile fw-bold text-white  text-hover-dark fs-6 py-2 px-3 rounded-4"
-                                >
-                                  Profile
-                                </Link>
-                              </div>
-                            </div>
-                          </div> */}
-                          {/* <hr /> */}
+                          
 
                           <div className="menu-item border-custom">
                             <Link

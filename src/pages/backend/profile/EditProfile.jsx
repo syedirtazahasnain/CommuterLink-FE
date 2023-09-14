@@ -98,7 +98,7 @@ const EditProfile = () => {
       if(jsonresponse.statusCode === 500){
         Swal.fire({
           position:'top',
-          // // icon: 'error',
+        
           text: `${jsonresponse.message}`
         })
       }
@@ -115,7 +115,7 @@ const EditProfile = () => {
         // alert("Please Fill All Fields!");
         Swal.fire({
           position:'top',
-          // // icon: 'warning',
+        
          text: 'Please Fill All Fields!',
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -126,7 +126,7 @@ const EditProfile = () => {
         // alert("Confirm password is not matched with new password!")
         Swal.fire({
           position:'top',
-          // // icon: 'warning',
+        
          text: 'Confirm password is not matched with new password!',
          customClass: {
           confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -160,7 +160,7 @@ const EditProfile = () => {
           // alert(jsonresponse.message);
           Swal.fire({
             position:'top',
-            // // icon: 'warning',
+          
            text: `${jsonresponse.message}`,
            customClass: {
             confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
@@ -173,7 +173,7 @@ const EditProfile = () => {
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
-            // // icon: 'error',
+        
             text: `${jsonresponse.message}`
           })
         }
@@ -181,7 +181,7 @@ const EditProfile = () => {
         if(jsonresponse.statusCode === 500){
           Swal.fire({
             position:'top',
-            // // icon: 'error',
+        
             text: `${jsonresponse.message}`
           })
         }

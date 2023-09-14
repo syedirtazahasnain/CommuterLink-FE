@@ -107,7 +107,7 @@ const Terms_Services = () => {
                           <TableRow>
                           <ul className="list-unstyled">
                           <li className="d-flex px-3"><span className="text-success fw-bold">11.   &nbsp;</span>
-                          Any complaints or grievances will be addressed to CommutersLink for resolution
+                          Any complaints or grievances will be addressed to CommutersLink for resolution.
                                                 </li> </ul>
                           
                           </TableRow>

@@ -179,12 +179,11 @@ const SeatCostVerification = () => {
                         According to the information you provided regarding your car and route, the system has calculated
                         your per seat per day cost is <strong>Rs. {price}/-</strong> on cost sharing basis.
                       </p>
-                    </div>
-                    <div className="text-black p-4">
                       <p className="text-black text-justify">
                         The cost will be adjusted fortnightly according to changes in the fuel price.
                       </p>
                     </div>
+                 
                     <form id="numberForm">
                       <div className="mb-5">
                         <Button variant="success" className="btnregistration fs-6 py-2 px-4" onClick={onSubmit}>

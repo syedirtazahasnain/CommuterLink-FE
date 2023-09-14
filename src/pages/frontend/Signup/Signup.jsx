@@ -620,10 +620,10 @@ const Signup = () => {
                       </div>
                     </div>
                     <hr id="hrline2" />
-                    <div id="span-text" className="text-center mb-5">
+                    <div className="text-center mb-5">
                       Already have account on CommuterLinks? &nbsp;
-                      <Link to="/login">
-                        <span style={{ color: "#198754" }}>Login</span>
+                      <Link to={'/login'} style={{ textDecoration: "none" }}>
+                        <span style={{ color: "#198754",    textDecoration: "none"}}>Login</span>
                       </Link>
                     </div>
                   </div>
