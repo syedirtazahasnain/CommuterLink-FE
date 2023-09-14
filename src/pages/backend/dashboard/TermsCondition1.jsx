@@ -80,15 +80,15 @@ const TermsCondition1 = () => {
             <p>1. Your car is in a good shape and is roadworthy</p>
             <p className="">
               2. You are committed to provide the car for commuting of partners
-              on all days mentioned in the agreement
+              on all days mentioned by your travel buddy
             </p>
             <p>
-              3. If due to any unforeseen reason you cannot commute on certain
+              3. If due to any unforeseen reason you cannot commute on a certain
               day, no fee will be paid for that day
             </p>
             <p>
-              4. You will inform the partners well in advance (atleast 12 hours)
-              about your inability to cummute on a certain day. In case of an
+              4. You will inform the travel buddy well in advance (at least 12 hours)
+              about your inability to commute on a certain day. In case of any
               emergency this can be waived off under exceptional circumstances
             </p>
             <p>
@@ -100,8 +100,8 @@ const TermsCondition1 = () => {
               to late arrival/time off you will still be paid for that day
             </p>
             <p>
-              7. You will wait at least 15 minute after the agreed time for
-              commuting partner to join you.
+              7. You will wait at least 15 minutes after the agreed time for
+              commuting partner to join you
             </p>
             <p>
               8. You will update the scheduler in your dashboard on daily(as and
@@ -110,13 +110,12 @@ const TermsCondition1 = () => {
             <p>
               9. You will receive your share of fee through CommutersLink and
               there will be no direct transaction between you and your commuting
-              partner
+              partnership
             </p>
             <p>
               10. If you wish to discontinue your partnership with a member due
               a reason or other CommutersLink will inform the partner on your
-              behalf (insert alink here "why to receive payment through
-              commutersLink")
+              behalf. You are required to give at least 1 week notice
             </p>
             11. Any complaints, grievances will be addressed to CommutersLink
             for resolution

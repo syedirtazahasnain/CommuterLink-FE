@@ -595,3 +595,7 @@ a.btn:hover {
 .font-custom{
   font-family: 'Roboto', sans-serif;
 }
+
+.terms_services {
+  background-color: #fcfcfc !important;
+}
