@@ -433,8 +433,8 @@ const TravelConfirmation = () => {
                           </div>
                            <div className="my-auto py-4">
                           <h4 className="font-custom text-center fw-bold text-decoration-none text-dark">
-                            No. Of Days Travelled</h4>
-                          <h5 className="text-center">0</h5>
+                            No. of Days Travelled</h4>
+                          <h2 className="text-center">300 (e.g.)</h2>
                            </div>
                           <a className="cursor-pointer btn-dark-green btn-sm font-custom text-center fs-6 fw-bold px-3 py-3 rounded-4 text-decoration-none text-white" onClick={route} >
                             View Full History</a>

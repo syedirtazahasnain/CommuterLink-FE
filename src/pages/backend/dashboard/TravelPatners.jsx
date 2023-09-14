@@ -334,7 +334,7 @@ const TravelPatners = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-4 text-end mt-4">
+            <div className="col-md-4 text-end mt-3">
               {userType === 0 ?
                 (
                   <button className="font-custom me-4 btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" onClick={onNavigate} >
