@@ -581,23 +581,23 @@ const Signup = () => {
                             </Tooltip>
                           </li>
                           <li className="mr-3">
-                            <Tooltip title="Signup With Facebook">
-                              <LoginSocialFacebook
-                                appId="264760359845922"
-                                onResolve={(response) => {
-                                  console.log("Response", response);
-                                }}
-                                onReject={(error) => {
-                                  console.log("Error Message:", error);
-                                }}
-                              >
+                            <LoginSocialFacebook
+                              appId="264760359845922"
+                              onResolve={(response) => {
+                                console.log("Response", response);
+                              }}
+                              onReject={(error) => {
+                                console.log("Error Message:", error);
+                              }}
+                            >
+                              <Tooltip title="Signup With Facebook">
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px", cursor: "pointer" }}
                                 />
-                              </LoginSocialFacebook>
-                            </Tooltip>
+                              </Tooltip>
+                            </LoginSocialFacebook>
                           </li>
                           <li>
                             {/* <Tooltip title="Signup With Linkedin">

@@ -17,11 +17,11 @@ const TravelPatners = () => {
   const [date, setDate] = useState("");
   const [walletAmount, setWalletAmount] = useState("");
   const [userType, setUserType] = useState("");
+  const [data, setData] = useState("");
 
   useEffect(() => {
     // Define a function that contains the code to execute
     const fetchData = () => {
-      getTravelData();
       getProfileData();
     };
 
@@ -33,6 +33,10 @@ const TravelPatners = () => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    getTravelData();
   }, []);
 
   const onNavigate = () => {
@@ -65,16 +69,17 @@ const TravelPatners = () => {
         setPrice(jsonresponse.data[0].price);
         setDate(jsonresponse.data[0].aggreement_date);
       }
-      // else if (jsonresponse.status_code === 100) {
-      //   Swal.fire({
-      //     position: 'top',
-      //     // icon: 'error',
-      //     text: `${jsonresponse.message}`,
-      //     customClass: {
-      //       confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      //     },
-      //   });
-      // }
+      else if (jsonresponse.status_code === 100) {
+        setData(jsonresponse.message);
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        //   },
+        // });
+      }
       else if (jsonresponse.status_code === 500) {
         Swal.fire({
           position: 'top',
@@ -122,25 +127,61 @@ const TravelPatners = () => {
 
   return (
     <div>
-      <div className="card mb-5">
-        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
-          <h4 className="text-center fw-bold text-warning m-auto">
-            {" "}
-            AGREEMENT INFORMATION{" "}
-          </h4>{" "}
-        </div>
-        <div className="card my-4 mx-4" style={{
-          backgroundColor: "#D9D9D9",
+      {data !== "" ?
+        (
+          <></>
+        )
+        :
+        (
+          <div className="card mb-5">
+            <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
+              <h4 className="text-center fw-bold text-warning m-auto">
+                {" "}
+                AGREEMENT INFORMATION{" "}
+              </h4>{" "}
+            </div>
+            <div className="card my-4 mx-4" style={{
+              backgroundColor: "#D9D9D9",
 
-        }}>
+            }}>
 
-
-          <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
-            <div className="d-flex flex-column">
-              <div className="card-body-inner green-card">
+              <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
                 <div className="d-flex flex-column">
-                  <div className="row mb-3">
-                    <div className="col-md-6">
+                  <div className="card-body-inner green-card">
+                    <div className="d-flex flex-column">
+                      <div className="row mb-3">
+                        <div className="col-md-6">
+                          <div className="row">
+                            <div className="col-md-4">
+                              <div
+                                className="card"
+                                style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
+                              >
+                                {image ? (
+                                  <img
+                                    src={`${IMAGE_URL}${image}`}
+                                    className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                    onClick={() => {
+                                      route();
+                                    }}
+                                  />
+                                ) : (
+                                  <img
+                                    src={`${BASE_URL}/assets/images/Vector.png`}
+                                    className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
+                                  />
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-8">
+                              <p className="fw-bold fs-6">Name: {name}</p>
+                              <p className="fw-bold fs-6">Daily Commuting Cost: Rs. &nbsp; {price}/-</p>
+                              <p className="fw-bold fs-6">Start Date: {date}</p>
+                            </div>
+
+                          </div>
+                        </div>
+                        {/* <div className="col-md-6">
                       <div className="row">
                         <div className="col-md-4">
                           <div
@@ -165,13 +206,15 @@ const TravelPatners = () => {
                         </div>
                         <div className="col-md-8">
                           <p className="fw-bold fs-6">Name: {name}</p>
-                          <p className="fw-bold fs-6">Daily Commuting Cost: Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
                           <p className="fw-bold fs-6">Start Date: {date}</p>
                         </div>
 
                       </div>
-                    </div>
-                    <div className="col-md-6">
+                    </div> */}
+                      </div>
+                      <div className="row">
+                        {/* <div className="col-md-6">
                       <div className="row">
                         <div className="col-md-4">
                           <div
@@ -199,114 +242,81 @@ const TravelPatners = () => {
                           <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
                           <p className="fw-bold fs-6">Start Date: {date}</p>
                         </div>
+                      </div>
+                    </div> */}
+                        {/* <div className="col-md-6">
+                      <div className="row">
+                        <div className="col-md-4">
+                          <div
+                            className="card"
+                            style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
+                          >
+                            {image ? (
+                              <img
+                                src={`${IMAGE_URL}${image}`}
+                                className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                onClick={() => {
+                                  route();
+                                }}
+                              />
+                            ) : (
+                              <img
+                                src={`${BASE_URL}/assets/images/Vector.png`}
+                                className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className="col-md-8">
+                          <p className="fw-bold fs-6">Name: {name}</p>
+                          <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
+                          <p className="fw-bold fs-6">Start Date: {date}</p>
+                        </div>
+                      </div>
+                    </div> */}
+                      </div>
 
+                      <div className="row d-flex justify-content-between pt-5">
+                        <TableContainer component={Paper} style={{ backgroundColor: "#ECF8F9", border: '1px solid gray' }}>
+                          <Table>
+                            <TableBody>
+                              <TableRow>
+                                <TableCell style={tableCellStyle}>Distance</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>50km</TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell style={tableCellStyle}>Avg. Fuel consumption</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>10km/Ltr</TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell style={tableCellStyle}>Fuel Price</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
+                                  Rs. 230/Ltr
+                                  <br />
+                                  (Rs. 288/-)
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell style={tableCellStyle}>Maintenance (10%)</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell style={tableCellStyle}>Wear & Tear (10%)</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                              </TableRow>
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
                       </div>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="row">
-                        <div className="col-md-4">
-                          <div
-                            className="card"
-                            style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
-                          >
-                            {image ? (
-                              <img
-                                src={`${IMAGE_URL}${image}`}
-                                className="card-img-top w-100px m-auto h-100px cursor-pointer"
-                                onClick={() => {
-                                  route();
-                                }}
-                              />
-                            ) : (
-                              <img
-                                src={`${BASE_URL}/assets/images/Vector.png`}
-                                className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <p className="fw-bold fs-6">Name: {name}</p>
-                          <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
-                          <p className="fw-bold fs-6">Start Date: {date}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="row">
-                        <div className="col-md-4">
-                          <div
-                            className="card"
-                            style={{ width: "10rem", height: "10rem", backgroundColor: "grey" }}
-                          >
-                            {image ? (
-                              <img
-                                src={`${IMAGE_URL}${image}`}
-                                className="card-img-top w-100px m-auto h-100px cursor-pointer"
-                                onClick={() => {
-                                  route();
-                                }}
-                              />
-                            ) : (
-                              <img
-                                src={`${BASE_URL}/assets/images/Vector.png`}
-                                className="card-img-top w-70px h-70 m-auto mt-3 cursor-pointer"
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <p className="fw-bold fs-6">Name: {name}</p>
-                          <p className="fw-bold fs-6">Daily Commuting Cost:  Rs. &nbsp; {price}/-</p>
-                          <p className="fw-bold fs-6">Start Date: {date}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row d-flex justify-content-between pt-5">
-                    <TableContainer component={Paper} style={{ backgroundColor: "#ECF8F9", border: '1px solid gray' }}>
-                      <Table>
-                        <TableBody>
-                          <TableRow>
-                            <TableCell style={tableCellStyle}>Distance</TableCell>
-                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>50km</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell style={tableCellStyle}>Avg. Fuel consumption</TableCell>
-                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>10km/Ltr</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell style={tableCellStyle}>Fuel Price</TableCell>
-                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
-                              Rs. 230/Ltr
-                              <br />
-                              (Rs. 288/-)
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell style={tableCellStyle}>Maintenance (10%)</TableCell>
-                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell style={tableCellStyle}>Wear & Tear (10%)</TableCell>
-                            <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
-                          </TableRow>
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </div>
+                </div>
+                <div>
                 </div>
               </div>
             </div>
-
-            <div>
-            </div>
           </div>
-        </div>
-
-      </div>
+        )}
       <div className="card  mt-3 mb-5">
         <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
           <h4 className="text-center fw-bold text-warning m-auto">
@@ -348,8 +358,6 @@ const TravelPatners = () => {
           </div>
         </div>
       </div>
-
-
     </div>
   );
 };
