@@ -284,21 +284,25 @@ const RiderRegistration = () => {
   }, [locationEndString, locationEndStringField]);
 
   const getdropdownStartdata = async () => {
-    const response = await fetch(
-      `${API_URL}/api/v1/list/data`,
-      {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const jsonresponse = await response.json();
-    setDropDownStartData(jsonresponse);
-    setDropDownEndData(jsonresponse);
-    setHomeTimeSlots(jsonresponse.time_slots);
-    setOfficeTimeSlots(jsonresponse.time_slots);
-    //console.log(jsonresponse);
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/list/data`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const jsonresponse = await response.json();
+      setDropDownStartData(jsonresponse);
+      setDropDownEndData(jsonresponse);
+      setHomeTimeSlots(jsonresponse.time_slots);
+      setOfficeTimeSlots(jsonresponse.time_slots);
+      //console.log(jsonresponse);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   const handleProvinceStartChange = (event) => {
@@ -923,7 +927,7 @@ const RiderRegistration = () => {
                         onChange={handleProvinceStartChange}
                         required
                       >
-                        <option value="" disabled hidden>
+                        <option value="" hidden>
                           Select a Province
                         </option>
                         {dropdownStartdata?.countries[0]?.provinces?.map(
@@ -954,7 +958,7 @@ const RiderRegistration = () => {
                         }}
                         required
                       >
-                        <option value="" disabled hidden>
+                        <option value="" hidden>
                           Select a City
                         </option>
                         {selectedStartProvinceCities?.map((province) => (
@@ -978,21 +982,21 @@ const RiderRegistration = () => {
                             controlId="validationCustom03"
                           >
                             <div className="d-flex justify-content-between align-items-center">
-                                  <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
-                                  {addNewStartField && (
-                                    <p
-                                    className="colorplace text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      textDecoration: "underline",
-                                    }}
-                                    onClick={AddNewStart}
-                                  >
-                                    Can't find your area?
-                                    <a> Add Here</a>
-                                  </p>
-                                  )}
-                                </div>
+                              <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                              {addNewStartField && (
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                  }}
+                                  onClick={AddNewStart}
+                                >
+                                  Can't find your area?
+                                  <a> Add Here</a>
+                                </p>
+                              )}
+                            </div>
                             <Form.Select
                               aria-label="Default select example"
                               className="text-secondary"
@@ -1000,7 +1004,7 @@ const RiderRegistration = () => {
                               onChange={handleLocationStart}
                               required
                             >
-                              <option value="" disabled hidden>
+                              <option value="" hidden>
                                 Select Area from Dropdown
                               </option>
                               {selectedStartCityArea?.map((province) => (
@@ -1122,7 +1126,7 @@ const RiderRegistration = () => {
                         onChange={handleProvinceEndChange}
                         required
                       >
-                        <option value="" disabled hidden>
+                        <option value="" hidden>
                           Select a Province
                         </option>
                         {dropdownEnddata?.countries[0]?.provinces?.map(
@@ -1153,7 +1157,7 @@ const RiderRegistration = () => {
                         }}
                         required
                       >
-                        <option value="" disabled hidden>
+                        <option value="" hidden>
                           Select a City
                         </option>
                         {selectedEndProvinceCities?.map((province) => (
@@ -1199,7 +1203,7 @@ const RiderRegistration = () => {
                               onChange={handleLocationEnd}
                               required
                             >
-                              <option value="" disabled>
+                              <option value="" hidden>
                                 Select Area from Dropdown
                               </option>
                               {selectedEndCityArea?.map((province) => (

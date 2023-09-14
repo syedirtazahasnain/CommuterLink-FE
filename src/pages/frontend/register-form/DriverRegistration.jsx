@@ -1286,7 +1286,7 @@ const DriverRegistration = () => {
                             onChange={handleProvinceStartChange}
                             required
                           >
-                            <option value="" disabled hidden>
+                            <option value="" hidden>
                               Select a Province
                             </option>
                             {dropdownStartdata?.countries[0]?.provinces?.map(
@@ -1317,7 +1317,7 @@ const DriverRegistration = () => {
                             }}
                             required
                           >
-                            <option value="" disabled hidden>
+                            <option value="" hidden>
                               Select a City
                             </option>
                             {selectedStartProvinceCities?.map((province) => (
@@ -1364,7 +1364,7 @@ const DriverRegistration = () => {
                                   onChange={handleLocationStart}
                                   required
                                 >
-                                  <option value="" disabled>
+                                  <option value="" hidden>
                                     Select Area from Dropdown
                                   </option>
                                   {selectedStartCityArea?.map((province) => (
@@ -1452,7 +1452,7 @@ const DriverRegistration = () => {
                             onChange={handleProvinceEndChange}
                             required
                           >
-                            <option value="" disabled hidden>
+                            <option value="" hidden>
                               Select a Province
                             </option>
                             {dropdownEnddata?.countries[0]?.provinces?.map(
@@ -1483,7 +1483,7 @@ const DriverRegistration = () => {
                             }}
                             required
                           >
-                            <option value="" disabled hidden>
+                            <option value="" hidden>
                               Select a City
                             </option>
                             {selectedEndProvinceCities?.map((province) => (
@@ -1498,30 +1498,7 @@ const DriverRegistration = () => {
                           </Form.Select>
                         </Form.Group>
                         
-                        {/* <Form.Group
-                          as={Col}
-                          md={cityEndId ? "12" : "12"}
-                          controlId="validationCustom05"
-                          className="mb-2"
-                        >
-                          <Form.Label style={{ color: "#000" }}>City</Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={cityEndId}
-                            onChange={(e) => setCityEndId(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>
-                              Select a City
-                            </option>
-                            {selectedEndProvinceCities?.map((province) => (
-                              <option key={province.id} value={province.id}>
-                                {province.value}
-                              </option>
-                            ))}
-                          </Form.Select>
-                        </Form.Group> */}
+                       
 
                         {cityEndId && (
                           <>
@@ -1554,7 +1531,7 @@ const DriverRegistration = () => {
                                   onChange={handleLocationEnd}
                                   required
                                 >
-                                  <option value="" disabled>
+                                  <option value="" hidden>
                                     Select Area from Dropdown
                                   </option>
                                   {selectedEndCityArea?.map((province) => (
@@ -1570,26 +1547,7 @@ const DriverRegistration = () => {
                               </Form.Group>
                             )}
 
-                            {/* {addNewEndField && (
-                              <Form.Group
-                                as={Col}
-                                md="12"
-                                className="mt-3"
-                                controlId="validationCustom07"
-                              >
-                                <span
-                                  className="colorplace text-danger"
-                                  style={{
-                                    cursor: "pointer",
-                                    textDecoration: "underline",
-                                  }}
-                                  onClick={AddNewEnd}
-                                >
-                                  Can't find your area?
-                                  <a> Add Here</a>
-                                </span>
-                              </Form.Group>
-                            )} */}
+                          
 
                             {addNewEnd && (
                               <Form.Group
@@ -1632,7 +1590,7 @@ const DriverRegistration = () => {
                       libraries={mapLibraries}
                     >
                       <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                        <Modal.Header closeButton>
+                        <Modal.Header className="d-block" >
                           <Modal.Title>Select Starting Location</Modal.Title>
                           <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                         </Modal.Header>
@@ -1667,7 +1625,7 @@ const DriverRegistration = () => {
                       </Modal>
 
                       <Modal show={showEndModal} onHide={handleCloseEndModal}>
-                        <Modal.Header closeButton>
+                        <Modal.Header className="d-block" >
                           <Modal.Title>Select Drop-off Location</Modal.Title>
                           <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
                         </Modal.Header>
@@ -1707,50 +1665,7 @@ const DriverRegistration = () => {
                       </Modal>
                     </LoadScript>
 
-                    {/* <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          Timings (+/- 15 Minutes)
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={selectedHomeTime}
-                          onChange={(e) => setSelectedHomeTime(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>
-                            Home to Office
-                          </option>
-                          {homeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.id}>
-                              {time.time_string}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
-                          Drop-off Time
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={selectedOfficeTime}
-                          onChange={(e) => setSelectedOfficeTime(e.target.value)}
-                          required
-                        >
-                          <option value="" disabled hidden>
-                            Office to Home
-                          </option>
-                          {officeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.id}>
-                              {time.time_string}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                    </Row> */}
+                  
                     <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3"
