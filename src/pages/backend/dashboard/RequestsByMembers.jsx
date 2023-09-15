@@ -316,7 +316,7 @@ const RequestsByMembers = () => {
                   </div>
                 </div>
                 <button className="btn btn_view d-flex justify-content-end me-5">
-                  VIEW MORE
+                  View More
                 </button>
               </div>
               <div>

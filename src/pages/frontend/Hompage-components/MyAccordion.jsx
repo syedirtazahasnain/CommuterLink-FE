@@ -124,7 +124,7 @@ const MyAccordion = () => {
                 className="btn btn-sm btn-join-us my-2 my-sm-0 mr-2 rounded rounded-5 fw-bold"
                 onClick={signupRoute}
               >
-                JOIN NOW
+                Join Now
               </button>
             </div>
           </div>

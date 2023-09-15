@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { createTheme } from "@mui/material";
+import { createTheme,Breadcrumbs } from "@mui/material";
 import { BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/base";
 const customTheme = createTheme({
   palette: {
@@ -12,6 +12,8 @@ const customTheme = createTheme({
   },
 });
 
+
+
 const backgroundLogo = {
   backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
   backgroundRepeat: "no-repeat",
@@ -19,6 +21,7 @@ const backgroundLogo = {
 };
 
 const WhyProcessPayment1 = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
 
@@ -29,7 +32,22 @@ const WhyProcessPayment1 = () => {
       navigate("/advancepayment");
     }
   };
-
+  const crumbs = [
+    {
+      path: "/request-commuter-profile",
+      label: "Commuter Profile",
+      active: false,
+    },
+    {
+      path: "/beforeapprovalterms",
+      label: "Terms and Condition",
+      active: false,
+    },
+    {
+      label: id == undefined ? "Why Process Payment" : "",
+      active: true,
+    },
+  ];
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
@@ -41,9 +59,36 @@ const WhyProcessPayment1 = () => {
   return (
     <div>
        <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
-         WHY PROCESS PAYMENT THROUGH COMMUTERSLINK
+       <h3 className="card px-4 py-2 text-success my-2 fw-bold">
+          <Breadcrumbs aria-label="breadcrumb">
+            {crumbs.map((crumb, index) => (
+              <Link
+                key={index}
+                to={crumb.path || ""}
+                style={{
+                  color: crumb.active ? "black" : "green",
+                  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                  pointerEvents: crumb.path ? "auto" : "none",
+                  textDecoration: "none",
+                }}
+              >
+                {crumb.label}
+              </Link>
+            ))}
+          </Breadcrumbs>
         </h3>
+       <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+      <div className="d-flex justify-content-between align-items-xl-baseline">
+        <h3 className="text-success my-2 fw-bold m-0">
+          WHY PROCESS PAYMENT THROUGHT COMMUTERSLINK
+        </h3>
+        <Link
+              to={"/beforeapprovalterms"} >
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link></div></div>
       </div>
      
 

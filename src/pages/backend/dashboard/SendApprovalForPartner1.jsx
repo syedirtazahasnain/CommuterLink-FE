@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { Breadcrumbs} from '@mui/material'
 
 const customTheme = createTheme({
   palette: {
@@ -22,6 +23,7 @@ const backgroundLogo = {
 };
 
 const SendApprovalForPartner1 = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
   const requestId = useSelector((s) => s.general.data.contact_id);
@@ -30,7 +32,19 @@ const SendApprovalForPartner1 = () => {
   const [contactId, setContactId] = useState("");
   const [requestContactId, setRequestContactId] = useState("");
   const [requestType, setRequestType] = useState("");
-
+  const crumbs = [
+    {
+      path: "/commuter-profile",
+      label: "Commuter Profile",
+      active: false,
+    },{
+    path:"/termscondition1",
+    label:"Terms and Condition"},
+    {
+      label: id == undefined ? "Send Approval Request" : "",
+      active: true,
+    },
+  ];
   useEffect(() => {
     getDashboardData();
     getProfileData();
@@ -99,16 +113,16 @@ const SendApprovalForPartner1 = () => {
   };
 
   const sendRequest = async () => {
-    if(option === 0){
+    if (option === 0) {
       const body = {
         reciever_contact_id: requestId,
         request_type: "rider",
         message: "Dear CL Member, CL have found us as matching xyz",
         start_date: "2023-06-10",
       };
-  
-      console.log({body});
-  
+
+      console.log({ body });
+
       const response = await fetch(
         `${API_URL}/api/v1/request`,
         {
@@ -150,17 +164,17 @@ const SendApprovalForPartner1 = () => {
         )
       }
     }
-    else if(option === 1) {
-      
+    else if (option === 1) {
+
       const body = {
         reciever_contact_id: requestId,
         request_type: "driver",
         message: "Dear CL Member, CL have found us as matching xyz",
         start_date: "2023-06-10",
       };
-  
-      console.log({body});
-  
+
+      console.log({ body });
+
       const response = await fetch(
         `${API_URL}/api/v1/request`,
         {
@@ -193,7 +207,7 @@ const SendApprovalForPartner1 = () => {
         // alert("Resend Error: " + jsonresponse.message);
         Swal.fire({
           position: 'top',
-          
+
           text: `${jsonresponse.message}`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -207,8 +221,34 @@ const SendApprovalForPartner1 = () => {
   return (
 
     <div> <div className="page-title">
-      <h3 className="card p-4 text-success my-2 fw-bold">SEND APPROVAL REQUEST TO MEMBER TO CONNECT</h3>
-
+        <h3 className="card px-4 py-2 text-success my-2 fw-bold">
+          <Breadcrumbs aria-label="breadcrumb">
+            {crumbs.map((crumb, index) => (
+              <Link
+                key={index}
+                to={crumb.path || ""}
+                style={{
+                  color: crumb.active ? "black" : "green",
+                  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                  pointerEvents: crumb.path ? "auto" : "none",
+                  textDecoration: "none",
+                }}
+              >
+                {crumb.label}
+              </Link>
+            ))}
+          </Breadcrumbs>
+        </h3>
+      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+        <div className="d-flex justify-content-between align-items-xl-baseline">
+          <h3 className="text-success my-2 fw-bold m-0">SEND APPROVAL REQUEST TO MEMBER TO CONNECT</h3>
+          <Link
+            to={"/termscondition1"} >
+            <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+              <i className="fas fa-angle-left text-white" />
+              Back
+            </button>
+          </Link></div></div>
     </div>
 
       <div className="card p-4 bg-light p-2">

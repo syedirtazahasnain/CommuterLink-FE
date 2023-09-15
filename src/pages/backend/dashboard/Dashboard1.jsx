@@ -144,7 +144,7 @@ const Dashboard1 = ({ children }) => {
                                     data-bs-target="#kt_modal_new_target"
                                     onClick={logout}
                                   >
-                                    LOG OUT
+                                    Logout
                                   </button>
                                 </Tooltip>
                               </div>
@@ -657,7 +657,7 @@ const Dashboard1 = ({ children }) => {
                                           </div>
 
                                           <button className="btn btn_view d-flex justify-content-end">
-                                            VIEW MORE
+                                            View More
                                           </button>
                                         </div>
                                       </div>
@@ -844,7 +844,7 @@ const Dashboard1 = ({ children }) => {
                                           </div>
 
                                           <button className="btn btn_view d-flex justify-content-end">
-                                            VIEW MORE
+                                            View More
                                           </button>
                                         </div>
                                       </div>

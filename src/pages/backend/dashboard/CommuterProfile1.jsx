@@ -3,6 +3,7 @@ import { createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
+import { Breadcrumbs} from '@mui/material'
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { setContactIdState, setIdState } from "../../../redux/generalSlice";
@@ -34,8 +35,18 @@ const CommuterProfile1 = () => {
   const [userType, setUserType] = useState("");
   const [userProfiles, setUserProfiles] = useState([]);
   const [userProfileDetails, setUserProfileDetails] = useState([]);
+ 
+  const crumbs = [
+    {
+      // path: "/portal/document-management",
+      label: "Commuter Profile",
+      //   path:"/viewprofile",
+      active: true,
+    },
+  ];
 
   useEffect(() => {
+  
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
@@ -641,7 +652,25 @@ const CommuterProfile1 = () => {
   return (
     <div>
       <div className="page-title">
+      <div className="card px-4 py-2 text-success my-2 fw-bold">
+      <Breadcrumbs aria-label="breadcrumb">
+            {crumbs.map((crumb, index) => (
+              <Link
+                key={index}
+                to={crumb.path || ""}
+                style={{
+                  color: crumb.active ? "black" : "#ff4815",
+                  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                  pointerEvents: crumb.path ? "auto" : "none",
+                  textDecoration: "none"
 
+                }}
+              >
+                {crumb.label}
+              </Link>
+            ))}
+          </Breadcrumbs>
+        </div>
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
             <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>

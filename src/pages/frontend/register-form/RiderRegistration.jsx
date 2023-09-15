@@ -12,6 +12,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { ThreeCircles } from 'react-loader-spinner'
 import {
   GoogleMap,
   LoadScript,
@@ -1300,7 +1301,7 @@ const RiderRegistration = () => {
                       </Form.Select>
                     </Form.Group> */}
                   </div>
-                </div>
+                </div> 
 
                 <LoadScript
                   googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"

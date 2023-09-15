@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { createTheme } from "@mui/material";
+import { createTheme, Breadcrumbs } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -29,6 +29,7 @@ const backgroundLogo = {
 };
 
 const FinalStep = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
@@ -38,7 +39,7 @@ const FinalStep = () => {
   const [name, setName] = useState("");
   const [contactId, setContactId] = useState("");
   const [driverName, setDriverName] = useState("");
-  const [id, setId] = useState("");
+  const [Id, setId] = useState("");
   const [requestAs, setRequestAs] = useState("");
   const [amount, setAmount] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
@@ -53,7 +54,38 @@ const FinalStep = () => {
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-
+  
+  const crumbs = [
+    {
+      path: "/request-commuter-profile",
+      label: "Commuter Profile",
+      active: false,
+    },
+    {
+      path: "/beforeapprovalterms",
+      label: "Terms and Condition",
+      active: false,
+    },
+    {
+      path: "/whyprocesspayment1",
+      label: "Why Process Payment",
+      active: false,
+    },
+    {
+      path: "/advancepayment",
+      label: "Advance Payment",
+      active: false,
+    },
+    {
+      path: "/congratulations",
+      label: "Congratulation",
+      active: false,
+    },
+    {
+      label: id == undefined ? "Final Step" : "",
+      active: true,
+    },
+  ];
   const getProfileData = async () => {
     try {
       const response = await fetch(
@@ -245,9 +277,36 @@ const FinalStep = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
-          FINAL STEP - YOU ARE RIGHT THERE!
+      <h3 className="card px-4 py-2 text-success my-2 fw-bold">
+          <Breadcrumbs aria-label="breadcrumb">
+            {crumbs.map((crumb, index) => (
+              <Link
+                key={index}
+                to={crumb.path || ""}
+                style={{
+                  color: crumb.active ? "black" : "green",
+                  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                  pointerEvents: crumb.path ? "auto" : "none",
+                  textDecoration: "none",
+                }}
+              >
+                {crumb.label}
+              </Link>
+            ))}
+          </Breadcrumbs>
         </h3>
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+      <div className="d-flex justify-content-between align-items-xl-baseline">
+      <h3 className="text-success my-2 fw-bold m-0">
+      FINAL STEP - YOU ARE RIGHT THERE!
+        </h3>
+        <Link
+              to={"/congratulations"} >
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link></div></div>
       </div>
       <div className="card p-4 bg-light p-2">
         <div className="card backgroundColor">

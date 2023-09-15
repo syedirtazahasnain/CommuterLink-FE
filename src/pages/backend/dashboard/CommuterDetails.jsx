@@ -419,7 +419,7 @@ const CommuterDetails = () => {
                       </div>
 
                       <button className="btn btn_view d-flex justify-content-end">
-                        VIEW MORE
+                        View More
                       </button>
                     </div>
                   </div>
@@ -606,7 +606,7 @@ const CommuterDetails = () => {
                       </div>
 
                       <button className="btn btn_view d-flex justify-content-end">
-                        VIEW MORE
+                        View More
                       </button>
                     </div>
                   </div>
@@ -849,7 +849,7 @@ const CommuterDetails = () => {
                                   >
                                     {" "}
                                     <p className="py-3 text-center fw-bold text-success">
-                                      Rs.0/
+                                      Rs. 0/
                                     </p>
                                     <button className="btn btn_view text-success d-flex justify-content-end">
                                       View Transaction History

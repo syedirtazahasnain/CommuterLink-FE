@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { createTheme } from "@mui/material";
+import { createTheme, Breadcrumbs } from "@mui/material";
 import { BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/base";
 
 
@@ -21,9 +21,21 @@ const backgroundLogo = {
 };
 
 const BeforeApprovalTerms = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   
+  const crumbs = [
+    {
+      path: "/request-commuter-profile",
+      label: "Commuter Profile",
+      active: false,
+    },
+    {
+      label: id == undefined ? "Terms and Condition" : "",
+      active: true,
+    },
+  ];
   const route = () => {
     setSubmit(true);
 
@@ -42,9 +54,36 @@ const BeforeApprovalTerms = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
+     <h3 className="card px-4 py-2 text-success my-2 fw-bold">
+          <Breadcrumbs aria-label="breadcrumb">
+            {crumbs.map((crumb, index) => (
+              <Link
+                key={index}
+                to={crumb.path || ""}
+                style={{
+                  color: crumb.active ? "black" : "green",
+                  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                  pointerEvents: crumb.path ? "auto" : "none",
+                  textDecoration: "none",
+                }}
+              >
+                {crumb.label}
+              </Link>
+            ))}
+          </Breadcrumbs>
+        </h3>
+      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+      <div className="d-flex justify-content-between align-items-xl-baseline">
+        <h3 className="text-success my-2 fw-bold m-0">
           TERMS AND CONDITIONS
         </h3>
+        <Link
+              to={"/request-commuter-profile"} >
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link></div></div>
       </div>
       <div className="card p-4 bg-light p-2">
         <h5 className="text-success pb-2">Before sending the request accept these terms</h5>
