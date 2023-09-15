@@ -286,7 +286,7 @@ const Resubmit = () => {
                   }}
                 >
                   {" "}
-                  ReSubmit
+                  Resubmit
                 </h1>{" "}
                 <Form className="text-center">
                   <Form.Group

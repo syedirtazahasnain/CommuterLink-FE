@@ -35,7 +35,7 @@ const SendApprovalForPartner1 = () => {
   const crumbs = [
     {
       path: "/commuter-profile",
-      label: "Commuter Profile",
+      label: "Home",
       active: false,
     },{
     path:"/termscondition1",
@@ -221,7 +221,7 @@ const SendApprovalForPartner1 = () => {
   return (
 
     <div> <div className="page-title">
-        <h3 className="card px-4 py-2 text-success my-2 fw-bold">
+        <h3 className="px-4 py-2 text-success my-2 fw-bold">
           <Breadcrumbs aria-label="breadcrumb">
             {crumbs.map((crumb, index) => (
               <Link

@@ -65,7 +65,7 @@ const AmShareRide = () => {
                       src={`${BASE_URL}/assets/images/signup-4.png`}
                       alt="First slide"
                     />
-                    <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride For School University</h4>
                   </Carousel.Item>
                   <Carousel.Item interval={4000}>
                     <img

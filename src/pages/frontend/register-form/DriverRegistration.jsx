@@ -1592,7 +1592,7 @@ const DriverRegistration = () => {
                       <Modal show={showStartModal} onHide={handleCloseStartModal}>
                         <Modal.Header className="d-block" >
                           <Modal.Title>Select Starting Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1627,7 +1627,7 @@ const DriverRegistration = () => {
                       <Modal show={showEndModal} onHide={handleCloseEndModal}>
                         <Modal.Header className="d-block" >
                           <Modal.Title>Select Drop-off Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1935,7 +1935,7 @@ const DriverRegistration = () => {
                       </Form.Group>
                       <Form.Group as={Col} md="12" controlId="validationCustom12" className="mb-2">
                         <Form.Label className="fs-6 text-black">
-                          Preferred gender of travel partner
+                          Preferred Gender Of Travel Partner
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"

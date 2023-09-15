@@ -397,7 +397,7 @@ const Signup = () => {
                 >
                   {" "}
                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register
+                    <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register.
                     <button type="" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
                   {/* <div class="alert alert-danger  text-center alert-dismissible text-danger fs-6" role="alert">

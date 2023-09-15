@@ -227,14 +227,14 @@ function NumberGenerate() {
                 style={{ background: "rgb(218,233,229)", borderRadius: "10px" }}
               >
                 <h3 className="card-title mb-3">
-                  Please Enter Your valid Phone No.
+                  Please Enter Your Valid Phone No.
                 </h3>
                 <form id="numberForm">
                   <Row className="mb-3 mt-2 px-2">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">
-                      <Form.Label className="d-flex justify-content-center mb-3 ">
+                      {/* <Form.Label className="d-flex justify-content-center mb-3 ">
                         Number
-                      </Form.Label>
+                      </Form.Label> */}
                       <Form.Control
                         required
                         type="text"
@@ -244,18 +244,21 @@ function NumberGenerate() {
                         defaultValue=""
                         maxLength={11}
                       />
-                      {isValidPhoneNumber && <span> Please enter a valid phone number </span>}
+                      {/* {isValidPhoneNumber && <span> Please enter a valid phone number </span>} */}
                     </Form.Group>
                   </Row>
                   <div className="px-4 mb-3">
                     {" "}
-                    <Button
+                    {/* <Button
                       variant="success"
                       className=""
                       onClick={ () => submitForm()}
                     >
                       Submit
-                    </Button>{" "}
+                    </Button>{" "} */}
+                    <Button variant="" className="btnregistration fs-6 py-2" onClick={ () => submitForm()}>
+                        Submit
+                      </Button>
                   </div>
                 </form>
               </div>

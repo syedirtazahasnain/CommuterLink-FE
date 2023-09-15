@@ -63,38 +63,38 @@ const Office_School = () => {
                   indicators={null}
                 >
                   <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
-                    </Carousel.Item>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                  </Carousel.Item>
 
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block  img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-4.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-6.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
-                    </Carousel.Item>
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-3.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+                  </Carousel.Item>
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block  img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-4.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                  </Carousel.Item>
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-6.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                  </Carousel.Item>
                 </Carousel>
               </div>
 
@@ -111,32 +111,32 @@ const Office_School = () => {
                               //   style={{ background: "rgb(22,70,57)" }}
                               >
                                 <div>
-                                  <h5
-                                    className="card-title mt-4"
-                                    
+                                  <span
+                                    className="card-title mt-4 fw-bold fs-6"
+
                                   >
                                     {name ?
-                                    (<p>{name}</p>)
-                                    :
-                                    (<></>)
-                                  }
-                                  </h5>
-                                  <h5
-                                    className="card-title mt-4"
-                                    
+                                      (<span>{name}<br /></span>)
+                                      :
+                                      (<></>)
+                                    }
+                                  </span>
+                                  <span
+                                    className="card-titlefw-bold fs-6"
+
                                   >
                                     {email ?
-                                    (<p className="text-success fw-small">{email}</p>)
-                                    :
-                                    (<></>)
-                                  }
-                                  </h5>
+                                      (<span className="text-success fw-small">{email}</span>)
+                                      :
+                                      (<></>)
+                                    }
+                                  </span>
                                 </div>
                                 <div className="">
                                   <h5 className="text-dark mb-4">
-                                  I want to commute to
+                                    I want to commute to
                                   </h5>
-                               <div>   <Button
+                                  <div>   <Button
                                     variant="success"
                                     className="btn-custom mx-2 w-150px px-4 py-2 rounded rounded-5 text-custom fw-bold"
                                     onClick={officeRoute}
@@ -148,24 +148,25 @@ const Office_School = () => {
                                     Or
                                   </div>
                                   <div>
-                                  <Button
-                                    variant="success"
-                                    className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
-                                    onClick={schoolRoute}
-                                  >
-                                    School/University
-                                  </Button>
-                                </div>
-                                <form id="numberForm">
-                                  <div>
-                                    <p className="my-3  fs-5  text-success cursor-pointer">
-                                      On long term basis (daily)
-                                    </p>
-                                    {/* <p className="my-3 fw-bold fs-6 text-danger cursor-pointer">
+                                    <Button
+                                      variant="success"
+                                      className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                                      onClick={schoolRoute}
+                                    >
+                                      School/University
+                                    </Button>
+                                  </div>
+                                  <form id="numberForm">
+                                    <div>
+                                      <p className="my-3  fs-5  text-success cursor-pointer">
+                                        On long term basis (daily)
+                                      </p>
+                                      {/* <p className="my-3 fw-bold fs-6 text-danger cursor-pointer">
                                       You must be 18 years old or elder to register 
                                     </p> */}
-                                  </div>
-                                </form>
+                                    </div>
+                                  </form>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -175,7 +176,6 @@ const Office_School = () => {
                   </div>
                 </div>
               </div>
-            </div>
             </div>
           </div>
         </section>

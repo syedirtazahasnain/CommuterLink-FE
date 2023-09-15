@@ -256,16 +256,33 @@ body{
   font-family: 'Roboto', sans-serif;
   /* font-family: 'GFS Didot', serif; */
 }
-.backgroundColor{
+/* .backgroundColor{
   background-color: rgb(205,219,217) !important;
-}
+} */
 
 .align-middle{
   font-family: 'Roboto', sans-serif;
 }
 
+.custom-scroll-color::-webkit-scrollbar {
+  width: 10px; 
+  overflow-y: hidden;
+}
 
+.custom-scroll-color::-webkit-scrollbar-thumb {
+  background-color: green; 
+  border-radius: 5px; 
+  overflow-y: hidden;
+}
+
+.custom-scroll-color::-webkit-scrollbar-track {
+  background-color: green; 
+  overflow-y: hidden;
+}
  
+.headerColor{
+  background-color: rgb(42, 64, 42);
+}
  
 
 

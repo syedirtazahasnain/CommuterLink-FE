@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { setloginState } from "../../../redux/loginSlice";
 import { API_URL, BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
@@ -126,16 +126,27 @@ const SendApprovalForMember = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
+        
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+      <div className="d-flex justify-content-between align-items-xl-baseline">
+        <h3 className="text-success my-2 fw-bold m-0">
           TRAVEL BUDDIES FOR YOUR CAR - REQUESTS BY MEMBERS
         </h3>
-
+        <Link
+              to={"/termscondition1"} >
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link></div></div>
       </div>
       <div className="card p-4 bg-light p-2">
       <h5 className="text-success pb-2 fw-bold">
         {/* SEND APPROVAL OF MEMBERS'S REQUEST */}
         Send approval for member's request
       </h5>
+
+      
         <div className="card  backgroundColor">
           <div className="card-body">
 

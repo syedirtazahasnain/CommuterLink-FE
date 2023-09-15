@@ -35,9 +35,7 @@ const RequestCommuterProfile = () => {
 
     const crumbs = [
         {
-          // path: "/portal/document-management",
-          label: "Commuter Profile",
-          //   path:"/viewprofile",
+          label: "Home",
           active: true,
         },
       ];
@@ -184,7 +182,6 @@ const RequestCommuterProfile = () => {
     const requestAccepeted = () => {
         Swal.fire({
             position: 'top',
-            // // icon: 'warning',
             text: 'Request is waiting for response!',
             customClass: {
                 confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -653,7 +650,7 @@ const RequestCommuterProfile = () => {
         <div>
            
              <div className="page-title">
-             <div className="card px-4 py-2 text-success my-2 fw-bold">
+             <div className="px-4 py-2 text-success my-2 fw-bold">
       <Breadcrumbs aria-label="breadcrumb">
             {crumbs.map((crumb, index) => (
               <Link

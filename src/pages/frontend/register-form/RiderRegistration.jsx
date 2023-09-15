@@ -1310,7 +1310,7 @@ const RiderRegistration = () => {
                   <Modal show={showStartModal} onHide={handleCloseStartModal}>
                     <Modal.Header className="d-block" >
                       <Modal.Title>Select Starting Location</Modal.Title>
-                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
                     </Modal.Header>
                     
                     <Modal.Body>
@@ -1353,7 +1353,7 @@ const RiderRegistration = () => {
                    
                    <Modal.Header className="d-block">
                       <Modal.Title>Select Drop-off Location</Modal.Title>
-                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Container className="d-flex justify-content-center align-items-center mb-3">

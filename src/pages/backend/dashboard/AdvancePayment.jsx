@@ -37,7 +37,7 @@ const AdvancePayment = () => {
   const crumbs = [
     {
       path: "/request-commuter-profile",
-      label: "Commuter Profile",
+      label: "Home",
       active: false,
     },
     {
@@ -249,7 +249,7 @@ const AdvancePayment = () => {
   return (
     <div>
       <div className="page-title">
-      <h3 className="card px-4 py-2 text-success my-2 fw-bold">
+      <h3 className="px-4 py-2 text-success my-2 fw-bold">
           <Breadcrumbs aria-label="breadcrumb">
             {crumbs.map((crumb, index) => (
               <Link
@@ -281,7 +281,7 @@ const AdvancePayment = () => {
             </Link></div></div>
       </div>
       <div className="card p-4  p-2">
-        <div className="card backgroundColor">
+        <div className="">
           <div className="card-body text-dark">
             <p>
               Money will stay in your Wallet & will be transferred to car owner
@@ -291,7 +291,7 @@ const AdvancePayment = () => {
               At any given point in time wallet must have 2 weeks balance, so
               keep checking and keep loading.
             </p>
-            <h5 className="container bg-white py-3 text-success text-center fw-bold">
+            <h5 className="container headerColor text-white py-3  text-success text-center fw-bold">
               PAYMENT OPTIONS{" "}
             </h5>
             <div className="page-title">

@@ -38,9 +38,8 @@ const CommuterProfile1 = () => {
  
   const crumbs = [
     {
-      // path: "/portal/document-management",
-      label: "Commuter Profile",
-      //   path:"/viewprofile",
+      
+      label: "Home",
       active: true,
     },
   ];
@@ -652,7 +651,7 @@ const CommuterProfile1 = () => {
   return (
     <div>
       <div className="page-title">
-      <div className="card px-4 py-2 text-success my-2 fw-bold">
+      <div className=" px-4 py-2 text-success my-2 fw-bold">
       <Breadcrumbs aria-label="breadcrumb">
             {crumbs.map((crumb, index) => (
               <Link

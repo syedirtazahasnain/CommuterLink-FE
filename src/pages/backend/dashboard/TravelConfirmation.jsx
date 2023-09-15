@@ -310,13 +310,13 @@ const TravelConfirmation = () => {
                 <div className="card h-50 w-100">
                   <div className="row g-0">
                     <div className="col-md-8">
-                      <Box className="card w-100 bg-light overflow-auto">
+                      <Box className="card w-100 bg-white overflow-auto overflow-y-hidden">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DateCalendar
                             value={selectedDate}
                             onChange={handleDateChange}
                             loading={isLoading}
-                            className="w-100"
+                            className="w-100 custom-scroll-color overflow-y-hidden"
                             onMonthChange={handleMonthChange}
                             renderLoading={() => <DayCalendarSkeleton />}
                             shouldDisableDate={isWeekend}
@@ -390,7 +390,12 @@ const TravelConfirmation = () => {
                               },
                               "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
                                 border: "0px solid rgba(0, 0, 0, 0.6)",
-                              },
+                              },  "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
+                                border: "0px solid rgba(0, 0, 0, 0.6)",
+                              },  "& .css-lmlc2i-MuiDateCalendar-root":{
+                             backgroundColor:'green',
+                              }
+                              
                             }}
                           />
                         </LocalizationProvider>
@@ -426,7 +431,7 @@ const TravelConfirmation = () => {
                         </div>
                       </Box>
                     </div>
-                    <div className="col-md-4 ">
+                    <div className="col-md-4 bg-light">
                       <div className="h-100">
                         <div className="d-flex flex-column h-100 px-3 py-3">
                           <div class="alert alert-info  text-center fw-bold fs-5" role="alert">
