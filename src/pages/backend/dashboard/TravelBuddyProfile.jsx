@@ -323,6 +323,7 @@ const TravelBuddyProfile = () => {
     }
   })
  }
+
   const sendRequest = () => {
     setSubmit(true);
 
@@ -346,12 +347,6 @@ const TravelBuddyProfile = () => {
             </Link>
           </div>
         </div>
-      {/* <div className="page-title">
-        <h4 className="card p-2 px text-success my-2">
-        You are looking for travel buddles to ride your car, others who want
-        to share their car and to connect with members with whom you can take turns to use each other's car
-        </h4>
-      </div> */}
       <h5 className="card p-2 px-4 text-success ">{`You are looking for travel buddies to ride your car, others who want
       to share their car and to connect with members with whom you can take turns to use each other's car`}</h5>
     </div>

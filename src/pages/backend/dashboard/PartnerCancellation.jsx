@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 const PartnerCancellation = () => {
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
+  const requestContactId = useSelector((s) => s.general.data.contact_id);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [contactId, setContactId] = useState("");
@@ -79,13 +80,13 @@ const PartnerCancellation = () => {
 
       if (checkStatus === 1) {
         const body = {
-          option: driver,
+          option: "driver",
           date: selectedDate.format('YYYY-MM-DD'),
         };
 
         console.log('sendRequest Body:', body);
 
-        const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${contactId}`, {
+        const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${requestContactId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -138,13 +139,13 @@ const PartnerCancellation = () => {
       }
       else {
         const body = {
-          option: rider,
+          option: "rider",
           date: selectedDate.format('YYYY-MM-DD'),
         };
 
         console.log('sendRequest Body:', body);
 
-        const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${contactId}`, {
+        const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${requestContactId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

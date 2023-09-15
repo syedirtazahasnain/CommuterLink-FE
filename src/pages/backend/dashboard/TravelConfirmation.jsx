@@ -88,8 +88,8 @@ const TravelConfirmation = () => {
     // Initial call when the component mounts
     fetchData();
 
-    // Set up a 20-second setInterval to call the fetchData function
-    const intervalId = setInterval(fetchData, 20000);
+    // Set up a 1 minute 20-second setInterval to call the fetchData function
+    const intervalId = setInterval(fetchData, 120000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
@@ -320,6 +320,7 @@ const TravelConfirmation = () => {
                             onMonthChange={handleMonthChange}
                             renderLoading={() => <DayCalendarSkeleton />}
                             shouldDisableDate={isWeekend}
+                            disablePast
                             slots={{
                               day: ServerDay,
                             }}

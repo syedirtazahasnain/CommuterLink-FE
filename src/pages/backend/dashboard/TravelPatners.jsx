@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import { setContactIdState } from "../../../redux/generalSlice";
 
 const TravelPatners = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn, setSubmit] = useState(false);
 
   // For Travel Data
+  const [contactId, setContactId] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
@@ -44,10 +47,11 @@ const TravelPatners = () => {
     navigate("/rechargewallet");
   };
 
-  const route = () => {
+  const route = (contactId) => {
     setSubmit(true);
 
     if (!submitbtn) {
+      dispatch(setContactIdState(contactId));
       navigate("/travel-buddy");
     }
   };
@@ -65,6 +69,7 @@ const TravelPatners = () => {
 
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
+        setContactId(jsonresponse.data[0].contact_id);
         setName(jsonresponse.data[0].name);
         setImage(jsonresponse.data[0].commuter_image);
         setPrice(jsonresponse.data[0].price);
@@ -186,7 +191,7 @@ const TravelPatners = () => {
                                     src={`${IMAGE_URL}${image}`}
                                     className="card-img-top w-100px m-auto h-100px cursor-pointer"
                                     onClick={() => {
-                                      route();
+                                      route(contactId);
                                     }}
                                   />
                                 ) : (
