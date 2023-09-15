@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setContactIdState } from "../../../redux/generalSlice";
 
 const CommuterLinkSuggestions = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn, setSubmit] = useState(false);
 
@@ -50,18 +52,20 @@ const CommuterLinkSuggestions = () => {
     return () => clearInterval(intervalId);
   }, [option, userToken]);
 
-  const requestRoute = () => {
+  const requestRoute = (contact_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
+      dispatch(setContactIdState(contact_id));
       navigate("/request-commuter-profile");
     }
   };
 
-  const route = () => {
+  const route = (contact_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
+      dispatch(setContactIdState(contact_id));
       navigate("/commuter-profile");
     }
   };
@@ -166,7 +170,7 @@ const CommuterLinkSuggestions = () => {
             className="card-title text-light text-center"
             style={{ width: "6rem", cursor: "pointer" }}
             onClick={() => {
-              route();
+              route(contact_id);
             }}
           >
             {req_stage === 1 || req_stage === 2 ? name : contact_id}
@@ -199,7 +203,7 @@ const CommuterLinkSuggestions = () => {
             className="card-title text-center text-light"
             style={{ width: "6rem", cursor: "pointer" }}
             onClick={() => {
-              route();
+              route(contact_id);
             }}
           >
             {req_stage === 1 || req_stage === 2 ? name : contact_id}
@@ -269,7 +273,7 @@ const CommuterLinkSuggestions = () => {
             className={`card-title ${request_stage === 2 ? "text-dark" : "text-light"} text-center`}
             style={{ width: "6rem", cursor: "pointer" }}
             onClick={() => {
-              requestRoute();
+              requestRoute(contact_id);
             }}
           >
             {request_stage === 1 || request_stage === 2 ? name : contact_id}

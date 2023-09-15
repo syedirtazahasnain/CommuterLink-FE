@@ -37,6 +37,7 @@ const TravelPatners = () => {
 
   useEffect(() => {
     getTravelData();
+    getSeatCostDetail();
   }, []);
 
   const onNavigate = () => {
@@ -117,6 +118,29 @@ const TravelPatners = () => {
       console.error("An error occurred:", error);
     }
   };
+
+  const getSeatCostDetail = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/v1/seat-cost-detail/`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+
+      const jsonresponse = await response.json();
+      // if (jsonresponse) {
+      //   setWalletAmount(jsonresponse[0].wallet.wallet_amount);
+      //   setUserType(jsonresponse[0].userlist.vehicle_option);
+      // }
+      console.log("Seat Cost Data", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
   const tableCellStyle = {
     color: 'black',
     fontWeight: 'bold',

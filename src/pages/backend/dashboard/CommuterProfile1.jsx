@@ -27,6 +27,7 @@ const CommuterProfile1 = () => {
   const dispatch = useDispatch();
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
+  const requestContactId = useSelector((s) => s.general.data.contact_id);
   // For Profile Page Data
   const [option, setOption] = useState(null);
   const [profileType, setProfileType] = useState("");
@@ -116,18 +117,15 @@ const CommuterProfile1 = () => {
         setProfileType("Rider");
         setUserType("Driver");
         profiles = jsonresponse.drivers;
-
-        // Set the profiles in the state
-        setUserProfiles(profiles);
       } else if (option === 1) {
         // User is a driver, show rider data
         setProfileType("Driver");
         setUserType("Rider");
         profiles = jsonresponse.rider;
-
-        // Set the profiles in the state
-        setUserProfiles(profiles);
       }
+
+      // Set the user profile to display in the state
+      setUserProfiles(profiles);
       console.log("Commuter Matches Data:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
@@ -662,12 +660,11 @@ const CommuterProfile1 = () => {
 
       <div className="row">
         {userProfiles.length > 0 && userProfileDetails.length > 0 ? (
-          userProfiles.map((user, index) => {
-            // Find the corresponding userDetails
-            return (
-              <UserProfile user={user} key={index} userDetails={userProfileDetails[index]} />
-            );
-          })
+          userProfiles
+            .filter(user => user.contact_id === requestContactId) // Filter profiles by contact_id
+            .map((user, index) => {
+              return <UserProfile user={user} key={index} userDetails={userProfileDetails[index]} />;
+            })
         ) : (
           null
         )}
