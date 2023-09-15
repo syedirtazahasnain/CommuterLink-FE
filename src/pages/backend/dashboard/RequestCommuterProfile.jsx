@@ -651,23 +651,7 @@ const RequestCommuterProfile = () => {
 
     return (
         <div>
-            <div className="page-title">
-
-                <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
-                    <div className="d-flex justify-content-between align-items-xl-baseline">
-                        <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
-                        <Link
-                            to={"/dashboard"} >
-                            <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
-                                <i className="fas fa-angle-left text-white" />
-                                Back
-                            </button>
-                        </Link>
-                    </div>
-
-                </div>
-                <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
-            </div>
+           
              <div className="page-title">
              <div className="card px-4 py-2 text-success my-2 fw-bold">
       <Breadcrumbs aria-label="breadcrumb">
