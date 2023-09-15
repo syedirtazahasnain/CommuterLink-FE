@@ -162,7 +162,7 @@ const CommuterLinkSuggestions = () => {
           }}
         >
           {req_stage === 1 || req_stage === 2 ? (
-            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" />
+            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top  w-40px m-auto mt-3" style={{aspectRatio:'22/29'}}/>
           ) : (
             <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
@@ -195,7 +195,7 @@ const CommuterLinkSuggestions = () => {
           }}
         >
           {req_stage === 1 || req_stage === 2 ? (
-            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" />
+            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" style={{aspectRatio:'22/29'}} />
           ) : (
             <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
@@ -265,7 +265,7 @@ const CommuterLinkSuggestions = () => {
           }}
         >
           {request_stage === 1 || request_stage === 2 ? (
-            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" />
+            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top imagebackend w-40px m-auto mt-3" style={{aspectRatio:'22/29'}} />
           ) : (
             <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
