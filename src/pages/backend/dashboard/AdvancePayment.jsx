@@ -25,11 +25,12 @@ const AdvancePayment = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const [windowClosedManually, setWindowClosedManually] = useState(false);
+  const requestContactId = useSelector((s) => s.general.data.contact_id);
+  const userToken = useSelector((s) => s.login.data.token);
   const [memberId, setMemberId] = useState("");
   const [userId, setUserId] = useState("");
   const [payment, setPayment] = useState("");
   const [profileType, setProfileType] = useState("");
-  const userToken = useSelector((s) => s.login.data.token);
   const paymentURL = `https://be.staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
 
 
@@ -75,10 +76,10 @@ const AdvancePayment = () => {
   }, []);
 
   useEffect(() => {
-    if (memberId) {
+    if (requestContactId) {
       getPaymentDetails();
     }
-  }, [memberId]);
+  }, [requestContactId]);
 
   useEffect(() => {
     // Listen for the beforeunload event
@@ -175,7 +176,7 @@ const AdvancePayment = () => {
   const getPaymentDetails = async () => {
     try {
       const response = await fetch(
-        `${API_URL}/api/v1/advance-seat-cost/${memberId}`,
+        `${API_URL}/api/v1/advance-seat-cost/${requestContactId}`,
         {
           method: "get",
           headers: {
@@ -328,13 +329,15 @@ const AdvancePayment = () => {
           <div className="text-center">
             <Button
               className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              style={{ backgroundColor: "rgb(42, 64, 42)" }}
               onClick={() => navigate("/dashboard")}
               disabled={windowClosedManually}
             >
               Skip Payment
             </Button>
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2" style={{ backgroundColor: "rgb(42, 64, 42)" }}
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2" 
+              style={{ backgroundColor: "rgb(42, 64, 42)" }}
               onClick={route}
               disabled={!windowClosedManually}
             >

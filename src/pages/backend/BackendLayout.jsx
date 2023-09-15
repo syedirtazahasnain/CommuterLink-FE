@@ -61,7 +61,7 @@ const BackendLayout = ({ children }) => {
       Swal.fire({
         position: 'top',
         title: 'Are you sure?',
-        text: "You are about to logout from commuterLink",
+        text: "You are about to logout from CommutersLink",
         // // icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: 'green',

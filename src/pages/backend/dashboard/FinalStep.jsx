@@ -174,7 +174,7 @@ const FinalStep = () => {
           dispatch(setIdState(""));
           dispatch(setContactIdState(""));
           navigate("/dashboard");
-        } else if (jsonresponse.statusCode === 100) {
+        } else if (jsonresponse.status_code === 100) {
           Swal.fire({
             position:'top',
             // // icon: 'error',
@@ -184,7 +184,7 @@ const FinalStep = () => {
           },}
           )
         }
-        else if (jsonresponse.statusCode === 500) {
+        else if (jsonresponse.status_code === 500) {
           Swal.fire({
             position:'top',
             // // icon: 'error',
@@ -229,7 +229,7 @@ const FinalStep = () => {
           dispatch(setIdState(""));
           dispatch(setContactIdState(""));
           navigate("/dashboard");
-        } else if (jsonresponse.statusCode === 100) {
+        } else if (jsonresponse.status_code === 100) {
           // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
@@ -240,7 +240,7 @@ const FinalStep = () => {
           },}
           )
         }
-        else if (jsonresponse.statusCode === 500) {
+        else if (jsonresponse.status_code === 500) {
           // alert("Resend Error: " + jsonresponse.message);
           Swal.fire({
             position:'top',
