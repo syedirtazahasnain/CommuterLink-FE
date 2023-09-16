@@ -77,6 +77,13 @@ const Driver = () => {
             if (jsonresponse) {
                 setOption(jsonresponse[0].userlist.vehicle_option);
             }
+            setSelectedHomeTime(jsonresponse[0].matches.time_return);
+            setSelectedOfficeTime(jsonresponse[0].matches.time_depart);
+            setPreferredGender(jsonresponse[0].contact.preferred_gender);
+            setDaysSelected(jsonresponse[0].matches.days);
+            setSelectedCarCC(jsonresponse[0].vehicle.car_cc);
+            setSelectedModelName(jsonresponse[0].vehicle.car_model);
+            setSelectedRegYear(jsonresponse[0].vehicle.car_reg_year);
             console.log("Update Driver Details Data", jsonresponse);
         } catch (error) {
             console.error("An error occurred:", error);
@@ -105,11 +112,11 @@ const Driver = () => {
                 || selectedRegYear === "") {
                 Swal.fire({
                     position: 'top',
-                 
+
                     text: `Please fill all fields!`,
-                    customClass:{
-                        confirmButton:'bg-success'
-                      }
+                    customClass: {
+                        confirmButton: 'bg-success'
+                    }
                 }
                 )
             }
@@ -150,22 +157,22 @@ const Driver = () => {
                 } else if (jsonresponse.status_code === 100) {
                     Swal.fire({
                         position: 'top',
-                      
+
                         text: `${jsonresponse.message}`,
-                        customClass:{
-                            confirmButton:'bg-success'
-                          }
+                        customClass: {
+                            confirmButton: 'bg-success'
+                        }
                     }
                     )
                 }
                 else if (jsonresponse.statusCode === 500) {
                     Swal.fire({
                         position: 'top',
-                       
+
                         text: `${jsonresponse.message}`,
-                        customClass:{
-                            confirmButton:'bg-success'
-                          }
+                        customClass: {
+                            confirmButton: 'bg-success'
+                        }
                     }
                     )
                 }
@@ -176,11 +183,11 @@ const Driver = () => {
             // alert("An error occurred while sending the request.");
             Swal.fire({
                 position: 'top',
-              
+
                 text: 'An error occured while sending the request.',
-                customClass:{
-                    confirmButton:'bg-success'
-                  }
+                customClass: {
+                    confirmButton: 'bg-success'
+                }
             })
         }
     };
@@ -277,7 +284,7 @@ const Driver = () => {
                                             <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
                                                 <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
                                                     <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
-                                                        I Commute (Select Days)
+                                                        I Commute (Select Days){daysTravel}
                                                     </Form.Label>
                                                 </Form.Group>
 
@@ -383,7 +390,7 @@ const Driver = () => {
                                                                             value="Saturday"
                                                                             color="success"
                                                                             id={`inline-${type}-5`}
-                                                                   
+
                                                                             checked={daysSelected.includes("Saturday")}
                                                                             onChange={handleCheckboxChange}
                                                                         // required
