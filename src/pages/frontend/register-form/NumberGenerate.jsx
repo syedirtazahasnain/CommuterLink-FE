@@ -165,9 +165,9 @@ function NumberGenerate() {
             {" "}
             <div className="row">
               <div
-                className="col-md-6 d-flex "
+                className="col-md-6 d-flex"
                 style={{
-                  marginTop: "10vh"
+                  marginTop: "12vh"
                 }}
               >
                
@@ -215,7 +215,7 @@ function NumberGenerate() {
               </div>
          
           <div className="col-md-5 mb-5 px-4 py-5"  style={{
-                  marginTop: "12vh"
+                  marginTop: "20vh"
                 }}>
          
             <div

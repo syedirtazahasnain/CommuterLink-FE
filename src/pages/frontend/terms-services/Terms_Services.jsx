@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { BASE_URL } from '../../../constants';
-
+import { useNavigate } from 'react-router-dom';
 function createData(text) {
   return { text };
 }
@@ -27,6 +27,12 @@ const rows = [
 ];
 
 const Terms_Services = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+  
   return (
     <div>
       <div className="container text-center mt-5 pt-5 fw-bold fs-1 mb-3">

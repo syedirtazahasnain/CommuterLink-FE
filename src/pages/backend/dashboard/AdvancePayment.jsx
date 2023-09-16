@@ -284,8 +284,8 @@ const AdvancePayment = () => {
         <div className="">
           <div className="card-body text-dark">
             <p>
-              Money will stay in your Wallet & will be transferred to car owner
-              on weekly basis after you have availed the services
+              Money will stay in your wallet & will be transferred to car owner
+              on weekly basis after you have availed the services.
             </p>
             <p className="">
               At any given point in time wallet must have 2 weeks balance, so

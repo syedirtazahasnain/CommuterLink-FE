@@ -87,7 +87,7 @@ const BeforeApprovalTerms = () => {
       </div>
       <div className="card p-4 bg-light p-2">
         <h5 className="text-success pb-2">Before sending the request accept these terms</h5>
-        <div className="card bg-light" >    
+        <div className="card" >    
           <div className="card-body">
 
             <p>1. The car offer will wait 15 mins after agreed time for you to join</p>
