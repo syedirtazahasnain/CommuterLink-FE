@@ -96,7 +96,7 @@ const WhyProcessPayment1 = () => {
         className="card p-4 bg-light p-2"
         
       >
-        <div class="card backgroundColor">
+        <div class="card bg-light ">
         
 
           <div

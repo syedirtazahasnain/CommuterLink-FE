@@ -95,7 +95,7 @@ const Congratulations = () => {
       <h5 className="pb-2 text-success text-center my-2 fw-bold">
         Your Payment has been Received Successfully and credited to your Wallet
       </h5>
-        <div className="card backgroundColor">
+        <div className="card bg-light">
           <div className="card-body">
 
 

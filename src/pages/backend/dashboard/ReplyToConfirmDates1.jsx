@@ -60,13 +60,13 @@ const ReplyToConfirmDates1 = ({ children }) => {
   
 </div>
 <div className="card p-4">
-  <div className="card backgroundColor">
+  <div className="">
     <div className="card-body">
     
 
       <div className="row text-left">
         <div
-          className="col-md-12 backgroundColor  p-5 mb-3 sha m-auto"
+          className="col-md-12 bg-light card  p-5 mb-3 sha m-auto"
          
         >
            <div className="card-body">

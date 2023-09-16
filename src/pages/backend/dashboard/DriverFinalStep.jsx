@@ -167,7 +167,7 @@ const DriverFinalStep = () => {
         <h5 className="text-success pb-2">
           Send following request and start commuting together
         </h5>
-        <div className="card backgroundColor">
+        <div className="card bg-light">
           <div className="card-body">
 
             <p>Dear {driverName}</p>

@@ -114,7 +114,7 @@ const ViewProfile = () => {
         </div>
       </div>
       <div className="card p-4  p-2">
-        <div className="card backgroundColor" >
+        <div className="card bg-light" >
           <div className="card-body text-dark">
             <div className="container text-center">
               <img src={`${IMAGE_URL}${image}`} style={{ height: "150px", width: "150px" }} className='border border-2 rounded rounded-circle' />

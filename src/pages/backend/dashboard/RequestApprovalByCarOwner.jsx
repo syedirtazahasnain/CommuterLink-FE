@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 const customTheme = createTheme({
   palette: {
@@ -114,13 +114,24 @@ const RequestApprovalByCarOwner = () => {
   return (
 
     <div> <div className="page-title">
-      <h3 className="card p-4 text-success my-2 fw-bold">REQUEST APPROVAL FOR CAR OWNER</h3>
+      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-success my-2 fw-bold m-0">REQUEST APPROVAL FOR CAR OWNER </h3>
+            <Link
+              onClick={() => navigate(-1)} >
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link>
+          </div>
+        </div>
 
     </div>
 
       <div className="card p-4 bg-light p-2">
         <div
-          className="card backgroundColor"
+          className="card bg-light"
         >
           <div className="card-body">     <p  >
             Dear {driverName}

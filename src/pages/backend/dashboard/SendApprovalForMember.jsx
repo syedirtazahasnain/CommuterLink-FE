@@ -147,7 +147,7 @@ const SendApprovalForMember = () => {
       </h5>
 
       
-        <div className="card  backgroundColor">
+        <div className="card  bg-light">
           <div className="card-body">
 
             <p>Dear {name}</p><br />

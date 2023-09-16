@@ -177,12 +177,12 @@ const ContactUs = () => {
           would love to hear your suggestions or feedback if any. Feel free to
           connect with us
         </h5>
-        <div className="card backgroundColor">
-          <div className="card-body">
+        <div className=" bg-white">
+          <div className="">
 
             <div className="row text-left">
               <div
-                className="col-md-12 backgroundColor"
+                className="col-md-12"
                
               >
                 <form action="#" method="post">

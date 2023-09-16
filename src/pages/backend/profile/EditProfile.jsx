@@ -234,7 +234,7 @@ const EditProfile = () => {
         </div>
       </div>
       <div className="card p-4  p-2">
-        <div className="card backgroundColor">
+        <div className="card bg-light">
           <div className="card-body text-dark">
             <div className="container text-center">
               <h2 className="text-success fw-bold">Change Password</h2>

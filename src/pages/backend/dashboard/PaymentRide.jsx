@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
+import { ThreeCircles } from 'react-loader-spinner'
 
 const customTheme = createTheme({
   palette: {
@@ -123,11 +124,20 @@ const PaymentRide = () => {
       </div>
         <div className="card p-4 bg-light p-2">
           <h5 className="pb-2 text-success ">{`The ride history along with payment log`}</h5>
-          <div className="card backgroundColor">
+          <div className="card bg-light">
             <div className="card-body">
               {loading ? (
                 <div className="text-center" style={{ height: "20vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <CircularProgress color="warning" />
+                   <ThreeCircles
+      height={50}
+      width={50}
+      color="#4fa94d"
+      visible={true}
+      ariaLabel="three-circles-rotating"
+      outerCircleColor=""
+      innerCircleColor=""
+      middleCircleColor=""
+    />
                 </div>
               ) : (
                 <>

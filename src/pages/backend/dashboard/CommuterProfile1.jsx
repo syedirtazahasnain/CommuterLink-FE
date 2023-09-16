@@ -258,7 +258,7 @@ const CommuterProfile1 = () => {
       <div>
 
         <div className="card p-4 bg-light">
-          <div className="card p-4 backgroundColor">
+          <div className="card p-4 backgroundColor"> 
             <div className="row px-3">
               <div className="col-md-1">
                 {req_stage === 0 ? (
@@ -683,7 +683,7 @@ const CommuterProfile1 = () => {
           </div>
 
         </div>
-        <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours". Exact details will be shown after both have accepted to share.`}</h5>
+        <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
       </div>
 
       <div className="row">

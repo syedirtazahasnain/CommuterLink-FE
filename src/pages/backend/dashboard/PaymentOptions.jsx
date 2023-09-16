@@ -53,7 +53,7 @@ const PaymentOptions = ({ children }) => {
       </div>
       <div className="card p-4  p-2">
         <h5 className="pb-2 text-success">(15 Days Advance Rs 354/-)&nbsp (Commuter Charges + 2.5% Service Charges)</h5>
-        <div className="card backgroundColor">
+        <div className="card bg-light">
           <div className="card-body text-dark">
             <p >
               Money will stay in your Wallet & will be transferred to car owner

@@ -88,7 +88,7 @@ const Notifications = () => {
       <div className="card my-2">
         <div className="row p-4">
           <div className="col">
-            <div className="card p-3 backgroundColor">
+            <div className="card p-3">
               {loading ? (
                 <div className="text-center">
                     {/* // Render CircularProgress while loading */}
