@@ -6,6 +6,18 @@ import Swal from "sweetalert2";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 import { setContactIdState } from "../../../redux/generalSlice";
 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const monthNames = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+  return `${day}-${monthNames[monthIndex]}-${year}`;
+}
+
 const TravelPatners = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,6 +33,14 @@ const TravelPatners = () => {
   const [walletAmount, setWalletAmount] = useState("");
   const [userType, setUserType] = useState("");
   const [data, setData] = useState("");
+
+  // Travel Cost Data
+  const [distance, setDistance] = useState("");
+  const [fuelAverage, setFuelAverage] = useState("");
+  const [fuelPrice, setFuelPrice] = useState("");
+  const [liter, setLiter] = useState("");
+  const [maintenance, setMaintenance] = useState("");
+  const [wearAndTear, setWearAndTear] = useState("");
 
   useEffect(() => {
     // Define a function that contains the code to execute
@@ -77,14 +97,6 @@ const TravelPatners = () => {
       }
       else if (jsonresponse.status_code === 100) {
         setData(jsonresponse.message);
-        // Swal.fire({
-        //   position: 'top',
-        //   // icon: 'error',
-        //   text: `${jsonresponse.message}`,
-        //   customClass: {
-        //     confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        //   },
-        // });
       }
       else if (jsonresponse.status_code === 500) {
         Swal.fire({
@@ -126,21 +138,48 @@ const TravelPatners = () => {
 
   const getSeatCostDetail = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/v1/seat-cost-detail`, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${userToken}`,
-        },
-      });
-
-      const jsonresponse = await response.json();
-      // if (jsonresponse) {
-      //   setWalletAmount(jsonresponse[0].wallet.wallet_amount);
-      //   setUserType(jsonresponse[0].userlist.vehicle_option);
-      // }
-      console.log("Seat Cost Data", jsonresponse);
+      if(userType === 1){
+        const response = await fetch(`${API_URL}/api/v1/seat-cost-detail`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        });
+  
+        const jsonresponse = await response.json();
+        if (jsonresponse) {
+          setDistance(jsonresponse.data[0].Distance);
+          setFuelAverage(jsonresponse.data[0]['Fuel Average']);
+          setFuelPrice(jsonresponse.data[0]['Fuel-Price']);
+          setLiter(jsonresponse.data[0]['Liter']);
+          setMaintenance(jsonresponse.data[0]['Maintenance']);
+          setWearAndTear(jsonresponse.data[0]['Wear and Tear']);
+        }
+        console.log("Driver Seat Cost Data", jsonresponse);
+      }
+      else if (userType === 0){
+        const response = await fetch(`${API_URL}/api/v1/seat-cost-detail/${contactId}`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        });
+  
+        const jsonresponse = await response.json();
+        if (jsonresponse) {
+          setDistance(jsonresponse.data[0].Distance);
+          setFuelAverage(jsonresponse.data[0]['Fuel Average']);
+          setFuelPrice(jsonresponse.data[0]['Fuel-Price']);
+          setLiter(jsonresponse.data[0]['Liter']);
+          setMaintenance(jsonresponse.data[0]['Maintenance']);
+          setWearAndTear(jsonresponse.data[0]['Wear and Tear']);
+        }
+        console.log("Rider Seat Cost Data", jsonresponse);
+      }
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -205,7 +244,7 @@ const TravelPatners = () => {
                             <div className="col-md-8">
                               <p className="fw-bold fs-6">Name: {name}</p>
                               <p className="fw-bold fs-6">Daily Commuting Cost: Rs. &nbsp; {price}/-</p>
-                              <p className="fw-bold fs-6">Start Date: {date}</p>
+                              <p className="fw-bold fs-6">Start Date: {date && formatDate(date)}</p>
                             </div>
 
                           </div>
@@ -311,27 +350,26 @@ const TravelPatners = () => {
                             <TableBody>
                               <TableRow>
                                 <TableCell style={tableCellStyle}>Distance</TableCell>
-                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>50km</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{distance}km</TableCell>
                               </TableRow>
                               <TableRow>
                                 <TableCell style={tableCellStyle}>Avg. Fuel consumption</TableCell>
-                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>10km/Ltr</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{fuelAverage}km/Ltr</TableCell>
                               </TableRow>
                               <TableRow>
                                 <TableCell style={tableCellStyle}>Fuel Price</TableCell>
                                 <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
-                                  Rs. 230/Ltr
+                                  Rs. {fuelPrice}/Ltr
                                   <br />
-                                  (Rs. 288/-)
                                 </TableCell>
                               </TableRow>
                               <TableRow>
-                                <TableCell style={tableCellStyle}>Maintenance (10%)</TableCell>
-                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                                <TableCell style={tableCellStyle}>Maintenance</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{maintenance}</TableCell>
                               </TableRow>
                               <TableRow>
-                                <TableCell style={tableCellStyle}>Wear & Tear (10%)</TableCell>
-                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                                <TableCell style={tableCellStyle}>Wear & Tear</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{wearAndTear}</TableCell>
                               </TableRow>
                             </TableBody>
                           </Table>

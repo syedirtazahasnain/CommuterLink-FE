@@ -329,7 +329,7 @@ const PartnerCancellation = () => {
                     </Button>
                     )}
                 </div>
-              {/* </Form> */}</Box>
+              </Box>
               </div>
               </div>
             </div>
