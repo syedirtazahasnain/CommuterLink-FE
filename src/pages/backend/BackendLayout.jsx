@@ -72,7 +72,7 @@ const BackendLayout = ({ children }) => {
           Swal.fire({
             position: 'top',
             title: 'Logout',
-            
+
             customClass: {
               confirmButton: 'bg-success', // Apply custom CSS class to the OK button
             },
@@ -86,6 +86,10 @@ const BackendLayout = ({ children }) => {
     ) {
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
@@ -271,7 +275,7 @@ const BackendLayout = ({ children }) => {
                           </div>
                         </div>
                       </div>
-                      
+
                     </div>
                     <div
                       className="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
@@ -373,7 +377,7 @@ const BackendLayout = ({ children }) => {
                           data-kt-menu="true"
                           data-kt-menu-expand="false"
                         >
-                          
+
 
                           <div className="menu-item border-custom">
                             <Link

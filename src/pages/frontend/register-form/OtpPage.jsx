@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { API_URL, BASE_URL } from "../../../constants";
 import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField"; 
+import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Modal, Alert } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
@@ -30,6 +30,10 @@ const OtpPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.signup.data);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   console.log("Signup Data:", userData);
 
@@ -107,12 +111,12 @@ const OtpPage = () => {
       newOTP[index] = value;
       return newOTP;
     });
-    
+
     if (value && index < otp.length - 1 && inputRefs.current[index + 1]) {
       // Check if the value is not empty, not the last field, and the next field exists
       inputRefs.current[index + 1].focus();
     }
-    
+
     if (index === 4) {
       // If the last input field is filled, validate the OTP
       const enteredOTP = otp.join("");
@@ -348,8 +352,8 @@ const OtpPage = () => {
                   </CardActions>
                   <div id="span-text" className="text-center mb-5">
                     Didn't get the code? &nbsp;
-                    <Link onClick={resendOTP} style={{textDecoration:'none'}}>
-                      <span style={{ color: "#198754", textDecoration:'none' }}>Resend</span>
+                    <Link onClick={resendOTP} style={{ textDecoration: 'none' }}>
+                      <span style={{ color: "#198754", textDecoration: 'none' }}>Resend</span>
                     </Link>
                   </div>
 

@@ -31,6 +31,10 @@ const Rider = () => {
     window.KTScroll.init();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+
   const getdropdowndata = async () => {
     const response = await fetch(
       `${API_URL}/api/v1/list/data`,
@@ -67,7 +71,7 @@ const Rider = () => {
       if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === "" || preferredGender === "") {
         Swal.fire({
           position: 'top',
-         
+
           text: `Please Fill All Fields!`,
           customClass: {
             confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -109,10 +113,10 @@ const Rider = () => {
         } else if (jsonresponse.status_code === 100) {
           Swal.fire({
             position: 'top',
-          
+
             text: `${jsonresponse.message}`,
-            customClass:{
-              confirmButton:'bg-success'
+            customClass: {
+              confirmButton: 'bg-success'
             }
           }
           )
@@ -134,7 +138,7 @@ const Rider = () => {
       // alert("An error occurred while sending the request.");
       Swal.fire({
         position: 'top',
-     
+
         text: 'An error occured while sending the request.',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button

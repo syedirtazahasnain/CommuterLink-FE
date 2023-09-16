@@ -34,6 +34,10 @@ const Driver = () => {
     }, []);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [navigate]);
+
+    useEffect(() => {
         dispatch(setCurrentPage("matchingupdate"));
         document.getElementById("root").classList.remove("w-100");
         document.getElementById("root").classList.add("d-flex");

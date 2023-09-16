@@ -34,7 +34,6 @@ const DriverRegistration = () => {
   const [isLoading, setIsLoading] = useState(false);
   const mapLibraries = ["places"];
 
-
   const route = () => {
     navigate("/seatcostverification");
 
@@ -177,6 +176,10 @@ const DriverRegistration = () => {
   useEffect(() => {
     getdropdownStartdata();
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate, showDriverForm]);
 
   useEffect(() => {
 
@@ -1229,7 +1232,7 @@ const DriverRegistration = () => {
 
   return (
     <>
-      {showDriverForm && (
+      {!showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
@@ -1260,7 +1263,7 @@ const DriverRegistration = () => {
                     <h1 className="text-center text-white py-4">
                       Registration Form
                     </h1></div>
-                  <Form className="p-3" noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Form className="p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}>
 
                     <div className="row mb-3 shadow shadow-sm">
                       <div
@@ -2136,7 +2139,7 @@ const DriverRegistration = () => {
         </>
       )}
 
-      {!showDriverForm && (
+      {showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
@@ -2174,7 +2177,7 @@ const DriverRegistration = () => {
                   </div>
 
                   <Form
-                    className=" p-3" noValidate validated={validated} onSubmit={handleSubmit}
+                    className=" p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}
                   >
                     <div className="row mb-3 shadow shadow-sm">
                       <div

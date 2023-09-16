@@ -53,7 +53,7 @@ const Office_School = () => {
               <div
                 className="col-md-6 d-flex fixed"
                 style={{
-                  marginTop: "",
+                  marginTop: "10vh",
                 }}
               >
                 <Carousel
@@ -102,7 +102,7 @@ const Office_School = () => {
                 <div className="container">
                   <div className="row justify-content-center py-15 my-4">
                     <div className="col-10 mt-2">
-                      <div className="card text-center border-0 shadow rounded rounded-4">
+                      <div className="card py-5 text-center border-0 shadow rounded rounded-4">
                         <div className="container">
                           <div className="row">
                             <div className="col">
