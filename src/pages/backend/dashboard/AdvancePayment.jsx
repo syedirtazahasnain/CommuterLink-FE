@@ -270,7 +270,7 @@ const AdvancePayment = () => {
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
         <h3 className="text-success my-2 fw-bold m-0">
-        TWO WEEKS ADVANCE MIN. PAYMENT DUE: RS. {payment}/-{" "}
+        TWO WEEKS ADVANCE MIN. PAYMENT DUE: Rs. {payment}/-{" "}
         </h3>
         <Link
               to={"/whyprocesspayment1"} >

@@ -311,7 +311,7 @@ const TravelConfirmation = () => {
                   <div className="row g-0">
                     <div className="col-md-8">
                       <Box className="card w-100 bg-white overflow-auto overflow-y-hidden">
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DateCalendar
                             value={selectedDate}
                             onChange={handleDateChange}
@@ -337,7 +337,7 @@ const TravelConfirmation = () => {
                                 fontWeight: 'bold',
                                 color: '#1F5F5B',
                                 paddingY: "0",
-                                paddingX: "calc(3rem + 18px)",
+                                paddingX: "calc(2rem + 18px)",
                                 margin: 0,
                               },
                               "& .MuiPickersDay-dayWithMargin": {
@@ -372,8 +372,8 @@ const TravelConfirmation = () => {
                                 fontSize: "1.5rem"
                               },
                               '& .MuiBadge-root ': {
-                                paddingLeft: '3rem',
-                                paddingRight: '3rem',
+                                paddingLeft: '2rem',
+                                paddingRight: '2rem',
                                 // paddingBottom: '.3rem'
                               },
                               '& .MuiPickersYear-yearButton': {
@@ -398,31 +398,118 @@ const TravelConfirmation = () => {
                               
                             }}
                           />
+                        </LocalizationProvider> */}
+
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DateCalendar
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            loading={isLoading}
+                            className="w-100 custom-scroll-color overflow-y-hidden"
+                            onMonthChange={handleMonthChange}
+                            renderLoading={() => <DayCalendarSkeleton />}
+                            shouldDisableDate={isWeekend}
+                            disablePast
+                            slots={{
+                              day: ServerDay,
+                            }}
+                            slotProps={{
+                              day: {
+                                highlightedDays,
+                              },
+                            }}
+                            sx={{
+                              overflow: 'auto',
+                              display: 'grid',
+                              "& .MuiDayCalendar-weekDayLabel": {
+                                fontSize: "1.4rem",
+                                fontWeight: 'bold',
+                                color: '#1F5F5B',
+                                paddingY: "0",
+                                paddingX: "calc(2rem + 18px)",
+                                margin: 0,
+                              },
+                              "& .MuiPickersDay-dayWithMargin": {
+                                fontSize: "1.3rem",
+                                margin: 0,
+                              },
+                              "& .MuiPickersCalendarHeader-root": {
+                                alignItems: "center",
+                                marginTop: "16px",
+                                marginBottom: "8px",
+                                paddingLeft: "150px",
+                                paddingRight: "130px",
+                                backgroundColor: "#CDF0EA",
+                                paddingY: "20px"
+                              },
+                              "& .MuiPickersDay-root:hover": {
+                                backgroundColor: "#cbeddd",
+                                borderRadius: "50%",
+                              },
+                              "& .MuiPickersDay-root.Mui-selected": {
+                                backgroundColor: "green",
+                                borderRadius: "100%",
+                                color: "#fff",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                padding:"1px",
+                              },
+                              "& .MuiPickersCalendarHeader-labelContainer": {
+                                fontSize: "1.5rem"
+                              },
+                              '& .MuiBadge-root': {
+                                paddingLeft: '2rem',
+                                paddingRight: '2rem',
+                              },
+                              '& .MuiPickersYear-yearButton': {
+                                backgroundColor: '#cbeddd'
+                              },
+                              "& .MuiPickersYear-yearButton.Mui-selected": {
+                                backgroundColor: "green",
+                              },
+                              '& .MuiPickersYear-yearButton.Mui-selected:hover': {
+                                backgroundColor: '#cbeddd'
+                              },
+                              "& .MuiPickersDay-root.Mui-selected:hover": {
+                                backgroundColor: "green",
+                              },
+                              "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
+                                border: "0px solid rgba(0, 0, 0, 0.6)",
+                              },
+                              "& .css-lmlc2i-MuiDateCalendar-root": {
+                                backgroundColor: 'green',
+                              }
+                            }}
+                          />
+
+
                         </LocalizationProvider>
+
                         <div className="h-100">
                           <div className="row text-center h-50 py-2 ">
                             <div className="col-md-4 mb-2">
                               <button className="font-custom btn text-success fw-bold fs-6 lh-1">
                                 <span className="d-flex">
                                   <i className="fa-regular fa-circle-check text-success mx-1 fs-5"></i>
-                              
-                                <div className="align-middle">Travelled</div>  </span>
+
+                                  <div className="align-middle">Travelled</div>  </span>
                               </button>
                             </div>
                             <div className="col-md-4 mb-2">
                               <button className=" font-custom btn btncol advancecolor text-success fw-bold fs-6 lh-1">
                                 <span className="d-flex">
                                   <i className="fa-solid fa-circle-minus text-success mx-1 fs-5"></i>
-                              
-                                <div className="align-middle">Not Travelled</div>  </span>
+
+                                  <div className="align-middle">Not Travelled</div>  </span>
                               </button>
                             </div>
                             <div className="col-md-4 mb-2">
                               <button className="font-custom btn btncol advancecolor text-success fw-bold fs-6 lh-1">
                                 <span className="d-flex">
                                   <i className="fa-solid fa-car text-danger mx-1"></i>
-                             
-                                <div className="align-middle">Driver Didn't Come</div>   </span>
+
+                                  <div className="align-middle">Driver Didn't Come</div>   </span>
                               </button>
                             </div>
 
@@ -431,18 +518,20 @@ const TravelConfirmation = () => {
                         </div>
                       </Box>
                     </div>
+
+
                     <div className="col-md-4 bg-light">
                       <div className="h-100">
                         <div className="d-flex flex-column h-100 px-3 py-3">
                           <div class="alert alert-info  text-center fw-bold fs-5" role="alert">
                             <i class="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Once the date is marked on Calendar, it remains fixed and cannot be altered.
                           </div>
-                           <div className="my-auto py-4">
-                          <h4 className="font-custom text-center fw-bold text-decoration-none text-dark">
-                            No. of Days Travelled</h4>
-                          <h2 className="text-center">300 (e.g.)</h2>
-                           </div>
-                          <a className="cursor-pointer btn-dark-green btn-sm font-custom text-center fs-6 fw-bold px-3 py-3 rounded-4 text-decoration-none text-white" onClick={route} >
+                          <div className="my-auto py-4">
+                            <h4 className="font-custom text-center fw-bold text-decoration-none text-dark">
+                              No. of Days Travelled</h4>
+                            <h2 className="text-center">300 (e.g.)</h2>
+                          </div>
+                          <a className="cursor-pointer font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-2 py-sm-3" onClick={route} >
                             View Full History</a>
                         </div>
                       </div>
@@ -456,7 +545,7 @@ const TravelConfirmation = () => {
                 <DialogContent></DialogContent>
                 <div className="container text-center px-2">
                   <div className="row px-4">
-                    <div className="col-12 mb-2 d-flex  border border-success rounded rounded-3">
+                    <div className="col-12 mb-2 d-flex flex-column flex-md-row  border border-success rounded rounded-3">
                       <div>
                         <button
                           className="btn font-custom   text-success fw-bold fs-5 lh-1"
