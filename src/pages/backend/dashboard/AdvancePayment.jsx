@@ -270,7 +270,7 @@ const AdvancePayment = () => {
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
         <h3 className="text-success my-2 fw-bold m-0">
-        TWO WEEKS ADVANCE MIN. PAYMENT DUE: RS. {payment}/-{" "}
+        TWO WEEKS ADVANCE MIN. PAYMENT DUE: Rs. {payment}/-{" "}
         </h3>
         <Link
               to={"/whyprocesspayment1"} >
@@ -284,8 +284,8 @@ const AdvancePayment = () => {
         <div className="">
           <div className="card-body text-dark">
             <p>
-              Money will stay in your Wallet & will be transferred to car owner
-              on weekly basis after you have availed the services
+              Money will stay in your wallet & will be transferred to car owner
+              on weekly basis after you have availed the services.
             </p>
             <p className="">
               At any given point in time wallet must have 2 weeks balance, so

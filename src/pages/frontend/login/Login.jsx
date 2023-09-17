@@ -22,6 +22,10 @@ const Login = () => {
   const [termsService, setTermsService] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+  
   const checkUserStatus = async () => {
     try {
       const response = await fetch(

@@ -122,7 +122,7 @@ const PaymentRide = () => {
         </div>
       </div>
       </div>
-        <div className="card p-4 bg-light p-2">
+        <div className="card p-4 bg-white p-2">
           <h5 className="pb-2 text-success ">{`The ride history along with payment log`}</h5>
           <div className="card bg-light">
             <div className="card-body">
@@ -145,7 +145,7 @@ const PaymentRide = () => {
                   <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 300 }} aria-label="simple table">
                       <TableHead>
-                        <TableRow>
+                        <TableRow className="bg-light">
                           <TableCell className="fw-bold fs-5 text-success">Date</TableCell>
                           <TableCell className="fw-bold fs-5 text-success">Message</TableCell>
                           <TableCell className="fw-bold fs-5 text-success">Amount</TableCell>

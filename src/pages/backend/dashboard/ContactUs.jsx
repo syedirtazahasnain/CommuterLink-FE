@@ -172,7 +172,7 @@ const ContactUs = () => {
       <div className="page-title">
       </div>
       <div className="card p-4">
-        <h5 className="text-success">
+        <h5 className="text-success mb-4">
           At CommutersLink, we are always available to address your queries and
           would love to hear your suggestions or feedback if any. Feel free to
           connect with us

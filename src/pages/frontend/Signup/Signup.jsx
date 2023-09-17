@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { API_URL, BASE_URL } from "../../../constants";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/base";
@@ -32,6 +32,10 @@ const Signup = () => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   function generateRandomPassword() {
     const length = 3;

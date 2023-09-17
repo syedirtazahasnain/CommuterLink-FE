@@ -5,11 +5,11 @@ import { resetsignupState } from "../../../redux/signupSlice";
 import { resetloginState } from "../../../redux/loginSlice";
 import { Button } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const VerifiedMember = () => {
-
+ const navigate = useNavigate();
   const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const name = useSelector((s) => s.signup.data.name);
@@ -27,6 +27,10 @@ const VerifiedMember = () => {
   useEffect(() => {
     getProfileData();
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   const getProfileData = async () => {
     try {

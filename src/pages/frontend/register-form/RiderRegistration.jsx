@@ -230,7 +230,10 @@ const RiderRegistration = () => {
   }, [cityEndId]);
 
   //console.log(locationEndString);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+  
   useEffect(() => {
     // Function to fetch the geocoding data
     const getGeocodeStartData = async () => {

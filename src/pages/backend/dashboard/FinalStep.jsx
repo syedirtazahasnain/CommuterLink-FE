@@ -308,7 +308,7 @@ const FinalStep = () => {
               </button>
             </Link></div></div>
       </div>
-      <div className="card p-4 bg-light p-2">
+      <div className="card p-4 bg-white p-2">
         <div className="card bg-light">
           <div className="card-body">
 
