@@ -16,7 +16,6 @@ import Form from "react-bootstrap/Form";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { LoginSocialFacebook } from "reactjs-social-login";
-import { FacebookLoginButton } from "react-social-login-buttons";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -253,17 +252,17 @@ const Signup = () => {
   };
 
   const handleFullNameChange = (e) => {
-    const value = e.target.value.replace(/[^a-z" "]/gi, '');
+    const value = e.target.value.replace(/[^a-z" "]/gi, "");
     setFullName(value);
 
     if (!/^[a-zA-Z" "]+$/.test(value) || value.length < 4) {
-      setFullNameError("Full Name must contain only alphabetic characters and be at least 4 characters long");
+      setFullNameError(
+        "Full Name must contain only alphabetic characters and be at least 4 characters long"
+      );
     } else {
       setFullNameError("");
     }
   };
-
-
 
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
@@ -396,19 +395,27 @@ const Signup = () => {
                 </h1>{" "}
                 <p
                   className="text-center fs-6 text-danger text-custom"
-                  style={{
-
-                  }}
+                  style={{}}
                 >
                   {" "}
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register.
-                    <button type="" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <div
+                    class="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i>{" "}
+                    You may proceed with registration if you are 18 years or
+                    older. For students below 18 years their
+                    parents can register.
+                    <button
+                      type=""
+                      class="btn-close"
+                      data-bs-dismiss="alert"
+                      aria-label="Close"
+                    ></button>
                   </div>
                   {/* <div class="alert alert-danger  text-center alert-dismissible text-danger fs-6" role="alert">
                             <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register
                           </div> */}
-
                 </p>{" "}
                 <Form className="text-center">
                   <Form.Group
@@ -532,15 +539,17 @@ const Signup = () => {
                       label={
                         <div id="span-text" className="mr-5 small">
                           I agree with all statements in
-                          <Link to={'/terms_services'} style={{ textDecoration: "none" }}>
+                          <Link
+                            to={"/terms_services"}
+                            style={{ textDecoration: "none" }}
+                          >
                             <span
                               style={{
                                 color: "#198754",
                                 textDecoration: "none",
                               }}
                             >
-                              &nbsp;
-                              Terms of service
+                              &nbsp; Terms of service
                             </span>
                           </Link>
                         </div>
@@ -587,7 +596,8 @@ const Signup = () => {
                           </li>
                           <li className="mr-3">
                             <LoginSocialFacebook
-                              appId="264760359845922"
+                              // appId="264760359845922"
+                              appId="832351251716749"
                               onResolve={(response) => {
                                 console.log("Response", response);
                               }}
@@ -595,14 +605,13 @@ const Signup = () => {
                                 console.log("Error Message:", error);
                               }}
                             >
-                              {/* <Tooltip title="Signup With Facebook">
+                              <Tooltip title="Signup With Facebook">
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px", cursor: "pointer" }}
                                 />
-                              </Tooltip> */}
-                              <FacebookLoginButton/>
+                              </Tooltip>
                             </LoginSocialFacebook>
                           </li>
                           <li>
@@ -621,7 +630,11 @@ const Signup = () => {
                                 <img
                                   src={`${BASE_URL}/assets/images/linkedin.png`}
                                   alt=""
-                                  style={{ height: "35px", width: "35px", cursor: "pointer" }}
+                                  style={{
+                                    height: "35px",
+                                    width: "35px",
+                                    cursor: "pointer",
+                                  }}
                                 />
                               </a>
                             </Tooltip>
@@ -632,8 +645,12 @@ const Signup = () => {
                     <hr id="hrline2" />
                     <div className="text-center mb-5">
                       Already have account on CommuterLinks? &nbsp;
-                      <Link to={'/login'} style={{ textDecoration: "none" }}>
-                        <span style={{ color: "#198754",    textDecoration: "none"}}>Login</span>
+                      <Link to={"/login"} style={{ textDecoration: "none" }}>
+                        <span
+                          style={{ color: "#198754", textDecoration: "none" }}
+                        >
+                          Login
+                        </span>
                       </Link>
                     </div>
                   </div>
