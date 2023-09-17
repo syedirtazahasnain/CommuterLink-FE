@@ -25,7 +25,7 @@ const Login = () => {
   const checkUserStatus = async () => {
     try {
       const response = await fetch(
-        `${API_URL}/api/v1/rejectedStatus`,
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -38,17 +38,29 @@ const Login = () => {
 
       const jsonresponse = await response.json();
 
-      console.log(jsonresponse);
+      console.log("Profile Response:", jsonresponse);
 
-      if (jsonresponse.statusCode === 200) {
-        if (jsonresponse.data[0] === 1) {
+      if (jsonresponse) {
+        if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === 1) {
           navigate("/dashboard");
         }
-        else if (jsonresponse.data[0] === 0) {
+        else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === 0) {
           navigate("/verification");
         }
-        else if (jsonresponse.data[0] === -1) {
+        else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === -1) {
           navigate("/rejection");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 1 && jsonresponse[0].profile_status === 5 && jsonresponse[0].approval_status === 1) {
+          navigate("/dashboard");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 1 && jsonresponse[0].profile_status === 5 && jsonresponse[0].approval_status === 0) {
+          navigate("/verification");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 1 && jsonresponse[0].profile_status === 5 && jsonresponse[0].approval_status === -1) {
+          navigate("/rejection");
+        }
+        else if (jsonresponse[0].profile_status === 1) {
+          navigate("/office_school");
         }
       }
 

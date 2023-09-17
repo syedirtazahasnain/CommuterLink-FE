@@ -28,7 +28,7 @@ import Swal from "sweetalert2";
 const eighteenYearsAgo = dayjs().subtract(18, "years");
 
 const RiderRegistration = () => {
-  
+
   // const option0 = useSelector((s) => s.general.data.option0);
   // console.log(option0);
   const backgroundStyle = {
@@ -40,7 +40,7 @@ const RiderRegistration = () => {
     height: "20vh",
     // Set the desired height of the background area
   };
-  
+
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
   const userToken = useSelector((s) => s.login.data.token);
@@ -340,7 +340,7 @@ const RiderRegistration = () => {
 
   const handlePlaceSelectStart = () => {
     const place = autocompleteRef.current.getPlace();
-  
+
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
       const isIslamabad =
@@ -348,7 +348,7 @@ const RiderRegistration = () => {
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityStart.toLowerCase()
         );
-  
+
       if (isIslamabad) {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
@@ -393,7 +393,7 @@ const RiderRegistration = () => {
 
   const handlePlaceSelectEnd = () => {
     const place = autocompleteRef.current.getPlace();
-  
+
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
       const isIslamabad =
@@ -401,7 +401,7 @@ const RiderRegistration = () => {
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityEnd.toLowerCase()
         );
-  
+
       if (isIslamabad) {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
@@ -534,6 +534,16 @@ const RiderRegistration = () => {
     setShowEndModal(false);
   };
 
+  const PersonalFormFields = [
+    martialStatus,
+    cnic,
+    selectedDateFormat,
+    gender,
+    preferredGender,
+    profession,
+    education,
+  ];
+
   const requiredFields = [
     cityStartId,
     provinceStartId,
@@ -561,7 +571,8 @@ const RiderRegistration = () => {
     picture,
   ];
 
-  console.log({requiredFields});
+  console.log({ requiredFields });
+  console.log({PersonalFormFields});
 
   const handleLogin = async () => {
     if (
@@ -572,13 +583,11 @@ const RiderRegistration = () => {
       setIsLoading(true); // Start loading
 
       try {
-        await LocationForm();
-        await PersonalForm();
-        await ImagesFormCnicFront();
-        await ImagesFormCnicBack();
-        await ImagesFormPicture();
-
-        setIsLoading(false);
+        if (PersonalFormFields.every(
+          (field) => field !== "" && field !== null && field !== undefined
+        )) {
+          await PersonalForm();
+        }
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -586,7 +595,6 @@ const RiderRegistration = () => {
       }
     } else {
       setIsLoading(false);
-      // alert("Please Fill All Fields!");
       Swal.fire({
         position: 'top',
         // icon: 'warning',
@@ -596,6 +604,68 @@ const RiderRegistration = () => {
         },
       }
       )
+    }
+  };
+
+  const PersonalForm = async () => {
+    try {
+      const body = {
+        marital_status: martialStatus,
+        cnic: cnic,
+        birth_year: selectedDateFormat,
+        gender: gender,
+        preferred_gender: preferredGender,
+        profession: profession,
+        education: education,
+        interests: null,
+        university_address: null,
+        university_name: null,
+        user_type: 299,
+      };
+      const response = await fetch(
+        `${API_URL}/api/v1/registration/personal`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      console.log("Personal Form Body:", body);
+
+      const jsonresponse = await response.json();
+
+      if (jsonresponse.statusCode == 200) {
+        console.log("Personal Form Response:", jsonresponse);
+        await LocationForm();
+        await ImagesFormCnicFront();
+        await ImagesFormCnicBack();
+        await ImagesFormPicture();
+
+        setIsLoading(false);
+      } else if (jsonresponse.statusCode === 422) {
+        console.log("Personal Form CNIC Issue Response:", jsonresponse);
+        const errors = jsonresponse.errors;
+        for (const field of Object.keys(errors)) {
+          Swal.fire({
+            position: "top",
+            // icon: "error",
+            // text: `${jsonresponse.message}`,
+            text: `${errors[field][0]}`,
+            customClass: {
+              confirmButton: "bg-success",
+              // Apply custom CSS class to the OK button
+            },
+          });
+        }
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -662,62 +732,13 @@ const RiderRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           // icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
-        )
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const PersonalForm = async () => {
-    try {
-      const body = {
-        marital_status: martialStatus,
-        cnic: cnic,
-        birth_year: selectedDateFormat,
-        gender: gender,
-        preferred_gender: preferredGender,
-        profession: profession,
-        education: education,
-        interests: null,
-        university_address: null,
-        university_name: null,
-        user_type: 299,
-      };
-      const response = await fetch(
-        `${API_URL}/api/v1/registration/personal`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
           },
-          body: JSON.stringify(body),
         }
-      );
-
-      console.log("Personal Form Body:", body);
-
-      const jsonresponse = await response.json();
-
-      if (jsonresponse.statusCode == 200) {
-        console.log("Personal Form Response:", jsonresponse);
-      } else {
-        // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position:'top',
-          // icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
         )
       }
     } catch (error) {
@@ -753,12 +774,13 @@ const RiderRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           // icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -794,12 +816,13 @@ const RiderRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           // icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -827,7 +850,7 @@ const RiderRegistration = () => {
       );
 
       console.log("Images Form Picture Body:", body);
-     
+
 
       const registrationSuccessful = () => {
         Swal.fire({
@@ -838,11 +861,11 @@ const RiderRegistration = () => {
           showCancelButton: false,
           confirmButtonText: 'OK',
           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
           },
         });
       };
-     
+
       const jsonresponse = await response.json();
 
       if (jsonresponse.statusCode === 200) {
@@ -852,12 +875,13 @@ const RiderRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position:'top',
+          position: 'top',
           // icon: 'error',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
@@ -869,24 +893,24 @@ const RiderRegistration = () => {
     <>
       <div className="main-bg">
         <div className="containter p-5 position-relative">
-        <div className="area" >
-                <ul className="circles">
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </div >
+          <div className="area" >
+            <ul className="circles">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div >
           <div className="row justify-content-center ">
             <div className="col-md-6 shadow bg-white  mt-5 mb-5">
               <div
@@ -1172,7 +1196,7 @@ const RiderRegistration = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
-                    
+
                     {cityEndId && (
                       <>
                         {addNewEndDropdown && (
@@ -1181,22 +1205,22 @@ const RiderRegistration = () => {
                             md="12"
                             controlId="validationCustom09"
                           >
-                           <div className="d-flex justify-content-between align-items-center">
-                                  <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
-                                  {addNewEndField && (
-                                    <p
-                                    className="colorplace text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      textDecoration: "underline",
-                                    }}
-                                    onClick={AddNewEnd}
-                                  >
-                                    Can't find your area?
-                                    <a> Add Here</a>
-                                  </p>
-                                  )}
-                                </div>
+                            <div className="d-flex justify-content-between align-items-center">
+                              <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                              {addNewEndField && (
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                  }}
+                                  onClick={AddNewEnd}
+                                >
+                                  Can't find your area?
+                                  <a> Add Here</a>
+                                </p>
+                              )}
+                            </div>
                             <Form.Select
                               aria-label="Default select example"
                               className="text-secondary"
@@ -1219,7 +1243,7 @@ const RiderRegistration = () => {
                             </Form.Select>
                           </Form.Group>
                         )}
-                      
+
                         {/* {addNewEndField && (
                           <Form.Group
                             as={Col}
@@ -1301,7 +1325,7 @@ const RiderRegistration = () => {
                       </Form.Select>
                     </Form.Group> */}
                   </div>
-                </div> 
+                </div>
 
                 <LoadScript
                   googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
@@ -1312,7 +1336,7 @@ const RiderRegistration = () => {
                       <Modal.Title>Select Starting Location</Modal.Title>
                       <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
                     </Modal.Header>
-                    
+
                     <Modal.Body>
                       <Container className="d-flex justify-content-center align-items-center mb-3">
                         <Row style={{ height: "100%", width: "100%" }}>
@@ -1350,8 +1374,8 @@ const RiderRegistration = () => {
                   </Modal>
 
                   <Modal show={showEndModal} onHide={handleCloseEndModal}>
-                   
-                   <Modal.Header className="d-block">
+
+                    <Modal.Header className="d-block">
                       <Modal.Title>Select Drop-off Location</Modal.Title>
                       <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
                     </Modal.Header>
@@ -1399,7 +1423,7 @@ const RiderRegistration = () => {
                     <h2 className="text-success mb-3 text-center">
                       Timing
                     </h2>
-               
+
                     <Form.Group
                       as={Col}
                       md="12"
@@ -1410,9 +1434,9 @@ const RiderRegistration = () => {
                         Start Time (From start point to destination +/- 30 Minutes)
                       </Form.Label>
                       <Form.Select
-                         aria-label="Default select example"
-                         className="text-secondary"
-                        
+                        aria-label="Default select example"
+                        className="text-secondary"
+
                         value={selectedHomeTime}
                         onChange={(e) => setSelectedHomeTime(e.target.value)}
                         required
@@ -1434,7 +1458,7 @@ const RiderRegistration = () => {
                       className="mb-2 mt-3"
                     >
                       <Form.Label className="text-black fs-6">
-                      Return  Time (From destination to start point +/- 30 Minutes)
+                        Return  Time (From destination to start point +/- 30 Minutes)
                       </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
@@ -1455,7 +1479,7 @@ const RiderRegistration = () => {
                     </Form.Group>
                   </div>
                 </div>
-                <Row className="mb-3" style={{ border: "1px solid #cddbd9", backgroundColor:'#cddbd9' }}>
+                <Row className="mb-3" style={{ border: "1px solid #cddbd9", backgroundColor: '#cddbd9' }}>
                   <Form.Group as={Col} md="12" controlId="validationCustom20">
                     <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
                       I commute (Select Days)
@@ -1481,7 +1505,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-0`}
                                 checked={daysSelected.includes("Monday")}
                                 onChange={handleCheckboxChange}
-                                // required
+                              // required
                               />
                             }
                             label="Monday"
@@ -1498,7 +1522,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-1`}
                                 checked={daysSelected.includes("Tuesday")}
                                 onChange={handleCheckboxChange}
-                                // required
+                              // required
                               />
                             }
                             label="Tuesday"
@@ -1515,7 +1539,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-2`}
                                 checked={daysSelected.includes("Wednesday")}
                                 onChange={handleCheckboxChange}
-                                // required
+                              // required
                               />
                             }
                             label="Wednesday"
@@ -1532,7 +1556,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-3`}
                                 checked={daysSelected.includes("Thursday")}
                                 onChange={handleCheckboxChange}
-                                // required
+                              // required
                               />
                             }
                             label="Thursday"
@@ -1549,7 +1573,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-4`}
                                 checked={daysSelected.includes("Friday")}
                                 onChange={handleCheckboxChange}
-                                // required
+                              // required
                               />
                             }
                             label="Friday"
@@ -1566,8 +1590,8 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-5`}
                                 checked={daysSelected.includes("Saturday")}
                                 onChange={handleCheckboxChange}
-                                // disabled
-                                // required
+                              // disabled
+                              // required
                               />
                             }
                             label="Saturday"
@@ -1584,8 +1608,8 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-6`}
                                 checked={daysSelected.includes("Sunday")}
                                 onChange={handleCheckboxChange}
-                                // disabled
-                                // required
+                              // disabled
+                              // required
                               />
                             }
                             label="Sunday"
@@ -1616,7 +1640,7 @@ const RiderRegistration = () => {
                     >
                       <option value="" hidden>
                         {" "}
-                       Gender{" "}
+                        Gender{" "}
                       </option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -1799,9 +1823,9 @@ const RiderRegistration = () => {
                       required
                       onChange={handleCnicFront}
                     />
-                      <Form.Text className="text-danger" style={{ color: "#000" }}>
-                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                        </Form.Text>
+                    <Form.Text className="text-danger" style={{ color: "#000" }}>
+                      The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                    </Form.Text>
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
@@ -1819,9 +1843,9 @@ const RiderRegistration = () => {
                       required
                       onChange={handleCnicBack}
                     />
-                          <Form.Text className="text-danger" style={{ color: "#000" }}>
-                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                        </Form.Text>
+                    <Form.Text className="text-danger" style={{ color: "#000" }}>
+                      The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                    </Form.Text>
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"

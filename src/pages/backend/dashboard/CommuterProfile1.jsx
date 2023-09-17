@@ -3,10 +3,11 @@ import { createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs} from '@mui/material'
+import { Breadcrumbs } from '@mui/material'
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { setContactIdState, setIdState } from "../../../redux/generalSlice";
+import { ThreeCircles } from "react-loader-spinner";
 
 const customTheme = createTheme({
   palette: {
@@ -30,22 +31,28 @@ const CommuterProfile1 = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const requestContactId = useSelector((s) => s.general.data.contact_id);
   // For Profile Page Data
+  const [loading, setLoading] = useState(true);
   const [option, setOption] = useState(null);
   const [profileType, setProfileType] = useState("");
   const [userType, setUserType] = useState("");
   const [userProfiles, setUserProfiles] = useState([]);
   const [userProfileDetails, setUserProfileDetails] = useState([]);
- 
+
   const crumbs = [
     {
-      
+
       label: "Home",
       active: true,
     },
   ];
 
   useEffect(() => {
-  
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
@@ -256,9 +263,8 @@ const CommuterProfile1 = () => {
 
     return (
       <div>
-
         <div className="card p-4 bg-light">
-          <div className="card p-4 backgroundColor"> 
+          <div className="card p-4 backgroundColor">
             <div className="row px-3">
               <div className="col-md-1">
                 {req_stage === 0 ? (
@@ -305,41 +311,41 @@ const CommuterProfile1 = () => {
                   </div>
                   <div className="col-md-10">{gender}
                   </div>
+                </div>
+
+
+                <div className="row px-5 mb-2">
+                  <div className="col-md-2">
+                    {age !== "" ? (
+                      <>
+                        <b className="text-black"> Age:</b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
                   </div>
-
-
-                  <div className="row px-5 mb-2">
-                    <div className="col-md-2">
-                      {age !== "" ? (
-                        <>
-                          <b className="text-black"> Age:</b>
-                        </>
-                      ) : (
-                        <>
-                        </>
-                      )}
-                    </div>
-                    <div className="col-md-10">{age} years
-                    </div>
+                  <div className="col-md-10">{age} years
                   </div>
-                  <div className="row px-5 mb-2">
-                    <div className="col-md-2">
-                      {profession !== "" ? (
-                        <>
-                          <b className="text-black">Profession:</b>
-                        </>
-                      ) : (
-                        <>
-                        </>
-                      )}
-                    </div>
-                    <div className="col-md-10"> {profession}
-                    </div>
+                </div>
+                <div className="row px-5 mb-2">
+                  <div className="col-md-2">
+                    {profession !== "" ? (
+                      <>
+                        <b className="text-black">Profession:</b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
                   </div>
+                  <div className="col-md-10"> {profession}
+                  </div>
+                </div>
 
 
 
-                  {/* {mobile ? (
+                {/* {mobile ? (
                   <>
                     {mobile && (
                       <>
@@ -649,55 +655,71 @@ const CommuterProfile1 = () => {
   };
 
   return (
-    <div>
-      <div className="page-title">
-      <div className=" px-4 py-2 text-success my-2 fw-bold">
-      <Breadcrumbs aria-label="breadcrumb">
-            {crumbs.map((crumb, index) => (
-              <Link
-                key={index}
-                to={crumb.path || ""}
-                style={{
-                  color: crumb.active ? "black" : "#ff4815",
-                  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                  pointerEvents: crumb.path ? "auto" : "none",
-                  textDecoration: "none"
+    <>
+      <div>
+        <div className="page-title">
+          <div className=" px-4 py-2 text-success my-2 fw-bold">
+            <Breadcrumbs aria-label="breadcrumb">
+              {crumbs.map((crumb, index) => (
+                <Link
+                  key={index}
+                  to={crumb.path || ""}
+                  style={{
+                    color: crumb.active ? "black" : "#ff4815",
+                    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                    pointerEvents: crumb.path ? "auto" : "none",
+                    textDecoration: "none"
 
-                }}
-              >
-                {crumb.label}
-              </Link>
-            ))}
-          </Breadcrumbs>
-        </div>
-        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
-          <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
-            <Link
-              to={"/dashboard"} >
-              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
-                <i className="fas fa-angle-left text-white" />
-                Back
-              </button>
-            </Link>
+                  }}
+                >
+                  {crumb.label}
+                </Link>
+              ))}
+            </Breadcrumbs>
           </div>
+          <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+            <div className="d-flex justify-content-between align-items-xl-baseline">
+              <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
+              <Link
+                to={"/dashboard"} >
+                <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                  <i className="fas fa-angle-left text-white" />
+                  Back
+                </button>
+              </Link>
+            </div>
 
+          </div>
+          <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
         </div>
-        <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
-      </div>
-
-      <div className="row">
-        {userProfiles.length > 0 && userProfileDetails.length > 0 ? (
-          userProfiles
-            .filter(user => user.contact_id === requestContactId) // Filter profiles by contact_id
-            .map((user, index) => {
-              return <UserProfile user={user} key={index} userDetails={userProfileDetails[index]} />;
-            })
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <ThreeCircles
+              height={50}
+              width={50}
+              color="#4fa94d"
+              visible={true}
+              ariaLabel="three-circles-rotating"
+              outerCircleColor=""
+              innerCircleColor=""
+              middleCircleColor=""
+            />
+          </div>
         ) : (
-          null
+          <div className="row">
+            {userProfiles.length > 0 && userProfileDetails.length > 0 ? (
+              userProfiles
+                .filter(user => user.contact_id === requestContactId) // Filter profiles by contact_id
+                .map((user, index) => {
+                  return <UserProfile user={user} key={index} userDetails={userProfileDetails[index]} />;
+                })
+            ) : (
+              null
+            )}
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

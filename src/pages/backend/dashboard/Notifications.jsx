@@ -91,19 +91,19 @@ const Notifications = () => {
             <div className="card p-3">
               {loading ? (
                 <div className="text-center">
-                    {/* // Render CircularProgress while loading */}
-                    <div className="d-flex justify-content-center align-items-center vh-10">
-    <ThreeCircles
-      height={50}
-      width={50}
-      color="#4fa94d"
-      visible={true}
-      ariaLabel="three-circles-rotating"
-      outerCircleColor=""
-      innerCircleColor=""
-      middleCircleColor=""
-    />
-  </div>
+                  {/* // Render CircularProgress while loading */}
+                  <div className="d-flex justify-content-center align-items-center vh-10">
+                    <ThreeCircles
+                      height={50}
+                      width={50}
+                      color="#4fa94d"
+                      visible={true}
+                      ariaLabel="three-circles-rotating"
+                      outerCircleColor=""
+                      innerCircleColor=""
+                      middleCircleColor=""
+                    />
+                  </div>
                 </div>
               ) : (
                 <div>
