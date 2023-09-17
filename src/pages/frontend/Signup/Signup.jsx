@@ -16,6 +16,7 @@ import Form from "react-bootstrap/Form";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { LoginSocialFacebook } from "reactjs-social-login";
+import { FacebookLoginButton } from "react-social-login-buttons";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -594,13 +595,14 @@ const Signup = () => {
                                 console.log("Error Message:", error);
                               }}
                             >
-                              <Tooltip title="Signup With Facebook">
+                              {/* <Tooltip title="Signup With Facebook">
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px", cursor: "pointer" }}
                                 />
-                              </Tooltip>
+                              </Tooltip> */}
+                              <FacebookLoginButton/>
                             </LoginSocialFacebook>
                           </li>
                           <li>
