@@ -364,7 +364,7 @@ const DriverRegistration = () => {
 
   const handlePlaceSelectStart = () => {
     const place = autocompleteRef.current.getPlace();
-  
+
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
       const isIslamabad =
@@ -372,7 +372,7 @@ const DriverRegistration = () => {
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityStart.toLowerCase()
         );
-  
+
       if (isIslamabad) {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
@@ -432,7 +432,7 @@ const DriverRegistration = () => {
 
   const handlePlaceSelectEnd = () => {
     const place = autocompleteRef.current.getPlace();
-  
+
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
       const isIslamabad =
@@ -440,7 +440,7 @@ const DriverRegistration = () => {
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityEnd.toLowerCase()
         );
-  
+
       if (isIslamabad) {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
@@ -728,6 +728,15 @@ const DriverRegistration = () => {
     setShowEndModal(false);
   };
 
+  const PersonalFormFields = [
+    martialStatus,
+    cnic,
+    selectedDateFormat,
+    gender,
+    preferredGender,
+    profession,
+    education,
+  ];
 
   const requiredFieldsLogin = [
     cityStartId, provinceStartId,
@@ -746,9 +755,15 @@ const DriverRegistration = () => {
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
     selectedCarImageExt, selectedSeat, selectedSeatGender,
-    selectedMidRoutePartner, inputDrivingLicenseMySelf,
-    inputValidUptoMySelf, inputPlaceIssueMySelf
+    // inputDrivingLicenseMySelf,
+    // inputValidUptoMySelf, inputPlaceIssueMySelf
   ];
+
+  console.log({ PersonalFormFields });
+
+  console.log({ requiredFieldsLogin });
+
+  console.log({ requiredFieldsDriver });
 
   const handleLogin = async () => {
     if (
@@ -759,13 +774,11 @@ const DriverRegistration = () => {
       setIsLoading(true); // Start loading
 
       try {
-        await LocationForm();
-        await PersonalForm();
-        await ImagesFormCnicFront();
-        await ImagesFormCnicBack();
-        await ImagesFormPicture();
-        setIsLoading(false);
-        setShowDriverForm(true);
+        if (PersonalFormFields.every(
+          (field) => field !== "" && field !== null && field !== undefined
+        )) {
+          await PersonalForm();
+        }
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -773,10 +786,9 @@ const DriverRegistration = () => {
       }
     } else {
       setIsLoading(false);
-      // alert("Please Fill All Fields!");
       Swal.fire({
         position: 'top',
-        // // icon: 'warning',
+        // icon: 'warning',
         text: 'Please Fill All Fields!',
         customClass: {
           confirmButton: 'bg-success', // Apply custom CSS class to the OK button
@@ -786,14 +798,48 @@ const DriverRegistration = () => {
     }
   };
 
+  // const handleLogin = async () => {
+  //   if (
+  //     requiredFieldsLogin.every(
+  //       (field) => field !== "" && field !== null && field !== undefined
+  //     )
+  //   ) {
+  //     setIsLoading(true); // Start loading
+
+  //     try {
+  //       await PersonalForm();
+  //       await LocationForm();
+  //       await ImagesFormCnicFront();
+  //       await ImagesFormCnicBack();
+  //       await ImagesFormPicture();
+  //       setIsLoading(false);
+  //       setShowDriverForm(true);
+  //     } catch (error) {
+  //       setIsLoading(false);
+  //       // Handle the error appropriately, e.g., show an error message
+  //       console.error('API call error:', error);
+  //     }
+  //   } else {
+  //     setIsLoading(false);
+  //     // alert("Please Fill All Fields!");
+  //     Swal.fire({
+  //       position: 'top',
+  //       // // icon: 'warning',
+  //       text: 'Please Fill All Fields!',
+  //       customClass: {
+  //         confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+  //       },
+  //     }
+  //     )
+  //   }
+  // };
+
 
   const handleDriver = async () => {
     if (requiredFieldsDriver.every(field => field !== "" && field !== null && field !== undefined)) {
       setIsLoading(true); // Start loading
       try {
         await DriverForm();
-        await PaymentForm();
-        setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -811,6 +857,69 @@ const DriverRegistration = () => {
         },
       }
       )
+    }
+  };
+
+  const PersonalForm = async () => {
+    try {
+      const body = {
+        marital_status: martialStatus,
+        cnic: cnic,
+        birth_year: selectedDateFormat,
+        gender: gender,
+        preferred_gender: preferredGender,
+        profession: profession,
+        education: education,
+        interests: null,
+        university_address: null,
+        university_name: null,
+        user_type: 299,
+      };
+      const response = await fetch(
+        `${API_URL}/api/v1/registration/personal`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      console.log("Personal Form Body:", body);
+
+      const jsonresponse = await response.json();
+
+      if (jsonresponse.statusCode == 200) {
+        console.log("Personal Form Response:", jsonresponse);
+        await LocationForm();
+        await ImagesFormCnicFront();
+        await ImagesFormCnicBack();
+        await ImagesFormPicture();
+
+        setIsLoading(false);
+        setShowDriverForm(true);
+      } else if (jsonresponse.statusCode === 422) {
+        console.log("Personal Form CNIC Issue Response:", jsonresponse);
+        const errors = jsonresponse.errors;
+        for (const field of Object.keys(errors)) {
+          Swal.fire({
+            position: "top",
+            // icon: "error",
+            // text: `${jsonresponse.message}`,
+            text: `${errors[field][0]}`,
+            customClass: {
+              confirmButton: "bg-success",
+              // Apply custom CSS class to the OK button
+            },
+          });
+        }
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -874,58 +983,6 @@ const DriverRegistration = () => {
 
       if (jsonresponse.statusCode === 200) {
         console.log("Location Form Response:", jsonresponse);
-      }
-      else if (jsonresponse.statusCode === 500) {
-        // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        }
-        )
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const PersonalForm = async () => {
-    try {
-      const body = {
-        marital_status: martialStatus,
-        cnic: cnic,
-        birth_year: selectedDateFormat,
-        gender: gender,
-        preferred_gender: preferredGender,
-        profession: profession,
-        education: education,
-        interests: null,
-        university_address: null,
-        university_name: null,
-        user_type: 299
-      }
-      const response = await fetch(
-        `${API_URL}/api/v1/registration/personal`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json',
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
-
-      console.log("Personal Form Body:", body);
-
-      const jsonresponse = await response.json();
-
-      if (jsonresponse.statusCode === 200) {
-        console.log("Personal Form Response:", jsonresponse);
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
@@ -1103,7 +1160,7 @@ const DriverRegistration = () => {
         car_image_ext: selectedCarImageExt,
         seats_available: selectedSeat,
         seats_for: selectedSeatGender,
-        mid_route: selectedMidRoutePartner,
+        mid_route: "Yes",
         //one_side: selectedOneRoutePartner,
         drive_option: "Driver",
         license_no: inputDrivingLicenseMySelf,
@@ -1141,6 +1198,20 @@ const DriverRegistration = () => {
 
       if (jsonresponse.statusCode === 200) {
         console.log("Driver Form Response:", jsonresponse);
+        await PaymentForm();
+        setIsLoading(false);
+      }
+      else if (jsonresponse.statusCode === 100) {
+        Swal.fire({
+          position: 'top',
+          // icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: 'bg-success',
+          },
+        }
+        )
+        setIsLoading(false);
       }
       else if (jsonresponse.statusCode === 500) {
         Swal.fire({
@@ -1336,7 +1407,7 @@ const DriverRegistration = () => {
                         </Form.Group>
 
                         {cityStartId && (
-                          <>  
+                          <>
                             {addNewStartDropdown && (
                               <Form.Group
                                 as={Col}
@@ -1347,16 +1418,16 @@ const DriverRegistration = () => {
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
                                   {addNewStartField && (
                                     <p
-                                    className="colorplace text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      textDecoration: "underline",
-                                    }}
-                                    onClick={AddNewStart}
-                                  >
-                                    Can't find your area?
-                                    <a> Add Here</a>
-                                  </p>
+                                      className="colorplace text-danger"
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "underline",
+                                      }}
+                                      onClick={AddNewStart}
+                                    >
+                                      Can't find your area?
+                                      <a> Add Here</a>
+                                    </p>
                                   )}
                                 </div>
 
@@ -1378,10 +1449,10 @@ const DriverRegistration = () => {
                                     >
                                       {province.value}
                                     </option>
-                                  ))} 
+                                  ))}
                                 </Form.Select>
                               </Form.Group>
-                              
+
                             )}
 
                             {/* {addNewStartField && (
@@ -1500,8 +1571,8 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        
-                       
+
+
 
                         {cityEndId && (
                           <>
@@ -1515,16 +1586,16 @@ const DriverRegistration = () => {
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
                                   {addNewEndField && (
                                     <p
-                                    className="colorplace text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      textDecoration: "underline",
-                                    }}
-                                    onClick={AddNewEnd}
-                                  >
-                                    Can't find your area?
-                                    <a> Add Here</a>
-                                  </p>
+                                      className="colorplace text-danger"
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "underline",
+                                      }}
+                                      onClick={AddNewEnd}
+                                    >
+                                      Can't find your area?
+                                      <a> Add Here</a>
+                                    </p>
                                   )}
                                 </div>
                                 <Form.Select
@@ -1550,7 +1621,7 @@ const DriverRegistration = () => {
                               </Form.Group>
                             )}
 
-                          
+
 
                             {addNewEnd && (
                               <Form.Group
@@ -1668,7 +1739,7 @@ const DriverRegistration = () => {
                       </Modal>
                     </LoadScript>
 
-                  
+
                     <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3"
@@ -2143,7 +2214,7 @@ const DriverRegistration = () => {
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
-            <div className="area" >
+              <div className="area" >
                 <ul className="circles">
                   <li></li>
                   <li></li>
@@ -2398,7 +2469,7 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </div></div>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    {/* <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3"
                         style={{ backgroundColor: "#cddbd9" }}
@@ -2406,7 +2477,7 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Route Partner
                         </h2>
-                        {/* <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             I accept one-route partner
                           </Form.Label>
@@ -2421,7 +2492,7 @@ const DriverRegistration = () => {
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
-                        </Form.Group> */}
+                        </Form.Group>
 
                         <Form.Group as={Col} md="12" controlId="validationCustom29" className="mb-2">
                           <Form.Label className="text-dark fs-6">
@@ -2439,10 +2510,11 @@ const DriverRegistration = () => {
                             <option value="No">No</option>
                           </Form.Select>
                         </Form.Group>
-                      </div></div>
+                      </div>
+                    </div> */}
 
 
-                   
+
                     <Row >
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>Car Brand</Form.Label>
@@ -3724,12 +3796,12 @@ const DriverRegistration = () => {
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div></div>
-                         
+
 
 
                     </>)
                     }
-                     <div className="row mb-3 mt-2 shadow shadow-sm">
+                    <div className="row mb-3 mt-2 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3 form-body"
                       >
