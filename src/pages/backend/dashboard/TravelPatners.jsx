@@ -43,6 +43,14 @@ const TravelPatners = () => {
   const [wearAndTear, setWearAndTear] = useState("");
 
   useEffect(() => {
+    getTravelData();
+  }, []);
+
+  useEffect(() => {
+    getSeatCostDetail();
+  }, [userType, contactId]);
+
+  useEffect(() => {
     // Define a function that contains the code to execute
     const fetchData = () => {
       getProfileData();
@@ -56,12 +64,7 @@ const TravelPatners = () => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    getTravelData();
-    getSeatCostDetail();
-  }, []);
+  }, [userType]);
 
   const onNavigate = () => {
     navigate("/rechargewallet");
@@ -138,7 +141,7 @@ const TravelPatners = () => {
 
   const getSeatCostDetail = async () => {
     try {
-      if(userType === 1){
+      if (userType === 1) {
         const response = await fetch(`${API_URL}/api/v1/seat-cost-detail`, {
           method: "get",
           headers: {
@@ -147,10 +150,10 @@ const TravelPatners = () => {
             Authorization: `Bearer ${userToken}`,
           },
         });
-  
+
         const jsonresponse = await response.json();
         if (jsonresponse) {
-          setDistance(jsonresponse.data[0].Distance);
+          setDistance(jsonresponse.data[0]['Distance']);
           setFuelAverage(jsonresponse.data[0]['Fuel Average']);
           setFuelPrice(jsonresponse.data[0]['Fuel-Price']);
           setLiter(jsonresponse.data[0]['Liter']);
@@ -159,7 +162,7 @@ const TravelPatners = () => {
         }
         console.log("Driver Seat Cost Data", jsonresponse);
       }
-      else if (userType === 0){
+      else {
         const response = await fetch(`${API_URL}/api/v1/seat-cost-detail/${contactId}`, {
           method: "get",
           headers: {
@@ -168,10 +171,10 @@ const TravelPatners = () => {
             Authorization: `Bearer ${userToken}`,
           },
         });
-  
+
         const jsonresponse = await response.json();
         if (jsonresponse) {
-          setDistance(jsonresponse.data[0].Distance);
+          setDistance(jsonresponse.data[0]['Distance']);
           setFuelAverage(jsonresponse.data[0]['Fuel Average']);
           setFuelPrice(jsonresponse.data[0]['Fuel-Price']);
           setLiter(jsonresponse.data[0]['Liter']);
@@ -359,7 +362,14 @@ const TravelPatners = () => {
                               <TableRow>
                                 <TableCell style={tableCellStyle}>Fuel Price</TableCell>
                                 <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
-                                  Rs. {fuelPrice}/Ltr
+                                  Rs. {fuelPrice} /-
+                                  <br />
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell style={tableCellStyle}>Liter Consumed</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
+                                  {liter} Ltr
                                   <br />
                                 </TableCell>
                               </TableRow>

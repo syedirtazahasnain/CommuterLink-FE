@@ -45,7 +45,10 @@ const Login = () => {
       console.log("Profile Response:", jsonresponse);
 
       if (jsonresponse) {
-        if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === 1) {
+        if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 2 && jsonresponse[0].approval_status === 1) {
+          navigate("/dashboard");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === 1) {
           navigate("/dashboard");
         }
         else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === 0) {

@@ -162,7 +162,7 @@ const CommuterLinkSuggestions = () => {
           }}
         >
           {req_stage === 1 || req_stage === 2 ? (
-            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top  w-40px m-auto mt-3" style={{aspectRatio:'22/29'}}/>
+            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top  w-40px m-auto mt-3" style={{ aspectRatio: '22/29' }} />
           ) : (
             <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
@@ -195,7 +195,7 @@ const CommuterLinkSuggestions = () => {
           }}
         >
           {req_stage === 1 || req_stage === 2 ? (
-            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" style={{aspectRatio:'22/29'}} />
+            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top w-40px m-auto mt-3" style={{ aspectRatio: '22/29' }} />
           ) : (
             <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
@@ -265,7 +265,7 @@ const CommuterLinkSuggestions = () => {
           }}
         >
           {request_stage === 1 || request_stage === 2 ? (
-            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top imagebackend w-40px m-auto mt-3" style={{aspectRatio:'22/29'}} />
+            <img src={`${IMAGE_URL}${commuter_image}`} className="card-img-top imagebackend w-40px m-auto mt-3" style={{ aspectRatio: '22/29' }} />
           ) : (
             <img src={`${BASE_URL}/assets/images/Vector.png`} className="card-img-top w-40px m-auto mt-3" />
           )}
@@ -328,7 +328,6 @@ const CommuterLinkSuggestions = () => {
 
         <div
           className="card-body"
-
         >
           <div className="card  mt-3 mb-5" style={{ backgroundColor: "#D9D9D9" }}>
             <div
@@ -357,9 +356,10 @@ const CommuterLinkSuggestions = () => {
                   } else if (user.req_stage !== 3) {
                     // Show a default card for other cases when req_stage is not 3
                     return <DefaultCard key={index} />;
-                  } else {
+                  } 
+                  else {
                     // Return null for cases where req_stage is 3 to hide the card
-                    return null;
+                    return <DefaultCard key={index} />;
                   }
                 })}
                 {/* Add default cards to reach a total of 6 if necessary */}
@@ -374,7 +374,7 @@ const CommuterLinkSuggestions = () => {
           <div className="card mt-5" style={{ backgroundColor: "#D9D9D9" }}>
             <div
               className="card-header "
-              style={{ backgroundColor: '#00917C' }}
+              style={{ backgroundColor: "#00917C" }}
             >
               <h5 className="text-white pt-4 mt-2 mx-auto fw-bold">
                 REQUESTS BY MEMBERS
@@ -389,14 +389,18 @@ const CommuterLinkSuggestions = () => {
               <div className="row">
                 {requests.map((request, index) => {
                   if (request.request_stage !== 3) {
-                    // Show Request card when req_stage is not 3
+                    // Show RequestCard when req_stage is not 3
                     return <RequestCard key={index} request={request} />;
+                  } else {
+                    // Show RequestDefaultCard when req_stage is 3
+                    return <RequestDefaultCard key={index} />;
                   }
                 })}
                 {/* Add default cards to reach a total of 6 if necessary */}
-                {requests.length < 6 && Array.from({ length: 6 - requests.length }, (_, i) => (
-                  <RequestDefaultCard key={`default-${i}`} />
-                ))}
+                {requests.length < 6 &&
+                  Array.from({ length: 6 - requests.length }, (_, i) => (
+                    <RequestDefaultCard key={`default-${i}`} />
+                  ))}
               </div>
               <div>
               </div>

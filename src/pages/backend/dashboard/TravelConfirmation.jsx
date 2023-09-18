@@ -21,11 +21,12 @@ import { API_URL } from "../../../constants";
 import Swal from "sweetalert2";
 
 const TravelConfirmation = () => {
+  const [date, setDate] = useState("");
   const initialValue = dayjs();
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn, setSubmit] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(initialValue);
+  const [selectedDate, setSelectedDate] = useState(date);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dateChanged, setDateChanged] = useState(false);
   const [statusData, setStatusData] = useState([]);
@@ -45,6 +46,10 @@ const TravelConfirmation = () => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    getTravelData();
   }, []);
 
 
@@ -94,6 +99,37 @@ const TravelConfirmation = () => {
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, [statusData]);
+
+  const getTravelData = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/v1/travelbuddy`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+
+      const jsonresponse = await response.json();
+      if (jsonresponse.data && jsonresponse.data.length > 0) {
+        setDate(jsonresponse.data[0].aggreement_date);
+      }
+      else if (jsonresponse.status_code === 500) {
+        Swal.fire({
+          position: 'top',
+          // icon: 'error',
+          text: `${jsonresponse.message}`,
+          customClass: {
+            confirmButton: "bg-success", // Apply custom CSS class to the OK button
+          },
+        });
+      }
+      console.log("Travel Data:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
 
   const handleDateChange = (date) => {
@@ -313,7 +349,7 @@ const TravelConfirmation = () => {
                       <Box className="card w-100 bg-white overflow-auto overflow-y-hidden">
                         {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DateCalendar
-                            value={selectedDate}
+                            value={initialValue}
                             onChange={handleDateChange}
                             loading={isLoading}
                             className="w-100 custom-scroll-color overflow-y-hidden"
