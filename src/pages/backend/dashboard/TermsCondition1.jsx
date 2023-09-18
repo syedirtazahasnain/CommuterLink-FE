@@ -120,14 +120,14 @@ const TermsCondition1 = () => {
             <p>1. Your car is in a good shape and is roadworthy</p>
             <p className="">
               2. You are committed to provide the car for commuting of partners
-              on all days mentioned by your travel buddy
+              on all days mentioned by your travel buddy in the agreement
             </p>
             <p>
               3. If due to any unforeseen reason you cannot commute on a certain
               day, no fee will be paid for that day
             </p>
-            <p>
-              4. You will inform the travel buddy well in advance (at least 12 hours)
+            <p> 
+              4. You will inform the travel buddy partners well in advance (at least 12 hours)
               about your inability to commute on a certain day. In case of any
               emergency this can be waived off under exceptional circumstances
             </p>
@@ -144,21 +144,22 @@ const TermsCondition1 = () => {
               commuting partner to join you
             </p>
             <p>
-              8. You will update the scheduler in your dashboard on daily(as and
+              8. You will update the scheduler in your dashboard on daily (as and
               when required basis)
             </p>
             <p>
               9. You will receive your share of fee through CommutersLink and
               there will be no direct transaction between you and your commuting
-              partnership
+              travel buddy partner
             </p>
             <p>
               10. If you wish to discontinue your partnership with a member due
               a reason or other CommutersLink will inform the partner on your
-              behalf. You are required to give at least 1 week notice
+              behalf. You are required to give at least 1 week notice(insert a link here "why to receive
+              payment through commutersLink")
             </p>
             11. Any complaints, grievances will be addressed to CommutersLink
-            for resolution
+            for resolution.
           </div>
           <div className="text-center">
             <Button
