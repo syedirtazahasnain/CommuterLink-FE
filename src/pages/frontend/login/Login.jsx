@@ -211,6 +211,7 @@ const Login = () => {
 
           if (jsonresponse.statusCode === 200) {
             dispatch(setloginState(jsonresponse.access_token));
+            navigate("/number-generate");
           } else {
             // alert("Error: " + jsonresponse.message);
             Swal.fire({
