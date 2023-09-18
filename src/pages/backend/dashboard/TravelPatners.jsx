@@ -404,7 +404,7 @@ const TravelPatners = () => {
                   </p>
             </div>
             <div className="col-md-4 col-sm-12 mx-5 py-3"> <img
-                        className="d-block img-fluid w-auto h-100px"
+                        className="d-block img-fluid w-auto h-auto"
                         src={`${BASE_URL}/assets/images/signup-3.png`}
                         alt="First slide"
                       /></div>
@@ -424,19 +424,19 @@ const TravelPatners = () => {
                 </div>
               </div>
             </div> */}
-            <div className="col-md-4 col-sm-12 text-center mt-auto">
+            <div className="col-md-4 col-sm-12 text-center py-4">
               {userType === 0 ?
                 (
-                  <button className="font-custom me-3 btn btn-sm w-75  fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" onClick={onNavigate} >
+                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
                     Recharge
                   </button>
                 ) :
                 (
-                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-2 py-sm-3 mb-3" >
+                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
                     Recharge
                   </button>
                 )}
-              <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-2 py-sm-3 mb-3" >
+              <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
                 View Transaction History
               </button>
             </div>
