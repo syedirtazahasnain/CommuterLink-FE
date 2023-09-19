@@ -132,12 +132,12 @@ const CommuterProfile1 = () => {
       if (option === 0) {
         // User is a rider, show driver data
         setProfileType("Rider");
-        setUserType("Offerer");
+        setUserType("Car Offerer");
         profiles = jsonresponse.drivers;
       } else if (option === 1) {
         // User is a driver, show rider data
-        setProfileType("Offerer");
-        setUserType("Rider");
+        setProfileType("Driver");
+        setUserType("Traveller");
         profiles = jsonresponse.rider;
       }
 
@@ -200,7 +200,7 @@ const CommuterProfile1 = () => {
     if (!submitbtn) {
       dispatch(setContactIdState(contact_id));
       dispatch(setIdState(request_id));
-      navigate("/beforeapprovalterms");
+      navigate("/whyprocesspayment1");
     }
   };
 
@@ -263,6 +263,11 @@ const CommuterProfile1 = () => {
 
     return (
       <div>
+        {req_stage === 1 || req_stage === 2 ? 
+         <h5 className="card p-2 px-4 text-success">{`Your request has been accepted`}</h5> 
+         :
+         <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5> 
+        }
         <div className="card p-4 bg-light">
           <div className="card p-4 backgroundColor">
             <div className="row px-3">
@@ -464,13 +469,8 @@ const CommuterProfile1 = () => {
                     {days}
                   </div>
                 </div>
-
-
-
-
               </div>
               <div className="col-md-6">
-
                 <div className="row mb-2">
                   <div className="col-md-4">
                     {seats ? (
@@ -631,7 +631,7 @@ const CommuterProfile1 = () => {
             <div className="text-center">
               {req_stage === 1 ? (
                 <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
-                  View Request
+                  Proceed to Payment
                 </Button>
               ) : req_stage === 0 ? (
                 <Button className="font-custom btn btn-sm fs-6 fw-bold text-white rounded-4 px-3 py-2 mb-3" style={{ background: "#ff8a00" }}>
@@ -639,7 +639,7 @@ const CommuterProfile1 = () => {
                 </Button>
               ) : req_stage === 2 ? (
                 <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
-                  View Request
+                  Proceed to Final Step
                 </Button>
               ) : (
                 <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
@@ -688,10 +688,7 @@ const CommuterProfile1 = () => {
                 </button>
               </Link>
             </div>
-
           </div>
-          {/* <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5> */}
-          <h5 className="card p-2 px-4 text-success">{`Your request has been accept`}</h5>
         </div>
         {loading ? (
           <div className="d-flex justify-content-center">

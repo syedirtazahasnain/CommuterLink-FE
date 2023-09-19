@@ -26,7 +26,7 @@ const TravelConfirmation = () => {
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn, setSubmit] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(date);
+  const [selectedDate, setSelectedDate] = useState(date ? date : initialValue);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dateChanged, setDateChanged] = useState(false);
   const [statusData, setStatusData] = useState([]);
@@ -130,7 +130,6 @@ const TravelConfirmation = () => {
       console.error("An error occurred:", error);
     }
   };
-
 
   const handleDateChange = (date) => {
     setSelectedDate(dayjs(date));
