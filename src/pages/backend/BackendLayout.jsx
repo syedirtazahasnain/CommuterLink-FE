@@ -90,12 +90,6 @@ const BackendLayout = ({ children }) => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, [navigate]);
 
@@ -143,8 +137,10 @@ const BackendLayout = ({ children }) => {
       }
 
       console.log("Profile Data", jsonresponse);
+      setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error);
+      setLoading(false);
     }
   };
 

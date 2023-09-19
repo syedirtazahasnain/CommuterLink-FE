@@ -250,7 +250,7 @@ const RequestCommuterProfile = () => {
                         {/* You can use the extracted properties to display the profile data */}
                         <div className="row px-3">
                             <div className="col-md-1 mt-1">
-                                <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00" }} />
+                                <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#5ab387" }} />
                             </div>
                             <div className="col-md-11 px-5">
                                 <div className="row px-5">
@@ -699,8 +699,7 @@ const RequestCommuterProfile = () => {
                     </div>
 
                 </div>
-                <h5 className="card p-2  px-4 text-success">{`The below request has been initiated by the member based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}
-               <br/> {`Further details will be shown to you after you accept the request.`}
+                <h5 className="card p-2  px-4 text-success">{`The below request has been initiated by the member based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share. Further details will be shown to you after you accept the request.`}
                 </h5>
             </div>
             {loading ? (

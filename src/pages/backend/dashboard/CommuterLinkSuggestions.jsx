@@ -3,12 +3,14 @@ import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setContactIdState } from "../../../redux/generalSlice";
+import { ThreeCircles } from "react-loader-spinner";
 
 const CommuterLinkSuggestions = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn, setSubmit] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // For Dashboard Data
   const [option, setOption] = useState("");
@@ -31,7 +33,7 @@ const CommuterLinkSuggestions = () => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, []);
+  }, [userToken]);
 
   useEffect(() => {
     // Define a function that contains the code to execute
@@ -89,8 +91,10 @@ const CommuterLinkSuggestions = () => {
         setOption(jsonresponse[0].userlist.vehicle_option);
       }
       console.log("Dashboard Page Data", jsonresponse);
+      setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error);
+      setLoading(false);
     }
   };
 
@@ -318,14 +322,31 @@ const CommuterLinkSuggestions = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="card  mt-3 mb-5">
-        <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
-          <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
-            {option === 1 ? "TRAVEL BUDDIES FOR YOUR CAR" : "GET A SEAT/S IN THEIR CAR"}
-          </h4>
-        </div>
-
+        {loading ? (
+          <div className="text-center">
+            {/* Render CircularProgress while loading */}
+            <div className="d-flex justify-content-center align-items-center vh-10">
+              <ThreeCircles
+                height={50}
+                width={50}
+                color="#4fa94d"
+                visible={true}
+                ariaLabel="three-circles-rotating"
+                outerCircleColor=""
+                innerCircleColor=""
+                middleCircleColor=""
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
+            <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
+              {option === 0 ? "GET A SEAT/S IN THEIR CAR" : "TRAVEL BUDDIES FOR YOUR CAR"}
+            </h4>
+          </div>
+        )}
         <div
           className="card-body"
         >
@@ -356,7 +377,7 @@ const CommuterLinkSuggestions = () => {
                   } else if (user.req_stage !== 3) {
                     // Show a default card for other cases when req_stage is not 3
                     return <DefaultCard key={index} />;
-                  } 
+                  }
                   else {
                     // Return null for cases where req_stage is 3 to hide the card
                     return <DefaultCard key={index} />;
@@ -408,7 +429,7 @@ const CommuterLinkSuggestions = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

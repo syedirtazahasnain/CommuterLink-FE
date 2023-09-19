@@ -7,6 +7,7 @@ import { setCurrentPage } from '../../../redux/generalSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import { API_URL } from '../../../constants'
+import { ThreeCircles } from 'react-loader-spinner'
 
 
 const Dashboard12 = () => {
@@ -14,6 +15,7 @@ const Dashboard12 = () => {
   const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const [data, setData] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getTravelData();
@@ -45,8 +47,10 @@ const Dashboard12 = () => {
         });
       }
       console.log("Dashboard Travel Data:", jsonresponse);
+      setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error);
+      setLoading(false);
     }
   };
 
@@ -56,18 +60,34 @@ const Dashboard12 = () => {
 
   return (
     <>
-      <CommuterLinkSuggestions />
-      {/* <RequestsByMembers /> */}
-      <TravelPatners />
-      {data !== "" ?
-        (
-          <></>
-        )
-        :
-        (
-          <TravelConfirmation />
-        )
-      }
+      {loading ? (
+        <div className="text-center">
+          {/* Render CircularProgress while loading */}
+          <div className="d-flex justify-content-center align-items-center vh-10">
+            <ThreeCircles
+              height={50}
+              width={50}
+              color="#4fa94d"
+              visible={true}
+              ariaLabel="three-circles-rotating"
+              outerCircleColor=""
+              innerCircleColor=""
+              middleCircleColor=""
+            />
+          </div>
+        </div>
+      ) : (
+        <>
+          <CommuterLinkSuggestions />
+          {/* <RequestsByMembers /> */}
+          <TravelPatners />
+          {data !== "" ? (
+            <></>
+          ) : (
+            <TravelConfirmation />
+          )}
+        </>
+      )}
     </>
   )
 }
