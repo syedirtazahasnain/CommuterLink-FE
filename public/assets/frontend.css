@@ -340,8 +340,20 @@
  .navbar{
    position: fixed;
  }
- #parallax-world-of-ugg .parallax-one {padding-top: 80px; padding-bottom: 80px; overflow: hidden; position: relative; width: 100%; background-image: url(Images/friends-shaking-hands-car.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
- #parallax-world-of-ugg .parallax-two {padding-top: 80px; padding-bottom: 80px; overflow: hidden; position: relative; width: 100%; background-image: url(Images/friends-shaking-hands-car.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+ #parallax-world-of-ugg .parallax-one {
+  padding-top: 80px; 
+  padding-bottom: 80px; 
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: 
+  url(https://staging.commuterslink.com/assets/images/opaque.png); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
+ #parallax-world-of-ugg .parallax-two {
+  padding-top: 80px; padding-bottom: 
+  80px; overflow: hidden; position: 
+  relative; width: 100%; 
+  background-image: url(https://staging.commuterslink.com/assets/images/opaque.png); 
+  background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
  .heading-color{
    padding: 10px 0;
    color: #198754;
@@ -833,7 +845,7 @@ a.nav-link:hover {
   overflow: hidden; 
   position: relative; 
   width: 100%; 
-  background-image: url(Images/opaque.png); 
+  background-image: url(https://staging.commuterslink.com/assets/images/opaque.png); 
   background-attachment: fixed; 
   background-size: cover; 
   -moz-background-size: cover; 
@@ -848,7 +860,7 @@ a.nav-link:hover {
   overflow: hidden; 
   position: relative; 
   width: 100%; 
-  background-image: url(Images/opaque.png); 
+  background-image: url(https://staging.commuterslink.com/assets/images/opaque.png); 
   background-attachment: fixed; 
   background-size: cover; 
   -moz-background-size: cover; 
@@ -929,4 +941,9 @@ a.nav-link:hover {
   top: "50%" !important;
   transform: 'translateY(-50%)' !important;
   width: "350px" !important;
+}
+@media (max-width: 768px) {
+  .new-banner-circle {
+    display: none;
+  }
 }

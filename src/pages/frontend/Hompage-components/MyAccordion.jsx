@@ -40,10 +40,11 @@ const MyAccordion = () => {
                 apps and CommutersLink is that we are offering long term solutions for daily commute
                 instead of onetime ride. The concept is to collectively
                 defeat the impact of price hike by cost sharing. It’s not a source of earning but saving</p>
-              <div className="row">
+                <div className="container p-5">
+              <div className="row ">
                 <div className="col-md-6 mb-3 text-center">
                   <a data-bs-toggle="collapse" href="#collapseOne" className="text-decoration-none">
-                    <div class="card card-pink h-100">
+                    <div class="card card-pink h-100 ">
                       <div class="card-body">
                         <i class="fa-solid fa-money-bill-1-wave mb-3 fs-1"></i>
                         <h3 class="card-subtitle mb-2 text-muted">Share Cost of
@@ -89,6 +90,7 @@ const MyAccordion = () => {
                   </a>
                 </div>
               </div>
+                </div>
             </div>
           </div>
           <div className="col-md-6 p-5 mb-5">
@@ -100,7 +102,7 @@ const MyAccordion = () => {
               <Link  to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link>
             </div>
             <div className="collapse fade" id="collapseTwo" data-bs-parent="#costEarningSection">
-              <img src={`${BASE_URL}/assets/images/contribute-2.jpg`} className='img-fluid w-100 p-3' />
+              <img src={`${BASE_URL}/assets/images/car-ride.png`} className='img-fluid w-100 p-3' />
               <h5 className="text-dark fw-bold mb-3">Choose between Using your  Car or Ride with
                 Others Two</h5>
               <p className="text-dark mb-3">CommutersLink simultaneously offers you partners, who are a suitable match to ride your car and at the same time matches you up with car owners with whom we think you can ride with. Both choices are made available at the same time</p>
@@ -114,7 +116,7 @@ const MyAccordion = () => {
               <Link  to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link>
             </div>
             <div className="collapse fade" id="collapseFour" data-bs-parent="#costEarningSection">
-              <img src={`${BASE_URL}/assets/images/contribute-2.jpg`} className='img-fluid w-100 p-3' />
+              <img src={`${BASE_URL}/assets/images/car-ride.png`} className='img-fluid w-100 p-3' />
               <h5 className="text-dark fw-bold mb-3">Choose between Using your  Car or Ride with
                 Others Four</h5>
               <p className="text-dark mb-3">CommutersLink simultaneously offers you partners, who are a suitable match to ride your car and at the same time matches you up with car owners with whom we think you can ride with. Both choices are made available at the same time</p>

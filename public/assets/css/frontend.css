@@ -43,6 +43,12 @@ body{
   background-color: var(--bg-card-pink)
  }
  
+.card-pink-1:hover{
+  background-color: var(--bg-card-pink);
+  color: white;
+  
+ }
+ 
  .card-orange{
   background-color: var(--bg-card-orange);
  }
@@ -534,4 +540,10 @@ i {
 
 .terms_services {
   background-color: #fcfcfc !important;
+}
+
+@media (max-width: 768px) {
+  .new-banner-circle {
+    display: none;
+  }
 }
