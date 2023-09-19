@@ -132,11 +132,11 @@ const CommuterProfile1 = () => {
       if (option === 0) {
         // User is a rider, show driver data
         setProfileType("Rider");
-        setUserType("Driver");
+        setUserType("Offerer");
         profiles = jsonresponse.drivers;
       } else if (option === 1) {
         // User is a driver, show rider data
-        setProfileType("Driver");
+        setProfileType("Offerer");
         setUserType("Rider");
         profiles = jsonresponse.rider;
       }
@@ -690,7 +690,8 @@ const CommuterProfile1 = () => {
             </div>
 
           </div>
-          <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
+          {/* <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5> */}
+          <h5 className="card p-2 px-4 text-success">{`Your request has been accept`}</h5>
         </div>
         {loading ? (
           <div className="d-flex justify-content-center">

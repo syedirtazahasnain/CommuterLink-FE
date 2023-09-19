@@ -856,17 +856,17 @@ const RiderRegistration = () => {
 
 
       const registrationSuccessful = () => {
-        Swal.fire({
-          position: 'top',
-          // title: 'Congratulations!',
-          text: 'Registration Form Submitted Successfully',
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // title: 'Congratulations!',
+        //   text: 'Registration Form Submitted Successfully',
+        //   icon: 'success',
+        //   showCancelButton: false,
+        //   confirmButtonText: 'OK',
+        //   customClass: {
+        //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        //   },
+        // });
       };
 
       const jsonresponse = await response.json();
@@ -1010,7 +1010,7 @@ const RiderRegistration = () => {
                             controlId="validationCustom03"
                           >
                             <div className="d-flex justify-content-between align-items-center">
-                              <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                              <p className="mt-2 text-dark fs-6 fw-bold">Select Area From Dropdown</p>
                               {addNewStartField && (
                                 <p
                                   className="colorplace text-danger"
@@ -1033,7 +1033,7 @@ const RiderRegistration = () => {
                               required
                             >
                               <option value="" hidden>
-                                Select Area from Dropdown
+                                Select Area From Dropdown
                               </option>
                               {selectedStartCityArea?.map((province) => (
                                 <option
@@ -1102,32 +1102,7 @@ const RiderRegistration = () => {
                         )}
                       </>
                     )}
-                    {/* <Form.Group
-                      as={Col}
-                      md="12"
-                      controlId="validationCustom06"
-                      className="mb-2 mt-3"
-                    >
-                      <Form.Label className="text-black fs-6">
-                        Timings (+/- 15 Minutes)
-                      </Form.Label>
-                      <Form.Select
-                         aria-label="Default select example"
-                         className="text-secondary"
-                        value={selectedHomeTime}
-                        onChange={(e) => setSelectedHomeTime(e.target.value)}
-                        required
-                      >
-                        <option value="" hidden>
-                          Pickup Timings
-                        </option>
-                        {homeTimeSlots?.map((time) => (
-                          <option key={time.id} value={time.id}>
-                            {time.time_string}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    </Form.Group> */}
+                  
                   </div>
                 </div>
                 <div className="row mb-3 shadow shadow-sm">
@@ -1209,7 +1184,7 @@ const RiderRegistration = () => {
                             controlId="validationCustom09"
                           >
                             <div className="d-flex justify-content-between align-items-center">
-                              <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
+                              <p className="mt-2 text-dark fs-6 fw-bold">Select Area From Dropdown</p>
                               {addNewEndField && (
                                 <p
                                   className="colorplace text-danger"
@@ -1232,7 +1207,7 @@ const RiderRegistration = () => {
                               required
                             >
                               <option value="" hidden>
-                                Select Area from Dropdown
+                                Select Area From Dropdown
                               </option>
                               {selectedEndCityArea?.map((province) => (
                                 <option
@@ -1246,27 +1221,6 @@ const RiderRegistration = () => {
                             </Form.Select>
                           </Form.Group>
                         )}
-
-                        {/* {addNewEndField && (
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            className="mt-3"
-                            controlId="validationCustom10"
-                          >
-                            <span
-                              className="colorplace text-danger"
-                              style={{
-                                cursor: "pointer",
-                                textDecoration: "underline",
-                              }}
-                              onClick={AddNewEnd}
-                            >
-                              Can't find your area?
-                              <a> Add Here</a>
-                            </span>
-                          </Form.Group>
-                        )} */}
 
                         {addNewEnd && (
                           <Form.Group
@@ -1301,32 +1255,7 @@ const RiderRegistration = () => {
                         )}
                       </>
                     )}
-                    {/* <Form.Group
-                      as={Col}
-                      md="12"
-                      controlId="validationCustom12"
-                      className="mb-2 mt-3"
-                    >
-                      <Form.Label className="text-black fs-6">
-                        Timings (+/- 15 Minutes)
-                      </Form.Label>
-                      <Form.Select
-                        aria-label="Default select example"
-                        className="text-secondary"
-                        value={selectedOfficeTime}
-                        onChange={(e) => setSelectedOfficeTime(e.target.value)}
-                        required
-                      >
-                        <option value="" hidden>
-                          Drop-off Timings
-                        </option>
-                        {officeTimeSlots?.map((time) => (
-                          <option key={time.id} value={time.id}>
-                            {time.time_string}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    </Form.Group> */}
+                 
                   </div>
                 </div>
 
@@ -1371,7 +1300,7 @@ const RiderRegistration = () => {
                         variant="contained"
                         onClick={handleCloseStartModal}
                       >
-                        Submit
+                        Select
                       </Button>
                     </Modal.Footer>
                   </Modal>
@@ -1413,7 +1342,7 @@ const RiderRegistration = () => {
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="contained" onClick={handleCloseEndModal}>
-                        Submit
+                        Select
                       </Button>
                     </Modal.Footer>
                   </Modal>
@@ -1485,7 +1414,7 @@ const RiderRegistration = () => {
                 <Row className="mb-3" style={{ border: "1px solid #cddbd9", backgroundColor: '#cddbd9' }}>
                   <Form.Group as={Col} md="12" controlId="validationCustom20">
                     <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
-                      I commute (Select Days)
+                      I Commute (Select Days)
                     </Form.Label>
                   </Form.Group>
 
@@ -1656,7 +1585,7 @@ const RiderRegistration = () => {
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
-                      Preferred gender of Travel partner
+                      Preferred Gender Of Travel Partner
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
@@ -1753,9 +1682,7 @@ const RiderRegistration = () => {
                       <option value="Bachelor">Bachelor</option>
                       <option value="BA">BA</option>
                       <option value="BSC">BSC</option>
-                      <option value="FSC">FSC</option>
-                      <option value="FA">FA</option>
-                      <option value="I.Com">I.Com</option>
+                      <option value="FSC">Intermediate</option>
                       <option value="Matric">Matric</option>
                       <option value="Middle">Middle</option>
                       <option value="Primary">Primary</option>
@@ -1780,7 +1707,7 @@ const RiderRegistration = () => {
                     />
                     {!isValidProfession && (
                       <div className="invalid-feedback">
-                        Please enter a valid profession.
+                        Please Enter a Valid Profession.
                       </div>
                     )}
                   </Form.Group>
@@ -1806,7 +1733,7 @@ const RiderRegistration = () => {
                     />
                     {!isValidCnic && (
                       <div className="invalid-feedback">
-                        Please enter a valid CNIC in the format 12345-1234567-1.
+                        Please Enter a Valid CNIC in the Format 12345-1234567-1.
                       </div>
                     )}
                   </Form.Group>
@@ -1838,7 +1765,7 @@ const RiderRegistration = () => {
                   >
                     <Form.Label className="fs-6 text-black">
                       {" "}
-                      Upload CNIC (back)
+                      Upload CNIC (Back)
                     </Form.Label>
                     <Form.Control
                       type="file"

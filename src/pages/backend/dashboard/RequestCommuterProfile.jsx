@@ -690,7 +690,9 @@ const RequestCommuterProfile = () => {
                     </div>
 
                 </div>
-                <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
+                <h5 className="card p-2  px-4 text-success">{`The below request has been initiated by the member based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}
+               <br/> {`Further details will be shown to you after you accept the request.`}
+                </h5>
             </div>
             {loading ? (
                 <div className="d-flex justify-content-center">

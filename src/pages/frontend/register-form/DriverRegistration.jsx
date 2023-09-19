@@ -1108,17 +1108,17 @@ const DriverRegistration = () => {
 
       console.log("Images Form Picture Body:", body);
       const registrationSuccessful = () => {
-        Swal.fire({
-          position: 'top',
-          title: 'Congratulations!',
-          text: 'Registration Form Submited Successfully',
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   title: 'Congratulations!',
+        //   text: 'Registration Form Submited Successfully',
+        //   icon: 'success',
+        //   showCancelButton: false,
+        //   confirmButtonText: 'OK',
+        //   customClass: {
+        //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        //   },
+        // });
       };
 
       const jsonresponse = await response.json();
@@ -1693,7 +1693,7 @@ const DriverRegistration = () => {
                         </Modal.Body>
                         <Modal.Footer>
                           <Button variant="contained" onClick={handleCloseStartModal}>
-                            Submit
+                            Select
                           </Button>
                         </Modal.Footer>
                       </Modal>
@@ -1733,7 +1733,7 @@ const DriverRegistration = () => {
                         </Modal.Body>
                         <Modal.Footer>
                           <Button variant="contained" onClick={handleCloseEndModal}>
-                            Submit
+                            Select
                           </Button>
                         </Modal.Footer>
                       </Modal>
@@ -2320,7 +2320,7 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedCarAC(e.target.value)}
                             required
                           >
-                            <option value="" hidden>AC</option>
+                            <option value="" hidden>Select</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>

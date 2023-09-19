@@ -71,14 +71,14 @@ const BackendLayout = ({ children }) => {
         confirmButtonText: 'Logout'
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-            position: 'top',
-            title: 'Logout',
+          // Swal.fire({
+          //   position: 'top',
+          //   title: 'Logout',
 
-            customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-            },
-          })
+          //   customClass: {
+          //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          //   },
+          // })
           dispatch(setloginState(""));
           dispatch(setsignupState(""));
           navigate("/login");

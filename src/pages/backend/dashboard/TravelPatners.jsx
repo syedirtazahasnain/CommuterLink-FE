@@ -435,17 +435,9 @@ const TravelPatners = () => {
               </div>
             </div> */}
             <div className="col-md-4 col-sm-12 text-center py-4">
-              {userType === 0 ?
-                (
-                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
-                    Recharge
-                  </button>
-                ) :
-                (
-                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
-                    Recharge
-                  </button>
-                )}
+            <div class="alert alert-info  text-center fw-bold fs-5" role="alert">
+                            <i class="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Your wallet is secure and end to end encrypted.
+                          </div>
               <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
                 View Transaction History
               </button>
