@@ -147,11 +147,11 @@ const DataSecurity = () => {
                    
                     
                       <div className="mb-5">
-                        <button  className="btnregistration px-4 fs-6 py-2" 
+                        <Button  className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" 
                         // onClick={handleButtonClick}
                         >
                           Next
-                        </button>
+                        </Button>
                       </div>
                     
                   </div>

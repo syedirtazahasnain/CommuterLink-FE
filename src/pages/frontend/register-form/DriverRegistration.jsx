@@ -1322,24 +1322,25 @@ const DriverRegistration = () => {
                   <li></li>
                   <li></li>
                   <li></li>
-                  <li></li>
+                  <li></li> 
                 </ul>
               </div >
               <div className="row justify-content-center">
-                <div className="col-md-6 bg-white mt-5 mb-5">
+                <div className="col-md-6 bg-white  mt-5 mb-5"  >
+             
                   <div
-                    className="row shadow"
-                    style={{ backgroundColor: '#1F5F5B' }}
+                    className="row shadow  form-color-header"
+                    // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1 className="text-center text-white py-4">
                       Registration Form
                     </h1></div>
-                  <Form className="p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Form className="p-3 top-form " noValidate validated={validated} onSubmit={handleSubmit}>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    <div className="row mb-3 shadow shadow-sm ">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           STARTING POINT
@@ -1502,10 +1503,10 @@ const DriverRegistration = () => {
                       </div>
                     </div>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    <div className="row mb-3 shadow shadow-sm ">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           DROP-OFF POINT
@@ -1742,8 +1743,8 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           Timing
@@ -1802,7 +1803,9 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </div>
                     </div>
-                    <Row className="my-3" style={{ border: '1px solid #cddbd9', backgroundColor: "#cddbd9" }}>
+                    <Row className="my-3 form-color-field" 
+                    // style={{ border: '1px solid #cddbd9', backgroundColor: "#cddbd9" }}
+                    >
                       <Form.Group as={Col} md="12" controlId="validationCustom10">
                         <Form.Label className="pt-3 px-3 text-black">
                           I Commute (Select Days)
@@ -1992,7 +1995,7 @@ const DriverRegistration = () => {
 
                     {/* {daysSelected} */}
 
-                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
+                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
                       <Form.Group as={Col} md="12" controlId="validationCustom11" className="mb-2">
                         <Form.Label className="fs-6 text-black">My Gender</Form.Label>
                         <Form.Select
@@ -2026,7 +2029,7 @@ const DriverRegistration = () => {
                       </Form.Group>
                     </Row>
 
-                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
+                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
                       <Form.Group as={Col} md="12" controlId="validationCustom13" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Year of Birth
@@ -2111,7 +2114,7 @@ const DriverRegistration = () => {
                     {/* 
                     <Row className="mb-3">
                     </Row> */}
-                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
+                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
 
                       <Form.Group as={Col} md="12" controlId="validationCustom17" className="mb-2">
                         <Form.Label className="fs-6 text-black">CNIC</Form.Label>
@@ -2152,7 +2155,7 @@ const DriverRegistration = () => {
                       >
                         <Form.Label className="fs-6 text-black">
                           {" "}
-                          Upload CNIC (back)
+                          Upload CNIC (Back)
                         </Form.Label>
                         <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
                         <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -2235,8 +2238,8 @@ const DriverRegistration = () => {
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div
-                    className="row shadow"
-                    style={{ backgroundColor: '#1F5F5B' }}
+                    className="row shadow form-color-header"
+                    // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1
                       className="text-center text-white py-4"
@@ -2252,7 +2255,7 @@ const DriverRegistration = () => {
                   >
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3 form-body"
+                        className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
                           Car Details
@@ -2320,7 +2323,7 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedCarAC(e.target.value)}
                             required
                           >
-                            <option value="" hidden>Select from Drop Down</option>
+                            <option value="" hidden>Select from Dropdown</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
@@ -2364,7 +2367,7 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3 form-body"
+                        className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
                           Car Registration
@@ -2905,7 +2908,7 @@ const DriverRegistration = () => {
                       <>
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3 form-body"
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
                             <Form.Group
                               as={Col}
@@ -3099,7 +3102,7 @@ const DriverRegistration = () => {
 
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3 form-body"
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
                             <Form.Group
                               as={Col}
@@ -3157,7 +3160,7 @@ const DriverRegistration = () => {
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
-                                Upload CNIC (front)
+                                Upload CNIC (Front)
                               </Form.Label>
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
                               <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -3171,7 +3174,7 @@ const DriverRegistration = () => {
                               className="mb-2"
                             >
                               <Form.Label className="text-dark">
-                                Upload CNIC (back)
+                                Upload CNIC (Back)
                               </Form.Label>
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
                               <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -3182,7 +3185,7 @@ const DriverRegistration = () => {
 
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3 form-body"
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
                             <Form.Group
                               as={Col}
@@ -3447,7 +3450,7 @@ const DriverRegistration = () => {
 
                       {/* <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
-                          className="col-md-12 px-2 py-3 form-body"
+                          className="col-md-12 px-2 py-3 form-color-field"
                         >
                           <Form.Group
                             as={Col}
@@ -3550,7 +3553,7 @@ const DriverRegistration = () => {
 
                       <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
-                          className="col-md-12 px-2 py-3 form-body"
+                          className="col-md-12 px-2 py-3 form-color-field"
                         >
                           <h2 className="text-success mb-3 text-center">
                             Driver's Details
@@ -3601,7 +3604,7 @@ const DriverRegistration = () => {
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
-                              Upload CNIC (front)
+                              Upload CNIC (Front)
                             </Form.Label>
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
                             <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -3615,7 +3618,7 @@ const DriverRegistration = () => {
                             className="mb-2"
                           >
                             <Form.Label className="text-dark">
-                              Upload CNIC (back)
+                              Upload CNIC (Back)
                             </Form.Label>
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
                             <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -3688,7 +3691,7 @@ const DriverRegistration = () => {
 
                       <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
-                          className="col-md-12 px-2 py-3 form-body"
+                          className="col-md-12 px-2 py-3 form-color-field"
                         >
                           <Form.Group
                             as={Col}
@@ -3803,12 +3806,24 @@ const DriverRegistration = () => {
                     }
                     <div className="row mb-3 mt-2 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3 form-body"
+                        className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
                           Bank/Payment Details
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled <Link
+                            to={"/whyprocesspayment2"}
+                            style={{ textDecoration: "none" }}
+                          >
+                            <span
+                              style={{
+                                color: "#198754",
+                                textDecoration: "none",
+                              }}
+                            >
+                              &nbsp; Why Process Payment
+                            </span>
+                          </Link> </p>
                         <div class="container text-center">
                           <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
@@ -3874,7 +3889,7 @@ const DriverRegistration = () => {
                       <Button variant="" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleDriver} disabled={isLoading}>
                         {isLoading ? (
                           <span>
-                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                            <i className="fa fa-spinner fa-spin" /> Proceed...
                           </span>
                         ) : (
                           'Submit'

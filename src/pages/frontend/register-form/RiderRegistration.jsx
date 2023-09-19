@@ -917,8 +917,8 @@ const RiderRegistration = () => {
           <div className="row justify-content-center ">
             <div className="col-md-6 shadow bg-white  mt-5 mb-5">
               <div
-                className="row shadow"
-                style={{ backgroundColor: '#1F5F5B' }}
+                className="row shadow form-color-header"
+                // style={{ backgroundColor: '#1F5F5B' }}
               >
                 <h1 className="text-center text-white py-4">
                   Registration Form
@@ -933,8 +933,8 @@ const RiderRegistration = () => {
               >
                 <div className="row mb-3 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-color-field"
+                    // style={{ backgroundColor: "#cddbd9" }}
                   >
                     <h2 className="text-success mb-3 text-center">
                       STARTING POINT
@@ -1107,8 +1107,8 @@ const RiderRegistration = () => {
                 </div>
                 <div className="row mb-3 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-color-field"
+                    // style={{ backgroundColor: "#cddbd9" }}
                   >
                     <h2 className="text-success mb-3 text-center">
                       DROP-OFF POINT
@@ -1351,8 +1351,8 @@ const RiderRegistration = () => {
                 </LoadScript>
                 <div className="row mb-3 shadow shadow-sm">
                   <div
-                    className="col-md-12 px-2 py-3"
-                    style={{ backgroundColor: "#cddbd9" }}
+                    className="col-md-12 px-2 py-3 form-color-field"
+                    // style={{ backgroundColor: "#cddbd9" }}
                   >
                     <h2 className="text-success mb-3 text-center">
                       Timing
@@ -1413,7 +1413,10 @@ const RiderRegistration = () => {
                     </Form.Group>
                   </div>
                 </div>
-                <Row className="mb-3" style={{ border: "1px solid #cddbd9", backgroundColor: '#cddbd9' }}>
+                <Row className="mb-3 form-color-field"
+                //  style={{ border: "1px solid #cddbd9", backgroundColor: '#cddbd9' }}
+                
+                >
                   <Form.Group as={Col} md="12" controlId="validationCustom20">
                     <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
                       I Commute (Select Days)
@@ -1555,8 +1558,8 @@ const RiderRegistration = () => {
                 </Row>
 
                 <Row
-                  className="mb-3 py-3 shadow shadow-sm"
-                  style={{ backgroundColor: " #cddbd9" }}
+                  className="mb-3 py-3 shadow shadow-sm form-color-field"
+                  // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}
@@ -1607,8 +1610,8 @@ const RiderRegistration = () => {
                 </Row>
 
                 <Row
-                  className="mb-3 py-3 shadow shadow-sm"
-                  style={{ backgroundColor: " #cddbd9" }}
+                  className="mb-3 py-3 shadow shadow-sm form-color-field"
+                  // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}
@@ -1715,8 +1718,8 @@ const RiderRegistration = () => {
                   </Form.Group>
                 </Row>
                 <Row
-                  className="mb-3 py-3 shadow shadow-sm"
-                  style={{ backgroundColor: " #cddbd9" }}
+                  className="mb-3 py-3 shadow shadow-sm form-color-field"
+                  // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}

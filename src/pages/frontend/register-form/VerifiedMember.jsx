@@ -3,7 +3,7 @@ import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { resetsignupState } from "../../../redux/signupSlice";
 import { resetloginState } from "../../../redux/loginSlice";
-import { Button } from "react-bootstrap";
+import { Button } from "@mui/base";
 import Carousel from "react-bootstrap/Carousel";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -252,9 +252,9 @@ const VerifiedMember = () => {
                         <div className="text-center mb-4">
                         <Link to={"/dashboard"} >
 
-              <button className="btnregistration px-3 fs-6 py-2">
+              <Button className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold">
                 My Dashboard
-              </button>
+              </Button>
             </Link>
             {/* <div className="mb-5">
                         <button  className="btnregistration px-4 fs-6 py-2" onClick={showCustomAlert}>

@@ -947,3 +947,11 @@ a.nav-link:hover {
     display: none;
   }
 }
+
+.form-color-header{
+  background: var(--bg-blue-green);
+}
+
+.form-color-field{
+  background: var(--bg-light-teal);
+}

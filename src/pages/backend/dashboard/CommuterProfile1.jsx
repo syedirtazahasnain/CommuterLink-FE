@@ -289,8 +289,9 @@ const CommuterProfile1 = () => {
                         </div>
                       ) :
                         (
-                          <div>
+                          <div className="row d-flex">
                             <h3 className="text-success fw-bold">{contact_id}</h3>
+                    
                           </div>
                         )
                     ) : (
@@ -365,7 +366,15 @@ const CommuterProfile1 = () => {
             </div>
             <hr style={{ color: "grey" }} />
             <div className="row">
+              <div className="row d-flex justify-content-between align-items-xl-baseline">
+            <div className="col-md-6">
               <h2 className="text-success py-2 fw-bold">{userType ? userType : "Commuter"} Details</h2>
+              </div>
+              <div className="col-md-2 pl-5">            <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { }}>
+                  View On Map
+                </Button></div>
+                
+                            </div>
               <div className="col-md-6">
                 <div className="row mb-2">
                   <div className="col-md-4">

@@ -10,6 +10,7 @@ import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 import RiderRegistration from "./pages/frontend/register-form/RiderRegistration";
 import Verification from "./pages/frontend/register-form/Verification";
 // import CommuterProfile from "./pages/frontend/Dashboard/CommuterProfile";
+import WhyProcessPayment2 from "./pages/frontend/whyprocesspayment/WhyProcessPayment";
 import { useSelector } from "react-redux";
 import Faq from "./pages/frontend/faq/Faq";
 import Login from "./pages/frontend/login/Login";
@@ -84,6 +85,7 @@ const Router = () => {
         <Route path="/faq" element={<FrontendLayout children={<Faq />} />} />
         <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
         <Route path="/resubmit" element={<FrontendLayout children={<Resubmit />} />} />
+        <Route path="/whyprocesspayment2" element={<FrontendLayout children={<WhyProcessPayment2 />} />} />
         <Route path="/rider" element={<BackendLayout children={<Rider />} />}></Route>
         <Route path="/driver" element={<BackendLayout children={<Driver />} />}></Route>
         <Route path="/loading" element={<FrontendLayout children={<Loading />} />} />
