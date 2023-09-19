@@ -323,6 +323,7 @@ const DriverRegistration = () => {
   };
 
   const handleProvinceStartChange = (event) => {
+    setCityStartId("");
     setProvinceStartId(event.target.value);
   };
   function validateProfession(profession) {
@@ -338,6 +339,7 @@ const DriverRegistration = () => {
   };
 
   const handleProvinceEndChange = (event) => {
+    setCityEndId("");
     setProvinceEndId(event.target.value);
   };
 
@@ -1313,6 +1315,9 @@ const DriverRegistration = () => {
 
                               // Set the value
                               setCityStart(selectedId);
+                              setAddNewStartDropdown(true);
+                              setAddNewStart(false);
+                              setAddNewStartField(true);
                             }}
                             required
                           >
@@ -1489,6 +1494,9 @@ const DriverRegistration = () => {
 
                               // Set the value
                               setCityEnd(selectedId);
+                              setAddNewEndDropdown(true);
+                              setAddNewEnd(false);
+                              setAddNewEndField(true);
                             }}
                             required
                           >

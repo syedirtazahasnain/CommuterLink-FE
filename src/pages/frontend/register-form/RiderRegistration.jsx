@@ -310,10 +310,12 @@ const RiderRegistration = () => {
   };
 
   const handleProvinceStartChange = (event) => {
+    setCityStartId("");
     setProvinceStartId(event.target.value);
   };
 
   const handleProvinceEndChange = (event) => {
+    setCityEndId("");
     setProvinceEndId(event.target.value);
   };
 
@@ -983,6 +985,9 @@ const RiderRegistration = () => {
 
                           // Set the value
                           setCityStart(selectedId);
+                          setAddNewStartDropdown(true);
+                          setAddNewStart(false);
+                          setAddNewStartField(true);
                         }}
                         required
                       >
@@ -1157,6 +1162,9 @@ const RiderRegistration = () => {
 
                           // Set the value
                           setCityEnd(selectedId);
+                          setAddNewEndDropdown(true);
+                          setAddNewEnd(false);
+                          setAddNewEndField(true);
                         }}
                         required
                       >
