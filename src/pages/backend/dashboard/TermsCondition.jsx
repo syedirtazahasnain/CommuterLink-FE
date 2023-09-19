@@ -58,7 +58,7 @@ const TermsCondition = () => {
         </div>
       </div>
       <div className="card p-4 bg-white p-2">
-        <h5 className="text-success">For Offerer</h5>
+        <h5 className="text-success">For Car Offerer</h5>
         <div className="card bg-light"  >
           <div className="card-body">
             <p>1. Your car is in a good shape and is roadworthy</p>
@@ -105,7 +105,7 @@ const TermsCondition = () => {
           </div> */}
          
         </div>
-        <h5 className="text-success mt-4">For Rider</h5>
+        <h5 className="text-success mt-4">For Traveller</h5>
         <div className="card bg-light"  >
           <div className="card-body">
             <p>1. The car offeror will wait 15 mins after agreed time for you to join. </p>

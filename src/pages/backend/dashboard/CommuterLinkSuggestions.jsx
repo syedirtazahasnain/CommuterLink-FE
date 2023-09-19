@@ -324,29 +324,29 @@ const CommuterLinkSuggestions = () => {
   return (
     <>
       <div className="card  mt-3 mb-5">
-        {loading ? (
-          <div className="text-center">
-            {/* Render CircularProgress while loading */}
-            <div className="d-flex justify-content-center align-items-center vh-10">
-              <ThreeCircles
-                height={50}
-                width={50}
-                color="#4fa94d"
-                visible={true}
-                ariaLabel="three-circles-rotating"
-                outerCircleColor=""
-                innerCircleColor=""
-                middleCircleColor=""
-              />
+        <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
+          {loading ? (
+            <div className="text-center m-auto">
+              {/* Render CircularProgress while loading */}
+              <div className="d-flex justify-content-center align-items-center vh-10">
+                <ThreeCircles
+                  height={50}
+                  width={50}
+                  color="#4fa94d"
+                  visible={true}
+                  ariaLabel="three-circles-rotating"
+                  outerCircleColor=""
+                  innerCircleColor=""
+                  middleCircleColor=""
+                />
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="card-header" style={{ backgroundColor: "#1F5F5B", padding: "5px 0", margin: "0" }}>
+          ) : (
             <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
               {option === 0 ? "GET A SEAT/S IN THEIR CAR" : "TRAVEL BUDDIES FOR YOUR CAR"}
             </h4>
-          </div>
-        )}
+          )}
+        </div>
         <div
           className="card-body"
         >
