@@ -370,21 +370,15 @@ const Login = () => {
                       }
                     />
                   </div>
-                  <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
+                  <Button
+                    className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                    onClick={handleLogin}
+                  >
                     Login
                   </Button>
-                  {/* <div className="py-1 justify-content-center">    <Link to={''} style={{ textDecoration: "none" }}>
-                            <span
-                              style={{
-                                color: "#dc3545",
-                                textDecoration: "none",
-                              }}
-                            >
-                              {" "}
-                            
-                             Forgot Password
-                            </span>
-                          </Link></div> */}
+                  {/* <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
+                    Login
+                  </Button> */}
                   <div className="container">
                     <div className="row d-flex justify-content-center">
                       <div className="column mt-2">
@@ -439,8 +433,8 @@ const Login = () => {
                     <hr id="hrline2" />
                     <div id="span-text" className="text-center mb-5">
                       Not have account on CommutersLink? &nbsp;
-                      <Link to="/signup" style={{textDecoration:'none'}}>
-                        <span className="reg-text" style={{textDecoration:'none'}}>Signup</span>
+                      <Link to="/signup" style={{ textDecoration: 'none' }}>
+                        <span className="reg-text" style={{ textDecoration: 'none' }}>Signup</span>
                       </Link>
                     </div>
                   </div>

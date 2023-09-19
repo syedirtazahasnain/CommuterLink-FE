@@ -558,11 +558,17 @@ const Signup = () => {
                   </Form.Group>
                   <div className="col-md-12  mt-3 text-center">
                     <Button
-                      className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                       onClick={() => postData()}
                     >
                       Sign up
                     </Button>
+                    {/* <Button
+                      className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                      onClick={() => postData()}
+                    >
+                      Sign up
+                    </Button> */}
                   </div>
                   <div className="container text-center">
                     <div className="row d-flex">
@@ -645,12 +651,8 @@ const Signup = () => {
                     <hr id="hrline2" />
                     <div className="text-center mb-5">
                       Already have account on CommuterLinks? &nbsp;
-                      <Link to={"/login"} style={{ textDecoration: "none" }}>
-                        <span
-                          style={{ color: "#198754", textDecoration: "none" }}
-                        >
-                          Login
-                        </span>
+                      <Link to={'/login'} style={{ textDecoration: "none" }}>
+                        <span style={{ color: "#198754", textDecoration: "none" }}>Login</span>
                       </Link>
                     </div>
                   </div>

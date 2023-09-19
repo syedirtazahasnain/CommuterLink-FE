@@ -116,31 +116,24 @@ const Contact = () => {
 
   return (
     <div>
-      <section id="contact" className="contact section-bg">
-        <div className="container">
-          <div className="section-title text-center">
-            <h2 className="text-dark">Contact Us</h2>
-            <p className="fs-5">
-              At CommutersLink, we are always available to address your queries
-              and would love to hear your suggestions or feedback if any. Feel
-              free to connect with us
-            </p>
-          </div>
-        </div>
-      </section>
+      <section id="contact" className="contact section-bg pt-5" style={{ 
+      backgroundImage: `url("/assets/images/contact-bg.png")`,  backgroundSize: 'cover', 
+    }}>
+        
       <div className="container">
         <div className="row text-left">
-          <div className="col-md-8 bg-light p-5 mb-3 sha m-auto">
+          <div className="col-md-5 bg-col-4 px-5 pt-3 pb-4 mb-3 sha m-auto rounded rounded-4">
+        <h3 className="text-white text-center pb-3">Contact Us</h3>
             <form action="#" method="post">
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-12 mb-2">
                   {" "}
                   <TextField
-                    className="mb-3"
+                    className="mb-3 bg-light"
                     id="outlined-basic"
                     label="Your Name"
                     variant="outlined"
-                    sx={{ width: '100%' }}
+                    sx={{ width: '100%', color: 'black' }}
                     value={fullName}
                     onChange={handleFullNameChange}
                     size="small"
@@ -148,10 +141,10 @@ const Contact = () => {
                     helperText={fullNameError}
                   />
                 </div>
-                <div className="col-md-6 mb-2">
+                <div className="col-md-12 mb-2">
                   {" "}
                   <TextField
-                    className="mb-3"
+                    className="mb-3 bg-light"
                     id="formBasicPassword"
                     label="Email"
                     variant="outlined"
@@ -167,7 +160,7 @@ const Contact = () => {
                 </div>
                 <div className="col-md-12">
                   <TextField
-                    className="mb-3"
+                    className="mb-3 bg-light"
                     id="formBasicPassword"
                     label="Subject"
                     variant="outlined"
@@ -181,13 +174,13 @@ const Contact = () => {
                 </div>
                 <div className="col-md-12">
                   <TextField
-                    className="mb-3"
+                    className="mb-3 bg-light"
                     id="exampleFormControlTextarea1"
                     label="Message"
                     value={message}
                     onChange={handleMessageChange}
                     multiline
-                    rows={10}
+                    rows={5}
                     variant="outlined"
                     sx={{ width: '100%' }}
                   />
@@ -195,16 +188,17 @@ const Contact = () => {
               </div>
             </form>
             <div className="d-flex justify-content-center">
-              <button
-                className="btn-custom px-4 py-2 rounded rounded-5 text-custom fw-bold"
-                onClick={SubmitForm}
-              >
-                Send
-              </button>
+            <button
+                  className="btn-custom mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                  onClick={SubmitForm}
+                >
+                  Send
+                </button>
             </div>
           </div>
         </div>
       </div>
+      </section>
     </div>
   );
 };

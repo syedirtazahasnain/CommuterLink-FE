@@ -3,37 +3,57 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { CardGroup } from 'react-bootstrap';
 import { BASE_URL } from "../../../constants";
+import { useNavigate } from 'react-router-dom';
 
 const ShareRideCards = () => {
+  const navigate = useNavigate();
+  const signupRoute = () => {
+    navigate("/signup");
+
+  };
   return (
-    <div>
-      <div className="container">
+    <div className='bg-light-secondary'>
         <div className="section-title text-center p-5">
-          <h2 className="heading-color text-black">
-            SHARE RIDE (YOUR CAR OR OTHERS) WITH SUITABLE MATCHES TO COMMUTE TO
-          </h2>
+          <h1 className="text-dark">
+            Share Ride (Your Car or Others) With
+          </h1>
+          <h3 className="text-green">
+            Suitable Matches to Commute to</h3>
         </div>
-      </div>
-      <div className="container">
-        <div className="row">
-          <CardGroup className='textride'><div className="col-md-6 sharingRide mb-2">
-            <Card className="mr-0">
-              <Card.Img variant="top" className="sharingRide" text="Img" src={`${BASE_URL}/assets/images/commutelinksoffice.jpg`} />
-              <article className="">
-                <h3 className="text-center" ><a href="signup.js" style={{ color: '#fff' }}>Office</a></h3></article>
+      
+      <div className="row g-0 pb-5">
+        <CardGroup className='textride'><div className="col-md-6 sharingRide mb-2">
+          <Card className="mr-0">
+            <Card.Img variant="top" className="sharingRide" text="Img" src={`${BASE_URL}/assets/images/commutelinksoffice.jpg`} />
+            <article className="d-flex">
+              <div className="m-auto p-4">
+                <h1 className="text-white fw-bold mb-3">Office</h1>
+                <button
+                  className="btn-custom2 border-1 border-white px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={signupRoute}>
+                  Join Now
+                </button>
+              </div>
+             
+            </article>
+          </Card>
+        </div>
+          <div className="col-md-6 sharingRide mb-2">
+            <Card className="ml-0">
+              <Card.Img className=" sharingRide" variant="top" src={`${BASE_URL}/assets/images/commutelinksuni.jpg`} />
+              <article className="d-flex">
+              <div className="m-auto p-4">
+                <h1 className="text-white fw-bold mb-3">School/University</h1>
+                <button
+                  className="btn-custom2 border-1 border-white px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={signupRoute}>
+                  Join Now
+                </button>
+              </div>
+              </article>
+             
             </Card>
           </div>
-            <div className="col-md-6 sharingRide mb-2">
-              <Card className="ml-0">
-                <Card.Img className=" sharingRide" variant="top" src={`${BASE_URL}/assets/images/commutelinksuni.jpg`} />
-                <article> <h3 className="m-auto p-0"><a href="signup.js" style={{ color: '#fff' }}>College & University</a></h3>
-                </article>
-              </Card>
-            </div>
-          </CardGroup>
-        </div>
+        </CardGroup>
       </div>
-
     </div>
   )
 }

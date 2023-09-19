@@ -1,21 +1,86 @@
 :root {
   --bs-primary: #198754;
   --bg-primary: #198754;
+  --bg-blue-green: #2B9F8A;
+  --bs-yellow: rgba(213, 171, 20, 1);
+  --bg-secondary-light: #3c3c3c;
+  --bs-text-green: rgba(32, 158, 141, 1);
+  --bg-card-orange: #F89F5B;
+  --bg-card-pink: rgba(229, 63, 113, 1) ;
+  --bg-card-purple: rgba(192, 63, 166, 1);
+  --bg-card-green: #189583;
+  --bg-card-pink: rgba(229, 63, 113, 1) ;
+  --bg-orange: #F89F5B;
+  --bg-dark-green: rgba(29, 104, 93, 1);
+}
+body{
+  scroll-behavior: smooth;
+
+}
+.new-banner-circle{
+  right: "20px" !important;
+  top: "50%" !important;
+  transform: 'translateY(-50%)' !important;
+  width: "350px" !important;
+}
+.bg-green{
+  color: var(--bg-card-green);
+}
+.bg-col-2{
+  background-color: var(--bg-orange) !important;
+}
+.bg-col-4{
+  background-color: var(--bg-dark-green) !important;
+}
+.text-green{
+  color: var(--bs-text-green);
 }
 
-.bg-green {
-  color: var(--bs-primary);
+.card-pink{
+  background-color: var(--bg-card-pink)
+ }
+.card-pink1{
+  background-color: var(--bg-card-pink)
+ }
+ 
+ .card-orange{
+  background-color: var(--bg-card-orange);
+ }
+ 
+ .card-purple{
+  background-color: var(--bg-card-purple);
+ }
+ 
+ .card-green{
+  background-color: var(--bg-card-green);
+ }
+.bg-secondary-light{
+  background-color: var(--bg-secondary-light);
 }
-
-.btn-custom {
-  border: 1px solid #198754;
-  background: none;
+.btn-custom{
+  border: none;
+  background: black;
 }
-.btn-custom:hover {
-  border: 1px solid #198754;
-  background-color: var(--bg-primary);
+.btn-custom1{
+  border: none;
+  background: var(--bg-blue-green);
+}
+.btn-custom:hover{
+  background-color: var(--bg-blue-green);
   color: #fff;
 }
+
+.nav-item{
+  color: black;
+  font-weight: bold;
+ }
+ .nav-item:hover{
+  color: black !important;
+  text-decoration: underline;
+ }
+ .nav-link{
+  font-weight: bold;
+ }
 .text-custom {
   color: #198754;
 }
@@ -62,7 +127,7 @@ a.nav-link:hover {
   overflow: hidden;
   position: relative;
   width: 100%;
-  background-image: url(Images/abstract-green-grunge-background.jpg);
+  background-image: url(Images/friends-shaking-hands-car.jpg);
   background-attachment: fixed;
   background-size: cover;
   -moz-background-size: cover;
@@ -76,7 +141,7 @@ a.nav-link:hover {
   overflow: hidden;
   position: relative;
   width: 100%;
-  background-image: url(Images/abstract-green-grunge-background.jpg);
+  background-image: url(Images/friends-shaking-hands-car.jpg);
   background-attachment: fixed;
   background-size: cover;
   -moz-background-size: cover;
@@ -103,14 +168,6 @@ section {
   width: 100px;
   height: 150px;
 }
-
-/* Add this CSS to change the color of the OK button */
-/* .custom-ok-button {
-  background-color: #0f6c40 !important; 
-  color: #fff; 
-} */
-
-
 img.crousel {
   width: 100%;
 }
@@ -132,7 +189,7 @@ img.crousel {
   z-index: 1;
   margin-bottom: 10px;
 }
-CardGroup a {
+.CardGroup a {
   text-decoration: none;
 }
 #work-card {
@@ -164,8 +221,12 @@ CardGroup a {
   text-decoration: none;
   color: #fff;
 }
-.Typography1:hover {
+/* .Typography1:hover {
   color: #fff;
+} */
+
+.bg-pink{
+  background-color: var(--bg-card-pink);
 }
 
 .container_foto img {
@@ -385,6 +446,10 @@ i {
   top: 13px;
 }
 
+.text-yellow{
+  color: var(--bs-yellow);
+}
+
 .container_foto:hover {
   cursor: pointer;
 }
@@ -401,130 +466,7 @@ i {
   font-weight: 700 !important;
   font-size: smaller !important;
 }
-/* @media (max-width: 768px) {
-   .carousel-item {
-     flex: 0 0 50%;
-   }
-  }
-  
- 
-.btnregistration {
-  border: 1px solid !important;
-  border-radius: 40px !important;
-  border-color: #198754 !important;
-  background-color: White !important;
-  color: #198754 !important;
-  font-weight: 700 !important;
-  font-size: smaller !important;
-}
-.btnregistration:hover {
-  background-color: #198754 !important;
-  border-color: #198754 !important;
-  color: #fff !important;
-}
-.accordianfaqs {
-  background-color: #cddbd9 !important;
-}
-img.carousel {
-  width: 100%;
-}
-.btnDriver {
-  background-color: #198754 !important;
-  box-shadow: none !important;
-  color: #ffff !important;
-}
-
-.btnDriver:hover {
-  border-color: #198754 !important;
-}
-
-.btnWhite {
-  background-color: #ffff !important;
-  color: #198754 !important;
-  border-color: #198754 !important;
-}
-.new-heading {
-  background-color: #198754 !important;
-  color: #ffff;
-}
-.colorplace::placeholder {
-  color: #198754 !important;
-}
-.cardpadding {
-}
-.text_underline {
-  text-decoration: underline;
-}
-.full-width-container {
-  width: 100% !important;
-}
-.second_heading {
-  color: #cfdfdc !important;
-}
-.menu li {
-  list-style: none;
-  text-decoration: none !important;
-  color: white;
-  list-style: none;
-}
-.menu a {
-  text-decoration: none;
-}
-ul {
-  list-style: none;
-}
-.menu {
-  width: 100%;
-  margin-top: 30px;
-}
-.menu .item {
-  position: relative;
-  cursor: pointer;
-}
-.menu .item a {
-  color: #ffff;
-  font-size: 16px;
-  text-decoration: none;
-  display: block;
-  padding: 5px 25px;
-  line-height: 40px;
-  list-style: none;
-}
-.menu .item a li {
-  list-style: none;
-}
-.btn_view {
-  color: dark !important;
-  font-weight: bold !important;
-}
-
-:root {
-  --bs-primary: #198754;
-  --bg-primary: #198754;
-}
-
-.bg-green {
-  color: var(--bs-primary);
-}
-
-.btn-custom {
-  border: 1px solid #198754;
-}
-.btn-custom:hover {
-  border: 1px solid #198754;
-  background-color: var(--bg-primary);
-  color: #fff;
-}
-
-.text-custom {
-  color: #198754;
-}
-a.btn:hover {
-  background-color: #198754;
-  border-color: #198754 !important;
-  color: #fff;
-}
-*/ a.nav-link:hover {
+ a.nav-link:hover {
   color: #198754 !important;
   text-decoration: underline;
 }
@@ -544,7 +486,7 @@ a.btn:hover {
   overflow: hidden;
   position: relative;
   width: 100%;
-  background-image: url(Images/abstract-green-grunge-background.jpg);
+  background-image: url(Images/friends-shaking-hands-car.jpg);
   background-attachment: fixed;
   background-size: cover;
   -moz-background-size: cover;
@@ -558,7 +500,7 @@ a.btn:hover {
   overflow: hidden;
   position: relative;
   width: 100%;
-  background-image: url(Images/abstract-green-grunge-background.jpg);
+  background-image: url(Images/friends-shaking-hands-car.jpg);
   background-attachment: fixed;
   background-size: cover;
   -moz-background-size: cover;
@@ -583,12 +525,6 @@ a.btn:hover {
 .nav-link {
   cursor: pointer;
 }
-/* .newdashboard {
-  background-color: #8fc4b7 !important;
-}
-.app-header {
-  background-color: #8fc4b7 !important;
-} */
 .image-upload-container {
   width: 400px; /* Adjust the width as needed */
 }

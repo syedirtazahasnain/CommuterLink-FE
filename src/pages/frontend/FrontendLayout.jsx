@@ -14,12 +14,12 @@ const FrontendLayout = ({ children }) => {
   }, []);
 
   return (
-    <>
+    <div className="pt-5">
       <link rel="stylesheet" href={`${BASE_URL}/public/assets/css/frontend.css`} />
       <Navbar />
       {children}
       <Footer />
-    </>
+    </div>
   );
 };
 

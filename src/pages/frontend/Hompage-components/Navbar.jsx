@@ -26,12 +26,12 @@ const Navbar = () => {
         <div className="row">
 
           <div className="pos-f-t">
-            <nav className="navbar navbar-expand-lg navbar-light-300  fixed-top">
+            <nav className="navbar navbar-expand-lg navbar-white bg-white  fixed-top">
               <DomLink
-                className="navbar-brand ml-3"
+                className="navbar-brand p-2"
                 to="/"
               >
-                <img src={`${BASE_URL}/assets/images/CL-logo.png`} width="mr-auto" height="40px" alt="logoimg" />
+                <img src={`${BASE_URL}/assets/images/CL-logo.png`} width="mr-auto" height="50px" alt="logoimg" />
               </DomLink>
               <button
                 className="navbar-toggler mr-2 d-lg-none" // Add 'd-lg-none' class to hide the button in desktop view
@@ -56,53 +56,53 @@ const Navbar = () => {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                <ul className="navbar-nav ml-auto  font-size:'12px' font-family:'Poppins, sans-serif'">
-                  <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="carousel" onClick={home}>
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item nav-grey">
+                    <Link className="nav-link text-black mr-3 ml-3" to="carousel" onClick={home}>
                       HOME
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="carousel" onClick={home} smooth="true" offset={20} duration={50}>
+                  <li className="nav-item nav-grey">
+                    <Link className="nav-link text-black mr-3 ml-3" to="carousel" onClick={home} smooth="true" offset={20} duration={50}>
                       CONCEPT
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="howworks" onClick={home} offset={20} duration={50}>
+                  <li className="nav-item nav-grey">
+                    <Link className="nav-link text-black mr-3 ml-3" to="howworks" onClick={home} offset={20} duration={50}>
                       HOW IT WORKS?
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="contribute" smooth="true" onClick={home} offset={20} duration={50}>
+                  <li className="nav-item nav-grey">
+                    <Link className="nav-link text-black mr-3 ml-3" to="contribute" smooth="true" onClick={home} offset={20} duration={50}>
                       CONTRIBUTE
                     </Link>
                    
                   </li>
-                  <li className="nav-item">
-                    <DomLink className="nav-link mr-3 ml-3 text-dark" to="/Faq">
+                  <li className="nav-item nav-grey">
+                    <DomLink className="nav-link text-black mr-3 ml-3 text-dark" to="/Faq">
                       FAQS
                     </DomLink>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link mr-3 ml-3" to="contact" onClick={home} smooth="true" offset={20} duration={50}>
+                  <li className="nav-item nav-grey">
+                    <Link className="nav-link text-black mr-3 ml-3" to="contact" onClick={home} smooth="true" offset={20} duration={50}>
                       CONTACT
                     </Link>
                   </li>
                 </ul>
                   
-                <Button
-                  className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                <button
+                  className="btn-custom mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                   onClick={signupRoute}
                 >
                   Sign up
-                </Button>
+                </button>
 
-                <Button
-                  className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                <button
+                  className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                   onClick={loginRoute}
                 >
                   Login
-                </Button>
+                </button>
               </div>
             </nav>
           </div>
