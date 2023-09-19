@@ -10,7 +10,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import Button from "@mui/material/Button";
+import {Button} from "@mui/base";
 import Stack from "@mui/material/Stack";
 import { ThreeCircles } from 'react-loader-spinner'
 import {
@@ -1299,6 +1299,7 @@ const RiderRegistration = () => {
                       <Button
                         variant="contained"
                         onClick={handleCloseStartModal}
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                       >
                         Select
                       </Button>
@@ -1341,7 +1342,8 @@ const RiderRegistration = () => {
                       </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="contained" onClick={handleCloseEndModal}>
+                      <Button variant="contained" onClick={handleCloseEndModal}
+                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold">
                         Select
                       </Button>
                     </Modal.Footer>
@@ -1811,7 +1813,7 @@ const RiderRegistration = () => {
                   <Button
                     variant="outlined"
                     size="large"
-                    className="btnregistration"
+                    className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                     onClick={handleLogin}
                     disabled={isLoading}
                   >

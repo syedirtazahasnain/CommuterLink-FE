@@ -138,7 +138,7 @@ const Office_School = () => {
                                   </h5>
                                   <div>   <Button
                                     variant="success"
-                                    className="btn-custom mx-2 w-150px px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                                    className="btn-custom1 mx-2 border-0 w-150px px-4 py-2 rounded rounded-2 text-white fw-bold"
                                     onClick={officeRoute}
                                   >
                                     Office
@@ -150,7 +150,7 @@ const Office_School = () => {
                                   <div>
                                     <Button
                                       variant="success"
-                                      className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                                       onClick={schoolRoute}
                                     >
                                       School/University

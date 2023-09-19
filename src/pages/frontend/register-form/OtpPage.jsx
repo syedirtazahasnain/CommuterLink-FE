@@ -343,7 +343,7 @@ const OtpPage = () => {
                       variant="outlined"
                       type="submit"
                       onClick={validateOTP}
-                      className="btn-custom px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                     >
                       Submit
                     </Button>

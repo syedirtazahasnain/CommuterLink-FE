@@ -9,7 +9,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from 'dayjs';
-import Button from "@mui/material/Button";
+import {Button} from "@mui/base";
 import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
@@ -1692,7 +1692,7 @@ const DriverRegistration = () => {
                           </Container>
                         </Modal.Body>
                         <Modal.Footer>
-                          <Button variant="contained" onClick={handleCloseStartModal}>
+                          <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseStartModal}>
                             Select
                           </Button>
                         </Modal.Footer>
@@ -1732,7 +1732,7 @@ const DriverRegistration = () => {
                           </Container>
                         </Modal.Body>
                         <Modal.Footer>
-                          <Button variant="contained" onClick={handleCloseEndModal}>
+                          <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseEndModal}>
                             Select
                           </Button>
                         </Modal.Footer>
@@ -2185,7 +2185,7 @@ const DriverRegistration = () => {
                       <Button
                         variant="outlined"
                         size="large"
-                        className="btnregistration"
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                         onClick={() => {
                           handleLogin();
                         }}
@@ -2320,7 +2320,7 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedCarAC(e.target.value)}
                             required
                           >
-                            <option value="" hidden>Select</option>
+                            <option value="" hidden>Select from Drop Down</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
@@ -3871,7 +3871,7 @@ const DriverRegistration = () => {
                       spacing={2}
                       style={{ justifyContent: "right" }}
                     >
-                      <Button variant="" className="btnregistration" onClick={handleDriver} disabled={isLoading}>
+                      <Button variant="" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleDriver} disabled={isLoading}>
                         {isLoading ? (
                           <span>
                             <i className="fa fa-spinner fa-spin" /> Submitting...
