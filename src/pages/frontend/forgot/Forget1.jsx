@@ -268,12 +268,12 @@ const Forget1 = () => {
                                                     variant="outlined"
                                                 >
                                                     <InputLabel htmlFor="outlined-adornment-password">
-                                                       Enter email address
+                                                        Enter email address
                                                     </InputLabel>
                                                     <OutlinedInput
                                                         id="outlined-adornment-password"
                                                         type={email}
-                                                
+
                                                         label="Enter email address"
                                                     />
                                                 </FormControl>

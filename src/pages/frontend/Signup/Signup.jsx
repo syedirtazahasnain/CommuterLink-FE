@@ -16,6 +16,7 @@ import Form from "react-bootstrap/Form";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { LoginSocialFacebook } from "reactjs-social-login";
+import { displayNotification } from "../../../helpers";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -148,15 +149,16 @@ const Signup = () => {
         navigate("/number-generate");
       } else {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: "top",
-          icon: "",
-          // text: `${jsonresponse.message}`,
-          text: "Email Already Exists",
-          customClass: {
-            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: "top",
+        //   icon: "",
+        //   // text: `${jsonresponse.message}`,
+        //   text: "Email Already Exists",
+        //   customClass: {
+        //     confirmButton: "swal-custom", // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log("Signup Error:", error.message);
@@ -173,22 +175,24 @@ const Signup = () => {
         confirmPassword === ""
       ) {
         // alert("Please Fill All Fields!");
-        Swal.fire({
-          position: "top",
-          // icon: "warning",
-          text: "Please Fill All Fields!",
-          customClass: {
-            confirmButton: "swal-custom",
-            // icon:'bg-secondary' // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: "top",
+        //   // icon: "warning",
+        //   text: "Please Fill All Fields!",
+        //   customClass: {
+        //     confirmButton: "swal-custom",
+        //     // icon:'bg-secondary' // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", "Please Fill All Fields");
       } else if (password !== confirmPassword) {
         // alert("Confirm password is not matched with new password!")
-        Swal.fire({
-          position: "top",
-          // icon: "warning",
-          text: "Confirm password is not matched with new password!",
-        });
+        // Swal.fire({
+        //   position: "top",
+        //   // icon: "warning",
+        //   text: "Confirm password is not matched with new password!",
+        // });
+        displayNotification("warning", "Confirm password is not matched with new password!");
       } else {
         if (termsService) {
           const body = {
@@ -222,28 +226,30 @@ const Signup = () => {
           } else {
             const errors = jsonresponse.errors;
             for (const field of Object.keys(errors)) {
-              Swal.fire({
-                position: "top",
-                // icon: "error",
-                // text: `${jsonresponse.message}`,
-                text: `${errors[field][0]}`,
-                customClass: {
-                  confirmButton: "swal-custom",
-                  // Apply custom CSS class to the OK button
-                },
-              });
+              // Swal.fire({
+              //   position: "top",
+              //   // icon: "error",
+              //   // text: `${jsonresponse.message}`,
+              //   text: `${errors[field][0]}`,
+              //   customClass: {
+              //     confirmButton: "swal-custom",
+              //     // Apply custom CSS class to the OK button
+              //   },
+              // });
+              displayNotification("error", `${jsonresponse.message}`);
             }
           }
         } else {
           // alert("please check Terms of Service");
-          Swal.fire({
-            position: "top",
-            // icon: "warning",
-            text: "Please Check Terms of Service",
-            customClass: {
-              confirmButton: "swal-custom", // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: "top",
+          //   // icon: "warning",
+          //   text: "Please Check Terms of Service",
+          //   customClass: {
+          //     confirmButton: "swal-custom", // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("warning", "Please Check Terms of Service");
         }
       }
     } catch (error) {

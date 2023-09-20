@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Login = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [navigate]);
-  
+
   const checkUserStatus = async () => {
     try {
       const response = await fetch(
@@ -95,20 +96,24 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    if (email === "" || password === "") {
-      Swal.fire({
-        position: 'top',
-        // // icon: 'warning',
-        text: 'Please Fill All Fields',
-        customClass: {
-          confirmButton: "swal-custom",
-       
-        },
-       
-      }
-      )
+    if(email === "" || password ===""){
+      displayNotification("warning", "Please Fill All Fields");
     }
-    else {
+    // if (email === "" || password === "") {
+      // Swal.fire({
+      //   position: 'top',
+      //   // // icon: 'warning',
+      //   text: 'Please Fill All Fields',
+      //   customClass: {
+      //     confirmButton: "swal-custom",
+
+      //   },
+
+      // }
+      // )
+      // displayNotification("warning", `${("222", "Please Fill All Fields")} [B]`);
+    // }
+    else  {
       await postData();
     }
   };
@@ -139,28 +144,31 @@ const Login = () => {
         } else {
           console.log(jsonresponse);
           // alert("Error: " + jsonresponse.message);
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom',
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom',
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
 
       else {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: 'Please Check Terms of Services',
-          customClass: {
-            confirmButton: 'swal-custom',
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: 'Please Check Terms of Services',
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+
+        displayNotification("warning", "Please Check Terms of Services");
       }
 
     } catch (error) {
@@ -215,15 +223,16 @@ const Login = () => {
             dispatch(setloginState(jsonresponse.access_token));
           } else {
             // alert("Error: " + jsonresponse.message);
-            Swal.fire({
-              position: 'top',
-              // // icon: 'error',
-              text: `${jsonresponse.message}`,
-              customClass: {
-                confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-              },
-            }
-            )
+            // Swal.fire({
+            //   position: 'top',
+            //   // // icon: 'error',
+            //   text: `${jsonresponse.message}`,
+            //   customClass: {
+            //     confirmButton: 'swal-custom', 
+            //   },
+            // }
+            // )
+            displayNotification("error", `${jsonresponse.message}`);
 
           }
         } else {
@@ -307,7 +316,7 @@ const Login = () => {
                   {" "}
                   Login
                 </h1>{" "}
-                <Form className="text-center">
+                <Form className="">
                   <Form.Group
                     className="mb-1 mt-5 text-center"
                     controlId="formBasicEmail"
@@ -341,6 +350,19 @@ const Login = () => {
                       sx={{ width: '100%' }}
                     />
                   </Form.Group>
+                     
+                  <div className="py-1">    <Link to={'/forget1'} style={{ textDecoration: "none" }}>
+                    <span
+                      style={{
+                        color: "#dc3545",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {" "}
+
+                      Forgot Password
+                    </span>
+                  </Link></div>
                   <div className="col-md-12 text-center mt-3">
                     <FormControlLabel
                       control={
@@ -371,29 +393,31 @@ const Login = () => {
                       }
                     />
                   </div>
+                  <div className="text-center"> 
                   <Button
-                    className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                    className="btn-custom1 mx-2 text-center border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                     onClick={handleLogin}
                   >
                     Login
-                  </Button>
-                
-                           <div className="py-1 justify-content-center">    <Link to={''} style={{ textDecoration: "none" }}>
-                            <span
-                              style={{
-                                color: "#dc3545",
-                                textDecoration: "none",
-                              }}
-                            >
-                              {" "}
-                            
-                             Forgot Password
-                            </span>
-                          </Link></div>
+                  </Button></div>
+                 
+
+                  {/* <div className="py-1 justify-content-center">    <Link to={''} style={{ textDecoration: "none" }}>
+                    <span
+                      style={{
+                        color: "#dc3545",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {" "}
+
+                      Forgot Password
+                    </span>
+                  </Link></div> */}
                   <div className="container">
                     <div className="row d-flex justify-content-center">
                       <div className="column mt-2">
-                        <p className=" text-muted" id="text2">
+                        <p className=" text-muted text-center" id="text2">
                           Or continue with
                         </p>
                       </div>

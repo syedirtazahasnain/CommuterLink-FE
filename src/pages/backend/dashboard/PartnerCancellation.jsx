@@ -19,6 +19,7 @@ import { Box, Link } from "@mui/material";
 import { width } from "@mui/system";
 import { API_URL, IMAGE_URL  } from "../../../constants";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const PartnerCancellation = () => {
   const initialValue = dayjs();
@@ -91,14 +92,15 @@ const PartnerCancellation = () => {
   const sendRequest = async () => {
     try {
       if (!selectedDate) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: 'Please select a date',
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: 'Please select a date',
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", "Please select a date");
         return;
       }
 
@@ -131,34 +133,37 @@ const PartnerCancellation = () => {
           navigate('/dashboard');
         }
         else if (jsonresponse.status_code === 100) {
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("error", `${jsonresponse.message}`);
         }
         else if (jsonresponse.status_code === 500) {
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("error", `${jsonresponse.message}`);
         }
         else {
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
       else {
@@ -190,46 +195,50 @@ const PartnerCancellation = () => {
           navigate('/dashboard');
         }
         else if (jsonresponse.status_code === 100) {
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("error", `${jsonresponse.message}`);
         }
         else if (jsonresponse.status_code === 500) {
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("error", `${jsonresponse.message}`);
         }
         else {
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
     } catch (error) {
       console.error('An error occurred:', error);
-      Swal.fire({
-        position: 'top',
-        // // icon: 'error',
-        text: 'An error occurred while sending the request.',
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      });
+      // Swal.fire({
+      //   position: 'top',
+      //   // // icon: 'error',
+      //   text: 'An error occurred while sending the request.',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // });
+      displayNotification("warning", "An error occured while sending the request.");
     }
   };
 
@@ -316,24 +325,26 @@ const PartnerCancellation = () => {
 
     const jsonresponse = await response.json();
     if (jsonresponse.status_code === 100) {
-      Swal.fire({
-        position: 'top',
-        // // icon: 'error',
-        text: `${jsonresponse.message}`,
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      });
+      // Swal.fire({
+      //   position: 'top',
+      //   // // icon: 'error',
+      //   text: `${jsonresponse.message}`,
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // });
+      displayNotification("error", `${jsonresponse.message}`);
     }
     else if (jsonresponse.status_code === 500) {
-      Swal.fire({
-        position: 'top',
-        // icon: 'error',
-        text: `${jsonresponse.message}`,
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      });
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'error',
+      //   text: `${jsonresponse.message}`,
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // });
+      displayNotification("error", `${jsonresponse.message}`);
     }
     console.log("handleConfirmStatus Response:", jsonresponse);
     setDialogOpen(false);

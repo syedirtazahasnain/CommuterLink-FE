@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const theme = createTheme({
   palette: {
@@ -124,27 +125,29 @@ const DriverFinalStep = () => {
         navigate("/dashboard");
       } else {
         // alert("Resend Error: " + jsonresponse.message);
-        Swal.fire({
-          position:'top',
-          // // icon: 'warning',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
-        },}
-        )
+        // Swal.fire({
+        //   position:'top',
+        //   // // icon: 'warning',
+        //  text: `${jsonresponse.message}`,
+        //  customClass: {
+        //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+        // },}
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.error("An error occurred:", error);
       // Handle error appropriately, e.g., display an error message to the user
       // alert("An error occurred while sending the request.");
-      Swal.fire({
-        position:'top',
-        // icon: 'error',
-       text: 'An error occured while sending the request',
-       customClass: {
-        confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
-      },}
-      )
+      // Swal.fire({
+      //   position:'top',
+      //   // icon: 'error',
+      //  text: 'An error occured while sending the request',
+      //  customClass: {
+      //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+      // },}
+      // )
+      displayNotification("error", "An error occured while sending the request");
     }
   };
 

@@ -8,6 +8,7 @@ import { Button } from "@mui/base";
 import Rider from './Rider';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { displayNotification } from '../../../helpers';
 
 const Driver = () => {
 
@@ -107,15 +108,16 @@ const Driver = () => {
             if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === ""
                 || preferredGender === "" || selectedCarCC === "" || selectedModelName === ""
                 || selectedRegYear === "") {
-                Swal.fire({
-                    position: 'top',
+                // Swal.fire({
+                //     position: 'top',
                  
-                    text: `Please fill all fields!`,
-                    customClass:{
-                        confirmButton:'swal-custom'
-                      }
-                }
-                )
+                //     text: `Please fill all fields!`,
+                //     customClass:{
+                //         confirmButton:'swal-custom'
+                //       }
+                // }
+                // )
+                displayNotification("warning", "Please Fill All Fields");
             }
             else {
                 const body = {
@@ -152,40 +154,43 @@ const Driver = () => {
                 if (jsonresponse.status_code === 200) {
                     navigate("/dashboard");
                 } else if (jsonresponse.status_code === 100) {
-                    Swal.fire({
-                        position: 'top',
+                    // Swal.fire({
+                    //     position: 'top',
                       
-                        text: `${jsonresponse.message}`,
-                        customClass:{
-                            confirmButton:'swal-custom'
-                          }
-                    }
-                    )
+                    //     text: `${jsonresponse.message}`,
+                    //     customClass:{
+                    //         confirmButton:'swal-custom'
+                    //       }
+                    // }
+                    // )
+                    displayNotification("error", `${jsonresponse.message}`);
                 }
                 else if (jsonresponse.statusCode === 500) {
-                    Swal.fire({
-                        position: 'top',
+                    // Swal.fire({
+                    //     position: 'top',
                        
-                        text: `${jsonresponse.message}`,
-                        customClass:{
-                            confirmButton:'swal-custom'
-                          }
-                    }
-                    )
+                    //     text: `${jsonresponse.message}`,
+                    //     customClass:{
+                    //         confirmButton:'swal-custom'
+                    //       }
+                    // }
+                    // )
+                    displayNotification("error", `${jsonresponse.message}`);
                 }
             }
         } catch (error) {
             console.error("An error occurred:", error);
             // Handle error appropriately, e.g., display an error message to the user
             // alert("An error occurred while sending the request.");
-            Swal.fire({
-                position: 'top',
+            // Swal.fire({
+            //     position: 'top',
               
-                text: 'An error occured while sending the request.',
-                customClass:{
-                    confirmButton:'swal-custom'
-                  }
-            })
+            //     text: 'An error occured while sending the request.',
+            //     customClass:{
+            //         confirmButton:'swal-custom'
+            //       }
+            // })
+            displayNotification("warning", "An error occured while sending the request");
         }
     };
 

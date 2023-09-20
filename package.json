@@ -22,6 +22,7 @@
         "bootstrap": "^5.3.0",
         "boxicons": "^2.1.4",
         "dayjs": "^1.11.9",
+        "noty": "^3.2.0-beta-deprecated",
         "react": "^18.2.0",
         "react-bootstrap": "^2.8.0",
         "react-calendar": "^4.6.0",

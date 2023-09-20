@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 function NumberGenerate() {
   const dispatch = useDispatch();
@@ -67,28 +68,30 @@ function NumberGenerate() {
         } else {
           console.log(jsonresponse);
           // alert("Error: " + jsonresponse.message);
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       } else {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          //  text: `${jsonresponse.message}`,
-          text: "Number already exists",
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   //  text: `${jsonresponse.message}`,
+        //   text: "Number already exists",
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("warning", "Number already exists");
       }
     } catch (error) {
       console.log(error.message);

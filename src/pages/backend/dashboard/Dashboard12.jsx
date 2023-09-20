@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import { API_URL } from '../../../constants'
 import { ThreeCircles } from 'react-loader-spinner'
+import { displayNotification } from '../../../helpers'
 
 
 const Dashboard12 = () => {
@@ -37,14 +38,15 @@ const Dashboard12 = () => {
         setData(jsonresponse.message);
       }
       else if (jsonresponse.status_code === 500) {
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: "swal-custom", // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("error", `${jsonresponse.message}`);
       }
       console.log("Dashboard Travel Data:", jsonresponse);
       setLoading(false);

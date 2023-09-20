@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const eighteenYearsAgo = dayjs().subtract(18, "years");
 
@@ -387,14 +388,15 @@ const DriverRegistration = () => {
           handleShowStartModal();
         }
       } else if (!isIslamabad) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: `Please select a place in ${cityStart}.`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: `Please select a place in ${cityStart}.`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", `{"Please Select a place in"}${cityStart}`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -455,14 +457,15 @@ const DriverRegistration = () => {
           handleShowEndModal();
         }
       } else if (!isIslamabad) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: `Please select a place in ${cityEnd}.`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: `Please select a place in ${cityEnd}.`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", `{"Please Select a place in"}${cityEnd}`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -788,15 +791,16 @@ const DriverRegistration = () => {
       }
     } else {
       setIsLoading(false);
-      Swal.fire({
-        position: 'top',
-        // icon: 'warning',
-        text: 'Please Fill All Fields!',
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      }
-      )
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'warning',
+      //   text: 'Please Fill All Fields!',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("warning", "Please Fill All Fields!");
     }
   };
 
@@ -850,15 +854,16 @@ const DriverRegistration = () => {
     } else {
       setIsLoading(false);
       // alert("Please Fill All Driver Form Fields!");
-      Swal.fire({
-        position: 'top',
-        // icon: 'warning',
-        text: 'Please Fill All Driver Form Fields!',
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      }
-      )
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'warning',
+      //   text: 'Please Fill All Driver Form Fields!',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("warning", "Please Fill All Driver Form Fields!");
     }
   };
 
@@ -988,15 +993,16 @@ const DriverRegistration = () => {
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1031,15 +1037,16 @@ const DriverRegistration = () => {
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1074,15 +1081,16 @@ const DriverRegistration = () => {
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1131,15 +1139,16 @@ const DriverRegistration = () => {
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1204,27 +1213,29 @@ const DriverRegistration = () => {
         setIsLoading(false);
       }
       else if (jsonresponse.statusCode === 100) {
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom',
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
         setIsLoading(false);
       }
       else if (jsonresponse.statusCode === 500) {
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom',
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1261,42 +1272,45 @@ const DriverRegistration = () => {
 
         if (jsonresponse.statusCode === 200) {
           console.log("Payment Form Response:", jsonresponse);
-          Swal.fire({
-            position: 'top',
-            title: 'Congratulations!',
-            text: 'Driver Form Submited Successfully',
-            icon: 'success',
-            showCancelButton: false,
-            confirmButtonText: 'OK',
-            customClass: {
-              confirmButton: 'swal-custom',
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   title: 'Congratulations!',
+          //   text: 'Driver Form Submited Successfully',
+          //   icon: 'success',
+          //   showCancelButton: false,
+          //   confirmButtonText: 'OK',
+          //   customClass: {
+          //     confirmButton: 'swal-custom',
+          //   },
+          // });
+          displayNotification("success", "Driver Registration Form Submitted Successfully");
           route();
         }
         else if (jsonresponse.statusCode === 500) {
           // alert("Error: " + jsonresponse.message);
-          Swal.fire({
-            position: 'top',
-            // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom',
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom',
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
       else {
-        Swal.fire({
-          position: 'top',
-          // icon: 'warning',
-          text: 'Please Enter Payment Details!',
-          customClass: {
-            confirmButton: 'swal-custom',
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'warning',
+        //   text: 'Please Enter Payment Details!',
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("warning", "Please Enter Payment Details!");
       }
     } catch (error) {
       console.log(error.message);

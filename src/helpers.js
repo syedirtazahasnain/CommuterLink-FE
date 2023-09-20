@@ -1,5 +1,8 @@
-import { API_URL, BASE_URL } from "constants";
-
+import { API_URL, BASE_URL } from "./constants";
+import Noty from "noty";
+import "noty/lib/noty.css";
+import "noty/lib/themes/mint.css";
+import 'animate.css/animate.min.css';
 export const getAPIURL = (url = '') => {
     return `${API_URL}${url}`;
 };

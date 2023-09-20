@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 // import moment from "moment/moment";
 
 const eighteenYearsAgo = dayjs().subtract(18, "years");
@@ -366,14 +367,15 @@ const RiderRegistration = () => {
           handleShowStartModal();
         }
       } else if (!isIslamabad) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: `Please select a place in ${cityStart}.`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: `Please select a place in ${cityStart}.`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", `{"Please Select a place in"}${cityStart}`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -419,14 +421,15 @@ const RiderRegistration = () => {
           handleShowEndModal();
         }
       } else if (!isIslamabad) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: `Please select a place in ${cityEnd}.`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: `Please select a place in ${cityEnd}.`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", `{"Please Select a place in"}${cityEnd}`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -600,15 +603,16 @@ const RiderRegistration = () => {
       }
     } else {
       setIsLoading(false);
-      Swal.fire({
-        position: 'top',
-        // icon: 'warning',
-        text: 'Please Fill All Fields!',
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      }
-      )
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'warning',
+      //   text: 'Please Fill All Fields!',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("warning", "Please Fill All Fields");
     }
   };
 
@@ -656,16 +660,17 @@ const RiderRegistration = () => {
         console.log("Personal Form CNIC Issue Response:", jsonresponse);
         const errors = jsonresponse.errors;
         for (const field of Object.keys(errors)) {
-          Swal.fire({
-            position: "top",
-            // icon: "error",
-            // text: `${jsonresponse.message}`,
-            text: `${errors[field][0]}`,
-            customClass: {
-              confirmButton: "swal-custom",
-              // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: "top",
+          //   // icon: "error",
+          //   // text: `${jsonresponse.message}`,
+          //   text: `${errors[field][0]}`,
+          //   customClass: {
+          //     confirmButton: "swal-custom",
+          //     // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("error", `${jsonresponse.message}`);
         }
         setIsLoading(false);
       }
@@ -736,15 +741,16 @@ const RiderRegistration = () => {
         console.log("Location Form Response:", jsonresponse);
       } else {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -778,15 +784,16 @@ const RiderRegistration = () => {
         console.log("Images Form Response Cnic Front:", jsonresponse);
       } else {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -820,15 +827,16 @@ const RiderRegistration = () => {
         console.log("Images Form Response Cnic Back:", jsonresponse);
       } else {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -869,6 +877,7 @@ const RiderRegistration = () => {
         //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
         //   },
         // });
+        displayNotification("success", "Rider Registration Form Submitted successfully");
       };
 
       const jsonresponse = await response.json();
@@ -879,15 +888,16 @@ const RiderRegistration = () => {
         route();
       } else {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);

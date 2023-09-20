@@ -7,6 +7,7 @@ import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import DatePicker from '@mui/lab/DatePicker';
 import { ThreeCircles } from "react-loader-spinner";
+import { displayNotification } from "../../../helpers";
 
 
 const customTheme = createTheme({
@@ -273,23 +274,25 @@ const TravelBuddyProfile = () => {
         setTimeReturn(jsonresponse.data[0].time_return);
       }
       else if (jsonresponse.status_code === 100) {
-        Swal.fire({
-          position: 'top',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("error", `${jsonresponse.message}`);
       }
       if (jsonresponse.status_code === 500) {
-        Swal.fire({
-          position: 'top',
+        // Swal.fire({
+        //   position: 'top',
 
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("error", `${jsonresponse.message}`);
       }
       console.log("Travel Data:", jsonresponse);
     } catch (error) {
@@ -322,8 +325,11 @@ const TravelBuddyProfile = () => {
       title: 'Are you sure?',
       text: "You want to cancel",
       showCancelButton: true,
-      confirmButtonColor: '#037e03',
-      cancelButtonColor: '#037e03',
+      // confirmButtonColor: '#037e03',
+      // cancelButtonColor: '#037e03',
+      customClass: {
+        confirmButton:'swal-custom',
+      },
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.isConfirmed) {

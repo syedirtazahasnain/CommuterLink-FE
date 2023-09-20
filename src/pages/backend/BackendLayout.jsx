@@ -11,6 +11,7 @@ import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { BsGear, BsPower, BsBell } from "react-icons/bs";
 import Loading from "../frontend/register-form/Loading";
+import { displayNotification } from "../../helpers";
 
 const customTheme = createTheme({
   palette: {
@@ -66,9 +67,12 @@ const BackendLayout = ({ children }) => {
         text: "You are about to logout from CommutersLink",
         // // icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: 'green',
-        cancelButtonColor: 'green',
-        confirmButtonText: 'Logout'
+        // confirmButtonColor: 'green',
+        // cancelButtonColor: 'green',
+        confirmButtonText: 'Logout',
+        customClass: {
+          confirmButton:'swal-custom',
+        }
       }).then((result) => {
         if (result.isConfirmed) {
           // Swal.fire({
@@ -129,11 +133,12 @@ const BackendLayout = ({ children }) => {
       }
 
       if (jsonresponse.statusCode === 500) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'error',
-          text: `${jsonresponse.message}`
-        })
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'error',
+        //   text: `${jsonresponse.message}`
+        // })
+        displayNotification("error", `${jsonresponse.message}`);
       }
 
       console.log("Profile Data", jsonresponse);
