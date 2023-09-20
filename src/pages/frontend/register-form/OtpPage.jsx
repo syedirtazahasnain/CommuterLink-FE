@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { API_URL, BASE_URL } from "../../../constants";
 import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField"; 
+import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Modal, Alert } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
@@ -30,6 +30,10 @@ const OtpPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.signup.data);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   console.log("Signup Data:", userData);
 
@@ -90,7 +94,7 @@ const OtpPage = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -107,12 +111,12 @@ const OtpPage = () => {
       newOTP[index] = value;
       return newOTP;
     });
-    
+
     if (value && index < otp.length - 1 && inputRefs.current[index + 1]) {
       // Check if the value is not empty, not the last field, and the next field exists
       inputRefs.current[index + 1].focus();
     }
-    
+
     if (index === 4) {
       // If the last input field is filled, validate the OTP
       const enteredOTP = otp.join("");
@@ -127,7 +131,7 @@ const OtpPage = () => {
       showCancelButton: false,
       confirmButtonText: 'OK',
       customClass: {
-        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
       },
     });
   };
@@ -148,7 +152,7 @@ const OtpPage = () => {
         // icon: 'warning',
         text: 'OTP does not match. Please try again.',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -192,7 +196,7 @@ const OtpPage = () => {
         // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -203,7 +207,7 @@ const OtpPage = () => {
       // icon: 'warning',
       text: 'OTP has been sent again!',
       customClass: {
-        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
       },
     }
     )
@@ -339,7 +343,7 @@ const OtpPage = () => {
                       variant="outlined"
                       type="submit"
                       onClick={validateOTP}
-                      className="btn-custom px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                     >
                       Submit
                     </Button>
@@ -348,8 +352,8 @@ const OtpPage = () => {
                   </CardActions>
                   <div id="span-text" className="text-center mb-5">
                     Didn't get the code? &nbsp;
-                    <Link onClick={resendOTP} style={{textDecoration:'none'}}>
-                      <span style={{ color: "#198754", textDecoration:'none' }}>Resend</span>
+                    <Link onClick={resendOTP} style={{ textDecoration: 'none' }}>
+                      <span style={{ color: "#198754", textDecoration: 'none' }}>Resend</span>
                     </Link>
                   </div>
 

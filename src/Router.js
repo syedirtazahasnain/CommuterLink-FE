@@ -10,6 +10,7 @@ import NumberGenerate from "./pages/frontend/register-form/NumberGenerate";
 import RiderRegistration from "./pages/frontend/register-form/RiderRegistration";
 import Verification from "./pages/frontend/register-form/Verification";
 // import CommuterProfile from "./pages/frontend/Dashboard/CommuterProfile";
+import WhyProcessPayment2 from "./pages/frontend/whyprocesspayment/WhyProcessPayment";
 import { useSelector } from "react-redux";
 import Faq from "./pages/frontend/faq/Faq";
 import Login from "./pages/frontend/login/Login";
@@ -62,6 +63,8 @@ import Loading from "./pages/frontend/register-form/Loading";
 import DataSecurity from "./pages/frontend/register-form/DataSecurity";
 import VerifiedMember from "./pages/frontend/register-form/VerifiedMember";
 import Terms_Services from "./pages/frontend/terms-services/Terms_Services";
+import Forget1 from "./pages/frontend/forgot/Forget1";
+import Forget2 from "./pages/frontend/forgot/Forget2";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -84,11 +87,14 @@ const Router = () => {
         <Route path="/faq" element={<FrontendLayout children={<Faq />} />} />
         <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
         <Route path="/resubmit" element={<FrontendLayout children={<Resubmit />} />} />
+        <Route path="/whyprocesspayment2" element={<FrontendLayout children={<WhyProcessPayment2 />} />} />
         <Route path="/rider" element={<BackendLayout children={<Rider />} />}></Route>
         <Route path="/driver" element={<BackendLayout children={<Driver />} />}></Route>
         <Route path="/loading" element={<FrontendLayout children={<Loading />} />} />
         <Route path="/datasecurity" element={<FrontendLayout children={<DataSecurity />} />} />
         <Route path="/verifiedmember" element={<FrontendLayout children={<VerifiedMember />} />} />
+        <Route path="/forget1" element={<FrontendLayout children={<Forget1 />} />} />
+        <Route path="/forget2" element={<FrontendLayout children={<Forget2 />} />} />
 
         {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { API_URL, BASE_URL } from "../../../constants";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/base";
@@ -16,6 +16,7 @@ import Form from "react-bootstrap/Form";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { LoginSocialFacebook } from "reactjs-social-login";
+import { displayNotification } from "../../../helpers";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -32,6 +33,10 @@ const Signup = () => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   function generateRandomPassword() {
     const length = 3;
@@ -144,15 +149,16 @@ const Signup = () => {
         navigate("/number-generate");
       } else {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: "top",
-          icon: "",
-          // text: `${jsonresponse.message}`,
-          text: "Email Already Exists",
-          customClass: {
-            confirmButton: "bg-success", // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: "top",
+        //   icon: "",
+        //   // text: `${jsonresponse.message}`,
+        //   text: "Email Already Exists",
+        //   customClass: {
+        //     confirmButton: "swal-custom", // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log("Signup Error:", error.message);
@@ -169,22 +175,24 @@ const Signup = () => {
         confirmPassword === ""
       ) {
         // alert("Please Fill All Fields!");
-        Swal.fire({
-          position: "top",
-          // icon: "warning",
-          text: "Please Fill All Fields!",
-          customClass: {
-            confirmButton: "bg-success",
-            // icon:'bg-secondary' // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: "top",
+        //   // icon: "warning",
+        //   text: "Please Fill All Fields!",
+        //   customClass: {
+        //     confirmButton: "swal-custom",
+        //     // icon:'bg-secondary' // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", "Please Fill All Fields");
       } else if (password !== confirmPassword) {
         // alert("Confirm password is not matched with new password!")
-        Swal.fire({
-          position: "top",
-          // icon: "warning",
-          text: "Confirm password is not matched with new password!",
-        });
+        // Swal.fire({
+        //   position: "top",
+        //   // icon: "warning",
+        //   text: "Confirm password is not matched with new password!",
+        // });
+        displayNotification("warning", "Confirm password is not matched with new password!");
       } else {
         if (termsService) {
           const body = {
@@ -218,28 +226,30 @@ const Signup = () => {
           } else {
             const errors = jsonresponse.errors;
             for (const field of Object.keys(errors)) {
-              Swal.fire({
-                position: "top",
-                // icon: "error",
-                // text: `${jsonresponse.message}`,
-                text: `${errors[field][0]}`,
-                customClass: {
-                  confirmButton: "bg-success",
-                  // Apply custom CSS class to the OK button
-                },
-              });
+              // Swal.fire({
+              //   position: "top",
+              //   // icon: "error",
+              //   // text: `${jsonresponse.message}`,
+              //   text: `${errors[field][0]}`,
+              //   customClass: {
+              //     confirmButton: "swal-custom",
+              //     // Apply custom CSS class to the OK button
+              //   },
+              // });
+              displayNotification("error", `${jsonresponse.message}`);
             }
           }
         } else {
           // alert("please check Terms of Service");
-          Swal.fire({
-            position: "top",
-            // icon: "warning",
-            text: "Please Check Terms of Service",
-            customClass: {
-              confirmButton: "bg-success", // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: "top",
+          //   // icon: "warning",
+          //   text: "Please Check Terms of Service",
+          //   customClass: {
+          //     confirmButton: "swal-custom", // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("warning", "Please Check Terms of Service");
         }
       }
     } catch (error) {
@@ -248,17 +258,17 @@ const Signup = () => {
   };
 
   const handleFullNameChange = (e) => {
-    const value = e.target.value.replace(/[^a-z" "]/gi, '');
+    const value = e.target.value.replace(/[^a-z" "]/gi, "");
     setFullName(value);
 
     if (!/^[a-zA-Z" "]+$/.test(value) || value.length < 4) {
-      setFullNameError("Full Name must contain only alphabetic characters and be at least 4 characters long");
+      setFullNameError(
+        "Full Name must contain only alphabetic characters and be at least 4 characters long"
+      );
     } else {
       setFullNameError("");
     }
   };
-
-
 
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
@@ -391,19 +401,27 @@ const Signup = () => {
                 </h1>{" "}
                 <p
                   className="text-center fs-6 text-danger text-custom"
-                  style={{
-
-                  }}
+                  style={{}}
                 >
                   {" "}
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register.
-                    <button type="" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <div
+                    class="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i>{" "}
+                    You may proceed with registration if you are 18 years or
+                    older. For students below 18 years their
+                    parents can register.
+                    <button
+                      type=""
+                      class="btn-close"
+                      data-bs-dismiss="alert"
+                      aria-label="Close"
+                    ></button>
                   </div>
                   {/* <div class="alert alert-danger  text-center alert-dismissible text-danger fs-6" role="alert">
                             <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register
                           </div> */}
-
                 </p>{" "}
                 <Form className="text-center">
                   <Form.Group
@@ -527,15 +545,17 @@ const Signup = () => {
                       label={
                         <div id="span-text" className="mr-5 small">
                           I agree with all statements in
-                          <Link to={'/terms_services'} style={{ textDecoration: "none" }}>
+                          <Link
+                            to={"/terms_services"}
+                            style={{ textDecoration: "none" }}
+                          >
                             <span
                               style={{
                                 color: "#198754",
                                 textDecoration: "none",
                               }}
                             >
-                              &nbsp;
-                              Terms of service
+                              &nbsp; Terms of service
                             </span>
                           </Link>
                         </div>
@@ -544,11 +564,17 @@ const Signup = () => {
                   </Form.Group>
                   <div className="col-md-12  mt-3 text-center">
                     <Button
-                      className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                       onClick={() => postData()}
                     >
                       Sign up
                     </Button>
+                    {/* <Button
+                      className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                      onClick={() => postData()}
+                    >
+                      Sign up
+                    </Button> */}
                   </div>
                   <div className="container text-center">
                     <div className="row d-flex">
@@ -582,7 +608,8 @@ const Signup = () => {
                           </li>
                           <li className="mr-3">
                             <LoginSocialFacebook
-                              appId="264760359845922"
+                              // appId="264760359845922"
+                              appId="832351251716749"
                               onResolve={(response) => {
                                 console.log("Response", response);
                               }}
@@ -615,7 +642,11 @@ const Signup = () => {
                                 <img
                                   src={`${BASE_URL}/assets/images/linkedin.png`}
                                   alt=""
-                                  style={{ height: "35px", width: "35px", cursor: "pointer" }}
+                                  style={{
+                                    height: "35px",
+                                    width: "35px",
+                                    cursor: "pointer",
+                                  }}
                                 />
                               </a>
                             </Tooltip>
@@ -627,7 +658,7 @@ const Signup = () => {
                     <div className="text-center mb-5">
                       Already have account on CommuterLinks? &nbsp;
                       <Link to={'/login'} style={{ textDecoration: "none" }}>
-                        <span style={{ color: "#198754",    textDecoration: "none"}}>Login</span>
+                        <span style={{ color: "#198754", textDecoration: "none" }}>Login</span>
                       </Link>
                     </div>
                   </div>

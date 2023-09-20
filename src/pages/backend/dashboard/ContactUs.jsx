@@ -6,6 +6,7 @@ import { setCurrentPage } from "../../../redux/generalSlice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API_URL } from "../../../constants";
+import { displayNotification } from "../../../helpers";
 
 const ContactUs = () => {
   const dispatch = useDispatch();
@@ -88,15 +89,16 @@ const ContactUs = () => {
   const SubmitForm = async () => {
     try {
       if (fullName === "" || email === "" || subject === "" || message === "") {
-        Swal.fire({
-          position: 'top',
-          // icon: 'warning',
-          text: 'Please Fill All Fields!',
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'warning',
+        //   text: 'Please Fill All Fields!',
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("warning", "Please Fill All Fields");
       }
       else {
         const body = {
@@ -125,27 +127,29 @@ const ContactUs = () => {
         console.log({jsonresponse});
 
         if (jsonresponse.statusCode === 200) {
-          Swal.fire({
-            position: 'top',
-            // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
           setSubject("");
           setMessage("");
         } else {
-          Swal.fire({
-            position: 'top',
-            // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
     } catch (error) {
@@ -172,7 +176,7 @@ const ContactUs = () => {
       <div className="page-title">
       </div>
       <div className="card p-4">
-        <h5 className="text-success">
+        <h5 className="text-success mb-4">
           At CommutersLink, we are always available to address your queries and
           would love to hear your suggestions or feedback if any. Feel free to
           connect with us

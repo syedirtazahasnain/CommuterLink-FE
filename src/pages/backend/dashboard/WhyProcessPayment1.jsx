@@ -80,7 +80,7 @@ const WhyProcessPayment1 = () => {
        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
         <h3 className="text-success my-2 fw-bold m-0">
-          WHY PROCESS PAYMENT THROUGHT COMMUTERSLINK
+          WHY PROCESS PAYMENT THROUGH COMMUTERSLINK
         </h3>
         <Link
               to={"/beforeapprovalterms"} >
@@ -139,7 +139,7 @@ const WhyProcessPayment1 = () => {
             </div>
             <div className="text-center">
               <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={route}>
-                Next
+                I Accept
               </Button>
             </div>
           </div>

@@ -16,6 +16,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const EditProfile = () => {
   const { id } = useParams();
@@ -113,25 +114,27 @@ const EditProfile = () => {
     try {
       if (currentPassword === "" || newPassword === "" || confirmPassword === "") {
         // alert("Please Fill All Fields!");
-        Swal.fire({
-          position:'top',
+        // Swal.fire({
+        //   position:'top',
         
-         text: 'Please Fill All Fields!',
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
-        )
+        //  text: 'Please Fill All Fields!',
+        //  customClass: {
+        //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+        // },}
+        // )
+        displayNotification("warning", "Please Fill All Fields");
       }
       else if (newPassword !== confirmPassword) {
         // alert("Confirm password is not matched with new password!")
-        Swal.fire({
-          position:'top',
+        // Swal.fire({
+        //   position:'top',
         
-         text: 'Confirm password is not matched with new password!',
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
-        )
+        //  text: 'Confirm password is not matched with new password!',
+        //  customClass: {
+        //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+        // },}
+        // )
+        displayNotification("warning", "Confirm password is nto matched with new password!");
       }
       else {
         const body = {
@@ -158,32 +161,35 @@ const EditProfile = () => {
 
         if (jsonresponse.message === "Password updated successfully") {
           // alert(jsonresponse.message);
-          Swal.fire({
-            position:'top',
+          // Swal.fire({
+          //   position:'top',
           
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },}
-          )
+          //  text: `${jsonresponse.message}`,
+          //  customClass: {
+          //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+          // },}
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
           setCurrentPassword("");
           setNewPassword("");
           setConfirmPassword("");
         } else {
           // alert("Error: " + jsonresponse.message);
-          Swal.fire({
-            position:'top',
+          // Swal.fire({
+          //   position:'top',
         
-            text: `${jsonresponse.message}`
-          })
+          //   text: `${jsonresponse.message}`
+          // })
+          displayNotification("error", `${jsonresponse.message}`);
         }
 
         if(jsonresponse.statusCode === 500){
-          Swal.fire({
-            position:'top',
+          // Swal.fire({
+          //   position:'top',
         
-            text: `${jsonresponse.message}`
-          })
+          //   text: `${jsonresponse.message}`
+          // })
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
     } catch (error) {

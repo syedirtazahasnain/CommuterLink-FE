@@ -233,7 +233,7 @@ const RechargeWallet = () => {
         <div className="card bg-light">
           <div className="card-body text-dark">
             <p>
-              Money will stay in your Wallet & will be transferred to car owner
+              Money will stay in your wallet & will be transferred to car owner
               on weekly basis after you have availed the services.
             </p>
             <p className="text-dark">
@@ -241,7 +241,7 @@ const RechargeWallet = () => {
               keep checking and keep loading.
             </p>
             <div className="page-title">
-              <h5 className="container bg-white py-3 text-success text-center fw-bold">
+              <h5 className="container headerColor py-3 text-white text-center fw-bold">
                 PAYMENT OPTIONS{" "}
               </h5>
             </div>
@@ -282,6 +282,7 @@ const RechargeWallet = () => {
           <div className="text-center">
             <Button
               className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              style={{backgroundColor: "rgb(42,64,42)"}}
               onClick={() => navigate("/dashboard")}
               disabled={windowClosedManually}
             >

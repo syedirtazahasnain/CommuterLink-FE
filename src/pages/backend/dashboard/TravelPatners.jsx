@@ -6,6 +6,18 @@ import Swal from "sweetalert2";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 import { setContactIdState } from "../../../redux/generalSlice";
 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const monthNames = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+  return `${day}-${monthNames[monthIndex]}-${year}`;
+}
+
 const TravelPatners = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,6 +34,22 @@ const TravelPatners = () => {
   const [userType, setUserType] = useState("");
   const [data, setData] = useState("");
 
+  // Travel Cost Data
+  const [distance, setDistance] = useState("");
+  const [fuelAverage, setFuelAverage] = useState("");
+  const [fuelPrice, setFuelPrice] = useState("");
+  const [liter, setLiter] = useState("");
+  const [maintenance, setMaintenance] = useState("");
+  const [wearAndTear, setWearAndTear] = useState("");
+
+  useEffect(() => {
+    getTravelData();
+  }, []);
+
+  useEffect(() => {
+    getSeatCostDetail();
+  }, [userType, contactId]);
+
   useEffect(() => {
     // Define a function that contains the code to execute
     const fetchData = () => {
@@ -36,12 +64,7 @@ const TravelPatners = () => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    getTravelData();
-    getSeatCostDetail();
-  }, []);
+  }, [userType]);
 
   const onNavigate = () => {
     navigate("/rechargewallet");
@@ -77,14 +100,6 @@ const TravelPatners = () => {
       }
       else if (jsonresponse.status_code === 100) {
         setData(jsonresponse.message);
-        // Swal.fire({
-        //   position: 'top',
-        //   // icon: 'error',
-        //   text: `${jsonresponse.message}`,
-        //   customClass: {
-        //     confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        //   },
-        // });
       }
       else if (jsonresponse.status_code === 500) {
         Swal.fire({
@@ -92,7 +107,7 @@ const TravelPatners = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: "bg-success", // Apply custom CSS class to the OK button
+            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
           },
         });
       }
@@ -126,21 +141,48 @@ const TravelPatners = () => {
 
   const getSeatCostDetail = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/v1/seat-cost-detail`, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${userToken}`,
-        },
-      });
+      if (userType === 1) {
+        const response = await fetch(`${API_URL}/api/v1/seat-cost-detail`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        });
 
-      const jsonresponse = await response.json();
-      // if (jsonresponse) {
-      //   setWalletAmount(jsonresponse[0].wallet.wallet_amount);
-      //   setUserType(jsonresponse[0].userlist.vehicle_option);
-      // }
-      console.log("Seat Cost Data", jsonresponse);
+        const jsonresponse = await response.json();
+        if (jsonresponse) {
+          setDistance(jsonresponse.data[0]['Distance']);
+          setFuelAverage(jsonresponse.data[0]['Fuel Average']);
+          setFuelPrice(jsonresponse.data[0]['Fuel-Price']);
+          setLiter(jsonresponse.data[0]['Liter']);
+          setMaintenance(jsonresponse.data[0]['Maintenance']);
+          setWearAndTear(jsonresponse.data[0]['Wear and Tear']);
+        }
+        console.log("Driver Seat Cost Data", jsonresponse);
+      }
+      else {
+        const response = await fetch(`${API_URL}/api/v1/seat-cost-detail/${contactId}`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        });
+
+        const jsonresponse = await response.json();
+        if (jsonresponse) {
+          setDistance(jsonresponse.data[0]['Distance']);
+          setFuelAverage(jsonresponse.data[0]['Fuel Average']);
+          setFuelPrice(jsonresponse.data[0]['Fuel-Price']);
+          setLiter(jsonresponse.data[0]['Liter']);
+          setMaintenance(jsonresponse.data[0]['Maintenance']);
+          setWearAndTear(jsonresponse.data[0]['Wear and Tear']);
+        }
+        console.log("Rider Seat Cost Data", jsonresponse);
+      }
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -205,7 +247,7 @@ const TravelPatners = () => {
                             <div className="col-md-8">
                               <p className="fw-bold fs-6">Name: {name}</p>
                               <p className="fw-bold fs-6">Daily Commuting Cost: Rs. &nbsp; {price}/-</p>
-                              <p className="fw-bold fs-6">Start Date: {date}</p>
+                              <p className="fw-bold fs-6">Start Date: {date && formatDate(date)}</p>
                             </div>
 
                           </div>
@@ -311,27 +353,33 @@ const TravelPatners = () => {
                             <TableBody>
                               <TableRow>
                                 <TableCell style={tableCellStyle}>Distance</TableCell>
-                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>50km</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{distance}km</TableCell>
                               </TableRow>
                               <TableRow>
                                 <TableCell style={tableCellStyle}>Avg. Fuel consumption</TableCell>
-                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>10km/Ltr</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{fuelAverage}km/Ltr</TableCell>
                               </TableRow>
                               <TableRow>
                                 <TableCell style={tableCellStyle}>Fuel Price</TableCell>
                                 <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
-                                  Rs. 230/Ltr
+                                  Rs. {fuelPrice} /-
                                   <br />
-                                  (Rs. 288/-)
                                 </TableCell>
                               </TableRow>
                               <TableRow>
-                                <TableCell style={tableCellStyle}>Maintenance (10%)</TableCell>
-                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                                <TableCell style={tableCellStyle}>Liter Consumed</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
+                                  {liter} Ltr
+                                  <br />
+                                </TableCell>
                               </TableRow>
                               <TableRow>
-                                <TableCell style={tableCellStyle}>Wear & Tear (10%)</TableCell>
-                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 29/-</TableCell>
+                                <TableCell style={tableCellStyle}>Maintenance</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{maintenance}</TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell style={tableCellStyle}>Wear & Tear</TableCell>
+                                <TableCell style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{wearAndTear}</TableCell>
                               </TableRow>
                             </TableBody>
                           </Table>
@@ -354,37 +402,57 @@ const TravelPatners = () => {
           </h4>{" "}
         </div>
         <div className="card mx-4 my-4" style={{ background: "rgb(214 219 218)" }}>
-          <div className="row py-3">
+          <div className="card-body">
+          <div className="row">
             <div className="col-md-8">
+              <div className="row d-flex justify-content-between">
+            <div className="col-md-6 col-sm-12 px-5 py-0 bg-light text-center border-2 rounded-4">
+              <div className="text-center">  <i className=" p-3 wallet-margin fa-solid text-success fa-wallet fs-1"></i></div>
+          
+            <p className="py-3 text-center fw-bold text-success fs-3">
+                    Rs. &nbsp; {walletAmount} /-
+                  </p>
+            </div>
+            <div className="col-md-4 col-sm-12 mx-5 py-3"> <img
+                        className="d-block img-fluid w-auto h-auto"
+                        src={`${BASE_URL}/assets/images/signup-3.png`}
+                        alt="First slide"
+                      /></div>
+            </div>
+            
+            </div>
+            {/* <div className="col-md-8">
               <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-4">
                   <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
                 </div>
                 <div className="col-md-10">
 
-                  <p className="py-3 fw-bold text-success fs-3">
+                  <p className="py-3 text-center fw-bold text-success fs-3">
                     Rs. &nbsp; {walletAmount} /-
                   </p>
                 </div>
               </div>
-            </div>
-            <div className="col-md-4 text-end mt-3">
+            </div> */}
+            <div className="col-md-4 col-sm-12 text-center py-4">
               {userType === 0 ?
                 (
-                  <button className="font-custom me-4 btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" onClick={onNavigate} >
+                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
                     Recharge
                   </button>
                 ) :
                 (
-                  <button className="font-custom btn me-4 btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" >
-                    Recharge
-                  </button>
+                    <div className="alert alert-info  text-center fw-bold fs-5" role="alert">
+                      <i className="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Your wallet is secure and end to end encrypted.
+                    </div>
                 )}
-              <button className="font-custom btn btn-sm me-3 fs-6 fw-bold btn-dark-green text-white rounded-4 px-5 py-3 mb-3" >
+              <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
                 View Transaction History
               </button>
             </div>
           </div>
+          </div>
+         
         </div>
       </div>
     </div>

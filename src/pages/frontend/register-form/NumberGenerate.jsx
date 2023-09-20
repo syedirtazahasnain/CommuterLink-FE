@@ -4,30 +4,31 @@ import Form from "react-bootstrap/Form";
 import { API_URL, BASE_URL } from "../../../constants";
 import Carousel from "react-bootstrap/Carousel";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
+import { Button } from "@mui/base";
 import { useNavigate } from "react-router-dom";
 //import img from "../../../Images/contribute-1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 function NumberGenerate() {
   const dispatch = useDispatch();
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState(null);
-  const store_signup = useSelector((s)=> s.signup.data);
+  const store_signup = useSelector((s) => s.signup.data);
   //const store_login = useSelector((s)=> s.login.data);
 
   //console.log("Signup Status", store_signup);
-  
-  const submitForm = async() =>{
+
+  const submitForm = async () => {
     try {
       const body = {
         mobile: phoneNumber,
-        email : store_signup.email,
+        email: store_signup.email,
       };
-  
+
       const response = await fetch(
         `${API_URL}/api/v1/mobilew`,
         {
@@ -41,7 +42,7 @@ function NumberGenerate() {
       );
 
       const jsonresponse = await response.json();
-       
+
       if (jsonresponse.status_code == 200) {
         const body = {
           email: store_signup.email,
@@ -60,37 +61,41 @@ function NumberGenerate() {
         );
         const jsonresponse = await response.json();
         //console.log(jsonresponse);
-  
+
         if (jsonresponse.statusCode === 200) {
           dispatch(setloginState(jsonresponse.access_token));
           navigate("/office_school");
         } else {
           console.log(jsonresponse);
           // alert("Error: " + jsonresponse.message);
-          Swal.fire({
-            position:'top',
-            // // icon: 'error',
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },}
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       } else {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position:'top',
-          // icon: 'error',
-        //  text: `${jsonresponse.message}`,
-        text: "Number already exists",
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   //  text: `${jsonresponse.message}`,
+        //   text: "Number already exists",
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("warning", "Number already exists");
       }
     } catch (error) {
       console.log(error.message);
-    } 
+    }
   }
   const validatePhoneNumber = (phoneNumber) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
@@ -160,117 +165,123 @@ function NumberGenerate() {
 
 
 
-<section id="sign-up" class="mt-5 main-bg">
-          <div className="container">
-            {" "}
-            <div className="row">
-              <div
-                className="col-md-6 d-flex "
-                style={{
-                  marginTop: "10vh"
-                }}
-              >
-               
-                  <Carousel
-                    className="carousel-container main-bg"
-                    prevIcon={null}
-                    nextIcon={null}
-                    indicators={null}
-                  >
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
-                    </Carousel.Item>
-
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-4.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-6.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
-                    </Carousel.Item>
-                  </Carousel>
-                {/* </div> */}
-              </div>
-         
-          <div className="col-md-5 mb-5 px-4 py-5"  style={{
-                  marginTop: "12vh"
-                }}>
-         
+      <section id="sign-up" class="mt-5 main-bg">
+        <div className="container">
+          {" "}
+          <div className="row">
             <div
-              className="card text-center border-1 border-success"
-              style={{ borderRadius: "10px" }}
+              className="col-md-6 d-flex"
+              style={{
+                marginTop: "12vh"
+              }}
             >
-              <div
-                className="card-body cardpadding"
-                style={{ background: "rgb(218,233,229)", borderRadius: "10px" }}
+
+              <Carousel
+                className="carousel-container main-bg"
+                prevIcon={null}
+                nextIcon={null}
+                indicators={null}
               >
-                <h3 className="card-title mb-3">
-                  Please Enter Your Valid Phone No.
-                </h3>
-                <form id="numberForm">
-                  <Row className="mb-3 mt-2 px-2">
-                    <Form.Group as={Col} md="12" controlId="validationCustom01">
-                      {/* <Form.Label className="d-flex justify-content-center mb-3 ">
+                <Carousel.Item interval={4000}>
+                  <img
+                    className="d-block img-fluid w-auto"
+                    src={`${BASE_URL}/assets/images/signup.png`}
+                    alt="First slide"
+                  />
+                  <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                </Carousel.Item>
+
+                <Carousel.Item interval={4000}>
+                  <img
+                    className="d-block img-fluid w-auto"
+                    src={`${BASE_URL}/assets/images/signup-3.png`}
+                    alt="First slide"
+                  />
+                  <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+                </Carousel.Item>
+                <Carousel.Item interval={4000}>
+                  <img
+                    className="d-block img-fluid w-auto"
+                    src={`${BASE_URL}/assets/images/signup-4.png`}
+                    alt="First slide"
+                  />
+                  <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                </Carousel.Item>
+                <Carousel.Item interval={4000}>
+                  <img
+                    className="d-block img-fluid w-auto"
+                    src={`${BASE_URL}/assets/images/signup-6.png`}
+                    alt="First slide"
+                  />
+                  <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                </Carousel.Item>
+              </Carousel>
+              {/* </div> */}
+            </div>
+
+            <div className="col-md-5 mb-5 px-4 py-5" style={{
+              marginTop: "10vh"
+            }}>
+
+              <div
+                className="card text-center"
+                style={{ borderRadius: "10px" }}
+              >
+                <div
+                  className="card-body"
+             
+                >
+                  <h3 className="card-title pb-3">
+                    Please Enter Your Valid Phone No.
+                  </h3>
+                  <img
+                          src={`${BASE_URL}/assets/images/hand-phone.png`}
+                          alt="Sample photo"
+                          style={{ width: '170px', height: '150px' }}
+                        />
+                  <form id="numberForm">
+                    <Row className="mb-3 mt-2 px-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom01">
+                        {/* <Form.Label className="d-flex justify-content-center mb-3 ">
                         Number
                       </Form.Label> */}
-                      <Form.Control
-                        required
-                        type="text"
-                        className="colorplace mb-3"
-                        placeholder="03XXXXXXXXX"
-                        onChange = { (e) => validatePhoneNumber(e.target.value)}
-                        defaultValue=""
-                        maxLength={11}
-                      />
-                      {/* {isValidPhoneNumber && <span> Please enter a valid phone number </span>} */}
-                    </Form.Group>
-                  </Row>
-                  <div className="px-4 mb-3">
-                    {" "}
-                    {/* <Button
+                        <Form.Control
+                          required
+                          type="text"
+                          className="colorplace mb-3"
+                          placeholder="03XXXXXXXXX"
+                          onChange={(e) => validatePhoneNumber(e.target.value)}
+                          defaultValue=""
+                          maxLength={11}
+                        />
+                        {/* {isValidPhoneNumber && <span> Please enter a valid phone number </span>} */}
+                      </Form.Group>
+                    </Row>
+                    <div className="px-4 mb-2 pt-3">
+                      {" "}
+                      {/* <Button
                       variant="success"
                       className=""
                       onClick={ () => submitForm()}
                     >
                       Submit
                     </Button>{" "} */}
-                    <Button variant="" className="btnregistration fs-6 py-2" onClick={ () => submitForm()}>
+                      <Button variant="" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={() => submitForm()}>
                         Submit
                       </Button>
-                  </div>
-                </form>
+
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-              
-            
-        </section>
+
+
+      </section>
     </div>
   );
 }
 
-export default NumberGenerate;
+export default NumberGenerate;

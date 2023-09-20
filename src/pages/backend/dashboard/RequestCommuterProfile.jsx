@@ -3,10 +3,11 @@ import { createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs} from '@mui/material'
+import { Breadcrumbs } from '@mui/material'
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { setContactIdState, setIdState, setRequestAsState } from "../../../redux/generalSlice";
+import { ThreeCircles } from "react-loader-spinner";
 
 const customTheme = createTheme({
     palette: {
@@ -28,6 +29,7 @@ const RequestCommuterProfile = () => {
     const dispatch = useDispatch();
     const userToken = useSelector((s) => s.login.data.token);
     const requestContactId = useSelector((s) => s.general.data.contact_id);
+    const [loading, setLoading] = useState(true);
     const [option, setOption] = useState(null);
     const [submitbtn, setSubmit] = useState(false);
     const [profiles, setProfiles] = useState([]);
@@ -35,11 +37,17 @@ const RequestCommuterProfile = () => {
 
     const crumbs = [
         {
-          label: "Home",
-          active: true,
+            label: "Home",
+            active: true,
         },
-      ];
-    
+    ];
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    }, []);
+
     useEffect(() => {
         document.getElementById("root").classList.remove("w-100");
         document.getElementById("root").classList.add("d-flex");
@@ -184,7 +192,7 @@ const RequestCommuterProfile = () => {
             position: 'top',
             text: 'Request is waiting for response!',
             customClass: {
-                confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+                confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
         }
         )
@@ -242,7 +250,7 @@ const RequestCommuterProfile = () => {
                         {/* You can use the extracted properties to display the profile data */}
                         <div className="row px-3">
                             <div className="col-md-1 mt-1">
-                                <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00" }} />
+                                <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#5ab387" }} />
                             </div>
                             <div className="col-md-11 px-5">
                                 <div className="row px-5">
@@ -310,7 +318,16 @@ const RequestCommuterProfile = () => {
                         <hr style={{ color: "grey" }} />
 
                         <div className="row">
-                            <h2 className="text-success py-2 fw-bold">{"Commuter"} Details</h2>
+                        <div className="row d-flex justify-content-between align-items-xl-baseline">
+            <div className="col-md-6">
+            <h2 className="text-success py-2 fw-bold">{"Commuter"} Details</h2>
+              </div>
+              <div className="col-md-2 pl-5">            <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { }}>
+                  View On Map
+                </Button></div>
+                
+                            </div>
+                            
                             <div className="col-md-6">
 
                                 <div className="row mb-2">
@@ -648,59 +665,69 @@ const RequestCommuterProfile = () => {
 
     return (
         <div>
-           
-             <div className="page-title">
-             <div className="px-4 py-2 text-success my-2 fw-bold">
-      <Breadcrumbs aria-label="breadcrumb">
-            {crumbs.map((crumb, index) => (
-              <Link
-                key={index}
-                to={crumb.path || ""}
-                style={{
-                  color: crumb.active ? "black" : "#ff4815",
-                  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                  pointerEvents: crumb.path ? "auto" : "none",
-                  textDecoration: "none"
 
-                }}
-              >
-                {crumb.label}
-              </Link>
-            ))}
-          </Breadcrumbs>
-        </div>
-      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
-        <div className="d-flex justify-content-between align-items-xl-baseline">
-        <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
-          <Link
-            to={"/dashboard"} >
-            <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
-              <i className="fas fa-angle-left text-white" />
-              Back
-            </button>
-          </Link>
-        </div>
-       
-      </div>
-      <h5 className="card p-2  px-4 text-success ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
-    </div>
-            {/* <div className="page-title">
-                <p className="card p-4 text-dark my-2 fw-bold fs-6">
-                    The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.
-                </p>
-            </div> */}
+            <div className="page-title">
+                <div className="px-4 py-2 text-success my-2 fw-bold">
+                    <Breadcrumbs aria-label="breadcrumb">
+                        {crumbs.map((crumb, index) => (
+                            <Link
+                                key={index}
+                                to={crumb.path || ""}
+                                style={{
+                                    color: crumb.active ? "black" : "#ff4815",
+                                    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                                    pointerEvents: crumb.path ? "auto" : "none",
+                                    textDecoration: "none"
 
-            <div className="row">
-                {profiles.length > 0 && userProfileDetails.length > 0 ? (
-                    profiles
-                        .filter(profile => profile.contact_id === requestContactId) // Filter profiles by contact_id
-                        .map((profile, index) => (
-                            <UserProfileCard key={index} profile={profile} userDetails={userProfileDetails[index]} />
-                        ))
-                ) : (
-                    null
-                )}
+                                }}
+                            >
+                                {crumb.label}
+                            </Link>
+                        ))}
+                    </Breadcrumbs>
+                </div>
+                <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+                    <div className="d-flex justify-content-between align-items-xl-baseline">
+                        <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
+                        <Link
+                            to={"/dashboard"} >
+                            <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                                <i className="fas fa-angle-left text-white" />
+                                Back
+                            </button>
+                        </Link>
+                    </div>
+
+                </div>
+                <h5 className="card p-2  px-4 text-success">{`The below request has been initiated by the member based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share. Further details will be shown to you after you accept the request.`}
+                </h5>
             </div>
+            {loading ? (
+                <div className="d-flex justify-content-center">
+                    <ThreeCircles
+                        height={50}
+                        width={50}
+                        color="#4fa94d"
+                        visible={true}
+                        ariaLabel="three-circles-rotating"
+                        outerCircleColor=""
+                        innerCircleColor=""
+                        middleCircleColor=""
+                    />
+                </div>
+            ) : (
+                <div className="row">
+                    {profiles.length > 0 && userProfileDetails.length > 0 ? (
+                        profiles
+                            .filter(profile => profile.contact_id === requestContactId) // Filter profiles by contact_id
+                            .map((profile, index) => (
+                                <UserProfileCard key={index} profile={profile} userDetails={userProfileDetails[index]} />
+                            ))
+                    ) : (
+                        null
+                    )}
+                </div>
+            )}
         </div>
     );
 };

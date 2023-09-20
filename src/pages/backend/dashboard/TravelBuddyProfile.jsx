@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import DatePicker from '@mui/lab/DatePicker';
+import { ThreeCircles } from "react-loader-spinner";
+import { displayNotification } from "../../../helpers";
 
 
 const customTheme = createTheme({
@@ -28,6 +30,7 @@ const TravelBuddyProfile = () => {
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
   const [requestStage, setRequestStage] = useState("");
+  const [loading, setLoading] = useState(true);
 
 
   const route = async () => {
@@ -38,6 +41,12 @@ const TravelBuddyProfile = () => {
       navigate("/beforeapprovalterms");
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
@@ -246,7 +255,7 @@ const TravelBuddyProfile = () => {
       );
 
       const jsonresponse = await response.json();
-      if(jsonresponse.data && jsonresponse.data.length > 0){
+      if (jsonresponse.data && jsonresponse.data.length > 0) {
         setProfileType(jsonresponse.data[0].type);
         setName(jsonresponse.data[0].name);
         setImage(jsonresponse.data[0].commuter_image);
@@ -265,23 +274,25 @@ const TravelBuddyProfile = () => {
         setTimeReturn(jsonresponse.data[0].time_return);
       }
       else if (jsonresponse.status_code === 100) {
-        Swal.fire({
-          position: 'top',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("error", `${jsonresponse.message}`);
       }
       if (jsonresponse.status_code === 500) {
-        Swal.fire({
-          position: 'top',
-        
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("error", `${jsonresponse.message}`);
       }
       console.log("Travel Data:", jsonresponse);
     } catch (error) {
@@ -304,25 +315,28 @@ const TravelBuddyProfile = () => {
   };
 
 
-  const calendarPicker = ()=>{
+  const calendarPicker = () => {
     navigate("/partner-cancellation");
 
   };
- const youSure=()=>{
-  Swal.fire({
-    position:'top',
-    title: 'Are you sure?',
-    text: "You want to cancel",
-    showCancelButton: true,
-    confirmButtonColor: '#037e03',
-    cancelButtonColor: '#037e03',
-    confirmButtonText: 'Yes'
-  }).then((result) => {
-    if (result.isConfirmed) {
+  const youSure = () => {
+    Swal.fire({
+      position: 'top',
+      title: 'Are you sure?',
+      text: "You want to cancel",
+      showCancelButton: true,
+      // confirmButtonColor: '#037e03',
+      // cancelButtonColor: '#037e03',
+      customClass: {
+        confirmButton:'swal-custom',
+      },
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
         calendarPicker();
-    }
-  })
- }
+      }
+    })
+  }
 
   const sendRequest = () => {
     setSubmit(true);
@@ -335,7 +349,7 @@ const TravelBuddyProfile = () => {
   return (
     <div>
       <div className="page-title">
-      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
             <h3 className="text-success my-2 fw-bold m-0">TRAVEL BUDDY PROFILE</h3>
             <Link
@@ -347,189 +361,203 @@ const TravelBuddyProfile = () => {
             </Link>
           </div>
         </div>
-      <h5 className="card p-2 px-4 text-success ">{`You are looking for travel buddies to ride your car, others who want
+        <h5 className="card p-2 px-4 text-success ">{`You are looking for travel buddies to ride your car, others who want
       to share their car and to connect with members with whom you can take turns to use each other's car`}</h5>
-    </div>
-      <div className="card p-4 bg-light" >
-        <div className="card p-4 backgroundColor">
-          <div className="row px-3">
-            <div className="col-md-1 mt-1">
-              <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />
-            </div>
-            <div className="col-md-11 px-5">
-              <div className="row px-5">
-                <div className="col-md-3">
-                {name !== "" ? (
-                  <div className="mt-0">
-                    <h3 className="text-success fw-bold">{name}</h3>
+      </div>
+      {loading ? (
+        <div className="d-flex justify-content-center">
+          <ThreeCircles
+            height={50}
+            width={50}
+            color="#4fa94d"
+            visible={true}
+            ariaLabel="three-circles-rotating"
+            outerCircleColor=""
+            innerCircleColor=""
+            middleCircleColor=""
+          />
+        </div>
+      ) : (
+        <div className="card p-4 bg-light" >
+          <div className="card p-4 backgroundColor">
+            <div className="row px-3">
+              <div className="col-md-1 mt-1">
+                <img src={`${IMAGE_URL}${image}`} style={{ height: "115px", width: "115px" }} />
+              </div>
+              <div className="col-md-11 px-5">
+                <div className="row px-5">
+                  <div className="col-md-3">
+                    {name !== "" ? (
+                      <div className="mt-0">
+                        <h3 className="text-success fw-bold">{name}</h3>
+                      </div>
+                    ) : (
+                      <>
+                      </>
+                    )}                </div>
+                  <div className="col-md-9">
                   </div>
-                ) : (
-                  <>
-                  </>
-                )}                </div>
-                <div className="col-md-9">
                 </div>
-              </div>
-              <div className="row px-5 mb-2">
-                <div className="col-md-2">
-                {gender !== "" ? (
-                  <>
-                    <b className="text-black">Gender:</b> 
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}             
+                <div className="row px-5 mb-2">
+                  <div className="col-md-2">
+                    {gender !== "" ? (
+                      <>
+                        <b className="text-black">Gender:</b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-10">
+                    {gender}
+                  </div>
                 </div>
-                <div className="col-md-10">
-                {gender}
+                <div className="row px-5 mb-2">
+                  <div className="col-md-2">
+                    {age !== "" ? (
+                      <>
+                        <b className="text-black"> Age:</b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-10">
+                    {age} years
+                  </div>
                 </div>
-              </div>
-              <div className="row px-5 mb-2">
-                <div className="col-md-2">
-                {age !== "" ? (
-                  <>
-                    <b className="text-black"> Age:</b> 
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}           
+                <div className="row px-5 mb-2">
+                  <div className="col-md-2">
+                    {profession !== "" ? (
+                      <>
+                        <b className="text-black">Profession:</b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-10">
+                    {profession}
+                  </div>
                 </div>
-                <div className="col-md-10">
-                {age} years
-                </div>
-              </div>
-              <div className="row px-5 mb-2">
-                <div className="col-md-2">
-                {profession !== "" ? (
-                  <>
-                    <b className="text-black">Profession:</b> 
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}         
-                </div>
-                <div className="col-md-10">
-                {profession}  
-                </div>
-              </div>
-              <div className="row px-5 mb-2">
-                <div className="col-md-2">
-                {mobileNo !== "" ? (
-                  <>
-                    <b className="text-black">Contact No:</b>
-                  </>
-                ) : (
-                  <></>
-                )}      
-                </div>
-                <div className="col-md-10">
-                {mobileNo}  
+                <div className="row px-5 mb-2">
+                  <div className="col-md-2">
+                    {mobileNo !== "" ? (
+                      <>
+                        <b className="text-black">Contact No:</b>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-10">
+                    {mobileNo}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <hr style={{ color: "green", fontWeight:"bolder" }} />
-          <div className="row">
-            <h2 className="text-success py-2 fw-bold">{profileType === "rider" ? ("Rider Details") : ("Driver Details")}</h2>
-            <div className="col-md-6">
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {preferredGender !== "" ? (
-                  <>
-                    <b className="text-black">Seats For: </b> 
-                  </>
-                ) : (
-                  <>
-                  </>
-                )} 
+            <hr style={{ color: "green", fontWeight: "bolder" }} />
+            <div className="row">
+              <h2 className="text-success py-2 fw-bold">{profileType === "rider" ? ("Rider Details") : ("Driver Details")}</h2>
+              <div className="col-md-6">
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {preferredGender !== "" ? (
+                      <>
+                        <b className="text-black">Seats For: </b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {preferredGender}
+                  </div>
                 </div>
-                <div className="col-md-8">
-                {preferredGender}  
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {origin !== "" ? (
+                      <>
+                        <b className="text-black">Point of Origin: </b>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {origin}
+                  </div>
                 </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {origin !== "" ? (
-                  <>
-                    <b className="text-black">Point of Origin: </b>
-                  </>
-                ) : (
-                  <>
-                  </>
-                )}
-                </div>
-                <div className="col-md-8">
-                {origin}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {timeDepart !== "" ? (
-                  <>
-                    <b className="text-black">Pickup Timings:</b>
-                  </>
-                ) : (
-                  <>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {timeDepart !== "" ? (
+                      <>
+                        <b className="text-black">Pickup Timings:</b>
+                      </>
+                    ) : (
+                      <>
 
-                  </>
-                )}
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {timeDepart}
+                  </div>
                 </div>
-                <div className="col-md-8">
-                {timeDepart}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {destination !== "" ? (
-                  <>
-                    <b className="text-black">Destination:</b>
-                  </>
-                ) : (
-                  <>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {destination !== "" ? (
+                      <>
+                        <b className="text-black">Destination:</b>
+                      </>
+                    ) : (
+                      <>
 
-                  </>
-                )}
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {destination}
+                  </div>
                 </div>
-                <div className="col-md-8">
-                {destination}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {timeReturn !== "" ? (
-                  <>
-                    <b className="text-black">Return Timings:</b>
-                  </>
-                ) : (
-                  <>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {timeReturn !== "" ? (
+                      <>
+                        <b className="text-black">Return Timings:</b>
+                      </>
+                    ) : (
+                      <>
 
-                  </>
-                )}
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {timeReturn}
+                  </div>
                 </div>
-                <div className="col-md-8">
-                {timeReturn}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {days !== "" ? (
-                  <>
-                    <b className="text-black">Days:</b>
-                  </>
-                ) : (
-                  <>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {days !== "" ? (
+                      <>
+                        <b className="text-black">Days:</b>
+                      </>
+                    ) : (
+                      <>
 
-                  </>
-                )}
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {days}
+                  </div>
                 </div>
-                <div className="col-md-8">
-                {days}  
-                </div>
-              </div>
-              {/* <div className="row mb-2">
+                {/* <div className="row mb-2">
                 <div className="col-md-4">
                 {mobileNo !== "" ? (
                   <>
@@ -543,150 +571,148 @@ const TravelBuddyProfile = () => {
                 {mobileNo}  
                 </div>
               </div> */}
-            </div>
-            <div className="col-md-6">
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {seats !== "" ? (
-                  <>
-                    <b className="text-black">No.of Seats:</b>
-                  </>
-                ) : (
-                  <>
+              </div>
+              <div className="col-md-6">
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {seats !== "" ? (
+                      <>
+                        <b className="text-black">No.of Seats:</b>
+                      </>
+                    ) : (
+                      <>
 
-                  </>
-                )}
+                      </>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {seats}
+                  </div>
                 </div>
-                <div className="col-md-8">
-                {seats}  
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {price !== "" ? (
+                      <>
+                        <b>Payment Terms (per day):</b>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    Rs. {price}/-
+                  </div>
+                </div>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {carAC !== "" ? (
+                      <>
+                        <b>Car have AC:</b>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {carAC}
+                  </div>
+                </div>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {carBrand !== "" ? (
+                      <>
+                        <b>Car Brand:</b>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {carBrand}
+                  </div>
+                </div>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {carCC !== "" ? (
+                      <>
+                        <b>Car CC:</b>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {carCC}
+                  </div>
+                </div>
+                <div className="row mb-2">
+                  <div className="col-md-4">
+                    {carModel !== "" ? (
+                      <>
+                        <b>Car Model:</b>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="col-md-8">
+                    {carModel}
+                  </div>
+                  <div className="row mb-2">
+                    <div className="col-md-4">
+                      {RegNo !== "" ? (
+                        <>
+                          <b>Registration Number:</b>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                    <div className="col-md-8">
+                      {RegNo}
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <div className="col-md-4">
+                      {RegYear !== "" ? (
+                        <>
+                          <b>Registration Year:</b>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                    <div className="col-md-8">
+                      {RegYear}
+                    </div>
+                  </div>
+                  <div className="row mb-2">
+                    <div className="col-md-4">
+                      {carRegYear !== "" ? (
+                        <>
+                          <b>Car Registration Year:</b>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                    <div className="col-md-8">
+                      {carRegYear}
+                    </div>
+                  </div>
                 </div>
               </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {price !== "" ? (
-                  <>
-                    <b>Payment Terms (per day):</b>
-                  </>
-                ) : (
-                  <></>
-                )}
-                </div>
-                <div className="col-md-8">
-                Rs. {price}/-
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {carAC !== "" ? (
-                  <>
-                    <b>Car have AC:</b>
-                  </>
-                ) : (
-                  <></>
-                )}
-                </div>
-                <div className="col-md-8">
-                {carAC}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {carBrand !== "" ? (
-                  <>
-                    <b>Car Brand:</b>
-                  </>
-                ) : (
-                  <></>
-                )}
-                </div>
-                <div className="col-md-8">
-                {carBrand}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {carCC !== "" ? (
-                  <>
-                    <b>Car CC:</b>
-                  </>
-                ) : (
-                  <></>
-                )}
-                </div>
-                <div className="col-md-8">
-                {carCC}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {carModel !== "" ? (
-                  <>
-                    <b>Car Model:</b>
-                  </>
-                ) : (
-                  <></>
-                )}
-                </div>
-                <div className="col-md-8">
-                {carModel}  
-                </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {RegNo !== "" ? (
-                  <>
-                    <b>Registration Number:</b>
-                  </>
-                ) : (
-                  <></>
-                )}
-                </div>
-                <div className="col-md-8">
-                {RegNo}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {RegYear !== "" ? (
-                  <>
-                    <b>Registration Year:</b>
-                  </>
-                ) : (
-                  <></>
-                )}
-                </div>
-                <div className="col-md-8">
-                {RegYear}  
-                </div>
-              </div>
-            <div className="row mb-2">
-                <div className="col-md-4">
-                {carRegYear !== "" ? (
-                  <>
-                    <b>Car Registration Year:</b>
-                  </>
-                ) : (
-                  <></>
-                )}
-                </div>
-                <div className="col-md-8">
-                {carRegYear}  
-                </div>
+              <div className="container text-center">
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3" onClick={youSure}>
+                  Cancel Agreement
+                </Button>
               </div>
             </div>
-          </div>
-          <div className="container text-center">
-            {/* <Button className="btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={GoBack}>
-              Back
-            </Button> */}
-            <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3" onClick={youSure}>
-              Cancel Agreement
-            </Button>
+            <div>
+            </div>
           </div>
         </div>
-        <div>
-        </div>
-      </div>
-    </div>
+      )}
     </div>
   );
 };

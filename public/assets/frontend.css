@@ -1,10 +1,93 @@
 :root {
   --bs-primary: #198754;
   --bg-primary: #198754;
+  --bg-blue-green: #2B9F8A;
+  --bg-grey: #666666;
+  --bg-footer-2: #EDEAEA;
+  --bg-light-teal: #BFE0DB99;
+  --bg-dark-teal: rgba(25, 190, 166, 0.6);
+  --bs-yellow: rgba(213, 171, 20, 1);
+  --bs-dark-yellow: rgba(255, 230, 8, 1);
+  --bg-secondary-light: #3c3c3c;
+  --bold-text: rgba(27, 185, 162, .14);
+  --bs-text-green: rgba(32, 158, 141, 1);
+  --bg-light-secondary: rgba(239, 239, 239, 1);
+  --bg-card-orange: #F89F5B;
+  --bg-orange: #F89F5B;
+  --bg-card-pink: rgba(229, 63, 113, 1) ;
+  --bg-card-purple: rgba(192, 63, 166, 1);
+  --bg-card-green: #189583;
+  --bg-green: #189583;
+  --bg-dark-green: rgba(29, 104, 93, 1);
  }
 
+ .text-yellow{
+  color: var(--bs-yellow);
+}
+.bg-secondary-light{
+  background-color: var(--bg-secondary-light);
+}
  .bg-green{
-   color: var(--bs-primary);
+   color: var(--bg-card-green);
+ }
+ .bg-orange{
+   color: var(--bg-card-orange);
+ }
+ .bg-col-2{
+   background-color: var(--bg-orange) !important;
+ }
+ .bg-col-3{
+   background-color: var(--bg-green) !important;
+ }
+ .bg-col-4{
+  background-color: var(--bg-dark-green) !important;
+}
+
+ .bg-light-secondary{
+  background-color: var(--bg-light-secondary);
+ }
+ .text-green{
+  color: var(--bs-text-green);
+}
+ .display{
+  font-size:calc(8rem + 0.390625vw) ;
+  font-weight: bolder;
+  color: var(--bold-text);
+ }
+.bg-pink{
+  background-color: var(--bg-card-pink);
+}
+ .card-pink:hover{
+  background-color: var(--bg-card-pink) !important;
+ }
+ 
+ .card-pink1:hover{
+  background-color: var(--bg-card-pink) !important;
+ }
+ 
+ .card-orange:hover{
+  background-color: var(--bg-card-orange) !important;
+ }
+ .card-orange1:hover{
+  background-color: var(--bg-card-orange) !important;
+ }
+ 
+ .card-purple:hover{
+  background-color: var(--bg-card-purple) !important;
+ }
+ .card-purple1:hover{
+  background-color: var(--bg-card-purple) !important;
+ }
+ 
+ .card-green:hover{
+  background-color: var(--bg-card-green) !important;
+ }
+ .card-green1:hover{
+  background-color: var(--bg-card-green) !important;
+ }
+
+ .faq-text:hover{
+  color: var(--bg-card-pink);
  }
 
  .navbar-light-300{
@@ -20,14 +103,15 @@
   background-color: #eee;
   position: top!important;
 }
-/* .area{
-  background: #eee;  
-  background: -webkit-linear-gradient(to left, #bdd1c7, #5fd8b2);  
-  width: 100%;
-  height:100vh;
-  
- 
-} */
+.car-animate{
+  position: relative;
+  animation: mymove 7s infinite;
+}
+
+@keyframes mymove {
+  from {left: 0px;}
+  to {left: calc(100vw - 130px); right: 0px;}
+}
 .circles{
   position: absolute;
   top: 0;
@@ -188,16 +272,37 @@
 
 }
  .btn-custom{
-   border: 1px solid #198754;
+   border: none;
+   background: black;
+ }
+ .btn-custom1{
+   border: none;
+   background: var(--bg-blue-green);
+ }
+ .btn-custom2{
+   border: 1px solid ghostwhite;
    background: none;
+   
  }
  .btn-custom:hover{
-   border: 1px solid #198754;
-   background-color: var(--bg-primary);
+   background-color: black !important;
    color: #fff;
  }
- .text-custom{
-   color: #198754;
+ .nav-item{
+  color: black;
+ }
+ .nav-grey{
+  background-color: none;
+ }
+ .nav-grey:hover{
+  background-color: #D9D9D9;
+ }
+ .nav-link{
+  font-weight: bold;
+ }
+ .nav-item:hover{
+  color: black !important;
+  text-decoration: underline 2px var(--bg-blue-green);
  }
  .reg-text{
    color: #198754;
@@ -226,10 +331,7 @@
    color: #fff;
  
  }
- a.nav-link:hover {
-   color: #198754 !important;
-   text-decoration: underline;
- }
+ 
  .navbar .nav-link {
    font-family: 'Open Sans', sans-serif;
    font-weight: bold;
@@ -238,16 +340,28 @@
  .navbar{
    position: fixed;
  }
- #parallax-world-of-ugg .parallax-one {padding-top: 80px; padding-bottom: 80px; overflow: hidden; position: relative; width: 100%; background-image: url(Images/abstract-green-grunge-background.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
- #parallax-world-of-ugg .parallax-two {padding-top: 80px; padding-bottom: 80px; overflow: hidden; position: relative; width: 100%; background-image: url(Images/abstract-green-grunge-background.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+ #parallax-world-of-ugg .parallax-one {
+  padding-top: 80px; 
+  padding-bottom: 80px; 
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: 
+  url(https://staging.commuterslink.com/assets/images/opaque.png); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
+ #parallax-world-of-ugg .parallax-two {
+  padding-top: 80px; padding-bottom: 
+  80px; overflow: hidden; position: 
+  relative; width: 100%; 
+  background-image: url(https://staging.commuterslink.com/assets/images/opaque.png); 
+  background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
  .heading-color{
    padding: 10px 0;
    color: #198754;
    
  }
- section {
+ /* section {
    padding: 20px 0;
-}
+} */
 .accordion{
  display: flex;
  justify-content: center;
@@ -315,9 +429,9 @@ CardGroup a{
  text-decoration: none;
  color: #fff;
 }
-.Typography1:hover{
+/* .Typography1:hover{
  color:#fff;
-}
+} */
 
 
 .container_foto img {
@@ -368,7 +482,7 @@ color: #198754;
 .sharingRide h3 a{
  text-decoration: none;
 }
-#footer .footer-top .footer-links ul li {
+/* #footer .footer-top .footer-links ul li {
  padding: 12px 0;
  display: flex;
  align-items: center;
@@ -377,22 +491,22 @@ color: #198754;
  background: #3d4f4c;
  border-bottom: 1px solid #4d635f;
  padding: 60px 0 30px 0;
-}
-#bottom-footer{
+} */
+/* #bottom-footer{
  background-color: #198754;
 }
 #footer .footer-top {
- background: #3d4f4c;
+ background: #fff;
  border-bottom: 1px solid #4d635f;
  padding: 40px 0 30px 0;
-}
-#footer {
+} */
+/* #footer {
  background: #344341;
  padding: 0 0 30px 0;
  color: #fff;
  font-size: 14px;
-}
-#footer .footer-top .social-links a {
+} */
+/* #footer .footer-top .social-links a {
  font-size: 18px;
  display: inline-block;
  background: #58716d;
@@ -405,8 +519,8 @@ color: #198754;
  width: 36px;
  height: 36px;
  transition: 0.3s;
-}
-#footer .footer-top .footer-newsletter form input[type=submit] {
+} */
+/* #footer .footer-top .footer-newsletter form input[type=submit] {
  position: absolute;
  top: 0;
  right: 0;
@@ -419,7 +533,7 @@ color: #198754;
  color: #fff;
  transition: 0.3s;
  border-radius: 4;
-}
+} */
 #footer .footer-top .footer-newsletter form input[type=email] {
  border: 0;
  padding: 4px;
@@ -432,12 +546,18 @@ color: #198754;
  margin: 0;
 }
 
+.bg-light-100{
+  background-color: var(--bg-footer-2);
+}
+
+
 #footer .footer-top .footer-links ul a {
- color: #fff;
+ color: #000;
  transition: 0.3s;
  display: inline-block;
  line-height: 1;
  text-decoration: none;
+ font-weight: 600;
 }
 #footer .footer-top .footer-links ul a:hover {
  color: #56e7d0;
@@ -481,6 +601,27 @@ i {
  font-weight: 600;
  text-transform: uppercase;
  font-family: "Poppins", sans-serif;
+}
+.bg-grey{
+  background-color: var(--bg-grey);
+}
+.bg-blue-green{
+  background-color: var(--bg-blue-green);
+  border: none;
+}
+#footer .footer-top .footer-newsletter form input[type=submit] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 0 20px;
+    background: #1bbca3;
+    color: #fff;
+    transition: 0.3s;
+    border-radius: 4;
 }
 .info p {
  font-size: 13px;
@@ -670,10 +811,6 @@ list-style: none;
  --bg-primary: #198754;
 }
 
-.bg-green{
-  color: var(--bs-primary);
-}
-
 .btn-custom{
   border: 1px solid #198754 ;
 }
@@ -702,8 +839,35 @@ a.nav-link:hover {
  font-size: 12px;
 }
 
-#parallax-world-of-ugg .parallax-one {padding-top: 80px; padding-bottom: 80px; overflow: hidden; position: relative; width: 100%; background-image: url(Images/abstract-green-grunge-background.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
-#parallax-world-of-ugg .parallax-two {padding-top: 80px; padding-bottom: 80px; overflow: hidden; position: relative; width: 100%; background-image: url(Images/abstract-green-grunge-background.jpg); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+#parallax-world-of-ugg .parallax-one {
+  padding-top: 80px; 
+  padding-bottom: 80px; 
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(https://staging.commuterslink.com/assets/images/opaque.png); 
+  background-attachment: fixed; 
+  background-size: cover; 
+  -moz-background-size: cover; 
+  -webkit-background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: top center;
+}
+
+#parallax-world-of-ugg .parallax-two {
+  padding-top: 80px; 
+  padding-bottom: 80px; 
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(https://staging.commuterslink.com/assets/images/opaque.png); 
+  background-attachment: fixed; 
+  background-size: cover; 
+  -moz-background-size: cover; 
+  -webkit-background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center center;
+}
 
 .btn-join-us{
  padding: 12px 32px;
@@ -751,4 +915,62 @@ a.nav-link:hover {
 
 .font-custom{
   font-family: 'Roboto', sans-serif;
+}
+
+.bg-teal{
+  background-color: var(--bg-light-teal) !important;
+}
+.bg-teal-dark{
+  background-color: var(--bg-dark-teal) !important;
+}
+
+.text-yellow{
+  color: var(--bs-dark-yellow);
+}
+.arrow-icon{
+  color: white !important;
+}
+.arrow-icon:hover{
+  color: black !important;
+}
+
+.new-banner-circle{
+  right: "20px" !important;
+  top: "50%" !important;
+  transform: 'translateY(-50%)' !important;
+  width: "350px" !important;
+}
+@media (max-width: 768px) {
+  .new-banner-circle {
+    display: none;
+  }
+}
+
+.form-color-header{
+  background: var(--bg-blue-green);
+}
+
+.form-color-field{
+  background: var(--bg-light-teal);
+}
+.swal-text {
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+  border: none;
+}
+
+/* Style the confirm button */
+.swal-custom {
+  background-color: #2b9f8a !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* Hover effect for the confirm button */
+.swal-custom:hover {
+  background-color: #2b9f8a;
 }

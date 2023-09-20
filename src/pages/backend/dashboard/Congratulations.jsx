@@ -79,16 +79,18 @@ const Congratulations = () => {
         </h3>
         <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
-      <h3 className="text-success my-2 fw-bold m-0">
-          CONGRATULATIONS!
-        </h3>
-        <Link
+            <h3 className="text-success my-2 fw-bold m-0">
+              CONGRATULATIONS!
+            </h3>
+            <Link
               to={"/advancepayment"} >
               <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
               </button>
-            </Link></div></div>
+            </Link>
+          </div>
+        </div>
 
       </div>
       <div className="card p-4 bg-light p-2">
@@ -96,7 +98,7 @@ const Congratulations = () => {
         Your Payment has been Received Successfully and credited to your Wallet
       </h5>
         <div className="card bg-light">
-          <div className="card-body">
+          <div className="card-body bg-light">
 
 
             <div className="text-center">
@@ -109,7 +111,7 @@ const Congratulations = () => {
                 className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mt-4"
                 onClick={route}
               >
-                Next
+                Proceed
               </Button>
             </div>
           </div>

@@ -3,12 +3,13 @@ import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { resetsignupState } from "../../../redux/signupSlice";
 import { resetloginState } from "../../../redux/loginSlice";
-import { Button } from "react-bootstrap";
+import { Button } from "@mui/base";
 import Carousel from "react-bootstrap/Carousel";
+import { useNavigate } from "react-router-dom";
 
 
 const Verification = () => {
-
+ const navigate =useNavigate();
   const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const name = useSelector((s) => s.signup.data.name);
@@ -26,6 +27,10 @@ const Verification = () => {
   useEffect(() => {
     getProfileData();
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   const getProfileData = async () => {
     try {
@@ -157,7 +162,7 @@ const Verification = () => {
                         </div>
 
                         <div className="text-center mb-3">
-                        <Button variant="" className="btnregistration fs-6 py-2" onClick={route}>
+                        <Button variant="" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={route}>
                         Close
                       </Button>
                     </div>

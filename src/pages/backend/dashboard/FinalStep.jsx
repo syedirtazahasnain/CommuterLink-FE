@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { setContactIdState, setIdState, setRequestAsState } from "../../../redux/generalSlice";
+import { displayNotification } from "../../../helpers";
 
 const theme = createTheme({
   palette: {
@@ -175,24 +176,26 @@ const FinalStep = () => {
           dispatch(setContactIdState(""));
           navigate("/dashboard");
         } else if (jsonresponse.status_code === 100) {
-          Swal.fire({
-            position:'top',
-            // // icon: 'error',
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },}
-          )
+          // Swal.fire({
+          //   position:'top',
+          //   // // icon: 'error',
+          //  text: `${jsonresponse.message}`,
+          //  customClass: {
+          //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+          // },}
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
         else if (jsonresponse.status_code === 500) {
-          Swal.fire({
-            position:'top',
-            // // icon: 'error',
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },}
-          )
+          // Swal.fire({
+          //   position:'top',
+          //   // // icon: 'error',
+          //  text: `${jsonresponse.message}`,
+          //  customClass: {
+          //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+          // },}
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
       else{
@@ -231,39 +234,42 @@ const FinalStep = () => {
           navigate("/dashboard");
         } else if (jsonresponse.status_code === 100) {
           // alert("Resend Error: " + jsonresponse.message);
-          Swal.fire({
-            position:'top',
-            // // icon: 'error',
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },}
-          )
+          // Swal.fire({
+          //   position:'top',
+          //   // // icon: 'error',
+          //  text: `${jsonresponse.message}`,
+          //  customClass: {
+          //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+          // },}
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
         else if (jsonresponse.status_code === 500) {
           // alert("Resend Error: " + jsonresponse.message);
-          Swal.fire({
-            position:'top',
-            // // icon: 'error',
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-          },}
-          )
+          // Swal.fire({
+          //   position:'top',
+          //   // // icon: 'error',
+          //  text: `${jsonresponse.message}`,
+          //  customClass: {
+          //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+          // },}
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
     } catch (error) {
       console.error("An error occurred:", error);
       // Handle error appropriately, e.g., display an error message to the user
       // alert("An error occurred while sending the request.");
-      Swal.fire({
-        position:'top',
-        // // icon: 'error',
-       text: 'An error occured while sending the request.',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
-      )
+      // Swal.fire({
+      //   position:'top',
+      //   // // icon: 'error',
+      //  text: 'An error occured while sending the request.',
+      //  customClass: {
+      //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+      // },}
+      // )
+      displayNotification("error", "An error occured while sending the request.");
     }
   };
 
@@ -308,7 +314,7 @@ const FinalStep = () => {
               </button>
             </Link></div></div>
       </div>
-      <div className="card p-4 bg-light p-2">
+      <div className="card p-4 bg-white p-2">
         <div className="card bg-light">
           <div className="card-body">
 

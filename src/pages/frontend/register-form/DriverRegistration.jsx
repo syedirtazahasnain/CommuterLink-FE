@@ -9,13 +9,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from 'dayjs';
-import Button from "@mui/material/Button";
+import {Button} from "@mui/base";
 import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const eighteenYearsAgo = dayjs().subtract(18, "years");
 
@@ -33,7 +34,6 @@ const DriverRegistration = () => {
   const [daysSelected, setDaysSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const mapLibraries = ["places"];
-
 
   const route = () => {
     navigate("/seatcostverification");
@@ -179,6 +179,10 @@ const DriverRegistration = () => {
   }, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate, showDriverForm]);
+
+  useEffect(() => {
 
     if (provinceStartId) {
       const selectedStartProvince = dropdownStartdata?.countries[0]?.provinces.find(
@@ -317,6 +321,7 @@ const DriverRegistration = () => {
   };
 
   const handleProvinceStartChange = (event) => {
+    setCityStartId("");
     setProvinceStartId(event.target.value);
   };
   function validateProfession(profession) {
@@ -332,6 +337,7 @@ const DriverRegistration = () => {
   };
 
   const handleProvinceEndChange = (event) => {
+    setCityEndId("");
     setProvinceEndId(event.target.value);
   };
 
@@ -361,7 +367,7 @@ const DriverRegistration = () => {
 
   const handlePlaceSelectStart = () => {
     const place = autocompleteRef.current.getPlace();
-  
+
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
       const isIslamabad =
@@ -369,7 +375,7 @@ const DriverRegistration = () => {
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityStart.toLowerCase()
         );
-  
+
       if (isIslamabad) {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
@@ -382,14 +388,15 @@ const DriverRegistration = () => {
           handleShowStartModal();
         }
       } else if (!isIslamabad) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: `Please select a place in ${cityStart}.`,
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: `Please select a place in ${cityStart}.`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", `{"Please Select a place in"}${cityStart}`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -429,7 +436,7 @@ const DriverRegistration = () => {
 
   const handlePlaceSelectEnd = () => {
     const place = autocompleteRef.current.getPlace();
-  
+
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
       const isIslamabad =
@@ -437,7 +444,7 @@ const DriverRegistration = () => {
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityEnd.toLowerCase()
         );
-  
+
       if (isIslamabad) {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
@@ -450,14 +457,15 @@ const DriverRegistration = () => {
           handleShowEndModal();
         }
       } else if (!isIslamabad) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: `Please select a place in ${cityEnd}.`,
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: `Please select a place in ${cityEnd}.`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", `{"Please Select a place in"}${cityEnd}`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -725,6 +733,15 @@ const DriverRegistration = () => {
     setShowEndModal(false);
   };
 
+  const PersonalFormFields = [
+    martialStatus,
+    cnic,
+    selectedDateFormat,
+    gender,
+    preferredGender,
+    profession,
+    education,
+  ];
 
   const requiredFieldsLogin = [
     cityStartId, provinceStartId,
@@ -742,10 +759,16 @@ const DriverRegistration = () => {
     selectedCarBrand, selectedCarCC,
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
-    selectedCarImageExt, selectedSeat, selectedSeatGender,
-    selectedMidRoutePartner, inputDrivingLicenseMySelf,
-    inputValidUptoMySelf, inputPlaceIssueMySelf
+    selectedCarImageExt, selectedSeat, preferredGender,
+    // inputDrivingLicenseMySelf,
+    // inputValidUptoMySelf, inputPlaceIssueMySelf
   ];
+
+  console.log({ PersonalFormFields });
+
+  console.log({ requiredFieldsLogin });
+
+  console.log({ requiredFieldsDriver });
 
   const handleLogin = async () => {
     if (
@@ -756,13 +779,11 @@ const DriverRegistration = () => {
       setIsLoading(true); // Start loading
 
       try {
-        await LocationForm();
-        await PersonalForm();
-        await ImagesFormCnicFront();
-        await ImagesFormCnicBack();
-        await ImagesFormPicture();
-        setIsLoading(false);
-        setShowDriverForm(true);
+        if (PersonalFormFields.every(
+          (field) => field !== "" && field !== null && field !== undefined
+        )) {
+          await PersonalForm();
+        }
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -770,18 +791,54 @@ const DriverRegistration = () => {
       }
     } else {
       setIsLoading(false);
-      // alert("Please Fill All Fields!");
-      Swal.fire({
-        position: 'top',
-        // // icon: 'warning',
-        text: 'Please Fill All Fields!',
-        customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-        },
-      }
-      )
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'warning',
+      //   text: 'Please Fill All Fields!',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("warning", "Please Fill All Fields!");
     }
   };
+
+  // const handleLogin = async () => {
+  //   if (
+  //     requiredFieldsLogin.every(
+  //       (field) => field !== "" && field !== null && field !== undefined
+  //     )
+  //   ) {
+  //     setIsLoading(true); // Start loading
+
+  //     try {
+  //       await PersonalForm();
+  //       await LocationForm();
+  //       await ImagesFormCnicFront();
+  //       await ImagesFormCnicBack();
+  //       await ImagesFormPicture();
+  //       setIsLoading(false);
+  //       setShowDriverForm(true);
+  //     } catch (error) {
+  //       setIsLoading(false);
+  //       // Handle the error appropriately, e.g., show an error message
+  //       console.error('API call error:', error);
+  //     }
+  //   } else {
+  //     setIsLoading(false);
+  //     // alert("Please Fill All Fields!");
+  //     Swal.fire({
+  //       position: 'top',
+  //       // // icon: 'warning',
+  //       text: 'Please Fill All Fields!',
+  //       customClass: {
+  //         confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+  //       },
+  //     }
+  //     )
+  //   }
+  // };
 
 
   const handleDriver = async () => {
@@ -789,8 +846,6 @@ const DriverRegistration = () => {
       setIsLoading(true); // Start loading
       try {
         await DriverForm();
-        await PaymentForm();
-        setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -799,15 +854,79 @@ const DriverRegistration = () => {
     } else {
       setIsLoading(false);
       // alert("Please Fill All Driver Form Fields!");
-      Swal.fire({
-        position: 'top',
-        // icon: 'warning',
-        text: 'Please Fill All Driver Form Fields!',
-        customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-        },
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'warning',
+      //   text: 'Please Fill All Driver Form Fields!',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("warning", "Please Fill All Driver Form Fields!");
+    }
+  };
+
+  const PersonalForm = async () => {
+    try {
+      const body = {
+        marital_status: martialStatus,
+        cnic: cnic,
+        birth_year: selectedDateFormat,
+        gender: gender,
+        preferred_gender: preferredGender,
+        profession: profession,
+        education: education,
+        interests: null,
+        university_address: null,
+        university_name: null,
+        user_type: 299,
+      };
+      const response = await fetch(
+        `${API_URL}/api/v1/registration/personal`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      console.log("Personal Form Body:", body);
+
+      const jsonresponse = await response.json();
+
+      if (jsonresponse.statusCode == 200) {
+        console.log("Personal Form Response:", jsonresponse);
+        await LocationForm();
+        await ImagesFormCnicFront();
+        await ImagesFormCnicBack();
+        await ImagesFormPicture();
+
+        setIsLoading(false);
+        setShowDriverForm(true);
+      } else if (jsonresponse.statusCode === 422) {
+        console.log("Personal Form CNIC Issue Response:", jsonresponse);
+        const errors = jsonresponse.errors;
+        for (const field of Object.keys(errors)) {
+          Swal.fire({
+            position: "top",
+            // icon: "error",
+            // text: `${jsonresponse.message}`,
+            text: `${errors[field][0]}`,
+            customClass: {
+              confirmButton: "bg-success",
+              // Apply custom CSS class to the OK button
+            },
+          });
+        }
+        setIsLoading(false);
       }
-      )
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -874,67 +993,16 @@ const DriverRegistration = () => {
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        }
-        )
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const PersonalForm = async () => {
-    try {
-      const body = {
-        marital_status: martialStatus,
-        cnic: cnic,
-        birth_year: selectedDateFormat,
-        gender: gender,
-        preferred_gender: preferredGender,
-        profession: profession,
-        education: education,
-        interests: null,
-        university_address: null,
-        university_name: null,
-        user_type: 299
-      }
-      const response = await fetch(
-        `${API_URL}/api/v1/registration/personal`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json',
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
-
-      console.log("Personal Form Body:", body);
-
-      const jsonresponse = await response.json();
-
-      if (jsonresponse.statusCode === 200) {
-        console.log("Personal Form Response:", jsonresponse);
-      }
-      else if (jsonresponse.statusCode === 500) {
-        // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -969,15 +1037,16 @@ const DriverRegistration = () => {
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1012,15 +1081,16 @@ const DriverRegistration = () => {
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1048,17 +1118,17 @@ const DriverRegistration = () => {
 
       console.log("Images Form Picture Body:", body);
       const registrationSuccessful = () => {
-        Swal.fire({
-          position: 'top',
-          title: 'Congratulations!',
-          text: 'Registration Form Submited Successfully',
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonText: 'OK',
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   title: 'Congratulations!',
+        //   text: 'Registration Form Submited Successfully',
+        //   icon: 'success',
+        //   showCancelButton: false,
+        //   confirmButtonText: 'OK',
+        //   customClass: {
+        //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        //   },
+        // });
       };
 
       const jsonresponse = await response.json();
@@ -1069,15 +1139,16 @@ const DriverRegistration = () => {
       }
       else if (jsonresponse.statusCode === 500) {
         // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1099,8 +1170,8 @@ const DriverRegistration = () => {
         car_image: selectedCarImage,
         car_image_ext: selectedCarImageExt,
         seats_available: selectedSeat,
-        seats_for: selectedSeatGender,
-        mid_route: selectedMidRoutePartner,
+        seats_for: preferredGender,
+        mid_route: "Yes",
         //one_side: selectedOneRoutePartner,
         drive_option: "Driver",
         license_no: inputDrivingLicenseMySelf,
@@ -1138,17 +1209,33 @@ const DriverRegistration = () => {
 
       if (jsonresponse.statusCode === 200) {
         console.log("Driver Form Response:", jsonresponse);
+        await PaymentForm();
+        setIsLoading(false);
+      }
+      else if (jsonresponse.statusCode === 100) {
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
+        setIsLoading(false);
       }
       else if (jsonresponse.statusCode === 500) {
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'bg-success',
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1185,42 +1272,45 @@ const DriverRegistration = () => {
 
         if (jsonresponse.statusCode === 200) {
           console.log("Payment Form Response:", jsonresponse);
-          Swal.fire({
-            position: 'top',
-            title: 'Congratulations!',
-            text: 'Driver Form Submited Successfully',
-            icon: 'success',
-            showCancelButton: false,
-            confirmButtonText: 'OK',
-            customClass: {
-              confirmButton: 'bg-success',
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   title: 'Congratulations!',
+          //   text: 'Driver Form Submited Successfully',
+          //   icon: 'success',
+          //   showCancelButton: false,
+          //   confirmButtonText: 'OK',
+          //   customClass: {
+          //     confirmButton: 'swal-custom',
+          //   },
+          // });
+          displayNotification("success", "Driver Registration Form Submitted Successfully");
           route();
         }
         else if (jsonresponse.statusCode === 500) {
           // alert("Error: " + jsonresponse.message);
-          Swal.fire({
-            position: 'top',
-            // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'bg-success',
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom',
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
       else {
-        Swal.fire({
-          position: 'top',
-          // icon: 'warning',
-          text: 'Please Enter Payment Details!',
-          customClass: {
-            confirmButton: 'bg-success',
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'warning',
+        //   text: 'Please Enter Payment Details!',
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("warning", "Please Enter Payment Details!");
       }
     } catch (error) {
       console.log(error.message);
@@ -1229,7 +1319,7 @@ const DriverRegistration = () => {
 
   return (
     <>
-      {showDriverForm && (
+      {!showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
@@ -1248,24 +1338,25 @@ const DriverRegistration = () => {
                   <li></li>
                   <li></li>
                   <li></li>
-                  <li></li>
+                  <li></li> 
                 </ul>
               </div >
               <div className="row justify-content-center">
-                <div className="col-md-6 bg-white mt-5 mb-5">
+                <div className="col-md-6 bg-white  mt-5 mb-5"  >
+             
                   <div
-                    className="row shadow"
-                    style={{ backgroundColor: '#1F5F5B' }}
+                    className="row shadow  form-color-header"
+                    // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1 className="text-center text-white py-4">
                       Registration Form
                     </h1></div>
-                  <Form className="p-3" noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Form className="p-3 top-form " noValidate validated={validated} onSubmit={handleSubmit}>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    <div className="row mb-3 shadow shadow-sm ">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           STARTING POINT
@@ -1314,6 +1405,9 @@ const DriverRegistration = () => {
 
                               // Set the value
                               setCityStart(selectedId);
+                              setAddNewStartDropdown(true);
+                              setAddNewStart(false);
+                              setAddNewStartField(true);
                             }}
                             required
                           >
@@ -1333,7 +1427,7 @@ const DriverRegistration = () => {
                         </Form.Group>
 
                         {cityStartId && (
-                          <>  
+                          <>
                             {addNewStartDropdown && (
                               <Form.Group
                                 as={Col}
@@ -1344,16 +1438,16 @@ const DriverRegistration = () => {
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
                                   {addNewStartField && (
                                     <p
-                                    className="colorplace text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      textDecoration: "underline",
-                                    }}
-                                    onClick={AddNewStart}
-                                  >
-                                    Can't find your area?
-                                    <a> Add Here</a>
-                                  </p>
+                                      className="colorplace text-danger"
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "underline",
+                                      }}
+                                      onClick={AddNewStart}
+                                    >
+                                      Can't find your area?
+                                      <a> Add Here</a>
+                                    </p>
                                   )}
                                 </div>
 
@@ -1375,10 +1469,10 @@ const DriverRegistration = () => {
                                     >
                                       {province.value}
                                     </option>
-                                  ))} 
+                                  ))}
                                 </Form.Select>
                               </Form.Group>
-                              
+
                             )}
 
                             {/* {addNewStartField && (
@@ -1428,10 +1522,10 @@ const DriverRegistration = () => {
                       </div>
                     </div>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    <div className="row mb-3 shadow shadow-sm ">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           DROP-OFF POINT
@@ -1480,6 +1574,9 @@ const DriverRegistration = () => {
 
                               // Set the value
                               setCityEnd(selectedId);
+                              setAddNewEndDropdown(true);
+                              setAddNewEnd(false);
+                              setAddNewEndField(true);
                             }}
                             required
                           >
@@ -1497,8 +1594,8 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        
-                       
+
+
 
                         {cityEndId && (
                           <>
@@ -1512,16 +1609,16 @@ const DriverRegistration = () => {
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
                                   {addNewEndField && (
                                     <p
-                                    className="colorplace text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      textDecoration: "underline",
-                                    }}
-                                    onClick={AddNewEnd}
-                                  >
-                                    Can't find your area?
-                                    <a> Add Here</a>
-                                  </p>
+                                      className="colorplace text-danger"
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "underline",
+                                      }}
+                                      onClick={AddNewEnd}
+                                    >
+                                      Can't find your area?
+                                      <a> Add Here</a>
+                                    </p>
                                   )}
                                 </div>
                                 <Form.Select
@@ -1547,7 +1644,7 @@ const DriverRegistration = () => {
                               </Form.Group>
                             )}
 
-                          
+
 
                             {addNewEnd && (
                               <Form.Group
@@ -1592,13 +1689,13 @@ const DriverRegistration = () => {
                       <Modal show={showStartModal} onHide={handleCloseStartModal}>
                         <Modal.Header className="d-block" >
                           <Modal.Title>Select Starting Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point.</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
                             <Row style={{ height: "100%", width: "100%" }}>
                               <GoogleMap
-                                zoom={12}
+                                zoom={15}
                                 center={defaultStartCenter}
                                 mapContainerStyle={{ width: "100%", height: "50vh" }}
                                 onClick={handleMapClickStart}
@@ -1618,8 +1715,8 @@ const DriverRegistration = () => {
                           </Container>
                         </Modal.Body>
                         <Modal.Footer>
-                          <Button variant="contained" onClick={handleCloseStartModal}>
-                            Submit
+                          <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseStartModal}>
+                            Select
                           </Button>
                         </Modal.Footer>
                       </Modal>
@@ -1627,13 +1724,13 @@ const DriverRegistration = () => {
                       <Modal show={showEndModal} onHide={handleCloseEndModal}>
                         <Modal.Header className="d-block" >
                           <Modal.Title>Select Drop-off Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
                             <Row style={{ height: "100%", width: "100%" }}>
                               <GoogleMap
-                                zoom={12}
+                                zoom={15}
                                 // center={
                                 //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
                                 // }
@@ -1658,18 +1755,18 @@ const DriverRegistration = () => {
                           </Container>
                         </Modal.Body>
                         <Modal.Footer>
-                          <Button variant="contained" onClick={handleCloseEndModal}>
-                            Submit
+                          <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseEndModal}>
+                            Select
                           </Button>
                         </Modal.Footer>
                       </Modal>
                     </LoadScript>
 
-                  
+
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           Timing
@@ -1728,7 +1825,9 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </div>
                     </div>
-                    <Row className="my-3" style={{ border: '1px solid #cddbd9', backgroundColor: "#cddbd9" }}>
+                    <Row className="my-3 form-color-field" 
+                    // style={{ border: '1px solid #cddbd9', backgroundColor: "#cddbd9" }}
+                    >
                       <Form.Group as={Col} md="12" controlId="validationCustom10">
                         <Form.Label className="pt-3 px-3 text-black">
                           I Commute (Select Days)
@@ -1918,7 +2017,7 @@ const DriverRegistration = () => {
 
                     {/* {daysSelected} */}
 
-                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
+                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
                       <Form.Group as={Col} md="12" controlId="validationCustom11" className="mb-2">
                         <Form.Label className="fs-6 text-black">My Gender</Form.Label>
                         <Form.Select
@@ -1952,7 +2051,7 @@ const DriverRegistration = () => {
                       </Form.Group>
                     </Row>
 
-                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
+                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
                       <Form.Group as={Col} md="12" controlId="validationCustom13" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Year of Birth
@@ -2037,7 +2136,7 @@ const DriverRegistration = () => {
                     {/* 
                     <Row className="mb-3">
                     </Row> */}
-                    <Row className="mb-3 py-3 shadow shadow-sm form-body">
+                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
 
                       <Form.Group as={Col} md="12" controlId="validationCustom17" className="mb-2">
                         <Form.Label className="fs-6 text-black">CNIC</Form.Label>
@@ -2078,7 +2177,7 @@ const DriverRegistration = () => {
                       >
                         <Form.Label className="fs-6 text-black">
                           {" "}
-                          Upload CNIC (back)
+                          Upload CNIC (Back)
                         </Form.Label>
                         <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
                         <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -2111,7 +2210,7 @@ const DriverRegistration = () => {
                       <Button
                         variant="outlined"
                         size="large"
-                        className="btnregistration"
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                         onClick={() => {
                           handleLogin();
                         }}
@@ -2119,7 +2218,7 @@ const DriverRegistration = () => {
                       >
                         {isLoading ? (
                           <span>
-                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                            <i className="fa fa-spinner fa-spin" /> Proceed...
                           </span>
                         ) : (
                           'Next'
@@ -2136,11 +2235,11 @@ const DriverRegistration = () => {
         </>
       )}
 
-      {!showDriverForm && (
+      {showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
-            <div className="area" >
+              <div className="area" >
                 <ul className="circles">
                   <li></li>
                   <li></li>
@@ -2161,8 +2260,8 @@ const DriverRegistration = () => {
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div
-                    className="row shadow"
-                    style={{ backgroundColor: '#1F5F5B' }}
+                    className="row shadow form-color-header"
+                    // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1
                       className="text-center text-white py-4"
@@ -2174,11 +2273,11 @@ const DriverRegistration = () => {
                   </div>
 
                   <Form
-                    className=" p-3" noValidate validated={validated} onSubmit={handleSubmit}
+                    className=" p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}
                   >
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3 form-body"
+                        className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
                           Car Details
@@ -2246,7 +2345,7 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedCarAC(e.target.value)}
                             required
                           >
-                            <option value="" hidden>AC</option>
+                            <option value="" hidden>Select from Dropdown</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
@@ -2290,7 +2389,7 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3 form-body"
+                        className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
                           Car Registration
@@ -2376,7 +2475,7 @@ const DriverRegistration = () => {
                             <option value="4">4</option>
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom27" className="mb-2">
+                        {/* <Form.Group as={Col} md="12" controlId="validationCustom27" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Seats Available for (Male, Female, Both)
                           </Form.Label>
@@ -2392,10 +2491,10 @@ const DriverRegistration = () => {
                             <option value="Female">Female</option>
                             <option value="Both">Both</option>
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
                       </div></div>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    {/* <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3"
                         style={{ backgroundColor: "#cddbd9" }}
@@ -2403,7 +2502,7 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Route Partner
                         </h2>
-                        {/* <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             I accept one-route partner
                           </Form.Label>
@@ -2418,7 +2517,7 @@ const DriverRegistration = () => {
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
-                        </Form.Group> */}
+                        </Form.Group>
 
                         <Form.Group as={Col} md="12" controlId="validationCustom29" className="mb-2">
                           <Form.Label className="text-dark fs-6">
@@ -2436,10 +2535,11 @@ const DriverRegistration = () => {
                             <option value="No">No</option>
                           </Form.Select>
                         </Form.Group>
-                      </div></div>
+                      </div>
+                    </div> */}
 
 
-                   
+
                     <Row >
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>Car Brand</Form.Label>
@@ -2830,7 +2930,7 @@ const DriverRegistration = () => {
                       <>
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3 form-body"
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
                             <Form.Group
                               as={Col}
@@ -3024,7 +3124,7 @@ const DriverRegistration = () => {
 
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3 form-body"
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
                             <Form.Group
                               as={Col}
@@ -3082,7 +3182,7 @@ const DriverRegistration = () => {
                               className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
-                                Upload CNIC (front)
+                                Upload CNIC (Front)
                               </Form.Label>
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
                               <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -3096,7 +3196,7 @@ const DriverRegistration = () => {
                               className="mb-2"
                             >
                               <Form.Label className="text-dark">
-                                Upload CNIC (back)
+                                Upload CNIC (Back)
                               </Form.Label>
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
                               <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -3107,7 +3207,7 @@ const DriverRegistration = () => {
 
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3 form-body"
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
                             <Form.Group
                               as={Col}
@@ -3372,7 +3472,7 @@ const DriverRegistration = () => {
 
                       {/* <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
-                          className="col-md-12 px-2 py-3 form-body"
+                          className="col-md-12 px-2 py-3 form-color-field"
                         >
                           <Form.Group
                             as={Col}
@@ -3475,7 +3575,7 @@ const DriverRegistration = () => {
 
                       <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
-                          className="col-md-12 px-2 py-3 form-body"
+                          className="col-md-12 px-2 py-3 form-color-field"
                         >
                           <h2 className="text-success mb-3 text-center">
                             Driver's Details
@@ -3526,7 +3626,7 @@ const DriverRegistration = () => {
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
-                              Upload CNIC (front)
+                              Upload CNIC (Front)
                             </Form.Label>
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
                             <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -3540,7 +3640,7 @@ const DriverRegistration = () => {
                             className="mb-2"
                           >
                             <Form.Label className="text-dark">
-                              Upload CNIC (back)
+                              Upload CNIC (Back)
                             </Form.Label>
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
                             <Form.Text className="text-danger" style={{ color: "#000" }}>
@@ -3613,7 +3713,7 @@ const DriverRegistration = () => {
 
                       <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
-                          className="col-md-12 px-2 py-3 form-body"
+                          className="col-md-12 px-2 py-3 form-color-field"
                         >
                           <Form.Group
                             as={Col}
@@ -3721,19 +3821,31 @@ const DriverRegistration = () => {
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div></div>
-                         
+
 
 
                     </>)
                     }
-                     <div className="row mb-3 mt-2 shadow shadow-sm">
+                    <div className="row mb-3 mt-2 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3 form-body"
+                        className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
                           Bank/Payment Details
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled <Link
+                            to={"/whyprocesspayment2"}
+                            style={{ textDecoration: "none" }}
+                          >
+                            <span
+                              style={{
+                                color: "#198754",
+                                textDecoration: "none",
+                              }}
+                            >
+                              &nbsp; Why Process Payment
+                            </span>
+                          </Link> </p>
                         <div class="container text-center">
                           <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
@@ -3796,10 +3908,10 @@ const DriverRegistration = () => {
                       spacing={2}
                       style={{ justifyContent: "right" }}
                     >
-                      <Button variant="" className="btnregistration" onClick={handleDriver} disabled={isLoading}>
+                      <Button variant="" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleDriver} disabled={isLoading}>
                         {isLoading ? (
                           <span>
-                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                            <i className="fa fa-spinner fa-spin" /> Proceed...
                           </span>
                         ) : (
                           'Submit'

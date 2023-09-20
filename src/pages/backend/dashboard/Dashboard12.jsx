@@ -7,6 +7,8 @@ import { setCurrentPage } from '../../../redux/generalSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import { API_URL } from '../../../constants'
+import { ThreeCircles } from 'react-loader-spinner'
+import { displayNotification } from '../../../helpers'
 
 
 const Dashboard12 = () => {
@@ -14,6 +16,7 @@ const Dashboard12 = () => {
   const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const [data, setData] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getTravelData();
@@ -35,18 +38,21 @@ const Dashboard12 = () => {
         setData(jsonresponse.message);
       }
       else if (jsonresponse.status_code === 500) {
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: "bg-success", // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: "swal-custom", // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("error", `${jsonresponse.message}`);
       }
       console.log("Dashboard Travel Data:", jsonresponse);
+      setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error);
+      setLoading(false);
     }
   };
 
@@ -56,18 +62,34 @@ const Dashboard12 = () => {
 
   return (
     <>
-      <CommuterLinkSuggestions />
-      {/* <RequestsByMembers /> */}
-      <TravelPatners />
-      {data !== "" ?
-        (
-          <></>
-        )
-        :
-        (
-          <TravelConfirmation />
-        )
-      }
+      {loading ? (
+        <div className="text-center">
+          {/* Render CircularProgress while loading */}
+          <div className="d-flex justify-content-center align-items-center vh-10">
+            <ThreeCircles
+              height={50}
+              width={50}
+              color="#4fa94d"
+              visible={true}
+              ariaLabel="three-circles-rotating"
+              outerCircleColor=""
+              innerCircleColor=""
+              middleCircleColor=""
+            />
+          </div>
+        </div>
+      ) : (
+        <>
+          <CommuterLinkSuggestions />
+          {/* <RequestsByMembers /> */}
+          <TravelPatners />
+          {data !== "" ? (
+            <></>
+          ) : (
+            <TravelConfirmation />
+          )}
+        </>
+      )}
     </>
   )
 }

@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -22,10 +23,14 @@ const Login = () => {
   const [termsService, setTermsService] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+
   const checkUserStatus = async () => {
     try {
       const response = await fetch(
-        `${API_URL}/api/v1/rejectedStatus`,
+        `${API_URL}/api/v1/profile`,
         {
           method: "get",
           headers: {
@@ -38,17 +43,32 @@ const Login = () => {
 
       const jsonresponse = await response.json();
 
-      console.log(jsonresponse);
+      console.log("Profile Response:", jsonresponse);
 
-      if (jsonresponse.statusCode === 200) {
-        if (jsonresponse.data[0] === 1) {
+      if (jsonresponse) {
+        if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 2 && jsonresponse[0].approval_status === 1) {
           navigate("/dashboard");
         }
-        else if (jsonresponse.data[0] === 0) {
+        else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === 1) {
+          navigate("/dashboard");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === 0) {
           navigate("/verification");
         }
-        else if (jsonresponse.data[0] === -1) {
+        else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === -1) {
           navigate("/rejection");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 1 && jsonresponse[0].profile_status === 5 && jsonresponse[0].approval_status === 1) {
+          navigate("/dashboard");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 1 && jsonresponse[0].profile_status === 5 && jsonresponse[0].approval_status === 0) {
+          navigate("/verification");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 1 && jsonresponse[0].profile_status === 5 && jsonresponse[0].approval_status === -1) {
+          navigate("/rejection");
+        }
+        else if (jsonresponse[0].profile_status === 1) {
+          navigate("/office_school");
         }
       }
 
@@ -76,18 +96,24 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    if (email === "" || password === "") {
-      Swal.fire({
-        position: 'top',
-        // // icon: 'warning',
-        text: 'Please Fill All Fields',
-        customClass: {
-          confirmButton: 'bg-success',
-        },
-      }
-      )
+    if(email === "" || password ===""){
+      displayNotification("warning", "Please Fill All Fields");
     }
-    else {
+    // if (email === "" || password === "") {
+      // Swal.fire({
+      //   position: 'top',
+      //   // // icon: 'warning',
+      //   text: 'Please Fill All Fields',
+      //   customClass: {
+      //     confirmButton: "swal-custom",
+
+      //   },
+
+      // }
+      // )
+      // displayNotification("warning", `${("222", "Please Fill All Fields")} [B]`);
+    // }
+    else  {
       await postData();
     }
   };
@@ -118,28 +144,31 @@ const Login = () => {
         } else {
           console.log(jsonresponse);
           // alert("Error: " + jsonresponse.message);
-          Swal.fire({
-            position: 'top',
-            // // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'bg-success',
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom',
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
 
       else {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: 'Please Check Terms of Services',
-          customClass: {
-            confirmButton: 'bg-success',
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: 'Please Check Terms of Services',
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+
+        displayNotification("warning", "Please Check Terms of Services");
       }
 
     } catch (error) {
@@ -194,15 +223,16 @@ const Login = () => {
             dispatch(setloginState(jsonresponse.access_token));
           } else {
             // alert("Error: " + jsonresponse.message);
-            Swal.fire({
-              position: 'top',
-              // // icon: 'error',
-              text: `${jsonresponse.message}`,
-              customClass: {
-                confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-              },
-            }
-            )
+            // Swal.fire({
+            //   position: 'top',
+            //   // // icon: 'error',
+            //   text: `${jsonresponse.message}`,
+            //   customClass: {
+            //     confirmButton: 'swal-custom', 
+            //   },
+            // }
+            // )
+            displayNotification("error", `${jsonresponse.message}`);
 
           }
         } else {
@@ -286,7 +316,7 @@ const Login = () => {
                   {" "}
                   Login
                 </h1>{" "}
-                <Form className="text-center">
+                <Form className="">
                   <Form.Group
                     className="mb-1 mt-5 text-center"
                     controlId="formBasicEmail"
@@ -320,6 +350,19 @@ const Login = () => {
                       sx={{ width: '100%' }}
                     />
                   </Form.Group>
+                     
+                  <div className="py-1">    <Link to={'/forget1'} style={{ textDecoration: "none" }}>
+                    <span
+                      style={{
+                        color: "#dc3545",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {" "}
+
+                      Forgot Password
+                    </span>
+                  </Link></div>
                   <div className="col-md-12 text-center mt-3">
                     <FormControlLabel
                       control={
@@ -350,13 +393,31 @@ const Login = () => {
                       }
                     />
                   </div>
-                  <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
+                  <div className="text-center"> 
+                  <Button
+                    className="btn-custom1 mx-2 text-center border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                    onClick={handleLogin}
+                  >
                     Login
-                  </Button>
+                  </Button></div>
+                 
+
+                  {/* <div className="py-1 justify-content-center">    <Link to={''} style={{ textDecoration: "none" }}>
+                    <span
+                      style={{
+                        color: "#dc3545",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {" "}
+
+                      Forgot Password
+                    </span>
+                  </Link></div> */}
                   <div className="container">
                     <div className="row d-flex justify-content-center">
                       <div className="column mt-2">
-                        <p className=" text-muted" id="text2">
+                        <p className=" text-muted text-center" id="text2">
                           Or continue with
                         </p>
                       </div>
@@ -407,8 +468,8 @@ const Login = () => {
                     <hr id="hrline2" />
                     <div id="span-text" className="text-center mb-5">
                       Not have account on CommutersLink? &nbsp;
-                      <Link to="/signup" style={{textDecoration:'none'}}>
-                        <span className="reg-text" style={{textDecoration:'none'}}>Signup</span>
+                      <Link to="/signup" style={{ textDecoration: 'none' }}>
+                        <span className="reg-text" style={{ textDecoration: 'none' }}>Signup</span>
                       </Link>
                     </div>
                   </div>

@@ -10,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import CircularProgress from '@mui/material/CircularProgress';
+// import CircularProgress from '@mui/material/CircularProgress';
 import { ThreeCircles } from 'react-loader-spinner'
 
 const customTheme = createTheme({
@@ -107,83 +107,83 @@ const PaymentRide = () => {
   return (
     <div>
       <div>
-      <div className="page-title">
-        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
-          <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">PAYMENT/RIDE HISTORY </h3>
-            <Link
-              onClick={() => navigate(-1)} >
-              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
-                <i className="fas fa-angle-left text-white" />
-                Back
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
-      </div>
-        <div className="card p-4 bg-light p-2">
-          <h5 className="pb-2 text-success ">{`The ride history along with payment log`}</h5>
-          <div className="card bg-light">
-            <div className="card-body">
-              {loading ? (
-                <div className="text-center" style={{ height: "20vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                   <ThreeCircles
-      height={50}
-      width={50}
-      color="#4fa94d"
-      visible={true}
-      ariaLabel="three-circles-rotating"
-      outerCircleColor=""
-      innerCircleColor=""
-      middleCircleColor=""
-    />
-                </div>
-              ) : (
-                <>
-                  <h5 className="text-center pb-2 fw-bold text-dark">{monthYear}</h5>
-                  <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 300 }} aria-label="simple table">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell className="fw-bold fs-5 text-success">Date</TableCell>
-                          <TableCell className="fw-bold fs-5 text-success">Message</TableCell>
-                          <TableCell className="fw-bold fs-5 text-success">Amount</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {data.length === 0 ? (
-                          <TableRow>
-                            <TableCell colSpan={3} className="text-center text-dark fw-bold">
-                              No Data Found
-                            </TableCell>
-                          </TableRow>
-                        ) : (
-                          data.map((item) => (
-                            <TableRow
-                              key={item.date}
-                              style={{ backgroundColor: getStatusColor(item.status) }}
-                            >
-                              <TableCell>{item.date}</TableCell>
-                              <TableCell>
-                                {`From Home to Office | Office to Home | ${getDisplay(
-                                  item.status
-                                )}`}
-                              </TableCell>
-                              <TableCell className="fs-6">{`Rs ${item.wallet_transfer}/-`}</TableCell>
-                            </TableRow>
-                          ))
-                        )}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </>
-              )}
+        <div className="page-title">
+          <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+            <div className="d-flex justify-content-between align-items-xl-baseline">
+              <h3 className="text-success my-2 fw-bold m-0">PAYMENT/RIDE HISTORY </h3>
+              <Link
+                onClick={() => navigate(-1)} >
+                <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                  <i className="fas fa-angle-left text-white" />
+                  Back
+                </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    
+      <div className="card p-4 bg-white p-2">
+        <h5 className="pb-2 text-success ">{`The ride history along with payment log`}</h5>
+        <div className="card bg-light">
+          <div className="card-body">
+            {loading ? (
+              <div className="text-center" style={{ height: "20vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <ThreeCircles
+                  height={50}
+                  width={50}
+                  color="#4fa94d"
+                  visible={true}
+                  ariaLabel="three-circles-rotating"
+                  outerCircleColor=""
+                  innerCircleColor=""
+                  middleCircleColor=""
+                />
+              </div>
+            ) : (
+              <>
+                <h5 className="text-center pb-2 fw-bold text-dark">{monthYear}</h5>
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 300 }} aria-label="simple table">
+                    <TableHead>
+                      <TableRow className="bg-light">
+                        <TableCell className="fw-bold fs-5 text-success">Date</TableCell>
+                        <TableCell className="fw-bold fs-5 text-success">Message</TableCell>
+                        <TableCell className="fw-bold fs-5 text-success">Amount</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {data.length === 0 ? (
+                        <TableRow>
+                          <TableCell colSpan={3} className="text-center text-dark fw-bold">
+                            No Data Found
+                          </TableCell>
+                        </TableRow>
+                      ) : (
+                        data.map((item) => (
+                          <TableRow
+                            key={item.date}
+                            style={{ backgroundColor: getStatusColor(item.status) }}
+                          >
+                            <TableCell>{item.date}</TableCell>
+                            <TableCell>
+                              {`From Home to Office | Office to Home | ${getDisplay(
+                                item.status
+                              )}`}
+                            </TableCell>
+                            <TableCell className="fs-6">{`Rs ${item.wallet_transfer}/-`}</TableCell>
+                          </TableRow>
+                        ))
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
   );
 };
 

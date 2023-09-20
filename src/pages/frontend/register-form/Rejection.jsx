@@ -24,6 +24,11 @@ const Rejection = () => {
       navigate("/resubmit");
     }
   };
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+
   return (
     <>
       <div style={{ backgroundColor: "#eee" }}>

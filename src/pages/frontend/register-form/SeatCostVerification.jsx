@@ -18,6 +18,10 @@ const SeatCostVerification = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+
+  useEffect(() => {
     getProfileData();
   }, []);
 
@@ -61,7 +65,7 @@ const SeatCostVerification = () => {
     try {
       if (option === 1) {
         const response = await fetch(
-          `${API_URL}/api/v1/commuter/profile/${contactId}/driver`,
+          `${API_URL}/api/v1/seatCostDriver`,
           {
             method: "get",
             headers: {
@@ -73,8 +77,8 @@ const SeatCostVerification = () => {
         );
 
         const jsonresponse = await response.json();
-        if (jsonresponse.data && jsonresponse.data.length > 0) {
-          setPrice(jsonresponse.data[0].price);
+        if (jsonresponse.status_code === 200) {
+          setPrice(jsonresponse.data);
         }
         console.log("Seat Cost Price Data:", jsonresponse);
       }
@@ -107,7 +111,7 @@ const SeatCostVerification = () => {
               }}
             >
 
-<Carousel
+              <Carousel
                 className="carousel-container main-bg"
                 prevIcon={null}
                 nextIcon={null}
@@ -119,7 +123,7 @@ const SeatCostVerification = () => {
                     src={`${BASE_URL}/assets/images/signup.png`}
                     alt="First slide"
                   />
-                   <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                  <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                 </Carousel.Item>
 
                 <Carousel.Item interval={4000}>
@@ -137,7 +141,7 @@ const SeatCostVerification = () => {
                     src={`${BASE_URL}/assets/images/signup-4.png`}
                     alt="First slide"
                   />
-                 <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                  <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
 
                 </Carousel.Item>
                 <Carousel.Item interval={4000}>
@@ -146,20 +150,20 @@ const SeatCostVerification = () => {
                     src={`${BASE_URL}/assets/images/signup-6.png`}
                     alt="First slide"
                   />
-                 <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                  <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
 
                 </Carousel.Item>
               </Carousel>
               {/* </div> */}
             </div>
-            <div className="col-md-6 pt-5" style={{marginTop: "6vh", marginBottom: "9vh"}}>
+            <div className="col-md-6 pt-5" style={{ marginTop: "6vh", marginBottom: "9vh" }}>
               <div
                 className="container py-3"
               >
-               <div className="card p-3 bg-white"><div className="mt-3" >
+                <div className="card p-3 bg-white"><div className="mt-3" >
                   <div
                     className="text-center"
-                    // style={{ background: "rgb(22,70,57)" }}
+                  // style={{ background: "rgb(22,70,57)" }}
                   >
                     <div>
                       <div>
@@ -169,9 +173,9 @@ const SeatCostVerification = () => {
                           alt="Sample photo"
                           style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '60%' }}
                         /> */}
-                         <h3 className="card-title mt-4 mb-3 text-center text-success" >
-                            Seat Cost Information
-                          </h3>
+                        <h3 className="card-title mt-4 mb-3 text-center text-success" >
+                          Seat Cost Information
+                        </h3>
                       </div>
                     </div>
                     <div className="text-white p-4 ">
@@ -183,17 +187,17 @@ const SeatCostVerification = () => {
                         The cost will be adjusted fortnightly according to changes in the fuel price.
                       </p>
                     </div>
-                 
+
                     <form id="numberForm">
                       <div className="mb-5">
-                        <Button variant="success" className="btnregistration fs-6 py-2 px-4" onClick={onSubmit}>
+                        <Button variant="success" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={onSubmit}>
                           Next
                         </Button>
                       </div>
                     </form>
                   </div>
                 </div></div>
-                
+
               </div>
             </div>
 

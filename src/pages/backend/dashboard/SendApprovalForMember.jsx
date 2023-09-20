@@ -57,7 +57,7 @@ const SendApprovalForMember = () => {
         // // icon: 'error',
        text: `${jsonresponse.message}`,
        customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
       },}
       )
     }
@@ -177,7 +177,7 @@ const SendApprovalForMember = () => {
               className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               onClick={route}
             >
-              Send
+              Accept
             </Button>
           </div>
         </div>

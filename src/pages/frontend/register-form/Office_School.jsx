@@ -53,7 +53,7 @@ const Office_School = () => {
               <div
                 className="col-md-6 d-flex fixed"
                 style={{
-                  marginTop: "",
+                  marginTop: "10vh",
                 }}
               >
                 <Carousel
@@ -102,7 +102,7 @@ const Office_School = () => {
                 <div className="container">
                   <div className="row justify-content-center py-15 my-4">
                     <div className="col-10 mt-2">
-                      <div className="card text-center border-0 shadow rounded rounded-4">
+                      <div className="card py-5 text-center border-0 shadow rounded rounded-4">
                         <div className="container">
                           <div className="row">
                             <div className="col">
@@ -138,7 +138,7 @@ const Office_School = () => {
                                   </h5>
                                   <div>   <Button
                                     variant="success"
-                                    className="btn-custom mx-2 w-150px px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                                    className="btn-custom1 mx-2 border-0 w-150px px-4 py-2 rounded rounded-2 text-white fw-bold"
                                     onClick={officeRoute}
                                   >
                                     Office
@@ -150,7 +150,7 @@ const Office_School = () => {
                                   <div>
                                     <Button
                                       variant="success"
-                                      className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"
+                                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                                       onClick={schoolRoute}
                                     >
                                       School/University

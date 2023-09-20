@@ -94,7 +94,7 @@ const Resubmit = () => {
         // icon: 'warning',
        text: 'Please Fill All Fields!',
        customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
       },}
       )
     } else {
@@ -133,7 +133,7 @@ const Resubmit = () => {
             // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
           },}
           )
         }
@@ -144,7 +144,7 @@ const Resubmit = () => {
           // icon: 'warning',
          text: 'Please Check Terms of Service',
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }
@@ -205,7 +205,7 @@ const Resubmit = () => {
               // icon: 'error',
              text: `${jsonresponse.message}`,
              customClass: {
-              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
             },}
             )
           }
@@ -377,6 +377,52 @@ const Resubmit = () => {
                         className="w-100 bg-light text-success"
                       >
                         Back Side of Your CNIC
+                      </Button>
+                    </label>
+                    {selectedImage && (
+                      <div >
+                        <Typography
+                          variant="body1"
+                          fullWidth
+                        >
+                          Selected Image:
+                        </Typography>
+                        <img
+                          src={URL.createObjectURL(selectedImage)}
+                          alt="Selected"
+                        />
+                        <Button
+                          variant="contained"
+                          
+                          onClick={handleUpload}
+                        >
+                          Upload
+                        </Button>
+                      </div>
+                    )}
+                  </Box>
+
+                  <Box className="mt-4 text-center"  >
+                    <input
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      id="image-upload"
+                      type="file"
+                      color="light"
+                      onChange={handleImageChange}
+                    />
+                    
+
+                    <label htmlFor="image-upload" className="w-100 bg-light text-success">
+                      <Button
+                        variant="contained"
+                        color="success"
+                        p-3
+                        component="span"
+                        startIcon={<CloudUpload />}
+                        className="w-100 bg-light text-success"
+                      >
+                        CLEAR IMAGE OF CAR NUMBER PLATE
                       </Button>
                     </label>
                     {selectedImage && (

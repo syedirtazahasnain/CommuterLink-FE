@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const theme = createTheme({
   palette: {
@@ -124,27 +125,29 @@ const DriverFinalStep = () => {
         navigate("/dashboard");
       } else {
         // alert("Resend Error: " + jsonresponse.message);
-        Swal.fire({
-          position:'top',
-          // // icon: 'warning',
-         text: `${jsonresponse.message}`,
-         customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-        },}
-        )
+        // Swal.fire({
+        //   position:'top',
+        //   // // icon: 'warning',
+        //  text: `${jsonresponse.message}`,
+        //  customClass: {
+        //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+        // },}
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.error("An error occurred:", error);
       // Handle error appropriately, e.g., display an error message to the user
       // alert("An error occurred while sending the request.");
-      Swal.fire({
-        position:'top',
-        // icon: 'error',
-       text: 'An error occured while sending the request',
-       customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
-      },}
-      )
+      // Swal.fire({
+      //   position:'top',
+      //   // icon: 'error',
+      //  text: 'An error occured while sending the request',
+      //  customClass: {
+      //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
+      // },}
+      // )
+      displayNotification("error", "An error occured while sending the request");
     }
   };
 
@@ -158,9 +161,18 @@ const DriverFinalStep = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
-          FINAL STEP - YOU ARE RIGHT THERE!
+        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+      <div className="d-flex justify-content-between align-items-xl-baseline">
+        <h3 className="text-success my-2 fw-bold m-0">
+        FINAL STEP - YOU ARE RIGHT THERE!
         </h3>
+        <Link
+              to={"/"} >
+              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                <i className="fas fa-angle-left text-white" />
+                Back
+              </button>
+            </Link></div></div>
       </div>
       
       <div className="card p-4 bg-light p-2">

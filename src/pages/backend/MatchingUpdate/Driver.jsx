@@ -8,6 +8,7 @@ import { Button } from "@mui/base";
 import Rider from './Rider';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { displayNotification } from '../../../helpers';
 
 const Driver = () => {
 
@@ -21,6 +22,8 @@ const Driver = () => {
     const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
     const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
     const [preferredGender, setPreferredGender] = useState("");
+    const [carBrand, setCarBrand] = useState([]);
+    const [selectedCarBrand, setSelectedCarBrand] = useState("");
     const [carCC, setCarCC] = useState([]);
     const [selectedCarCC, setSelectedCarCC] = useState("");
     const [selectedModelName, setSelectedModelName] = useState("");
@@ -32,6 +35,10 @@ const Driver = () => {
         getdropdowndata();
         getProfileData();
     }, []);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [navigate]);
 
     useEffect(() => {
         dispatch(setCurrentPage("matchingupdate"));
@@ -55,6 +62,7 @@ const Driver = () => {
         const jsonresponse = await response.json();
         setHomeTimeSlots(jsonresponse.time_slots);
         setOfficeTimeSlots(jsonresponse.time_slots);
+        setCarBrand(jsonresponse.car_brand);
         setCarCC(jsonresponse.car_cc);
         setRegYear(jsonresponse.car_reg_year);
     };
@@ -77,14 +85,17 @@ const Driver = () => {
             if (jsonresponse) {
                 setOption(jsonresponse[0].userlist.vehicle_option);
             }
-            setSelectedHomeTime(jsonresponse[0].matches.time_return);
-            setSelectedOfficeTime(jsonresponse[0].matches.time_depart);
+            setSelectedHomeTime(jsonresponse[0].matches.time_depart);
+            setSelectedOfficeTime(jsonresponse[0].matches.time_return);
             setPreferredGender(jsonresponse[0].contact.preferred_gender);
-            setDaysSelected(jsonresponse[0].matches.days);
+            // setDaysSelected(jsonresponse[0].matches.days);
+            setSelectedCarBrand(jsonresponse[0].vehicle.car_make);
             setSelectedCarCC(jsonresponse[0].vehicle.car_cc);
             setSelectedModelName(jsonresponse[0].vehicle.car_model);
             setSelectedRegYear(jsonresponse[0].vehicle.car_reg_year);
             console.log("Update Driver Details Data", jsonresponse);
+            const mynewarray=jsonresponse[0].matches.days.split(',');
+            setDaysSelected(mynewarray.map(day => day.trim())); 
         } catch (error) {
             console.error("An error occurred:", error);
         }
@@ -107,18 +118,11 @@ const Driver = () => {
 
     const sendRequest = async () => {
         try {
-            if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === ""
-                || preferredGender === "" || selectedCarCC === "" || selectedModelName === ""
-                || selectedRegYear === "") {
-                Swal.fire({
-                    position: 'top',
-
-                    text: `Please fill all fields!`,
-                    customClass: {
-                        confirmButton: 'bg-success'
-                    }
-                }
-                )
+            if (daysSelected.length === 0 || selectedHomeTime === "" || selectedOfficeTime === ""
+                || preferredGender === "" || selectedCarBrand === ""|| selectedCarCC === "" 
+                || selectedModelName === "" || selectedRegYear === "") {
+                displayNotification("warning","Please fill all fields!");    
+                
             }
             else {
                 const body = {
@@ -126,8 +130,9 @@ const Driver = () => {
                     start_time_id: selectedHomeTime,
                     return_time_id: selectedOfficeTime,
                     prefer_genders: preferredGender,
+                    car_make: selectedCarBrand,
                     car_cc: selectedCarCC,
-                    car_make: selectedModelName,
+                    car_model: selectedModelName,
                     car_reg_year: selectedRegYear
                 }
                 console.log("sendRequest Body:", body);
@@ -153,42 +158,21 @@ const Driver = () => {
                 console.log("sendRequest API Response", jsonresponse);
 
                 if (jsonresponse.status_code === 200) {
-                    navigate("/dashboard");
+                    //navigate("/dashboard");
+                    displayNotification("success","Matching criteria has been updated successfully"); 
+                    
+                    //window.location.reload();
                 } else if (jsonresponse.status_code === 100) {
-                    Swal.fire({
-                        position: 'top',
-
-                        text: `${jsonresponse.message}`,
-                        customClass: {
-                            confirmButton: 'bg-success'
-                        }
-                    }
-                    )
+                    displayNotification("error", `${jsonresponse.message}`);
                 }
                 else if (jsonresponse.statusCode === 500) {
-                    Swal.fire({
-                        position: 'top',
-
-                        text: `${jsonresponse.message}`,
-                        customClass: {
-                            confirmButton: 'bg-success'
-                        }
-                    }
-                    )
+                    displayNotification("error", `${jsonresponse.message}`);
                 }
             }
         } catch (error) {
             console.error("An error occurred:", error);
             // Handle error appropriately, e.g., display an error message to the user
-            // alert("An error occurred while sending the request.");
-            Swal.fire({
-                position: 'top',
-
-                text: 'An error occured while sending the request.',
-                customClass: {
-                    confirmButton: 'bg-success'
-                }
-            })
+            displayNotification("warning", "An error occured while sending the request");
         }
     };
 
@@ -290,7 +274,26 @@ const Driver = () => {
 
                                                 <div className="row d-flex">
                                                     <div className="col">
-                                                        {["checkbox"].map((type) => (
+                                                        {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
+                                                            <FormControlLabel
+                                                                key={index}
+                                                                control={
+                                                                    <Checkbox
+                                                                        inline
+                                                                        label={day}
+                                                                        name="group1"
+                                                                        color="success"
+                                                                        type="checkbox"
+                                                                        value={day}
+                                                                        id={`inline-checkbox-${index}`}
+                                                                        checked={daysSelected.includes(day)}
+                                                                        onChange={handleCheckboxChange}
+                                                                    />
+                                                                }
+                                                                label={day}
+                                                            />
+                                                        ))}
+                                                        {/* {["checkbox"].map((type) => (
                                                             <div
                                                                 key={`inline-${type}`}
                                                                 className="mb-3 d-flex flex-wrap"
@@ -416,11 +419,32 @@ const Driver = () => {
                                                                     label="Sunday"
                                                                 />
                                                             </div>
-                                                        ))}
+                                                        ))} */}
 
                                                     </div>
                                                 </div>
                                             </Row>
+                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                <FormControl fullWidth size="small">
+                                                    <InputLabel id="demo-simple-select-label" color='success'>Car Brand</InputLabel>
+                                                    <Select
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
+                                                        color='success'
+                                                        className="bg-light text-left"
+                                                        label="Select Car Brand"
+                                                        value={selectedCarBrand}
+                                                        onChange={(e) => setSelectedCarBrand(e.target.value)}
+                                                        required
+                                                    >
+                                                        {carBrand?.map((car) => (
+                                                            <MenuItem key={car.id} value={car.id}>
+                                                                {car.brand_name}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
+                                            </Box>
                                             <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                 <FormControl fullWidth size="small">
                                                     <InputLabel id="demo-simple-select-label" color='success'>Car CC</InputLabel>
@@ -435,7 +459,7 @@ const Driver = () => {
                                                         required
                                                     >
                                                         {carCC?.map((car) => (
-                                                            <MenuItem key={car.id} value={car.car_cc}>
+                                                            <MenuItem key={car.id} value={car.id}>
                                                                 {car.car_cc}
                                                             </MenuItem>
                                                         ))}
@@ -469,7 +493,7 @@ const Driver = () => {
                                                         required
                                                     >
                                                         {regYear?.map((reg) => (
-                                                            <MenuItem key={reg.id} value={reg.car_year_ranges}>
+                                                            <MenuItem key={reg.id} value={reg.id}>
                                                                 {reg.car_year_ranges}
                                                             </MenuItem>
                                                         ))}

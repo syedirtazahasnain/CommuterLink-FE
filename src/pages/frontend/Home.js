@@ -6,19 +6,21 @@ import Register from "./Hompage-components/Register";
 import HowWorks from "./Hompage-components/HowWorks";
 import Contribute from "./Hompage-components/Contribute";
 import Contact from "./Hompage-components/Contact";
-import AddressCards from "./Hompage-components/AddressCards";
+import NewBanner from "./Hompage-components/NewBanner";
+import BePartOfCL from "./Hompage-components/BePartOfCL";
 
 export default function Home() {
   return (
-    <div>
-      <CarouselSlider />
+    <>
+      {/* <CarouselSlider /> */}
+      <NewBanner />
       <MyAccordion />
+      <BePartOfCL />
       <ShareRideCards />
       <Register />
       <HowWorks />
       <Contribute />
       <Contact />
-      <AddressCards />
-    </div>
+    </>
   );
 }

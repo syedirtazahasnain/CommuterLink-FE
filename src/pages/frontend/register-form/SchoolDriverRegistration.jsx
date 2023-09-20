@@ -294,7 +294,9 @@ const DriverRegistration = () => {
     };
     getGeocodeEndData();
   }, [locationEndString, locationEndStringField]);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
   const getdropdownStartdata = async () => {
     const response = await fetch(
       `${API_URL}/api/v1/list/data`,
@@ -321,6 +323,7 @@ const DriverRegistration = () => {
   };
 
   const handleProvinceStartChange = (event) => {
+    setCityStartId("");
     setProvinceStartId(event.target.value);
   };
   function validateProfession(profession) {
@@ -336,6 +339,7 @@ const DriverRegistration = () => {
   };
 
   const handleProvinceEndChange = (event) => {
+    setCityEndId("");
     setProvinceEndId(event.target.value);
   };
 
@@ -365,7 +369,7 @@ const DriverRegistration = () => {
 
   const handlePlaceSelectStart = () => {
     const place = autocompleteRef.current.getPlace();
-  
+
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
       const isIslamabad =
@@ -373,7 +377,7 @@ const DriverRegistration = () => {
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityStart.toLowerCase()
         );
-  
+
       if (isIslamabad) {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
@@ -391,7 +395,7 @@ const DriverRegistration = () => {
           // // icon: 'warning',
           text: `Please select a place in ${cityStart}.`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       }
@@ -418,7 +422,7 @@ const DriverRegistration = () => {
 
   const handlePlaceSelectEnd = () => {
     const place = autocompleteRef.current.getPlace();
-  
+
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
       const isIslamabad =
@@ -426,7 +430,7 @@ const DriverRegistration = () => {
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityEnd.toLowerCase()
         );
-  
+
       if (isIslamabad) {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
@@ -444,7 +448,7 @@ const DriverRegistration = () => {
           // // icon: 'warning',
           text: `Please select a place in ${cityEnd}.`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       }
@@ -741,7 +745,7 @@ const DriverRegistration = () => {
     selectedCarBrand, selectedCarCC,
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
-    selectedCarImageExt, selectedSeat, selectedSeatGender,
+    selectedCarImageExt, selectedSeat, preferredGender,
     selectedMidRoutePartner, inputDrivingLicenseMySelf,
     inputValidUptoMySelf, inputPlaceIssueMySelf
   ];
@@ -777,7 +781,7 @@ const DriverRegistration = () => {
         // icon: 'warning',
         text: 'Please Fill All Fields!',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -804,7 +808,7 @@ const DriverRegistration = () => {
         // icon: 'warning',
         text: 'Please Fill All Driver Form Fields!',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -878,7 +882,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -929,7 +933,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -971,7 +975,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1013,7 +1017,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1050,7 +1054,7 @@ const DriverRegistration = () => {
           showCancelButton: false,
           confirmButtonText: 'OK',
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       };
@@ -1069,7 +1073,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1094,7 +1098,7 @@ const DriverRegistration = () => {
         car_image: selectedCarImage,
         car_image_ext: selectedCarImageExt,
         seats_available: selectedSeat,
-        seats_for: selectedSeatGender,
+        seats_for: preferredGender,
         mid_route: selectedMidRoutePartner,
         one_side: selectedOneRoutePartner,
         drive_option: "Driver",
@@ -1140,7 +1144,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1189,7 +1193,7 @@ const DriverRegistration = () => {
             showCancelButton: false,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           });
           route();
@@ -1200,7 +1204,7 @@ const DriverRegistration = () => {
             // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           }
           )
@@ -1213,7 +1217,7 @@ const DriverRegistration = () => {
           // icon: 'warning',
           text: 'Please Enter Payment Details!',
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1231,7 +1235,7 @@ const DriverRegistration = () => {
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
-            <div className="area" >
+              <div className="area" >
                 <ul className="circles">
                   <li></li>
                   <li></li>
@@ -1311,6 +1315,9 @@ const DriverRegistration = () => {
 
                               // Set the value
                               setCityStart(selectedId);
+                              setAddNewStartDropdown(true);
+                              setAddNewStart(false);
+                              setAddNewStartField(true);
                             }}
                             required
                           >
@@ -1337,23 +1344,23 @@ const DriverRegistration = () => {
                                 md="12"
                                 controlId="validationCustom03"
                               >
-                                  <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex justify-content-between align-items-center">
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
                                   {addNewStartField && (
                                     <p
-                                    className="colorplace text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      textDecoration: "underline",
-                                    }}
-                                    onClick={AddNewStart}
-                                  >
-                                    Can't find your area?
-                                    <a> Add Here</a>
-                                  </p>
+                                      className="colorplace text-danger"
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "underline",
+                                      }}
+                                      onClick={AddNewStart}
+                                    >
+                                      Can't find your area?
+                                      <a> Add Here</a>
+                                    </p>
                                   )}
                                 </div>
-                                
+
                                 <Form.Select
                                   aria-label="Default select example"
                                   className="text-secondary"
@@ -1487,6 +1494,9 @@ const DriverRegistration = () => {
 
                               // Set the value
                               setCityEnd(selectedId);
+                              setAddNewEndDropdown(true);
+                              setAddNewEnd(false);
+                              setAddNewEndField(true);
                             }}
                             required
                           >
@@ -1513,20 +1523,20 @@ const DriverRegistration = () => {
                                 md="12"
                                 controlId="validationCustom09"
                               >
-                                   <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex justify-content-between align-items-center">
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
                                   {addNewEndField && (
                                     <p
-                                    className="colorplace text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      textDecoration: "underline",
-                                    }}
-                                    onClick={AddNewEnd}
-                                  >
-                                    Can't find your area?
-                                    <a> Add Here</a>
-                                  </p>
+                                      className="colorplace text-danger"
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "underline",
+                                      }}
+                                      onClick={AddNewEnd}
+                                    >
+                                      Can't find your area?
+                                      <a> Add Here</a>
+                                    </p>
                                   )}
                                 </div>
                                 <Form.Select
@@ -1964,7 +1974,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
-                                    // disabled
+                                  // disabled
                                   // required
                                   />
                                 }
@@ -1989,7 +1999,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
-                                    // disabled
+                                  // disabled
                                   // required
                                   />
                                 }
@@ -2482,7 +2492,7 @@ const DriverRegistration = () => {
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
-            <div className="area" >
+              <div className="area" >
                 <ul className="circles">
                   <li></li>
                   <li></li>
@@ -3305,7 +3315,7 @@ const DriverRegistration = () => {
                     </>)
                     }
 
-                       <div className="row mb-3 mt-3 shadow shadow-sm">
+                    <div className="row mb-3 mt-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3"
                         style={{ backgroundColor: "#cddbd9" }}
