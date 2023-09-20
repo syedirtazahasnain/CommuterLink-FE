@@ -377,9 +377,19 @@ const Login = () => {
                   >
                     Login
                   </Button>
-                  {/* <Button className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold" onClick={handleLogin}>
-                    Login
-                  </Button> */}
+                
+                           <div className="py-1 justify-content-center">    <Link to={''} style={{ textDecoration: "none" }}>
+                            <span
+                              style={{
+                                color: "#dc3545",
+                                textDecoration: "none",
+                              }}
+                            >
+                              {" "}
+                            
+                             Forgot Password
+                            </span>
+                          </Link></div>
                   <div className="container">
                     <div className="row d-flex justify-content-center">
                       <div className="column mt-2">

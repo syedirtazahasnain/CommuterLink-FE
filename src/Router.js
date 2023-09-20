@@ -63,6 +63,8 @@ import Loading from "./pages/frontend/register-form/Loading";
 import DataSecurity from "./pages/frontend/register-form/DataSecurity";
 import VerifiedMember from "./pages/frontend/register-form/VerifiedMember";
 import Terms_Services from "./pages/frontend/terms-services/Terms_Services";
+import Forget1 from "./pages/frontend/forgot/Forget1";
+import Forget2 from "./pages/frontend/forgot/Forget2";
 
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -91,6 +93,8 @@ const Router = () => {
         <Route path="/loading" element={<FrontendLayout children={<Loading />} />} />
         <Route path="/datasecurity" element={<FrontendLayout children={<DataSecurity />} />} />
         <Route path="/verifiedmember" element={<FrontendLayout children={<VerifiedMember />} />} />
+        <Route path="/forget1" element={<FrontendLayout children={<Forget1 />} />} />
+        <Route path="/forget2" element={<FrontendLayout children={<Forget2 />} />} />
 
         {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />
