@@ -223,6 +223,62 @@ const CommuterProfile1 = () => {
     }
   };
 
+  const CancelRequest = async (contact_id) => {
+    try {
+      // Display a confirmation dialog with a close button
+      const result = await Swal.fire({
+        position: 'top',
+        title: 'Are you sure?',
+        text: 'You are about to cancel the request',
+        confirmButtonColor: 'green',
+        cancelButtonColor: 'green',
+        confirmButtonText: 'Yes',
+        showCloseButton: true, // Added this line
+      });
+  
+      // Check if the user confirmed the cancellation
+      if (result.isConfirmed) {
+        const body = {
+          contact_id: contact_id,
+        };
+  
+        console.log("Cancel Request Body:", body);
+  
+        const response = await fetch(
+          `${API_URL}/api/v1/cancel-request`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+  
+        const jsonResponse = await response.json();
+        console.log("Cancel API Response", jsonResponse);
+  
+        if (jsonResponse.statusCode === 200) {
+          // Display a success message using Swal
+          Swal.fire({
+            position: 'top',
+            text: `${jsonResponse.message}`,
+            customClass: {
+              confirmButton: 'swal-custom',
+            },
+          });
+  
+          // Redirect the user to the dashboard on success
+          navigate("/dashboard");
+        }
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };  
+
   const UserProfile = ({ user, userDetails }) => {
     const {
       contact_id,
@@ -348,9 +404,6 @@ const CommuterProfile1 = () => {
                   <div className="col-md-10"> {profession}
                   </div>
                 </div>
-
-
-
                 {/* {mobile ? (
                   <>
                     {mobile && (
@@ -367,14 +420,15 @@ const CommuterProfile1 = () => {
             <hr style={{ color: "grey" }} />
             <div className="row">
               <div className="row d-flex justify-content-between align-items-xl-baseline">
-            <div className="col-md-6">
-              <h2 className="text-success py-2 fw-bold">{userType ? userType : "Commuter"} Details</h2>
+                <div className="col-md-6">
+                  <h2 className="text-success py-2 fw-bold">{userType ? userType : "Commuter"} Details</h2>
+                </div>
+                <div className="col-md-2 pl-5">
+                  <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { }}>
+                    View On Map
+                  </Button>
+                </div>
               </div>
-              <div className="col-md-2 pl-5">            <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { }}>
-                  View On Map
-                </Button></div>
-                
-                            </div>
               <div className="col-md-6">
                 <div className="row mb-2">
                   <div className="col-md-4">
@@ -643,8 +697,8 @@ const CommuterProfile1 = () => {
                   Proceed to Payment
                 </Button>
               ) : req_stage === 0 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold text-white rounded-4 px-3 py-2 mb-3" style={{ background: "#ff8a00" }}>
-                  Request Sent
+                <Button className="font-custom btn btn-sm fs-6 fw-bold text-white rounded-4 px-3 py-2 mb-3" style={{ background: "#198754" }} onClick={() => {CancelRequest(contact_id) }}>
+                  Cancel Request
                 </Button>
               ) : req_stage === 2 ? (
                 <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
