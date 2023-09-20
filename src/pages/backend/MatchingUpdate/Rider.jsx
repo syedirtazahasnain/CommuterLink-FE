@@ -22,6 +22,7 @@ const Rider = () => {
 
   useEffect(() => {
     getdropdowndata();
+    getProfileData();
   }, []);
 
   useEffect(() => {
@@ -50,7 +51,32 @@ const Rider = () => {
     setHomeTimeSlots(jsonresponse.time_slots);
     setOfficeTimeSlots(jsonresponse.time_slots);
   };
+  
+  const getProfileData = async () => {
+    try {
+        const response = await fetch(
+            `${API_URL}/api/v1/profile`,
+            {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                },
+            }
+        );
 
+        const jsonresponse = await response.json();
+        setSelectedHomeTime(jsonresponse[0].matches.time_depart);
+        setSelectedOfficeTime(jsonresponse[0].matches.time_return);
+        setPreferredGender(jsonresponse[0].contact.preferred_gender);
+        console.log("Update Driver Details Data", jsonresponse);
+        const mynewarray=jsonresponse[0].matches.days.split(',');
+        setDaysSelected(mynewarray.map(day => day.trim())); 
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+};
   // Function to handle checkbox changes
   const handleCheckboxChange = (event) => {
     const { value } = event.target;
@@ -70,16 +96,7 @@ const Rider = () => {
     try {
 
       if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === "" || preferredGender === "") {
-        // Swal.fire({
-        //   position: 'top',
-
-        //   text: `Please Fill All Fields!`,
-        //   customClass: {
-        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        //   },
-        // }
-        // )
-        displayNotification("warning", "Please Fill All Fields");
+        displayNotification("error", `${jsonresponse.message}`);
       }
       else {
         const body = {
@@ -111,28 +128,12 @@ const Rider = () => {
         console.log("sendRequest API Response", jsonresponse);
 
         if (jsonresponse.status_code === 200) {
-          navigate("/dashboard");
+          //navigate("/dashboard");
+          displayNotification("error", `${jsonresponse.message}`);
         } else if (jsonresponse.status_code === 100) {
-          // Swal.fire({
-          //   position: 'top',
-
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom'
-          //   }
-          // }
-          // )
           displayNotification("error", `${jsonresponse.message}`);
         }
         else if (jsonresponse.status_code === 500) {
-          // Swal.fire({
-          //   position: 'top',
-          //   // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          //   },
-          // });
           displayNotification("error", `${jsonresponse.message}`);
         }
       }
@@ -140,15 +141,6 @@ const Rider = () => {
       console.error("An error occurred:", error);
       // Handle error appropriately, e.g., display an error message to the user
       // alert("An error occurred while sending the request.");
-      // Swal.fire({
-      //   position: 'top',
-
-      //   text: 'An error occured while sending the request.',
-      //   customClass: {
-      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-      //   },
-      // }
-      // )
       displayNotification("error", "An error occured white sending the request");
     }
   };
