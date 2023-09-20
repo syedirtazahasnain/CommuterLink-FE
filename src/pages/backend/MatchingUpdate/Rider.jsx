@@ -74,7 +74,7 @@ const Rider = () => {
 
           text: `Please Fill All Fields!`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -116,7 +116,7 @@ const Rider = () => {
 
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success'
+              confirmButton: 'swal-custom'
             }
           }
           )
@@ -127,7 +127,7 @@ const Rider = () => {
             // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           });
         }
@@ -141,7 +141,7 @@ const Rider = () => {
 
         text: 'An error occured while sending the request.',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )

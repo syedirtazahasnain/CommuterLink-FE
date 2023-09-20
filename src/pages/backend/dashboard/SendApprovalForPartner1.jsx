@@ -146,7 +146,7 @@ const SendApprovalForPartner1 = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -158,7 +158,7 @@ const SendApprovalForPartner1 = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -198,7 +198,7 @@ const SendApprovalForPartner1 = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -210,7 +210,7 @@ const SendApprovalForPartner1 = () => {
 
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -265,7 +265,7 @@ const SendApprovalForPartner1 = () => {
               Based upon your profile I feel that we are a good match. Kindly view my profile and if you think it suits, please approve the request and let's start commuting together.
             </p>
             <p className="">
-              Looking forward to sharing.
+              Looking forward to sharing your car.
             </p>
             <p className="">
               Regards,

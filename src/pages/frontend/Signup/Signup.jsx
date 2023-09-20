@@ -154,7 +154,7 @@ const Signup = () => {
           // text: `${jsonresponse.message}`,
           text: "Email Already Exists",
           customClass: {
-            confirmButton: "bg-success", // Apply custom CSS class to the OK button
+            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
           },
         });
       }
@@ -178,7 +178,7 @@ const Signup = () => {
           // icon: "warning",
           text: "Please Fill All Fields!",
           customClass: {
-            confirmButton: "bg-success",
+            confirmButton: "swal-custom",
             // icon:'bg-secondary' // Apply custom CSS class to the OK button
           },
         });
@@ -228,7 +228,7 @@ const Signup = () => {
                 // text: `${jsonresponse.message}`,
                 text: `${errors[field][0]}`,
                 customClass: {
-                  confirmButton: "bg-success",
+                  confirmButton: "swal-custom",
                   // Apply custom CSS class to the OK button
                 },
               });
@@ -241,7 +241,7 @@ const Signup = () => {
             // icon: "warning",
             text: "Please Check Terms of Service",
             customClass: {
-              confirmButton: "bg-success", // Apply custom CSS class to the OK button
+              confirmButton: "swal-custom", // Apply custom CSS class to the OK button
             },
           });
         }

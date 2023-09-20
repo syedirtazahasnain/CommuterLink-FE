@@ -180,7 +180,7 @@ const FinalStep = () => {
             // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
           },}
           )
         }
@@ -190,7 +190,7 @@ const FinalStep = () => {
             // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
           },}
           )
         }
@@ -236,7 +236,7 @@ const FinalStep = () => {
             // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
           },}
           )
         }
@@ -247,7 +247,7 @@ const FinalStep = () => {
             // // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
           },}
           )
         }
@@ -261,7 +261,7 @@ const FinalStep = () => {
         // // icon: 'error',
        text: 'An error occured while sending the request.',
        customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
       },}
       )
     }

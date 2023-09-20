@@ -118,7 +118,7 @@ const EditProfile = () => {
         
          text: 'Please Fill All Fields!',
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }
@@ -129,7 +129,7 @@ const EditProfile = () => {
         
          text: 'Confirm password is not matched with new password!',
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }
@@ -163,7 +163,7 @@ const EditProfile = () => {
           
            text: `${jsonresponse.message}`,
            customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
           },}
           )
           setCurrentPassword("");

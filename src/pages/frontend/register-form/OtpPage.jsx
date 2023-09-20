@@ -94,7 +94,7 @@ const OtpPage = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -131,7 +131,7 @@ const OtpPage = () => {
       showCancelButton: false,
       confirmButtonText: 'OK',
       customClass: {
-        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
       },
     });
   };
@@ -152,7 +152,7 @@ const OtpPage = () => {
         // icon: 'warning',
         text: 'OTP does not match. Please try again.',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -196,7 +196,7 @@ const OtpPage = () => {
         // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -207,7 +207,7 @@ const OtpPage = () => {
       // icon: 'warning',
       text: 'OTP has been sent again!',
       customClass: {
-        confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
       },
     }
     )

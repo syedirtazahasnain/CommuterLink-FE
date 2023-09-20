@@ -388,7 +388,7 @@ const SchoolRegistration = () => {
           // // icon: 'warning',
           text: `Please select a place in ${cityStart}.`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       }
@@ -442,7 +442,7 @@ const SchoolRegistration = () => {
           // // icon: 'warning',
           text: `Please select a place in ${cityEnd}.`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       }
@@ -617,7 +617,7 @@ const SchoolRegistration = () => {
         // icon: 'warning',
         text: 'Please Fill All Fields!',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -691,7 +691,7 @@ const SchoolRegistration = () => {
           // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }
@@ -741,7 +741,7 @@ const SchoolRegistration = () => {
           // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }
@@ -782,7 +782,7 @@ const SchoolRegistration = () => {
           // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }
@@ -823,7 +823,7 @@ const SchoolRegistration = () => {
           // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },
       }
         )
@@ -860,7 +860,7 @@ const SchoolRegistration = () => {
       //     showCancelButton: false,
       //     confirmButtonText: 'OK',
       //     customClass: {
-      //       confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+      //       confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
       //     },
       //   });
       // };
@@ -879,7 +879,7 @@ const SchoolRegistration = () => {
           showCancelButton: false,
           confirmButtonText: 'OK',
           customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
           },
         });
         route();
@@ -890,7 +890,7 @@ const SchoolRegistration = () => {
           // icon: 'error',
          text: `${jsonresponse.message}`,
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }

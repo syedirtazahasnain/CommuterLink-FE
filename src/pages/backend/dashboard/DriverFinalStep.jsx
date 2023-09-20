@@ -129,7 +129,7 @@ const DriverFinalStep = () => {
           // // icon: 'warning',
          text: `${jsonresponse.message}`,
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }
@@ -142,7 +142,7 @@ const DriverFinalStep = () => {
         // icon: 'error',
        text: 'An error occured while sending the request',
        customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
       },}
       )
     }

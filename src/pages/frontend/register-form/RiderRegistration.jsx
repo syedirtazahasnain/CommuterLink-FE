@@ -10,7 +10,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import {Button} from "@mui/base";
+import { Button } from "@mui/base";
 import Stack from "@mui/material/Stack";
 import { ThreeCircles } from 'react-loader-spinner'
 import {
@@ -233,7 +233,7 @@ const RiderRegistration = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [navigate]);
-  
+
   useEffect(() => {
     // Function to fetch the geocoding data
     const getGeocodeStartData = async () => {
@@ -371,7 +371,7 @@ const RiderRegistration = () => {
           // // icon: 'warning',
           text: `Please select a place in ${cityStart}.`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       }
@@ -424,7 +424,7 @@ const RiderRegistration = () => {
           // // icon: 'warning',
           text: `Please select a place in ${cityEnd}.`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       }
@@ -577,7 +577,7 @@ const RiderRegistration = () => {
   ];
 
   console.log({ requiredFields });
-  console.log({PersonalFormFields});
+  console.log({ PersonalFormFields });
 
   const handleLogin = async () => {
     if (
@@ -605,7 +605,7 @@ const RiderRegistration = () => {
         // icon: 'warning',
         text: 'Please Fill All Fields!',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -662,7 +662,7 @@ const RiderRegistration = () => {
             // text: `${jsonresponse.message}`,
             text: `${errors[field][0]}`,
             customClass: {
-              confirmButton: "bg-success",
+              confirmButton: "swal-custom",
               // Apply custom CSS class to the OK button
             },
           });
@@ -741,7 +741,7 @@ const RiderRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -783,7 +783,7 @@ const RiderRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -825,7 +825,7 @@ const RiderRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -884,7 +884,7 @@ const RiderRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -920,7 +920,7 @@ const RiderRegistration = () => {
             <div className="col-md-6 shadow bg-white  mt-5 mb-5">
               <div
                 className="row shadow form-color-header"
-                // style={{ backgroundColor: '#1F5F5B' }}
+              // style={{ backgroundColor: '#1F5F5B' }}
               >
                 <h1 className="text-center text-white py-4">
                   Registration Form
@@ -936,7 +936,7 @@ const RiderRegistration = () => {
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3 form-color-field"
-                    // style={{ backgroundColor: "#cddbd9" }}
+                  // style={{ backgroundColor: "#cddbd9" }}
                   >
                     <h2 className="text-success mb-3 text-center">
                       STARTING POINT
@@ -1107,13 +1107,13 @@ const RiderRegistration = () => {
                         )}
                       </>
                     )}
-                  
+
                   </div>
                 </div>
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3 form-color-field"
-                    // style={{ backgroundColor: "#cddbd9" }}
+                  // style={{ backgroundColor: "#cddbd9" }}
                   >
                     <h2 className="text-success mb-3 text-center">
                       DROP-OFF POINT
@@ -1263,7 +1263,7 @@ const RiderRegistration = () => {
                         )}
                       </>
                     )}
-                 
+
                   </div>
                 </div>
 
@@ -1274,7 +1274,11 @@ const RiderRegistration = () => {
                   <Modal show={showStartModal} onHide={handleCloseStartModal}>
                     <Modal.Header className="d-block" >
                       <Modal.Title>Select Starting Location</Modal.Title>
-                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
+                      <Modal.Title className="text-danger fs-7">
+                        <Modal.Title className="text-danger fs-7">                        
+                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
+                        </Modal.Title>
+                      </Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
@@ -1351,7 +1355,7 @@ const RiderRegistration = () => {
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="contained" onClick={handleCloseEndModal}
-                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold">
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold">
                         Select
                       </Button>
                     </Modal.Footer>
@@ -1360,7 +1364,7 @@ const RiderRegistration = () => {
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3 form-color-field"
-                    // style={{ backgroundColor: "#cddbd9" }}
+                  // style={{ backgroundColor: "#cddbd9" }}
                   >
                     <h2 className="text-success mb-3 text-center">
                       Timing
@@ -1423,7 +1427,7 @@ const RiderRegistration = () => {
                 </div>
                 <Row className="mb-3 form-color-field"
                 //  style={{ border: "1px solid #cddbd9", backgroundColor: '#cddbd9' }}
-                
+
                 >
                   <Form.Group as={Col} md="12" controlId="validationCustom20">
                     <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
@@ -1567,7 +1571,7 @@ const RiderRegistration = () => {
 
                 <Row
                   className="mb-3 py-3 shadow shadow-sm form-color-field"
-                  // style={{ backgroundColor: " #cddbd9" }}
+                // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}
@@ -1619,7 +1623,7 @@ const RiderRegistration = () => {
 
                 <Row
                   className="mb-3 py-3 shadow shadow-sm form-color-field"
-                  // style={{ backgroundColor: " #cddbd9" }}
+                // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}
@@ -1727,7 +1731,7 @@ const RiderRegistration = () => {
                 </Row>
                 <Row
                   className="mb-3 py-3 shadow shadow-sm form-color-field"
-                  // style={{ backgroundColor: " #cddbd9" }}
+                // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}
@@ -1830,7 +1834,7 @@ const RiderRegistration = () => {
                   >
                     {isLoading ? (
                       <span>
-                        <i className="fa fa-spinner fa-spin" /> Submitting...
+                        <i className="fa fa-spinner fa-spin" /> Proceed...
                       </span>
                     ) : (
                       'Submit'
