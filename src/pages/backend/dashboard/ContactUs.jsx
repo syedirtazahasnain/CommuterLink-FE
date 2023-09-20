@@ -93,7 +93,7 @@ const ContactUs = () => {
           // icon: 'warning',
           text: 'Please Fill All Fields!',
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -130,7 +130,7 @@ const ContactUs = () => {
             // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           }
           )
@@ -142,7 +142,7 @@ const ContactUs = () => {
             // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           }
           )

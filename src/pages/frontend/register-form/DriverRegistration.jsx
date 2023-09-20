@@ -392,7 +392,7 @@ const DriverRegistration = () => {
           // // icon: 'warning',
           text: `Please select a place in ${cityStart}.`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       }
@@ -460,7 +460,7 @@ const DriverRegistration = () => {
           // // icon: 'warning',
           text: `Please select a place in ${cityEnd}.`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
       }
@@ -793,7 +793,7 @@ const DriverRegistration = () => {
         // icon: 'warning',
         text: 'Please Fill All Fields!',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -855,7 +855,7 @@ const DriverRegistration = () => {
         // icon: 'warning',
         text: 'Please Fill All Driver Form Fields!',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       }
       )
@@ -993,7 +993,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1036,7 +1036,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1079,7 +1079,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1136,7 +1136,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         }
         )
@@ -1209,7 +1209,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success',
+            confirmButton: 'swal-custom',
           },
         }
         )
@@ -1221,7 +1221,7 @@ const DriverRegistration = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'bg-success',
+            confirmButton: 'swal-custom',
           },
         }
         )
@@ -1269,7 +1269,7 @@ const DriverRegistration = () => {
             showCancelButton: false,
             confirmButtonText: 'OK',
             customClass: {
-              confirmButton: 'bg-success',
+              confirmButton: 'swal-custom',
             },
           });
           route();
@@ -1281,7 +1281,7 @@ const DriverRegistration = () => {
             // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success',
+              confirmButton: 'swal-custom',
             },
           }
           )
@@ -1293,7 +1293,7 @@ const DriverRegistration = () => {
           // icon: 'warning',
           text: 'Please Enter Payment Details!',
           customClass: {
-            confirmButton: 'bg-success',
+            confirmButton: 'swal-custom',
           },
         }
         )
@@ -1675,7 +1675,7 @@ const DriverRegistration = () => {
                       <Modal show={showStartModal} onHide={handleCloseStartModal}>
                         <Modal.Header className="d-block" >
                           <Modal.Title>Select Starting Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point.</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1710,7 +1710,7 @@ const DriverRegistration = () => {
                       <Modal show={showEndModal} onHide={handleCloseEndModal}>
                         <Modal.Header className="d-block" >
                           <Modal.Title>Select Drop-off Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                           <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -2204,7 +2204,7 @@ const DriverRegistration = () => {
                       >
                         {isLoading ? (
                           <span>
-                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                            <i className="fa fa-spinner fa-spin" /> Proceed...
                           </span>
                         ) : (
                           'Next'

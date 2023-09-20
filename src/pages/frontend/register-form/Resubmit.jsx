@@ -94,7 +94,7 @@ const Resubmit = () => {
         // icon: 'warning',
        text: 'Please Fill All Fields!',
        customClass: {
-        confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+        confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
       },}
       )
     } else {
@@ -133,7 +133,7 @@ const Resubmit = () => {
             // icon: 'error',
            text: `${jsonresponse.message}`,
            customClass: {
-            confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
           },}
           )
         }
@@ -144,7 +144,7 @@ const Resubmit = () => {
           // icon: 'warning',
          text: 'Please Check Terms of Service',
          customClass: {
-          confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         },}
         )
       }
@@ -205,7 +205,7 @@ const Resubmit = () => {
               // icon: 'error',
              text: `${jsonresponse.message}`,
              customClass: {
-              confirmButton: 'bg-success' , // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
             },}
             )
           }

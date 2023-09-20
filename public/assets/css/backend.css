@@ -283,7 +283,27 @@ body{
 .headerColor{
   background-color: rgb(42, 64, 42);
 }
- 
+.swal-text {
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+  border: none;
+}
+
+/* Style the confirm button */
+.swal-custom {
+  background-color: #2b9f8a !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* Hover effect for the confirm button */
+.swal-custom:hover {
+  background-color: #2b9f8a;
+}
 
 
 

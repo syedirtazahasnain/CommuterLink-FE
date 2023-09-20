@@ -96,7 +96,7 @@ const PartnerCancellation = () => {
           // // icon: 'warning',
           text: 'Please select a date',
           customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           },
         });
         return;
@@ -136,7 +136,7 @@ const PartnerCancellation = () => {
             // // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           });
         }
@@ -146,7 +146,7 @@ const PartnerCancellation = () => {
             // // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           });
         }
@@ -156,7 +156,7 @@ const PartnerCancellation = () => {
             // // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           });
         }
@@ -195,7 +195,7 @@ const PartnerCancellation = () => {
             // // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           });
         }
@@ -205,7 +205,7 @@ const PartnerCancellation = () => {
             // // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           });
         }
@@ -215,7 +215,7 @@ const PartnerCancellation = () => {
             // // icon: 'error',
             text: `${jsonresponse.message}`,
             customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
             },
           });
         }
@@ -227,7 +227,7 @@ const PartnerCancellation = () => {
         // // icon: 'error',
         text: 'An error occurred while sending the request.',
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       });
     }
@@ -321,7 +321,7 @@ const PartnerCancellation = () => {
         // // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       });
     }
@@ -331,7 +331,7 @@ const PartnerCancellation = () => {
         // icon: 'error',
         text: `${jsonresponse.message}`,
         customClass: {
-          confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         },
       });
     }

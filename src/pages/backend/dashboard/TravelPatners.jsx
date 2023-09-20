@@ -107,7 +107,7 @@ const TravelPatners = () => {
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: "bg-success", // Apply custom CSS class to the OK button
+            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
           },
         });
       }

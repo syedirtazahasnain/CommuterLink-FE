@@ -112,7 +112,7 @@ const Driver = () => {
                  
                     text: `Please fill all fields!`,
                     customClass:{
-                        confirmButton:'bg-success'
+                        confirmButton:'swal-custom'
                       }
                 }
                 )
@@ -157,7 +157,7 @@ const Driver = () => {
                       
                         text: `${jsonresponse.message}`,
                         customClass:{
-                            confirmButton:'bg-success'
+                            confirmButton:'swal-custom'
                           }
                     }
                     )
@@ -168,7 +168,7 @@ const Driver = () => {
                        
                         text: `${jsonresponse.message}`,
                         customClass:{
-                            confirmButton:'bg-success'
+                            confirmButton:'swal-custom'
                           }
                     }
                     )
@@ -183,7 +183,7 @@ const Driver = () => {
               
                 text: 'An error occured while sending the request.',
                 customClass:{
-                    confirmButton:'bg-success'
+                    confirmButton:'swal-custom'
                   }
             })
         }
