@@ -359,9 +359,9 @@
    color: #198754;
    
  }
- section {
+ /* section {
    padding: 20px 0;
-}
+} */
 .accordion{
  display: flex;
  justify-content: center;
@@ -882,8 +882,6 @@ a.nav-link:hover {
  font-family: "Poppins", sans-serif;
  display: inline-block;
 }
-
-
 .nav-link{
  cursor: pointer;
 }

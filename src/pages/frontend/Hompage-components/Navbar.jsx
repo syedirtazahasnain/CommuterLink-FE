@@ -63,7 +63,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link className="nav-link text-black mr-3 ml-3" to="carousel" onClick={home} smooth="true" offset={20} duration={50}>
+                    <Link className="nav-link text-black mr-3 ml-3" to="costEarningSection" onClick={home} smooth="true" offset={20} duration={50}>
                       CONCEPT
                     </Link>
                   </li>

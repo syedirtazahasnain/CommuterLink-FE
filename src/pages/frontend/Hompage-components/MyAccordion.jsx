@@ -26,7 +26,7 @@ const MyAccordion = () => {
             </button>
           </div>
         </div>
-        <div className="col-md-6  p-5">
+        <div className="col-md-6">
           <img src={`${BASE_URL}/assets/images/diagonal-picture.png`} className='img-fluid w-100' />
         </div>
       </div>
@@ -36,11 +36,11 @@ const MyAccordion = () => {
             <div className="container">
               <h3 className="text-dark fw-bold mb-2">It's Not About Earning but </h3>
               <h1 className="text-green mb-3">Cost Sharing & Saving</h1>
-              <p className="text-dark fs-5 mb-5">The basic difference between other carpooling
+              <p className="text-dark fs-5">The basic difference between other carpooling
                 apps and CommutersLink is that we are offering long term solutions for daily commute
                 instead of onetime ride. The concept is to collectively
                 defeat the impact of price hike by cost sharing. It’s not a source of earning but saving</p>
-                <div className="container p-5">
+                <div className="container px-5">
               <div className="row ">
                 <div className="col-md-6 mb-3 text-center">
                   <a data-bs-toggle="collapse" href="#collapseOne" className="text-decoration-none">
@@ -103,23 +103,20 @@ const MyAccordion = () => {
             </div>
             <div className="collapse fade" id="collapseTwo" data-bs-parent="#costEarningSection">
               <img src={`${BASE_URL}/assets/images/car-ride.png`} className='img-fluid w-100 p-3' />
-              <h5 className="text-dark fw-bold mb-3">Choose between Using your  Car or Ride with
-                Others Two</h5>
-              <p className="text-dark mb-3">CommutersLink simultaneously offers you partners, who are a suitable match to ride your car and at the same time matches you up with car owners with whom we think you can ride with. Both choices are made available at the same time</p>
+              <h5 className="text-dark fw-bold mb-3"> Long Term Commitment</h5>
+              <p className="text-dark mb-3">The commuting buddies would mostly belong to same neighbourhood and community. It’s a long term solution for cost effective commute to Work/Office or University/School and not a one-time drop off.</p>
               <Link  to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link>
             </div>
             <div className="collapse fade" id="collapseThree" data-bs-parent="#costEarningSection">
               <img src={`${BASE_URL}/assets/images/car-ride.png`} className='img-fluid w-100 p-3' />
-              <h5 className="text-dark fw-bold mb-3">Choose between Using your  Car or Ride with
-                Others Three</h5>
-              <p className="text-dark mb-3">CommutersLink simultaneously offers you partners, who are a suitable match to ride your car and at the same time matches you up with car owners with whom we think you can ride with. Both choices are made available at the same time</p>
+              <h5 className="text-dark fw-bold mb-3">Share Cost of Commuting</h5>
+              <p className="text-dark mb-3">CommutersLink aims to empower society to manage ever increasing cost of living and inflation by distributing the burden of commuting in a respectable manner</p>
               <Link  to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link>
             </div>
             <div className="collapse fade" id="collapseFour" data-bs-parent="#costEarningSection">
               <img src={`${BASE_URL}/assets/images/car-ride.png`} className='img-fluid w-100 p-3' />
-              <h5 className="text-dark fw-bold mb-3">Choose between Using your  Car or Ride with
-                Others Four</h5>
-              <p className="text-dark mb-3">CommutersLink simultaneously offers you partners, who are a suitable match to ride your car and at the same time matches you up with car owners with whom we think you can ride with. Both choices are made available at the same time</p>
+              <h5 className="text-dark fw-bold mb-3">Socioeconomic Angle</h5>
+              <p className="text-dark mb-3">Commuterslink has a socioeconomic welfare angle by reducing traffic, hazards, pollution, government spending on communication infrastructure and improving citizen mental health</p>
               <Link  to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link>
             </div>
           </div>

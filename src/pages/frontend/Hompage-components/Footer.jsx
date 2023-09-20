@@ -22,18 +22,21 @@ const Footer = () => {
                 <h1 className='text-white text-center'>Our Newsletter</h1>
               </div>
               <div className="col-md-4">
-                <p className="text-white fs-4 mt-3">To Remain Updated, Please Subscribe to Our Newsletters</p>
+                <p className="text-white fs-4 mt-1">To Remain Updated, Please Subscribe to Our Newsletters</p>
               </div>
               <div class="col-md-4 mt-2 text-center">
-                <form >
-                  <input
-                    className='fs-5'
+                  <input 
                     type="email"
-                    name="email"
-                    placeholder="Enter your email"
+                    name="email" 
+                    class="input fs-5 rounded-3 border-0 px-5 py-2 shadow shadow-sm" 
+                    placeholder="Enter Your Email" 
                   />
-                  <input className='btn-custom1 fs-5 fw-bold text-white my-2' type="submit" value="Subscribe" />
-                </form>
+                  <input 
+                    className='btn-custom1 fs-5 text-white py-2 rounded-3 px-4' 
+                    type="submit" 
+                    value="Subscribe" 
+                  />
+
               </div>
             </div>
             <div className="row bg-light-secondary">
@@ -63,7 +66,7 @@ const Footer = () => {
                   </li>
                   <li className='cursor-pointer'>
                     <i className="bx bx-chevron-right cursor-pointer"></i>
-                    <DomLink to="carousel" onClick={home} smooth="true" offset={20} duration={50}>Concept</DomLink>
+                    <DomLink to="costEarningSection" onClick={home} smooth="true" offset={20} duration={50}>Concept</DomLink>
                   </li>
                   <li className='cursor-pointer'>
                     <i className="bx bx-chevron-right"></i>
@@ -79,12 +82,12 @@ const Footer = () => {
                   </li>
                   <li className='cursor-pointer'>
                     <i className="bx bx-chevron-right"></i>
-                    <Link to="/faq" onClick={home} smooth="true" offset={20} duration={50}>Faqs</Link>
+                    <Link to="/faq" onClick={home} smooth="true" offset={20} duration={50}>FAQs</Link>
                   </li>
                 </ul>
               </div>
 
-              <div className="col-lg-4 col-md-6 footer-links  my-4">
+              <div className="col-lg-3 col-md-6 footer-links  my-4">
                 <h4>Contact Us</h4>
                 <ul>
                   <li className='mb-2'>
@@ -126,25 +129,25 @@ const Footer = () => {
               </div>
 
 
-              <div className="col-lg-3 col-md-6 footer-newsletter  my-4">
+              <div className="col-lg-4 col-md-6 footer-newsletter  my-4">
 
                 <h4>Download App</h4>
-                <div className="container">
-                  <ul className="list-unstyled d-flex">
-                    <li className="mr-3">
-                      <img
-                        className="img-fluid"
-                        src="https://www.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "200px" }} />
+                <ul className="list-unstyled d-flex">
+                  <li className="mr-3">
+                    <img
+                      className="img-fluid"
+                      src="https://www.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
 
-                    </li>
-                    <li>
-                      <img
-                        className="img-fluid"
-                        src="https://www.commuterslink.com/front_assets/img/Apple-store.png" style={{ width: "200px" }} />
+                  </li>
+                  <li>
+                    <img
+                      className="img-fluid"
+                      src="https://www.commuterslink.com/front_assets/img/Apple-store.png" style={{ width: "400px" }} />
 
-                    </li>
-                  </ul>
-                </div>
+                  </li>
+                </ul>
+                {/* <div className="container">
+                </div> */}
               </div>
             </div>
           </div>

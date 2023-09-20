@@ -133,7 +133,8 @@ const Contact = () => {
                     id="outlined-basic"
                     label="Your Name"
                     variant="outlined"
-                    sx={{ width: '100%', color: 'black' }}
+                    sx={{ width: '100%', color: 'black', 
+                    color: "success" }}
                     value={fullName}
                     onChange={handleFullNameChange}
                     size="small"

@@ -159,9 +159,9 @@ a.nav-link:hover {
   padding: 10px 0;
   color: #198754;
 }
-section {
+/* section {
   padding: 20px 0;
-}
+} */
 .accordion {
   display: flex;
   justify-content: center;
@@ -546,4 +546,37 @@ i {
   .new-banner-circle {
     display: none;
   }
+}
+.form-control {
+  position: relative;
+  margin: 30px 0 20px;
+}
+
+.input {
+  border: 0;
+  border-radius: 50px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  display: block;
+  font-family: 'Muli', sans-serif;
+  font-size: 14px;
+  height: 42px;
+  padding: 12px 25px;
+  width: 100%;
+}
+
+.btn {
+  background-color: #312940;
+  border: 0;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 14px;
+  height: 42px;
+  padding: 12px 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.input:focus, .btn:focus {
+  outline: 0;
 }

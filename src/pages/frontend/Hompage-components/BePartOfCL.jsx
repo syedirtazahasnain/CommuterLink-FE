@@ -19,8 +19,8 @@ const signupRoute = () => {
                 </div>
                 <div className="col-md-5 text-center d-flex">
                     <div className="m-auto p-4">
-                        <h1 className="text-white fw-bold mb-3">Be Part of CommutersLink</h1>
-                        <h3 className="text-white mb-3">It's not about EARNING but cost sharing and SAVING</h3>
+                        {/* <p className="text-white fs-4 mb-3">Break Free from <strong className='text-dark'>High Fuel Costs</strong>  and <strong className='text-dark'>Daily Commuting Expenses </strong>  to offices, universities and schools!</p> */}
+                        <h1 className="text-white mb-3"> Join CommutersLink for a Better, Affordable daily Commute Today!</h1>
 
                         <button
                             className="btn-custom2  border-1 border-white px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={signupRoute}>

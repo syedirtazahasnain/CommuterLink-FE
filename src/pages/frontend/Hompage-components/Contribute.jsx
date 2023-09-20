@@ -20,17 +20,16 @@ export default class SimpleSlider extends Component {
         <Slider {...settings}>
           <div className="">
             <div className="row bg-pink g-0">
-              <div className="col-md-6 text-center d-flex">
+              <div className="col-md-7 text-center d-flex">
                 <div className="m-auto p-4">
                   <h1 className="text-white fw-bold mb-3">Help Reduce Traffic Congestion</h1>
-                  <button
-                    className="btn-custom2  border-1 border-white px-4 py-2 rounded rounded-2 text-white fw-bold">
-                    Join Now
-                  </button>
+                  <p className="text-white fs-4">With less traffic easy to regulate the traffic and enforce discipline </p>
+                  <img className="img-fluid" src={`${BASE_URL}/assets/images/orange-car.png`} alt="image1" style={{width: "80px"}} />
+
                 </div>
 
               </div>
-              <div className="col-md-6">
+              <div className="col-md-5">
                 <img className="crousel img-fluid" src={`${BASE_URL}/assets/images/contribute-1.jpg`} alt="image1" style={{ width: "500px" }} />
 
 
@@ -39,17 +38,15 @@ export default class SimpleSlider extends Component {
           </div>
           <div className="">
             <div className="row bg-col-3 g-0">
-              <div className="col-md-6 text-center d-flex">
+              <div className="col-md-7 text-center d-flex">
                 <div className="m-auto p-4">
                   <h1 className="text-white fw-bold mb-3">Help Reduce Air & Noise Pollution</h1>
-                  <button
-                    className="btn-custom2  border-1 border-white px-4 py-2 rounded rounded-2 text-white fw-bold">
-                    Join Now
-                  </button>
+                  <p className="text-white fs-4">Reduced air, noise pollution and improved mental health</p>
+                  <img className="img-fluid" src={`${BASE_URL}/assets/images/orange-car.png`} alt="image1" style={{width: "80px"}} />
                 </div>
 
               </div>
-              <div className="col-md-6">
+              <div className="col-md-5">
                 <img className="crousel img-fluid" src={`${BASE_URL}/assets/images/contribute-2.jpg`} alt="image1" style={{ width: "500px" }} />
 
 
@@ -58,18 +55,19 @@ export default class SimpleSlider extends Component {
           </div>
           <div className="">
             <div className="row bg-col-2 g-0">
-              <div className="col-md-6 text-center d-flex">
+              <div className="col-md-7 text-center d-flex">
                 <div className="m-auto p-4">
-                  <h1 className="text-white fw-bold mb-3">Help Conserve Energy</h1>
-                  <button
-                    className="btn-custom2  border-1 border-white px-4 py-2 rounded rounded-2 text-white fw-bold">
-                    Join Now
-                  </button>
+                  <h1 className="text-white fw-bold mb-3">Gender inclusion in national development </h1>
+                  <p className="text-white fs-4">A large number of our female workforce does not contribute <br /> 
+                  to economy owing to commuting problems
+                   </p>
+                  <img className="img-fluid" src={`${BASE_URL}/assets/images/orange-car.png`} alt="image1" style={{width: "80px"}} />
+                  
                 </div>
 
               </div>
-              <div className="col-md-6">
-                <img className="crousel img-fluid" src={`${BASE_URL}/assets/images/contribute-3.jpg`} alt="image1" style={{ width: "500px" }} />
+              <div className="col-md-5">
+                <img className="crousel img-fluid" src={`${BASE_URL}/assets/images/taxi-driver-client-car.jpg`} alt="image1" style={{ width: "500px" }} />
 
               </div>
             </div>

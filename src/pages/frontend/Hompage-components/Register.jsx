@@ -16,7 +16,7 @@ const Register = () => {
             <div className="container">
               <div className="text-center text-black">
                 <h1>Register</h1>
-                <h3 className="fs-5 mb-3">Care to Share - Carpool with Your Neighbourhood</h3>
+                <h3 className=" mb-3">Care to Share - Carpool with Your Neighbourhood</h3>
                 <button
                   className="btn-custom2 border-1 border-black px-4 py-2 rounded rounded-2 text-black fw-bold" onClick={signupRoute}>
                   Join Now
