@@ -745,7 +745,7 @@ const DriverRegistration = () => {
     selectedCarBrand, selectedCarCC,
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
-    selectedCarImageExt, selectedSeat, selectedSeatGender,
+    selectedCarImageExt, selectedSeat, preferredGender,
     selectedMidRoutePartner, inputDrivingLicenseMySelf,
     inputValidUptoMySelf, inputPlaceIssueMySelf
   ];
@@ -1098,7 +1098,7 @@ const DriverRegistration = () => {
         car_image: selectedCarImage,
         car_image_ext: selectedCarImageExt,
         seats_available: selectedSeat,
-        seats_for: selectedSeatGender,
+        seats_for: preferredGender,
         mid_route: selectedMidRoutePartner,
         one_side: selectedOneRoutePartner,
         drive_option: "Driver",

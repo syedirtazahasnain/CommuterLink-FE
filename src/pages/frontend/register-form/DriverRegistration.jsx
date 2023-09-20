@@ -756,7 +756,7 @@ const DriverRegistration = () => {
     selectedCarBrand, selectedCarCC,
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
-    selectedCarImageExt, selectedSeat, selectedSeatGender,
+    selectedCarImageExt, selectedSeat, preferredGender,
     // inputDrivingLicenseMySelf,
     // inputValidUptoMySelf, inputPlaceIssueMySelf
   ];
@@ -1161,7 +1161,7 @@ const DriverRegistration = () => {
         car_image: selectedCarImage,
         car_image_ext: selectedCarImageExt,
         seats_available: selectedSeat,
-        seats_for: selectedSeatGender,
+        seats_for: preferredGender,
         mid_route: "Yes",
         //one_side: selectedOneRoutePartner,
         drive_option: "Driver",
@@ -2461,7 +2461,7 @@ const DriverRegistration = () => {
                             <option value="4">4</option>
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom27" className="mb-2">
+                        {/* <Form.Group as={Col} md="12" controlId="validationCustom27" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Seats Available for (Male, Female, Both)
                           </Form.Label>
@@ -2477,7 +2477,7 @@ const DriverRegistration = () => {
                             <option value="Female">Female</option>
                             <option value="Both">Both</option>
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
                       </div></div>
 
                     {/* <div className="row mb-3 shadow shadow-sm">
