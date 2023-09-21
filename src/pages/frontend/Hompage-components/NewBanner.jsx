@@ -30,6 +30,21 @@ const NewBanner = () => {
           </CardContent>
         </Card>
       </div>
+      <div
+        className="position-absolute new-banner-rectangle"
+        style={{
+          left: "200px",
+          top: "90%",
+          transform: 'translateY(-50%)',
+          // width: "1150px"
+        }}
+      >
+        <div className="p-0 d-flex bg-dark">
+          <div className="col-12 m-auto py-4 px-5">
+            <h1 className='text-yellow'>YOUR FUEL-SAVING DAILY COMMUTING SOLUTION!</h1>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

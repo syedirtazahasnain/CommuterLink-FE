@@ -946,6 +946,18 @@ a.nav-link:hover {
   }
 }
 
+.new-banner-rectangle{
+  /* right: "20px" !important;
+  top: "50%" !important;
+  transform: 'translateY(-50%)' !important;
+  width: "350px" !important; */
+}
+@media (max-width: 1024px) {
+  .new-banner-rectangle {
+    display: none;
+  }
+}
+
 .form-color-header{
   background: var(--bg-blue-green);
 }
