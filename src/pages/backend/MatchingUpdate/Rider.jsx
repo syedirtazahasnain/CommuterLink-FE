@@ -96,7 +96,7 @@ const Rider = () => {
     try {
 
       if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === "" || preferredGender === "") {
-        displayNotification("error", `${jsonresponse.message}`);
+        displayNotification("error", `Please fill all fields`);
       }
       else {
         const body = {
