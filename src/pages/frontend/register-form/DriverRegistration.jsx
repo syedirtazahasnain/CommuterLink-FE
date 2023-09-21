@@ -1342,7 +1342,7 @@ const DriverRegistration = () => {
                 </ul>
               </div >
               <div className="row justify-content-center">
-                <div className="col-md-6 bg-white  mt-5 mb-5"  >
+                <div className="col-md-6 bg-white mt-5 mb-5"  >
              
                   <div
                     className="row shadow  form-color-header"
@@ -1351,7 +1351,7 @@ const DriverRegistration = () => {
                     <h1 className="text-center text-white py-4">
                       Registration Form
                     </h1></div>
-                  <Form className="p-3 top-form " noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Form className="p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}>
 
                     <div className="row mb-3 shadow shadow-sm ">
                       <div
