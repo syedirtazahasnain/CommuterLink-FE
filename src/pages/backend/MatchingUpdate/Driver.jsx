@@ -158,14 +158,17 @@ const Driver = () => {
                 console.log("sendRequest API Response", jsonresponse);
 
                 if (jsonresponse.status_code === 200) {
-                    //navigate("/dashboard");
+                    console.log('200');
+                    navigate("/dashboard");
                     displayNotification("success","Matching criteria has been updated successfully"); 
                     
                     //window.location.reload();
                 } else if (jsonresponse.status_code === 100) {
+                    console.log('100');
                     displayNotification("error", `${jsonresponse.message}`);
                 }
                 else if (jsonresponse.statusCode === 500) {
+                    console.log('500');
                     displayNotification("error", `${jsonresponse.message}`);
                 }
             }
