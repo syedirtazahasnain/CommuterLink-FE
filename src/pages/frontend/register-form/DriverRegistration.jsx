@@ -458,7 +458,7 @@ const DriverRegistration = () => {
         //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         //   },
         // });
-        displayNotification("warning", `{"Please Select a place in"}${cityStart}`);
+        displayNotification("warning", `Please select a place in ${cityStart}.`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -527,7 +527,7 @@ const DriverRegistration = () => {
         //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         //   },
         // });
-        displayNotification("warning", `{"Please Select a place in"}${cityEnd}`);
+        displayNotification("warning", `Please select a place in ${cityEnd}.`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -2346,7 +2346,18 @@ const DriverRegistration = () => {
                         </h2>
                         <Form.Group as={Col} md="12" controlId="validationCustom18" className="mb-2">
                           <Form.Label className="text-dark fs-6">Car Brand</Form.Label>
-                          <Form.Select
+                          <Form.Control
+                            required
+                            type="text"
+                            className="text-secondary"
+                            value={selectedCarBrand}
+                            onChange={(e) => setSelectedCarBrand(e.target.value)}
+                            // value={selectedModelName}
+                            // onChange={(e) => setSelectedModelName(e.target.value)}
+                            placeholder="Enter your Car Brand (Honda, Toyota etc)"
+                            defaultValue=""
+                          />
+                          {/* <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
                             value={selectedCarBrand}
@@ -2361,7 +2372,7 @@ const DriverRegistration = () => {
                                 {car.brand_name}
                               </option>
                             ))}
-                          </Form.Select>
+                          </Form.Select> */}
                         </Form.Group>
                         <Form.Group as={Col} md="12" controlId="validationCustom19" className="mb-2">
                           <Form.Label className="text-dark fs-6">
