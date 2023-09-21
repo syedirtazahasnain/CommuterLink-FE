@@ -72,7 +72,7 @@ const DriverRegistration = () => {
               <div class="row">
                 <div class="col-md-8  col-lg-12 col-sm-8 mb-5">
                   <div class="bg-light text-left">
-                    <ol>
+                    <ol class="p-4 text-justify">
                       <li>
                         Commuters link keeps a month's advance and your money is
                         secure and will be paid transferred to your wallet on a daily
@@ -3906,22 +3906,11 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Bank/Payment Details
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled <Link
-                          onClick={openPopup}
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID.<br/> Atleast one field must be filled. <Link
+                          
                           style={{ textDecoration: "none" }}
                         >
-                          <span
-                            style={{
-                              color: "#198754",
-                              textDecoration: "none",
-                            
-                              
-                            }}
-                            className="fw-bold"
-                           
-                          >
-                            &nbsp; Why Process Payment
-                          </span>
+                          
                         </Link> </p>
                         <div class="container text-center">
                           <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
@@ -3929,6 +3918,19 @@ const DriverRegistration = () => {
                           <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
                         </div>
+                        <span
+                            style={{
+                              color: "#198754",
+                              textDecoration: "none",
+                               textAlign:"center",
+                               cursor:"pointer"
+                              
+                            }}
+                            className="fw-bold"
+                           
+                          >
+                            &nbsp;<p className="text-center" onClick={openPopup}> Why Process Payment?</p>
+                          </span>
                         <form id="paymentForm">
                           <div className="mt-4 px-3">
                             <input
