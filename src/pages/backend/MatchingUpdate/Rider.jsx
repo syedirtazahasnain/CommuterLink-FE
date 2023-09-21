@@ -96,7 +96,7 @@ const Rider = () => {
     try {
 
       if (daysSelected === "" || selectedHomeTime === "" || selectedOfficeTime === "" || preferredGender === "") {
-        displayNotification("error", `${jsonresponse.message}`);
+        displayNotification("error", `Please fill all fields`);
       }
       else {
         const body = {
@@ -130,7 +130,7 @@ const Rider = () => {
         if (jsonresponse.status_code === 200) {
           console.log('200');
           navigate("/dashboard");
-          displayNotification("error", `${jsonresponse.message}`);
+          displayNotification("success","Matching criteria has been updated successfully");
         } else if (jsonresponse.status_code === 100) {
           console.log('100');
           displayNotification("error", `${jsonresponse.message}`);
