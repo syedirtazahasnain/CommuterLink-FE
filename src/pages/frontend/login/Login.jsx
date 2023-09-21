@@ -351,7 +351,7 @@ const Login = () => {
                     />
                   </Form.Group>
                      
-                  <div className="py-1">    <Link to={'/forget1'} style={{ textDecoration: "none" }}>
+                  <div className="py-1 text-right">    <Link to={'/forget1'} style={{ textDecoration: "none" }}>
                     <span
                       style={{
                         color: "#dc3545",
@@ -402,18 +402,7 @@ const Login = () => {
                   </Button></div>
                  
 
-                  {/* <div className="py-1 justify-content-center">    <Link to={''} style={{ textDecoration: "none" }}>
-                    <span
-                      style={{
-                        color: "#dc3545",
-                        textDecoration: "none",
-                      }}
-                    >
-                      {" "}
-
-                      Forgot Password
-                    </span>
-                  </Link></div> */}
+                 
                   <div className="container">
                     <div className="row d-flex justify-content-center">
                       <div className="column mt-2">

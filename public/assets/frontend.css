@@ -19,6 +19,7 @@
   --bg-card-green: #189583;
   --bg-green: #189583;
   --bg-dark-green: rgba(29, 104, 93, 1);
+  --bg-dark-success-light: rgb(89, 238, 216);
  }
 
  .text-yellow{
@@ -40,9 +41,8 @@
    background-color: var(--bg-green) !important;
  }
  .bg-col-4{
-  background-color: var(--bg-dark-green) !important;
+  background-color: var(--bg-blue-green) !important;
 }
-
  .bg-light-secondary{
   background-color: var(--bg-light-secondary);
  }

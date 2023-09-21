@@ -11,6 +11,10 @@ const Footer = () => {
   const home = () => {
     navigate("/")
   }
+  
+  const footer=()=>{
+   navigate("/footer");
+  }
 
   return (
     <div>
@@ -93,7 +97,7 @@ const Footer = () => {
                   <li className='mb-2'>
                     <i className="fa-solid fa-location-dot text-success me-1"></i>
                     <span className="ml-2">
-                      Office 8, Ground Floor, Hamadan Heights, <br />
+                      Office # 7, 14 & 15, Ground Floor, Hamdan Heights, <br />
                     </span>
                     <span className='ms-4'>
                       Koral Interchange, Express Highway, <br />
@@ -131,8 +135,8 @@ const Footer = () => {
 
               <div className="col-lg-4 col-md-6 footer-newsletter  my-4">
 
-                <h4 className='text-center mb-3'>Download CommutersLink now and revolutionize your daily commute</h4>
-                <ul className="list-unstyled d-flex">
+                <h4>Download App</h4>
+                <ul className="list-unstyled d-flex pt-5">
                   <li className="mr-3">
                     <img
                       className="img-fluid"

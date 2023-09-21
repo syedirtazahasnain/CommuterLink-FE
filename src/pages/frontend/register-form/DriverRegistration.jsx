@@ -9,7 +9,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from 'dayjs';
-import {Button} from "@mui/base";
+import { Button } from "@mui/base";
 import Stack from "@mui/material/Stack";
 import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
@@ -58,6 +58,66 @@ const DriverRegistration = () => {
     setAddNewEndField(false);
   };
 
+  const openPopup = () => {
+    Swal.fire({
+
+      html: `
+        <div>
+          <div class="container mt-5 pt-1 fw-bold fs-1 mb-5">
+            <span><i class=" p-3 wallet-margin fa-solid text-success fa-wallet fs-1"></i>
+              Why Process Payment</span>
+          </div>
+          <div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8  col-lg-12 col-sm-8 mb-5">
+                  <div class="bg-light text-left">
+                    <ol>
+                      <li>
+                        Commuters link keeps a month's advance and your money is
+                        secure and will be paid transferred to your wallet on a daily
+                        basis.
+                      </li>
+                  
+                   
+                      <li >
+                        No bargaining involved. Commuterslink works out the per day cost
+                        based upon a fixed relationized formula. If the petrol prices go
+                        up or down, the same will be adjusted.
+                      </li>
+                 
+                  
+                    <li> No dispute on cost,payments,number of days the services were
+                    utilized etc. </li>
+        
+                   <li>If you stop provision of car seat to a partner for a reason
+                   or other with 1 week, your payment is secure and you will still be able to
+               get another match.</li> 
+                            
+                          <li>
+                         CommutersLink verifies all the data of its members and ensures
+                          your safety and security                        </li>
+                     
+                      <li>
+                      By receiving money through CommutersLink you remain an active
+                     member and have access to to other options to find travel buddies.                        </li>
+                         
+                           <li>
+                        Last but not the least it is the most respectable way of
+                                      receiving money as you donot have to ask your travel buddy
+                                      to pay you cash.                                                </li></ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `,
+      width: '50%', // Adjust the width as needed
+      showCloseButton: true,
+      showConfirmButton: false, // Remove confirm button if not needed
+    });
+  };
 
   // For Registration
   const [validated, setValidated] = useState(false);
@@ -305,6 +365,8 @@ const DriverRegistration = () => {
         },
       }
     );
+
+
 
     console.log(response);
     const jsonresponse = await response.json();
@@ -1338,15 +1400,15 @@ const DriverRegistration = () => {
                   <li></li>
                   <li></li>
                   <li></li>
-                  <li></li> 
+                  <li></li>
                 </ul>
               </div >
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white mt-5 mb-5"  >
-             
+
                   <div
                     className="row shadow  form-color-header"
-                    // style={{ backgroundColor: '#1F5F5B' }}
+                  // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1 className="text-center text-white py-4">
                       Registration Form
@@ -1356,7 +1418,7 @@ const DriverRegistration = () => {
                     <div className="row mb-3 shadow shadow-sm ">
                       <div
                         className="col-md-12 px-2 py-3 form-color-field"
-                        // style={{ backgroundColor: "#cddbd9" }}
+                      // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           STARTING POINT
@@ -1525,7 +1587,7 @@ const DriverRegistration = () => {
                     <div className="row mb-3 shadow shadow-sm ">
                       <div
                         className="col-md-12 px-2 py-3 form-color-field"
-                        // style={{ backgroundColor: "#cddbd9" }}
+                      // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           DROP-OFF POINT
@@ -1766,7 +1828,7 @@ const DriverRegistration = () => {
                     <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3 form-color-field"
-                        // style={{ backgroundColor: "#cddbd9" }}
+                      // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           Timing
@@ -1825,7 +1887,7 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </div>
                     </div>
-                    <Row className="my-3 form-color-field" 
+                    <Row className="my-3 form-color-field"
                     // style={{ border: '1px solid #cddbd9', backgroundColor: "#cddbd9" }}
                     >
                       <Form.Group as={Col} md="12" controlId="validationCustom10">
@@ -2034,7 +2096,7 @@ const DriverRegistration = () => {
                       </Form.Group>
                       <Form.Group as={Col} md="12" controlId="validationCustom12" className="mb-2">
                         <Form.Label className="fs-6 text-black">
-                          Preferred Gender Of Travel Partner
+                          Preferred Gender of Travel Partner
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
@@ -2261,7 +2323,7 @@ const DriverRegistration = () => {
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div
                     className="row shadow form-color-header"
-                    // style={{ backgroundColor: '#1F5F5B' }}
+                  // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1
                       className="text-center text-white py-4"
@@ -3834,18 +3896,22 @@ const DriverRegistration = () => {
                           Bank/Payment Details
                         </h2>
                         <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled <Link
-                            to={"/whyprocesspayment2"}
-                            style={{ textDecoration: "none" }}
+                          onClick={openPopup}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <span
+                            style={{
+                              color: "#198754",
+                              textDecoration: "none",
+                            
+                              
+                            }}
+                            className="fw-bold"
+                           
                           >
-                            <span
-                              style={{
-                                color: "#198754",
-                                textDecoration: "none",
-                              }}
-                            >
-                              &nbsp; Why Process Payment
-                            </span>
-                          </Link> </p>
+                            &nbsp; Why Process Payment
+                          </span>
+                        </Link> </p>
                         <div class="container text-center">
                           <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}

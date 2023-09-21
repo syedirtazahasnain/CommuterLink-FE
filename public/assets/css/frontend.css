@@ -12,6 +12,7 @@
   --bg-card-pink: rgba(229, 63, 113, 1) ;
   --bg-orange: #F89F5B;
   --bg-dark-green: rgba(29, 104, 93, 1);
+  --bg-dark-success-light: rgb(89, 238, 216);
 }
 body{
   scroll-behavior: smooth;
@@ -30,8 +31,9 @@ body{
   background-color: var(--bg-orange) !important;
 }
 .bg-col-4{
-  background-color: var(--bg-dark-green) !important;
+  background-color: var(--bg-blue-green) !important;
 }
+
 .text-green{
   color: var(--bs-text-green);
 }

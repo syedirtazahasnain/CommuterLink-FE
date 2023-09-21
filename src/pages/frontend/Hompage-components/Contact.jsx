@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Swal from "sweetalert2";
 import { API_URL } from "../../../constants";
-
+import { alpha, styled } from '@mui/material/styles';
+import { displayNotification } from "../../../helpers";
+import Form from "react-bootstrap/Form";
 
 const Contact = () => {
   const [fullName, setFullName] = useState("");
@@ -48,15 +50,16 @@ const Contact = () => {
   const SubmitForm = async () => {
     try {
       if (fullName === "" || email === "" || subject === "" || message === "") {
-        Swal.fire({
-          position: 'top',
-          // icon: 'warning',
-          text: 'Please Fill All Fields!',
-          customClass: {
-            confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'warning',
+        //   text: 'Please Fill All Fields!',
+        //   customClass: {
+        //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("warning", "Please Fill All Fields");
       }
       else {
         const body = {
@@ -84,40 +87,64 @@ const Contact = () => {
         console.log({jsonresponse});
 
         if (jsonresponse.statusCode === 200) {
-          Swal.fire({
-            position: 'top',
-            // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
           setFullName("");
           setEmail("");
           setSubject("");
           setMessage("");
         } else {
-          Swal.fire({
-            position: 'top',
-            // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'bg-success', // Apply custom CSS class to the OK button
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
     } catch (error) {
       console.log(error.message);
     }
   };
+  const cssTextField = styled(TextField)({
+    '& label.Mui-focused': {
+      color: '#000',
+      fontSize: '15px',
+      fontWeight:'bolder'
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#B2BAC2',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#E0E3E7',
+      },
+      '&:hover fieldset': {
+        borderColor: '#B2BAC2',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#E0E3E7',
+      },
+    },
+  });
 
   return (
     <div>
       <section id="contact" className="contact section-bg pt-5" style={{ 
-      backgroundImage: `url("/assets/images/contact-bg.png")`,  backgroundSize: 'cover', 
+      backgroundImage: `url("/assets/images/contact-bg.png")`,
+       backgroundSize: 'cover', 
     }}>
         
       <div className="container">
@@ -128,10 +155,16 @@ const Contact = () => {
               <div className="row">
                 <div className="col-md-12 mb-2">
                   {" "}
-                  <TextField
+                
+                    <Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
+                      <TextField
                     className="mb-3 bg-light"
-                    id="outlined-basic"
+                    id="custom-css-outlined-input"
                     label="Your Name"
+                    color="success"
                     variant="outlined"
                     sx={{ width: '100%', color: 'black', 
                     color: "success" }}
@@ -141,14 +174,21 @@ const Contact = () => {
                     error={!!fullNameError}
                     helperText={fullNameError}
                   />
+                  </Form.Group>
                 </div>
                 <div className="col-md-12 mb-2">
                   {" "}
-                  <TextField
+
+                  <Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
+                    <cssTextField
                     className="mb-3 bg-light"
-                    id="formBasicPassword"
+                    id="custom-css-outlined-input"
                     label="Email"
                     variant="outlined"
+                    color="success"
                     type="email"
                     value={email}
                     onChange={(e) => validateEmail(e.target.value)}
@@ -158,33 +198,55 @@ const Contact = () => {
                     error={!isValidEmail}
                     helperText={!isValidEmail && "Please enter a valid email"}
                   />
+                  </Form.Group>
+                  
+                  
                 </div>
                 <div className="col-md-12">
-                  <TextField
+                  
+
+                  
+<Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
+                  <TextField  id="custom-css-outlined-input"
                     className="mb-3 bg-light"
-                    id="formBasicPassword"
+                   
                     label="Subject"
                     variant="outlined"
+                    color="success"
                     type="text"
                     value={subject}
                     onChange={handleSubjectChange}
                     //required
-                    sx={{ width: '100%' }}
+                    sx={{ width: '100%',}}
                     size="small"
                   />
+                  </Form.Group>
+                   
                 </div>
                 <div className="col-md-12">
-                  <TextField
+                 
+
+
+<Form.Group
+                    className="mt-3 text-center"
+                    controlId="formBasicEmail"
+                  >
+                 <TextField
                     className="mb-3 bg-light"
-                    id="exampleFormControlTextarea1"
+                    id="custom-css-outlined-input"
                     label="Message"
+                    color="success"
                     value={message}
-                    onChange={handleMessageChange}
+                    onChange={handleMessageChange} 
                     multiline
                     rows={5}
                     variant="outlined"
                     sx={{ width: '100%' }}
                   />
+                  </Form.Group>
                 </div>
               </div>
             </form>

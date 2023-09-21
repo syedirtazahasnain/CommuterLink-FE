@@ -17,7 +17,7 @@ const rows = [
   createData('2. You are committed to providing the car for commuting of partners on all days mentioned by your travel buddy'),
   createData('3. If due to any unforeseen reason you cannot commute on a certain day, no fee will be paid for that day'),
   createData('4. You will inform the travel buddy well in advance (at least 12 hours) about your inability to commute on a certain day. In case of any emergency, this can be waived off under exceptional circumstances'),
-  createData('5. You will be paid on a daily basis for the actual number of days that your car is used'),
+  createData('5. You will be paid on weekly basis for the actual number of days that your car is used'),
   createData('6. If a commuting partner misses the car and fails to commute due to late arrival/time off, you will still be paid for that day'),
   createData('7. You will wait at least 15 minutes after the agreed time for the commuting partner to join you'),
   createData('8. You will update the scheduler in your dashboard on a daily (as and when required basis)'),

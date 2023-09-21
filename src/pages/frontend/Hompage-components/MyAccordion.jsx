@@ -11,6 +11,10 @@ const MyAccordion = () => {
     navigate("/signup");
 
   };
+  const handleScroll = () => {
+    document.getElementById('footer').scrollIntoView();
+  }
+
   return (
     <div>
       {/* <div className="container">
@@ -26,7 +30,7 @@ const MyAccordion = () => {
               For drivers, CommutersLink is about saving money through sharing seats in their car. Passengers only pay for the seat they occupy, calculated based on car model, CC, distance to be traveled, fuel consumption, and a nominal maintenance fee for wear and tear. CommutersLink calculates all the costs for you
             </p>
             <button
-              className="btn-custom1  border-0 px-4 py-2 rounded rounded-2 text-white fw-bold">
+              className="btn-custom1  border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={() => handleScroll()}>
               Download App
             </button>
           </div>

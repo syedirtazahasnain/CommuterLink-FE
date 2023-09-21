@@ -20,6 +20,10 @@ const Navbar = () => {
 
   };
 
+  const footer=()=>{
+    navigate("/footer")
+  }
+
   return (
     <div>
       <div className="container ">
