@@ -59,6 +59,12 @@ const Login = () => {
         if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 2 && jsonresponse[0].approval_status === 1) {
           navigate("/dashboard");
         }
+        else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 2 && jsonresponse[0].approval_status === 0) {
+          navigate("/verification");
+        }
+        else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 2 && jsonresponse[0].approval_status === -1) {
+          navigate("/rejection");
+        }
         else if (jsonresponse[0].userlist.vehicle_option === 0 && jsonresponse[0].profile_status === 3 && jsonresponse[0].approval_status === 1) {
           navigate("/dashboard");
         }
@@ -112,6 +118,8 @@ const Login = () => {
           email: response.data.email,
           provider: response.provider,
         };
+
+        console.log("Facebook Body:", body);
 
         const res = await fetch(
           `${API_URL}/api/v1/auth`,

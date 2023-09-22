@@ -670,7 +670,7 @@ const RiderRegistration = () => {
           //     // Apply custom CSS class to the OK button
           //   },
           // });
-          displayNotification("error", `${jsonresponse.message}`);
+          displayNotification("error", `${errors[field][0]}`);
         }
         setIsLoading(false);
       }
