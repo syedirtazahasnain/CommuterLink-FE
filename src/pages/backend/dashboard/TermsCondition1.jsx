@@ -5,6 +5,8 @@ import { API_URL, BASE_URL } from "../../../constants";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/base";
 import { Breadcrumbs} from '@mui/material'
+import { async } from "q";
+import Swal from "sweetalert2";
 
 const customTheme = createTheme({
   palette: {
@@ -25,7 +27,10 @@ const TermsCondition1 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
+  const requestId = useSelector((s) => s.general.data.contact_id);
   const [requestedAs, setRequestedAs] = useState("");
+  const [option, setOption] = useState("");
+  const [userId, setUserId] = useState("");
   
   const crumbs = [
     {
@@ -38,14 +43,6 @@ const TermsCondition1 = () => {
       active: true,
     },
   ];
-  const route = () => {
-    if (requestedAs === "rider") {
-      navigate("/sendapprovalformember");
-    }
-    else{
-      navigate("/sendapprovalforpartner1");
-    }
-  };
 
   useEffect(() => {
     getMemberData();
@@ -55,6 +52,34 @@ const TermsCondition1 = () => {
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
+
+  const getProfileData = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/profile`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse) {
+        setOption(jsonresponse[0].userlist.vehicle_option);
+      }
+      console.log("Commuter Profile Data", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   const getMemberData = async () => {
     try {
@@ -73,10 +98,189 @@ const TermsCondition1 = () => {
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
         setRequestedAs(jsonresponse.data[0].requested_as);
+        setUserId(jsonresponse.data[0].id);
       }
       console.log("Request Member Terms Condition Data:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
+    }
+  };
+
+  const route = async () => {
+    if (requestedAs === "rider") {
+       // Display a confirmation dialog with a close button
+       const result = await Swal.fire({
+        position: 'top',
+        title: 'Are you sure?',
+        text: 'You are about to accept the request',
+        // confirmButtonColor: 'green',
+        cancelButtonColor: 'green',
+        confirmButtonText: 'Confirm',
+        showCloseButton: true,
+        customClass: {
+          confirmButton: 'swal-custom',
+        },
+      });
+      // Check if the user confirmed the cancellation
+      if (result.isConfirmed) {
+        const body = {
+          request_id: userId,
+          message: "I accept your request",
+          status: 1
+        }
+    
+        const response = await fetch(
+          `${API_URL}/api/v1/request`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+    
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+    
+        const jsonresponse = await response.json();
+        console.log("API Response", jsonresponse);
+    
+        if (jsonresponse.statusCode === 200) {
+          navigate("/dashboard");
+        } else {
+          Swal.fire({
+            position:'top',
+            // // icon: 'error',
+           text: `${jsonresponse.message}`,
+           customClass: {
+            confirmButton: 'swal-custom' ,
+          }}
+          )
+        }
+      }
+    }
+    else {
+      // Display a confirmation dialog with a close button
+      const result = await Swal.fire({
+        position: 'top',
+        title: 'Are you sure?',
+        text: 'You are about to send the request',
+        // confirmButtonColor: 'green',
+        cancelButtonColor: 'green',
+        confirmButtonText: 'Confirm',
+        showCloseButton: true,
+        customClass: {
+          confirmButton: 'swal-custom',
+        },
+      });
+
+      // Check if the user confirmed the cancellation
+      if (result.isConfirmed) {
+        if (option === 0) {
+          const body = {
+            reciever_contact_id: requestId,
+            request_type: "rider",
+            message: "Dear CL Member, CL have found us as matching xyz",
+            start_date: "2023-06-10",
+          };
+    
+          console.log({ body });
+    
+          const response = await fetch(
+            `${API_URL}/api/v1/request`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json',
+                Authorization: `Bearer ${userToken}`,
+              },
+              body: JSON.stringify(body),
+            }
+          );
+          const jsonresponse = await response.json();
+          console.log("API Response", jsonresponse);
+          if (jsonresponse.statusCode === 200) {
+            navigate("/dashboard");
+          } else if (jsonresponse.statusCode === 100) {
+            // alert("Resend Error: " + jsonresponse.message);
+            Swal.fire({
+              position: 'top',
+              // icon: 'error',
+              text: `${jsonresponse.message}`,
+              customClass: {
+                confirmButton: 'swal-custom',
+              },
+            }
+            )
+          }
+          else if (jsonresponse.statusCode === 500) {
+            Swal.fire({
+              position: 'top',
+              // icon: 'error',
+              text: `${jsonresponse.message}`,
+              customClass: {
+                confirmButton: 'swal-custom',
+              },
+            }
+            )
+          }
+        }
+        else if (option === 1) {
+    
+          const body = {
+            reciever_contact_id: requestId,
+            request_type: "driver",
+            message: "Dear CL Member, CL have found us as matching xyz",
+            start_date: "2023-06-10",
+          };
+    
+          console.log({ body });
+    
+          const response = await fetch(
+            `${API_URL}/api/v1/request`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json',
+                Authorization: `Bearer ${userToken}`,
+              },
+              body: JSON.stringify(body),
+            }
+          );
+          const jsonresponse = await response.json();
+          console.log("API Response", jsonresponse);
+          if (jsonresponse.statusCode === 200) {
+            navigate("/dashboard");
+          } else if (jsonresponse.statusCode === 100) {
+            Swal.fire({
+              position: 'top',
+              // icon: 'error',
+              text: `${jsonresponse.message}`,
+              customClass: {
+                confirmButton: 'swal-custom',
+              },
+            }
+            )
+          }
+          else if (jsonresponse.statusCode === 500) {
+            Swal.fire({
+              position: 'top',
+    
+              text: `${jsonresponse.message}`,
+              customClass: {
+                confirmButton: 'swal-custom',
+              },
+            }
+            )
+          }
+        }
+      }
     }
   };
 

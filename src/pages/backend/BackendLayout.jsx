@@ -68,7 +68,7 @@ const BackendLayout = ({ children }) => {
         // // icon: 'warning',
         showCancelButton: true,
         // confirmButtonColor: 'green',
-        cancelButtonColor: 'green',
+        cancelButtonColor: 'swal-custom',
         confirmButtonText: 'Logout',
         customClass: {
           confirmButton:'swal-custom',
