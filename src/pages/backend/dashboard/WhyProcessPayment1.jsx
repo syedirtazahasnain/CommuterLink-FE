@@ -77,7 +77,7 @@ const WhyProcessPayment1 = () => {
             ))}
           </Breadcrumbs>
         </h3>
-       <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+       <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
         <h3 className="text-success my-2 fw-bold m-0">
           WHY PROCESS PAYMENT THROUGH COMMUTERSLINK

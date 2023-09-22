@@ -204,7 +204,7 @@ const TravelPatners = () => {
         )
         :
         (
-          <div className="card mb-5">
+          <div className="card bg-medium-teal mb-5">
             <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
               <h4 className="text-center fw-bold text-warning m-auto">
                 {" "}

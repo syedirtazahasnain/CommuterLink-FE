@@ -72,9 +72,9 @@ const BeforeApprovalTerms = () => {
             ))}
           </Breadcrumbs>
         </h3>
-      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+      <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
-        <h3 className="text-success my-2 fw-bold m-0">
+        <h3 className="text-dark-green my-2 fw-bold m-0">
           TERMS AND CONDITIONS
         </h3>
         <Link
@@ -86,43 +86,43 @@ const BeforeApprovalTerms = () => {
             </Link></div></div>
       </div>
       <div className="card p-4 bg-light p-2">
-        <h5 className="text-success pb-2">Before sending the request accept these terms</h5>
+        <h5 className="text-dark-green pb-2">Before sending the request accept these terms</h5>
         <div className="card" >    
           <div className="card-body">
 
-            <p>1. The car offeror will wait 15 mins after agreed time for you to join</p>
-            <p className="">
+            <p className="text-justify">1. The car offeror will wait 15 mins after agreed time for you to join</p>
+            <p className="text-justify">
               2. If due to any unforeseen reason you cannot commute an a certain day, fee will be still be charged as
               your seat remains reserved for you
             </p>
-            <p>
+            <p className="text-justify">
               3. You will inform the partners well in advance (at least 12 hours)
               about your inability to cummute on a certain day. In case of any
               emergency this can be waived off under exceptional circumstances
             </p>
-            <p>
+            <p className="text-justify">
               4. You will pay one month 15 days cost in advance. The money will remain in your
               wallet and will be transferred to car owner every week after on daily basis confirmation 
               that the service was provided. You will recharge your wallet every week to maintain
               15 days commuting balance in wallet all the time
             </p>
-            <p>
+            <p className="text-justify">
               5. You will be charged on daily basis for actual number of days that you avail share
               the car. No charges will be levied for public holidays or number of days
               that the car owner does not turn up
             </p>
-            <p>
+            <p className="text-justify">
               6. You will update the scheduler in your dashboard on daily ( as and when required basis)
             </p>
-            <p>
+            <p className="text-justify">
               7. You will pay your share of cost through Commuterslink and there will be no direct
               transaction between you and your commuting partner. (insert a link here "why to receive payment through commutersLink")
             </p>
-            <p>
+            <p className="text-justify">
               8. If you wish to discontinue your partnership with a memeber due a reason or other
               CommutersLink will inform the partner an your behalf. Minimum 1 week notice is required
             </p>
-            <p>
+            <p className="text-justify">
               9. Any complaints, grievances will be addressed to CommutersLink for resolution.
             </p>
 
@@ -130,7 +130,7 @@ const BeforeApprovalTerms = () => {
           </div>
           <div className="text-center">
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"
               onClick={route}
             >
               I Accept

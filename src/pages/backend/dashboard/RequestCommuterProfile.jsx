@@ -686,9 +686,9 @@ const RequestCommuterProfile = () => {
                         ))}
                     </Breadcrumbs>
                 </div>
-                <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+                <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
                     <div className="d-flex justify-content-between align-items-xl-baseline">
-                        <h3 className="text-success my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
+                        <h3 className="text-dark-green my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
                         <Link
                             to={"/dashboard"} >
                             <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
@@ -699,7 +699,7 @@ const RequestCommuterProfile = () => {
                     </div>
 
                 </div>
-                <h5 className="card p-2  px-4 text-success">{`The below request has been initiated by the member based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share. Further details will be shown to you after you accept the request.`}
+                <h5 className="card p-2  px-4 text-dark-green">{`The below request has been initiated by the member based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share. Further details will be shown to you after you accept the request.`}
                 </h5>
             </div>
             {loading ? (

@@ -301,9 +301,9 @@ const FinalStep = () => {
             ))}
           </Breadcrumbs>
         </h3>
-        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+        <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
-      <h3 className="text-success my-2 fw-bold m-0">
+      <h3 className="text-dark-green my-2 fw-bold m-0">
       FINAL STEP - YOU ARE RIGHT THERE!
         </h3>
         <Link
@@ -362,7 +362,7 @@ const FinalStep = () => {
 
           <div className="text-center">
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"
               onClick={sendRequest}
             >
               Done

@@ -1,7 +1,7 @@
 :root{
   --bg-green: #008d55;
   --bs-green: #008d55;
-  --bs-dark-green: #1D685D;
+  --bs-text-green: rgba(32, 158, 141, 1);
   --bg-light-grey: #E8E8E8;
   --bs-light-teal: #BBD0CD;
   --bg-dark-green: #0A6155;
@@ -57,10 +57,12 @@
   border-top: none;
   background-color: var(--bs-light-teal);
   border-left:3px solid rgb(191, 216, 210);
-  color: var(--bg-dark-green);
+  /* color: var(--bg-dark-green); */
+ 
+ 
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-title {
-  color: var(--bs-texgrey);
+  color: var(--bg-dark-green) !important;
 }
 
 .font-family-default {
@@ -206,6 +208,7 @@ a {
 }
 .app-sidebar-menu .menu-item .menu-icon>i {
   font-size: 1.3rem;
+  color: var(--bg-dark-green) !important;
 }
 .line {
   padding: 0 5px;
@@ -288,7 +291,7 @@ body{
 }
  
 .headerColor{
-  background-color: rgb(42, 64, 42);
+  background-color: var(--bg-dark-green)
 }
 .swal-text {
   font-size: 18px;
@@ -356,4 +359,7 @@ body{
 .custom-button-style.active{
   background-color: var(--bg-medium-teal) !important;
   color: var(--bs-dark) !important;
+}
+.text-green{
+  color: var(--bs-text-green) !important;
 }

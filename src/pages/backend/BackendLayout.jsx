@@ -408,7 +408,7 @@ const BackendLayout = ({ children }) => {
                                     marginRight: "0%",
                                   }}
                                 >
-                                  <span className="menu-icon font-custom">
+                                  <span className="menu-icon text-green font-custom">
                                     <i className="fas fa-home fa-2x"></i>
                                   </span>
                                   <span className="menu-title font-custom mt-1">
@@ -427,7 +427,7 @@ const BackendLayout = ({ children }) => {
                                     marginRight: "0%",
                                   }}
                                 >
-                                  <span className="menu-icon font-custom">
+                                  <span className="menu-icon text-green font-custom">
                                     <i className="fas fa-solid fa-user fa-2x"></i>
                                   </span>
                                   <span className="menu-title font-custom mt-1">

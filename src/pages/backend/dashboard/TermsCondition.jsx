@@ -44,9 +44,9 @@ const TermsCondition = () => {
   return (
     <div>
       <div className="page-title">
-        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+        <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">TERMS AND CONDITIONS</h3>
+            <h3 className="text-dark-green my-2 fw-bold m-0">TERMS AND CONDITIONS</h3>
             <Link
               to={"/dashboard"} >
               <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
@@ -58,7 +58,7 @@ const TermsCondition = () => {
         </div>
       </div>
       <div className="card p-4 bg-white p-2">
-        <h5 className="text-success">For Car Offerer</h5>
+        <h5 className="text-dark-green">For Car Offerer</h5>
         <div className="card bg-light"  >
           <div className="card-body">
             <p>1. Your car is in a good shape and is roadworthy</p>
@@ -105,7 +105,7 @@ const TermsCondition = () => {
           </div> */}
          
         </div>
-        <h5 className="text-success mt-4">For Traveller</h5>
+        <h5 className="text-dark-green mt-4">For Traveller</h5>
         <div className="card bg-light"  >
           <div className="card-body">
             <p>1. The car offeror will wait 15 mins after agreed time for you to join. </p>
