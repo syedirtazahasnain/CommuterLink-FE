@@ -65,7 +65,7 @@ const DriverRegistration = () => {
         <div>
           <div class="container mt-5 pt-1 fw-bold fs-1 mb-5">
             <span><i class=" p-3 wallet-margin fa-solid text-success fa-wallet fs-1"></i>
-              Why Process Payment</span>
+              Why Process Payment to CommutersLink</span>
           </div>
           <div>
             <div class="container">
@@ -74,7 +74,7 @@ const DriverRegistration = () => {
                   <div class="bg-light text-left">
                     <ol class="p-4 text-justify">
                       <li>
-                        Commuters link keeps a month's advance and your money is
+                        Commuterslink keeps a month's advance and your money is
                         secure and will be paid transferred to your wallet on a daily
                         basis.
                       </li>
@@ -611,6 +611,9 @@ const DriverRegistration = () => {
   const handleCnicChange = (event) => {
     const inputCnic = event.target.value.replace(/\D/g, '');
 
+    if (cnic.length < 15 && cnic.length > 15) {
+      setIsValidCnic(false);
+    }
     if (inputCnic.length <= 13) {
       const formattedCnic = inputCnic.replace(
         /^(\d{5})(\d{7})(\d{1})$/,
@@ -618,8 +621,6 @@ const DriverRegistration = () => {
       );
       setCnic(formattedCnic);
       setIsValidCnic(validateCnic(formattedCnic));
-    } else {
-      setIsValidCnic(false);
     }
   };
   const handleCnicFront = (e) => {
@@ -2524,8 +2525,8 @@ const DriverRegistration = () => {
 
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                        
                       >
                         <h2 className="text-success mb-3 text-center">
                           Available Seats
@@ -3906,11 +3907,11 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Bank/Payment Details
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID.<br/> Atleast one field must be filled. <Link
-                          
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID.<br /> Atleast one field must be filled. <Link
+
                           style={{ textDecoration: "none" }}
                         >
-                          
+
                         </Link> </p>
                         <div class="container text-center">
                           <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
@@ -3919,18 +3920,18 @@ const DriverRegistration = () => {
                           <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
                         </div>
                         <span
-                            style={{
-                              color: "#198754",
-                              textDecoration: "none",
-                               textAlign:"center",
-                               cursor:"pointer"
-                              
-                            }}
-                            className="fw-bold"
-                           
-                          >
-                            &nbsp;<p className="text-center" onClick={openPopup}> Why Process Payment?</p>
-                          </span>
+                          style={{
+                            color: "#198754",
+                            textDecoration: "none",
+                            textAlign: "center",
+                            cursor: "pointer"
+
+                          }}
+                          className="fw-bold"
+
+                        >
+                          &nbsp;<p className="text-center" onClick={openPopup}> Why Process Payment to CommuterLink?</p>
+                        </span>
                         <form id="paymentForm">
                           <div className="mt-4 px-3">
                             <input

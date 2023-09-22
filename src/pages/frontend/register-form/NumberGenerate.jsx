@@ -259,13 +259,7 @@ function NumberGenerate() {
                     </Row>
                     <div className="px-4 mb-2 pt-3">
                       {" "}
-                      {/* <Button
-                      variant="success"
-                      className=""
-                      onClick={ () => submitForm()}
-                    >
-                      Submit
-                    </Button>{" "} */}
+                     
                       <Button variant="" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={() => submitForm()}>
                         Submit
                       </Button>
