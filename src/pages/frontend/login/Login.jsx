@@ -17,6 +17,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { LoginSocialFacebook } from "reactjs-social-login";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -104,24 +105,44 @@ const Login = () => {
     console.log("handleFailure", response);
   };
 
+  const handleFacebookSuccess = async (response) => {
+    try {
+      if (response && response.data.accessToken) {
+        const body = {
+          email: response.data.email,
+          provider: response.provider,
+        };
+
+        const res = await fetch(
+          `${API_URL}/api/v1/auth`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        const jsonresponse = await res.json();
+
+        if (jsonresponse.statusCode === 200) {
+          dispatch(setloginState(jsonresponse.access_token));
+        } else {
+          displayNotification("error", `${jsonresponse.message}`);
+        }
+      } else {
+        console.error("Profile request failed with status:", response);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
   const handleLogin = async () => {
     if(email === "" || password ===""){
       displayNotification("warning", "Please Fill All Fields");
     }
-    // if (email === "" || password === "") {
-      // Swal.fire({
-      //   position: 'top',
-      //   // // icon: 'warning',
-      //   text: 'Please Fill All Fields',
-      //   customClass: {
-      //     confirmButton: "swal-custom",
-
-      //   },
-
-      // }
-      // )
-      // displayNotification("warning", `${("222", "Please Fill All Fields")} [B]`);
-    // }
     else  {
       await postData();
     }
@@ -152,31 +173,11 @@ const Login = () => {
           dispatch(setloginState(jsonresponse.access_token));
         } else {
           console.log(jsonresponse);
-          // alert("Error: " + jsonresponse.message);
-          // Swal.fire({
-          //   position: 'top',
-          //   // // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom',
-          //   },
-          // }
-          // )
           displayNotification("error", `${jsonresponse.message}`);
         }
       }
 
       else {
-        // Swal.fire({
-        //   position: 'top',
-        //   // // icon: 'warning',
-        //   text: 'Please Check Terms of Services',
-        //   customClass: {
-        //     confirmButton: 'swal-custom',
-        //   },
-        // }
-        // )
-
         displayNotification("warning", "Please Check Terms of Services");
       }
 
@@ -231,18 +232,7 @@ const Login = () => {
           if (jsonresponse.statusCode === 200) {
             dispatch(setloginState(jsonresponse.access_token));
           } else {
-            // alert("Error: " + jsonresponse.message);
-            // Swal.fire({
-            //   position: 'top',
-            //   // // icon: 'error',
-            //   text: `${jsonresponse.message}`,
-            //   customClass: {
-            //     confirmButton: 'swal-custom', 
-            //   },
-            // }
-            // )
             displayNotification("error", `${jsonresponse.message}`);
-
           }
         } else {
           console.error("Profile request failed with status:", profile.status);
@@ -448,15 +438,24 @@ const Login = () => {
                             </Tooltip>
                           </li>
                           <li className="mr-3">
-                            <Tooltip title="Login With Facebook">
-                              <a href="https://www.facebook.com/Sysreforms">
+                            <LoginSocialFacebook
+                              // appId="264760359845922"
+                              appId="832351251716749"
+                              onResolve={(response) => {
+                                handleFacebookSuccess(response);
+                              }}
+                              onReject={(error) => {
+                                console.log("Error Message:", error);
+                              }}
+                            >
+                              <Tooltip title="Signup With Facebook">
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
                                   style={{ height: "27px", width: "27px", cursor: "pointer" }}
                                 />
-                              </a>
-                            </Tooltip>
+                              </Tooltip>
+                            </LoginSocialFacebook>
                           </li>
                           <li>
                             <Tooltip title="Login With Linkedin">

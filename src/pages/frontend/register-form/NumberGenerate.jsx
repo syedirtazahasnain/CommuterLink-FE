@@ -67,30 +67,9 @@ function NumberGenerate() {
           navigate("/office_school");
         } else {
           console.log(jsonresponse);
-          // alert("Error: " + jsonresponse.message);
-          // Swal.fire({
-          //   position: 'top',
-          //   // // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          //   },
-          // }
-          // )
           displayNotification("error", `${jsonresponse.message}`);
         }
       } else {
-        // alert("Error: " + jsonresponse.message);
-        // Swal.fire({
-        //   position: 'top',
-        //   // icon: 'error',
-        //   //  text: `${jsonresponse.message}`,
-        //   text: "Number already exists",
-        //   customClass: {
-        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        //   },
-        // }
-        // )
         displayNotification("warning", "Number already exists");
       }
     } catch (error) {
@@ -278,4 +257,4 @@ function NumberGenerate() {
   );
 }
 
-export default NumberGenerate;
+export default NumberGenerate;

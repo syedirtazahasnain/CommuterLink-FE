@@ -128,7 +128,30 @@ const Signup = () => {
     }
   };
 
-  const signupgoogledatapost = async (userData) => {
+  const handleFacebookSuccess = async (response) => {
+    try {
+      if (response && response.data.accessToken) {
+        const facebookuserdata = {
+          name: response.data.name,
+          email: response.data.email,
+          provider: response.provider,
+          provider_id: "DasD" + generateRandomOtp(0, 1000000),
+          facebooktoken: response.data.accessToken,
+          password: "jWaeo@123" + generateRandomPassword(),
+          otp: generateRandomOtp(0, 1000000),
+          phone: "",
+        };
+
+        await signupfacebookdatapost(facebookuserdata);
+      } else {
+        console.error("Profile request failed with status:", response);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
+  const signupfacebookdatapost = async (userData) => {
     try {
       const body = {
         email: userData.email,
@@ -139,9 +162,9 @@ const Signup = () => {
         confirm_password: userData.password,
         name: userData.name,
         otp: userData.otp,
-        token: userData.googletoken,
+        token: userData.facebooktoken,
       };
-      console.log("Google Body:", body);
+      console.log("Signup Data Body:", body);
       const response = await fetch(`${API_URL}/api/v1/signup`, {
         method: "POST",
         headers: {
@@ -159,7 +182,48 @@ const Signup = () => {
             provider: body.provider,
           })
         );
-        console.log("Google Response:", jsonresponse);
+        console.log("Signup Data Response:", jsonresponse);
+        navigate("/number-generate");
+      } else {
+        displayNotification("error", `${jsonresponse.message}`);
+      }
+    } catch (error) {
+      console.log("Signup Error:", error.message);
+    }
+  };
+
+  const signupgoogledatapost = async (userData) => {
+    try {
+      const body = {
+        email: userData.email,
+        number: userData.phone,
+        provider: userData.provider,
+        password: userData.password,
+        provider_id: userData.provider_id,
+        confirm_password: userData.password,
+        name: userData.name,
+        otp: userData.otp,
+        token: userData.googletoken,
+      };
+      console.log("Signup Data Body:", body);
+      const response = await fetch(`${API_URL}/api/v1/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      const jsonresponse = await response.json();
+
+      if (jsonresponse.statusCode === 200) {
+        dispatch(
+          setsignupState({
+            email: body.email,
+            provider: body.provider,
+          })
+        );
+        console.log("Signup Data Response:", jsonresponse);
         navigate("/number-generate");
       } else {
         // alert("Error: " + jsonresponse.message);
@@ -188,24 +252,8 @@ const Signup = () => {
         password === "" ||
         confirmPassword === ""
       ) {
-        // alert("Please Fill All Fields!");
-        // Swal.fire({
-        //   position: "top",
-        //   // icon: "warning",
-        //   text: "Please Fill All Fields!",
-        //   customClass: {
-        //     confirmButton: "swal-custom",
-        //     // icon:'bg-secondary' // Apply custom CSS class to the OK button
-        //   },
-        // });
         displayNotification("warning", "Please Fill All Fields");
       } else if (password !== confirmPassword) {
-        // alert("Confirm password is not matched with new password!")
-        // Swal.fire({
-        //   position: "top",
-        //   // icon: "warning",
-        //   text: "Confirm password is not matched with new password!",
-        // });
         displayNotification("warning", "Confirm password is not matched with new password!");
       } else {
         if (termsService) {
@@ -240,29 +288,10 @@ const Signup = () => {
           } else {
             const errors = jsonresponse.errors;
             for (const field of Object.keys(errors)) {
-              // Swal.fire({
-              //   position: "top",
-              //   // icon: "error",
-              //   // text: `${jsonresponse.message}`,
-              //   text: `${errors[field][0]}`,
-              //   customClass: {
-              //     confirmButton: "swal-custom",
-              //     // Apply custom CSS class to the OK button
-              //   },
-              // });
               displayNotification("error", `${errors[field][0]}`);
             }
           }
         } else {
-          // alert("please check Terms of Service");
-          // Swal.fire({
-          //   position: "top",
-          //   // icon: "warning",
-          //   text: "Please Check Terms of Service",
-          //   customClass: {
-          //     confirmButton: "swal-custom", // Apply custom CSS class to the OK button
-          //   },
-          // });
           displayNotification("warning", "Please Check Terms of Service");
         }
       }
@@ -643,7 +672,7 @@ const Signup = () => {
                               // appId="264760359845922"
                               appId="832351251716749"
                               onResolve={(response) => {
-                                console.log("Response", response);
+                                handleFacebookSuccess(response);
                               }}
                               onReject={(error) => {
                                 console.log("Error Message:", error);
