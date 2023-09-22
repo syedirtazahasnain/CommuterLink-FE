@@ -13,6 +13,10 @@ import { setloginState } from "../../../redux/loginSlice";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import { displayNotification } from "../../../helpers";
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -22,6 +26,11 @@ const Login = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [termsService, setTermsService] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -343,11 +352,20 @@ const Login = () => {
                       fullWidth
                       variant="outlined"
                       className="bg-light"
-                      type="password"
+                      type={showPassword ? 'text' : 'password'}
                       label="Password"
                       onChange={(e) => setPassword(e.target.value)}
                       size='small'
                       sx={{ width: '100%' }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={togglePasswordVisibility} edge="end">
+                              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Form.Group>
                      

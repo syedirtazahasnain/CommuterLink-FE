@@ -181,7 +181,7 @@ const SeatCostVerification = () => {
                     <div className="text-white p-4 ">
                       <p className="text-black text-justify">
                         According to the information you provided regarding your car and route, the system has calculated
-                        your per seat per day cost is <strong>Rs. {price}/-</strong> on cost sharing basis.
+                        your per seat per day cost as <strong>Rs. {price}/-</strong> on cost sharing basis.
                       </p>
                       <p className="text-black text-justify">
                         The cost will be adjusted fortnightly according to changes in the fuel price.

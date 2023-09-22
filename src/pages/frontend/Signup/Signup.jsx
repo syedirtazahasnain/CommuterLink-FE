@@ -17,6 +17,10 @@ import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { displayNotification } from "../../../helpers";
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -33,6 +37,16 @@ const Signup = () => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+   
+  const togglePasswordVisibility1 = () => {
+    setShowPassword1(!showPassword1);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -494,7 +508,7 @@ const Signup = () => {
                       fullWidth
                       className="bg-light"
                       variant="outlined"
-                      type="password"
+                      type={showPassword ? 'text': 'password'}
                       label="Password"
                       value={password}
                       onChange={(e) => validatePassword(e.target.value)}
@@ -505,6 +519,15 @@ const Signup = () => {
                         !isValidPassword &&
                         "Password must have at least 8 characters with mix of letters numbers special  characters"
                       }
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={togglePasswordVisibility} edge="end">
+                              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Form.Group>
                   <Form.Group
@@ -515,7 +538,7 @@ const Signup = () => {
                       fullWidth
                       className="bg-light"
                       variant="outlined"
-                      type="password"
+                      type={showPassword1 ? 'text' : 'password'}
                       label="Confirm Password"
                       value={confirmPassword}
                       onChange={(e) => checkconfirmPassword(e.target.value)}
@@ -526,6 +549,15 @@ const Signup = () => {
                         !isValidConfirmPassword &&
                         "Both passwords must be the same"
                       }
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={togglePasswordVisibility1} edge="end">
+                              {showPassword1 ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Form.Group>
                   <Form.Group
