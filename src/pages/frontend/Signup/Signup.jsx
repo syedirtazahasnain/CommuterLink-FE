@@ -250,7 +250,7 @@ const Signup = () => {
               //     // Apply custom CSS class to the OK button
               //   },
               // });
-              displayNotification("error", `${jsonresponse.message}`);
+              displayNotification("error", `${errors[field][0]}`);
             }
           }
         } else {
@@ -517,7 +517,7 @@ const Signup = () => {
                       error={!isValidPassword}
                       helperText={
                         !isValidPassword &&
-                        "Password must have at least 8 characters with mix of letters numbers special  characters"
+                        "Password must have at least 8 characters with mix of letters numbers special characters"
                       }
                       InputProps={{
                         endAdornment: (

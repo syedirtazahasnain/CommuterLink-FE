@@ -336,7 +336,7 @@ const RequestCommuterProfile = () => {
                                             <>
                                                 {preferred_gender && (
                                                     <>
-                                                        <b className="text-black">Seats For: </b>
+                                                        <b className="text-black">Preferred Gender: </b>
                                                     </>
                                                 )}
                                             </>

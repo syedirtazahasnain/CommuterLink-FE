@@ -14,163 +14,92 @@ import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import Box from '@mui/material/Box';
 import { FormControl } from "@mui/material";
+import { displayNotification } from "../../../helpers";
 
 
 const Forget2 = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
+    const userToken = useSelector((s) => s.login.data.token);
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [isValidPassword, setIsValidPassword] = useState(true);
+    const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
 
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [navigate]);
 
+    const validatePassword = (password) => {
+        // Regular expression pattern for validating passwords
+        const passwordPattern =
+            /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+        if (password === "" || passwordPattern.test(password)) {
+            setPassword(password);
+            setIsValidPassword(true);
+        } else {
+            setPassword(password);
+            setIsValidPassword(false);
+        }
+    };
 
+    const checkconfirmPassword = (cpassword) => {
+        if (password === cpassword) {
+            setConfirmPassword(cpassword);
+            setisValidConfirmPassword(true);
+        } else {
+            setConfirmPassword(cpassword);
+            setisValidConfirmPassword(false);
+        }
+    };
 
+    const sendRequest = async () => {
+        try {
+            if (password === "" || confirmPassword === "") {
+                displayNotification("warning", "Please Fill All Fields");
+            }
+            else if (password !== confirmPassword) {
+                displayNotification("error", "Confirm password is not matched with new password");
+            }
+            else {
+                const body = {
+                    token: userToken,
+                    password: password,
+                    confirm_password: confirmPassword
+                }
+                console.log("sendRequest Body:", body);
 
+                const response = await fetch(
+                    `${API_URL}/api/v1/forgot-password`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Accept': 'application/json',
+                        },
+                        body: JSON.stringify(body),
+                    }
+                );
 
-    // const handleLogin = async () => {
-    //     if (email === "" || password === "") {
-    //         Swal.fire({
-    //             position: 'top',
-    //             // // icon: 'warning',
-    //             text: 'Please Fill All Fields',
-    //             customClass: {
-    //                 confirmButton: "swal-custom",
+                if (!response.ok) {
+                    throw new Error(`Request failed with status: ${response.status}`);
+                }
 
-    //             },
+                const jsonresponse = await response.json();
+                console.log("API Response", jsonresponse);
 
-    //         }
-    //         )
-    //     }
-    //     else {
-    //         await postData();
-    //     }
-    // };
-
-    // const postData = async () => {
-    //     try {
-    //         if (termsService) {
-    //             const body = {
-    //                 email: email,
-
-    //             };
-    //             const response = await fetch(
-    //                 `${API_URL}/api/v1/auth`,
-    //                 {
-    //                     method: "POST",
-    //                     headers: {
-    //                         "Content-Type": "application/json",
-    //                         'Accept': 'application/json',
-    //                     },
-    //                     body: JSON.stringify(body),
-    //                 }
-    //             );
-    //             const jsonresponse = await response.json();
-    //             //console.log(jsonresponse);
-
-    //             if (jsonresponse.statusCode === 200) {
-    //                 dispatch(setloginState(jsonresponse.access_token));
-    //             } else {
-    //                 console.log(jsonresponse);
-    //                 // alert("Error: " + jsonresponse.message);
-    //                 Swal.fire({
-    //                     position: 'top',
-    //                     // // icon: 'error',
-    //                     text: `${jsonresponse.message}`,
-    //                     customClass: {
-    //                         confirmButton: 'swal-custom',
-    //                     },
-    //                 }
-    //                 )
-    //             }
-    //         }
-
-    //         else {
-    //             Swal.fire({
-    //                 position: 'top',
-    //                 // // icon: 'warning',
-    //                 text: 'Please Check Terms of Services',
-    //                 customClass: {
-    //                     confirmButton: 'swal-custom',
-    //                 },
-    //             }
-    //             )
-    //         }
-
-    //     } catch (error) {
-    //         console.log(error.message);
-    //     }
-    // };
-    // const validateEmail = (email) => {
-    //     // Regular expression pattern for validating email addresses
-    //     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    //     if (emailPattern.test(email)) {
-    //         setEmail(email);
-    //         setIsValidEmail(true);
-    //     } else {
-    //         setIsValidEmail(false);
-    //     }
-    // };
-
-    // const handleSuccess = async (response) => {
-    //     try {
-    //         if (response && response.access_token) {
-    //             const profile = await fetch(
-    //                 "https://www.googleapis.com/oauth2/v3/userinfo",
-    //                 {
-    //                     headers: {
-    //                         Authorization: `Bearer ${response.access_token}`,
-    //                     },
-    //                     method: "get",
-    //                 }
-    //             );
-
-    //             if (profile.ok) {
-    //                 const userObject = await profile.json();
-    //                 const body = {
-    //                     email: userObject.email,
-    //                     provider: "google",
-    //                 };
-
-    //                 const res = await fetch(
-    //                     `${API_URL}/api/v1/auth`,
-    //                     {
-    //                         method: "POST",
-    //                         headers: {
-    //                             "Content-Type": "application/json",
-    //                         },
-    //                         body: JSON.stringify(body),
-    //                     }
-    //                 );
-
-    //                 const jsonresponse = await res.json();
-
-    //                 if (jsonresponse.statusCode === 200) {
-    //                     dispatch(setloginState(jsonresponse.access_token));
-    //                     navigate("/number-generate");
-    //                 } else {
-    //                     // alert("Error: " + jsonresponse.message);
-    //                     Swal.fire({
-    //                         position: 'top',
-    //                         // // icon: 'error',
-    //                         text: `${jsonresponse.message}`,
-    //                         customClass: {
-    //                             confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-    //                         },
-    //                     }
-    //                     )
-
-    //                 }
-    //             } else {
-    //                 console.error("Profile request failed with status:", profile.status);
-    //             }
-    //         }
-    //     } catch (error) {
-    //         console.error("Error:", error.message);
-    //     }
-    // };
+                if (jsonresponse.statusCode === 200) {
+                    dispatch(setloginState(""));
+                    displayNotification("success", `${jsonresponse.message}`);
+                    navigate("/login");
+                }
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+            displayNotification("error", "An error occured while sending the request.");
+        }
+    };
 
     return (
         <div>
@@ -267,14 +196,21 @@ const Forget2 = () => {
                                                     sx={{ width: "100%" }}
                                                     variant="outlined"
                                                 >
-                                                    <InputLabel htmlFor="outlined-adornment-password">
-                                                        New Password
-                                                    </InputLabel>
-                                                    <OutlinedInput
-                                                        id="outlined-adornment-password"
-                                                        type={email}
-
-                                                        label="Enter email address"
+                                                    <TextField
+                                                        fullWidth
+                                                        className="bg-light"
+                                                        variant="outlined"
+                                                        type="password"
+                                                        label="Password"
+                                                        value={password}
+                                                        onChange={(e) => validatePassword(e.target.value)}
+                                                        // required
+                                                        size="small"
+                                                        error={!isValidPassword}
+                                                        helperText={
+                                                            !isValidPassword &&
+                                                            "Password must have at least 8 characters with mix of letters numbers special characters"
+                                                        }
                                                     />
                                                 </FormControl>
                                             </Form.Group>
@@ -290,29 +226,35 @@ const Forget2 = () => {
                                                     sx={{ width: "100%" }}
                                                     variant="outlined"
                                                 >
-                                                    <InputLabel htmlFor="outlined-adornment-password">
-                                                        Confirm Password
-                                                    </InputLabel>
-                                                    <OutlinedInput
-                                                        id="outlined-adornment-password"
-                                                        type={email}
-
+                                                    <TextField
+                                                        fullWidth
+                                                        className="bg-light"
+                                                        variant="outlined"
+                                                        type="password"
                                                         label="Confirm Password"
+                                                        value={confirmPassword}
+                                                        onChange={(e) => checkconfirmPassword(e.target.value)}
+                                                        // required
+                                                        size="small"
+                                                        error={!isValidConfirmPassword}
+                                                        helperText={
+                                                            !isValidConfirmPassword &&
+                                                            "Both passwords must be the same"
+                                                        }
                                                     />
                                                 </FormControl>
                                             </Form.Group>
                                             <Button
                                                 className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white mt-4 fw-bold"
-                                            // onClick={handleLogin}
+                                                onClick={sendRequest}
                                             >
-                                                Resend
+                                                Submit
                                             </Button>
-
-
                                         </Form>
                                     </div>
-
-                                </div></div></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>

@@ -93,8 +93,8 @@ const Router = () => {
         <Route path="/loading" element={<FrontendLayout children={<Loading />} />} />
         <Route path="/datasecurity" element={<FrontendLayout children={<DataSecurity />} />} />
         <Route path="/verifiedmember" element={<FrontendLayout children={<VerifiedMember />} />} />
-        <Route path="/forget1" element={<FrontendLayout children={<Forget1 />} />} />
-        <Route path="/forget2" element={<FrontendLayout children={<Forget2 />} />} />
+        <Route path="/forget" element={<FrontendLayout children={<Forget1 />} />} />
+        <Route path="/forget-password" element={<FrontendLayout children={<Forget2 />} />} />
 
         {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />

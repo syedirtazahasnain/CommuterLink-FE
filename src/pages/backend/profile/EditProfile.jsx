@@ -134,7 +134,7 @@ const EditProfile = () => {
         //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
         // },}
         // )
-        displayNotification("warning", "Confirm password is nto matched with new password!");
+        displayNotification("warning", "Confirm password is not matched with new password!");
       }
       else {
         const body = {

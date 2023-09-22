@@ -527,7 +527,7 @@ const CommuterProfile1 = () => {
                   <div className="col-md-4">
                     {preferred_gender !== "" ? (
                       <>
-                        <b className="text-black">Seats For: </b>
+                        <b className="text-black">Preferred Gender: </b>
                       </>
                     ) : (
                       <>

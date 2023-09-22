@@ -14,163 +14,83 @@ import { Button } from "@mui/base";
 import Swal from "sweetalert2";
 import Box from '@mui/material/Box';
 import { FormControl } from "@mui/material";
+import { displayNotification } from "../../../helpers";
 
 
 const Forget1 = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const userToken = useSelector((s) => s.login.data.token);
     const [email, setEmail] = useState("");
+    const [isValidEmail, setIsValidEmail] = useState(true);
+
+    useEffect(() => {
+        if (userToken) {
+            navigate("/forget-password");
+        }
+    }, [userToken]);
 
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [navigate]);
 
+    const validateEmail = (email) => {
+        // Regular expression pattern for validating email addresses
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (emailPattern.test(email)) {
+          setEmail(email);
+          setIsValidEmail(true);
+        } else {
+          setIsValidEmail(false);
+        }
+      };
 
+    const sendRequest = async () => {
+        if (email === "") {
+            displayNotification("warning", `Please Enter your Email`);
+        }
+        else {
+            const body = {
+                email: email,
+            }
+            console.log("sendRequest Body:", body);
 
+            const response = await fetch(
+                `${API_URL}/api/v1/forgot`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                }
+            );
 
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
 
-    // const handleLogin = async () => {
-    //     if (email === "" || password === "") {
-    //         Swal.fire({
-    //             position: 'top',
-    //             // // icon: 'warning',
-    //             text: 'Please Fill All Fields',
-    //             customClass: {
-    //                 confirmButton: "swal-custom",
+            const jsonresponse = await response.json();
+            console.log("API Response", jsonresponse);
 
-    //             },
-
-    //         }
-    //         )
-    //     }
-    //     else {
-    //         await postData();
-    //     }
-    // };
-
-    // const postData = async () => {
-    //     try {
-    //         if (termsService) {
-    //             const body = {
-    //                 email: email,
-
-    //             };
-    //             const response = await fetch(
-    //                 `${API_URL}/api/v1/auth`,
-    //                 {
-    //                     method: "POST",
-    //                     headers: {
-    //                         "Content-Type": "application/json",
-    //                         'Accept': 'application/json',
-    //                     },
-    //                     body: JSON.stringify(body),
-    //                 }
-    //             );
-    //             const jsonresponse = await response.json();
-    //             //console.log(jsonresponse);
-
-    //             if (jsonresponse.statusCode === 200) {
-    //                 dispatch(setloginState(jsonresponse.access_token));
-    //             } else {
-    //                 console.log(jsonresponse);
-    //                 // alert("Error: " + jsonresponse.message);
-    //                 Swal.fire({
-    //                     position: 'top',
-    //                     // // icon: 'error',
-    //                     text: `${jsonresponse.message}`,
-    //                     customClass: {
-    //                         confirmButton: 'swal-custom',
-    //                     },
-    //                 }
-    //                 )
-    //             }
-    //         }
-
-    //         else {
-    //             Swal.fire({
-    //                 position: 'top',
-    //                 // // icon: 'warning',
-    //                 text: 'Please Check Terms of Services',
-    //                 customClass: {
-    //                     confirmButton: 'swal-custom',
-    //                 },
-    //             }
-    //             )
-    //         }
-
-    //     } catch (error) {
-    //         console.log(error.message);
-    //     }
-    // };
-    // const validateEmail = (email) => {
-    //     // Regular expression pattern for validating email addresses
-    //     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    //     if (emailPattern.test(email)) {
-    //         setEmail(email);
-    //         setIsValidEmail(true);
-    //     } else {
-    //         setIsValidEmail(false);
-    //     }
-    // };
-
-    // const handleSuccess = async (response) => {
-    //     try {
-    //         if (response && response.access_token) {
-    //             const profile = await fetch(
-    //                 "https://www.googleapis.com/oauth2/v3/userinfo",
-    //                 {
-    //                     headers: {
-    //                         Authorization: `Bearer ${response.access_token}`,
-    //                     },
-    //                     method: "get",
-    //                 }
-    //             );
-
-    //             if (profile.ok) {
-    //                 const userObject = await profile.json();
-    //                 const body = {
-    //                     email: userObject.email,
-    //                     provider: "google",
-    //                 };
-
-    //                 const res = await fetch(
-    //                     `${API_URL}/api/v1/auth`,
-    //                     {
-    //                         method: "POST",
-    //                         headers: {
-    //                             "Content-Type": "application/json",
-    //                         },
-    //                         body: JSON.stringify(body),
-    //                     }
-    //                 );
-
-    //                 const jsonresponse = await res.json();
-
-    //                 if (jsonresponse.statusCode === 200) {
-    //                     dispatch(setloginState(jsonresponse.access_token));
-    //                     navigate("/number-generate");
-    //                 } else {
-    //                     // alert("Error: " + jsonresponse.message);
-    //                     Swal.fire({
-    //                         position: 'top',
-    //                         // // icon: 'error',
-    //                         text: `${jsonresponse.message}`,
-    //                         customClass: {
-    //                             confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-    //                         },
-    //                     }
-    //                     )
-
-    //                 }
-    //             } else {
-    //                 console.error("Profile request failed with status:", profile.status);
-    //             }
-    //         }
-    //     } catch (error) {
-    //         console.error("Error:", error.message);
-    //     }
-    // };
+            if (jsonresponse.statusCode === 200) {
+                dispatch(setloginState(jsonresponse.token));
+            }
+            else {
+                displayNotification("error", `Email does not exist`);
+            }
+            // else if (jsonresponse.statusCode === 422) {
+            //     // console.log("hi");
+            //     // return;
+            //     const errors = jsonresponse.errors;
+            //     for (const field of Object.keys(errors)) {
+            //         displayNotification("error", `${errors[field][0]}`);
+            //     }
+            // }          
+        }
+    };
 
     return (
         <div>
@@ -243,7 +163,7 @@ const Forget1 = () => {
                                         className="card-body"
                                         style={{ borderRadius: "10px" }}
                                     >
-                                        <h1
+                                        <h2
                                             className="text-custom px-4 mt-2  mb-2"
                                             style={{
                                                 color: "#198754",
@@ -253,8 +173,8 @@ const Forget1 = () => {
                                         >
                                             {" "}
                                             Forgot <br /> <span>Password?</span>
-                                        </h1>{" "}
-                                        <h3 className=" text-custom px-4 mb-2">Enter the email address <br /> <span>associated with your account.</span></h3>
+                                        </h2>{" "}
+                                        <h4 className=" text-custom px-4 mb-2 mt-1">Enter the email address <br /> <span>associated with your account.</span></h4>
                                         <Form className="text-center">
                                             <Form.Group
                                                 className=" mt-4 text-center"
@@ -267,31 +187,31 @@ const Forget1 = () => {
                                                     sx={{ width: "100%" }}
                                                     variant="outlined"
                                                 >
-                                                    <InputLabel htmlFor="outlined-adornment-password">
-                                                        Enter email address
-                                                    </InputLabel>
-                                                    <OutlinedInput
+                                                    <TextField
                                                         id="outlined-adornment-password"
-                                                        type={email}
-
+                                                        type="email"
+                                                        // value={email}
+                                                        onChange={(e) => validateEmail(e.target.value)}
+                                                        // required
+                                                        error={!isValidEmail}
+                                                        helperText={!isValidEmail && "Please enter a valid email"}
+                                                        size='small'
+                                                        sx={{ width: '100%' }}
                                                         label="Enter email address"
                                                     />
                                                 </FormControl>
                                             </Form.Group>
-
-
                                             <Button
                                                 className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white mt-4 fw-bold"
-                                            // onClick={handleLogin}
+                                                onClick={sendRequest}
                                             >
                                                 Send
                                             </Button>
-
-
                                         </Form>
                                     </div>
-
-                                </div></div></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>

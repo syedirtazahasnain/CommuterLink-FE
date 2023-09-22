@@ -369,7 +369,7 @@ const Login = () => {
                     />
                   </Form.Group>
                      
-                  <div className="py-1 text-right">    <Link to={'/forget1'} style={{ textDecoration: "none" }}>
+                  <div className="py-1 text-right">    <Link to={'/forget'} style={{ textDecoration: "none" }}>
                     <span
                       style={{
                         color: "#dc3545",
