@@ -108,9 +108,9 @@ const PaymentRide = () => {
     <div>
       <div>
         <div className="page-title">
-          <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+          <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
             <div className="d-flex justify-content-between align-items-xl-baseline">
-              <h3 className="text-success my-2 fw-bold m-0">PAYMENT/RIDE HISTORY </h3>
+              <h3 className="text-dark-green my-2 fw-bold m-0">PAYMENT/RIDE HISTORY </h3>
               <Link
                 onClick={() => navigate(-1)} >
                 <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
@@ -123,7 +123,7 @@ const PaymentRide = () => {
         </div>
       </div>
       <div className="card p-4 bg-white p-2">
-        <h5 className="pb-2 text-success ">{`The ride history along with payment log`}</h5>
+        <h5 className="pb-2 text-dark-green ">{`The ride history along with payment log`}</h5>
         <div className="card bg-light">
           <div className="card-body">
             {loading ? (
@@ -146,9 +146,9 @@ const PaymentRide = () => {
                   <Table sx={{ minWidth: 300 }} aria-label="simple table">
                     <TableHead>
                       <TableRow className="bg-light">
-                        <TableCell className="fw-bold fs-5 text-success">Date</TableCell>
-                        <TableCell className="fw-bold fs-5 text-success">Message</TableCell>
-                        <TableCell className="fw-bold fs-5 text-success">Amount</TableCell>
+                        <TableCell className="fw-bold fs-5 text-dark-green">Date</TableCell>
+                        <TableCell className="fw-bold fs-5 text-dark-green">Message</TableCell>
+                        <TableCell className="fw-bold fs-5 text-dark-green">Amount</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>

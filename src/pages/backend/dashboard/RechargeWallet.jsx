@@ -225,7 +225,7 @@ const RechargeWallet = () => {
   return (
     <div>
       <div className="page-title">
-        <h3 className="card p-4 text-success my-2 fw-bold">
+        <h3 className="card bg-medium-teal p-4 text-dark-green my-2 fw-bold">
           TWO WEEKS ADVANCE MIN. PAYMENT DUE: RS {payment}/-{" "}
         </h3>
       </div>
@@ -260,6 +260,20 @@ const RechargeWallet = () => {
                         </button>
                       </div>
                     </div>
+                    <div className="col-12 mb-2  border border-success rounded rounded-3 bg-light">
+                      <div>
+                        <button 
+                          className="font-custom btn  text-success fw-bold fs-5 lh-1" 
+                          // onClick={openAndCloseWindow}
+                        >
+                          <span><img
+                            src={`${BASE_URL}/assets/images/ep.png`}
+                            className="card-img-top w-40px m-auto mx-4"
+                          /></span>
+                          easypaisa
+                        </button>
+                      </div>
+                    </div>
                     <div className="col-12 border advancecolor border-success rounded rounded-3 bg-light">
                       <div>
                         <button 
@@ -280,17 +294,17 @@ const RechargeWallet = () => {
             </div>
           </div>
           <div className="text-center">
-            <Button
+            {/* <Button
               className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               style={{backgroundColor: "rgb(42,64,42)"}}
               onClick={() => navigate("/dashboard")}
               disabled={windowClosedManually}
             >
               Skip Payment
-            </Button>
+            </Button> */}
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2"
-              style={{backgroundColor: "rgb(42, 64, 42)"}}
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3 ml-2"
+              // style={{backgroundColor: "rgb(42, 64, 42)"}}
               onClick={route}
               disabled={!windowClosedManually}
             >

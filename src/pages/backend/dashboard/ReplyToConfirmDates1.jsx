@@ -56,7 +56,7 @@ const ReplyToConfirmDates1 = ({ children }) => {
    
 <div>
 <div className="page-title">
-  <h3 className="card p-4 text-success my-2 fw-bold">MEMBER REQUEST</h3>
+  <h3 className="card bg-medium-teal p-4 text-dark-green my-2 fw-bold">MEMBER REQUEST</h3>
   
 </div>
 <div className="card p-4">
@@ -97,7 +97,7 @@ const ReplyToConfirmDates1 = ({ children }) => {
               <p>Zafar Jamil</p>
             </div>
           <div className="d-flex justify-content-center mt-4">
-            <Button className="font-custom border-0 btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3">
+            <Button className="font-custom border-0 btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3">
             Reply to Confirm Dates
             </Button>
           </div>

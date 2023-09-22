@@ -77,9 +77,9 @@ const Congratulations = () => {
             ))}
           </Breadcrumbs>
         </h3>
-        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+        <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">
+            <h3 className="text-dark-green my-2 fw-bold m-0">
               CONGRATULATIONS!
             </h3>
             <Link
@@ -94,7 +94,7 @@ const Congratulations = () => {
 
       </div>
       <div className="card p-4 bg-light p-2">
-      <h5 className="pb-2 text-success text-center my-2 fw-bold">
+      <h5 className="pb-2 text-dark-green text-center my-2 fw-bold">
         Your Payment has been Received Successfully and credited to your Wallet
       </h5>
         <div className="card bg-light">
@@ -108,7 +108,7 @@ const Congratulations = () => {
 
             <div className="text-center">
               <Button
-                className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mt-4"
+                className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-2 mt-4"
                 onClick={route}
               >
                 Proceed

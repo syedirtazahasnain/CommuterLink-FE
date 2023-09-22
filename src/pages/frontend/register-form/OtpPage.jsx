@@ -6,7 +6,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { Modal, Alert } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";   
 import { Button } from "@mui/base";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { setsignupState } from "../../../redux/signupSlice";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 
 const OtpPage = () => {
 

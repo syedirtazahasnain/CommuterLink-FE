@@ -114,9 +114,9 @@ const RequestApprovalByCarOwner = () => {
   return (
 
     <div> <div className="page-title">
-      <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+      <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-success my-2 fw-bold m-0">REQUEST APPROVAL FOR CAR OWNER </h3>
+            <h3 className="text-dark-green my-2 fw-bold m-0">REQUEST APPROVAL FOR CAR OWNER </h3>
             <Link
               onClick={() => navigate(-1)} >
               <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
@@ -156,7 +156,7 @@ const RequestApprovalByCarOwner = () => {
           <div className="row text-left">
 
             <div className="d-flex justify-content-center mt-4">
-              <Button className="font-custom border-0 btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3">
+              <Button className="font-custom border-0 btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3">
                 Next
               </Button>
 

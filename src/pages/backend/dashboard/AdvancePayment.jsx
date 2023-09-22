@@ -267,9 +267,9 @@ const AdvancePayment = () => {
             ))}
           </Breadcrumbs>
         </h3>
-        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+        <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
       <div className="d-flex justify-content-between align-items-xl-baseline">
-        <h3 className="text-success my-2 fw-bold m-0">
+        <h3 className="text-dark-green my-2 fw-bold m-0">
         TWO WEEKS ADVANCE MIN. PAYMENT DUE: Rs. {payment}/-{" "}
         </h3>
         <Link
@@ -295,7 +295,7 @@ const AdvancePayment = () => {
               PAYMENT OPTIONS{" "}
             </h5>
             <div className="page-title">
-              <div className="container text-center p-2">
+              <div className="container text-center">
                 <div className="row">
                   <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
                     <div>
@@ -309,16 +309,33 @@ const AdvancePayment = () => {
                       </button>
                     </div>
                   </div>
+              
+                  <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
+                    <div>
+                      <button
+                        className="font-custom btn  text-success fw-bold fs-5 lh-1"
+                        // onClick={openAndCloseWindow}
+                         >
+                        <span className="font-custom">
+                        <img
+                          src={`${BASE_URL}/assets/images/ep.png`}
+                          className="font-custom card-img-top w-25px h-30px  mx-2 " />
+                        </span>
+                        easypaisa
+                        
+                      </button>
+                    </div>
+                  </div>
                   <div className="col-12 border bg-light advancecolor border-success rounded rounded-3">
                     <div>
                       <button
-                        className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
+                        className="font-custom btn  advancecolor text-success fw-bold fs-5 ml-3 lh-1"
                         onClick={openAndCloseWindow} >
                         <span><img
                           src={`${BASE_URL}/assets/images/jazz.png`}
-                          className="font-custom card-img-top w-40px m-auto mx-4" />
+                          className="font-custom  w-40px" />
                         </span>
-                        Jazz Cash
+                       &nbsp; Jazz Cash
                       </button>
                     </div>
                   </div>
@@ -327,17 +344,17 @@ const AdvancePayment = () => {
             </div>
           </div>
           <div className="text-center">
-            <Button
+            {/* <Button
               className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
               style={{ backgroundColor: "rgb(42, 64, 42)" }}
               onClick={() => navigate("/dashboard")}
               disabled={windowClosedManually}
             >
               Skip Payment
-            </Button>
+            </Button> */}
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3 ml-2" 
-              style={{ backgroundColor: "rgb(42, 64, 42)" }}
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3 ml-2" 
+              // style={{ backgroundColor: "rgb(42, 64, 42)" }}
               onClick={route}
               disabled={!windowClosedManually}
             >

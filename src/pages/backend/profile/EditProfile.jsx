@@ -40,10 +40,24 @@ const EditProfile = () => {
   ];
 
   const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword1, setShowPassword1] = React.useState(false);
+  const [showPassword2, setShowPassword2] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
+
+  const handleMouseDownPassword1 = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+
+  const handleMouseDownPassword2 = (event) => {
     event.preventDefault();
   };
 
@@ -297,7 +311,7 @@ const EditProfile = () => {
                     </InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-password"
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword1 ? "text" : "password"}
                       value={newPassword}
                       onChange={(e) => validatePassword(e.target.value)}
                       required
@@ -311,11 +325,11 @@ const EditProfile = () => {
                         <InputAdornment position="end">
                           <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
+                            onClick={handleClickShowPassword1}
+                            onMouseDown={handleMouseDownPassword1}
                             edge="end"
                           >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            {showPassword1 ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
                       }
@@ -339,7 +353,7 @@ const EditProfile = () => {
                     </InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-password"
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword2 ? "text" : "password"}
                       value={confirmPassword}
                       onChange={(e) => checkconfirmPassword(e.target.value)}
                       required
@@ -353,11 +367,11 @@ const EditProfile = () => {
                         <InputAdornment position="end">
                           <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
+                            onClick={handleClickShowPassword2}
+                            onMouseDown={handleMouseDownPassword2}
                             edge="end"
                           >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            {showPassword2 ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
                       }
