@@ -563,7 +563,7 @@ const BackendLayout = ({ children }) => {
                             <img
                               src={`${BASE_URL}/assets/images/Sysreformssmlogo.png`}
                               className=" app-sidebar-logo-minimize w-auto"
-                              style={{ height: "40px", width: "auto", backgroundColor: "#06373A" }}
+                              style={{ height: "40px", width: "auto" }}
                               alt=""
                             />
                           </div></div>
