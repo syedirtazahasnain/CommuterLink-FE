@@ -1,6 +1,16 @@
 :root{
   --bg-green: #008d55;
   --bs-green: #008d55;
+  --bs-dark-green: #1D685D;
+  --bg-light-grey: #E8E8E8;
+  --bs-light-teal: #BBD0CD;
+  --bg-dark-green: #0A6155;
+  --bg-dark-green-hover: #08483f;
+  --bs-dark-green: #0A6155;
+   --bs-texgrey: #8B8E8E;
+  --bg-medium-teal: #BFE0DB;
+  --bg-secondary-border: rgba(1, 1, 1, 0.2);
+  --bg-secondary-90: #E6E7E9;
 }
 
 
@@ -30,10 +40,10 @@
 }
 
 .btn-dark-green{
-  background-color:rgb(42, 64, 42);
+  background-color: var(--bg-dark-green);
 }
 .btn-dark-green:hover{
-  background-color:rgb(31, 48, 31);
+  background-color:var(--bg-dark-green-hover);
 }
 .btn.btn-dark {
   background-color: var(--bs-dark);
@@ -45,8 +55,12 @@
   transition: all 0.1s;
   border-bottom: none;
   border-top: none;
-  background-color: #062315;
+  background-color: var(--bs-light-teal);
   border-left:3px solid rgb(191, 216, 210);
+  color: var(--bg-dark-green);
+}
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-title {
+  color: var(--bs-texgrey);
 }
 
 .font-family-default {
@@ -67,13 +81,6 @@
 .app-sidebar .app-sidebar-logo .px-6 {
   border-bottom: #363740;
 }
-/* .app-sidebar .menu .menu-item .active a, 
-.menu-item a:hover {
-  transition: all 0.2s ease;
-  border-bottom: none;
-  background-color: #6b6b6b;
-  border-left:3px solid #8FC4B7;
-} */
 .menu-title {
   font-family: "Sohne-Buch";
   font-size: 16px;
@@ -90,8 +97,8 @@
 .menu-item:hover, .menu-item.active{
   border-bottom: none;
   border-top: none;
-  background-color: #062315;
-  border-left:3px solid rgb(191, 216, 210);
+  background-color: var(--bs-light-teal);
+  border-left:3px solid var(--bg-dark-green);
  
 }
 
@@ -247,7 +254,7 @@ body{
  }
 
  .sidebar-bg{
-  background-color: #06373A;
+  background-color: var(--bg-light-grey);
  
  }
 
@@ -306,6 +313,47 @@ body{
 }
 
 
+.bg-medium-teal{
+  background-color: var(--bg-medium-teal);
+}
 
+.border-secondary-light{
+  border-color: 0.5px solid var(--bg-secondary-border);
+}
 
+.bg-card-grey{
+  background-color: var(--bg-secondary-90);
+}
 
+.text-dark-green{
+  color: var(--bs-dark-green);
+}
+.nav-tabs-wider .nav-link {
+}
+
+.tab{
+  color: white;
+  background-color: var(--bg-light-grey);
+}
+.tab:hover{
+  color: black;
+  background-color: var(--bg-medium-teal);
+}
+
+.active-tab {
+  background-color: var(--bg-medium-teal); /* Change this to the desired background color */
+  color: black; /* Change this to the desired text color */
+}
+
+.custom-button-style{
+  background-color: var(--bg-light-grey) !important;
+  color: var(--bs-texgrey) !important;
+}
+.custom-button-style:hover{
+  background-color: var(--bg-medium-teal) !important;
+  color: var(--bs-dark) !important;
+}
+.custom-button-style.active{
+  background-color: var(--bg-medium-teal) !important;
+  color: var(--bs-dark) !important;
+}

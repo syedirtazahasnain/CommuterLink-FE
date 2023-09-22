@@ -159,9 +159,9 @@ const BackendLayout = ({ children }) => {
           <Loading/>
         </div>
       ) : (
-        <div className="container-fluid font-custom">
+        <div className="container-fluid font-custom bg-white">
           <div className="row">
-            <div className="col-12 bg-light-lime" >
+            <div className="col-12 bg-white" >
               <ThemeProvider theme={customTheme}>
                 <link rel="stylesheet" href={`/assets/css/backend.css`} />
                 <link rel="stylesheet" href={"/assets/frontend.css"} />
@@ -174,7 +174,7 @@ const BackendLayout = ({ children }) => {
                   id="kt_app_root"
                 >
                   <div
-                    className="app-page flex-column flex-column-fluid bg-light-lime"
+                    className="app-page flex-column flex-column-fluid bg-white"
                     id="kt_app_page"
                   >
                     <div id="kt_app_header" className="app-header">
@@ -338,7 +338,7 @@ const BackendLayout = ({ children }) => {
                             <img
                               src={`${BASE_URL}/assets/images/CL-logo.png`}
                               className="img-fluid app-sidebar-logo-default"
-                              style={{ height: "50px", width: "auto" }}
+                              style={{ height: "60px", width: "auto" }}
                               alt=""
                             />
                             <img
@@ -411,7 +411,7 @@ const BackendLayout = ({ children }) => {
                                   <span className="menu-icon font-custom">
                                     <i className="fas fa-home fa-2x"></i>
                                   </span>
-                                  <span className="menu-title text-white font-custom mt-1">
+                                  <span className="menu-title font-custom mt-1">
                                     Dashboard
                                   </span>
                                 </Link>
@@ -430,7 +430,7 @@ const BackendLayout = ({ children }) => {
                                   <span className="menu-icon font-custom">
                                     <i className="fas fa-solid fa-user fa-2x"></i>
                                   </span>
-                                  <span className="menu-title text-white font-custom mt-1">
+                                  <span className="menu-title font-custom mt-1">
                                     Profile
                                   </span>
                                 </Link>
@@ -452,7 +452,7 @@ const BackendLayout = ({ children }) => {
                                     <i class="fa-regular fa-file-lines"></i>
                                     {/* <i className="fa-solid fa-terminal"></i> */}
                                   </span>
-                                  <span className="menu-title text-white font-custom">
+                                  <span className="menu-title font-custom">
                                     Terms and Conditions
                                   </span>
                                 </Link>
@@ -472,7 +472,7 @@ const BackendLayout = ({ children }) => {
                                     <i className="fa-solid fa-bell"></i>
                                   </span>
 
-                                  <span className="menu-title text-white font-custom">
+                                  <span className="menu-title font-custom">
                                     Notifications
                                   </span>
                                 </Link>
@@ -491,7 +491,7 @@ const BackendLayout = ({ children }) => {
                                   <span className="menu-icon font-custom">
                                     <i class="fa-solid fa-rotate"></i>
                                   </span>
-                                  <span className="menu-title text-white font-custom">
+                                  <span className="menu-title font-custom">
                                     Update Matching Criteria
                                   </span>
                                 </Link>
@@ -510,7 +510,7 @@ const BackendLayout = ({ children }) => {
                                   <span className="menu-icon font-custom">
                                     <i className="fa-solid fa-address-card"></i>
                                   </span>
-                                  <span className="menu-title text-white font-custom">
+                                  <span className="menu-title font-custom">
                                     Contact Us
                                   </span>
                                 </Link>
@@ -529,7 +529,7 @@ const BackendLayout = ({ children }) => {
                                   <span className="menu-icon font-custom">
                                     <i className="fa-solid fa-phone"></i>
                                   </span>
-                                  <span className="menu-title text-white font-custom">
+                                  <span className="menu-title font-custom">
                                     WhatsApp
                                   </span>
                                 </Link>
@@ -553,7 +553,7 @@ const BackendLayout = ({ children }) => {
                           className="app-sidebar-logo sidebar-bg border-0"
                           id="kt_app_sidebar_logo"
                         >
-                          <div className="container text-center " id="kt_app_sidebar_logo" style={{ backgroundColor: "#06373A" }}>
+                          <div className="container text-center " id="kt_app_sidebar_logo" >
                             <img
                               src={`${BASE_URL}/assets/images/Sysreformslogo2.png`}
                               className="img-fluid app-sidebar-logo-default py-2 "
