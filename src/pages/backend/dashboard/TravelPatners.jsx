@@ -394,67 +394,6 @@ const TravelPatners = () => {
             </div>
           </div>
         )}
-      <div className="card  mt-3 mb-5">
-        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
-          <h4 className="text-center fw-bold text-warning m-auto">
-            {" "}
-            MY WALLET{" "}
-          </h4>{" "}
-        </div>
-        <div className="card mx-4 my-4" style={{ background: "rgb(214 219 218)" }}>
-          <div className="card-body">
-          <div className="row">
-            <div className="col-md-8">
-              <div className="row d-flex justify-content-between">
-            <div className="col-md-6 col-sm-12 px-5 py-0 bg-light text-center border-2 rounded-4">
-              <div className="text-center">  <i className=" p-3 wallet-margin fa-solid text-success fa-wallet fs-1"></i></div>
-          
-            <p className="py-3 text-center fw-bold text-success fs-3">
-                    Rs. &nbsp; {walletAmount} /-
-                  </p>
-            </div>
-            <div className="col-md-4 col-sm-12 mx-5 py-3"> <img
-                        className="d-block img-fluid w-auto h-auto"
-                        src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="First slide"
-                      /></div>
-            </div>
-            
-            </div>
-            {/* <div className="col-md-8">
-              <div className="row">
-                <div className="col-md-4">
-                  <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
-                </div>
-                <div className="col-md-10">
-
-                  <p className="py-3 text-center fw-bold text-success fs-3">
-                    Rs. &nbsp; {walletAmount} /-
-                  </p>
-                </div>
-              </div>
-            </div> */}
-            <div className="col-md-4 col-sm-12 text-center py-4">
-              {userType === 0 ?
-                (
-                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
-                    Recharge
-                  </button>
-                ) :
-                (
-                    <div className="alert alert-info  text-center fw-bold fs-5" role="alert">
-                      <i className="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Your wallet is secure and end to end encrypted.
-                    </div>
-                )}
-              <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
-                View Transaction History
-              </button>
-            </div>
-          </div>
-          </div>
-         
-        </div>
-      </div>
     </div>
   );
 };

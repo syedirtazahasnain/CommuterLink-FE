@@ -326,7 +326,7 @@ const TravelConfirmation = () => {
 
   return (
     <div>
-      <div className="card bg-light-green mt-3 mb-5">
+      <div className="card bg-light-green mb-5">
         <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
           <h4 className="text-center fw-bold text-warning m-auto">
             {" "}
