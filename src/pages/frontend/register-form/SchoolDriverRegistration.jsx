@@ -11,7 +11,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from 'dayjs';
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-maps/api";
+import { GoogleMap, Autocomplete, MarkerF, } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { Checkbox } from '@mui/material';
@@ -33,7 +33,6 @@ const DriverRegistration = () => {
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const mapLibraries = ["places"];
 
   const [isValidUniversityName, setIsValidUniversityName] = useState(true);
   const [isValidUniversityAddress, setIsValidUniversityAddress] = useState(true);
@@ -324,6 +323,7 @@ const DriverRegistration = () => {
 
   const handleProvinceStartChange = (event) => {
     setCityStartId("");
+    setLocationStartStringField("");
     setProvinceStartId(event.target.value);
   };
   function validateProfession(profession) {
@@ -340,6 +340,7 @@ const DriverRegistration = () => {
 
   const handleProvinceEndChange = (event) => {
     setCityEndId("");
+    setLocationEndStringField("");
     setProvinceEndId(event.target.value);
   };
 
@@ -1645,85 +1646,77 @@ const DriverRegistration = () => {
                       </div>
                     </div>
 
-                    <LoadScript
-                      googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
-                      libraries={mapLibraries}
-                    >
-                      <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                        <Modal.Header closeButton>
-                          <Modal.Title>Select Starting Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <Container className="d-flex justify-content-center align-items-center mb-3">
-                            <Row style={{ height: "100%", width: "100%" }}>
-                              <GoogleMap
-                                zoom={12}
-                                center={defaultStartCenter}
-                                mapContainerStyle={{ width: "100%", height: "50vh" }}
-                                onClick={handleMapClickStart}
-                                options={{
-                                  types: ["(regions)"],
-                                  componentRestrictions: { country: "PK" },
+                    <Modal show={showStartModal} onHide={handleCloseStartModal}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Select Starting Location</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Container className="d-flex justify-content-center align-items-center mb-3">
+                          <Row style={{ height: "100%", width: "100%" }}>
+                            <GoogleMap
+                              zoom={15}
+                              center={defaultStartCenter}
+                              mapContainerStyle={{ width: "100%", height: "50vh" }}
+                              onClick={handleMapClickStart}
+                              options={{
+                                types: ["(regions)"],
+                                componentRestrictions: { country: "PK" },
+                              }}
+                            >
+                              <MarkerF
+                                position={markerPositionStart}
+                                icon={{
+                                  url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                                 }}
-                              >
-                                <MarkerF
-                                  position={markerPositionStart}
-                                  icon={{
-                                    url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                                  }}
-                                />
-                              </GoogleMap>
-                            </Row>
-                          </Container>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="contained" onClick={handleCloseStartModal}>
-                            Submit
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
+                              />
+                            </GoogleMap>
+                          </Row>
+                        </Container>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="contained" onClick={handleCloseStartModal}>
+                          Submit
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
 
-                      <Modal show={showEndModal} onHide={handleCloseEndModal}>
-                        <Modal.Header closeButton>
-                          <Modal.Title>Select Drop-off Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <Container className="d-flex justify-content-center align-items-center mb-3">
-                            <Row style={{ height: "100%", width: "100%" }}>
-                              <GoogleMap
-                                zoom={12}
-                                // center={
-                                //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
-                                // }
-                                center={defaultEndCenter}
-                                mapContainerStyle={{ width: "100%", height: "50vh" }}
-                                onClick={handleMapClickEnd}
-                                options={{
-                                  types: ["(regions)"],
-                                  componentRestrictions: { country: "PK" },
+                    <Modal show={showEndModal} onHide={handleCloseEndModal}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Select Drop-off Location</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Container className="d-flex justify-content-center align-items-center mb-3">
+                          <Row style={{ height: "100%", width: "100%" }}>
+                            <GoogleMap
+                              zoom={15}
+                              center={defaultEndCenter}
+                              mapContainerStyle={{ width: "100%", height: "50vh" }}
+                              onClick={handleMapClickEnd}
+                              options={{
+                                types: ["(regions)"],
+                                componentRestrictions: { country: "PK" },
+                              }}
+                            >
+
+                              <MarkerF
+                                position={markerPositionEnd}
+                                icon={{
+                                  url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                                 }}
-                              >
+                              />
 
-                                <MarkerF
-                                  position={markerPositionEnd}
-                                  icon={{
-                                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                                  }}
-                                />
-
-                              </GoogleMap>
-                            </Row>
-                          </Container>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="contained" onClick={handleCloseEndModal}>
-                            Submit
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                    </LoadScript>
+                            </GoogleMap>
+                          </Row>
+                        </Container>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="contained" onClick={handleCloseEndModal}>
+                          Submit
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
 
                     {/* <Row className="mb-3">
                       <Form.Group as={Col} md="6" controlId="validationCustom01">

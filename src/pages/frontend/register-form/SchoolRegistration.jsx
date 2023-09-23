@@ -14,7 +14,6 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import {
   GoogleMap,
-  LoadScript,
   Autocomplete,
   MarkerF,
 } from "@react-google-maps/api";
@@ -46,7 +45,6 @@ const SchoolRegistration = () => {
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const mapLibraries = ["places"];
 
   const [isValidProfession, setIsValidProfession] = useState(true);
   const [isValidUniversityName, setIsValidUniversityName] = useState(true);
@@ -328,11 +326,13 @@ const SchoolRegistration = () => {
 
   const handleProvinceStartChange = (event) => {
     setCityStartId("");
+    setLocationStartStringField("");
     setProvinceStartId(event.target.value);
   };
 
   const handleProvinceEndChange = (event) => {
     setCityEndId("");
+    setLocationEndStringField("");
     setProvinceEndId(event.target.value);
   };
 
@@ -1301,89 +1301,85 @@ const SchoolRegistration = () => {
                   </div>
                 </div>
 
-                <LoadScript
-                  googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
-                  libraries={mapLibraries}
-                >
-                  <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Select Starting Location</Modal.Title>
-                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Container className="d-flex justify-content-center align-items-center mb-3">
-                        <Row style={{ height: "100%", width: "100%" }}>
-                          <GoogleMap
-                            zoom={12}
-                            center={defaultStartCenter}
-                            mapContainerStyle={{
-                              width: "100%",
-                              height: "50vh",
+                <Modal show={showStartModal} onHide={handleCloseStartModal}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Select Starting Location</Modal.Title>
+                    <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Container className="d-flex justify-content-center align-items-center mb-3">
+                      <Row style={{ height: "100%", width: "100%" }}>
+                        <GoogleMap
+                          zoom={15}
+                          center={defaultStartCenter}
+                          mapContainerStyle={{
+                            width: "100%",
+                            height: "50vh",
+                          }}
+                          onClick={handleMapClickStart}
+                          options={{
+                            types: ["(regions)"],
+                            componentRestrictions: { country: "PK" },
+                          }}
+                        >
+                          <MarkerF
+                            position={markerPositionStart}
+                            icon={{
+                              url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                             }}
-                            onClick={handleMapClickStart}
-                            options={{
-                              types: ["(regions)"],
-                              componentRestrictions: { country: "PK" },
-                            }}
-                          >
-                            <MarkerF
-                              position={markerPositionStart}
-                              icon={{
-                                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                              }}
-                            />
-                          </GoogleMap>
-                        </Row>
-                      </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="contained"
-                        onClick={handleCloseStartModal}
-                      >
-                        Submit
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+                          />
+                        </GoogleMap>
+                      </Row>
+                    </Container>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      variant="contained"
+                      onClick={handleCloseStartModal}
+                    >
+                      Submit
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
 
-                  <Modal show={showEndModal} onHide={handleCloseEndModal}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Select Drop-off Location</Modal.Title>
-                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Container className="d-flex justify-content-center align-items-center mb-3">
-                        <Row style={{ height: "100%", width: "100%" }}>
-                          <GoogleMap
-                            zoom={12}
-                            center={defaultEndCenter}
-                            mapContainerStyle={{
-                              width: "100%",
-                              height: "50vh",
+                <Modal show={showEndModal} onHide={handleCloseEndModal}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Select Drop-off Location</Modal.Title>
+                    <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Container className="d-flex justify-content-center align-items-center mb-3">
+                      <Row style={{ height: "100%", width: "100%" }}>
+                        <GoogleMap
+                          zoom={15}
+                          center={defaultEndCenter}
+                          mapContainerStyle={{
+                            width: "100%",
+                            height: "50vh",
+                          }}
+                          onClick={handleMapClickEnd}
+                          options={{
+                            types: ["(regions)"],
+                            componentRestrictions: { country: "PK" },
+                          }}
+                        >
+                          <MarkerF
+                            position={markerPositionEnd}
+                            icon={{
+                              url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                             }}
-                            onClick={handleMapClickEnd}
-                            options={{
-                              types: ["(regions)"],
-                              componentRestrictions: { country: "PK" },
-                            }}
-                          >
-                            <MarkerF
-                              position={markerPositionEnd}
-                              icon={{
-                                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                              }}
-                            />
-                          </GoogleMap>
-                        </Row>
-                      </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="contained" onClick={handleCloseEndModal}>
-                        Submit
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </LoadScript>
+                          />
+                        </GoogleMap>
+                      </Row>
+                    </Container>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="contained" onClick={handleCloseEndModal}>
+                      Submit
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3"
