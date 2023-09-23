@@ -323,8 +323,6 @@ const CommuterLinkSuggestions = () => {
 
   return (
     <>
-      
-
       <div className="card rounded-0 mb-5">
         <div className="card-header rounded-0" style={{ backgroundColor: "rgb(0 145 124)"}}>
           {loading ? (

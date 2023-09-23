@@ -9,12 +9,8 @@ import Swal from "sweetalert2";
 import { setContactIdState, setIdState } from "../../../redux/generalSlice";
 import { ThreeCircles } from "react-loader-spinner";
 import Modal from 'react-bootstrap/Modal';
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, PolylineF } from "@react-google-maps/api";
 import { Container, Row } from "react-bootstrap";
-
-const mapLibraries = ["places"];
-
-const API_KEY = "AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA";
 
 const customTheme = createTheme({
   palette: {
@@ -38,14 +34,8 @@ const CommuterProfile1 = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const requestContactId = useSelector((s) => s.general.data.contact_id);
   const [showModal, setShowModal] = useState(false);
-
-  // For Profile Page Data
-  const [defaultStartCenter, setDefaultStartCenter] = useState({
-    lat: 30.3753,
-    lng: 69.3451,
-  });
-  const [locationStartString, setLocationStartString] = useState("");
-  const [locationEndString, setLocationEndString] = useState("");
+  
+  // For Profile Data
   const [loading, setLoading] = useState(true);
   const [option, setOption] = useState(null);
   const [profileType, setProfileType] = useState("");
@@ -74,59 +64,6 @@ const CommuterProfile1 = () => {
       setLoading(false);
     }, 2000);
   }, []);
-
-  // useEffect(() => {
-  //   // Function to fetch the geocoding data
-  //   const getGeocodeStartData = async () => {
-  //     try {
-
-  //       if (locationStartString) {
-  //         const response = await fetch(
-  //           `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-  //         );
-
-  //         const data = await response.json(); // Parse the response as JSON
-  //         console.log(data);
-  //         if (data.status === 'OK' && data.results.length > 0) {
-  //           const { lat, lng } = data.results[0].geometry.location;
-  //           setDefaultStartCenter({ lat, lng });
-  //           setMarkerPositionStart({ lat, lng });
-  //         } else {
-  //           console.error('Geocoding API response error');
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching geocoding data:", error);
-  //     }
-  //   };
-  //   getGeocodeStartData();
-  // }, [locationStartString]);
-
-  // useEffect(() => {
-  //   // Function to fetch the geocoding data
-  //   const getGeocodeEndData = async () => {
-  //     try {
-
-  //       if (locationEndString) {
-  //         const response = await fetch(
-  //           `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-  //         );
-
-  //         const data = await response.json(); // Parse the response as JSON
-  //         if (data.status === 'OK' && data.results.length > 0) {
-  //           const { lat, lng } = data.results[0].geometry.location;
-  //           // setDefaultEndCenter({ lat, lng });
-  //           setMarkerPositionEnd({ lat, lng });
-  //         } else {
-  //           console.error('Geocoding API response error');
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching geocoding data:", error);
-  //     }
-  //   };
-  //   getGeocodeEndData();
-  // }, [locationEndString]);
 
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
@@ -394,9 +331,6 @@ const CommuterProfile1 = () => {
       car_model,
       car_reg_year,
     } = (userDetails[0]?.vehicle?.[0] || {}) || {};
-
-    setLocationStartString(origin);
-    setLocationEndString(destination);
 
     // Splitting the latitude and longitude
     const dropoffCoords = dropoff_address.split(',');
@@ -803,9 +737,63 @@ const CommuterProfile1 = () => {
                 </Button>
               )}
             </div>
-
           </div>
         </div>
+        <Modal show={showModal} onHide={closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Map View</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Container className="d-flex justify-content-center align-items-center mb-3">
+              <Row style={{ height: "400px", width: "100%" }}>
+                <GoogleMap
+                  zoom={12}
+                  center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                  mapContainerStyle={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  options={{
+                    types: ["(regions)"],
+                    componentRestrictions: { country: "PK" },
+                  }}
+                >
+                  <MarkerF
+                    position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                    icon={{
+                      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                    }}
+                  />
+                  <MarkerF
+                    position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
+                    icon={{
+                      url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                    }}
+                  />
+                  <PolylineF
+                    path={[
+                      { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
+                      { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
+                    ]}
+                    options={{
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 3,
+                    }}
+                  />
+                </GoogleMap>
+              </Row>
+            </Container>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+              onClick={closeModal}
+            >
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   };
@@ -873,50 +861,6 @@ const CommuterProfile1 = () => {
           </div>
         )}
       </div>
-      <LoadScript
-        googleMapsApiKey={API_KEY}
-        libraries={mapLibraries}
-      >
-        <Modal show={showModal} onHide={closeModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Map View</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {/* <h4> Modal Body </h4> */}
-            <Container className="d-flex justify-content-center align-items-center mb-3">
-              <Row style={{ height: "400px", width: "100%" }}>
-                <GoogleMap
-                  zoom={15}
-                  defaultCenter={{ lat: 30.3753, lng: 69.3451 }}
-                  mapContainerStyle={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                  options={{
-                    types: ["(regions)"],
-                    componentRestrictions: { country: "PK" },
-                  }}
-                >
-                  <MarkerF
-                    position={{ lat: 0, lng: 0 }}
-                    icon={{
-                      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                    }}
-                  />
-                </GoogleMap>
-              </Row>
-            </Container>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
-              onClick={closeModal}
-            >
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </LoadScript>
     </>
   );
 };
