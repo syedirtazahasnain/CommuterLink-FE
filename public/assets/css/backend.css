@@ -1,4 +1,5 @@
 :root{
+  --bg-white:'#fff';
   --bg-green: #008d55;
   --bs-green: #008d55;
   --bs-text-green: rgba(32, 158, 141, 1);
@@ -356,10 +357,11 @@ body{
 .custom-button-style:hover{
   background-color: var(--bg-medium-teal) !important;
   color: var(--bs-dark) !important;
+  
 }
 .custom-button-style.active{
-  background-color: var(--bg-medium-teal) !important;
-  color: var(--bs-dark) !important;
+  background-color: var(--bs-dark-green) !important;
+  color: white !important;
 }
 
 .header-teal{
@@ -368,3 +370,6 @@ body{
 .text-green{
   color: var(--bs-text-green) !important;
 }
+.background_body{
+  background: linear-gradient(to top right, rgba(28, 196, 172, 1), rgba(6, 55, 58, 1)) !important;
+  color: white !important}

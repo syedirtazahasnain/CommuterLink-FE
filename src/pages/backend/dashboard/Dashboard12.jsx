@@ -89,16 +89,16 @@ const Dashboard12 = () => {
               <a className={`nav-link fs-4 custom-button-style active rounded-0 font-custom`} data-bs-toggle="pill" href="#home">CommutersLink Suggestions</a>
             </li>
             <li className="nav-item me-0">
-              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom`} data-bs-toggle="pill" href="#menu1">Request by Members</a>
+              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom px-4`} data-bs-toggle="pill" href="#menu1">Request by Members</a>
             </li>
             <li className="nav-item me-0">
               <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom`} data-bs-toggle="pill" href="#menu2">Agreement Information</a>
             </li>
             <li className="nav-item me-0">
-              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom`} data-bs-toggle="pill" href="#menu3">My Wallet</a>
+              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom px-6`} data-bs-toggle="pill" href="#menu3">My Wallet <br/><br/></a>
             </li>
             <li className="nav-item me-0">
-              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom`} data-bs-toggle="pill" href="#menu4">Travel Confirmation</a>
+              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom px-5`} data-bs-toggle="pill" href="#menu4">Travel Confirmation</a>
             </li>
           </ul>
           </div>

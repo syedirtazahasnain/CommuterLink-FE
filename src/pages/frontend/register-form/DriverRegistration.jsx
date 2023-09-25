@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
-import Col from "react-bootstrap/Col";
+import Col from "react-bootstrap/Col";        
 import Form from "react-bootstrap/Form";
 import { Container, Row, Modal } from 'react-bootstrap';
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -64,7 +64,7 @@ const DriverRegistration = () => {
         <div>
           <div class="container mt-5 pt-1 fw-bold fs-1 mb-5">
             <span><i class=" p-3 wallet-margin fa-solid text-success fa-wallet fs-1"></i>
-              Why Process Payment to CommutersLink</span>
+              Why Process Payment through CommutersLink</span>
           </div>
           <div>
             <div class="container">
@@ -3926,7 +3926,7 @@ const DriverRegistration = () => {
                           className="fw-bold"
 
                         >
-                          &nbsp;<p className="text-center" onClick={openPopup}> Why Process Payment to CommuterLink?</p>
+                          &nbsp;<p className="text-center" onClick={openPopup}> Why Process Payment through CommuterLink?</p>
                         </span>
                         <form id="paymentForm">
                           <div className="mt-4 px-3">

@@ -348,17 +348,17 @@ const RequestsByMembers = () => {
           )}
         </div>
         <div
-          className="card-body"
+          className="card-body pb-5" style={{ background: "rgb(214 219 218)" }}
         >
-          <div className="card mt-5" style={{ backgroundColor: "#D9D9D9" }}>
-            <div
+          <div className="card pb-5"style={{ background: "rgb(214 219 218)" }}>
+            {/* <div
               className="card-header "
               style={{ backgroundColor: "#00917C" }}
             >
               <h5 className="text-white pt-4 mt-2 mx-auto fw-bold">
                 REQUESTS BY MEMBERS
               </h5>
-            </div>
+            </div> */}
 
             <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
               <p>

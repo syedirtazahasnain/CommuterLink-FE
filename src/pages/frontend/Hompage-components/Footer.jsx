@@ -135,8 +135,8 @@ const Footer = () => {
 
               <div className="col-lg-4 col-md-6 footer-newsletter  my-4">
 
-                <h4>Download App</h4>
-                <ul className="list-unstyled d-flex pt-5">
+                <h4>Download CommutersLink now and revolutionize your daily commute</h4>
+                <ul className="list-unstyled d-flex pt-1">
                   <li className="mr-3">
                     <img
                       className="img-fluid"
