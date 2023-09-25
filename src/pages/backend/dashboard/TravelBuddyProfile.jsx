@@ -385,7 +385,7 @@ const TravelBuddyProfile = () => {
                 </div>
                 <div className="card-body bg-card-grey">
                   <div className="card-text">
-                    <div className="row  mb-2">
+                    <div className="row px-5 mb-2">
                       <div className="col-md-6 ">
                         {gender !== "" ? (
                           <>
@@ -449,22 +449,22 @@ const TravelBuddyProfile = () => {
               </div>
             </div>
             <div className="col-md-8 d-flex flex-column">
-              <ul className="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
-                <li className="nav-item me-0" role="presentation">
+              <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+                <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style active rounded-0`}
                     id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{profileType === "rider" ? ("Traveller Details") : ("Car Offerer Details")}</button>
                 </li>
-                <li className="nav-item me-0" role="presentation">
+                <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
                     id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Additional Info</button>
                 </li>
-                <li className="nav-item me-0" role="presentation">
+                <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
                     id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">View On Map</button>
                 </li>
               </ul>
-              <div className="tab-content flex-grow-1" id="pills-tabContent">
-                <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              <div class="tab-content flex-grow-1" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                   <div className="row ">
 
                     <div className="col-md-11">
@@ -581,7 +581,7 @@ const TravelBuddyProfile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div className="row ">
 
                     <div className="col-md-11">
@@ -733,9 +733,7 @@ const TravelBuddyProfile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                  MAPPPPP
-                </div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">MAPPPPP</div>
               </div>
               <div className="text-end px-3 py-3">
                 <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure}>

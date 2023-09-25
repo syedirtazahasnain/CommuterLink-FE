@@ -10,7 +10,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
-import   {Button as btnresubmit} from "@mui/base";
+import { Button as btnresubmit } from "@mui/base";
 import { Button, Input, Box, Typography } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
 import Swal from "sweetalert2";
@@ -32,10 +32,7 @@ const Resubmit = () => {
     }
   };
 
-  const handleUpload = () => {
-    // You can perform the upload logic here, e.g., using an API call.
-    console.log("Uploading image:", selectedImage);
-  };
+
   const checkUserStatus = async () => {
     try {
       const response = await fetch(
@@ -76,31 +73,6 @@ const Resubmit = () => {
   //     }
   //   }, [userToken]);
 
-  const googlesignup = useGoogleLogin({
-    clientId:
-      "380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
-    onSuccess: (codeResponse) => handleSuccess(codeResponse),
-    onError: (codeResponse) => handleFailure(codeResponse),
-  });
-  const handleFailure = (response) => {
-    console.log("handleFailure", response);
-  };
-
-  const handleLogin = async () => {
-    if (email === "" || password === "") {
-      // alert("Please Fill All Fields!");
-      Swal.fire({
-        position:'top',
-        // icon: 'warning',
-       text: 'Please Fill All Fields!',
-       customClass: {
-        confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
-      },}
-      )
-    } else {
-      await postData();
-    }
-  };
 
   const postData = async () => {
     try {
@@ -129,37 +101,29 @@ const Resubmit = () => {
           console.log(jsonresponse);
           // alert("Error: " + jsonresponse.message);
           Swal.fire({
-            position:'top',
+            position: 'top',
             // icon: 'error',
-           text: `${jsonresponse.message}`,
-           customClass: {
-            confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
-          },}
+            text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+            },
+          }
           )
         }
       } else {
         // alert("please check Terms of Service");
         Swal.fire({
-          position:'top',
+          position: 'top',
           // icon: 'warning',
-         text: 'Please Check Terms of Service',
-         customClass: {
-          confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
-        },}
+          text: 'Please Check Terms of Service',
+          customClass: {
+            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          },
+        }
         )
       }
     } catch (error) {
       console.log(error.message);
-    }
-  };
-  const validateEmail = (email) => {
-    // Regular expression pattern for validating email addresses
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (emailPattern.test(email)) {
-      setEmail(email);
-      setIsValidEmail(true);
-    } else {
-      setIsValidEmail(false);
     }
   };
 
@@ -201,12 +165,13 @@ const Resubmit = () => {
           } else {
             // alert("Error: " + jsonresponse.message);
             Swal.fire({
-              position:'top',
+              position: 'top',
               // icon: 'error',
-             text: `${jsonresponse.message}`,
-             customClass: {
-              confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
-            },}
+              text: `${jsonresponse.message}`,
+              customClass: {
+                confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+              },
+            }
             )
           }
         } else {
@@ -240,38 +205,38 @@ const Resubmit = () => {
                   indicators={null}
                 >
                   <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
-                    </Carousel.Item>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                  </Carousel.Item>
 
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-4.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
-                    </Carousel.Item>
-                    <Carousel.Item interval={4000}>
-                      <img
-                        className="d-block img-fluid w-auto"
-                        src={`${BASE_URL}/assets/images/signup-6.png`}
-                        alt="First slide"
-                      />
-                      <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
-                    </Carousel.Item>
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-3.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+                  </Carousel.Item>
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-4.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                  </Carousel.Item>
+                  <Carousel.Item interval={4000}>
+                    <img
+                      className="d-block img-fluid w-auto"
+                      src={`${BASE_URL}/assets/images/signup-6.png`}
+                      alt="First slide"
+                    />
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                  </Carousel.Item>
                 </Carousel>
                 {/* </div> */}
               </div>
@@ -319,7 +284,7 @@ const Resubmit = () => {
                       color="light"
                       onChange={handleImageChange}
                     />
-                    
+
 
                     <label htmlFor="image-upload" className="w-100 bg-light text-success">
                       <Button
@@ -339,23 +304,17 @@ const Resubmit = () => {
                           variant="body1"
                           fullWidth
                         >
-                          Selected Image:
+                          Front Side CNIC Image:
                         </Typography>
                         <img
+                          className="mt-1"
                           src={URL.createObjectURL(selectedImage)}
                           alt="Selected"
                         />
-                        <Button
-                          variant="contained"
-                          
-                          onClick={handleUpload}
-                        >
-                          Upload
-                        </Button>
                       </div>
                     )}
                   </Box>
-                  
+
                   <Box className="mt-4 text-center"  >
                     <input
                       accept="image/*"
@@ -365,7 +324,7 @@ const Resubmit = () => {
                       color="light"
                       onChange={handleImageChange}
                     />
-                    
+
 
                     <label htmlFor="image-upload" className="w-100 bg-light text-success">
                       <Button
@@ -385,19 +344,13 @@ const Resubmit = () => {
                           variant="body1"
                           fullWidth
                         >
-                          Selected Image:
+                          Back Side CNIC Image:
                         </Typography>
                         <img
+                          className="mt-1"
                           src={URL.createObjectURL(selectedImage)}
                           alt="Selected"
                         />
-                        <Button
-                          variant="contained"
-                          
-                          onClick={handleUpload}
-                        >
-                          Upload
-                        </Button>
                       </div>
                     )}
                   </Box>
@@ -411,7 +364,7 @@ const Resubmit = () => {
                       color="light"
                       onChange={handleImageChange}
                     />
-                    
+
 
                     <label htmlFor="image-upload" className="w-100 bg-light text-success">
                       <Button
@@ -431,28 +384,21 @@ const Resubmit = () => {
                           variant="body1"
                           fullWidth
                         >
-                          Selected Image:
+                          Car Number Plate Image:
                         </Typography>
                         <img
+                          className="mt-1"
                           src={URL.createObjectURL(selectedImage)}
                           alt="Selected"
                         />
-                        <Button
-                          variant="contained"
-                          
-                          onClick={handleUpload}
-                        >
-                          Upload
-                        </Button>
                       </div>
                     )}
                   </Box>
-                 <div className="py-5">
-                 <btnresubmit className="btn-custom mx-2  px-4 py-2 rounded rounded-5 text-custom fw-bold">
-                    Resubmit
-                  </btnresubmit>
-                 </div>
-                  
+                  <div className="py-5">
+                    <btnresubmit className="btn-custom mx-2  px-4 py-2 rounded rounded-5 text-custom fw-bold cursor-pointer">
+                      Resubmit
+                    </btnresubmit>
+                  </div>
                 </Form>
               </div>
             </div>
