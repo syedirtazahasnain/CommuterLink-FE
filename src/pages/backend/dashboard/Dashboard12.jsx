@@ -9,8 +9,6 @@ import Swal from 'sweetalert2'
 import { API_URL } from '../../../constants'
 import { ThreeCircles } from 'react-loader-spinner'
 import { displayNotification } from '../../../helpers'
-import RequestsByMembers from './RequestsByMembers'
-import MyWallet from './MyWallet'
 
 
 const Dashboard12 = () => {
@@ -82,57 +80,14 @@ const Dashboard12 = () => {
         </div>
       ) : (
         <>
-          <div className="mt-3">
-
-          <ul className="nav nav-pills nav-justified">
-            <li className="nav-item me-0">
-              <a className={`nav-link fs-4 custom-button-style active rounded-0 font-custom`} data-bs-toggle="pill" href="#home">CommutersLink Suggestions</a>
-            </li>
-            <li className="nav-item me-0">
-              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom`} data-bs-toggle="pill" href="#menu1">Request by Members</a>
-            </li>
-            <li className="nav-item me-0">
-              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom`} data-bs-toggle="pill" href="#menu2">Agreement Information</a>
-            </li>
-            <li className="nav-item me-0">
-              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom`} data-bs-toggle="pill" href="#menu3">My Wallet</a>
-            </li>
-            <li className="nav-item me-0">
-              <a className={`nav-link fs-4 custom-button-style rounded-0 font-custom`} data-bs-toggle="pill" href="#menu4">Travel Confirmation</a>
-            </li>
-          </ul>
-          </div>
-
-          <div className="tab-content">
-            <div className="tab-pane active" id="home">
-              <CommuterLinkSuggestions />
-            </div>
-            <div className="tab-pane fade" id="menu1">
-              <RequestsByMembers />
-            </div>
-            <div className="tab-pane fade" id="menu2">
-              <TravelPatners />
-            </div>
-            <div className="tab-pane fade" id="menu3">
-              <MyWallet />
-            </div>
-            <div className="tab-pane fade" id="menu4">
-              {data !== "" ? (
-                <></>
-              ) : (
-                <TravelConfirmation />
-              )}
-            </div>
-          </div>
-
-
-          {/* <CommuterLinkSuggestions />
+          <CommuterLinkSuggestions />
+          {/* <RequestsByMembers /> */}
           <TravelPatners />
           {data !== "" ? (
             <></>
           ) : (
             <TravelConfirmation />
-          )} */}
+          )}
         </>
       )}
     </>

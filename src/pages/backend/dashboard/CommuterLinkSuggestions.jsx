@@ -327,6 +327,7 @@ const CommuterLinkSuggestions = () => {
         <div className="card-header rounded-0" style={{ backgroundColor: "rgb(0 145 124)"}}>
           {loading ? (
             <div className="text-center m-auto">
+              {/* Render CircularProgress while loading */}
               <div className="d-flex justify-content-center align-items-center vh-10">
                 <ThreeCircles
                   height={50}
@@ -341,25 +342,31 @@ const CommuterLinkSuggestions = () => {
               </div>
             </div>
           ) : (
-            <h4 className="text-center text-white m-auto fw-bold">
+            <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
               {option === 0 ? "GET A SEAT/S IN THEIR CAR" : "TRAVEL BUDDIES FOR YOUR CAR"}
             </h4>
           )}
         </div>
         <div
-          className="card-body " style={{ backgroundColor: "#D9D9D9" }}
+          className="card-body"
         >
-          <div className="d-flex flex-column" >
-              <h5 className="text-dark-green py-4 mx-auto fw-bold">
-                COMMUTERSLINK SUGGESTIONS
+          <div className="card  mt-3 mb-5" style={{ backgroundColor: "#D9D9D9" }}>
+            <div
+              className="card-header"
+              // style={{ backgroundColor: "#2a402a" }}
+              style={{ backgroundColor: '#00917C' }}
+            >
+              <h5 className="text-white pt-4 mt-2 mx-auto fw-bold">
+                COMMUTERSLINK SUGGESTION
               </h5>
+            </div>
 
-            <div className="card px-4 py-5 border-secondary" style={{ backgroundColor: "#D9D9D9" }}>
+            <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
               <p>
                 Based upon your Profile, We have Following{" "}
                 <strong> Matches</strong> to Offer
               </p>
-              <div className="row px-1">
+              <div className="row">
                 {userData.map((user, index) => {
                   if (userType === "rider" && user.vehicle_option === 1 && user.req_stage !== 3) {
                     // Show rider card only for riders and when req_stage is not 3
@@ -380,6 +387,41 @@ const CommuterLinkSuggestions = () => {
                 {userData.length < 6 && Array.from({ length: 6 - userData.length }, (_, i) => (
                   <DefaultCard key={`default-${i}`} />
                 ))}
+              </div>
+              <div>
+              </div>
+            </div>
+          </div>
+          <div className="card mt-5" style={{ backgroundColor: "#D9D9D9" }}>
+            <div
+              className="card-header "
+              style={{ backgroundColor: "#00917C" }}
+            >
+              <h5 className="text-white pt-4 mt-2 mx-auto fw-bold">
+                REQUESTS BY MEMBERS
+              </h5>
+            </div>
+
+            <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
+              <p>
+                Based upon your Profile, We have Following{" "}
+                <strong>Requests</strong> to Offer
+              </p>
+              <div className="row">
+                {requests.map((request, index) => {
+                  if (request.request_stage !== 3) {
+                    // Show RequestCard when req_stage is not 3
+                    return <RequestCard key={index} request={request} />;
+                  } else {
+                    // Show RequestDefaultCard when req_stage is 3
+                    return <RequestDefaultCard key={index} />;
+                  }
+                })}
+                {/* Add default cards to reach a total of 6 if necessary */}
+                {requests.length < 6 &&
+                  Array.from({ length: 6 - requests.length }, (_, i) => (
+                    <RequestDefaultCard key={`default-${i}`} />
+                  ))}
               </div>
               <div>
               </div>
