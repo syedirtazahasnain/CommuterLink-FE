@@ -87,6 +87,8 @@ const DriverRegistration = () => {
   const [isValidProfession, setIsValidProfession] = useState(true);
   const [isCarBrandValid, setIsCarBrandValid] = useState(true);
   // For Start Point
+  const [startBounds, setStartBounds] = useState([]);
+  const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
   const [locationStartString, setLocationStartString] = useState("");
   const [locationStartStringId, setLocationStartStringId] = useState("");
   const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
@@ -98,6 +100,8 @@ const DriverRegistration = () => {
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
 
   // For End Point
+  const [endBounds, setEndBounds] = useState([]);
+  const [autocompleteEndBounds, setAutocompleteEndBounds] = useState(null);
   const [locationEndString, setLocationEndString] = useState("");
   const [locationEndStringId, setLocationEndStringId] = useState("");
   const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
@@ -306,7 +310,6 @@ const DriverRegistration = () => {
         },
       }
     );
-
     console.log(response);
     const jsonresponse = await response.json();
     setDropDownStartData(jsonresponse);
@@ -320,6 +323,88 @@ const DriverRegistration = () => {
     setCarCC(jsonresponse.car_cc);
     console.log(jsonresponse);
   };
+
+  useEffect(() => {
+    const fetchCityBounds = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${cityStart}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.results.length > 0) {
+            const cityBounds = data.results[0].geometry.bounds;
+            console.log("City Start Bounds", cityBounds);
+            setStartBounds(cityBounds);
+          } else {
+            console.error('City not found');
+          }
+        } else {
+          console.error('Error fetching city data');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    if (cityStart) {
+      fetchCityBounds();
+    }
+  }, [cityStart]);
+
+  useEffect(() => {
+    if (startBounds && startBounds.southwest && startBounds.northeast) {
+      // Convert startBounds data into LatLngBounds object
+      const bounds = new window.google.maps.LatLngBounds(
+        new window.google.maps.LatLng(startBounds.southwest.lat, startBounds.southwest.lng),
+        new window.google.maps.LatLng(startBounds.northeast.lat, startBounds.northeast.lng)
+      );
+  
+      setAutocompleteStartBounds(bounds);
+    }
+  }, [startBounds]);
+
+  useEffect(() => {
+    const fetchCityBounds = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${cityEnd}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.results.length > 0) {
+            const cityBounds = data.results[0].geometry.bounds;
+            console.log("City End Bounds", cityBounds);
+            setEndBounds(cityBounds);
+          } else {
+            console.error('City not found');
+          }
+        } else {
+          console.error('Error fetching city data');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    if (cityEnd) {
+      fetchCityBounds();
+    }
+  }, [cityEnd]);
+
+  useEffect(() => {
+    if (endBounds && endBounds.southwest && endBounds.northeast) {
+      // Convert startBounds data into LatLngBounds object
+      const bounds = new window.google.maps.LatLngBounds(
+        new window.google.maps.LatLng(endBounds.southwest.lat, endBounds.southwest.lng),
+        new window.google.maps.LatLng(endBounds.northeast.lat, endBounds.northeast.lng)
+      );
+  
+      setAutocompleteEndBounds(bounds);
+    }
+  }, [endBounds]);
 
   const handleProvinceStartChange = (event) => {
     setCityStartId("");
@@ -1421,6 +1506,7 @@ const DriverRegistration = () => {
                                   }
                                   onPlaceChanged={handlePlaceSelectStart}
                                   restrictions={{ country: "PK" }}
+                                  bounds={autocompleteStartBounds}
                                   options={{ strictBounds: true }}
                                 >
                                   <Form.Control
@@ -1599,6 +1685,7 @@ const DriverRegistration = () => {
                                   }
                                   onPlaceChanged={handlePlaceSelectEnd}
                                   restrictions={{ country: "PK" }}
+                                  bounds={autocompleteEndBounds}
                                   options={{ strictBounds: true }}
                                 >
                                   <Form.Control
