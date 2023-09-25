@@ -747,7 +747,7 @@ const CommuterProfile1 = () => {
             <Container className="d-flex justify-content-center align-items-center mb-3">
               <Row style={{ height: "400px", width: "100%" }}>
                 <GoogleMap
-                  zoom={10}
+                  zoom={11}
                   center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
                   mapContainerStyle={{
                     width: "100%",
