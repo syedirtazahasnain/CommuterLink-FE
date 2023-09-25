@@ -162,7 +162,7 @@ const CommuterLinkSuggestions = () => {
           className="card"
           style={{
             width: "6rem",
-            backgroundColor: req_stage === 1 ? "#5ab387" : req_stage === 0 ? "#FF8A00" : "#5ab387",
+            backgroundColor: req_stage === 1 ? "#0A6155" : req_stage === 0 ? "#FF8A00" : "#0A6155",
           }}
         >
           {req_stage === 1 || req_stage === 2 ? (
@@ -326,8 +326,8 @@ const CommuterLinkSuggestions = () => {
       
 
       <div className="card rounded-0 mb-5">
-        <div className="card-header rounded-0" style={{ backgroundColor: "rgb(0 145 124)"}}>
-          {loading ? (
+        {/* <div className="card-header rounded-0" style={{ backgroundColor: "rgb(0 145 124)"}}> */}
+          {/* {loading ? (
             <div className="text-center m-auto">
               <div className="d-flex justify-content-center align-items-center vh-10">
                 <ThreeCircles
@@ -346,15 +346,15 @@ const CommuterLinkSuggestions = () => {
             <h4 className="text-center text-white m-auto fw-bold">
               {option === 0 ? "GET A SEAT/S IN THEIR CAR" : "TRAVEL BUDDIES FOR YOUR CAR"}
             </h4>
-          )}
-        </div>
+          )} */}
+        {/* </div> */}
         <div
           className="card-body " style={{ backgroundColor: "#D9D9D9" }}
         >
           <div className="d-flex flex-column" >
-              <h5 className="text-dark-green py-4 mx-auto fw-bold">
+              {/* <h5 className="text-dark-green py-4 mx-auto fw-bold">
                 COMMUTERSLINK SUGGESTIONS
-              </h5>
+              </h5> */}
 
             <div className="card px-4 py-5 border-secondary" style={{ backgroundColor: "#D9D9D9" }}>
               <p>
