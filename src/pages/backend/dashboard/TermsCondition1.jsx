@@ -30,20 +30,6 @@ const TermsCondition1 = () => {
   const [requestedAs, setRequestedAs] = useState("");
   const [option, setOption] = useState("");
   const [userId, setUserId] = useState("");
-  
-  const requestSend = () => {
-    Swal.fire({
-      position: 'top',
-      // title: 'Congratulations!',
-      text: 'Request Send Successfully',
-      icon: 'success',
-      showCancelButton: false,
-      confirmButtonText: 'OK',
-      customClass: {
-        confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-      },
-    });
-  };
 
   const crumbs = [
     {
@@ -380,8 +366,8 @@ const TermsCondition1 = () => {
           </div>
           <div className="text-center">
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"
-              onClick={requestSend}
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green rounded text-white  px-3 py-2 mb-3"
+              onClick={route}
             >
               I Accept
             </Button>
