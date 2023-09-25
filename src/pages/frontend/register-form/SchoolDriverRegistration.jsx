@@ -132,6 +132,7 @@ const DriverRegistration = () => {
   const [manYear, setManYear] = useState([]);
   const [selectedManYear, setSelectedManYear] = useState("");
   const [regYear, setRegYear] = useState([]);
+  const [filteredRegYears, setFilteredRegYears] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
   const [carYearRanges, setCarYearRanges] = useState([]);
   // const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
@@ -405,6 +406,17 @@ const DriverRegistration = () => {
       setAutocompleteEndBounds(bounds);
     }
   }, [endBounds]);
+
+  useEffect(() => {
+    // Filter registration years based on the selected manufacturing year.
+    if (selectedManYear) {
+      const filteredYears = regYear.filter((reg) => reg.car_year_ranges > selectedManYear);
+      setFilteredRegYears(filteredYears);
+    } else {
+      // If no manufacturing year is selected, show all registration years.
+      setFilteredRegYears(regYear);
+    }
+  }, [selectedManYear]);
 
   const handleProvinceStartChange = (event) => {
     setCityStartId("");
@@ -2739,7 +2751,7 @@ const DriverRegistration = () => {
                             required
                           >
                             <option value="" hidden>Registration Year</option>
-                            {regYear?.map((reg) => (
+                            {filteredRegYears.map((reg) => (
                               <option key={reg.id} value={reg.car_year_ranges}>
                                 {reg.car_year_ranges}
                               </option>
