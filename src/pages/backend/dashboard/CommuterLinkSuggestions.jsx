@@ -324,7 +324,7 @@ const CommuterLinkSuggestions = () => {
   return (
     <>
       <div className="card rounded-0 mb-5">
-        <div className="card-header rounded-0" style={{ backgroundColor: "rgb(0 145 124)"}}>
+        <div className="card-header rounded-0" style={{ backgroundColor: "rgb(0 145 124)" }}>
           {loading ? (
             <div className="text-center m-auto">
               {/* Render CircularProgress while loading */}
@@ -391,6 +391,34 @@ const CommuterLinkSuggestions = () => {
               <div>
               </div>
             </div>
+            <div className="d-flex flex-row mt-5 mb-3">
+              <div className="ml-auto me-3">
+                <img
+                  src={`${BASE_URL}/assets/images/Vector.png`}
+                  className="card-img-top w-40px m-auto bg-success p-2 me-2"
+                />
+                <span className=" fw-bold">
+                  Active Suggestions
+                </span>              </div>
+              <div className="me-3 ">
+                <img
+                  src={`${BASE_URL}/assets/images/Vector.png`}
+                  className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
+                />
+                <span className=" fw-bold">
+                Pending Suggestions
+                </span>
+              </div>
+              <div className="me-3">
+                <img
+                  src={`${BASE_URL}/assets/images/Vector.png`}
+                  className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
+                />
+                <span className=" fw-bold">
+                  Inactive Suggestions
+                </span>
+              </div>
+            </div>
           </div>
           <div className="card mt-5" style={{ backgroundColor: "#D9D9D9" }}>
             <div
@@ -424,14 +452,14 @@ const CommuterLinkSuggestions = () => {
                   ))}
               </div>
             </div>
-            <div className="d-flex flex-row mt-3">
+            <div className="d-flex flex-row mt-5 mb-3">
               <div className="ml-auto me-3">
                 <img
                   src={`${BASE_URL}/assets/images/Vector.png`}
                   className="card-img-top w-40px m-auto bg-success p-2 me-2"
                 />
                 <span className=" fw-bold">
-                  Active Suggestions
+                  Active Requests
                 </span>              </div>
               <div className="me-3 ">
                 <img
@@ -439,16 +467,16 @@ const CommuterLinkSuggestions = () => {
                   className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
                 />
                 <span className=" fw-bold">
-                  Inactive Suggestions
+                Pending Requests
                 </span>
               </div>
-              <div className="">
+              <div className="me-3">
                 <img
                   src={`${BASE_URL}/assets/images/Vector.png`}
                   className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
                 />
                 <span className=" fw-bold">
-                  Pending Suggestions
+                  Inactive Requests
                 </span>
               </div>
             </div>
