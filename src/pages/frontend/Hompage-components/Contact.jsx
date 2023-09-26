@@ -161,7 +161,7 @@ const Contact = () => {
                       controlId="formBasicEmail"
                     >
                       <TextField
-                        className="mb-3"
+                        className=""
                         id="custom-css-outlined-input"
                         label="Your Name"
                         color="success"
@@ -186,7 +186,7 @@ const Contact = () => {
                       controlId="formBasicEmail"
                     >
                       <TextField
-                        className="mb-3"
+                        className="mb-1"
                         id="custom-css-outlined-input"
                         label="Email"
                         variant="outlined"
@@ -213,7 +213,7 @@ const Contact = () => {
                       controlId="formBasicEmail"
                     >
                       <TextField id="custom-css-outlined-input"
-                        className="mb-3"
+                        className=""
 
                         label="Subject"
                         variant="outlined"
@@ -233,7 +233,7 @@ const Contact = () => {
 
 
                     <Form.Group
-                      className="mt-3 text-center"
+                      className="mt-4 text-center"
                       controlId="formBasicEmail"
                     >
                       <TextField

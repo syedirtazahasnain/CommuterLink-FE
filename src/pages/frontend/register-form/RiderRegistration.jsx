@@ -91,7 +91,9 @@ const RiderRegistration = () => {
   }
   const handleCnicChange = (event) => {
     const inputCnic = event.target.value.replace(/\D/g, "");
-
+    if (cnic.length < 15 && cnic.length > 15) {
+      setIsValidCnic(false);
+    }
     if (inputCnic.length <= 13) {
       const formattedCnic = inputCnic.replace(
         /^(\d{5})(\d{7})(\d{1})$/,
@@ -99,8 +101,6 @@ const RiderRegistration = () => {
       );
       setCnic(formattedCnic);
       setIsValidCnic(validateCnic(formattedCnic));
-    } else {
-      setIsValidCnic(false);
     }
   };
   // For Registration
@@ -1370,7 +1370,9 @@ const RiderRegistration = () => {
                     <Modal.Title>Select Starting Location</Modal.Title>
                     <Modal.Title className="text-danger fs-7">
                       <Modal.Title className="text-danger fs-7">
-                        <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">
+                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
+                        </Modal.Title>
                       </Modal.Title>
                     </Modal.Title>
                   </Modal.Header>

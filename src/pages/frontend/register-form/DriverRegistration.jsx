@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { TextField, Tooltip } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import Col from "react-bootstrap/Col";        
+import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { Container, Row, Modal } from 'react-bootstrap';
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -33,7 +34,10 @@ const DriverRegistration = () => {
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [isValidJazzCash, setIsValidJazzCash] = useState(true);
+  const [isValidEasyPaisa, setIsValidEasyPaisa] = useState(true);
+  const [isValidRaastID, setIsValidRaastID] = useState(true);
+  
   const route = () => {
     navigate("/seatcostverification");
 
@@ -225,7 +229,7 @@ const DriverRegistration = () => {
   const [inputDriverLicenseNumber, setInputDriverLicenseNumber] = useState("");
   const [inputDriverValidUpto, setInputDriverValidUpto] = useState(null);
   const inputDriverValidUptoFormat = inputDriverValidUpto ? inputDriverValidUpto.format('DD-MM-YYYY') : '';
-
+  const [isIBANValid, setIsIBANValid] = useState(true);
   // For License Fields
   const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
   const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] = useState("");
@@ -520,11 +524,53 @@ const DriverRegistration = () => {
     setAddNewStartField(false);
     handleShowStartModal();
   };
-
+  const validateJazzCash = (inputJazzCash) => {
+    // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+    const phonePattern = /^03\d{9}$/;
+    if (inputJazzCash === "" || phonePattern.test(inputJazzCash)) {
+      setInputJazzCash(inputJazzCash);
+      setIsValidJazzCash(true);
+    } else {
+      setInputJazzCash(inputJazzCash);
+      setIsValidJazzCash(false);
+    }
+  };
   const handleLocationStartField = (e) => {
     setLocationStartStringField(e.target.value);
     setLocationStartString(e.target.value);
   };
+
+  const validateEasyPaisa = (inputEasyPaisa) => {
+    // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+    const phonePattern = /^03\d{9}$/;
+    if (inputEasyPaisa === "" || phonePattern.test(inputEasyPaisa)) {
+      setInputEasyPaisa(inputEasyPaisa);
+      setIsValidEasyPaisa(true);
+    } else {
+      setInputEasyPaisa(inputEasyPaisa);
+      setIsValidEasyPaisa(false);
+    }
+  };
+  // const handleLocationStartField1 = (e) => {
+  //   setLocationStartStringField(e.target.value);
+  //   setLocationStartString(e.target.value);
+  // };
+
+  const validateRaastID = (inputRaastID) => {
+    // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+    const phonePattern = /^03\d{9}$/;
+    if (inputRaastID === "" || phonePattern.test(inputRaastID)) {
+      setInputRaastID(inputRaastID);
+      setIsValidRaastID(true);
+    } else {
+      setInputRaastID(inputRaastID);
+      setIsValidRaastID(false);
+    }
+  };
+  // const handleLocationStartField2 = (e) => {
+  //   setLocationStartStringField(e.target.value);
+  //   setLocationStartString(e.target.value);
+  // };
 
   const handlePlaceSelectStart = () => {
     const place = autocompleteRef.current.getPlace();
@@ -749,6 +795,23 @@ const DriverRegistration = () => {
     }
   };
 
+  const handleInputChange = (e) => {
+    let value = e.target.value;
+
+    // Remove any special characters and spaces
+    value = value.replace(/[^a-zA-Z0-9]/g, '');
+
+    // Enforce a maximum length of 24 characters
+    if (value.length > 24) {
+      value = value.slice(0, 24);
+    }
+
+    setInputBankAccount(value);
+
+    // Check if the entered value is valid and reset the validation state
+    setIsIBANValid(value.length === 24);
+  };
+
   //console.log("Back Image:", cnicBack);
   //console.log("Back Image Extension:", cnicBackExt);
 
@@ -878,6 +941,11 @@ const DriverRegistration = () => {
 
 
   // For Modal Open & Close Functionality
+  const isValidIBAN = (iban) => {
+    // Regular expression for a 24-digit IBAN
+    const ibanRegex = /^[A-Z0-9]{24}$/;
+    return ibanRegex.test(iban);
+  };
 
   const handleShowStartModal = () => {
     setShowStartModal(true);
@@ -1523,15 +1591,37 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           STARTING POINT
                         </h2>
+
+
                         <Form.Group
                           as={Col}
                           md={cityStartId ? "12" : "12"}
                           controlId="validationCustom01"
                           className="mb-2"
                         >
-                          <Form.Label className="text-black fs-6">
-                            Province
-                          </Form.Label>
+                          <div className="d-flex justify-content-between align-items-center">
+                            <Form.Label className="text-black fs-6">
+                              Province
+                            </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                            // onClick={AddNewStart}
+                            >
+                              <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                </Link>
+                              </Tooltip>
+
+                            </p></div>
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
@@ -1550,7 +1640,11 @@ const DriverRegistration = () => {
                               )
                             )}
                           </Form.Select>
+
+
                         </Form.Group>
+
+
                         <Form.Group as={Col} md={cityStartId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
                           <Form.Label className="text-black fs-6">City</Form.Label>
                           <Form.Select
@@ -1699,9 +1793,31 @@ const DriverRegistration = () => {
                           controlId="validationCustom57"
                           className="mb-2"
                         >
-                          <Form.Label className="text-black fs-6">
-                            Province
-                          </Form.Label>
+
+                          <div className="d-flex justify-content-between align-items-center">
+                            <Form.Label className="text-black fs-6">
+                              Province
+                            </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                            // onClick={AddNewStart}
+                            >
+                              <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                </Link>
+                              </Tooltip>
+
+                            </p></div>
+
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
@@ -1936,9 +2052,31 @@ const DriverRegistration = () => {
                           controlId="validationCustomtime1"
                           className="mb-2 mt-3"
                         >
-                          <Form.Label className="text-black fs-6">
-                            Start Time (From start point to destination +/- 30 Minutes)
-                          </Form.Label>
+
+
+                          <div className="d-flex justify-content-between align-items-center">
+                            <Form.Label className="text-black fs-6">
+                              Start Time (From start point to destination +/- 30 Minutes)
+                            </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                            // onClick={AddNewStart}
+                            >
+                              <Tooltip title={<h6 className="text-center">{"You will got maximum suggestions according to your selected time"}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                </Link>
+                              </Tooltip>
+
+                            </p></div>
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
@@ -2192,9 +2330,31 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group>
                       <Form.Group as={Col} md="12" controlId="validationCustom12" className="mb-2">
-                        <Form.Label className="fs-6 text-black">
-                          Preferred Gender of Travel Partner
-                        </Form.Label>
+
+                        <div className="d-flex justify-content-between align-items-center">
+                          <Form.Label className="fs-6 text-black">
+                            Preferred Gender of Travel Partner
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          // onClick={AddNewStart}
+                          >
+                            <Tooltip title={<h6 className="text-center">{"You will got maximum suggestions according to your selected preferred gender"}</h6>}>
+                              <Link
+                                // to='/notification'
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-5 fa-circle-info "></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+
                         <Form.Select
                           aria-label="Default select example"
                           className="text-secondary"
@@ -3706,7 +3866,7 @@ const DriverRegistration = () => {
                               <Form.Label text-dark fs-6>
                                 Place of Issue
                               </Form.Label>
-                              <Form.Control
+                              <Form.ControlEarning
                                 required
                                 type="text"
                                 className="text-secondary"
@@ -4023,57 +4183,127 @@ const DriverRegistration = () => {
                             cursor: "pointer"
 
                           }}
-                          className="fw-bold"
+                          className="fw-bold  "
 
-                        >
-                          &nbsp;<p className="text-center" onClick={openPopup}> Why Process Payment through CommuterLink?</p>
+                        ><div className="d-flex justify-content-between align-items-center px-4 pt-4">
+                            <p className="text-center" onClick={openPopup}> Why Process Payment through CommuterLink?</p>
+
+
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+
+                              }}
+                            // onClick={AddNewStart}
+                            >
+                              <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                </Link>
+                              </Tooltip>
+
+                            </p>
+                          </div>
                         </span>
                         <form id="paymentForm">
-                          <div className="mt-4 px-3">
-                            <input
+                          <div className="mt-2 px-3">
+                            <TextField
                               type="text"
-                              className="form-control mb-2 text-secondary"
+                              className={`form-control mb-2 text-secondary ${isIBANValid ? '' : 'is-invalid'}`}
                               id="bankAccount"
+                              size="small"
                               name="bankAccount"
-                              placeholder="Bank Account (IBAN)"
+                              placeholder="Bank Account (IBAN-24 Character)"
                               value={inputBankAccount}
-                              onChange={(e) => setInputBankAccount(e.target.value)}
+                              onChange={handleInputChange}
                               required
                             />
+                            {!isIBANValid && (
+                              <div className="invalid-feedback">Please enter a valid 24-digit IBAN.</div>
+                            )}
                           </div>
-                          <div className="px-3">
-                            <input
+                          <div className="mt-2 px-3">
+                            <TextField
                               type="text"
-                              className="form-control mb-2 text-secondary "
+                              className="form-control"
                               id="jazzCashAccount"
                               name="jazzCashAccount"
+                              size="small"
                               placeholder="Jazz Cash Account Number"
                               value={inputJazzCash}
-                              onChange={(e) => setInputJazzCash(e.target.value)}
-                              required
+                              // onChange={(e) => c(e.target.value)}
+                              // required
+                              onChange={(e) => {
+                                if (/^\d{0,11}$/.test(e.target.value)) {
+                                  setInputJazzCash(e.target.value);
+                                  validateJazzCash(e.target.value);
+                                }
+
+                              }}
+                              error={!isValidJazzCash && inputJazzCash !== ""}
+                              helperText={
+                                !isValidJazzCash &&
+                                inputJazzCash !== "" &&
+                                "Please enter a valid Account Number starting with '03' and having 11 digits."
+                              }
+
                             />
                           </div>
-                          <div className="px-3">
-                            <input
+                          <div className="mt-2 px-3">
+                            <TextField
                               type="text"
                               className="form-control mb-2 text-secondary"
                               id="easypaisaAccount"
+                              size="small"
                               name="easypaisaAccount"
                               placeholder="EasyPaisa Account Number"
                               value={inputEasyPaisa}
-                              onChange={(e) => setInputEasyPaisa(e.target.value)}
-                              required
+                              // onChange={(e) => setInputEasyPaisa(e.target.value)}
+                              // required
+                              onChange={(e) => {
+                                if (/^\d{0,11}$/.test(e.target.value)) {
+                                  setInputEasyPaisa(e.target.value);
+                                  validateEasyPaisa(e.target.value);
+                                }
+
+                              }}
+                              error={!isValidEasyPaisa && inputEasyPaisa !== ""}
+                              helperText={
+                                !isValidEasyPaisa &&
+                                inputEasyPaisa !== "" &&
+                                "Please enter a valid Account Number starting with '03' and having 11 digits."
+                              }
                             />
                           </div>
-                          <div className="px-3">
-                            <input
+                          <div className="mt-2 px-3">
+                            <TextField
                               type="text"
-                              className="form-control mb-2 text-secondary"
+                              className="form-control mb-2"
                               id="raastID"
+                              size="small"
                               name="raastID"
                               placeholder="Raast ID"
                               value={inputRaastID}
-                              onChange={(e) => setInputRaastID(e.target.value)}
+                              // onChange={(e) => setInputRaastID(e.target.value)}
+                              onChange={(e) => {
+                                if (/^\d{0,11}$/.test(e.target.value)) {
+                                  setInputRaastID(e.target.value);
+                                  validateRaastID(e.target.value);
+                                }
+
+                              }}
+                              error={!isValidRaastID && inputRaastID !== ""}
+                              helperText={
+                                !isValidRaastID &&
+                                inputRaastID !== "" &&
+                                "Please enter a valid Account Number starting with '03' and having 11 digits."
+                              }
                             />
                           </div>
                         </form>
