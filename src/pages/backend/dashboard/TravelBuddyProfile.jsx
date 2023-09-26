@@ -400,7 +400,7 @@ const TravelBuddyProfile = () => {
                         <h5 className="fw-bold text-secondary">{gender}</h5>
                       </div>
                     </div>
-                    <div className="row px-5 mb-2">
+                    <div className="row mb-2">
                       <div className="col-md-6">
                         {age !== "" ? (
                           <>
@@ -415,7 +415,7 @@ const TravelBuddyProfile = () => {
                         <h5 className="fw-bold text-secondary">{age} years</h5>
                       </div>
                     </div>
-                    <div className="row px-5 mb-2">
+                    <div className="row mb-2">
                       <div className="col-md-6">
                         {profession !== "" ? (
                           <>
@@ -430,7 +430,7 @@ const TravelBuddyProfile = () => {
                         <h5 className="fw-bold text-secondary">{profession}</h5>
                       </div>
                     </div>
-                    <div className="row px-5 mb-2">
+                    <div className="row mb-2">
                       <div className="col-md-6">
                         {mobileNo !== "" ? (
                           <>

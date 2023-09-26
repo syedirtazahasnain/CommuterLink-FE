@@ -12,6 +12,8 @@
   --bg-medium-teal: #BFE0DB;
   --bg-secondary-border: rgba(1, 1, 1, 0.2);
   --bg-secondary-90: #E6E7E9;
+  --bg-gradient-green: linear-gradient(to top right, rgba(28, 196, 172, 1), rgba(6, 55, 58, 1));
+  --bg-gradient-grey: linear-gradient(to top right, rgba(107, 107, 107, 1), rgba(36, 36, 36, 1));
 }
 
 
@@ -368,4 +370,20 @@ body{
 }
 .text-green{
   color: var(--bs-text-green) !important;
+}
+.background-body-green{
+  background: var(--bg-gradient-green) !important;
+  color: white !important
+}
+.background-body-grey{
+  background: var(--bg-gradient-grey) !important;
+  color: white !important
+}
+
+.table-bg{
+  background: transparent !important;
+}
+
+.table-payment {
+  background-color: transparent !important;
 }

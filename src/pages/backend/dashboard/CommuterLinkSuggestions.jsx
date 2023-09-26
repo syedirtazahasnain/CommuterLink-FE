@@ -423,7 +423,33 @@ const CommuterLinkSuggestions = () => {
                     <RequestDefaultCard key={`default-${i}`} />
                   ))}
               </div>
-              <div>
+            </div>
+            <div className="d-flex flex-row mt-3">
+              <div className="ml-auto me-3">
+                <img
+                  src={`${BASE_URL}/assets/images/Vector.png`}
+                  className="card-img-top w-40px m-auto bg-success p-2 me-2"
+                />
+                <span className=" fw-bold">
+                  Active Suggestions
+                </span>              </div>
+              <div className="me-3 ">
+                <img
+                  src={`${BASE_URL}/assets/images/Vector.png`}
+                  className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
+                />
+                <span className=" fw-bold">
+                  Inactive Suggestions
+                </span>
+              </div>
+              <div className="">
+                <img
+                  src={`${BASE_URL}/assets/images/Vector.png`}
+                  className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
+                />
+                <span className=" fw-bold">
+                  Pending Suggestions
+                </span>
               </div>
             </div>
           </div>
