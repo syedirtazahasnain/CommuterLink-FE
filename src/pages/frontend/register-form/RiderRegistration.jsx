@@ -15,7 +15,6 @@ import Stack from "@mui/material/Stack";
 import { ThreeCircles } from 'react-loader-spinner'
 import {
   GoogleMap,
-  LoadScript,
   Autocomplete,
   MarkerF,
 } from "@react-google-maps/api";
@@ -53,7 +52,6 @@ const RiderRegistration = () => {
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const mapLibraries = ["places"];
 
   const [isValidProfession, setIsValidProfession] = useState(true);
 
@@ -128,6 +126,8 @@ const RiderRegistration = () => {
   const [pictureExt, setPictureExt] = useState("");
 
   // For Start Point
+  const [startBounds, setStartBounds] = useState([]);
+  const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
   const [locationStartString, setLocationStartString] = useState("");
   const [locationStartStringId, setLocationStartStringId] = useState("");
   const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
@@ -139,6 +139,8 @@ const RiderRegistration = () => {
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
 
   // For End Point
+  const [endBounds, setEndBounds] = useState([]);
+  const [autocompleteEndBounds, setAutocompleteEndBounds] = useState(null);
   const [locationEndString, setLocationEndString] = useState("");
   const [locationEndStringId, setLocationEndStringId] = useState("");
   const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
@@ -310,13 +312,97 @@ const RiderRegistration = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchCityBounds = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${cityStart}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.results.length > 0) {
+            const cityBounds = data.results[0].geometry.bounds;
+            console.log("City Start Bounds", cityBounds);
+            setStartBounds(cityBounds);
+          } else {
+            console.error('City not found');
+          }
+        } else {
+          console.error('Error fetching city data');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    if (cityStart) {
+      fetchCityBounds();
+    }
+  }, [cityStart]);
+
+  useEffect(() => {
+    if (startBounds && startBounds.southwest && startBounds.northeast) {
+      // Convert startBounds data into LatLngBounds object
+      const bounds = new window.google.maps.LatLngBounds(
+        new window.google.maps.LatLng(startBounds.southwest.lat, startBounds.southwest.lng),
+        new window.google.maps.LatLng(startBounds.northeast.lat, startBounds.northeast.lng)
+      );
+  
+      setAutocompleteStartBounds(bounds);
+    }
+  }, [startBounds]);
+
+  useEffect(() => {
+    const fetchCityBounds = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${cityEnd}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.results.length > 0) {
+            const cityBounds = data.results[0].geometry.bounds;
+            console.log("City End Bounds", cityBounds);
+            setEndBounds(cityBounds);
+          } else {
+            console.error('City not found');
+          }
+        } else {
+          console.error('Error fetching city data');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    if (cityEnd) {
+      fetchCityBounds();
+    }
+  }, [cityEnd]);
+
+  useEffect(() => {
+    if (endBounds && endBounds.southwest && endBounds.northeast) {
+      // Convert startBounds data into LatLngBounds object
+      const bounds = new window.google.maps.LatLngBounds(
+        new window.google.maps.LatLng(endBounds.southwest.lat, endBounds.southwest.lng),
+        new window.google.maps.LatLng(endBounds.northeast.lat, endBounds.northeast.lng)
+      );
+  
+      setAutocompleteEndBounds(bounds);
+    }
+  }, [endBounds]);
+
   const handleProvinceStartChange = (event) => {
     setCityStartId("");
+    setLocationStartStringField("");
     setProvinceStartId(event.target.value);
   };
 
   const handleProvinceEndChange = (event) => {
     setCityEndId("");
+    setLocationEndStringField("");
     setProvinceEndId(event.target.value);
   };
 
@@ -375,7 +461,7 @@ const RiderRegistration = () => {
         //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         //   },
         // });
-        displayNotification("warning", `{"Please Select a place in"}${cityStart}`);
+        displayNotification("warning", `Please Select a place in ${cityStart}`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -429,7 +515,7 @@ const RiderRegistration = () => {
         //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         //   },
         // });
-        displayNotification("warning", `{"Please Select a place in"}${cityEnd}`);
+        displayNotification("warning", `Please Select a place in ${cityEnd}`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -1099,6 +1185,7 @@ const RiderRegistration = () => {
                               }
                               onPlaceChanged={handlePlaceSelectStart}
                               restrictions={{ country: "PK" }}
+                              bounds={autocompleteStartBounds}
                               options={{ strictBounds: true }}
                             >
                               <Form.Control
@@ -1255,6 +1342,7 @@ const RiderRegistration = () => {
                               }
                               onPlaceChanged={handlePlaceSelectEnd}
                               restrictions={{ country: "PK" }}
+                              bounds={autocompleteEndBounds}
                               options={{ strictBounds: true }}
                             >
                               <Form.Control
@@ -1277,100 +1365,95 @@ const RiderRegistration = () => {
                   </div>
                 </div>
 
-                <LoadScript
-                  googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
-                  libraries={mapLibraries}
-                >
-                  <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                    <Modal.Header className="d-block" >
-                      <Modal.Title>Select Starting Location</Modal.Title>
+                <Modal show={showStartModal} onHide={handleCloseStartModal}>
+                  <Modal.Header className="d-block" >
+                    <Modal.Title>Select Starting Location</Modal.Title>
+                    <Modal.Title className="text-danger fs-7">
                       <Modal.Title className="text-danger fs-7">
-                        <Modal.Title className="text-danger fs-7">                        
-                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
-                        </Modal.Title>
+                        <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
                       </Modal.Title>
-                    </Modal.Header>
+                    </Modal.Title>
+                  </Modal.Header>
 
-                    <Modal.Body>
-                      <Container className="d-flex justify-content-center align-items-center mb-3">
-                        <Row style={{ height: "100%", width: "100%" }}>
-                          <GoogleMap
-                            zoom={15}
-                            center={defaultStartCenter}
-                            mapContainerStyle={{
-                              width: "100%",
-                              height: "50vh",
+                  <Modal.Body>
+                    <Container className="d-flex justify-content-center align-items-center mb-3">
+                      <Row style={{ height: "100%", width: "100%" }}>
+                        <GoogleMap
+                          zoom={15}
+                          center={defaultStartCenter}
+                          mapContainerStyle={{
+                            width: "100%",
+                            height: "50vh",
+                          }}
+                          onClick={handleMapClickStart}
+                          options={{
+                            types: ["(regions)"],
+                            componentRestrictions: { country: "PK" },
+                          }}
+                        >
+                          <MarkerF
+                            position={markerPositionStart}
+                            icon={{
+                              url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                             }}
-                            onClick={handleMapClickStart}
-                            options={{
-                              types: ["(regions)"],
-                              componentRestrictions: { country: "PK" },
-                            }}
-                          >
-                            <MarkerF
-                              position={markerPositionStart}
-                              icon={{
-                                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                              }}
-                            />
-                          </GoogleMap>
-                        </Row>
-                      </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="contained"
-                        onClick={handleCloseStartModal}
-                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
-                      >
-                        Select
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+                          />
+                        </GoogleMap>
+                      </Row>
+                    </Container>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      variant="contained"
+                      onClick={handleCloseStartModal}
+                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                    >
+                      Select
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
 
-                  <Modal show={showEndModal} onHide={handleCloseEndModal}>
+                <Modal show={showEndModal} onHide={handleCloseEndModal}>
 
-                    <Modal.Header className="d-block">
-                      <Modal.Title>Select Drop-off Location</Modal.Title>
-                      <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Container className="d-flex justify-content-center align-items-center mb-3">
-                        <Row style={{ height: "100%", width: "100%" }}>
-                          <GoogleMap
-                            zoom={15}
-                            // center={
-                            //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
-                            // }
-                            center={defaultEndCenter}
-                            mapContainerStyle={{
-                              width: "100%",
-                              height: "50vh",
+                  <Modal.Header className="d-block">
+                    <Modal.Title>Select Drop-off Location</Modal.Title>
+                    <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Container className="d-flex justify-content-center align-items-center mb-3">
+                      <Row style={{ height: "100%", width: "100%" }}>
+                        <GoogleMap
+                          zoom={15}
+                          // center={
+                          //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
+                          // }
+                          center={defaultEndCenter}
+                          mapContainerStyle={{
+                            width: "100%",
+                            height: "50vh",
+                          }}
+                          onClick={handleMapClickEnd}
+                          options={{
+                            types: ["(regions)"],
+                            componentRestrictions: { country: "PK" },
+                          }}
+                        >
+                          <MarkerF
+                            position={markerPositionEnd}
+                            icon={{
+                              url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                             }}
-                            onClick={handleMapClickEnd}
-                            options={{
-                              types: ["(regions)"],
-                              componentRestrictions: { country: "PK" },
-                            }}
-                          >
-                            <MarkerF
-                              position={markerPositionEnd}
-                              icon={{
-                                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                              }}
-                            />
-                          </GoogleMap>
-                        </Row>
-                      </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="contained" onClick={handleCloseEndModal}
-                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold">
-                        Select
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </LoadScript>
+                          />
+                        </GoogleMap>
+                      </Row>
+                    </Container>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="contained" onClick={handleCloseEndModal}
+                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold">
+                      Select
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3 form-color-field"

@@ -11,7 +11,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from 'dayjs';
 import { Button } from "@mui/base";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, LoadScript, Autocomplete, MarkerF, } from "@react-google-maps/api";
+import { GoogleMap, Autocomplete, MarkerF, } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
 import { Checkbox, FormControlLabel } from "@mui/material";
@@ -33,7 +33,6 @@ const DriverRegistration = () => {
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const mapLibraries = ["places"];
 
   const route = () => {
     navigate("/seatcostverification");
@@ -143,6 +142,8 @@ const DriverRegistration = () => {
   const [isValidProfession, setIsValidProfession] = useState(true);
   const [isCarBrandValid, setIsCarBrandValid] = useState(true);
   // For Start Point
+  const [startBounds, setStartBounds] = useState([]);
+  const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
   const [locationStartString, setLocationStartString] = useState("");
   const [locationStartStringId, setLocationStartStringId] = useState("");
   const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
@@ -154,6 +155,8 @@ const DriverRegistration = () => {
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
 
   // For End Point
+  const [endBounds, setEndBounds] = useState([]);
+  const [autocompleteEndBounds, setAutocompleteEndBounds] = useState(null);
   const [locationEndString, setLocationEndString] = useState("");
   const [locationEndStringId, setLocationEndStringId] = useState("");
   const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
@@ -184,6 +187,7 @@ const DriverRegistration = () => {
   const [manYear, setManYear] = useState([]);
   const [selectedManYear, setSelectedManYear] = useState("");
   const [regYear, setRegYear] = useState([]);
+  const [filteredRegYears, setFilteredRegYears] = useState([]);
   const [selectedRegYear, setSelectedRegYear] = useState("");
   const [carYearRanges, setCarYearRanges] = useState([]);
   const [selectedCarYearRanges, setSelectedCarYearRanges] = useState("");
@@ -382,8 +386,102 @@ const DriverRegistration = () => {
     console.log(jsonresponse);
   };
 
+  useEffect(() => {
+    const fetchCityBounds = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${cityStart}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.results.length > 0) {
+            const cityBounds = data.results[0].geometry.bounds;
+            console.log("City Start Bounds", cityBounds);
+            setStartBounds(cityBounds);
+          } else {
+            console.error('City not found');
+          }
+        } else {
+          console.error('Error fetching city data');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    if (cityStart) {
+      fetchCityBounds();
+    }
+  }, [cityStart]);
+
+  useEffect(() => {
+    if (startBounds && startBounds.southwest && startBounds.northeast) {
+      // Convert startBounds data into LatLngBounds object
+      const bounds = new window.google.maps.LatLngBounds(
+        new window.google.maps.LatLng(startBounds.southwest.lat, startBounds.southwest.lng),
+        new window.google.maps.LatLng(startBounds.northeast.lat, startBounds.northeast.lng)
+      );
+  
+      setAutocompleteStartBounds(bounds);
+    }
+  }, [startBounds]);
+
+  useEffect(() => {
+    const fetchCityBounds = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${cityEnd}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.results.length > 0) {
+            const cityBounds = data.results[0].geometry.bounds;
+            console.log("City End Bounds", cityBounds);
+            setEndBounds(cityBounds);
+          } else {
+            console.error('City not found');
+          }
+        } else {
+          console.error('Error fetching city data');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    if (cityEnd) {
+      fetchCityBounds();
+    }
+  }, [cityEnd]);
+
+  useEffect(() => {
+    if (endBounds && endBounds.southwest && endBounds.northeast) {
+      // Convert startBounds data into LatLngBounds object
+      const bounds = new window.google.maps.LatLngBounds(
+        new window.google.maps.LatLng(endBounds.southwest.lat, endBounds.southwest.lng),
+        new window.google.maps.LatLng(endBounds.northeast.lat, endBounds.northeast.lng)
+      );
+  
+      setAutocompleteEndBounds(bounds);
+    }
+  }, [endBounds]);
+
+  useEffect(() => {
+    // Filter registration years based on the selected manufacturing year.
+    if (selectedManYear) {
+      const filteredYears = regYear.filter((reg) => reg.car_year_ranges > selectedManYear);
+      setFilteredRegYears(filteredYears);
+    } else {
+      // If no manufacturing year is selected, show all registration years.
+      setFilteredRegYears(regYear);
+    }
+  }, [selectedManYear]);
+
   const handleProvinceStartChange = (event) => {
     setCityStartId("");
+    setLocationStartStringField("");
     setProvinceStartId(event.target.value);
   };
   function validateProfession(profession) {
@@ -400,6 +498,7 @@ const DriverRegistration = () => {
 
   const handleProvinceEndChange = (event) => {
     setCityEndId("");
+    setLocationEndStringField("");
     setProvinceEndId(event.target.value);
   };
 
@@ -1563,6 +1662,7 @@ const DriverRegistration = () => {
                                   }
                                   onPlaceChanged={handlePlaceSelectStart}
                                   restrictions={{ country: "PK" }}
+                                  bounds={autocompleteStartBounds}
                                   options={{ strictBounds: true }}
                                 >
                                   <Form.Control
@@ -1724,6 +1824,7 @@ const DriverRegistration = () => {
                                   }
                                   onPlaceChanged={handlePlaceSelectEnd}
                                   restrictions={{ country: "PK" }}
+                                  bounds={autocompleteEndBounds}
                                   options={{ strictBounds: true }}
                                 >
                                   <Form.Control
@@ -1745,85 +1846,80 @@ const DriverRegistration = () => {
 
                       </div>
                     </div>
-                    <LoadScript
-                      googleMapsApiKey="AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA"
-                      libraries={mapLibraries}
-                    >
-                      <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                        <Modal.Header className="d-block" >
-                          <Modal.Title>Select Starting Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point.</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <Container className="d-flex justify-content-center align-items-center mb-3">
-                            <Row style={{ height: "100%", width: "100%" }}>
-                              <GoogleMap
-                                zoom={15}
-                                center={defaultStartCenter}
-                                mapContainerStyle={{ width: "100%", height: "50vh" }}
-                                onClick={handleMapClickStart}
-                                options={{
-                                  types: ["(regions)"],
-                                  componentRestrictions: { country: "PK" },
+                    <Modal show={showStartModal} onHide={handleCloseStartModal}>
+                      <Modal.Header className="d-block" >
+                        <Modal.Title>Select Starting Location</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point.</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Container className="d-flex justify-content-center align-items-center mb-3">
+                          <Row style={{ height: "100%", width: "100%" }}>
+                            <GoogleMap
+                              zoom={15}
+                              center={defaultStartCenter}
+                              mapContainerStyle={{ width: "100%", height: "50vh" }}
+                              onClick={handleMapClickStart}
+                              options={{
+                                types: ["(regions)"],
+                                componentRestrictions: { country: "PK" },
+                              }}
+                            >
+                              <MarkerF
+                                position={markerPositionStart}
+                                icon={{
+                                  url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                                 }}
-                              >
-                                <MarkerF
-                                  position={markerPositionStart}
-                                  icon={{
-                                    url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                                  }}
-                                />
-                              </GoogleMap>
-                            </Row>
-                          </Container>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseStartModal}>
-                            Select
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
+                              />
+                            </GoogleMap>
+                          </Row>
+                        </Container>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseStartModal}>
+                          Select
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
 
-                      <Modal show={showEndModal} onHide={handleCloseEndModal}>
-                        <Modal.Header className="d-block" >
-                          <Modal.Title>Select Drop-off Location</Modal.Title>
-                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <Container className="d-flex justify-content-center align-items-center mb-3">
-                            <Row style={{ height: "100%", width: "100%" }}>
-                              <GoogleMap
-                                zoom={15}
-                                // center={
-                                //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
-                                // }
-                                center={defaultEndCenter}
-                                mapContainerStyle={{ width: "100%", height: "50vh" }}
-                                onClick={handleMapClickEnd}
-                                options={{
-                                  types: ["(regions)"],
-                                  componentRestrictions: { country: "PK" },
+                    <Modal show={showEndModal} onHide={handleCloseEndModal}>
+                      <Modal.Header className="d-block" >
+                        <Modal.Title>Select Drop-off Location</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Container className="d-flex justify-content-center align-items-center mb-3">
+                          <Row style={{ height: "100%", width: "100%" }}>
+                            <GoogleMap
+                              zoom={15}
+                              // center={
+                              //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
+                              // }
+                              center={defaultEndCenter}
+                              mapContainerStyle={{ width: "100%", height: "50vh" }}
+                              onClick={handleMapClickEnd}
+                              options={{
+                                types: ["(regions)"],
+                                componentRestrictions: { country: "PK" },
+                              }}
+                            >
+
+                              <MarkerF
+                                position={markerPositionEnd}
+                                icon={{
+                                  url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                                 }}
-                              >
+                              />
 
-                                <MarkerF
-                                  position={markerPositionEnd}
-                                  icon={{
-                                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                                  }}
-                                />
-
-                              </GoogleMap>
-                            </Row>
-                          </Container>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseEndModal}>
-                            Select
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                    </LoadScript>
+                            </GoogleMap>
+                          </Row>
+                        </Container>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseEndModal}>
+                          Select
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
 
 
                     <div className="row mb-3 shadow shadow-sm">
@@ -2324,7 +2420,7 @@ const DriverRegistration = () => {
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div
                     className="row shadow form-color-header"
-                  // style={{ backgroundColor: '#1F5F5B' }}
+                    // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1
                       className="text-center text-white py-4"
@@ -2480,7 +2576,7 @@ const DriverRegistration = () => {
                             required
                           >
                             <option value="" hidden>Registration Year</option>
-                            {regYear?.map((reg) => (
+                            {filteredRegYears.map((reg) => (
                               <option key={reg.id} value={reg.car_year_ranges}>
                                 {reg.car_year_ranges}
                               </option>
@@ -2526,7 +2622,7 @@ const DriverRegistration = () => {
                     <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3 form-color-field"
-                        
+
                       >
                         <h2 className="text-success mb-3 text-center">
                           Available Seats

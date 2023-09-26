@@ -24,7 +24,7 @@ const Rejection = () => {
       navigate("/resubmit");
     }
   };
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [navigate]);
@@ -37,7 +37,7 @@ const Rejection = () => {
             <div className="col-md-7 bg-light mt-5 mb-5"  >
               <div className="row shadow bg-danger" style={{ backgroundColor: '#1F5F5B' }}>
                 <h1 className="text-center text-white py-4">
-                  Account Disapproved!
+                  Account Rejected!
                 </h1>
               </div>
               <div className="container py-3">
@@ -60,23 +60,19 @@ const Rejection = () => {
                       can also update any other data on your dashboard.
                     </h5>
                     <div className="text-center">
-                      <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark text-white rounded-4 px-3 py-2 mb-3"  onClick={route}>
+                      <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark text-white rounded-4 px-3 py-2 mb-3" onClick={route}>
                         Next
                       </Button>
                     </div>
-
-
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-        </div>
-
-      </>
-      );
+      </div>
+    </>
+  );
 };
 
-      export default Rejection;
+export default Rejection;
