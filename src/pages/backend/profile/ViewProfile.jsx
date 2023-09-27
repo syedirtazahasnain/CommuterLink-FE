@@ -188,7 +188,7 @@ const ViewProfile = () => {
                 </Form.Group>
                 <div className="container my-5">
 
-                  <Link className="font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-3 mb-3"
+                  <Link className="font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-3 mb-3"
                     to={"/editprofile"}
                   >
                     Change Password

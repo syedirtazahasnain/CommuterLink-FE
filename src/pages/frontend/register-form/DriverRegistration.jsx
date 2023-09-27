@@ -802,7 +802,7 @@ const DriverRegistration = () => {
     value = value.replace(/[^a-zA-Z0-9]/g, '');
 
     // Enforce a maximum length of 24 characters
-    if (value.length > 24) {
+    if (value.length > 24 ) {
       value = value.slice(0, 24);
     }
 
@@ -4150,7 +4150,8 @@ const DriverRegistration = () => {
                             </Form.Label>
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
-                        </div></div>
+                        </div>
+                        </div>
 
 
 
@@ -4198,7 +4199,7 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                              <Tooltip title={<h6 className="text-center">{"To select any one field for transactions"}</h6>}>
                                 <Link
                                   // to='/notification'
                                   className='mx-1 h-15px d-inline-block'
@@ -4215,18 +4216,25 @@ const DriverRegistration = () => {
                           <div className="mt-2 px-3">
                             <TextField
                               type="text"
-                              className={`form-control mb-2 text-secondary ${isIBANValid ? '' : 'is-invalid'}`}
+                              // className={`form-control mb-2 text-secondary ${isIBANValid ? '' : 'is-invalid'}`}
+                              className="form-control"
                               id="bankAccount"
                               size="small"
                               name="bankAccount"
                               placeholder="Bank Account (IBAN-24 Character)"
                               value={inputBankAccount}
                               onChange={handleInputChange}
-                              required
+                              error={!isIBANValid && inputBankAccount !== ""}
+                              helperText={
+                                !isIBANValid &&
+                                inputBankAccount !== "" &&
+                                "Please enter a valid 24-digit IBAN."
+                              }
                             />
-                            {!isIBANValid && (
+                            {/* {!isIBANValid && (
                               <div className="invalid-feedback">Please enter a valid 24-digit IBAN.</div>
-                            )}
+                            )} */}
+                              
                           </div>
                           <div className="mt-2 px-3">
                             <TextField

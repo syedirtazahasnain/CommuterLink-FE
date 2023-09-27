@@ -150,8 +150,8 @@ const Rider = () => {
 
   return (
     <div>
-      <div className="page-title">
-        <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
+      <div className="page-title py-2">
+        {/* <div className="card p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
             <h3 className="text-success my-2 fw-bold m-0">UPDATE MATCHING CRITERIA</h3>
             <Link
@@ -162,13 +162,13 @@ const Rider = () => {
               </button>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="card p-4  p-2">
         <div className="card bg-light">
           <div className="card-body text-dark">
             <div className="container text-center mt-4">
-
+            <h2 className="text-success fw-bold">Update Matching Criteria</h2>
               <Form className="text-center">
                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                   <FormControl fullWidth size="small">
@@ -376,7 +376,7 @@ const Rider = () => {
 
                 <div className="container my-5">
                   <Button
-                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"
                     onClick={sendRequest}
                   >
                     Update

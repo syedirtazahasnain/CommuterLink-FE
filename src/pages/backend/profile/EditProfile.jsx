@@ -17,7 +17,7 @@ import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { displayNotification } from "../../../helpers";
-
+import Rider from '../MatchingUpdate/Rider';
 const EditProfile = () => {
   const { id } = useParams();
   const userToken = useSelector((s) => s.login.data.token);
@@ -381,7 +381,7 @@ const EditProfile = () => {
                 </Form.Group>
                 <div className="container my-5">
                   <Button 
-                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 py-2 mb-3" 
+                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-4 py-2 mb-3" 
                     onClick={ResetPassword}
                   >
                     Save
@@ -392,6 +392,7 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
+      <Rider/>
     </div>
   );
 };

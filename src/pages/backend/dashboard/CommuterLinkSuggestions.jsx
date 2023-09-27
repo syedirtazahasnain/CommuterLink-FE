@@ -342,7 +342,7 @@ const CommuterLinkSuggestions = () => {
               </div>
             </div>
           ) : (
-            <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
+            <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1", }}>
               {option === 0 ? "GET A SEAT/S IN THEIR CAR" : "TRAVEL BUDDIES FOR YOUR CAR"}
             </h4>
           )}
