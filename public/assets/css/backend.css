@@ -369,3 +369,7 @@ body{
 .text-green{
   color: var(--bs-text-green) !important;
 }
+
+.background_body{
+  background: linear-gradient(to top right, rgba(28, 196, 172, 1), rgba(6, 55, 58, 1)) !important;
+  color: white !important}

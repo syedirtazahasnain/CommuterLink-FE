@@ -401,7 +401,7 @@ const TravelPatners = () => {
             MY WALLET{" "}
           </h4>{" "}
         </div>
-        <div className="card mx-4 my-4" style={{ background: "rgb(214 219 218)" }}>
+        {/* <div className="card mx-4 my-4" style={{ background: "rgb(214 219 218)" }}>
           <div className="card-body">
           <div className="row">
             <div className="col-md-8">
@@ -421,7 +421,7 @@ const TravelPatners = () => {
             </div>
             
             </div>
-            {/* <div className="col-md-8">
+            <div className="col-md-8">
               <div className="row">
                 <div className="col-md-4">
                   <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
@@ -433,7 +433,7 @@ const TravelPatners = () => {
                   </p>
                 </div>
               </div>
-            </div> */}
+            </div>
             <div className="col-md-4 col-sm-12 text-center py-4">
               {userType === 0 ?
                 (
@@ -453,7 +453,140 @@ const TravelPatners = () => {
           </div>
           </div>
          
+        </div> */}
+<div className="card mx-4 my-4 broder-0" style={{ background: "rgb(214 219 218)" }}>
+          <div className="card-body">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="row d-flex justify-content-between">
+                  <div className="col-md-10 col-sm-12 px-5 py-0 background_body text-center border-2 rounded-4">
+                    <div className="text-center">  <i className=" p-3 wallet-margin fa-solid fa-wallet fs-1"></i></div>
+
+                    <h1 className="py-3 text-center fw-bold  ">
+                      Rs. {walletAmount} /-
+                    </h1>
+                  </div>
+                  {/* <div className="col-md-4 col-sm-12 mx-5 py-3"> <img
+                    className="d-block img-fluid w-auto h-auto"
+                    src={`${BASE_URL}/assets/images/signup-3.png`}
+                    alt="First slide"
+                  /></div> */}
+                </div>
+
+              </div>
+              {/* <div className="col-md-8">
+              <div className="row">
+                <div className="col-md-4">
+                  <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
+                </div>
+                <div className="col-md-10">
+
+                  <p className="py-3 text-center fw-bold text-success fs-3">
+                    Rs. &nbsp; {walletAmount} /-
+                  </p>
+                </div>
+              </div>
+            </div> */}
+              {/* <div className="col-md-4 col-sm-12 text-center py-4">
+              {userType === 0 ?
+                (
+                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
+                    Recharge
+                  </button>
+                ) :
+                (
+                    <div className="alert alert-info  text-center fw-bold fs-5" role="alert">
+                      <i className="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Your wallet is secure and end to end encrypted.
+                    </div>
+                )}
+              <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
+                View Transaction History
+              </button>
+            </div> */}
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="card bg-dark border-1 rounded-4 py-2 px-4">
+                      <h2 className="text-light">Recent Transactions</h2>
+                    <table className="table table-dark border-1 rounded-4 ">
+                     
+                      <thead>
+                        <tr>
+                          <th scope="col">Date</th>
+                          <th scope="col">Message</th>
+                          <th scope="col"></th>
+                          <th scope="col">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">12 Sep,2023</th>
+                          <td>Transferred to Car Offer on Monday</td>
+                          <td></td>
+                          <td>Rs. 360/-</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">12 Sep,2023</th>
+                          <td>Transferred to Car Offer on Monday</td>
+                          <td></td>
+                          <td>Rs. 360/-</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">12 Sep,2023</th>
+                          <td>Transferred to Car Offer on Monday</td>
+                          <td></td>
+                          <td>Rs. 360/-</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">12 Sep,2023</th>
+                          <td>Transferred to Car Offer on Monday</td>
+                          <td></td>
+                          <td>Rs. 360/-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                  
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div className="row pt-5 d-flex justify-content-between">
+              <div className="col-md-4 d-flex">
+                <div className="row d-flex">
+                  <div className="col-md-2"><img src={`${BASE_URL}/assets/images/data_security_icon.png`} className="w-50px h-50px" /></div>
+                </div>
+              <div className="col-md-8 fs-auto fw-bold"> Your wallet is secured  and<br/> end-to-end encrypted.</div>
+          
+              </div>
+              <div className="col-md-6 col-sm-12">
+                <div className="row d-flex justify-content-between">
+                  <div className="col-md-6"> 
+                   {userType === 0 ?
+                (
+                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
+                    Recharge
+                  </button>
+                ) :
+                (
+                    <div className="alert alert-info  text-center fw-bold fs-5" role="alert">
+                      <i className="fa-solid fa-triangle-exclamation fs-4 text-warning"></i>Your wallet is secure and end to end encrypted.
+                    </div>
+                )}</div>
+               
+
+            <div className="col-md-6">  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white  px-4 px-sm-5 py-3 py-sm-3 mb-3" >
+                View Transaction History
+              </button></div>
+              </div>
+            </div>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </div>
   );

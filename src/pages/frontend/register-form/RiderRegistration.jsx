@@ -12,13 +12,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { Button } from "@mui/base";
 import Stack from "@mui/material/Stack";
+import { TextField, Tooltip } from "@mui/material";
 import { ThreeCircles } from 'react-loader-spinner'
 import {
   GoogleMap,
   Autocomplete,
   MarkerF,
 } from "@react-google-maps/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
@@ -348,7 +349,7 @@ const RiderRegistration = () => {
         new window.google.maps.LatLng(startBounds.southwest.lat, startBounds.southwest.lng),
         new window.google.maps.LatLng(startBounds.northeast.lat, startBounds.northeast.lng)
       );
-  
+
       setAutocompleteStartBounds(bounds);
     }
   }, [startBounds]);
@@ -389,7 +390,7 @@ const RiderRegistration = () => {
         new window.google.maps.LatLng(endBounds.southwest.lat, endBounds.southwest.lng),
         new window.google.maps.LatLng(endBounds.northeast.lat, endBounds.northeast.lng)
       );
-  
+
       setAutocompleteEndBounds(bounds);
     }
   }, [endBounds]);
@@ -1043,9 +1044,30 @@ const RiderRegistration = () => {
                       controlId="validationCustom01"
                       className="mb-2"
                     >
-                      <Form.Label className="text-black fs-6">
-                        Province
-                      </Form.Label>
+
+                      <div className="d-flex justify-content-between align-items-center">
+                        <Form.Label className="text-black fs-6">
+                          Province
+                        </Form.Label>
+                        <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+                          }}
+                        // onClick={AddNewStart}
+                        >
+                          <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                            <Link
+                              // to='/notification'
+                              className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="fa-solid fs-5 fa-circle-info "></i>
+                            </Link>
+                          </Tooltip>
+
+                        </p></div>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
@@ -1221,9 +1243,30 @@ const RiderRegistration = () => {
                       controlId="validationCustom07"
                       className="mb-2"
                     >
-                      <Form.Label className="text-black fs-6">
-                        Province
-                      </Form.Label>
+
+                      <div className="d-flex justify-content-between align-items-center">
+                        <Form.Label className="text-black fs-6">
+                          Province
+                        </Form.Label>
+                        <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+                          }}
+                        // onClick={AddNewStart}
+                        >
+                          <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                            <Link
+                              // to='/notification'
+                              className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="fa-solid fs-5 fa-circle-info "></i>
+                            </Link>
+                          </Tooltip>
+
+                        </p></div>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
@@ -1471,9 +1514,30 @@ const RiderRegistration = () => {
                       controlId="validationCustomtime1"
                       className="mb-2 mt-3"
                     >
+                     
+                      <div className="d-flex justify-content-between align-items-center">
                       <Form.Label className="text-black fs-6">
                         Start Time (From start point to destination +/- 30 Minutes)
                       </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                            // onClick={AddNewStart}
+                            >
+                              <Tooltip title={<h6 className="text-center">{"You will got maximum suggestions according to your selected time"}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                </Link>
+                              </Tooltip>
+
+                            </p></div>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
@@ -1696,9 +1760,30 @@ const RiderRegistration = () => {
                     controlId="validationCustom14"
                     className="mb-2"
                   >
-                    <Form.Label className="fs-6 text-black">
-                      Preferred Gender Of Travel Partner
-                    </Form.Label>
+                    
+                    <div className="d-flex justify-content-between align-items-center">
+                          <Form.Label className="fs-6 text-black">
+                            Preferred Gender of Travel Partner
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          // onClick={AddNewStart}
+                          >
+                            <Tooltip title={<h6 className="text-center">{"You will got maximum suggestions according to your selected preferred gender"}</h6>}>
+                              <Link
+                                // to='/notification'
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-5 fa-circle-info "></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
                     <Form.Select
                       aria-label="Default select example"
                       className="text-secondary"

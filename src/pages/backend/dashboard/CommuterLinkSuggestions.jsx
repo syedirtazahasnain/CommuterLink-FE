@@ -324,7 +324,7 @@ const CommuterLinkSuggestions = () => {
   return (
     <>
       <div className="card rounded-0 mb-5">
-        <div className="card-header rounded-0" style={{ backgroundColor: "rgb(0 145 124)"}}>
+        <div className="card-header rounded-0" style={{  backgroundColor: "#1F5F5B" }}>
           {loading ? (
             <div className="text-center m-auto">
               {/* Render CircularProgress while loading */}
@@ -342,7 +342,7 @@ const CommuterLinkSuggestions = () => {
               </div>
             </div>
           ) : (
-            <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1" }}>
+            <h4 className="text-center text-warning m-auto fw-bold" style={{ lineHeight: "1", }}>
               {option === 0 ? "GET A SEAT/S IN THEIR CAR" : "TRAVEL BUDDIES FOR YOUR CAR"}
             </h4>
           )}
