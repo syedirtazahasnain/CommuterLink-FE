@@ -37,18 +37,35 @@ const DriverRegistration = () => {
   const [isValidJazzCash, setIsValidJazzCash] = useState(true);
   const [isValidEasyPaisa, setIsValidEasyPaisa] = useState(true);
   const [isValidRaastID, setIsValidRaastID] = useState(true);
-  
+
   const route = () => {
     navigate("/seatcostverification");
 
   };
 
   const handleCarBrandChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
+    value = value.replace(/[^a-zA-Z]/g, '');
     setSelectedCarBrand(value);
-    setIsCarBrandValid(value !== ''); // Set validation based on whether a value is selected or not
-  };
+    setIsCarBrandValid(value !== ''); 
+    if (value.length > 20) {
+      value = value.slice(0, 20);
+    }// Set validation based on whether a value is selected or not
+    setSelectedCarBrand(value);
 
+    // Check if the entered value is valid and reset the validation state
+    setIsCarBrandValid(value.length === 20);
+  };
+ 
+
+    // Remove any special characters and spaces
+   
+
+    // Enforce a maximum length of 24 characters
+  
+
+   
+ 
   const AddNewStart = () => {
     setAddNewStart(true);
     setAddNewStartDropdown(false);
@@ -426,7 +443,7 @@ const DriverRegistration = () => {
         new window.google.maps.LatLng(startBounds.southwest.lat, startBounds.southwest.lng),
         new window.google.maps.LatLng(startBounds.northeast.lat, startBounds.northeast.lng)
       );
-  
+
       setAutocompleteStartBounds(bounds);
     }
   }, [startBounds]);
@@ -467,7 +484,7 @@ const DriverRegistration = () => {
         new window.google.maps.LatLng(endBounds.southwest.lat, endBounds.southwest.lng),
         new window.google.maps.LatLng(endBounds.northeast.lat, endBounds.northeast.lng)
       );
-  
+
       setAutocompleteEndBounds(bounds);
     }
   }, [endBounds]);
@@ -802,7 +819,7 @@ const DriverRegistration = () => {
     value = value.replace(/[^a-zA-Z0-9]/g, '');
 
     // Enforce a maximum length of 24 characters
-    if (value.length > 24 ) {
+    if (value.length > 24) {
       value = value.slice(0, 24);
     }
 
@@ -2554,7 +2571,7 @@ const DriverRegistration = () => {
         </>
       )}
 
-      {showDriverForm && (
+      {!showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
@@ -2580,7 +2597,7 @@ const DriverRegistration = () => {
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div
                     className="row shadow form-color-header"
-                    // style={{ backgroundColor: '#1F5F5B' }}
+                  // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1
                       className="text-center text-white py-4"
@@ -2608,7 +2625,13 @@ const DriverRegistration = () => {
                             type="text"
                             className="text-secondary"
                             value={selectedCarBrand}
-                            onChange={(e) => setSelectedCarBrand(e.target.value)}
+                            onChange={handleCarBrandChange}
+                            error={!isCarBrandValid && selectedCarBrand !== ""}
+                            helperText={
+                              !isCarBrandValid &&
+                              selectedCarBrand !== "" &&
+                              "Please enter a valid 24-digit IBAN."
+                            }
                             // value={selectedModelName}
                             // onChange={(e) => setSelectedModelName(e.target.value)}
                             placeholder="Enter your Car Brand (Honda, Toyota etc)"
@@ -3902,13 +3925,118 @@ const DriverRegistration = () => {
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div></div> */}
-
                       <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
                           className="col-md-12 px-2 py-3 form-color-field"
                         >
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom30"
+                            className="mb-2"
+                          >
+                            <h2 className="text-success mb-3 text-center">
+                              I Drive MySelf License Details
+                            </h2>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom31"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Driving License No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="License No."
+                              value={inputDrivingLicenseMySelf}
+                              onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom32"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Valid Upto
+                            </Form.Label>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DatePicker
+                                label={"MM/DD/YY"}
+                                className="bg-white"
+                                slotProps={{
+                                  textField: { size: "small", color: "success" },
+                                }}
+                                sx={{ width: "100%" }}
+                                value={inputValidUptoMySelf}
+                                onChange={handleValidChange}
+                                disablePast
+                              />
+                            </LocalizationProvider>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom33"
+                            className="mb-2"
+                          >
+                            <Form.Label text-dark fs-6>
+                              Place of Issue
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Place of issue"
+                              value={inputPlaceIssueMySelf}
+                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom34"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (front)
+                            </Form.Label>
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                            </Form.Text>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom35"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (back)
+                            </Form.Label>
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                            </Form.Text>
+                          </Form.Group>
+                        </div></div>
+                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                        <div
+                          className="col-md-12 px-2 py-3 form-color-field"
+                        >
+
+
                           <h2 className="text-success mb-3 text-center">
-                            Driver's Details
+                            My Driver's Details
                           </h2>
                           <Form.Group
                             as={Col}
@@ -4052,7 +4180,7 @@ const DriverRegistration = () => {
                             className="mb-2"
                           >
                             <h2 className="text-success mb-3 text-center">
-                              Driver's License Details
+                              My Driver's License Details
                             </h2>
                           </Form.Group>
                           <Form.Group
@@ -4151,7 +4279,7 @@ const DriverRegistration = () => {
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div>
-                        </div>
+                      </div>
 
 
 
@@ -4234,7 +4362,7 @@ const DriverRegistration = () => {
                             {/* {!isIBANValid && (
                               <div className="invalid-feedback">Please enter a valid 24-digit IBAN.</div>
                             )} */}
-                              
+
                           </div>
                           <div className="mt-2 px-3">
                             <TextField

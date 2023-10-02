@@ -566,7 +566,7 @@ const TravelConfirmation = () => {
                               No. of Days Travelled</h4>
                             <h2 className="text-center">300 (e.g.)</h2>
                           </div>
-                          <button className="cursor-pointer font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-2 py-sm-3" onClick={route} >
+                          <button className="cursor-pointer font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white px-4 px-sm-5 py-2 py-sm-3" onClick={route} >
                             View Full History</button>
                         </div>
                       </div>

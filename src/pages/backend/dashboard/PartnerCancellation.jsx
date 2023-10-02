@@ -488,18 +488,18 @@ const PartnerCancellation = () => {
         <h3 className="card bg-medium-teal p-4 text-dark-green my-2 fw-bold">CANCELLATION DATE</h3>
       </div>
       <div className="card">
-        <div className="card backgroundColor">
+        <div className="card bg-light">
           <div className="card-body text-dark">
             <div className="container text-center">
               <img src={`${IMAGE_URL}${image}`} style={{ height: '150px', width: '150px' }} className="border border-2 rounded rounded-circle" />
               <p className="py-2">{name}</p>
-      <div className="card bg-light-green mt-3 mb-5">
+      <div className="card bg-light mt-3 mb-5">
      
         <div
           className="card-body"
         >
           <div className="card h-50" style={{ backgroundColor: "rgb(214 219 218)" }}>
-            <div className="card-body">
+            <div className="">
               <div
                 className="card border-0"
                 style={{ backgroundColor: "#D9D9D9" }}

@@ -110,7 +110,7 @@ const PaymentRide = () => {
         <div className="page-title">
           <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
             <div className="d-flex justify-content-between align-items-xl-baseline">
-              <h3 className="text-dark-green my-2 fw-bold m-0">PAYMENT/RIDE HISTORY </h3>
+              <h3 className="text-dark-green my-2 fw-bold m-0">PAYMENT HISTORY </h3>
               <Link
                 onClick={() => navigate(-1)} >
                 <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
@@ -123,7 +123,7 @@ const PaymentRide = () => {
         </div>
       </div>
       <div className="card p-4 bg-white p-2">
-        <h5 className="pb-2 text-dark-green ">{`The ride history along with payment log`}</h5>
+        <h5 className="pb-2 text-dark-green ">{`Payment Ride`}</h5>
         <div className="card bg-light">
           <div className="card-body">
             {loading ? (

@@ -324,7 +324,7 @@ const CommuterLinkSuggestions = () => {
   return (
     <>
       <div className="card rounded-0 mb-5">
-        <div className="card-header rounded-0" style={{ backgroundColor: "rgb(0 145 124)" }}>
+        <div className="card-header rounded-0" style={{ backgroundColor: "#1F5F5B" }}>
           {loading ? (
             <div className="text-center m-auto">
               {/* Render CircularProgress while loading */}
@@ -395,7 +395,7 @@ const CommuterLinkSuggestions = () => {
               <div className="ml-auto me-3">
                 <img
                   src={`${BASE_URL}/assets/images/Vector.png`}
-                  className="card-img-top w-40px m-auto bg-success p-2 me-2"
+                  className="card-img-top w-40px m-auto  p-2 me-2" style={{backgroundColor:'#0A6155'}}
                 />
                 <span className=" fw-bold">
                   Active Suggestions
@@ -403,7 +403,7 @@ const CommuterLinkSuggestions = () => {
               <div className="me-3 ">
                 <img
                   src={`${BASE_URL}/assets/images/Vector.png`}
-                  className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
+                  className="card-img-top w-40px m-auto  p-2 me-2" style={{backgroundColor:'#ff8a00'}}
                 />
                 <span className=" fw-bold">
                 Pending Suggestions
@@ -456,7 +456,7 @@ const CommuterLinkSuggestions = () => {
               <div className="ml-auto me-3">
                 <img
                   src={`${BASE_URL}/assets/images/Vector.png`}
-                  className="card-img-top w-40px m-auto bg-success p-2 me-2"
+                  className="card-img-top w-40px m-auto  p-2 me-2" style={{backgroundColor:'#0A6155'}}
                 />
                 <span className=" fw-bold">
                   Active Requests
@@ -464,7 +464,7 @@ const CommuterLinkSuggestions = () => {
               <div className="me-3 ">
                 <img
                   src={`${BASE_URL}/assets/images/Vector.png`}
-                  className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
+                  className="card-img-top w-40px m-auto p-2 me-2" style={{backgroundColor:'#ff8a00'}}
                 />
                 <span className=" fw-bold">
                 Pending Requests

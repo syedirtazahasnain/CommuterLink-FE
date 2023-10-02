@@ -19,6 +19,7 @@ const Rider = () => {
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
+  const [showfield, setShowField] = useState(false);
 
   useEffect(() => {
     getdropdowndata();
@@ -129,8 +130,8 @@ const Rider = () => {
 
         if (jsonresponse.status_code === 200) {
           console.log('200');
-          navigate("/dashboard");
           displayNotification("success","Matching criteria has been updated successfully");
+          navigate("/dashboard");
         } else if (jsonresponse.status_code === 100) {
           console.log('100');
           displayNotification("error", `${jsonresponse.message}`);
@@ -166,11 +167,30 @@ const Rider = () => {
       </div>
       <div className="card p-4  p-2">
         <div className="card bg-light">
+        <div className="row text-right pt-2 px-2">
+               
+               <Link
+                 to={""} >
+                 <Button variant=""
+                   className="btn font-custom btn align-end btn-dark-green rounded-0 text-white fs-6 lh-1"
+
+                   onClick={() => {
+                     setShowField(true);
+                   }}
+                 >
+                   <i className="fa-solid fa-pen text-white" />
+                   Edit
+                 </Button>
+               </Link>
+               
+             </div>
           <div className="card-body text-dark">
-            <div className="container text-center mt-4">
-            <h2 className="text-success fw-bold">Update Matching Criteria</h2>
+            <div className="container text-center mt-2">
+            <h2 className="text-success fw-bold mb-4">Update Matching Criteria</h2>
               <Form className="text-center">
-                <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                {showfield ===true ?(
+                <> 
+                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                   <FormControl fullWidth size="small">
                     <InputLabel id="demo-simple-select-label" color='success'>Pickup Timings</InputLabel>
                     <Select
@@ -182,6 +202,7 @@ const Rider = () => {
                       className="bg-light text-left"
                       label="Pickup Timings"
                       required
+                    
                     >
                       {homeTimeSlots?.map((time) => (
                         <MenuItem key={time.id} value={time.id}>
@@ -227,6 +248,7 @@ const Rider = () => {
                       value={preferredGender}
                       onChange={(e) => setPreferredGender(e.target.value)}
                       required
+                   
                     >
                       <MenuItem value="Male">Male</MenuItem>
                       <MenuItem value="Female">Female</MenuItem>
@@ -261,6 +283,7 @@ const Rider = () => {
                                 checked={daysSelected.includes("Monday")}
                                 onChange={handleCheckboxChange}
                               // required
+                          
                               />
                             }
                             label="Monday"
@@ -278,6 +301,7 @@ const Rider = () => {
                                 checked={daysSelected.includes("Tuesday")}
                                 onChange={handleCheckboxChange}
                               // required
+                             
                               />
                             }
                             label="Tuesday"
@@ -295,6 +319,7 @@ const Rider = () => {
                                 checked={daysSelected.includes("Wednesday")}
                                 onChange={handleCheckboxChange}
                               // required
+                            
                               />
                             }
                             label="Wednesday"
@@ -312,7 +337,7 @@ const Rider = () => {
                                 checked={daysSelected.includes("Thursday")}
                                 onChange={handleCheckboxChange}
                               // required
-                              />
+                                 />
                             }
                             label="Thursday"
                           />
@@ -329,6 +354,7 @@ const Rider = () => {
                                 checked={daysSelected.includes("Friday")}
                                 onChange={handleCheckboxChange}
                               // required
+                            
                               />
                             }
                             label="Friday"
@@ -346,6 +372,7 @@ const Rider = () => {
                                 checked={daysSelected.includes("Saturday")}
                                 onChange={handleCheckboxChange}
                               // required
+                            
                               />
                             }
                             label="Saturday"
@@ -363,6 +390,7 @@ const Rider = () => {
                                 checked={daysSelected.includes("Sunday")}
                                 onChange={handleCheckboxChange}
                               // required
+                           
                               />
                             }
                             label="Sunday"
@@ -372,15 +400,236 @@ const Rider = () => {
 
                     </div>
                   </div>
-                </Row>
-
-                <div className="container my-5">
+                </Row>  <div className="container my-5">
                   <Button
                     className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"
                     onClick={sendRequest}
                   >
                     Update
                   </Button>
+                </div> </>):
+                (<>  <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                <FormControl fullWidth size="small">
+                  <InputLabel id="demo-simple-select-label" color='success'>Pickup Timings</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    color='success'
+                    value={selectedHomeTime}
+                    onChange={(e) => setSelectedHomeTime(e.target.value)}
+                    className="bg-light text-left"
+                    label="Pickup Timings"
+                    required
+                    disabled
+                  >
+                    {homeTimeSlots?.map((time) => (
+                      <MenuItem key={time.id} value={time.id}>
+                        {time.time_string}
+                      </MenuItem>
+
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                <FormControl fullWidth size="small">
+                  <InputLabel id="demo-simple-select-label" color='success'>Drop-off Timings</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    color='success'
+                    className="bg-light text-left"
+                    label="Drop-off Timings"
+                    value={selectedOfficeTime}
+                    onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                    required
+                    disabled
+                  >
+                    {officeTimeSlots?.map((time) => (
+                      <MenuItem key={time.id} value={time.id}>
+                        {time.time_string}
+                      </MenuItem>
+                    ))}
+
+
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                <FormControl fullWidth size="small">
+                  <InputLabel id="demo-simple-select-label" color='success'>Preferred Gender</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    color='success'
+                    className="bg-light text-left"
+                    label="Prefer Gender"
+                    value={preferredGender}
+                    onChange={(e) => setPreferredGender(e.target.value)}
+                    required
+                    disabled
+                  >
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                    <MenuItem value="Both">Both</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
+                <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
+                  <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
+                    I Commute (Select Days)
+                  </Form.Label>
+                </Form.Group>
+
+                <div className="row d-flex">
+                  <div className="col">
+                    {["checkbox"].map((type) => (
+                      <div
+                        key={`inline-${type}`}
+                        className="mb-3 d-flex flex-wrap"
+                      >
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              inline
+                              label="Monday"
+                              name="group1"
+                              color="success"
+                              type={type}
+                              value="Monday"
+                              id={`inline-${type}-0`}
+                              checked={daysSelected.includes("Monday")}
+                              onChange={handleCheckboxChange}
+                            // required
+                            disabled
+                            />
+                          }
+                          label="Monday"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              inline
+                              label="Tuesday"
+                              name="group1"
+                              color="success"
+                              type={type}
+                              value="Tuesday"
+                              id={`inline-${type}-1`}
+                              checked={daysSelected.includes("Tuesday")}
+                              onChange={handleCheckboxChange}
+                            // required
+                            disabled
+                            />
+                          }
+                          label="Tuesday"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              inline
+                              label="Wednesday"
+                              name="group1"
+                              color="success"
+                              type={type}
+                              value="Wednesday"
+                              id={`inline-${type}-2`}
+                              checked={daysSelected.includes("Wednesday")}
+                              onChange={handleCheckboxChange}
+                            // required
+                            disabled
+                            />
+                          }
+                          label="Wednesday"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              inline
+                              label="Thursday"
+                              name="group1"
+                              color="success"
+                              type={type}
+                              value="Thursday"
+                              id={`inline-${type}-3`}
+                              checked={daysSelected.includes("Thursday")}
+                              onChange={handleCheckboxChange}
+                            // required
+                            disabled
+                            />
+                          }
+                          label="Thursday"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              inline
+                              label="Friday"
+                              name="group1"
+                              color="success"
+                              type={type}
+                              value="Friday"
+                              id={`inline-${type}-4`}
+                              checked={daysSelected.includes("Friday")}
+                              onChange={handleCheckboxChange}
+                            // required
+                            disabled
+                            />
+                          }
+                          label="Friday"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              inline
+                              label="Saturday"
+                              name="group1"
+                              type={type}
+                              value="Saturday"
+                              color="success"
+                              id={`inline-${type}-5`}
+                              checked={daysSelected.includes("Saturday")}
+                              onChange={handleCheckboxChange}
+                            // required
+                            disabled
+                            />
+                          }
+                          label="Saturday"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              inline
+                              label="Sunday"
+                              name="group1"
+                              type={type}
+                              value="Sunday"
+                              color="success"
+                              id={`inline-${type}-6`}
+                              checked={daysSelected.includes("Sunday")}
+                              onChange={handleCheckboxChange}
+                            // required
+                            disabled
+                            />
+                          }
+                          label="Sunday"
+                        />
+                      </div>
+                    ))}
+
+                  </div>
+                </div>
+              </Row> </>)}
+              
+
+                <div className="container my-5">
+                  {/* <Button
+                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"
+                    onClick={sendRequest}
+                  >
+                    Update
+                  </Button> */}
                 </div>
               </Form>
             </div>

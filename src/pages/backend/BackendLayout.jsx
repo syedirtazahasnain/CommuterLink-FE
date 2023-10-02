@@ -70,12 +70,15 @@ const BackendLayout = ({ children }) => {
         // confirmButtonColor: 'green',
         cancelButtonColor: 'swal-custom',
         confirmButtonText: 'Logout',
+        cancelButtonText:'Cancel',
         customClass: {
           confirmButton:'swal-custom',
+          cancelButton:'swal-custom',
         },
-        cancelClass:{
-          cancelButton: 'swal-custom',
-        }
+        // cancelClass:{
+
+        //   cancelButton: 'swal-custom',
+        // }
       }).then((result) => {
         if (result.isConfirmed) {
           // Swal.fire({
