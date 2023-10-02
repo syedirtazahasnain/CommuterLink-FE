@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,12 +9,8 @@ import Swal from "sweetalert2";
 import { setContactIdState, setIdState } from "../../../redux/generalSlice";
 import { ThreeCircles } from "react-loader-spinner";
 import Modal from 'react-bootstrap/Modal';
-import { GoogleMap, LoadScript, MarkerF, PolylineF} from "@react-google-maps/api";
+import { GoogleMap, LoadScript, MarkerF, PolylineF } from "@react-google-maps/api";
 import { Container, Row } from "react-bootstrap";
-
-const mapLibraries = ["places"];
-
-const API_KEY = "AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA";
 
 const customTheme = createTheme({
   palette: {
@@ -75,59 +70,6 @@ const CommuterProfile1 = () => {
       setLoading(false);
     }, 2000);
   }, []);
-
-  // useEffect(() => {
-  //   // Function to fetch the geocoding data
-  //   const getGeocodeStartData = async () => {
-  //     try {
-
-  //       if (locationStartString) {
-  //         const response = await fetch(
-  //           `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-  //         );
-
-  //         const data = await response.json(); // Parse the response as JSON
-  //         console.log(data);
-  //         if (data.status === 'OK' && data.results.length > 0) {
-  //           const { lat, lng } = data.results[0].geometry.location;
-  //           setDefaultStartCenter({ lat, lng });
-  //           setMarkerPositionStart({ lat, lng });
-  //         } else {
-  //           console.error('Geocoding API response error');
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching geocoding data:", error);
-  //     }
-  //   };
-  //   getGeocodeStartData();
-  // }, [locationStartString]);
-
-  // useEffect(() => {
-  //   // Function to fetch the geocoding data
-  //   const getGeocodeEndData = async () => {
-  //     try {
-
-  //       if (locationEndString) {
-  //         const response = await fetch(
-  //           `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
-  //         );
-
-  //         const data = await response.json(); // Parse the response as JSON
-  //         if (data.status === 'OK' && data.results.length > 0) {
-  //           const { lat, lng } = data.results[0].geometry.location;
-  //           // setDefaultEndCenter({ lat, lng });
-  //           setMarkerPositionEnd({ lat, lng });
-  //         } else {
-  //           console.error('Geocoding API response error');
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching geocoding data:", error);
-  //     }
-  //   };
-  //   getGeocodeEndData();
-  // }, [locationEndString]);
 
   useEffect(() => {
     document.getElementById("root").classList.remove("w-100");
@@ -315,15 +257,15 @@ const CommuterProfile1 = () => {
           confirmButton: 'swal-custom',
         },
       });
-  
+
       // Check if the user confirmed the cancellation
       if (result.isConfirmed) {
         const body = {
           contact_id: contact_id,
         };
-  
+
         console.log("Cancel Request Body:", body);
-  
+
         const response = await fetch(
           `${API_URL}/api/v1/cancel-request`,
           {
@@ -336,10 +278,10 @@ const CommuterProfile1 = () => {
             body: JSON.stringify(body),
           }
         );
-  
+
         const jsonResponse = await response.json();
         console.log("Cancel API Response", jsonResponse);
-  
+
         if (jsonResponse.statusCode === 200) {
           // Display a success message using Swal
           Swal.fire({
@@ -349,7 +291,7 @@ const CommuterProfile1 = () => {
               confirmButton: 'swal-custom',
             },
           });
-  
+
           // Redirect the user to the dashboard on success
           navigate("/dashboard");
         }
@@ -419,30 +361,30 @@ const CommuterProfile1 = () => {
           :
           <h5 className="card bg-medium-teal p-2  px-4 text-dark-green ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
         }
-       <div className="card p-4 bg-white rounded-0" >
+        <div className="card p-4 bg-white rounded-0" >
           <div className="row">
             <div className="col-md-4">
               <div className="card rounded-0">
                 <div className="card-img-top bg-medium-teal rounded-0 text-center py-5">
-                {req_stage === 0 ? (
-                  <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00" }} />
-                ) :
-                  (
-                    <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#0A6155" }} />
-                  )}
+                  {req_stage === 0 ? (
+                    <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00" }} />
+                  ) :
+                    (
+                      <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#0A6155" }} />
+                    )}
                 </div>
                 <div className="card-body bg-card-grey">
                   <div className="card-text">
                     <div className="row  mb-2">
                       <div className="col-md-6 ">
-                      {gender !== "" ? (
-                      <>
-                        <h5 className="text-dark-green fw-bold font-custom">Gender:</h5>
-                      </>
-                    ) : (
-                      <>
-                      </>
-                    )}
+                        {gender !== "" ? (
+                          <>
+                            <h5 className="text-dark-green fw-bold font-custom">Gender:</h5>
+                          </>
+                        ) : (
+                          <>
+                          </>
+                        )}
                       </div>
                       <div className="col-md-6">
                         <h5 className="fw-bold text-secondary">{gender}</h5>
@@ -450,14 +392,14 @@ const CommuterProfile1 = () => {
                     </div>
                     <div className="row  mb-2">
                       <div className="col-md-6">
-                      {age !== "" ? (
-                      <>
-                        <h5 className="text-dark-green fw-bold font-custom">Age:</h5>
-                      </>
-                    ) : (
-                      <>
-                      </>
-                    )}
+                        {age !== "" ? (
+                          <>
+                            <h5 className="text-dark-green fw-bold font-custom">Age:</h5>
+                          </>
+                        ) : (
+                          <>
+                          </>
+                        )}
                       </div>
                       <div className="col-md-6">
                         <h5 className="fw-bold text-secondary">{age} years</h5>
@@ -465,14 +407,14 @@ const CommuterProfile1 = () => {
                     </div>
                     <div className="row mb-2">
                       <div className="col-md-6">
-                      {profession !== "" ? (
-                      <>
-                        <h5 className="text-dark-green fw-bold font-custom">Profession:</h5>
-                      </>
-                    ) : (
-                      <>
-                      </>
-                    )}
+                        {profession !== "" ? (
+                          <>
+                            <h5 className="text-dark-green fw-bold font-custom">Profession:</h5>
+                          </>
+                        ) : (
+                          <>
+                          </>
+                        )}
                       </div>
                       <div className="col-md-6">
                         <h5 className="fw-bold text-secondary">{profession}</h5>
@@ -500,12 +442,15 @@ const CommuterProfile1 = () => {
               <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                 <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style active rounded-0`}
-                    id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"> {option === 0 ? (
-                      "Car Offerer Details" 
-                    ) :
-                      (
+                    id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                    {option === 0 ? (
+                      "Car Offerer Details"
+                    ) 
+                    :
+                    (
                         "Traveller Details"
-                      )}</button>
+                    )}
+                  </button>
                 </li>
                 <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
@@ -524,25 +469,33 @@ const CommuterProfile1 = () => {
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                   <div className="row ">
 
-                    <div className="col-md-12">
+                      <div className="col-md-12">
                       <div className="row d-flex justify-content-between">
                         <div className="col-md-6">
-                        {contact_id !== "" ? (
-                      req_stage === 0 ? (
-                        <div>
-                          <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
+                          {contact_id !== "" ? (
+                            req_stage === 0 ? (
+                              <div>
+                                <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
+                              </div>
+                            ) :
+                              (
+                                <div className="row d-flex">
+                                  <h3 className="text-success fw-bold">{contact_id}</h3>
+                                </div>
+                              )
+                          ) : (
+                            <>
+                            </>
+                          )}
                         </div>
-                      ) :
-                        (
-                          <div className="row d-flex">
-                            <h3 className="text-success fw-bold">{contact_id}</h3>
-
+                        <div className="col-md-6">
+                          <div className="row text-end">
+                            <div className="col-md-12">
+                              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { CancelRequest(contact_id) }}>
+                                Cancel Request
+                              </Button>
+                            </div>
                           </div>
-                        )
-                    ) : (
-                      <>
-                      </>
-                    )}
                         </div>
                         <div className="col-md-6">
                           <div className="row text-end">
@@ -559,16 +512,16 @@ const CommuterProfile1 = () => {
                     <div className="col-md-9">
                       <div className="row mb-2">
                         <div className="col-md-4">
-                        {preferred_gender !== "" ? (
-                      <>
-                        <b className="text-black"> </b>
-                        <h5 className="text-dark-green fw-bold font-custom">Preferred Gender:</h5>
+                          {preferred_gender !== "" ? (
+                            <>
+                              <b className="text-black"> </b>
+                              <h5 className="text-dark-green fw-bold font-custom">Preferred Gender:</h5>
 
-                      </>
-                    ) : (
-                      <>
-                      </>
-                    )}
+                            </>
+                          ) : (
+                            <>
+                            </>
+                          )}
                         </div>
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary">{preferred_gender}</h5>
@@ -576,14 +529,14 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
-                        {origin !== "" ? (
-                      <>
-                        <h5 className="text-dark-green fw-bold font-custom">Point of Origin:</h5>
-                      </>
-                    ) : (
-                      <>
-                      </>
-                    )}
+                          {origin !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">Point of Origin:</h5>
+                            </>
+                          ) : (
+                            <>
+                            </>
+                          )}
                         </div>
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary">{origin}</h5>
@@ -591,7 +544,7 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
-                        {time_depart !== "" ? (
+                          {time_depart !== "" ? (
                             <>
                               <h5 className="text-dark-green fw-bold font-custom">Pickup Timings:</h5>
                             </>
@@ -607,16 +560,16 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
-                        {destination !== "" ? (
-                      <>
-                        <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
+                          {destination !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
 
-                      </>
-                    ) : (
-                      <>
+                            </>
+                          ) : (
+                            <>
 
-                      </>
-                    )}
+                            </>
+                          )}
                         </div>
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary">{destination}</h5>
@@ -624,15 +577,15 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
-                        {time_return !== "" ? (
-                      <>
-                        <h5 className="text-dark-green fw-bold font-custom">Return Timings:</h5>
-                      </>
-                    ) : (
-                      <>
+                          {time_return !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">Return Timings:</h5>
+                            </>
+                          ) : (
+                            <>
 
-                      </>
-                    )}
+                            </>
+                          )}
                         </div>
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary"> {time_return}</h5>
@@ -640,16 +593,16 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
-                        {days !== "" ? (
-                      <>
-                      
-                        <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
-                      </>
-                    ) : (
-                      <>
+                          {days !== "" ? (
+                            <>
 
-                      </>
-                    )}
+                              <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
+                            </>
+                          ) : (
+                            <>
+
+                            </>
+                          )}
                         </div>
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary">{days}</h5>
@@ -664,22 +617,22 @@ const CommuterProfile1 = () => {
                     <div className="col-md-11">
                       <div className="row">
                         <div className="col-md-12">
-                        {contact_id !== "" ? (
-                      req_stage === 0 ? (
-                        <div>
-                          <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
-                        </div>
-                      ) :
-                        (
-                          <div className="row d-flex">
-                            <h3 className="text-success fw-bold">{contact_id}</h3>
+                          {contact_id !== "" ? (
+                            req_stage === 0 ? (
+                              <div>
+                                <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
+                              </div>
+                            ) :
+                              (
+                                <div className="row d-flex">
+                                  <h3 className="text-success fw-bold">{contact_id}</h3>
 
-                          </div>
-                        )
-                    ) : (
-                      <>
-                      </>
-                    )}
+                                </div>
+                              )
+                          ) : (
+                            <>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -732,17 +685,17 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
-                        {car_brand !== "" ? (
-                      <>
-                        {car_brand && (
-                          <>
-                            <h5 className="text-dark-green fw-bold font-custom">Car Brand:</h5>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
+                          {car_brand !== "" ? (
+                            <>
+                              {car_brand && (
+                                <>
+                                  <h5 className="text-dark-green fw-bold font-custom">Car Brand:</h5>
+                                </>
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </div>
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary">{car_brand}</h5>
@@ -750,24 +703,24 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
-                        {car_cc !== "" ? (
-                      <>
-                        {car_cc && (
-                          <>
-                            <h5 className="text-dark-green fw-bold font-custom">Car CC:</h5>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
+                          {car_cc !== "" ? (
+                            <>
+                              {car_cc && (
+                                <>
+                                  <h5 className="text-dark-green fw-bold font-custom">Car CC:</h5>
+                                </>
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </div>
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary">{car_cc}</h5>
                         </div>
                       </div>
-                     
-                        {/* <div className="col-md-4">
+
+                      {/* <div className="col-md-4">
                           {carModel !== "" ? (
                             <>
                               <h5 className="text-dark-green fw-bold font-custom">Car Model:</h5>
@@ -780,25 +733,25 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{carModel}</h5>
                           {carModel}
                         </div> */}
-                        <div className="row mb-2">
-                          <div className="col-md-4">
-                            {reg_year !== "" ? (
-                      <>
-                        {reg_year && (
-                          <>
-                                                      <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                          </div>
-                          <div className="col-md-8">
-                            <h5 className="fw-bold text-secondary"> {reg_year}</h5>
-                          </div>
+                      <div className="row mb-2">
+                        <div className="col-md-4">
+                          {reg_year !== "" ? (
+                            <>
+                              {reg_year && (
+                                <>
+                                  <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
+                                </>
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </div>
-                        {/* <div className="row mb-2">
+                        <div className="col-md-8">
+                          <h5 className="fw-bold text-secondary"> {reg_year}</h5>
+                        </div>
+                      </div>
+                      {/* <div className="row mb-2">
                           <div className="col-md-4">
                             {RegYear !== "" ? (
                               <>
@@ -812,119 +765,110 @@ const CommuterProfile1 = () => {
                             <h5 className="fw-bold text-secondary">{RegYear}</h5>
                           </div>
                         </div> */}
-                        <div className="row mb-2">
-                          <div className="col-md-4">
+                      <div className="row mb-2">
+                        <div className="col-md-4">
                           {car_reg_year !== "" ? (
-                      <>
-                        {car_reg_year && (
-                          <>
-                            <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                          </div>
-                          <div className="col-md-8">
-                            <h5 className="fw-bold text-secondary"> {car_reg_year}</h5>
-                          </div>
+                            <>
+                              {car_reg_year && (
+                                <>
+                                  <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
+                                </>
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="col-md-8">
+                          <h5 className="fw-bold text-secondary"> {car_reg_year}</h5>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">MAPPPPP</div>
               </div>
-              <div className="text-end px-3 py-3">
+              <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">MAPPPPP</div>
+            </div>
+            <div className="text-end px-3 py-3">
               <div className="text-right">
-              {req_stage === 1 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
-                  Proceed to Payment
-                </Button>
-              ) : req_stage === 0 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold text-white  px-3 py-2 mb-3" style={{ background: "#ff8a00" }} onClick={() => { CancelRequest(contact_id) }}>
-                  Cancel Request
-                </Button>
-              ) : req_stage === 2 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
-                  Proceed to Final Step
-                </Button>
-              ) : (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
-                  Send Request
-                </Button>
-              )}
-            </div>
+                {req_stage === 1 ? (
+                  <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
+                    Proceed to Payment
+                  </Button>
+                ) : req_stage === 0 ? (
+                  <Button className="font-custom btn btn-sm fs-6 fw-bold text-white  px-3 py-2 mb-3" style={{ background: "#ff8a00" }} onClick={() => { CancelRequest(contact_id) }}>
+                    Cancel Request
+                  </Button>
+                ) : req_stage === 2 ? (
+                  <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
+                    Proceed to Final Step
+                  </Button>
+                ) : (
+                  <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
+                    Send Request
+                  </Button>
+                )}
               </div>
             </div>
-
-            <Modal show={showModal} onHide={closeModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Map View</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Container className="d-flex justify-content-center align-items-center mb-3">
-              <Row style={{ height: "400px", width: "100%" }}>
-                <GoogleMap
-                  zoom={11}
-                  center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                  mapContainerStyle={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                  options={{
-                    types: ["(regions)"],
-                    componentRestrictions: { country: "PK" },
-                  }}
-                >
-                  <MarkerF
-                    position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                    icon={{
-                      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                    }}
-                  />
-                  <MarkerF
-                    position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
-                    icon={{
-                      url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                    }}
-                  />
-                  <PolylineF
-                    path={[
-                      { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
-                      { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
-                    ]}
-                    options={{
-                      strokeColor: "#FF0000",
-                      strokeOpacity: 1.0,
-                      strokeWeight: 3,
-                    }}
-                  />
-                </GoogleMap>
-              </Row>
-            </Container>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-2 mb-3"
-              onClick={closeModal}
-            >
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
           </div>
 
+          <Modal show={showModal} onHide={closeModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Map View</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Container className="d-flex justify-content-center align-items-center mb-3">
+                <Row style={{ height: "400px", width: "100%" }}>
+                  <GoogleMap
+                    zoom={11}
+                    center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                    mapContainerStyle={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    options={{
+                      types: ["(regions)"],
+                      componentRestrictions: { country: "PK" },
+                    }}
+                  >
+                    <MarkerF
+                      position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                      icon={{
+                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                      }}
+                    />
+                    <MarkerF
+                      position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
+                      icon={{
+                        url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                      }}
+                    />
+                    <PolylineF
+                      path={[
+                        { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
+                        { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
+                      ]}
+                      options={{
+                        strokeColor: "#FF0000",
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                      }}
+                    />
+                  </GoogleMap>
+                </Row>
+              </Container>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-2 mb-3"
+                onClick={closeModal}
+              >
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
-
-
-
-
-
-
-        
-      
+      </div>
     );
   };
 
@@ -991,50 +935,6 @@ const CommuterProfile1 = () => {
           </div>
         )}
       </div>
-      <LoadScript
-        googleMapsApiKey={API_KEY}
-        libraries={mapLibraries}
-      >
-        <Modal show={showModal} onHide={closeModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Map View</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {/* <h4> Modal Body </h4> */}
-            <Container className="d-flex justify-content-center align-items-center mb-3">
-              <Row style={{ height: "400px", width: "100%" }}>
-                <GoogleMap
-                  zoom={15}
-                  defaultCenter={{ lat: 30.3753, lng: 69.3451 }}
-                  mapContainerStyle={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                  options={{
-                    types: ["(regions)"],
-                    componentRestrictions: { country: "PK" },
-                  }}
-                >
-                  <MarkerF
-                    position={{ lat: 0, lng: 0 }}
-                    icon={{
-                      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                    }}
-                  />
-                </GoogleMap>
-              </Row>
-            </Container>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
-              onClick={closeModal}
-            >
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </LoadScript>
     </>
   );
 };

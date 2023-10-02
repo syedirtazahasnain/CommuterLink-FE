@@ -865,7 +865,7 @@ const DriverRegistration = () => {
         await ImagesFormCnicBack();
         await ImagesFormPicture();
         setIsLoading(false);
-        setShowDriverForm(true);
+        // setShowDriverForm(true);
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -1163,7 +1163,7 @@ const DriverRegistration = () => {
       if (jsonresponse.statusCode == 200) {
         console.log("Images Form Response Picture:", jsonresponse);
         // alert("Registration Form Submitted Successfully");
-        registrationSuccessful();
+        // registrationSuccessful();
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
@@ -2555,19 +2555,20 @@ const DriverRegistration = () => {
                       <Button
                         variant="outlined"
                         size="large"
-                        className="btnregistration"
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                         onClick={() => {
-                          handleLogin();
+                          setShowDriverForm(true);
                         }}
-                        disabled={isLoading}
+                      // disabled={isLoading}
                       >
-                        {isLoading ? (
+                        Next
+                        {/* {isLoading ? (
                           <span>
-                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                            <i className="fa fa-spinner fa-spin" /> Proceed...
                           </span>
                         ) : (
                           'Next'
-                        )}
+                        )} */}
                       </Button>
                     </Stack>
                   </Form>
@@ -3482,10 +3483,27 @@ const DriverRegistration = () => {
                       spacing={2}
                       style={{ justifyContent: "right" }}
                     >
-                      <Button variant="" className="btnregistration" onClick={handleDriver} disabled={isLoading}>
+                      <Button
+                        variant=""
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                        onClick={() => {
+                          setShowDriverForm(false);
+                        }}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        variant=""
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                        onClick={() => {
+                          handleLogin();
+                          handleDriver();
+                        }}
+                        disabled={isLoading}
+                      >
                         {isLoading ? (
                           <span>
-                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                            <i className="fa fa-spinner fa-spin" /> Proceed...
                           </span>
                         ) : (
                           'Submit'

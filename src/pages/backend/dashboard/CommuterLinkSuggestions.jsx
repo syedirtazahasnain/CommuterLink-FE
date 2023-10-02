@@ -120,6 +120,9 @@ const CommuterLinkSuggestions = () => {
         setUserType("driver");
         setUserData(jsonresponse.rider);
       }
+      else {
+        setUserData([]);
+      }
 
       console.log("Dashboard Data:", jsonresponse);
     } catch (error) {

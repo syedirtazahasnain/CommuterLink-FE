@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../../constants";
 import { Link } from "react-scroll";
 import { Link as DomLink, useNavigate } from "react-router-dom";
@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="container ">
+      <div className="container">
         <div className="row">
 
           <div className="pos-f-t">
