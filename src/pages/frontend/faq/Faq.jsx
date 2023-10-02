@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 // import imgfaqs from '../../../Images/question.png'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -6,7 +6,13 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { BASE_URL } from '../../../constants';
+import { useNavigate } from "react-router-dom";
 const Faq = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+  
   return (
     <div>
       <div className="container text-center mt-5 pt-5 fw-bold fs-1 mb-5">

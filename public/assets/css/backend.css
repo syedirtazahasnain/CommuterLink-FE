@@ -311,13 +311,14 @@ body{
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
+display: block;
 }
+
 
 /* Hover effect for the confirm button */
 .swal-custom:hover {
   background-color: #2b9f8a;
 }
-
 
 .bg-medium-teal{
   background-color: var(--bg-medium-teal);

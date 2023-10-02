@@ -1,4 +1,6 @@
-import Home from "./pages/frontend/Home";
+// import Home from "./pages/frontend/Home";
+
+import React, {Suspense, Component} from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 import Signup from "./pages/frontend/Signup/Signup";
@@ -65,7 +67,7 @@ import VerifiedMember from "./pages/frontend/register-form/VerifiedMember";
 import Terms_Services from "./pages/frontend/terms-services/Terms_Services";
 import Forget1 from "./pages/frontend/forgot/Forget1";
 import Forget2 from "./pages/frontend/forgot/Forget2";
-
+const LazyHome = React.lazy(()=>import("./pages/frontend/Home"));
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
   const userSignup = useSelector((s) => s.signup.data.token);
@@ -73,7 +75,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<FrontendLayout children={<Home />} />} />
+        
+        <Route path="/" element={<FrontendLayout children={ <Suspense fallback={<div><h5>Loading.....</h5></div>}><LazyHome /></Suspense>} />} />
         <Route path="/terms_services" element={<FrontendLayout children={<Terms_Services />} />} />
        
        
