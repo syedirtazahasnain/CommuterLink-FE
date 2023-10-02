@@ -1566,7 +1566,7 @@ const DriverRegistration = () => {
 
   return (
     <>
-      {!showDriverForm && (
+      {showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
