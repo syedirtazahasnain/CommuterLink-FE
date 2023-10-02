@@ -1047,7 +1047,7 @@ const DriverRegistration = () => {
       //   },
       // }
       // )
-      displayNotification("warning", "Please Fill All Fields!");
+      displayNotification("warning", "Please Fill All Personal Form Fields!");
     }
   };
 
@@ -1092,6 +1092,7 @@ const DriverRegistration = () => {
     if (requiredFieldsDriver.every(field => field !== "" && field !== null && field !== undefined)) {
       setIsLoading(true); // Start loading
       try {
+        await handleLogin();
         await DriverForm();
       } catch (error) {
         setIsLoading(false);
@@ -1153,8 +1154,7 @@ const DriverRegistration = () => {
         await ImagesFormCnicBack();
         await ImagesFormPicture();
 
-        setIsLoading(false);
-        setShowDriverForm(true);
+        // setIsLoading(false);
       } else if (jsonresponse.statusCode === 422) {
         console.log("Personal Form CNIC Issue Response:", jsonresponse);
         const errors = jsonresponse.errors;
@@ -1566,7 +1566,7 @@ const DriverRegistration = () => {
 
   return (
     <>
-      {showDriverForm && (
+      {!showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
@@ -2548,17 +2548,18 @@ const DriverRegistration = () => {
                         size="large"
                         className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                         onClick={() => {
-                          handleLogin();
+                          setShowDriverForm(true);
                         }}
-                        disabled={isLoading}
+                        // disabled={isLoading}
                       >
-                        {isLoading ? (
+                          Next
+                        {/* {isLoading ? (
                           <span>
                             <i className="fa fa-spinner fa-spin" /> Proceed...
                           </span>
                         ) : (
                           'Next'
-                        )}
+                        )} */}
                       </Button>
                     </Stack>
                   </Form>
@@ -4450,7 +4451,23 @@ const DriverRegistration = () => {
                       spacing={2}
                       style={{ justifyContent: "right" }}
                     >
-                      <Button variant="" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleDriver} disabled={isLoading}>
+                      <Button
+                        variant=""
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                        onClick={() => {
+                          setShowDriverForm(false);
+                        }}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        variant=""
+                        className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                        onClick={() => {
+                          handleDriver();
+                        }}
+                        disabled={isLoading}
+                      >
                         {isLoading ? (
                           <span>
                             <i className="fa fa-spinner fa-spin" /> Proceed...
