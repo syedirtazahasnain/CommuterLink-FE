@@ -71,7 +71,7 @@ const TravelPatners = () => {
     navigate("/rechargewallet");
   };
   const viewTrasaction=()=>{
-    navigate("/paymentride")
+    navigate("/transaction-history")
   }
 
   const route = (contactId) => {
@@ -615,7 +615,7 @@ const TravelPatners = () => {
                   </div>
 
 
-                  <div className="col-md-6">  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white  px-4 px-sm-5 py-3 py-sm-3 mb-3">
+                  <div className="col-md-6">  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white  px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={viewTrasaction}>
                     View Transaction History
                   </button></div>
                 </div>

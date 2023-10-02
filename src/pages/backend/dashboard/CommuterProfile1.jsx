@@ -442,12 +442,10 @@ const CommuterProfile1 = () => {
               <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                 <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style active rounded-0`}
-                    id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                    {option === 0 ? (
+                    id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"> {option === 0 ? (
                       "Car Offerer Details"
-                    ) 
-                    :
-                    (
+                    ) :
+                      (
                         "Traveller Details"
                     )}
                   </button>
@@ -487,23 +485,6 @@ const CommuterProfile1 = () => {
                             <>
                             </>
                           )}
-                        </div>
-                        <div className="col-md-6">
-                          <div className="row text-end">
-                            <div className="col-md-12">
-                              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { CancelRequest(contact_id) }}>
-                                Cancel Request
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="row text-end">
-                            <div className="col-md-12">                   <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"  onClick={() => { CancelRequest(contact_id) }}>
-                  Cancel Request
-                </Button></div>
-                          </div>
-     
                         </div>
                       </div>
                     </div>
@@ -673,7 +654,11 @@ const CommuterProfile1 = () => {
                         <div className="col-md-4">
                           {car_ac !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Car has AC:</h5>
+                             {car_ac && (
+                                <>
+                                  <h5 className="text-dark-green fw-bold font-custom">Car has AC:</h5>
+                                </>
+                              )}
                             </>
                           ) : (
                             <></>

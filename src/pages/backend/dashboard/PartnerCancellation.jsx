@@ -606,7 +606,7 @@ const PartnerCancellation = () => {
                           (
                             <div className="py-5">
                               <Button
-                                className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3 mx-4"
+                                className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 mb-3 mx-4"
                                 style={{ cursor: 'pointer' }}
                                 onClick={() => {
                                   sendRequest();
@@ -616,7 +616,7 @@ const PartnerCancellation = () => {
                                 Cancel Now
                               </Button>
                               <Button
-                                className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3 mx-4"
+                                className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3  mb-3 mx-4"
                                 style={{ cursor: 'pointer' }}
                                 onClick={() => {
                                   sendRequest();
@@ -629,7 +629,7 @@ const PartnerCancellation = () => {
                           )
                           :
                           (<Button
-                            className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-3 mb-3"
+                            className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 mb-3"
                             style={{ cursor: 'pointer' }}
                             onClick={() => {
                               sendRequest();

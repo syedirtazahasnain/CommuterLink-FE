@@ -1566,7 +1566,7 @@ const DriverRegistration = () => {
 
   return (
     <>
-      {showDriverForm && (
+      {!showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
@@ -3314,7 +3314,9 @@ const DriverRegistration = () => {
                                 onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
                                 defaultValue=""
                               />
+                             
                             </Form.Group>
+                           
                             <Form.Group
                               as={Col}
                               md="12"

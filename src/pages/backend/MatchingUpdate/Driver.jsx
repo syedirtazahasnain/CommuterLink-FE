@@ -95,8 +95,8 @@ const Driver = () => {
             setSelectedModelName(jsonresponse[0].vehicle.car_model);
             setSelectedRegYear(jsonresponse[0].vehicle.car_reg_year);
             console.log("Update Driver Details Data", jsonresponse);
-            const mynewarray=jsonresponse[0].matches.days.split(',');
-            setDaysSelected(mynewarray.map(day => day.trim())); 
+            const mynewarray = jsonresponse[0].matches.days.split(',');
+            setDaysSelected(mynewarray.map(day => day.trim()));
         } catch (error) {
             console.error("An error occurred:", error);
         }
@@ -120,10 +120,10 @@ const Driver = () => {
     const sendRequest = async () => {
         try {
             if (daysSelected.length === 0 || selectedHomeTime === "" || selectedOfficeTime === ""
-                || preferredGender === "" || selectedCarBrand === ""|| selectedCarCC === "" 
+                || preferredGender === "" || selectedCarBrand === "" || selectedCarCC === ""
                 || selectedModelName === "" || selectedRegYear === "") {
-                displayNotification("warning","Please fill all fields!");    
-                
+                displayNotification("warning", "Please fill all fields!");
+
             }
             else {
                 const body = {
@@ -160,9 +160,9 @@ const Driver = () => {
 
                 if (jsonresponse.status_code === 200) {
                     console.log('200');
-                    displayNotification("success","Matching criteria has been updated successfully"); 
+                    displayNotification("success", "Matching criteria has been updated successfully");
                     navigate("/dashboard");
-                    
+
                     //window.location.reload();
                 } else if (jsonresponse.status_code === 100) {
                     console.log('100');
@@ -201,121 +201,121 @@ const Driver = () => {
                         </div> */}
                         <div className="card p-4">
                             <div className="card bg-light">
-                            <div className="row text-right pt-2 px-2">
-               
-               <Link
-                 to={""} >
-                 <Button variant=""
-                   className="btn font-custom btn align-end btn-dark-green rounded-0 text-white fs-6 lh-1"
+                                <div className="row text-right pt-2 px-2">
 
-                   onClick={() => {
-                     setShowField(true);
-                   }}
-                 >
-                   <i className="fa-solid fa-pen text-white" />
-                   Edit
-                 </Button>
-               </Link>
-               
-             </div>
+                                    <Link
+                                        to={""} >
+                                        <Button variant=""
+                                            className="btn font-custom btn align-end btn-dark-green rounded-0 text-white fs-6 lh-1"
+
+                                            onClick={() => {
+                                                setShowField(true);
+                                            }}
+                                        >
+                                            <i className="fa-solid fa-pen text-white" />
+                                            Edit
+                                        </Button>
+                                    </Link>
+
+                                </div>
                                 <div className="card-body text-dark">
                                     <div className="container text-center mt-4">
-                                    <h2 className="text-success fw-bold mb-4">Update Matching Criteria</h2>
+                                        <h2 className="text-success fw-bold mb-4">Update Matching Criteria</h2>
                                         <Form className="text-center">
-                                            {showfield === true ?(<>
-                                             <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Pickup Timings</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        value={selectedHomeTime}
-                                                        onChange={(e) => setSelectedHomeTime(e.target.value)}
-                                                        className="bg-light text-left"
-                                                        label="Pickup Timings"
-                                                        required
-                                                    >
-                                                        {homeTimeSlots?.map((time) => (
-                                                            <MenuItem key={time.id} value={time.id}>
-                                                                {time.time_string}
-                                                            </MenuItem>
+                                            {showfield === true ? (<>
+                                                <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                    <FormControl fullWidth size="small">
+                                                        <InputLabel id="demo-simple-select-label" color='success'>Pickup Timings</InputLabel>
+                                                        <Select
+                                                            labelId="demo-simple-select-label"
+                                                            id="demo-simple-select"
+                                                            color='success'
+                                                            value={selectedHomeTime}
+                                                            onChange={(e) => setSelectedHomeTime(e.target.value)}
+                                                            className="bg-light text-left"
+                                                            label="Pickup Timings"
+                                                            required
+                                                        >
+                                                            {homeTimeSlots?.map((time) => (
+                                                                <MenuItem key={time.id} value={time.id}>
+                                                                    {time.time_string}
+                                                                </MenuItem>
 
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Drop-off Timings</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Drop-off Timings"
-                                                        value={selectedOfficeTime}
-                                                        onChange={(e) => setSelectedOfficeTime(e.target.value)}
-                                                        required
-                                                    >
-                                                        {officeTimeSlots?.map((time) => (
-                                                            <MenuItem key={time.id} value={time.id}>
-                                                                {time.time_string}
-                                                            </MenuItem>
-                                                        ))}
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
+                                                </Box>
+                                                <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                    <FormControl fullWidth size="small">
+                                                        <InputLabel id="demo-simple-select-label" color='success'>Drop-off Timings</InputLabel>
+                                                        <Select
+                                                            labelId="demo-simple-select-label"
+                                                            id="demo-simple-select"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            label="Drop-off Timings"
+                                                            value={selectedOfficeTime}
+                                                            onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                                                            required
+                                                        >
+                                                            {officeTimeSlots?.map((time) => (
+                                                                <MenuItem key={time.id} value={time.id}>
+                                                                    {time.time_string}
+                                                                </MenuItem>
+                                                            ))}
 
 
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Preferred Gender</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Prefer Gender"
-                                                        value={preferredGender}
-                                                        onChange={(e) => setPreferredGender(e.target.value)}
-                                                        required
-                                                    >
-                                                        <MenuItem value="Male">Male</MenuItem>
-                                                        <MenuItem value="Female">Female</MenuItem>
-                                                        <MenuItem value="Both">Both</MenuItem>
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
-                                            <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
-                                                <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
-                                                    <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
-                                                        I Commute (Select Days)
-                                                    </Form.Label>
-                                                </Form.Group>
+                                                        </Select>
+                                                    </FormControl>
+                                                </Box>
+                                                <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                    <FormControl fullWidth size="small">
+                                                        <InputLabel id="demo-simple-select-label" color='success'>Preferred Gender</InputLabel>
+                                                        <Select
+                                                            labelId="demo-simple-select-label"
+                                                            id="demo-simple-select"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            label="Prefer Gender"
+                                                            value={preferredGender}
+                                                            onChange={(e) => setPreferredGender(e.target.value)}
+                                                            required
+                                                        >
+                                                            <MenuItem value="Male">Male</MenuItem>
+                                                            <MenuItem value="Female">Female</MenuItem>
+                                                            <MenuItem value="Both">Both</MenuItem>
+                                                        </Select>
+                                                    </FormControl>
+                                                </Box>
+                                                <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
+                                                    <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
+                                                        <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
+                                                            I Commute (Select Days)
+                                                        </Form.Label>
+                                                    </Form.Group>
 
-                                                <div className="row d-flex">
-                                                    <div className="col">
-                                                        {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
-                                                            <FormControlLabel
-                                                                key={index}
-                                                                control={
-                                                                    <Checkbox
-                                                                        inline
-                                                                        label={day}
-                                                                        name="group1"
-                                                                        color="success"
-                                                                        type="checkbox"
-                                                                        value={day}
-                                                                        id={`inline-checkbox-${index}`}
-                                                                        checked={daysSelected.includes(day)}
-                                                                        onChange={handleCheckboxChange}
-                                                                    />
-                                                                }
-                                                                label={day}
-                                                            />
-                                                        ))}
-                                                        {/* {["checkbox"].map((type) => (
+                                                    <div className="row d-flex">
+                                                        <div className="col">
+                                                            {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
+                                                                <FormControlLabel
+                                                                    key={index}
+                                                                    control={
+                                                                        <Checkbox
+                                                                            inline
+                                                                            label={day}
+                                                                            name="group1"
+                                                                            color="success"
+                                                                            type="checkbox"
+                                                                            value={day}
+                                                                            id={`inline-checkbox-${index}`}
+                                                                            checked={daysSelected.includes(day)}
+                                                                            onChange={handleCheckboxChange}
+                                                                        />
+                                                                    }
+                                                                    label={day}
+                                                                />
+                                                            ))}
+                                                            {/* {["checkbox"].map((type) => (
                                                             <div
                                                                 key={`inline-${type}`}
                                                                 className="mb-3 d-flex flex-wrap"
@@ -443,279 +443,281 @@ const Driver = () => {
                                                             </div>
                                                         ))} */}
 
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </Row>
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Car Brand</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
+                                                </Row>
+                                                <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                    <FormControl fullWidth size="small">
+                                                        <InputLabel id="demo-simple-select-label" color='success'>Car Brand</InputLabel>
+                                                        <Select
+                                                            labelId="demo-simple-select-label"
+                                                            id="demo-simple-select"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            label="Select Car Brand"
+                                                            value={selectedCarBrand}
+                                                            onChange={(e) => setSelectedCarBrand(e.target.value)}
+                                                            required
+
+                                                        >
+                                                            {carBrand?.map((car) => (
+                                                                <MenuItem key={car.id} value={car.id}>
+                                                                    {car.brand_name}
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
+                                                </Box>
+                                                <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                    <FormControl fullWidth size="small">
+                                                        <InputLabel id="demo-simple-select-label" color='success'>Car CC</InputLabel>
+                                                        <Select
+                                                            labelId="demo-simple-select-label"
+                                                            id="demo-simple-select"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            label="Select Car CC"
+                                                            value={selectedCarCC}
+                                                            onChange={(e) => setSelectedCarCC(e.target.value)}
+                                                            required
+
+                                                        >
+                                                            {carCC?.map((car) => (
+                                                                <MenuItem key={car.id} value={car.id}>
+                                                                    {car.car_cc}
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
+                                                </Box>
+
+                                                <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
                                                         color='success'
                                                         className="bg-light text-left"
-                                                        label="Select Car Brand"
-                                                        value={selectedCarBrand}
-                                                        onChange={(e) => setSelectedCarBrand(e.target.value)}
-                                                        required
-                                                       
-                                                    >
-                                                        {carBrand?.map((car) => (
-                                                            <MenuItem key={car.id} value={car.id}>
-                                                                {car.brand_name}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Car CC</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Select Car CC"
-                                                        value={selectedCarCC}
-                                                        onChange={(e) => setSelectedCarCC(e.target.value)}
-                                                        required
-                                                   
-                                                    >
-                                                        {carCC?.map((car) => (
-                                                            <MenuItem key={car.id} value={car.id}>
-                                                                {car.car_cc}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
+                                                        value={selectedModelName}
+                                                        onChange={(e) => setSelectedModelName(e.target.value)}
+                                                        placeholder="Car Model"
+                                                        defaultValue=""
 
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <Form.Control
-                                                    required
-                                                    type="text"
-                                                    className="text-secondary"
-                                                    value={selectedModelName}
-                                                    onChange={(e) => setSelectedModelName(e.target.value)}
-                                                    placeholder="Car Model"
-                                                    defaultValue=""
-                                                    
-                                                />
-                                            </Box>
+                                                    />
+                                                </Box>
 
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Car Registration Year</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Car Registration Year"
-                                                        value={selectedRegYear}
-                                                        onChange={(e) => setSelectedRegYear(e.target.value)}
-                                                        required
-                                                      
-                                                    >
-                                                        {regYear?.map((reg) => (
-                                                            <MenuItem key={reg.id} value={reg.id}>
-                                                                {reg.car_year_ranges}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                           
-                                            <div className="container my-5">
+                                                <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                    <FormControl fullWidth size="small">
+                                                        <InputLabel id="demo-simple-select-label" color='success'>Car Registration Year</InputLabel>
+                                                        <Select
+                                                            labelId="demo-simple-select-label"
+                                                            id="demo-simple-select"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            label="Car Registration Year"
+                                                            value={selectedRegYear}
+                                                            onChange={(e) => setSelectedRegYear(e.target.value)}
+                                                            required
 
-                                                <Button
-                                                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-2 mb-3"
-                                                    onClick={sendRequest}
-                                                    >
-                                                    Update
-                                                </Button>
-                                            </div>
-                                                    </Box></>):(<> <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Pickup Timings</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        value={selectedHomeTime}
-                                                        onChange={(e) => setSelectedHomeTime(e.target.value)}
-                                                        className="bg-light text-left"
-                                                        label="Pickup Timings"
-                                                        required
-                                                        disabled
-                                                    >
-                                                        {homeTimeSlots?.map((time) => (
-                                                            <MenuItem key={time.id} value={time.id}>
-                                                                {time.time_string}
-                                                            </MenuItem>
+                                                        >
+                                                            {regYear?.map((reg) => (
+                                                                <MenuItem key={reg.id} value={reg.id}>
+                                                                    {reg.car_year_ranges}
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
 
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Drop-off Timings</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Drop-off Timings"
-                                                        value={selectedOfficeTime}
-                                                        onChange={(e) => setSelectedOfficeTime(e.target.value)}
-                                                        required
-                                                        disabled
-                                                    >
-                                                        {officeTimeSlots?.map((time) => (
-                                                            <MenuItem key={time.id} value={time.id}>
-                                                                {time.time_string}
-                                                            </MenuItem>
-                                                        ))}
+                                                    <div className="container my-5">
+
+                                                        <Button
+                                                            className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-2 mb-3"
+                                                            onClick={sendRequest}
+                                                        >
+                                                            Update
+                                                        </Button>
+                                                    </div>
+                                                </Box></>) : (<> <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                    <FormControl fullWidth size="small">
+                                                        <InputLabel id="demo-simple-select-label" color='success'>Pickup Timings</InputLabel>
+                                                        <Select
+                                                            labelId="demo-simple-select-label"
+                                                            id="demo-simple-select"
+                                                            color='success'
+                                                            value={selectedHomeTime}
+                                                            onChange={(e) => setSelectedHomeTime(e.target.value)}
+                                                            className="bg-light text-left"
+                                                            label="Pickup Timings"
+                                                            required
+                                                            disabled
+                                                        >
+                                                            {homeTimeSlots?.map((time) => (
+                                                                <MenuItem key={time.id} value={time.id}>
+                                                                    {time.time_string}
+                                                                </MenuItem>
+
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
+                                                </Box>
+                                                    <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                        <FormControl fullWidth size="small">
+                                                            <InputLabel id="demo-simple-select-label" color='success'>Drop-off Timings</InputLabel>
+                                                            <Select
+                                                                labelId="demo-simple-select-label"
+                                                                id="demo-simple-select"
+                                                                color='success'
+                                                                className="bg-light text-left"
+                                                                label="Drop-off Timings"
+                                                                value={selectedOfficeTime}
+                                                                onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                                                                required
+                                                                disabled
+                                                            >
+                                                                {officeTimeSlots?.map((time) => (
+                                                                    <MenuItem key={time.id} value={time.id}>
+                                                                        {time.time_string}
+                                                                    </MenuItem>
+                                                                ))}
 
 
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Preferred Gender</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Prefer Gender"
-                                                        value={preferredGender}
-                                                        onChange={(e) => setPreferredGender(e.target.value)}
-                                                        required
-                                                        disabled
-                                                    >
-                                                        <MenuItem value="Male">Male</MenuItem>
-                                                        <MenuItem value="Female">Female</MenuItem>
-                                                        <MenuItem value="Both">Both</MenuItem>
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
-                                            <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
-                                                <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
-                                                    <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
-                                                        I Commute (Select Days)
-                                                    </Form.Label>
-                                                </Form.Group>
+                                                            </Select>
+                                                        </FormControl>
+                                                    </Box>
+                                                    <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                        <FormControl fullWidth size="small">
+                                                            <InputLabel id="demo-simple-select-label" color='success'>Preferred Gender</InputLabel>
+                                                            <Select
+                                                                labelId="demo-simple-select-label"
+                                                                id="demo-simple-select"
+                                                                color='success'
+                                                                className="bg-light text-left"
+                                                                label="Prefer Gender"
+                                                                value={preferredGender}
+                                                                onChange={(e) => setPreferredGender(e.target.value)}
+                                                                required
+                                                                disabled
+                                                            >
+                                                                <MenuItem value="Male">Male</MenuItem>
+                                                                <MenuItem value="Female">Female</MenuItem>
+                                                                <MenuItem value="Both">Both</MenuItem>
+                                                            </Select>
+                                                        </FormControl>
+                                                    </Box>
+                                                    <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
+                                                        <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
+                                                            <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
+                                                                I Commute (Select Days)
+                                                            </Form.Label>
+                                                        </Form.Group>
 
-                                                <div className="row d-flex">
-                                                    <div className="col">
-                                                        {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
-                                                            <FormControlLabel
-                                                                key={index}
-                                                                control={
-                                                                    <Checkbox
-                                                                        inline
+                                                        <div className="row d-flex">
+                                                            <div className="col">
+                                                                {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
+                                                                    <FormControlLabel
+                                                                        key={index}
+                                                                        control={
+                                                                            <Checkbox
+                                                                                inline
+                                                                                label={day}
+                                                                                name="group1"
+                                                                                color="success"
+                                                                                type="checkbox"
+                                                                                value={day}
+                                                                                id={`inline-checkbox-${index}`}
+                                                                                checked={daysSelected.includes(day)}
+                                                                                onChange={handleCheckboxChange}
+                                                                                disabled
+                                                                            />
+                                                                        }
                                                                         label={day}
-                                                                        name="group1"
-                                                                        color="success"
-                                                                        type="checkbox"
-                                                                        value={day}
-                                                                        id={`inline-checkbox-${index}`}
-                                                                        checked={daysSelected.includes(day)}
-                                                                        onChange={handleCheckboxChange}
-                                                                        disabled
                                                                     />
-                                                                }
-                                                                label={day}
-                                                            />
-                                                        ))}
-                                                     
+                                                                ))}
 
-                                                    </div>
-                                                </div>
-                                            </Row>
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Car Brand</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Select Car Brand"
-                                                        value={selectedCarBrand}
-                                                        onChange={(e) => setSelectedCarBrand(e.target.value)}
-                                                        required
-                                                        disabled
-                                                    >
-                                                        {carBrand?.map((car) => (
-                                                            <MenuItem key={car.id} value={car.id}>
-                                                                {car.brand_name}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Car CC</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Select Car CC"
-                                                        value={selectedCarCC}
-                                                        onChange={(e) => setSelectedCarCC(e.target.value)}
-                                                        required
-                                                        disabled
-                                                    >
-                                                        {carCC?.map((car) => (
-                                                            <MenuItem key={car.id} value={car.id}>
-                                                                {car.car_cc}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Box>
 
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <Form.Control
-                                                    required
-                                                    type="text"
-                                                    className="text-secondary"
-                                                    value={selectedModelName}
-                                                    onChange={(e) => setSelectedModelName(e.target.value)}
-                                                    placeholder="Car Model"
-                                                    defaultValue=""
-                                                    disabled
-                                                />
-                                            </Box>
+                                                            </div>
+                                                        </div>
+                                                    </Row>
+                                                    <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                        <FormControl fullWidth size="small">
+                                                            <InputLabel id="demo-simple-select-label" color='success'>Car Brand</InputLabel>
+                                                            <Select
+                                                                labelId="demo-simple-select-label"
+                                                                id="demo-simple-select"
+                                                                color='success'
+                                                                className="bg-light text-left"
+                                                                label="Select Car Brand"
+                                                                value={selectedCarBrand}
+                                                                onChange={(e) => setSelectedCarBrand(e.target.value)}
+                                                                required
+                                                                disabled
+                                                            >
+                                                                {carBrand?.map((car) => (
+                                                                    <MenuItem key={car.id} value={car.id}>
+                                                                        {car.brand_name}
+                                                                    </MenuItem>
+                                                                ))}
+                                                            </Select>
+                                                        </FormControl>
+                                                    </Box>
+                                                    <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                        <FormControl fullWidth size="small">
+                                                            <InputLabel id="demo-simple-select-label" color='success'>Car CC</InputLabel>
+                                                            <Select
+                                                                labelId="demo-simple-select-label"
+                                                                id="demo-simple-select"
+                                                                color='success'
+                                                                className="bg-light text-left"
+                                                                label="Select Car CC"
+                                                                value={selectedCarCC}
+                                                                onChange={(e) => setSelectedCarCC(e.target.value)}
+                                                                required
+                                                                disabled
+                                                            >
+                                                                {carCC?.map((car) => (
+                                                                    <MenuItem key={car.id} value={car.id}>
+                                                                        {car.car_cc}
+                                                                    </MenuItem>
+                                                                ))}
+                                                            </Select>
+                                                        </FormControl>
+                                                    </Box>
 
-                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                <FormControl fullWidth size="small">
-                                                    <InputLabel id="demo-simple-select-label" color='success'>Car Registration Year</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        color='success'
-                                                        className="bg-light text-left"
-                                                        label="Car Registration Year"
-                                                        value={selectedRegYear}
-                                                        onChange={(e) => setSelectedRegYear(e.target.value)}
-                                                        required
-                                                        disabled
-                                                    >
-                                                        {regYear?.map((reg) => (
-                                                            <MenuItem key={reg.id} value={reg.id}>
-                                                                {reg.car_year_ranges}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Box></>)}
+                                                    <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                        <Form.Control
+                                                            required
+                                                            type="text"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            value={selectedModelName}
+                                                            onChange={(e) => setSelectedModelName(e.target.value)}
+                                                            placeholder="Car Model"
+                                                            defaultValue=""
+                                                            disabled
+                                                        />
+                                                    </Box>
+
+                                                    <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                        <FormControl fullWidth size="small">
+                                                            <InputLabel id="demo-simple-select-label" color='success'>Car Registration Year</InputLabel>
+                                                            <Select
+                                                                labelId="demo-simple-select-label"
+                                                                id="demo-simple-select"
+                                                                color='success'
+                                                                className="bg-light text-left"
+                                                                label="Car Registration Year"
+                                                                value={selectedRegYear}
+                                                                onChange={(e) => setSelectedRegYear(e.target.value)}
+                                                                required
+                                                                disabled
+                                                            >
+                                                                {regYear?.map((reg) => (
+                                                                    <MenuItem key={reg.id} value={reg.id}>
+                                                                        {reg.car_year_ranges}
+                                                                    </MenuItem>
+                                                                ))}
+                                                            </Select>
+                                                        </FormControl>
+                                                    </Box></>)}
                                         </Form>
                                     </div>
                                 </div>

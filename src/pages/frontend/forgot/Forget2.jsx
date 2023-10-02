@@ -160,30 +160,30 @@ const Forget2 = () => {
                                 </Carousel>
                                 {/* </div> */}
                             </div>
-                            <div className="col-md-5 mb-5 px-4 py-2" style={{
+                            <div className="col-md-5 mb-5 py-2" style={{
                                 marginTop: "10vh"
                             }}>
 
                                 <div
-                                    className="card text-center "
+                                    className="card text-center"
                                     style={{ borderRadius: "10px" }}
                                 >
                                     <div
                                         className="card-body"
                                         style={{ borderRadius: "10px" }}
                                     >
-                                        <h1
-                                            className="text-custom px-4 mt-2  mb-2"
+                                        <h2
+                                            className="text-custom  mt-2  mb-2"
                                             style={{
                                                 color: "#198754",
                                                 marginBottom: "5px",
                                                 marginTop: "",
                                             }}
                                         >
-                                            {" "}
-                                            Edit <br /> <span>Password?</span>
-                                        </h1>{" "}
-                                        <h3 className=" text-custom px-4 mb-2">Enter the new password <br /> <span>for accessing account.</span></h3>
+                                            Forgot{" "}
+                                           <span>Password</span>
+                                        </h2>{" "}
+                                        <h5 className=" text-custom  mb-2">Enter the new password  <span>for accessing account.</span></h5>
                                         <Form className="text-center">
                                             <Form.Group
                                                 className=" mt-4 text-center"

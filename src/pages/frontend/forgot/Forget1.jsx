@@ -152,11 +152,11 @@ const Forget1 = () => {
                                 {/* </div> */}
                             </div>
                             <div className="col-md-5 mb-5 px-4 py-2" style={{
-                                marginTop: "10vh"
+                                marginTop: "13vh"
                             }}>
 
                                 <div
-                                    className="card text-center "
+                                    className="card text-center"
                                     style={{ borderRadius: "10px" }}
                                 >
                                     <div
@@ -164,7 +164,7 @@ const Forget1 = () => {
                                         style={{ borderRadius: "10px" }}
                                     >
                                         <h2
-                                            className="text-custom px-4 mt-2  mb-2"
+                                            className="text-custom  mt-2  mb-2"
                                             style={{
                                                 color: "#198754",
                                                 marginBottom: "5px",
@@ -172,9 +172,9 @@ const Forget1 = () => {
                                             }}
                                         >
                                             {" "}
-                                            Forgot <br /> <span>Password?</span>
+                                            Forgot <span>Password</span>
                                         </h2>{" "}
-                                        <h4 className=" text-custom px-4 mb-2 mt-1">Enter the email address <br /> <span>associated with your account.</span></h4>
+                                        <h5 className=" text-custom  mb-2 mt-1">Enter the email address <span>associated with your account.</span></h5>
                                         <Form className="text-center">
                                             <Form.Group
                                                 className=" mt-4 text-center"

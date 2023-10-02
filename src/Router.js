@@ -67,6 +67,7 @@ import VerifiedMember from "./pages/frontend/register-form/VerifiedMember";
 import Terms_Services from "./pages/frontend/terms-services/Terms_Services";
 import Forget1 from "./pages/frontend/forgot/Forget1";
 import Forget2 from "./pages/frontend/forgot/Forget2";
+import TransactionHistory from "./pages/backend/dashboard/TransactionHistory";
 const LazyHome = React.lazy(()=>import("./pages/frontend/Home"));
 const Router = () => {
   const userLogin = useSelector((s) => s.login.data.token);
@@ -143,6 +144,8 @@ const Router = () => {
         <Route path="/school-driver-form" element={<FrontendLayout children={<SchoolDriverRegistration />} />}></Route>
         <Route path="/verification" element={<FrontendLayout children={<Verification />} />}></Route>
         <Route path="/partner-cancellation" element={<BackendLayout children={<PartnerCancellation />} />}></Route>
+        <Route path="/transaction-history" element={<BackendLayout children={<TransactionHistory />} />}></Route>
+
 
         {userSignup && (
           <>
