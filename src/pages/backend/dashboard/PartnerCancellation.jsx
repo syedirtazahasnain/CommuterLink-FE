@@ -38,11 +38,10 @@ const PartnerCancellation = () => {
   const [driver, setDriver] = useState("");
 
   useEffect(() => {
-    getProfileData();
     // Define a function that contains the code to execute
     const fetchData = () => {
-      getDashboardData();
-      FetchDates();
+      getProfileData();
+      // FetchDates();
     };
 
     // Initial call when the component mounts
@@ -53,7 +52,7 @@ const PartnerCancellation = () => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, []);
+  }, [userToken]);
 
 
   const handleDateChange = (date) => {
@@ -242,52 +241,52 @@ const PartnerCancellation = () => {
     }
   };
 
-  useEffect(() => {
-    // Fetch status data from the API
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${API_URL}/api/v1/mytravelhistory`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${userToken}`,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   // Fetch status data from the API
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${API_URL}/api/v1/mytravelhistory`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Accept: "application/json",
+  //             Authorization: `Bearer ${userToken}`,
+  //           },
+  //         }
+  //       );
 
-        const jsonresponse = await response.json();
-        console.log("Date History:", jsonresponse);
-        if (jsonresponse.success === true) {
-          setStatusData(jsonresponse.data);
-        }
-      } catch (error) {
-        console.error("An error occurred:", error);
-      }
-    };
+  //       const jsonresponse = await response.json();
+  //       console.log("Date History:", jsonresponse);
+  //       if (jsonresponse.success === true) {
+  //         setStatusData(jsonresponse.data);
+  //       }
+  //     } catch (error) {
+  //       console.error("An error occurred:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [userToken, selectedDate]);
+  //   fetchData();
+  // }, [userToken, selectedDate]);
 
-  useEffect(() => {
-    // Define a function that contains the code to execute
-    const fetchData = () => {
-      if (statusData) {
-        fetchHighlightedDays();
-      }
-    };
+  // useEffect(() => {
+  //   // Define a function that contains the code to execute
+  //   const fetchData = () => {
+  //     if (statusData) {
+  //       fetchHighlightedDays();
+  //     }
+  //   };
 
-    // Initial call when the component mounts
-    fetchData();
+  //   // Initial call when the component mounts
+  //   fetchData();
 
-    // Set up a 1 minute 20-second setInterval to call the fetchData function
-    const intervalId = setInterval(fetchData, 120000);
+  //   // Set up a 1 minute 20-second setInterval to call the fetchData function
+  //   const intervalId = setInterval(fetchData, 120000);
 
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, [statusData]);
+  //   // Clean up the interval when the component unmounts
+  //   return () => clearInterval(intervalId);
+  // }, [statusData]);
 
 
 
@@ -362,34 +361,6 @@ const PartnerCancellation = () => {
     }
   };
 
-  const getDashboardData = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/matches/office`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse.rider && jsonresponse.rider.length > 0) {
-        setContactId(jsonresponse.rider[0].contact_id);
-      } else if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
-        setContactId(jsonresponse.drivers[0].contact_id);
-      } else {
-        setContactId("");
-      }
-      console.log("Dashboard Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
 
   function FetchDates() {
     return new Promise((resolve, reject) => {
@@ -431,7 +402,7 @@ const PartnerCancellation = () => {
       <Badge
         key={props.day.toString()}
         overlap="circular"
-        badgeContent={isSelected ? marker : undefined}
+        //badgeContent={isSelected ? marker : undefined}
       >
         <PickersDay
           {...other}
@@ -483,8 +454,7 @@ const PartnerCancellation = () => {
 
   return (
     <div>
-
-<div className="page-title">
+      <div className="page-title">
         <h3 className="card bg-medium-teal p-4 text-dark-green my-2 fw-bold">CANCELLATION DATE</h3>
       </div>
       <div className="card">
@@ -493,154 +463,154 @@ const PartnerCancellation = () => {
             <div className="container text-center">
               <img src={`${IMAGE_URL}${image}`} style={{ height: '150px', width: '150px' }} className="border border-2 rounded rounded-circle" />
               <p className="py-2">{name}</p>
-      <div className="card bg-light mt-3 mb-5">
-     
-        <div
-          className="card-body"
-        >
-          <div className="card h-50" style={{ backgroundColor: "rgb(214 219 218)" }}>
-            <div className="">
-              <div
-                className="card border-0"
-                style={{ backgroundColor: "#D9D9D9" }}
-              >
-                <div className="card h-50 w-100">
-                  <div className="row g-0">
-                    <div className="col-md-12">
-                      <Box className="card w-100 bg-white overflow-auto overflow-y-hidden">
-                     
+              <div className="card bg-light mt-3 mb-5">
 
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DateCalendar
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            loading={isLoading}
-                            className="w-100 custom-scroll-color overflow-y-hidden"
-                            onMonthChange={handleMonthChange}
-                            renderLoading={() => <DayCalendarSkeleton />}
-                            shouldDisableDate={isWeekend}
-                            disablePast
-                            slots={{
-                              day: ServerDay,
-                            }}
-                            slotProps={{
-                              day: {
-                                highlightedDays,
-                              },
-                            }}
-                            sx={{
-                              overflow: 'auto',
-                              display: 'grid',
-                              "& .MuiDayCalendar-weekDayLabel": {
-                                fontSize: "1.4rem",
-                                fontWeight: 'bold',
-                                color: '#1F5F5B',
-                                paddingY: "0",
-                                paddingX: "calc(2rem + 18px)",
-                                margin: 0,
-                              },
-                              "& .MuiPickersDay-dayWithMargin": {
-                                fontSize: "1.3rem",
-                                margin: 0,
-                              },
-                              "& .MuiPickersCalendarHeader-root": {
-                                alignItems: "center",
-                                marginTop: "16px",
-                                marginBottom: "8px",
-                                paddingLeft: "150px",
-                                paddingRight: "130px",
-                                backgroundColor: "#CDF0EA",
-                                paddingY: "20px"
-                              },
-                              "& .MuiPickersDay-root:hover": {
-                                backgroundColor: "#cbeddd",
-                                borderRadius: "50%",
-                              },
-                              "& .MuiPickersDay-root.Mui-selected": {
-                                backgroundColor: "green",
-                                borderRadius: "100%",
-                                color: "#fff",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                padding:"1px",
-                              },
-                              "& .MuiPickersCalendarHeader-labelContainer": {
-                                fontSize: "1.5rem"
-                              },
-                              '& .MuiBadge-root': {
-                                paddingLeft: '2rem',
-                                paddingRight: '2rem',
-                              },
-                              '& .MuiPickersYear-yearButton': {
-                                backgroundColor: '#cbeddd'
-                              },
-                              "& .MuiPickersYear-yearButton.Mui-selected": {
-                                backgroundColor: "green",
-                              },
-                              '& .MuiPickersYear-yearButton.Mui-selected:hover': {
-                                backgroundColor: '#cbeddd'
-                              },
-                              "& .MuiPickersDay-root.Mui-selected:hover": {
-                                backgroundColor: "green",
-                              },
-                              "& .MuiButtonBase-root.MuiPickersDay-root.Mui-selected": {
-                                backgroundColor: "green",
-                                fontSize: "1.3rem",
-                                margin: 0,
-                              
-                              },
-                              "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
-                                border: "0px solid rgba(0, 0, 0, 0.6)",
-                              },
-                              "& .css-lmlc2i-MuiDateCalendar-root": {
-                                backgroundColor: 'green',
-                              }
-                            }}
-                          />
+                <div
+                  className="card-body"
+                >
+                  <div className="card h-50" style={{ backgroundColor: "rgb(214 219 218)" }}>
+                    <div className="">
+                      <div
+                        className="card border-0"
+                        style={{ backgroundColor: "#D9D9D9" }}
+                      >
+                        <div className="card h-50 w-100">
+                          <div className="row g-0">
+                            <div className="col-md-12">
+                              <Box className="card w-100 bg-white overflow-auto overflow-y-hidden">
 
 
-                        </LocalizationProvider>
-                        <div className="container">
-                        {checkStatus === 0 ?
-                          (
-                            <div className="py-5">
-                              <Button
-                                className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 mb-3 mx-4"
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => {
-                                  sendRequest();
-                                  setRider("cancel_now");
-                                }}
-                              >
-                                Cancel Now
-                              </Button>
-                              <Button
-                                className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3  mb-3 mx-4"
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => {
-                                  sendRequest();
-                                  setRider("week_notice");
-                                }}
-                              >
-                                Week Notice
-                              </Button>
-                            </div>
-                          )
-                          :
-                          (<Button
-                            className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 mb-3"
-                            style={{ cursor: 'pointer' }}
-                            onClick={() => {
-                              sendRequest();
-                              setDriver("driver");
-                            }}
-                          >
-                            Submit
-                          </Button>
-                          )}
-                      </div>
-                        {/* <div className="h-100">
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                  <DateCalendar
+                                    value={selectedDate}
+                                    onChange={handleDateChange}
+                                    loading={isLoading}
+                                    className="w-100 custom-scroll-color overflow-y-hidden"
+                                    //onMonthChange={handleMonthChange}
+                                    renderLoading={() => <DayCalendarSkeleton />}
+                                    shouldDisableDate={isWeekend}
+                                    disablePast
+                                    slots={{
+                                      day: ServerDay,
+                                    }}
+                                    slotProps={{
+                                      day: {
+                                        highlightedDays,
+                                      },
+                                    }}
+                                    sx={{
+                                      overflow: 'auto',
+                                      display: 'grid',
+                                      "& .MuiDayCalendar-weekDayLabel": {
+                                        fontSize: "1.4rem",
+                                        fontWeight: 'bold',
+                                        color: '#1F5F5B',
+                                        paddingY: "0",
+                                        paddingX: "calc(2rem + 18px)",
+                                        margin: 0,
+                                      },
+                                      "& .MuiPickersDay-dayWithMargin": {
+                                        fontSize: "1.3rem",
+                                        margin: 0,
+                                      },
+                                      "& .MuiPickersCalendarHeader-root": {
+                                        alignItems: "center",
+                                        marginTop: "16px",
+                                        marginBottom: "8px",
+                                        paddingLeft: "150px",
+                                        paddingRight: "130px",
+                                        backgroundColor: "#CDF0EA",
+                                        paddingY: "20px"
+                                      },
+                                      "& .MuiPickersDay-root:hover": {
+                                        backgroundColor: "#cbeddd",
+                                        borderRadius: "50%",
+                                      },
+                                      "& .MuiPickersDay-root.Mui-selected": {
+                                        backgroundColor: "green",
+                                        borderRadius: "100%",
+                                        color: "#fff",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        padding: "1px",
+                                      },
+                                      "& .MuiPickersCalendarHeader-labelContainer": {
+                                        fontSize: "1.5rem"
+                                      },
+                                      '& .MuiBadge-root': {
+                                        paddingLeft: '2rem',
+                                        paddingRight: '2rem',
+                                      },
+                                      '& .MuiPickersYear-yearButton': {
+                                        backgroundColor: '#cbeddd'
+                                      },
+                                      "& .MuiPickersYear-yearButton.Mui-selected": {
+                                        backgroundColor: "green",
+                                      },
+                                      '& .MuiPickersYear-yearButton.Mui-selected:hover': {
+                                        backgroundColor: '#cbeddd'
+                                      },
+                                      "& .MuiPickersDay-root.Mui-selected:hover": {
+                                        backgroundColor: "green",
+                                      },
+                                      "& .MuiButtonBase-root.MuiPickersDay-root.Mui-selected": {
+                                        backgroundColor: "green",
+                                        fontSize: "1.3rem",
+                                        margin: 0,
+
+                                      },
+                                      "& .css-jlta03-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)": {
+                                        border: "0px solid rgba(0, 0, 0, 0.6)",
+                                      },
+                                      "& .css-lmlc2i-MuiDateCalendar-root": {
+                                        backgroundColor: 'green',
+                                      }
+                                    }}
+                                  />
+
+
+                                </LocalizationProvider>
+                                <div className="container">
+                                  {checkStatus === 0 ?
+                                    (
+                                      <div className="py-5">
+                                        <Button
+                                          className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 mb-3 mx-4"
+                                          style={{ cursor: 'pointer' }}
+                                          onClick={() => {
+                                            sendRequest();
+                                            setRider("cancel_now");
+                                          }}
+                                        >
+                                          Cancel Now
+                                        </Button>
+                                        <Button
+                                          className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3  mb-3 mx-4"
+                                          style={{ cursor: 'pointer' }}
+                                          onClick={() => {
+                                            sendRequest();
+                                            setRider("week_notice");
+                                          }}
+                                        >
+                                          Week Notice
+                                        </Button>
+                                      </div>
+                                    )
+                                    :
+                                    (<Button
+                                      className="text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 mb-3"
+                                      style={{ cursor: 'pointer' }}
+                                      onClick={() => {
+                                        sendRequest();
+                                        setDriver("driver");
+                                      }}
+                                    >
+                                      Submit
+                                    </Button>
+                                    )}
+                                </div>
+                                {/* <div className="h-100">
                           <div className="row text-center h-50 py-2 ">
                             <div className="col-md-4 mb-2">
                               <button className="font-custom btn text-success fw-bold fs-6 lh-1">
@@ -670,62 +640,62 @@ const PartnerCancellation = () => {
                           </div>
 
                         </div> */}
-                      </Box>
+                              </Box>
+                            </div>
+
+
+
+
+                          </div>
+                        </div>
+                      </div>
+                      <Dialog open={dialogOpen} onClose={handleCloseDialog}>
+                        <DialogTitle className=" fw-bold">Select Any Options</DialogTitle>
+                        <DialogContent></DialogContent>
+                        <div className="container text-center px-2">
+                          <div className="row px-4">
+                            <div className="col-12 mb-2 d-flex flex-column flex-md-row  border border-success rounded rounded-3">
+                              <div>
+                                <button
+                                  className="btn font-custom   text-success fw-bold fs-5 lh-1"
+                                  onClick={() => handleStatusSelect("1")}
+                                >
+                                  <span>
+                                    <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
+                                  </span>
+                                  Travelled
+                                </button>
+                              </div>
+                              <div>
+                                <button className="btn btncol font-custom  advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("0")}>
+                                  <span>
+                                    <i className="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
+                                  </span>
+                                  Not Travelled
+                                </button>
+                              </div>
+                              <div>
+                                <button className="btn btncol font-custom advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("-1")}>
+                                  <span>
+                                    <i className="fa-solid fa-car text-danger mx-1 fs-2"></i>
+                                  </span>
+                                  Driver Didn't Come
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <DialogActions>
+                          <Button className="text-dark fw-bold" onClick={handleCloseDialog}>
+                            Cancel
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </div>
-
-
-                  
-
                   </div>
                 </div>
               </div>
-              <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-                <DialogTitle className=" fw-bold">Select Any Options</DialogTitle>
-                <DialogContent></DialogContent>
-                <div className="container text-center px-2">
-                  <div className="row px-4">
-                    <div className="col-12 mb-2 d-flex flex-column flex-md-row  border border-success rounded rounded-3">
-                      <div>
-                        <button
-                          className="btn font-custom   text-success fw-bold fs-5 lh-1"
-                          onClick={() => handleStatusSelect("1")}
-                        >
-                          <span>
-                            <i className="fa-regular fa-circle-check text-success mx-1 fs-2"></i>
-                          </span>
-                          Travelled
-                        </button>
-                      </div>
-                      <div>
-                        <button className="btn btncol font-custom  advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("0")}>
-                          <span>
-                            <i className="fa-solid fa-circle-minus text-success mx-1 fs-2"></i>
-                          </span>
-                          Not Travelled
-                        </button>
-                      </div>
-                      <div>
-                        <button className="btn btncol font-custom advancecolor text-success fw-bold fs-5 lh-1" onClick={() => handleStatusSelect("-1")}>
-                          <span>
-                            <i className="fa-solid fa-car text-danger mx-1 fs-2"></i>
-                          </span>
-                          Driver Didn't Come
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <DialogActions>
-                  <Button className="text-dark fw-bold" onClick={handleCloseDialog}>
-                    Cancel
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div></div></div></div></div>
+            </div></div></div></div></div>
   );
 };
 

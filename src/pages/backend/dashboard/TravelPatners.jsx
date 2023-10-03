@@ -44,14 +44,6 @@ const TravelPatners = () => {
   const [wearAndTear, setWearAndTear] = useState("");
 
   useEffect(() => {
-    getTravelData();
-  }, []);
-
-  useEffect(() => {
-    getSeatCostDetail();
-  }, [userType, contactId]);
-
-  useEffect(() => {
     // Define a function that contains the code to execute
     const fetchData = () => {
       getProfileData();
@@ -65,7 +57,15 @@ const TravelPatners = () => {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, [userType]);
+  }, []);
+
+  useEffect(() => {
+    getTravelData();
+  }, []);
+
+  useEffect(() => {
+    getSeatCostDetail();
+  }, [userType, contactId]);
 
   const onNavigate = () => {
     navigate("/rechargewallet");
@@ -156,7 +156,7 @@ const TravelPatners = () => {
         });
 
         const jsonresponse = await response.json();
-        if (jsonresponse) {
+        if (jsonresponse && jsonresponse.data) {
           setDistance(jsonresponse.data[0]['Distance']);
           setFuelAverage(jsonresponse.data[0]['Fuel Average']);
           setFuelPrice(jsonresponse.data[0]['Fuel-Price']);
@@ -166,7 +166,7 @@ const TravelPatners = () => {
         }
         console.log("Driver Seat Cost Data", jsonresponse);
       }
-      else {
+      else if(userType === 0 && contactId !== "") {
         const response = await fetch(`${API_URL}/api/v1/seat-cost-detail/${contactId}`, {
           method: "get",
           headers: {
@@ -177,7 +177,7 @@ const TravelPatners = () => {
         });
 
         const jsonresponse = await response.json();
-        if (jsonresponse) {
+        if (jsonresponse && jsonresponse.data) {
           setDistance(jsonresponse.data[0]['Distance']);
           setFuelAverage(jsonresponse.data[0]['Fuel Average']);
           setFuelPrice(jsonresponse.data[0]['Fuel-Price']);

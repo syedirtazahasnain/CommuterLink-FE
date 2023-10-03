@@ -15,12 +15,14 @@ import { useGoogleLogin } from "@react-oauth/google";
 import Form from "react-bootstrap/Form";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
-import { LoginSocialFacebook } from "reactjs-social-login";
+import { LoginSocialFacebook, LoginSocialLinkedin } from "reactjs-social-login";
 import { displayNotification } from "../../../helpers";
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
+const REDIRECT_URI = "https://staging.commuterslink.com/auth/linkedin/callback";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -688,29 +690,31 @@ const Signup = () => {
                             </LoginSocialFacebook>
                           </li>
                           <li>
-                            {/* <Tooltip title="Signup With Linkedin">
-                            
-                              <a onClick={linkedInLogin}>
-                                <img
-                                  src={`${BASE_URL}/assets/images/linkedin.png`}
-                                  alt=""
-                                  style={{ height: "35px", width: "35px", cursor: "pointer" }}
-                                />
-                              </a>
-                            </Tooltip> */}
-                            <Tooltip title="Signup With Linkedin">
-                              <a>
-                                <img
-                                  src={`${BASE_URL}/assets/images/linkedin.png`}
-                                  alt=""
-                                  style={{
-                                    height: "35px",
-                                    width: "35px",
-                                    cursor: "pointer",
-                                  }}
-                                />
-                              </a>
-                            </Tooltip>
+                            <LoginSocialLinkedin
+                              client_id="86th1m5dtehgx3"
+                              client_secret="YY1HZ3JYb4jM5btI"
+                              redirect_uri={REDIRECT_URI}
+                              onResolve={(response) => {
+                                console.log("LinkedIn Response:", response);
+                              }}
+                              onReject={(error) => {
+                                console.log("LinkedIn Error Message:", error);
+                              }}
+                            >
+                              <Tooltip title="Signup With Linkedin">
+                                <a>
+                                  <img
+                                    src={`${BASE_URL}/assets/images/linkedin.png`}
+                                    alt=""
+                                    style={{
+                                      height: "35px",
+                                      width: "35px",
+                                      cursor: "pointer",
+                                    }}
+                                  />
+                                </a>
+                              </Tooltip>
+                            </LoginSocialLinkedin>
                           </li>
                         </ul>
                       </div>

@@ -324,7 +324,7 @@ const TravelBuddyProfile = () => {
     Swal.fire({
       position: 'top',
       title: 'Are you sure?',
-      text: "You want to cancel",
+      text: "You want to cancel the agreement",
       showCancelButton: true,
       customClass: {
         confirmButton: 'swal-custom',

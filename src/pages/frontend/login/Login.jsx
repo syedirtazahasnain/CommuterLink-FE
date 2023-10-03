@@ -17,7 +17,9 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { LoginSocialFacebook } from "reactjs-social-login";
+import { LoginSocialFacebook, LoginSocialLinkedin } from "reactjs-social-login";
+
+const REDIRECT_URI = "https://staging.commuterslink.com/auth/linkedin/callback";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -453,7 +455,7 @@ const Login = () => {
                                 handleFacebookSuccess(response);
                               }}
                               onReject={(error) => {
-                                console.log("Error Message:", error);
+                                console.log("Facebook Error Message:", error);
                               }}
                             >
                               <Tooltip title="Signup With Facebook">
@@ -466,15 +468,25 @@ const Login = () => {
                             </LoginSocialFacebook>
                           </li>
                           <li>
-                            <Tooltip title="Login With Linkedin">
-                              <a href="https://www.linkedin.com/company/sysreforms-international/mycompany/">
+                            <LoginSocialLinkedin
+                              client_id="86th1m5dtehgx3"
+                              client_secret="YY1HZ3JYb4jM5btI"
+                              redirect_uri={REDIRECT_URI}
+                              onResolve={(response) => {
+                                console.log("LinkedIn Response:", response);
+                              }}
+                              onReject={(error) => {
+                                console.log("LinkedIn Error Message:", error);
+                              }}
+                            >
+                              <Tooltip title="Login With Linkedin">
                                 <img
                                   src={`${BASE_URL}/assets/images/linkedin.png`}
                                   alt=""
                                   style={{ height: "35px", width: "35px", cursor: "pointer" }}
                                 />
-                              </a>
-                            </Tooltip>
+                              </Tooltip>
+                            </LoginSocialLinkedin>
                           </li>
                         </ul>
                       </div>

@@ -370,7 +370,7 @@ const CommuterLinkSuggestions = () => {
                 <strong> Matches</strong> to Offer
               </p>
               <div className="row">
-                {userData.map((user, index) => {
+                {userData && userData.map((user, index) => {
                   if (userType === "rider" && user.vehicle_option === 1 && user.req_stage !== 3) {
                     // Show rider card only for riders and when req_stage is not 3
                     return <RiderCard user={user} key={index} />;
@@ -387,7 +387,7 @@ const CommuterLinkSuggestions = () => {
                   }
                 })}
                 {/* Add default cards to reach a total of 6 if necessary */}
-                {userData.length < 6 && Array.from({ length: 6 - userData.length }, (_, i) => (
+                {userData && userData.length < 6 && Array.from({ length: 6 - userData.length }, (_, i) => (
                   <DefaultCard key={`default-${i}`} />
                 ))}
               </div>
@@ -439,7 +439,7 @@ const CommuterLinkSuggestions = () => {
                 <strong>Requests</strong> to Offer
               </p>
               <div className="row">
-                {requests.map((request, index) => {
+                {requests && requests.map((request, index) => {
                   if (request.request_stage !== 3) {
                     // Show RequestCard when req_stage is not 3
                     return <RequestCard key={index} request={request} />;
@@ -449,7 +449,7 @@ const CommuterLinkSuggestions = () => {
                   }
                 })}
                 {/* Add default cards to reach a total of 6 if necessary */}
-                {requests.length < 6 &&
+                {requests && requests.length < 6 &&
                   Array.from({ length: 6 - requests.length }, (_, i) => (
                     <RequestDefaultCard key={`default-${i}`} />
                   ))}
