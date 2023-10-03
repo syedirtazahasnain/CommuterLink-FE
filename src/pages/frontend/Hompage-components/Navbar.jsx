@@ -3,9 +3,15 @@ import { BASE_URL } from "../../../constants";
 import { Link } from "react-scroll";
 import { Link as DomLink, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
+import { useDispatch, useSelector } from "react-redux";
+import { resetsignupState } from "../../../redux/signupSlice";
+import { resetloginState } from "../../../redux/loginSlice";
 const Navbar = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userToken = useSelector((s) => s.login.data.token);
+  const [checkStatus, setCheckStatus] = useState(false);
 
   const signupRoute = () => {
     navigate("/signup");
@@ -24,6 +30,22 @@ const Navbar = () => {
     navigate("/footer")
   }
 
+  const handleLogout = () => {
+    setCheckStatus(false);
+    dispatch(resetsignupState());
+    dispatch(resetloginState());
+    navigate("/");
+  };
+
+  useEffect(() => {
+    if (userToken) {
+      setCheckStatus(true);
+    }
+    else{
+      setCheckStatus(false);
+    }
+  }, [userToken]);
+
   return (
     <div>
       <div className="container">
@@ -33,6 +55,7 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-white bg-white  fixed-top">
               <DomLink
                 className="navbar-brand p-2"
+                style={checkStatus ? {pointerEvents: "none"} : null}
                 to="/"
               >
                 <img src={`${BASE_URL}/assets/images/CL-logo.png`} width="mr-auto" height="50px" alt="logoimg" />
@@ -62,51 +85,95 @@ const Navbar = () => {
               >
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item nav-grey">
-                    <Link className="nav-link text-black mr-3 ml-3" to="carousel" onClick={home}>
+                    <Link 
+                      className="nav-link text-black mr-3 ml-3"
+                      style={checkStatus ? {pointerEvents: "none"} : null}
+                      to="carousel" 
+                      onClick={home}
+                    >
                       HOME
                     </Link>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link className="nav-link text-black mr-3 ml-3" to="costEarningSection" onClick={home} smooth="true" offset={20} duration={50}>
+                    <Link 
+                      className="nav-link text-black mr-3 ml-3"
+                      to="costEarningSection"
+                      style={checkStatus ? {pointerEvents: "none"} : null}
+                      onClick={home} 
+                      smooth="true" 
+                      offset={20} 
+                      duration={50}
+                    >
                       CONCEPT
                     </Link>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link className="nav-link text-black mr-3 ml-3" to="howworks" onClick={home} offset={20} duration={50}>
+                    <Link 
+                      className="nav-link text-black mr-3 ml-3"
+                      style={checkStatus ? {pointerEvents: "none"} : null}
+                      to="howworks" 
+                      onClick={home} 
+                      offset={20} 
+                      duration={50}
+                    >
                       HOW IT WORKS?
                     </Link>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link className="nav-link text-black mr-3 ml-3" to="contribute" smooth="true" onClick={home} offset={20} duration={50}>
+                    <Link 
+                      className="nav-link text-black mr-3 ml-3"
+                      style={checkStatus ? {pointerEvents: "none"} : null}
+                      to="contribute" 
+                      smooth="true" 
+                      onClick={home} 
+                      offset={20} 
+                      duration={50}
+                    >
                       CONTRIBUTE
                     </Link>
                    
                   </li>
                   <li className="nav-item nav-grey">
-                    <DomLink className="nav-link text-black mr-3 ml-3 text-dark" to="/Faq">
+                    <DomLink 
+                      className="nav-link text-black mr-3 ml-3 text-dark"
+                      style={checkStatus ? {pointerEvents: "none"} : null}
+                      to="/Faq"
+                    >
                       FAQS
                     </DomLink>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link className="nav-link text-black mr-3 ml-3" to="contact" onClick={home} smooth="true" offset={20} duration={50}>
+                    <Link 
+                      className="nav-link text-black mr-3 ml-3"
+                      style={checkStatus ? {pointerEvents: "none"} : null}
+                      to="contact" 
+                      onClick={home} 
+                      smooth="true" 
+                      offset={20} 
+                      duration={50}
+                    >
                       CONTACT
                     </Link>
                   </li>
                 </ul>
-                  
-                <button
-                  className="btn-custom mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
-                  onClick={signupRoute}
-                >
-                  Sign up
-                </button>
 
-                <button
-                  className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
-                  onClick={loginRoute}
-                >
-                  Login
-                </button>
+                <div>
+                  <button
+                    className="btn-custom mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                    onClick={signupRoute}
+                    disabled={checkStatus}
+                  >
+                    Sign up
+                  </button>
+
+                  <button
+                    className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                    onClick={loginRoute}
+                    disabled={checkStatus}
+                  >
+                    Login
+                  </button>
+                </div>
               </div>
             </nav>
           </div>

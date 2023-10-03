@@ -34,6 +34,7 @@ const BackendLayout = ({ children }) => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [submitbtn, setSubmit] = useState(false);
+  const [badgeNo, setBadgeNo] = useState(null);
 
   // For getting current date
   const currentDate = new Date();
@@ -110,6 +111,7 @@ const BackendLayout = ({ children }) => {
     window.KTToggle.init();
     window.KTScroll.init();
     getProfileData();
+    getNotifications();
   }, []);
 
   const getProfileData = async () => {
@@ -148,6 +150,32 @@ const BackendLayout = ({ children }) => {
       }
 
       console.log("Profile Data", jsonresponse);
+      setLoading(false);
+    } catch (error) {
+      console.error("An error occurred:", error);
+      setLoading(false);
+    }
+  };
+
+  const getNotifications = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/show-notifications/`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse) {
+        setBadgeNo(jsonresponse.data[0].badge_no);
+      }
+      console.log("Notifications:", jsonresponse);
       setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error);
@@ -263,14 +291,20 @@ const BackendLayout = ({ children }) => {
                                       )}
                                   </div>
                                   <div className="h-15px me-3 mt-4">
-                                    <Tooltip title="Notifications">
-                                      <Link
-                                        to='/notification'
-                                        className='mx-1 h-15px d-inline-block'
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <BsBell className="align-top text-dark" />
-                                      </Link>
+                                      <Tooltip title="Notifications">
+                                        <Link
+                                          to='/notification'
+                                          className='mx-2 h-15px d-inline-block position-relative'
+                                          style={{ cursor: "pointer", textDecoration: "none" }}
+                                        >
+                                          <BsBell className="align-top text-dark" />
+                                          {/* Use position-absolute to overlay the badge */}
+                                          {badgeNo > 0 && (
+                                            <span className="text-light position-absolute top-0 start-100 translate-middle badge rounded-pill bg-grey">
+                                              {badgeNo}
+                                            </span>
+                                          )}
+                                        </Link>
                                     </Tooltip>
                                     <Tooltip title="Settings">
                                       <Link
