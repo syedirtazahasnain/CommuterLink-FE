@@ -63,7 +63,19 @@ const DriverRegistration = () => {
 
     // Enforce a maximum length of 24 characters
   
-
+    const handleDrivingLicenseMySelf = (e) => {
+      let value = e.target.value;
+      value = value.replace(/[^a-zA-Z0-9-]/g, '');
+      setInputDrivingLicenseMySelf(value);
+      setIsLicenseValid(value !== ''); 
+      if (value.length > 20) {
+        value = value.slice(0, 20);
+      }// Set validation based on whether a value is selected or not
+      setInputDrivingLicenseMySelf(value);
+  
+      // Check if the entered value is valid and reset the validation state
+      setIsLicenseValid(value.length === 20);
+    };
    
  
   const AddNewStart = () => {
@@ -162,6 +174,7 @@ const DriverRegistration = () => {
   const [profession, setProfession] = useState('');
   const [isValidProfession, setIsValidProfession] = useState(true);
   const [isCarBrandValid, setIsCarBrandValid] = useState(true);
+  const [isLicenseValid, setIsLicenseValid] = useState(true);
   // For Start Point
   const [startBounds, setStartBounds] = useState([]);
   const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
@@ -3311,8 +3324,15 @@ const DriverRegistration = () => {
                                 className="text-secondary"
                                 placeholder="License No."
                                 value={inputDrivingLicenseMySelf}
-                                onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
+                                // onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
                                 defaultValue=""
+                                onChange={handleDrivingLicenseMySelf}
+                                error={!isLicenseValid && inputDrivingLicenseMySelf !== ""}
+                                helperText={
+                                  !isLicenseValid &&
+                                  inputDrivingLicenseMySelf !== "" &&
+                                  "Please enter a valid License No."
+                                }
                               />
                              
                             </Form.Group>

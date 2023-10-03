@@ -17,11 +17,11 @@ const FrontendLayout = ({ children }) => {
     window.KTScroll.init();
   }, []);
 
-  // useEffect(() => {
-  //   if (userToken) {
-  //     setCheckStatus(true);
-  //   }
-  // }, [userToken]);
+  useEffect(() => {
+    if (userToken) {
+      setCheckStatus(true);
+    }
+  }, [userToken]);
 
   return (
     <div className="pt-5">
