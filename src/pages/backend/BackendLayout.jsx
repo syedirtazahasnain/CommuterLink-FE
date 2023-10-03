@@ -308,7 +308,7 @@ const BackendLayout = ({ children }) => {
                                     </Tooltip>
                                     <Tooltip title="Settings">
                                       <Link
-                                        to='/editprofile'
+                                        to='/viewprofile'
                                         className='mx-1 h-15px d-inline-block'
                                         style={{ cursor: "pointer" }}
                                       >
@@ -556,7 +556,8 @@ const BackendLayout = ({ children }) => {
                                 <Link
                                   className={`menu-link ${currentPage == "whatsapp" ? "active" : ""
                                     }`}
-                                  to={"/whatsapp"}
+                                  // to={"/whatsapp"}
+                                  // to={"https://wa.me/923335069216"}
                                   style={{
                                     borderRadius: "0%",
                                     marginLeft: "0%",

@@ -2801,7 +2801,7 @@ const DriverRegistration = () => {
                         </Form.Group> */}
                         <Form.Group as={Col} md="12" controlId="validationCustom25" className="mb-2">
                           <Form.Label className="text-dark fs-6">
-                            Registeration Number
+                            Registration Number
                           </Form.Label>
                           <Form.Control
                             required
@@ -2809,7 +2809,7 @@ const DriverRegistration = () => {
                             className="text-secondary"
                             value={selectedRegNumber}
                             onChange={(e) => setSelectedRegNumber(e.target.value)}
-                            placeholder="Registeration Number"
+                            placeholder="Registration Number"
                             defaultValue=""
                           />
                         </Form.Group>

@@ -222,11 +222,11 @@ const TravelPatners = () => {
 
               <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
                 <div className="row d-flex flex-column">
-                  <div className="card-body-inner green-card">
+                  <div className="card-body-inner green-card ">
                     <div className="row d-flex flex-column">
 
                       <div className="row mb-3 justify-content-between">
-                        <div className="col-md-4">
+                        <div className="col-md-4 cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Click on the image to view the profile or Cancel Agreement">
                           <div className="card rounded-0">
                             <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
 

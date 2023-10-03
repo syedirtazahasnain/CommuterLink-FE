@@ -492,7 +492,9 @@ const Driver = () => {
                                                 </Box>
 
                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                    <Form.Control
+                                                    <TextField
+                                                    fullWidth
+                                                    size='small'
                                                         required
                                                         type="text"
                                                         color='success'
@@ -501,6 +503,8 @@ const Driver = () => {
                                                         onChange={(e) => setSelectedModelName(e.target.value)}
                                                         placeholder="Car Model"
                                                         defaultValue=""
+                                                        label="Model Name"
+                                                        id="outlined-basic"
 
                                                     />
                                                 </Box>
@@ -683,14 +687,18 @@ const Driver = () => {
                                                     </Box>
 
                                                     <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                        <Form.Control
+                                                        <TextField
                                                             required
+                                                            fullWidth
+                                                            size='small'
                                                             type="text"
                                                             color='success'
                                                             className="bg-light text-left"
                                                             value={selectedModelName}
                                                             onChange={(e) => setSelectedModelName(e.target.value)}
                                                             placeholder="Car Model"
+                                                            label="Model Name"
+                                                            id='outlined-basic'
                                                             defaultValue=""
                                                             disabled
                                                         />

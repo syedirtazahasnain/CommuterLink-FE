@@ -450,21 +450,24 @@ const CommuterProfile1 = () => {
                     )}
                   </button>
                 </li>
-                <li class="nav-item me-0" role="presentation">
+                <li className="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
                     id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Additional Info</button>
                 </li>
-                <li class="nav-item me-0" role="presentation">
+                <li className="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onClick={openModal}>View On Map</button>
+                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" 
+                    // onClick={openModal}
+                    >
+                    View On Map</button>
                 </li>
                 {/* <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
                     id="pills-cancel-tab" data-bs-toggle="pill" data-bs-target="#pills-cancel" type="button" role="tab" aria-controls="pills-cancel" aria-selected="false" >Cancel</button>
                 </li> */}
               </ul>
-              <div class="tab-content flex-grow-1" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              <div className="tab-content flex-grow-0" id="pills-tabContent">
+                <div className="tab-pane fade show active overflow-hidden" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                   <div className="row ">
 
                       <div className="col-md-12">
@@ -592,7 +595,7 @@ const CommuterProfile1 = () => {
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div className="row ">
 
                     <div className="col-md-11">
@@ -772,7 +775,49 @@ const CommuterProfile1 = () => {
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">MAPPPPP</div>
+              <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"> 
+              <div className=" row d-flex justify-content-center align-items-center">
+                <Row style={{ height: "100px", width: "100%" }}>
+                  <GoogleMap
+                    zoom={10}
+                    center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                    mapContainerStyle={{
+                      width: "100%",
+                      height: '275%',
+                    }}
+                    options={{
+                      types: ["(regions)"],
+                      componentRestrictions: { country: "PK" },
+                    }}
+                  >
+                    <MarkerF
+                      position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                      icon={{
+                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                      }}
+                    />
+                    <MarkerF
+                      position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
+                      icon={{
+                        url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                      }}
+                    />
+                    <PolylineF
+                      path={[
+                        { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
+                        { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
+                      ]}
+                      options={{
+                        strokeColor: "#FF0000",
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                      }}
+                    />
+                  </GoogleMap>
+                </Row>
+              </div>
+              </div></div>
+              
             </div>
             <div className="text-end px-3 py-3">
               <div className="text-right">
@@ -795,6 +840,7 @@ const CommuterProfile1 = () => {
                 )}
               </div>
             </div>
+            
           </div>
 
           <Modal show={showModal} onHide={closeModal}>
@@ -853,7 +899,7 @@ const CommuterProfile1 = () => {
             </Modal.Footer>
           </Modal>
         </div>
-      </div>
+      
     );
   };
 
