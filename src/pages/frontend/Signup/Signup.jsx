@@ -22,7 +22,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-const REDIRECT_URI = "https://staging.commuterslink.com/auth/linkedin/callback";
+// const REDIRECT_URI = "https://staging.commuterslink.com/auth/linkedin/callback";
+const REDIRECT_URI = window.location.href;
 
 const Signup = () => {
   const navigate = useNavigate();

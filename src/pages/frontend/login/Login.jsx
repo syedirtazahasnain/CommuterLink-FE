@@ -19,7 +19,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { LoginSocialFacebook, LoginSocialLinkedin } from "reactjs-social-login";
 
-const REDIRECT_URI = "https://staging.commuterslink.com/auth/linkedin/callback";
+// const REDIRECT_URI = "https://staging.commuterslink.com/auth/linkedin/callback";
+const REDIRECT_URI = window.location.href;
 
 const Login = () => {
   const dispatch = useDispatch();
