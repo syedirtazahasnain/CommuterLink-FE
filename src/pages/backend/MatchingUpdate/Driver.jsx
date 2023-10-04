@@ -447,7 +447,21 @@ const Driver = () => {
                                                     </div>
                                                 </Row>
                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                    <FormControl fullWidth size="small">
+                                                    <TextField
+                                                        required
+                                                        fullWidth
+                                                        size='small'
+                                                        type="text"
+                                                        color='success'
+                                                        className="bg-light text-left"
+                                                        value={selectedCarBrand}
+                                                        onChange={(e) => setSelectedCarBrand(e.target.value)}
+                                                        placeholder="Select Car Brand"
+                                                        label="Model Name"
+                                                        id='outlined-basic'
+                                                        defaultValue=""
+                                                    />
+                                                    {/* <FormControl fullWidth size="small">
                                                         <InputLabel id="demo-simple-select-label" color='success'>Car Brand</InputLabel>
                                                         <Select
                                                             labelId="demo-simple-select-label"
@@ -466,7 +480,7 @@ const Driver = () => {
                                                                 </MenuItem>
                                                             ))}
                                                         </Select>
-                                                    </FormControl>
+                                                    </FormControl> */}
                                                 </Box>
                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                     <FormControl fullWidth size="small">
@@ -493,8 +507,8 @@ const Driver = () => {
 
                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                     <TextField
-                                                    fullWidth
-                                                    size='small'
+                                                        fullWidth
+                                                        size='small'
                                                         required
                                                         type="text"
                                                         color='success'
@@ -642,7 +656,22 @@ const Driver = () => {
                                                         </div>
                                                     </Row>
                                                     <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                        <FormControl fullWidth size="small">
+                                                        <TextField
+                                                            required
+                                                            fullWidth
+                                                            size='small'
+                                                            type="text"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            value={selectedCarBrand}
+                                                            onChange={(e) => setSelectedCarBrand(e.target.value)}
+                                                            placeholder="Select Car Brand"
+                                                            label="Model Name"
+                                                            id='outlined-basic'
+                                                            defaultValue=""
+                                                            disabled
+                                                        />
+                                                        {/* <FormControl fullWidth size="small">
                                                             <InputLabel id="demo-simple-select-label" color='success'>Car Brand</InputLabel>
                                                             <Select
                                                                 labelId="demo-simple-select-label"
@@ -661,7 +690,7 @@ const Driver = () => {
                                                                     </MenuItem>
                                                                 ))}
                                                             </Select>
-                                                        </FormControl>
+                                                        </FormControl> */}
                                                     </Box>
                                                     <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                         <FormControl fullWidth size="small">
@@ -725,7 +754,9 @@ const Driver = () => {
                                                                 ))}
                                                             </Select>
                                                         </FormControl>
-                                                    </Box></>)}
+                                                    </Box>
+                                                    </>
+                                                )}
                                         </Form>
                                     </div>
                                 </div>

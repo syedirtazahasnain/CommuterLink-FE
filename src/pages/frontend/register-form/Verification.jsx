@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
-import { resetsignupState } from "../../../redux/signupSlice";
-import { resetloginState } from "../../../redux/loginSlice";
 import { Button } from "@mui/base";
 import Carousel from "react-bootstrap/Carousel";
 import { useNavigate } from "react-router-dom";
+import { setloginState } from "../../../redux/loginSlice";
+import { setsignupState } from "../../../redux/signupSlice";
 
 
 const Verification = () => {
@@ -19,8 +19,8 @@ const Verification = () => {
   const [verificationEmail, setVerificationEmail] = useState("");
 
   const route = () => {
-    dispatch(resetsignupState());
-    dispatch(resetloginState());
+    dispatch(setloginState(""));
+    dispatch(setsignupState(""));
     window.location.href = "/";
   };
 

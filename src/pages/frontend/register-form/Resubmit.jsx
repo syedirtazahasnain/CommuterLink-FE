@@ -976,7 +976,7 @@ const Resubmit = () => {
                         </>
                       )}
                     <div className="py-4">
-                      <btnresubmit className="btn-custom1 mx-2 text-center border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={SubmitForm}>
+                      <btnresubmit className="btn-custom1 mx-2 text-center border-0 px-4 py-2 rounded rounded-2 text-white fw-bold cursor-pointer" onClick={SubmitForm}>
                         Resubmit
                       </btnresubmit>
                     </div>

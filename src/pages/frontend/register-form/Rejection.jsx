@@ -9,6 +9,7 @@ import { ThreeCircles } from "react-loader-spinner";
 
 const Rejection = () => {
   const navigate = useNavigate();
+  const [option, setOption] = useState(null);
   const [submitbtn, setSubmit] = useState(false);
   const [rejectedData, setRejectedData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,6 +29,7 @@ const Rejection = () => {
 
   useEffect(() => {
     getRejectedStatus();
+    getProfileData();
   }, []);
 
   const getRejectedStatus = async () => {
@@ -65,6 +67,30 @@ const Rejection = () => {
     }
   };
 
+  const getProfileData = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/profile`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse) {
+        setOption(jsonresponse[0].userlist.vehicle_option);
+      }
+      console.log("UserProfile Data", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
   return (
     <>
       <div style={{ backgroundColor: "#eee" }}>
@@ -98,7 +124,7 @@ const Rejection = () => {
                   ) : (
                     <>
                       <p>
-                        Your request has not been approved due to the following
+                        Dear {option === 0 ? "Traveller" : "Car Offerer"} your request has not been approved due to the following
                         reasons:
                       </p>
                       {rejectedData && rejectedData.length > 0 && (
