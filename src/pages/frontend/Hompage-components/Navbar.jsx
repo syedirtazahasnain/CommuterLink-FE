@@ -46,6 +46,10 @@ const Navbar = () => {
     }
   }, [userToken]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+
   return (
     <div>
       <div className="container">
