@@ -124,7 +124,7 @@ const Resubmit = () => {
         if (rejectedData.includes('Cnic Back Image')) {
           if (selectedImageCnicBackBase64 !== null && selectedImageCnicBackBase64Ext !== "") {
             const body = {
-              "cnic_image_back": selectedImageCnicBackBase64,
+              "cnic_back_image": selectedImageCnicBackBase64,
               "cnic_back_image_ext": selectedImageCnicBackBase64Ext,
             }
             const response = await fetch(
@@ -145,6 +145,14 @@ const Resubmit = () => {
             const jsonresponse = await response.json();
       
             console.log("API Response:", jsonresponse);
+            
+            if(jsonresponse.statusCode === 200){
+              setSelectedImageCnicBack(null);
+              setSelectedImageCnicBackBase64(null);
+              setSelectedImageCnicBackBase64Ext("");
+              dispatch(setloginState(""));
+              navigate("/");
+            }
           } else {
             displayNotification("warning", "Please provide your Cnic Back Image");
           }
@@ -152,7 +160,7 @@ const Resubmit = () => {
         else if (rejectedData.includes('Cnic Front Image')) {
           if (selectedImageCnicFrontBase64 !== null && selectedImageCnicFrontBase64Ext !== "") {
             const body = {
-              "cnic_image_front": selectedImageCnicFrontBase64,
+              "cnic_front_image": selectedImageCnicFrontBase64,
               "cnic_front_image_ext": selectedImageCnicFrontBase64Ext,
             }
             const response = await fetch(
@@ -173,6 +181,14 @@ const Resubmit = () => {
             const jsonresponse = await response.json();
       
             console.log("API Response:", jsonresponse);
+
+            if(jsonresponse.statusCode === 200){
+              setSelectedImageCnicFront(null);
+              setSelectedImageCnicFrontBase64(null);
+              setSelectedImageCnicFrontBase64Ext("");
+              dispatch(setloginState(""));
+              navigate("/");
+            }
           } else {
             displayNotification("warning", "Please provide your valid Cnic Front Image");
           }
@@ -180,7 +196,7 @@ const Resubmit = () => {
         else if (rejectedData.includes('Commuters Image')) {
           if (selectedImageBase64 !== null && selectedImageBase64Ext !== "") {
             const body = {
-              "picture_image": selectedImageBase64,
+              "picture": selectedImageBase64,
               "picture_image_ext": selectedImageBase64Ext,
             }
             const response = await fetch(
@@ -201,6 +217,14 @@ const Resubmit = () => {
             const jsonresponse = await response.json();
       
             console.log("API Response:", jsonresponse);
+
+            if(jsonresponse.statusCode === 200){
+              setSelectedImage(null);
+              setSelectedImageBase64(null);
+              setSelectedImageBase64Ext("");
+              dispatch(setloginState(""));
+              navigate("/");
+            }
           } else {
             displayNotification("warning", "Please provide your Profile Image");
           }
@@ -211,9 +235,9 @@ const Resubmit = () => {
           if (selectedImageCnicFrontBase64 !== null && selectedImageCnicFrontBase64Ext !== "" 
               && selectedImageCnicBackBase64 !== null && selectedImageCnicBackBase64Ext !== "") {
             const body = {
-              "cnic_image_front": selectedImageCnicFrontBase64,
+              "cnic_front_image": selectedImageCnicFrontBase64,
               "cnic_front_image_ext": selectedImageCnicFrontBase64Ext,
-              "cnic_image_back": selectedImageCnicBackBase64,
+              "cnic_back_image": selectedImageCnicBackBase64,
               "cnic_back_image_ext": selectedImageCnicBackBase64Ext,
             }
             const response = await fetch(
@@ -234,6 +258,17 @@ const Resubmit = () => {
             const jsonresponse = await response.json();
       
             console.log("API Response:", jsonresponse);
+
+            if(jsonresponse.statusCode === 200){
+              setSelectedImageCnicFront(null);
+              setSelectedImageCnicFrontBase64(null);
+              setSelectedImageCnicFrontBase64Ext("");
+              setSelectedImageCnicBack(null);
+              setSelectedImageCnicBackBase64(null);
+              setSelectedImageCnicBackBase64Ext("");
+              dispatch(setloginState(""));
+              navigate("/");
+            }
           } else {
             displayNotification("warning", "Please provide your Cnic Front Image and Cnic Back Image");
           }
@@ -242,9 +277,9 @@ const Resubmit = () => {
           if (selectedImageCnicBackBase64 !== null && selectedImageCnicBackBase64Ext !== "" 
               && selectedImageBase64 !== null && selectedImageBase64Ext !== "") {
             const body = {
-              "cnic_image_back": selectedImageCnicBackBase64,
+              "cnic_back_image": selectedImageCnicBackBase64,
               "cnic_back_image_ext": selectedImageCnicBackBase64Ext,
-              "picture_image": selectedImageBase64,
+              "picture": selectedImageBase64,
               "picture_image_ext": selectedImageBase64Ext,
             }
             const response = await fetch(
@@ -265,6 +300,17 @@ const Resubmit = () => {
             const jsonresponse = await response.json();
       
             console.log("API Response:", jsonresponse);
+
+            if(jsonresponse.statusCode === 200){
+              setSelectedImageCnicBack(null);
+              setSelectedImageCnicBackBase64(null);
+              setSelectedImageCnicBackBase64Ext("");
+              setSelectedImage(null);
+              setSelectedImageBase64(null);
+              setSelectedImageBase64Ext("");
+              dispatch(setloginState(""));
+              navigate("/");
+            }
           } else {
             displayNotification("warning", "Please provide your Cnic Back Image and Profile Image");
           }
@@ -273,9 +319,9 @@ const Resubmit = () => {
           if (selectedImageCnicFrontBase64 !== null && selectedImageCnicFrontBase64Ext !== ""
               && selectedImageBase64 !== null && selectedImageBase64Ext !== "") {
             const body = {
-              "cnic_image_front": selectedImageCnicFrontBase64,
+              "cnic_front_image": selectedImageCnicFrontBase64,
               "cnic_front_image_ext": selectedImageCnicFrontBase64Ext,
-              "picture_image": selectedImageBase64,
+              "picture": selectedImageBase64,
               "picture_image_ext": selectedImageBase64Ext,
             }
             const response = await fetch(
@@ -296,6 +342,18 @@ const Resubmit = () => {
             const jsonresponse = await response.json();
       
             console.log("API Response:", jsonresponse);
+
+            if(jsonresponse.statusCode === 200){
+              setSelectedImageCnicFront(null);
+              setSelectedImageCnicFrontBase64(null);
+              setSelectedImageCnicFrontBase64Ext("");
+              setSelectedImage(null);
+              setSelectedImageBase64(null);
+              setSelectedImageBase64Ext("");
+              dispatch(setloginState(""));
+              navigate("/");
+            }
+
           } else {
             displayNotification("warning", "Please provide your Cnic Front Image and Profile Image");
           }
@@ -306,11 +364,11 @@ const Resubmit = () => {
           (field) => field !== "" && field !== null && field !== undefined
         )) {
           const body = {
-            "cnic_image_front": selectedImageCnicFrontBase64,
+            "cnic_front_image": selectedImageCnicFrontBase64,
             "cnic_front_image_ext": selectedImageCnicFrontBase64Ext,
-            "cnic_image_back": selectedImageCnicBackBase64,
+            "cnic_back_image": selectedImageCnicBackBase64,
             "cnic_back_image_ext": selectedImageCnicBackBase64Ext,
-            "picture_image": selectedImageBase64,
+            "picture": selectedImageBase64,
             "picture_image_ext": selectedImageBase64Ext,
           }
           const response = await fetch(
@@ -331,6 +389,20 @@ const Resubmit = () => {
           const jsonresponse = await response.json();
 
           console.log("API Response:", jsonresponse);
+
+          if(jsonresponse.statusCode === 200){
+            setSelectedImageCnicFront(null);
+            setSelectedImageCnicFrontBase64(null);
+            setSelectedImageCnicFrontBase64Ext("");
+            setSelectedImageCnicBack(null);
+            setSelectedImageCnicBackBase64(null);
+            setSelectedImageCnicBackBase64Ext("");
+            setSelectedImage(null);
+            setSelectedImageBase64(null);
+            setSelectedImageBase64Ext("");
+            dispatch(setloginState(""));
+            navigate("/");
+          }
         }
         else {
           displayNotification("warning", "Please submit all your details");
@@ -413,7 +485,7 @@ const Resubmit = () => {
                 </h1>
                 {loading ? (
                   <div className="text-center">
-                    {/* // Render CircularProgress while loading */}
+                    {/* Render CircularProgress while loading */}
                     <div className="d-flex justify-content-center align-items-center vh-10">
                       <ThreeCircles
                         height={50}

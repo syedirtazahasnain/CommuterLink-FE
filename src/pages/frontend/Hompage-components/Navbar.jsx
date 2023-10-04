@@ -17,7 +17,7 @@ const Navbar = () => {
     navigate("/signup");
 
   };
-  const home=()=>{
+  const home = () => {
     navigate("/")
   }
 
@@ -26,7 +26,7 @@ const Navbar = () => {
 
   };
 
-  const footer=()=>{
+  const footer = () => {
     navigate("/footer")
   }
 
@@ -41,7 +41,7 @@ const Navbar = () => {
     if (userToken) {
       setCheckStatus(true);
     }
-    else{
+    else {
       setCheckStatus(false);
     }
   }, [userToken]);
@@ -55,7 +55,7 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-white bg-white  fixed-top">
               <DomLink
                 className="navbar-brand p-2"
-                style={checkStatus ? {pointerEvents: "none"} : null}
+                style={checkStatus ? { pointerEvents: "none" } : null}
                 to="/"
               >
                 <img src={`${BASE_URL}/assets/images/CL-logo.png`} width="mr-auto" height="50px" alt="logoimg" />
@@ -85,71 +85,71 @@ const Navbar = () => {
               >
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item nav-grey">
-                    <Link 
+                    <Link
                       className="nav-link text-black mr-3 ml-3"
-                      style={checkStatus ? {pointerEvents: "none"} : null}
-                      to="carousel" 
+                      style={checkStatus ? { pointerEvents: "none" } : null}
+                      to="carousel"
                       onClick={home}
                     >
                       HOME
                     </Link>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link 
+                    <Link
                       className="nav-link text-black mr-3 ml-3"
                       to="costEarningSection"
-                      style={checkStatus ? {pointerEvents: "none"} : null}
-                      onClick={home} 
-                      smooth="true" 
-                      offset={20} 
+                      style={checkStatus ? { pointerEvents: "none" } : null}
+                      onClick={home}
+                      smooth="true"
+                      offset={20}
                       duration={50}
                     >
                       CONCEPT
                     </Link>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link 
+                    <Link
                       className="nav-link text-black mr-3 ml-3"
-                      style={checkStatus ? {pointerEvents: "none"} : null}
-                      to="howworks" 
-                      onClick={home} 
-                      offset={20} 
+                      style={checkStatus ? { pointerEvents: "none" } : null}
+                      to="howworks"
+                      onClick={home}
+                      offset={20}
                       duration={50}
                     >
                       HOW IT WORKS?
                     </Link>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link 
+                    <Link
                       className="nav-link text-black mr-3 ml-3"
-                      style={checkStatus ? {pointerEvents: "none"} : null}
-                      to="contribute" 
-                      smooth="true" 
-                      onClick={home} 
-                      offset={20} 
+                      style={checkStatus ? { pointerEvents: "none" } : null}
+                      to="contribute"
+                      smooth="true"
+                      onClick={home}
+                      offset={20}
                       duration={50}
                     >
                       CONTRIBUTE
                     </Link>
-                   
+
                   </li>
                   <li className="nav-item nav-grey">
-                    <DomLink 
+                    <DomLink
                       className="nav-link text-black mr-3 ml-3 text-dark"
-                      style={checkStatus ? {pointerEvents: "none"} : null}
+                      style={checkStatus ? { pointerEvents: "none" } : null}
                       to="/Faq"
                     >
                       FAQS
                     </DomLink>
                   </li>
                   <li className="nav-item nav-grey">
-                    <Link 
+                    <Link
                       className="nav-link text-black mr-3 ml-3"
-                      style={checkStatus ? {pointerEvents: "none"} : null}
-                      to="contact" 
-                      onClick={home} 
-                      smooth="true" 
-                      offset={20} 
+                      style={checkStatus ? { pointerEvents: "none" } : null}
+                      to="contact"
+                      onClick={home}
+                      smooth="true"
+                      offset={20}
                       duration={50}
                     >
                       CONTACT
