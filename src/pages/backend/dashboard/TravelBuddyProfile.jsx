@@ -335,6 +335,7 @@ const TravelBuddyProfile = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         calendarPicker();
+        
       }
     })
   }
