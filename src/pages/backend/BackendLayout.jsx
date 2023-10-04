@@ -556,8 +556,8 @@ const BackendLayout = ({ children }) => {
                                 <Link
                                   className={`menu-link ${currentPage == "whatsapp" ? "active" : ""
                                     }`}
-                                  // to={"/whatsapp"}
-                                  // to={"https://wa.me/923335069216"}
+                           
+                                  to={"https://wa.me/923335069216"}
                                   style={{
                                     borderRadius: "0%",
                                     marginLeft: "0%",

@@ -353,7 +353,7 @@ const Resubmit = () => {
               <div
                 className="col-md-6 d-flex py-4"
                 style={{
-                  marginTop: "8vh",
+                  marginTop: "12vh",
                 }}
               >
                 <Carousel
@@ -366,7 +366,7 @@ const Resubmit = () => {
                     <img
                       className="d-block img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup.png`}
-                      alt="First slide"
+                      alt="first slide"
                     />
                     <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                   </Carousel.Item>
@@ -375,7 +375,7 @@ const Resubmit = () => {
                     <img
                       className="d-block img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup-3.png`}
-                      alt="First slide"
+                      alt="second slide"
                     />
                     <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
                   </Carousel.Item>
@@ -383,7 +383,7 @@ const Resubmit = () => {
                     <img
                       className="d-block img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup-4.png`}
-                      alt="First slide"
+                      alt="third slide"
                     />
                     <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
                   </Carousel.Item>
@@ -391,7 +391,7 @@ const Resubmit = () => {
                     <img
                       className="d-block img-fluid w-auto"
                       src={`${BASE_URL}/assets/images/signup-6.png`}
-                      alt="First slide"
+                      alt="fourth slide"
                     />
                     <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
                   </Carousel.Item>
@@ -903,8 +903,8 @@ const Resubmit = () => {
                           </Box>
                         </>
                       )}
-                    <div className="py-5">
-                      <btnresubmit className="btn-custom mx-2  px-4 py-2 rounded rounded-5 text-custom fw-bold cursor-pointer" onClick={SubmitForm}>
+                    <div className="py-4">
+                      <btnresubmit className="btn-custom1 mx-2 text-center border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={SubmitForm}>
                         Resubmit
                       </btnresubmit>
                     </div>

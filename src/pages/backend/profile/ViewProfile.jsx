@@ -203,6 +203,7 @@ const ViewProfile = () => {
                           value={name}
                           required
                           size="small"
+                          onChange={(e) =>setName(e.target.value)}
                           // disabled
 
                         />

@@ -326,8 +326,10 @@ const TravelBuddyProfile = () => {
       title: 'Are you sure?',
       text: "You want to cancel the agreement",
       showCancelButton: true,
+      cancelButtonColor: 'swal-custom',
       customClass: {
         confirmButton: 'swal-custom',
+        cancelButton:'swal-custom',
       },
       confirmButtonText: 'Yes'
     }).then((result) => {
