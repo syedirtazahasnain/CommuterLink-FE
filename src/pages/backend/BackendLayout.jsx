@@ -30,11 +30,12 @@ const BackendLayout = ({ children }) => {
   const currentPage = useSelector((s) => s.general.currentPage);
   const sidebarOpened = useSelector((s) => s.general.sidebarOpened);
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState("");
   const [option, setOption] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [submitbtn, setSubmit] = useState(false);
-  const [badgeNo, setBadgeNo] = useState(null);
+  const [badgeNo, setBadgeNo] = useState(0);
 
   // For getting current date
   const currentDate = new Date();
@@ -111,6 +112,9 @@ const BackendLayout = ({ children }) => {
     window.KTToggle.init();
     window.KTScroll.init();
     getProfileData();
+  }, []);
+
+  useEffect(() => {
     getNotifications();
   }, []);
 
@@ -133,6 +137,7 @@ const BackendLayout = ({ children }) => {
         setName(jsonresponse[0].name);
         setImage(jsonresponse[0].contact.commuter_image);
         setOption(jsonresponse[0].userlist.vehicle_option);
+        setUserId(jsonresponse[0].contact.user_id);
         //console.log("Image", jsonresponse[0].contact.commuter_image);
       }
       else {
@@ -180,6 +185,31 @@ const BackendLayout = ({ children }) => {
     } catch (error) {
       console.error("An error occurred:", error);
       setLoading(false);
+    }
+  };
+
+  const clearNotification = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/store/${userId}/null`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+
+      if(jsonresponse.status_code === 200){
+        getNotifications();
+      }
+      console.log("Notifications Clear Response:", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
     }
   };
 
@@ -296,8 +326,9 @@ const BackendLayout = ({ children }) => {
                                           to='/notification'
                                           className='mx-2 h-15px d-inline-block position-relative'
                                           style={{ cursor: "pointer", textDecoration: "none" }}
+                                          onClick={clearNotification}
                                         >
-                                          <BsBell className="align-top text-dark" />
+                                          <BsBell className="align-top text-dark"/>
                                           {/* Use position-absolute to overlay the badge */}
                                           {badgeNo > 0 && (
                                             <span className="text-light position-absolute top-0 start-100 translate-middle badge rounded-pill bg-grey">
