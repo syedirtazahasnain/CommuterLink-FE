@@ -230,7 +230,7 @@ const DriverRequestAcceptence = () => {
               Best Regards
             </p>
             <p>
-              {contactId}
+              {name}
             </p>
           </div>
 

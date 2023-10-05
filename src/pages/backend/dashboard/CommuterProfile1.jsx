@@ -775,73 +775,71 @@ const CommuterProfile1 = () => {
                   </div>
                 </div>
               </div>
-              <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"> 
-              <div className=" row d-flex justify-content-center align-items-center">
-                <Row style={{ height: "100px", width: "100%" }}>
-                  <GoogleMap
-                    zoom={10}
-                    center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                    mapContainerStyle={{
-                      width: "100%",
-                      height: '275%',
-                    }}
-                    options={{
-                      types: ["(regions)"],
-                      componentRestrictions: { country: "PK" },
-                    }}
-                  >
-                    <MarkerF
-                      position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                      icon={{
-                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+              <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div className=" row d-flex justify-content-center align-items-center">
+                  <Row style={{ height: "100px", width: "100%" }}>
+                    <GoogleMap
+                      zoom={10}
+                      center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                      mapContainerStyle={{
+                        width: "100%",
+                        height: '275%',
                       }}
-                    />
-                    <MarkerF
-                      position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
-                      icon={{
-                        url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                      }}
-                    />
-                    <PolylineF
-                      path={[
-                        { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
-                        { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
-                      ]}
                       options={{
-                        strokeColor: "#FF0000",
-                        strokeOpacity: 1.0,
-                        strokeWeight: 3,
+                        types: ["(regions)"],
+                        componentRestrictions: { country: "PK" },
                       }}
-                    />
-                  </GoogleMap>
-                </Row>
+                    >
+                      <MarkerF
+                        position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                        icon={{
+                          url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                        }}
+                      />
+                      <MarkerF
+                        position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
+                        icon={{
+                          url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                        }}
+                      />
+                      <PolylineF
+                        path={[
+                          { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
+                          { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
+                        ]}
+                        options={{
+                          strokeColor: "#FF0000",
+                          strokeOpacity: 1.0,
+                          strokeWeight: 3,
+                        }}
+                      />
+                    </GoogleMap>
+                  </Row>
+                </div>
               </div>
-              </div></div>
+            </div>
               
             </div>
-            <div className="text-end px-3 py-3">
-              <div className="text-right">
-                {req_stage === 1 ? (
-                  <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
-                    Proceed to Payment
-                  </Button>
-                ) : req_stage === 0 ? (
-                  <Button className="font-custom btn btn-sm fs-6 fw-bold text-white  px-3 py-2 mb-3" style={{ background: "#ff8a00" }} onClick={() => { CancelRequest(contact_id) }}>
-                    Cancel Request
-                  </Button>
-                ) : req_stage === 2 ? (
-                  <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
-                    Proceed to Final Step
-                  </Button>
-                ) : (
-                  <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
-                    Send Request
-                  </Button>
-                )}
-              </div>
-            </div>
-            
+          <div className="text-end px-3 py-3">
+            {req_stage === 1 ? (
+              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
+                Proceed to Payment
+              </Button>
+            ) : req_stage === 0 ? (
+              <Button className="font-custom btn btn-sm fs-6 fw-bold text-white  px-3 py-2 mb-3" style={{ background: "#ff8a00" }} onClick={() => { CancelRequest(contact_id) }}>
+                Cancel Request
+              </Button>
+            ) : req_stage === 2 ? (
+              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
+                Proceed to Final Step
+              </Button>
+            ) : (
+              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
+                Send Request
+              </Button>
+            )}
           </div>
+        </div>
 
           <Modal show={showModal} onHide={closeModal}>
             <Modal.Header closeButton>

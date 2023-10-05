@@ -129,6 +129,7 @@ const PartnerCancellation = () => {
         console.log('sendRequest API Response', jsonresponse);
 
         if (jsonresponse.status_code === 200) {
+          displayNotification("success", `${jsonresponse.message}`);
           navigate('/dashboard');
         }
         else if (jsonresponse.status_code === 100) {
@@ -191,6 +192,7 @@ const PartnerCancellation = () => {
         console.log('sendRequest API Response', jsonresponse);
 
         if (jsonresponse.status_code === 200) {
+          displayNotification("success", `${jsonresponse.message}`);
           navigate('/dashboard');
         }
         else if (jsonresponse.status_code === 100) {

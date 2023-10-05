@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import DatePicker from '@mui/lab/DatePicker';
 import { ThreeCircles } from "react-loader-spinner";
 import { displayNotification } from "../../../helpers";
+import { GoogleMap, MarkerF, PolylineF } from "@react-google-maps/api";
 
 
 const customTheme = createTheme({
@@ -46,7 +47,7 @@ const TravelBuddyProfile = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
@@ -85,6 +86,8 @@ const TravelBuddyProfile = () => {
   const [carRegYear, setCarRegYear] = useState("");
   const [RegNo, setRegNo] = useState("");
   const [RegYear, setRegYear] = useState("");
+  const [dropOffAddress, setDropOffAddress] = useState("");
+  const [pickupAddress, setPickupAddress] = useState("");
 
   const getDashboardData = async () => {
     try {
@@ -273,6 +276,8 @@ const TravelBuddyProfile = () => {
         setDestination(jsonresponse.data[0].destination);
         setTimeDepart(jsonresponse.data[0].time_depart);
         setTimeReturn(jsonresponse.data[0].time_return);
+        setDropOffAddress(jsonresponse.data[0].dropoff_address);
+        setPickupAddress(jsonresponse.data[0].pickup_address);
       }
       else if (jsonresponse.status_code === 100) {
         // Swal.fire({
@@ -348,7 +353,15 @@ const TravelBuddyProfile = () => {
     }
   };
 
-  const activeTabKey = "first";
+  // Splitting the latitude and longitude
+  const dropoffCoords = dropOffAddress.split(',');
+  const pickupCoords = pickupAddress.split(',');
+
+  const dropoffLatitude = dropoffCoords[0];
+  const dropoffLongitude = dropoffCoords[1];
+
+  const pickupLatitude = pickupCoords[0];
+  const pickupLongitude = pickupCoords[1];
 
   return (
     <div>
@@ -461,9 +474,12 @@ const TravelBuddyProfile = () => {
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
                     id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Additional Info</button>
                 </li>
-                <li class="nav-item me-0" role="presentation">
+                <li className="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">View On Map</button>
+                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" 
+                    // onClick={openModal}
+                    >
+                    View On Map</button>
                 </li>
               </ul>
               <div class="tab-content flex-grow-1" id="pills-tabContent">
@@ -736,7 +752,48 @@ const TravelBuddyProfile = () => {
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">MAPPPPP</div>
+                <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <div className=" row d-flex justify-content-center align-items-center">
+                    <Row style={{ height: "100px", width: "100%" }}>
+                      <GoogleMap
+                        zoom={10}
+                        center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                        mapContainerStyle={{
+                          width: "100%",
+                          height: '275%',
+                        }}
+                        options={{
+                          types: ["(regions)"],
+                          componentRestrictions: { country: "PK" },
+                        }}
+                      >
+                        <MarkerF
+                          position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                          icon={{
+                            url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                          }}
+                        />
+                        <MarkerF
+                          position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
+                          icon={{
+                            url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                          }}
+                        />
+                        <PolylineF
+                          path={[
+                            { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
+                            { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
+                          ]}
+                          options={{
+                            strokeColor: "#FF0000",
+                            strokeOpacity: 1.0,
+                            strokeWeight: 3,
+                          }}
+                        />
+                      </GoogleMap>
+                    </Row>
+                  </div>
+                </div>
               </div>
               <div className="text-end px-3 py-3">
                 <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure}>
@@ -745,7 +802,6 @@ const TravelBuddyProfile = () => {
               </div>
             </div>
           </div>
-
         </div>
       )}
     </div>
