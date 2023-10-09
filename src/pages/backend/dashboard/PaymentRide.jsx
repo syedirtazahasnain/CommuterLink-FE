@@ -145,7 +145,7 @@ const PaymentRide = () => {
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 300 }} aria-label="simple table">
                     <TableHead>
-                      <TableRow className="bg-light">
+                      <TableRow className="card bg-light">
                         <TableCell className="fw-bold fs-5 text-dark-green">Date</TableCell>
                         <TableCell className="fw-bold fs-5 text-dark-green">Message</TableCell>
                         <TableCell className="fw-bold fs-5 text-dark-green">Amount</TableCell>

@@ -7,6 +7,22 @@ import { setCurrentPage } from "../../../redux/generalSlice";
 import { CircularProgress } from "@mui/material";
 import { ThreeCircles } from 'react-loader-spinner'
 
+function formatTime(timeStr) {
+  const options = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    timeZoneName: 'short',
+  };
+
+  const date = new Date(timeStr);
+
+  return date.toLocaleDateString('en-US', options);
+}
+
 const backgroundStyle = {
   backgroundImage: `url(${BASE_URL}/assets/images/CL-logo.png)`,
   // backgroundSize: 'cover',
@@ -23,6 +39,7 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const [submitbtn, setSubmit] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [time, setTime] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const route = () => {
@@ -60,7 +77,9 @@ const Notifications = () => {
       const jsonresponse = await response.json();
       if (jsonresponse) {
         const notificationsArray = jsonresponse.data[0].Notifications;
+        const timeArray = jsonresponse.data[0].Time;
         setNotifications(notificationsArray);
+        setTime(timeArray);
       }
       console.log("Notifications:", jsonresponse);
       setLoading(false);
@@ -91,7 +110,7 @@ const Notifications = () => {
             <div className="card p-3">
               {loading ? (
                 <div className="text-center">
-                  {/* // Render CircularProgress while loading */}
+                  {/* Render CircularProgress while loading */}
                   <div className="d-flex justify-content-center align-items-center vh-10">
                     <ThreeCircles
                       height={50}
@@ -112,6 +131,7 @@ const Notifications = () => {
                       <p className="card-title text-dark py-1">
                         {index + 1}: {notification}
                       </p>
+                      <em className='d-flex flex-end fs-9'>{formatTime(time[index])}</em>
                       <hr style={{ color: "grey" }} />
                     </div>
                   ))}
