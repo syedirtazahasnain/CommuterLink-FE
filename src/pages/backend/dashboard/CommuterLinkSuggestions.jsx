@@ -164,7 +164,7 @@ const CommuterLinkSuggestions = () => {
         <div
           className="card"
           style={{
-            width: "6rem",
+            width: "6.2rem",
             backgroundColor: req_stage === 1 ? "#0A6155" : req_stage === 0 ? "#FF8A00" : "#0A6155",
           }}
         >
@@ -180,7 +180,7 @@ const CommuterLinkSuggestions = () => {
               route(contact_id);
             }}
           >
-            {req_stage === 1 || req_stage === 2 ? name : contact_id}
+            {req_stage === 1 || req_stage === 2 ? name : `Member ${contact_id}`}
           </div>
           {/* <img className="" src={`${BASE_URL}/assets/images/downlineofmembericon.png`} /> */}
         </div>
@@ -197,7 +197,7 @@ const CommuterLinkSuggestions = () => {
         <div
           className="card"
           style={{
-            width: "6rem",
+            width: "6.2rem",
             backgroundColor: req_stage === 1 ? "#0A6155" : req_stage === 0 ? "#ff8a00" : "#0A6155",
           }}
         >
@@ -213,7 +213,7 @@ const CommuterLinkSuggestions = () => {
               route(contact_id);
             }}
           >
-            {req_stage === 1 || req_stage === 2 ? name : contact_id}
+            {req_stage === 1 || req_stage === 2 ? name : `Member ${contact_id}`}
           </div>
           <img
             className=""
@@ -266,7 +266,7 @@ const CommuterLinkSuggestions = () => {
         <div
           className="card"
           style={{
-            width: "6rem",
+            width: "6.2rem",
             backgroundColor:
               request_stage === 1 || request_stage === 2 ? "#FF8A00" : "#0A6155",
           }}
@@ -283,7 +283,7 @@ const CommuterLinkSuggestions = () => {
               requestRoute(contact_id);
             }}
           >
-            {request_stage === 1 || request_stage === 2 ? name : contact_id}
+            {request_stage === 1 || request_stage === 2 ? name :  `Member ${contact_id}`}
           </div>
           <img
             className=""

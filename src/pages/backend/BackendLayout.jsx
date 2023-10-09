@@ -335,7 +335,7 @@ const BackendLayout = ({ children }) => {
                                           <BsBell className="align-top text-dark"/>
                                           {/* Use position-absolute to overlay the badge */}
                                           {badgeNo > 0 && (
-                                            <span className="text-light position-absolute top-0 start-100 translate-middle badge rounded-pill bg-grey">
+                                            <span className="text-light position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                               {badgeNo}
                                             </span>
                                           )}

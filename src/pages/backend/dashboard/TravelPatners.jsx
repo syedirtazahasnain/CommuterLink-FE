@@ -113,7 +113,7 @@ const TravelPatners = () => {
   const onNavigate = () => {
     navigate("/rechargewallet");
   };
-  const viewTrasaction=()=>{
+  const viewTrasaction = () => {
     navigate("/transaction-history")
   }
 
@@ -291,6 +291,14 @@ const TravelPatners = () => {
         setTimeReturn(jsonresponse.data[0].time_return);
         setDropOffAddress(jsonresponse.data[0].dropoff_address);
         setPickupAddress(jsonresponse.data[0].pickup_address);
+        setCarAC(jsonresponse.data[0].vehicle[0].car_ac);
+        setCarBrand(jsonresponse.data[0].vehicle[0].car_brand);
+        setCarCC(jsonresponse.data[0].vehicle[0].car_cc);
+        setCarModel(jsonresponse.data[0].vehicle[0].car_model);
+        setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
+        setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
+        setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
+        setSeatsLeft(jsonresponse.data[0].vehicle[0].seats_left);
       }
       else if (jsonresponse.status_code === 100) {
         setData(jsonresponse.message);
@@ -334,7 +342,7 @@ const TravelPatners = () => {
         }
         console.log("Driver Seat Cost Data", jsonresponse);
       }
-      else if(userType === 0 && contactId !== "") {
+      else if (userType === 0 && contactId !== "") {
         const response = await fetch(`${API_URL}/api/v1/seat-cost-detail/${contactId}`, {
           method: "get",
           headers: {
@@ -685,6 +693,20 @@ const TravelPatners = () => {
                                   <div className="col-md-8">
                                     <h5 className="fw-bold text-secondary">{seats}</h5>
                                   </div>
+                                  <div className="col-md-4">
+                                    {seatsLeft !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
+                                      </>
+                                    ) : (
+                                      <>
+
+                                      </>
+                                    )}
+                                  </div>
+                                  <div className="col-md-8">
+                                    <h5 className="fw-bold text-secondary">{seatsLeft}</h5>
+                                  </div>
                                 </div>
                                 <div className="row mb-2">
                                   <div className="col-md-4">
@@ -782,49 +804,48 @@ const TravelPatners = () => {
                                   </div>
                                   <div className="col-md-8">
                                     <h5 className="fw-bold text-secondary">{carModel}</h5>
-                                    {carModel}
                                   </div>
-                                  <div className="row mb-2">
-                                    <div className="col-md-4">
-                                      {RegNo !== "" ? (
-                                        <>
-                                          <h5 className="text-dark-green fw-bold font-custom">Registration Number:</h5>
-                                        </>
-                                      ) : (
-                                        <></>
-                                      )}
-                                    </div>
-                                    <div className="col-md-8">
-                                      <h5 className="fw-bold text-secondary">{RegNo}</h5>
-                                    </div>
+                                </div>
+                                <div className="row mb-2">
+                                  <div className="col-md-4">
+                                    {RegNo !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold font-custom">Registration Number:</h5>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
                                   </div>
-                                  <div className="row mb-2">
-                                    <div className="col-md-4">
-                                      {RegYear !== "" ? (
-                                        <>
-                                          <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
-                                        </>
-                                      ) : (
-                                        <></>
-                                      )}
-                                    </div>
-                                    <div className="col-md-8">
-                                      <h5 className="fw-bold text-secondary">{RegYear}</h5>
-                                    </div>
+                                  <div className="col-md-8">
+                                    <h5 className="fw-bold text-secondary">{RegNo}</h5>
                                   </div>
-                                  <div className="row mb-2">
-                                    <div className="col-md-4">
-                                      {carRegYear !== "" ? (
-                                        <>
-                                          <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
-                                        </>
-                                      ) : (
-                                        <></>
-                                      )}
-                                    </div>
-                                    <div className="col-md-8">
-                                      <h5 className="fw-bold text-secondary">{carRegYear}</h5>
-                                    </div>
+                                </div>
+                                <div className="row mb-2">
+                                  <div className="col-md-4">
+                                    {RegYear !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                  <div className="col-md-8">
+                                    <h5 className="fw-bold text-secondary">{RegYear}</h5>
+                                  </div>
+                                </div>
+                                <div className="row mb-2">
+                                  <div className="col-md-4">
+                                    {carRegYear !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                  <div className="col-md-8">
+                                    <h5 className="fw-bold text-secondary">{carRegYear}</h5>
                                   </div>
                                 </div>
                               </div>
@@ -999,7 +1020,7 @@ const TravelPatners = () => {
                 <div className="row">
                   <div className="col-md-12 ">
                     <div className="">
-                     
+
                       <Table className="bg-dark text-white border-1 rounded-top-4">
                         <TableBody>
                           <TableRow>

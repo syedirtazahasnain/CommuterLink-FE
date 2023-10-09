@@ -8,6 +8,19 @@ import { CircularProgress } from "@mui/material";
 import { ThreeCircles } from 'react-loader-spinner'
 
 function formatTime(timeStr) {
+  // Split the date and time components
+  const [dateStr, time] = timeStr.split(' ');
+
+  // Split the date components into day, month, and year
+  const [day, month, year] = dateStr.split('-').map(Number);
+
+  // Split the time components into hours, minutes, and seconds
+  const [hours, minutes, seconds] = time.split(':').map(Number);
+
+  // Create a new Date object using the components
+  const formattedDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds));
+
+  // Format the date using the desired format
   const options = {
     year: 'numeric',
     month: 'short',
@@ -18,9 +31,7 @@ function formatTime(timeStr) {
     timeZoneName: 'short',
   };
 
-  const date = new Date(timeStr);
-
-  return date.toLocaleDateString('en-US', options);
+  return formattedDate.toLocaleDateString('en-US', options);
 }
 
 const backgroundStyle = {
@@ -129,7 +140,8 @@ const Notifications = () => {
                   {notifications.map((notification, index) => (
                     <div key={index}> {/* Add a key prop */}
                       <p className="card-title text-dark py-1">
-                        {index + 1}: {notification}
+                        {/* {index + 1}: {notification} */}
+                        {notification}
                       </p>
                       <em className='d-flex flex-end fs-9'>{formatTime(time[index])}</em>
                       <hr style={{ color: "grey" }} />
