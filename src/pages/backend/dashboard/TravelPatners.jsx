@@ -1011,7 +1011,7 @@ const TravelPatners = () => {
                         <TableBody>
                           <TableRow>
                             <TableCell className="text-white" style={tableCellStyle}>Date</TableCell>
-                            <TableCell className="text-white" style={tableCellStyle}>Message</TableCell>
+                            <TableCell className="text-white" style={tableCellStyle}>Discription</TableCell>
                             <TableCell className="text-white" style={tableCellStyle}>Amount</TableCell>
 
                           </TableRow>

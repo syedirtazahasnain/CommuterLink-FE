@@ -451,7 +451,7 @@ const Signup = () => {
                 >
                   {" "}
                   <div
-                    class="alert alert-danger alert-dismissible fade show"
+                    class="alert alert-info alert-dismissible fade show"
                     role="alert"
                   >
                     <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i>{" "}

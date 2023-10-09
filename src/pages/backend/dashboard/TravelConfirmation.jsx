@@ -558,8 +558,8 @@ const TravelConfirmation = () => {
                     <div className="col-md-4 bg-light">
                       <div className="h-100">
                         <div className="d-flex flex-column h-100 px-3 py-3">
-                          <div class="alert alert-info  text-center fw-bold fs-5" role="alert">
-                            <i class="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Once the date is marked on Calendar, it remains fixed and cannot be altered.
+                          <div className="alert alert-info  text-center fw-bold fs-5" role="alert">
+                            <i className="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Once the date is marked on Calendar, it remains fixed and cannot be altered.
                           </div>
                           <div className="my-auto py-4">
                             <h4 className="font-custom text-center fw-bold text-decoration-none text-dark">
