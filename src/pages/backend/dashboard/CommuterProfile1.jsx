@@ -420,20 +420,7 @@ const CommuterProfile1 = () => {
                         <h5 className="fw-bold text-secondary">{profession}</h5>
                       </div>
                     </div>
-                    {/* <div className="row px-5 mb-2">
-                      <div className="col-md-6">
-                        {mobileNo !== "" ? (
-                          <>
-                            <h5 className="text-dark-green fw-bold text-end font-custom">Contact No:</h5>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      <div className="col-md-6">
-                        <h5 className="fw-bold text-secondary">{mobileNo}</h5>
-                      </div>
-                    </div> */}
+                   
                   </div>
                 </div>
               </div>
@@ -461,10 +448,7 @@ const CommuterProfile1 = () => {
                     >
                     View On Map</button>
                 </li>
-                {/* <li class="nav-item me-0" role="presentation">
-                  <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                    id="pills-cancel-tab" data-bs-toggle="pill" data-bs-target="#pills-cancel" type="button" role="tab" aria-controls="pills-cancel" aria-selected="false" >Cancel</button>
-                </li> */}
+             
               </ul>
               <div className="tab-content flex-grow-0" id="pills-tabContent">
                 <div className="tab-pane fade show active overflow-hidden" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -708,19 +692,7 @@ const CommuterProfile1 = () => {
                         </div>
                       </div>
 
-                      {/* <div className="col-md-4">
-                          {carModel !== "" ? (
-                            <>
-                              <h5 className="text-dark-green fw-bold font-custom">Car Model:</h5>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                        <div className="col-md-8">
-                          <h5 className="fw-bold text-secondary">{carModel}</h5>
-                          {carModel}
-                        </div> */}
+                   
                       <div className="row mb-2">
                         <div className="col-md-4">
                           {reg_year !== "" ? (
@@ -739,20 +711,7 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary"> {reg_year}</h5>
                         </div>
                       </div>
-                      {/* <div className="row mb-2">
-                          <div className="col-md-4">
-                            {RegYear !== "" ? (
-                              <>
-                                <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
-                          <div className="col-md-8">
-                            <h5 className="fw-bold text-secondary">{RegYear}</h5>
-                          </div>
-                        </div> */}
+                      
                       <div className="row mb-2">
                         <div className="col-md-4">
                           {car_reg_year !== "" ? (

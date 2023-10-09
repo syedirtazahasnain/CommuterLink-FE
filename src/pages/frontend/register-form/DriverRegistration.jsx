@@ -47,7 +47,7 @@ const DriverRegistration = () => {
     let value = e.target.value;
     value = value.replace(/[^a-zA-Z]/g, '');
     setSelectedCarBrand(value);
-    setIsCarBrandValid(value !== ''); 
+    setIsCarBrandValid(value !== '');
     if (value.length > 20) {
       value = value.slice(0, 20);
     }// Set validation based on whether a value is selected or not
@@ -56,28 +56,28 @@ const DriverRegistration = () => {
     // Check if the entered value is valid and reset the validation state
     setIsCarBrandValid(value.length === 20);
   };
- 
 
-    // Remove any special characters and spaces
-   
 
-    // Enforce a maximum length of 24 characters
-  
-    const handleDrivingLicenseMySelf = (e) => {
-      let value = e.target.value;
-      value = value.replace(/[^a-zA-Z0-9-]/g, '');
-      setInputDrivingLicenseMySelf(value);
-      setIsLicenseValid(value !== ''); 
-      if (value.length > 20) {
-        value = value.slice(0, 20);
-      }// Set validation based on whether a value is selected or not
-      setInputDrivingLicenseMySelf(value);
-  
-      // Check if the entered value is valid and reset the validation state
-      setIsLicenseValid(value.length === 20);
-    };
-   
- 
+  // Remove any special characters and spaces
+
+
+  // Enforce a maximum length of 24 characters
+
+  const handleDrivingLicenseMySelf = (e) => {
+    let value = e.target.value;
+    value = value.replace(/[^a-zA-Z0-9-]/g, '');
+    setInputDrivingLicenseMySelf(value);
+    setIsLicenseValid(value !== '');
+    if (value.length > 20) {
+      value = value.slice(0, 20);
+    }// Set validation based on whether a value is selected or not
+    setInputDrivingLicenseMySelf(value);
+
+    // Check if the entered value is valid and reset the validation state
+    setIsLicenseValid(value.length === 20);
+  };
+
+
   const AddNewStart = () => {
     setAddNewStart(true);
     setAddNewStartDropdown(false);
@@ -106,39 +106,31 @@ const DriverRegistration = () => {
                   <div class="bg-light text-left">
                     <ol class="p-4 text-justify">
                       <li>
-                        Commuterslink keeps a month's advance and your money is
-                        secure and will be paid transferred to your wallet on a daily
-                        basis.
+                      Commuterslink holds a 15-day advance from the traveler and, upon confirming the journey, will transfer the daily ride cost to your wallet. Subsequently, you can receive these funds through the chosen preferred payment method at the time of registration. Your money is not only secure but also protected with end-to-end encryption.
                       </li>
                   
                    
                       <li >
-                        No bargaining involved. Commuterslink works out the per day cost
-                        based upon a fixed relationized formula. If the petrol prices go
-                        up or down, the same will be adjusted.
+                      No bargaining involved. Commuterslink works out the per-day per-seat cost based upon a fixed rationalized formula. If the petrol prices go up or down, the same will be adjusted.
                       </li>
                  
                   
-                    <li> No dispute on cost,payments,number of days the services were
-                    utilized etc. </li>
+                    <li> No dispute on cost,payments,number of days the services were utilized etc.</li>
         
-                   <li>If you stop provision of car seat to a partner for a reason
-                   or other with 1 week, your payment is secure and you will still be able to
-               get another match.</li> 
+                   <li>If you stop provision of car seat to a partner for a reason or other with 1 week, your payment is secure and you will still be able to get another match.</li> 
                             
                           <li>
-                         CommutersLink verifies all the data of its members and ensures
-                          your safety and security                        </li>
+                          CommutersLink verifies all the data of its members and ensures your safety and security.                        </li>
                      
                       <li>
-                      By receiving money through CommutersLink you remain an active
-                     member and have access to to other options to find travel buddies.                        </li>
+                      By receiving money through CommutersLink you remain an active member and have access to other options to find travel buddies.                       </li>
                          
                            <li>
-                        Last but not the least it is the most respectable way of
-                                      receiving money as you donot have to ask your travel buddy
-                                      to pay you cash.                                                </li></ol>
-                  </div>
+                           Last but not the least, it is the most respectable way of receiving money as you do not have to ask your travel buddy to pay you cash.                                            </li>
+                           <li>You can add or update your preferred payment method from your profile page.</li>
+                           </ol>
+
+                           </div>
                 </div>
               </div>
             </div>
@@ -165,6 +157,7 @@ const DriverRegistration = () => {
   const [education, setEducation] = useState("");
   const [cnic, setCnic] = useState('');
   const [isValidCnic, setIsValidCnic] = useState(true);
+  const [isValidCnic1, setIsValidCnic1] = useState(true);
   const [cnicFront, setCnicFront] = useState("");
   const [cnicFrontExt, setCnicFrontExt] = useState("");
   const [cnicBack, setCnicBack] = useState("");
@@ -796,6 +789,27 @@ const DriverRegistration = () => {
       );
       setCnic(formattedCnic);
       setIsValidCnic(validateCnic(formattedCnic));
+    }
+  };
+  function validateCnic1(inputDriverCnicNumber) {
+    // Regular expression pattern for validating Pakistani CNIC (12345-1234567-1)
+    const cnicPattern = /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/;
+
+    return cnicPattern.test(inputDriverCnicNumber);
+  }
+  const handleCnicChange1 = (event) => {
+    const inputCnic = event.target.value.replace(/\D/g, '');
+
+    if (inputDriverCnicNumber.length < 15 && inputDriverCnicNumber.length > 15) {
+      setIsValidCnic1(false);
+    }
+    if (inputCnic.length <= 13) {
+      const formattedCnic = inputCnic.replace(
+        /^(\d{5})(\d{7})(\d{1})$/,
+        '$1-$2-$3'
+      );
+      setInputDriverCnicNumber(formattedCnic);
+      setIsValidCnic1(validateCnic1(formattedCnic));
     }
   };
   const handleCnicFront = (e) => {
@@ -1620,7 +1634,17 @@ const DriverRegistration = () => {
                       >
                         <h2 className="text-success mb-3 text-center">
                           STARTING POINT
+                          {/* <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                            <Link
+                              // to='/notification'
+                              className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                            </Link>
+                          </Tooltip> */}
                         </h2>
+
 
 
                         <Form.Group
@@ -1641,13 +1665,13 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                              <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
                                 <Link
                                   // to='/notification'
                                   className='mx-1 h-15px d-inline-block'
                                   style={{ cursor: "pointer" }}
                                 >
-                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip>
 
@@ -1836,13 +1860,13 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                              <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
                                 <Link
                                   // to='/notification'
                                   className='mx-1 h-15px d-inline-block'
                                   style={{ cursor: "pointer" }}
                                 >
-                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip>
 
@@ -2096,13 +2120,13 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="text-center">{"You will got maximum suggestions according to your selected time"}</h6>}>
+                              <Tooltip title={<h6 className="px-2">{"You can specify the times you are available for commuting by selecting both the start and return times.."}</h6>}>
                                 <Link
                                   // to='/notification'
                                   className='mx-1 h-15px d-inline-block'
                                   style={{ cursor: "pointer" }}
                                 >
-                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip>
 
@@ -2344,7 +2368,7 @@ const DriverRegistration = () => {
 
                     {/* {daysSelected} */}
 
-                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
+                    <Row className="mb-3 py-3 px-3 shadow shadow-sm form-color-field">
                       <Form.Group as={Col} md="12" controlId="validationCustom11" className="mb-2">
                         <Form.Label className="fs-6 text-black">My Gender</Form.Label>
                         <Form.Select
@@ -2373,13 +2397,13 @@ const DriverRegistration = () => {
                             }}
                           // onClick={AddNewStart}
                           >
-                            <Tooltip title={<h6 className="text-center">{"You will got maximum suggestions according to your selected preferred gender"}</h6>}>
+                            <Tooltip title={<h6 className="px-2">{"You can choose the gender of your travel partner based on your comfort level."}</h6>}>
                               <Link
                                 // to='/notification'
                                 className='mx-1 h-15px d-inline-block'
                                 style={{ cursor: "pointer" }}
                               >
-                                <i className="fa-solid fs-5 fa-circle-info "></i>
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                               </Link>
                             </Tooltip>
 
@@ -2400,7 +2424,7 @@ const DriverRegistration = () => {
                       </Form.Group>
                     </Row>
 
-                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
+                    <Row className="mb-3 py-3 px-3  shadow shadow-sm form-color-field">
                       <Form.Group as={Col} md="12" controlId="validationCustom13" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Year of Birth
@@ -2485,7 +2509,7 @@ const DriverRegistration = () => {
                     {/* 
                     <Row className="mb-3">
                     </Row> */}
-                    <Row className="mb-3 py-3 shadow shadow-sm form-color-field">
+                    <Row className="mb-3 py-3 px-3 shadow shadow-sm form-color-field">
 
                       <Form.Group as={Col} md="12" controlId="validationCustom17" className="mb-2">
                         <Form.Label className="fs-6 text-black">CNIC</Form.Label>
@@ -2493,13 +2517,13 @@ const DriverRegistration = () => {
                           required
                           type="text"
                           className={`${isValidCnic ? '' : 'is-invalid'}`}
-                          placeholder="12345-1234567-1"
+                          placeholder="1234512345671"
                           value={cnic}
                           onChange={handleCnicChange}
                         />
                         {!isValidCnic && (
                           <div className="invalid-feedback">
-                            Please enter a valid CNIC in the format 12345-1234567-1.
+                            Please enter a valid CNIC in the format 1234512345671.
                           </div>
                         )}
                       </Form.Group>
@@ -2507,46 +2531,105 @@ const DriverRegistration = () => {
                         controlId="formFile"
                         as={Col}
                         md="12"
-                        className="mb-2"
+                        className="mb-1"
                       >
-                        <Form.Label className="fs-6 text-black">
-                          {" "}
-                          Upload CNIC (Front)
-                        </Form.Label>
+                        <div className="d-flex justify-content-between align-items-center pt-1">
+                          <Form.Label className="fs-6 text-black">
+                            {" "}
+                            Upload CNIC (Front)
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+
+                            }}
+
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+
                         <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFront} />
-                        <Form.Text className="text-danger" style={{ color: "#000" }}>
-                          The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                        </Form.Text>
+
                       </Form.Group>
                       <Form.Group
                         controlId="formFile"
                         as={Col}
                         md="12"
-                        className="mb-2"
+                        className="mb-1"
                       >
-                        <Form.Label className="fs-6 text-black">
-                          {" "}
-                          Upload CNIC (Back)
-                        </Form.Label>
+                        <div className="d-flex justify-content-between align-items-center pt-1">
+                          <Form.Label className="fs-6 text-black">
+                            {" "}
+                            Upload CNIC (Back)
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+
+                            }}
+
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+
                         <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
-                        <Form.Text className="text-danger" style={{ color: "#000" }}>
-                          The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                        </Form.Text>
+
                       </Form.Group>
                       <Form.Group
                         controlId="formFile"
                         as={Col}
                         md="12"
-                        className="mb-3"
+                        className="mb-1"
                       >
-                        <Form.Label className="fs-6 text-black">
-                          Upload Your Picture
-                        </Form.Label>
+                        <div className="d-flex justify-content-between align-items-center pt-2">
+                          <Form.Label className="fs-6 text-black">
+                            Upload Your Picture
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+
+                            }}
+
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your recent picture in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+
                         <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handlePicture} />
-                        <Form.Text className="text-danger" style={{ color: "#000" }}>
-                          The picture will only be shown to members with whom you
-                          agree to commute
-                        </Form.Text>
+
                       </Form.Group>
                     </Row>
 
@@ -2563,9 +2646,9 @@ const DriverRegistration = () => {
                         onClick={() => {
                           setShowDriverForm(true);
                         }}
-                        // disabled={isLoading}
+                      // disabled={isLoading}
                       >
-                          Next
+                        Next
                         {/* {isLoading ? (
                           <span>
                             <i className="fa fa-spinner fa-spin" /> Proceed...
@@ -2738,18 +2821,40 @@ const DriverRegistration = () => {
                         </Form.Group>
                         <Form.Group controlId="formFile" as={Col} md="12"
                         >
-                          <Form.Label className="text-dark fs-6">
-                            Upload Car Image with visible number plate
-                          </Form.Label>
+                          <div className="d-flex justify-content-between align-items-center pt-1">
+                            <Form.Label className="text-dark fs-6">
+                              Upload Car Image with visible number plate
+                            </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+
+                              }}
+
+                            >
+                              <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your car image in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 10MB."}</h6>}>
+                                <Link
+
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                </Link>
+                              </Tooltip>
+
+                            </p></div>
+
                           <Form.Control
                             type="file"
                             accept="image/png, image/jpeg"
                             onChange={handleImageSelect}
                             required
                           />
-                          <Form.Text className="text-danger" style={{ color: "#000" }}>
+                          {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                             The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                          </Form.Text>
+                          </Form.Text> */}
                         </Form.Group>
                       </div>
                     </div>
@@ -3334,9 +3439,9 @@ const DriverRegistration = () => {
                                   "Please enter a valid License No."
                                 }
                               />
-                             
+
                             </Form.Group>
-                           
+
                             <Form.Group
                               as={Col}
                               md="12"
@@ -3385,13 +3490,35 @@ const DriverRegistration = () => {
                               controlId="validationCustom34"
                               className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Upload License (front)
-                              </Form.Label>
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Front)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3399,13 +3526,35 @@ const DriverRegistration = () => {
                               controlId="validationCustom35"
                               className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Upload License (back)
+                               <div className="d-flex justify-content-between align-items-center pt-1"> 
+                               <Form.Label className="text-dark fs-6">
+                                Upload License (Back)
                               </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                              
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                           </div></div>
                         {/* <Row className="mb-3 mt-3">
@@ -3543,27 +3692,56 @@ const DriverRegistration = () => {
                               <Form.Control
                                 required
                                 type="text"
-                                className="text-secondary"
-                                placeholder="CNIC: xxxxxxxxxxxxx"
+                                className={`${isValidCnic1 ? '' : 'is-invalid'}`}
+                                placeholder="1234512345671"
                                 value={inputDriverCnicNumber}
-                                onChange={(e) => setInputDriverCnicNumber(e.target.value)}
-                                defaultValue=""
-                                maxLength={13}
+                                // onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                                onChange={handleCnicChange1}
+                              // defaultValue=""
+                              // maxLength={13}
                               />
+                              {!isValidCnic1 && (
+                                <div className="invalid-feedback">
+                                  Please enter a valid CNIC in the format 1234512345671.
+                                </div>
+                              )}
                             </Form.Group>
+
                             <Form.Group
                               as={Col}
                               md="12"
                               controlId="validationCustom39"
                               className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
+                                <div className="d-flex justify-content-between align-items-center pt-1"> 
+                                <Form.Label className="text-dark fs-6">
                                 Upload CNIC (Front)
                               </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                           
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3571,13 +3749,35 @@ const DriverRegistration = () => {
                               controlId="validationCustom40"
                               className="mb-2"
                             >
+                              <div className="d-flex justify-content-between align-items-center pt-1"> 
                               <Form.Label className="text-dark">
                                 Upload CNIC (Back)
                               </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                              
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                           </div></div>
 
@@ -3671,13 +3871,35 @@ const DriverRegistration = () => {
                               controlId="validationCustom44"
                               className="mb-2"
                             >
+                              <div className="d-flex justify-content-between align-items-center pt-1"> 
                               <Form.Label className="text-dark fs-6">
-                                Upload License (front)
+                                Upload License (Front)
                               </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                              
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -3685,13 +3907,35 @@ const DriverRegistration = () => {
                               controlId="validationCustom45"
                               className="mb-2"
                             >
+                              <div className="d-flex justify-content-between align-items-center pt-1"> 
                               <Form.Label className="text-dark fs-6">
-                                Upload License (back)
+                                Upload License (Back)
                               </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                            
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                           </div></div>
                         {/* <Row className="mb-3 mt-3">
@@ -4029,13 +4273,35 @@ const DriverRegistration = () => {
                             controlId="validationCustom34"
                             className="mb-2"
                           >
-                            <Form.Label className="text-dark fs-6">
-                              Upload License (front)
-                            </Form.Label>
+                             <div className="d-flex justify-content-between align-items-center pt-1"> 
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (Front)
+                              </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                           
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
+                            </Form.Text> */}
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -4043,13 +4309,35 @@ const DriverRegistration = () => {
                             controlId="validationCustom35"
                             className="mb-2"
                           >
+                            <div className="d-flex justify-content-between align-items-center pt-1"> 
                             <Form.Label className="text-dark fs-6">
-                              Upload License (back)
+                              Upload License (Back)
                             </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                           
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
+                            </Form.Text> */}
                           </Form.Group>
                         </div></div>
                       <div className="row mb-3 mt-2 shadow shadow-sm">
@@ -4083,7 +4371,7 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom47"
+                            controlId="validationCustom38"
                             className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
@@ -4092,13 +4380,19 @@ const DriverRegistration = () => {
                             <Form.Control
                               required
                               type="text"
-                              className="text-secondary"
-                              placeholder="CNIC: xxxxxxxxxxxxx"
+                              className={`${isValidCnic1 ? '' : 'is-invalid'}`}
+                              placeholder="1234512345671"
                               value={inputDriverCnicNumber}
-                              onChange={(e) => setInputDriverCnicNumber(e.target.value)}
-                              defaultValue=""
-                              maxLength={13}
+                              // onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                              onChange={handleCnicChange1}
+                            // defaultValue=""
+                            // maxLength={13}
                             />
+                            {!isValidCnic1 && (
+                              <div className="invalid-feedback">
+                                Please enter a valid CNIC in the format 1234512345671.
+                              </div>
+                            )}
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -4106,13 +4400,35 @@ const DriverRegistration = () => {
                             controlId="validationCustom48"
                             className="mb-2"
                           >
+                            <div className="d-flex justify-content-between align-items-center pt-1"> 
                             <Form.Label className="text-dark fs-6">
                               Upload CNIC (Front)
                             </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                           
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
+                            </Form.Text> */}
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -4120,13 +4436,35 @@ const DriverRegistration = () => {
                             controlId="validationCustom49"
                             className="mb-2"
                           >
+                            <div className="d-flex justify-content-between align-items-center pt-1"> 
                             <Form.Label className="text-dark">
                               Upload CNIC (Back)
                             </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                            
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
+                            </Form.Text> */}
                           </Form.Group>
                         </div></div>
                       {/* <Row className="mb-3 mt-3">
@@ -4282,13 +4620,35 @@ const DriverRegistration = () => {
                             controlId="validationCustom53"
                             className="mb-2"
                           >
+                            <div className="d-flex justify-content-between align-items-center pt-1"> 
                             <Form.Label className="text-dark fs-6">
-                              Upload License (front)
+                              Upload License (Front)
                             </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                            
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
+                            </Form.Text> */}
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -4296,9 +4656,31 @@ const DriverRegistration = () => {
                             controlId="validationCustom54"
                             className="mb-2"
                           >
+                            <div className="d-flex justify-content-between align-items-center pt-1"> 
                             <Form.Label className="text-dark fs-6">
-                              Upload License (back)
+                              Upload License (Back)
                             </Form.Label>
+                          <p
+                          className="colorplace text-danger"
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+
+                          }}
+                       
+                        >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                              
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                            
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div>
@@ -4350,13 +4732,13 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="text-center">{"To select any one field for transactions"}</h6>}>
+                              <Tooltip title={<h6 className="px-2">{"You can add or update your preferred payment method from your profile page."}</h6>}>
                                 <Link
                                   // to='/notification'
                                   className='mx-1 h-15px d-inline-block'
                                   style={{ cursor: "pointer" }}
                                 >
-                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip>
 

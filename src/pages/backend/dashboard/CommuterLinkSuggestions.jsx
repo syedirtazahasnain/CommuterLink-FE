@@ -401,15 +401,15 @@ const CommuterLinkSuggestions = () => {
                   className="card-img-top w-40px m-auto  p-2 me-2" style={{backgroundColor:'#0A6155'}}
                 />
                 <span className=" fw-bold">
-                  Active Suggestions
+                  Active 
                 </span>              </div>
-              <div className="me-3 ">
+              <div className="me-3">
                 <img
                   src={`${BASE_URL}/assets/images/Vector.png`}
                   className="card-img-top w-40px m-auto  p-2 me-2" style={{backgroundColor:'#ff8a00'}}
                 />
                 <span className=" fw-bold">
-                Pending Suggestions
+                Pending 
                 </span>
               </div>
               <div className="me-3">
@@ -418,7 +418,7 @@ const CommuterLinkSuggestions = () => {
                   className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
                 />
                 <span className=" fw-bold">
-                  Inactive Suggestions
+                  Inactive 
                 </span>
               </div>
             </div>
@@ -462,7 +462,7 @@ const CommuterLinkSuggestions = () => {
                   className="card-img-top w-40px m-auto  p-2 me-2" style={{backgroundColor:'#0A6155'}}
                 />
                 <span className=" fw-bold">
-                  Active Requests
+                  Active
                 </span>              </div>
               <div className="me-3 ">
                 <img
@@ -470,7 +470,7 @@ const CommuterLinkSuggestions = () => {
                   className="card-img-top w-40px m-auto p-2 me-2" style={{backgroundColor:'#ff8a00'}}
                 />
                 <span className=" fw-bold">
-                Pending Requests
+                Pending
                 </span>
               </div>
               <div className="me-3">
@@ -479,7 +479,7 @@ const CommuterLinkSuggestions = () => {
                   className="card-img-top w-40px m-auto bg-secondary p-2 me-2"
                 />
                 <span className=" fw-bold">
-                  Inactive Requests
+                  Inactive
                 </span>
               </div>
             </div>

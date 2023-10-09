@@ -6,7 +6,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { Modal, Alert } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";   
+import { Link } from "react-router-dom";
 import { Button } from "@mui/base";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -18,7 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setloginState } from "../../../redux/loginSlice";
 import { setsignupState } from "../../../redux/signupSlice";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const OtpPage = () => {
 
@@ -89,15 +90,16 @@ const OtpPage = () => {
         }
       } else {
         //alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -123,17 +125,18 @@ const OtpPage = () => {
     }
   };
   const otpSuccessful = () => {
-    Swal.fire({
-      position: 'top',
-      title: 'Congratulations!',
-      text: 'Your OTP has been matched',
-      icon: 'success',
-      showCancelButton: false,
-      confirmButtonText: 'OK',
-      customClass: {
-        confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-      },
-    });
+    // Swal.fire({
+    //   position: 'top',
+    //   title: 'Congratulations!',
+    //   text: 'Your OTP has been matched',
+    //   icon: 'success',
+    //   showCancelButton: false,
+    //   confirmButtonText: 'OK',
+    //   customClass: {
+    //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+    //   },
+    // });
+    displayNotification("success", "Your OTP has been matched");
   };
 
   const validateOTP = () => {
@@ -147,15 +150,16 @@ const OtpPage = () => {
     } else {
       setIsOTPMatched(false);
       // alert("OTP does not match. Please try again.");
-      Swal.fire({
-        position: 'top',
-        // icon: 'warning',
-        text: 'OTP does not match. Please try again.',
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      }
-      )
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'warning',
+      //   text: 'OTP does not match. Please try again.',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("error", "OTP does not match. Please try agian.")
     }
   };
 
@@ -191,26 +195,28 @@ const OtpPage = () => {
       );
     } else {
       // alert("Resend OTP Error: " + jsonresponse.message);
-      Swal.fire({
-        position: 'top',
-        // icon: 'error',
-        text: `${jsonresponse.message}`,
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      }
-      )
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'error',
+      //   text: `${jsonresponse.message}`,
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("error", `${jsonresponse.message}`);
     }
     // alert("OTP has been sent again!");
-    Swal.fire({
-      position: 'top',
-      // icon: 'warning',
-      text: 'OTP has been sent again!',
-      customClass: {
-        confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-      },
-    }
-    )
+    // Swal.fire({
+    //   position: 'top',
+    //   // icon: 'warning',
+    //   text: 'OTP has been sent again!',
+    //   customClass: {
+    //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+    //   },
+    // }
+    // )
+    displayNotification("warning", "OTP has been sent again!");
   };
 
   const handleShowModal = () => {
@@ -310,29 +316,33 @@ const OtpPage = () => {
                     >
                       Enter OTP
                     </Typography>
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center d-flex">
                       {otp.map((data, index) => {
                         return (
-                          <FormControl
-                            sx={{ m: 1, width: "5ch" }}
-                            variant="outlined"
-                            key={0}
-                          >
-                            <TextField
-                              id="outlined-adornment-weight"
-                              className="otp-input"
-                              aria-describedby="outlined-weight-helper-text"
+                          <div className="col-md-2 col-sm-2 col-3" key={0}>
+                            <FormControl
+                              sx={{ m: 1,width: "100%", // Make the form control take the full width
+                              marginBottom: "10px", }}
+                              variant="outlined"
                               key={1}
-                              value={data}
-                              onChange={(e) => handleInputChange(e, index)}
-                              onFocus={(e) => e.target.select()}
-                              inputProps={{
-                                "aria-label": "weight",
-                                maxLength: 1,
-                              }}
-                              inputRef={(el) => (inputRefs.current[index] = el)}
-                            />
-                          </FormControl>
+                            >
+                              <TextField
+                                id="outlined-adornment-weight"
+                                className="otp-input"
+                                aria-describedby="outlined-weight-helper-text"
+                                key={1}
+                                value={data}
+                                onChange={(e) => handleInputChange(e, index)}
+                                onFocus={(e) => e.target.select()}
+                                inputProps={{
+                                  "aria-label": "weight",
+                                  maxLength: 1,
+                                  style: { textAlign: "center" },
+                                }}
+                                inputRef={(el) => (inputRefs.current[index] = el)}
+                              />
+                            </FormControl>
+                          </div>
                         );
                       })}
                     </div>
