@@ -20,6 +20,7 @@
   --bg-green: #189583;
   --bg-dark-green: rgba(29, 104, 93, 1);
   --bg-dark-success-light: rgb(89, 238, 216);
+  --bs-dark-blue:'#1439bf';
  }
 
  .text-yellow{
@@ -989,4 +990,8 @@ a.nav-link:hover {
 
 .contactcolor{
   background-color: rgb(217 255 249);
+}
+
+.icon-tooltip-blue{
+  color:rgba(32, 158, 141, 1)!important;
 }

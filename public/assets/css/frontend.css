@@ -13,6 +13,7 @@
   --bg-orange: #F89F5B;
   --bg-dark-green: rgba(29, 104, 93, 1);
   --bg-dark-success-light: rgb(89, 238, 216);
+  --bs-dark-blue:'#1439bf';
 }
 body{
   scroll-behavior: smooth;
@@ -582,3 +583,8 @@ i {
 .input:focus, .btn:focus {
   outline: 0;
 }
+.icon-tooltip-blue{
+  color: var(--bs-dark-blue) !important;
+}
+
+

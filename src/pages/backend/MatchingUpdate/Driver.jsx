@@ -220,7 +220,7 @@ const Driver = () => {
                                 </div>
                                 <div className="card-body text-dark">
                                     <div className="container text-center mt-4">
-                                        <h2 className="text-success fw-bold mb-4">Update Matching Criteria</h2>
+                                        <h2 className="text-success fw-bold mb-4">Update Additional Information</h2>
                                         <Form className="text-center">
                                             {showfield === true ? (<>
                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">

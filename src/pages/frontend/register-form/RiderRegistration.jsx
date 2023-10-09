@@ -1057,13 +1057,13 @@ const RiderRegistration = () => {
                           }}
                         // onClick={AddNewStart}
                         >
-                          <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                          <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
                             <Link
                               // to='/notification'
                               className='mx-1 h-15px d-inline-block'
                               style={{ cursor: "pointer" }}
                             >
-                              <i className="fa-solid fs-5 fa-circle-info "></i>
+                              <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                             </Link>
                           </Tooltip>
 
@@ -1256,13 +1256,13 @@ const RiderRegistration = () => {
                           }}
                         // onClick={AddNewStart}
                         >
-                          <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                          <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
                             <Link
                               // to='/notification'
                               className='mx-1 h-15px d-inline-block'
                               style={{ cursor: "pointer" }}
                             >
-                              <i className="fa-solid fs-5 fa-circle-info "></i>
+                              <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                             </Link>
                           </Tooltip>
 
@@ -1527,13 +1527,13 @@ const RiderRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="text-center">{"You will got maximum suggestions according to your selected time"}</h6>}>
+                              <Tooltip title={<h6 className="px-2">{"You can specify the times you are available for commuting by selecting both the start and return times."}</h6>}>
                                 <Link
                                   // to='/notification'
                                   className='mx-1 h-15px d-inline-block'
                                   style={{ cursor: "pointer" }}
                                 >
-                                  <i className="fa-solid fs-5 fa-circle-info "></i>
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip>
 
@@ -1584,7 +1584,7 @@ const RiderRegistration = () => {
                     </Form.Group>
                   </div>
                 </div>
-                <Row className="mb-3 form-color-field"
+                <Row className="mb-3 px-3 form-color-field"
                 //  style={{ border: "1px solid #cddbd9", backgroundColor: '#cddbd9' }}
 
                 >
@@ -1729,7 +1729,7 @@ const RiderRegistration = () => {
                 </Row>
 
                 <Row
-                  className="mb-3 py-3 shadow shadow-sm form-color-field"
+                  className="mb-3 py-3 px-3 shadow shadow-sm form-color-field"
                 // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
@@ -1773,13 +1773,13 @@ const RiderRegistration = () => {
                             }}
                           // onClick={AddNewStart}
                           >
-                            <Tooltip title={<h6 className="text-center">{"You will got maximum suggestions according to your selected preferred gender"}</h6>}>
+                            <Tooltip title={<h6 className="px-2">{"You can choose the gender of your travel partner based on your comfort level."}</h6>}>
                               <Link
                                 // to='/notification'
                                 className='mx-1 h-15px d-inline-block'
                                 style={{ cursor: "pointer" }}
                               >
-                                <i className="fa-solid fs-5 fa-circle-info "></i>
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                               </Link>
                             </Tooltip>
 
@@ -1802,7 +1802,7 @@ const RiderRegistration = () => {
                 </Row>
 
                 <Row
-                  className="mb-3 py-3 shadow shadow-sm form-color-field"
+                  className="mb-3 py-3 px-3 shadow shadow-sm form-color-field"
                 // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
@@ -1910,7 +1910,7 @@ const RiderRegistration = () => {
                   </Form.Group>
                 </Row>
                 <Row
-                  className="mb-3 py-3 shadow shadow-sm form-color-field"
+                  className="mb-3 py-3 px-3 shadow shadow-sm form-color-field"
                 // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
@@ -1919,6 +1919,7 @@ const RiderRegistration = () => {
                     controlId="validationCustom19"
                     className="mb-2"
                   >
+                    
                     <Form.Label className="fs-6 text-black">CNIC</Form.Label>
                     <Form.Control
                       required
@@ -1930,7 +1931,7 @@ const RiderRegistration = () => {
                     />
                     {!isValidCnic && (
                       <div className="invalid-feedback">
-                        Please Enter a Valid CNIC in the Format 12345-1234567-1.
+                        Please Enter a Valid CNIC in the Format 1234512345671.
                       </div>
                     )}
                   </Form.Group>
@@ -1940,19 +1941,38 @@ const RiderRegistration = () => {
                     md="12"
                     className="mb-2"
                   >
+                    <div className="d-flex justify-content-between align-items-center">
                     <Form.Label className="fs-6 text-black">
                       {" "}
                       Upload CNIC (Front)
                     </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          // onClick={AddNewStart}
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                                // to='/notification'
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                  
                     <Form.Control
                       type="file"
                       accept="image/png, image/jpeg"
                       required
                       onChange={handleCnicFront}
                     />
-                    <Form.Text className="text-danger" style={{ color: "#000" }}>
-                      The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                    </Form.Text>
+                    
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
@@ -1960,19 +1980,38 @@ const RiderRegistration = () => {
                     md="12"
                     className="mb-2"
                   >
+                    <div className="d-flex justify-content-between align-items-center">
                     <Form.Label className="fs-6 text-black">
                       {" "}
                       Upload CNIC (Back)
                     </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          // onClick={AddNewStart}
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                                // to='/notification'
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                    
                     <Form.Control
                       type="file"
                       accept="image/png, image/jpeg"
                       required
                       onChange={handleCnicBack}
                     />
-                    <Form.Text className="text-danger" style={{ color: "#000" }}>
-                      The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                    </Form.Text>
+                   
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
@@ -1980,22 +2019,42 @@ const RiderRegistration = () => {
                     md="12"
                     className="mb-3"
                   >
+                    <div className="d-flex justify-content-between align-items-center">
                     <Form.Label className="fs-6 text-black">
                       Upload Your Picture
                     </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          // onClick={AddNewStart}
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your recent picture in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 10MB."}</h6>}>
+                              <Link
+                                // to='/notification'
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+                  
                     <Form.Control
                       type="file"
                       accept="image/png, image/jpeg"
                       required
                       onChange={handlePicture}
                     />
-                    <Form.Text
+                    {/* <Form.Text
                       className="text-danger"
                       style={{ color: "#000" }}
                     >
-                      The picture will only be shown to members with whom you
-                      agree to commute
-                    </Form.Text>
+                      
+                    </Form.Text> */}
                   </Form.Group>
                 </Row>
 

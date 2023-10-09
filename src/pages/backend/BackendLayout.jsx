@@ -36,6 +36,7 @@ const BackendLayout = ({ children }) => {
   const [image, setImage] = useState("");
   const [submitbtn, setSubmit] = useState(false);
   const [badgeNo, setBadgeNo] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // For getting current date
   const currentDate = new Date();
@@ -72,10 +73,10 @@ const BackendLayout = ({ children }) => {
         // confirmButtonColor: 'green',
         cancelButtonColor: 'swal-custom',
         confirmButtonText: 'Logout',
-        cancelButtonText:'Cancel',
+        cancelButtonText: 'Cancel',
         customClass: {
-          confirmButton:'swal-custom',
-          cancelButton:'swal-custom',
+          confirmButton: 'swal-custom',
+          cancelButton: 'swal-custom',
         },
         // cancelClass:{
 
@@ -117,6 +118,9 @@ const BackendLayout = ({ children }) => {
   useEffect(() => {
     getNotifications();
   }, []);
+  useEffect(() => {
+    document.getElementById("kt_app_body").dataset.ktAppSidebarMinimize = !sidebarOpened ? "on" : "";
+  }, [sidebarOpened]);
 
   const getProfileData = async () => {
     try {
@@ -217,7 +221,7 @@ const BackendLayout = ({ children }) => {
     <>
       {loading ? (
         <div className="d-flex align-items-center mx-auto my-auto">
-          <Loading/>
+          <Loading />
         </div>
       ) : (
         <div className="container-fluid font-custom bg-white">
@@ -231,9 +235,7 @@ const BackendLayout = ({ children }) => {
                   href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"
                 />
                 <div
-                  className="d-flex flex-column flex-root app-root"
-                  id="kt_app_root"
-                >
+                  className="d-flex flex-column flex-root app-root" id="kt_app_root">
                   <div
                     className="app-page flex-column flex-column-fluid bg-white"
                     id="kt_app_page"
@@ -250,9 +252,11 @@ const BackendLayout = ({ children }) => {
                           <button
                             className="btn btn-icon btn-active-color-primary w-35px h-35px"
                             id="kt_app_sidebar_mobile_toggle"
-                            onClick={() =>
-                              dispatch(setSidebarState(!sidebarOpened))
-                            }
+                            data-kt-toggle="true"
+                            data-kt-toggle-state="active"
+                            data-kt-toggle-target="body"
+                            data-kt-toggle-name="app-sidebar-minimize"
+                            onClick={() => dispatch(setSidebarState(!sidebarOpened))}
                           >
                             <span className="svg-icon svg-icon-2 svg-icon-md-1">
                               <svg
@@ -290,7 +294,7 @@ const BackendLayout = ({ children }) => {
                               id="kt_header_user_menu_toggle"
                             >
                               <div
-                                className="d-flex"
+                                className="d-flex pt-1"
                                 data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
                                 data-kt-menu-attach="parent"
                                 data-kt-menu-placement="bottom-end"
@@ -397,10 +401,13 @@ const BackendLayout = ({ children }) => {
                         data-kt-drawer-width="225px"
                         data-kt-drawer-direction="start"
                         data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle"
+                        style={{ backgroundColor: "#363740" }}
+
                       >
                         <div
                           className="app-sidebar-logo sidebar-bg border-1"
                           id="kt_app_sidebar_logo"
+                          style={{ borderBottom: "#363740, solid" }}
                         >
                           <div className="container text-center" id="kt_app_sidebar_logo">
                             <img
@@ -423,6 +430,7 @@ const BackendLayout = ({ children }) => {
                             data-kt-toggle-state="active"
                             data-kt-toggle-target="body"
                             data-kt-toggle-name="app-sidebar-minimize"
+                            onClick={() => dispatch(setSidebarState(!sidebarOpened))  }
                           >
                             <span className="svg-icon svg-icon-2 rotate-180 text-success">
                               <svg
@@ -545,7 +553,7 @@ const BackendLayout = ({ children }) => {
                                   </span>
                                 </Link>
                               </div>
-                              <div className="menu-item border-custom">
+                              {/* <div className="menu-item border-custom">
                                 <Link
                                   className={`menu-link ${currentPage == "matchingupdate" ? "active" : ""
                                     }`}
@@ -563,7 +571,7 @@ const BackendLayout = ({ children }) => {
                                     Update Matching Criteria
                                   </span>
                                 </Link>
-                              </div>
+                              </div> */}
                               <div className="menu-item border-custom">
                                 <Link
                                   className={`menu-link ${currentPage == "contactus" ? "active" : ""
@@ -587,7 +595,7 @@ const BackendLayout = ({ children }) => {
                                 <Link
                                   className={`menu-link ${currentPage == "whatsapp" ? "active" : ""
                                     }`}
-                           
+
                                   to={"https://wa.me/923335069216"}
                                   style={{
                                     borderRadius: "0%",

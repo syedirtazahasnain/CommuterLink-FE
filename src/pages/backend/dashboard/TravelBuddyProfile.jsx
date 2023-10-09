@@ -340,7 +340,7 @@ const TravelBuddyProfile = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         calendarPicker();
-        
+
       }
     })
   }
@@ -647,6 +647,7 @@ const TravelBuddyProfile = () => {
                           )}
                         </div>
                         <div className="col-md-8">
+                          
                           <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
                         </div>
                       </div>
@@ -654,7 +655,7 @@ const TravelBuddyProfile = () => {
                         <div className="col-md-4">
                           {carAC !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Car have AC:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">Car has AC:</h5>
                             </>
                           ) : (
                             <></>

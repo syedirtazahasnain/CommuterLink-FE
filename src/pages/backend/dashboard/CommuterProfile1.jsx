@@ -375,11 +375,11 @@ const CommuterProfile1 = () => {
                 </div>
                 <div className="card-body bg-card-grey">
                   <div className="card-text">
-                    <div className="row  mb-2">
+                    <div className="row px-5 mb-2">
                       <div className="col-md-6 ">
                         {gender !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold font-custom">Gender:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">Gender:</h5>
                           </>
                         ) : (
                           <>
@@ -390,11 +390,11 @@ const CommuterProfile1 = () => {
                         <h5 className="fw-bold text-secondary">{gender}</h5>
                       </div>
                     </div>
-                    <div className="row  mb-2">
+                    <div className="row mb-2">
                       <div className="col-md-6">
                         {age !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold font-custom">Age:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom"> Age:</h5>
                           </>
                         ) : (
                           <>
@@ -409,7 +409,7 @@ const CommuterProfile1 = () => {
                       <div className="col-md-6">
                         {profession !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold font-custom">Profession:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">Profession:</h5>
                           </>
                         ) : (
                           <>
@@ -420,20 +420,7 @@ const CommuterProfile1 = () => {
                         <h5 className="fw-bold text-secondary">{profession}</h5>
                       </div>
                     </div>
-                    {/* <div className="row px-5 mb-2">
-                      <div className="col-md-6">
-                        {mobileNo !== "" ? (
-                          <>
-                            <h5 className="text-dark-green fw-bold text-end font-custom">Contact No:</h5>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      <div className="col-md-6">
-                        <h5 className="fw-bold text-secondary">{mobileNo}</h5>
-                      </div>
-                    </div> */}
+
                   </div>
                 </div>
               </div>
@@ -442,36 +429,26 @@ const CommuterProfile1 = () => {
               <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                 <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style active rounded-0`}
-                    id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"> {option === 0 ? (
-                      "Car Offerer Details"
-                    ) :
-                      (
-                        "Traveller Details"
-                    )}
-                  </button>
+                    id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{option === 0 ? ("Car Offerer Details") : ("Traveller Details")}</button>
                 </li>
-                <li className="nav-item me-0" role="presentation">
+                <li class="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
                     id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Additional Info</button>
                 </li>
                 <li className="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" 
-                    // onClick={openModal}
-                    >
+                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"
+                  // onClick={openModal}
+                  >
                     View On Map</button>
                 </li>
-                {/* <li class="nav-item me-0" role="presentation">
-                  <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                    id="pills-cancel-tab" data-bs-toggle="pill" data-bs-target="#pills-cancel" type="button" role="tab" aria-controls="pills-cancel" aria-selected="false" >Cancel</button>
-                </li> */}
               </ul>
-              <div className="tab-content flex-grow-0" id="pills-tabContent">
-                <div className="tab-pane fade show active overflow-hidden" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              <div className="tab-content flex-grow-1" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                   <div className="row ">
 
-                      <div className="col-md-12">
-                      <div className="row d-flex justify-content-between">
+                    <div className="col-md-11">
+                      <div className="row">
                         <div className="col-md-6">
                           {contact_id !== "" ? (
                             req_stage === 0 ? (
@@ -498,9 +475,7 @@ const CommuterProfile1 = () => {
                         <div className="col-md-4">
                           {preferred_gender !== "" ? (
                             <>
-                              <b className="text-black"> </b>
-                              <h5 className="text-dark-green fw-bold font-custom">Preferred Gender:</h5>
-
+                              <h5 className="text-dark-green fw-bold font-custom">Preffered Gender:</h5>
                             </>
                           ) : (
                             <>
@@ -547,7 +522,6 @@ const CommuterProfile1 = () => {
                           {destination !== "" ? (
                             <>
                               <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
-
                             </>
                           ) : (
                             <>
@@ -572,14 +546,13 @@ const CommuterProfile1 = () => {
                           )}
                         </div>
                         <div className="col-md-8">
-                          <h5 className="fw-bold text-secondary"> {time_return}</h5>
+                          <h5 className="fw-bold text-secondary">{time_return}</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
                           {days !== "" ? (
                             <>
-
                               <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
                             </>
                           ) : (
@@ -595,12 +568,20 @@ const CommuterProfile1 = () => {
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div className="row ">
 
                     <div className="col-md-11">
                       <div className="row">
                         <div className="col-md-12">
+                          {/* {name !== "" ? (
+                            <div className="mt-0">
+                              <h1 className="text-dark fw-bold">{name}</h1>
+                            </div>
+                          ) : (
+                            <>
+                            </>
+                          )} */}
                           {contact_id !== "" ? (
                             req_stage === 0 ? (
                               <div>
@@ -610,7 +591,6 @@ const CommuterProfile1 = () => {
                               (
                                 <div className="row d-flex">
                                   <h3 className="text-success fw-bold">{contact_id}</h3>
-
                                 </div>
                               )
                           ) : (
@@ -622,7 +602,7 @@ const CommuterProfile1 = () => {
                     </div>
                   </div>
                   <div className="row mt-3">
-                    <div className="col-md-12">
+                    <div className="col-md-9">
                       <div className="row mb-2">
                         <div className="col-md-4">
                           {seats !== "" ? (
@@ -650,6 +630,7 @@ const CommuterProfile1 = () => {
                           )}
                         </div>
                         <div className="col-md-8">
+
                           <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
                         </div>
                       </div>
@@ -657,7 +638,7 @@ const CommuterProfile1 = () => {
                         <div className="col-md-4">
                           {car_ac !== "" ? (
                             <>
-                             {car_ac && (
+                              {car_ac && (
                                 <>
                                   <h5 className="text-dark-green fw-bold font-custom">Car has AC:</h5>
                                 </>
@@ -668,7 +649,7 @@ const CommuterProfile1 = () => {
                           )}
                         </div>
                         <div className="col-md-8">
-                          <h5 className="fw-bold text-secondary"> {car_ac}</h5>
+                          <h5 className="fw-bold text-secondary">{car_ac}</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
@@ -707,20 +688,6 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{car_cc}</h5>
                         </div>
                       </div>
-
-                      {/* <div className="col-md-4">
-                          {carModel !== "" ? (
-                            <>
-                              <h5 className="text-dark-green fw-bold font-custom">Car Model:</h5>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                        <div className="col-md-8">
-                          <h5 className="fw-bold text-secondary">{carModel}</h5>
-                          {carModel}
-                        </div> */}
                       <div className="row mb-2">
                         <div className="col-md-4">
                           {reg_year !== "" ? (
@@ -736,23 +703,10 @@ const CommuterProfile1 = () => {
                           )}
                         </div>
                         <div className="col-md-8">
-                          <h5 className="fw-bold text-secondary"> {reg_year}</h5>
+                          <h5 className="fw-bold text-secondary">{reg_year}</h5>
+
                         </div>
                       </div>
-                      {/* <div className="row mb-2">
-                          <div className="col-md-4">
-                            {RegYear !== "" ? (
-                              <>
-                                <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
-                          <div className="col-md-8">
-                            <h5 className="fw-bold text-secondary">{RegYear}</h5>
-                          </div>
-                        </div> */}
                       <div className="row mb-2">
                         <div className="col-md-4">
                           {car_reg_year !== "" ? (
@@ -768,136 +722,78 @@ const CommuterProfile1 = () => {
                           )}
                         </div>
                         <div className="col-md-8">
-                          <h5 className="fw-bold text-secondary"> {car_reg_year}</h5>
+                          <h5 className="fw-bold text-secondary">{car_reg_year}</h5>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <div className=" row d-flex justify-content-center align-items-center">
-                  <Row style={{ height: "100px", width: "100%" }}>
-                    <GoogleMap
-                      zoom={10}
-                      center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                      mapContainerStyle={{
-                        width: "100%",
-                        height: '275%',
-                      }}
-                      options={{
-                        types: ["(regions)"],
-                        componentRestrictions: { country: "PK" },
-                      }}
-                    >
-                      <MarkerF
-                        position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                        icon={{
-                          url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <div className=" row d-flex justify-content-center align-items-center">
+                    <Row style={{ height: "100px", width: "100%" }}>
+                      <GoogleMap
+                        zoom={10}
+                        center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                        mapContainerStyle={{
+                          width: "100%",
+                          height: '275%',
                         }}
-                      />
-                      <MarkerF
-                        position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
-                        icon={{
-                          url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                        }}
-                      />
-                      <PolylineF
-                        path={[
-                          { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
-                          { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
-                        ]}
                         options={{
-                          strokeColor: "#FF0000",
-                          strokeOpacity: 1.0,
-                          strokeWeight: 3,
+                          types: ["(regions)"],
+                          componentRestrictions: { country: "PK" },
                         }}
-                      />
-                    </GoogleMap>
-                  </Row>
+                      >
+                        <MarkerF
+                          position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                          icon={{
+                            url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                          }}
+                        />
+                        <MarkerF
+                          position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
+                          icon={{
+                            url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                          }}
+                        />
+                        <PolylineF
+                          path={[
+                            { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
+                            { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
+                          ]}
+                          options={{
+                            strokeColor: "#FF0000",
+                            strokeOpacity: 1.0,
+                            strokeWeight: 3,
+                          }}
+                        />
+                      </GoogleMap>
+                    </Row>
+                  </div>
                 </div>
               </div>
             </div>
-              
+            <div className="text-end px-3 py-3">
+              {req_stage === 1 ? (
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
+                  Proceed to Payment
+                </Button>
+              ) : req_stage === 0 ? (
+                <Button className="font-custom btn btn-sm fs-6 fw-bold text-white  px-3 py-2 mb-3" style={{ background: "#ff8a00" }} onClick={() => { CancelRequest(contact_id) }}>
+                  Cancel Request
+                </Button>
+              ) : req_stage === 2 ? (
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
+                  Proceed to Final Step
+                </Button>
+              ) : (
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
+                  Send Request
+                </Button>
+              )}
             </div>
-          <div className="text-end px-3 py-3">
-            {req_stage === 1 ? (
-              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
-                Proceed to Payment
-              </Button>
-            ) : req_stage === 0 ? (
-              <Button className="font-custom btn btn-sm fs-6 fw-bold text-white  px-3 py-2 mb-3" style={{ background: "#ff8a00" }} onClick={() => { CancelRequest(contact_id) }}>
-                Cancel Request
-              </Button>
-            ) : req_stage === 2 ? (
-              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
-                Proceed to Final Step
-              </Button>
-            ) : (
-              <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
-                Send Request
-              </Button>
-            )}
           </div>
         </div>
-
-          <Modal show={showModal} onHide={closeModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Map View</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Container className="d-flex justify-content-center align-items-center mb-3">
-                <Row style={{ height: "400px", width: "100%" }}>
-                  <GoogleMap
-                    zoom={11}
-                    center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                    mapContainerStyle={{
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    options={{
-                      types: ["(regions)"],
-                      componentRestrictions: { country: "PK" },
-                    }}
-                  >
-                    <MarkerF
-                      position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                      icon={{
-                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                      }}
-                    />
-                    <MarkerF
-                      position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
-                      icon={{
-                        url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                      }}
-                    />
-                    <PolylineF
-                      path={[
-                        { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
-                        { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
-                      ]}
-                      options={{
-                        strokeColor: "#FF0000",
-                        strokeOpacity: 1.0,
-                        strokeWeight: 3,
-                      }}
-                    />
-                  </GoogleMap>
-                </Row>
-              </Container>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-2 mb-3"
-                onClick={closeModal}
-              >
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      
+      </div>
     );
   };
 
