@@ -223,11 +223,11 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const requestViewDriver = (contact_id, request_id) => {
+  const requestViewDriver = (name, request_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
-      dispatch(setContactIdState(contact_id));
+      dispatch(setContactIdState(name));
       dispatch(setIdState(request_id));
       navigate("/driver-acceptance");
     }
@@ -832,7 +832,7 @@ const CommuterProfile1 = () => {
                   Cancel Request
                 </Button>
               ) : req_stage === 2 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(contact_id, request_id) }}>
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(name, request_id) }}>
                   Proceed to Final Step
                 </Button>
               ) : (

@@ -450,458 +450,551 @@ const TravelPatners = () => {
                 <div className="card my-4 mx-4" style={{
                   backgroundColor: "#D9D9D9",
                 }}>
-                  <div className="card p-4 bg-white rounded-0" >
-                    <div className="row">
-                      <div className="col-md-4">
-                        <div className="card rounded-0">
-                          <div className="card-img-top bg-medium-teal rounded-0 text-center py-5">
-                            <img className="rounded-circle bg-white" src={`${IMAGE_URL}${image}`} alt="Card image cap" style={{ width: "200px", height: "200px" }} />
-                          </div>
-                          <div className="card-body bg-card-grey">
-                            <div className="card-text">
-                              <div className="row px-5 mb-2">
-                                <div className="col-md-6 ">
-                                  {gender !== "" ? (
-                                    <>
-                                      <h5 className="text-dark-green fw-bold text-end font-custom">Gender:</h5>
-                                    </>
-                                  ) : (
-                                    <>
-                                    </>
-                                  )}
+                  {userType === 0 ? (
+                    <div className="card p-4 bg-white rounded-0" >
+                      <div className="row">
+                        <div className="col-md-4">
+                          <div className="card rounded-0">
+                            <div className="card-img-top bg-medium-teal rounded-0 text-center py-5">
+                              <img className="rounded-circle bg-white" src={`${IMAGE_URL}${image}`} alt="Card image cap" style={{ width: "200px", height: "200px" }} />
+                            </div>
+                            <div className="card-body bg-card-grey">
+                              <div className="card-text">
+                                <div className="row px-5 mb-2">
+                                  <div className="col-md-6 ">
+                                    {gender !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold text-end font-custom">Gender:</h5>
+                                      </>
+                                    ) : (
+                                      <>
+                                      </>
+                                    )}
+                                  </div>
+                                  <div className="col-md-6">
+                                    <h5 className="fw-bold text-secondary">{gender}</h5>
+                                  </div>
                                 </div>
-                                <div className="col-md-6">
-                                  <h5 className="fw-bold text-secondary">{gender}</h5>
+                                <div className="row mb-2">
+                                  <div className="col-md-6">
+                                    {age !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold text-end font-custom"> Age:</h5>
+                                      </>
+                                    ) : (
+                                      <>
+                                      </>
+                                    )}
+                                  </div>
+                                  <div className="col-md-6">
+                                    <h5 className="fw-bold text-secondary">{age} years</h5>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="row mb-2">
-                                <div className="col-md-6">
-                                  {age !== "" ? (
-                                    <>
-                                      <h5 className="text-dark-green fw-bold text-end font-custom"> Age:</h5>
-                                    </>
-                                  ) : (
-                                    <>
-                                    </>
-                                  )}
+                                <div className="row mb-2">
+                                  <div className="col-md-6">
+                                    {profession !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold text-end font-custom">Profession:</h5>
+                                      </>
+                                    ) : (
+                                      <>
+                                      </>
+                                    )}
+                                  </div>
+                                  <div className="col-md-6">
+                                    <h5 className="fw-bold text-secondary">{profession}</h5>
+                                  </div>
                                 </div>
-                                <div className="col-md-6">
-                                  <h5 className="fw-bold text-secondary">{age} years</h5>
-                                </div>
-                              </div>
-                              <div className="row mb-2">
-                                <div className="col-md-6">
-                                  {profession !== "" ? (
-                                    <>
-                                      <h5 className="text-dark-green fw-bold text-end font-custom">Profession:</h5>
-                                    </>
-                                  ) : (
-                                    <>
-                                    </>
-                                  )}
-                                </div>
-                                <div className="col-md-6">
-                                  <h5 className="fw-bold text-secondary">{profession}</h5>
-                                </div>
-                              </div>
-                              <div className="row mb-2">
-                                <div className="col-md-6">
-                                  {mobileNo !== "" ? (
-                                    <>
-                                      <h5 className="text-dark-green fw-bold text-end font-custom">Contact No:</h5>
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </div>
-                                <div className="col-md-6">
-                                  <h5 className="fw-bold text-secondary">{mobileNo}</h5>
+                                <div className="row mb-2">
+                                  <div className="col-md-6">
+                                    {mobileNo !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold text-end font-custom">Contact No:</h5>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                  <div className="col-md-6">
+                                    <h5 className="fw-bold text-secondary">{mobileNo}</h5>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-md-8 d-flex flex-column">
-                        <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
-                          <li class="nav-item me-0" role="presentation">
-                            <button className={`nav-link fs-4 custom-button-style active rounded-0`}
-                              id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{profileType === "rider" ? ("Traveller Details") : ("Car Offerer Details")}</button>
-                          </li>
-                          <li class="nav-item me-0" role="presentation">
-                            <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                              id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Additional Info</button>
-                          </li>
-                          <li className="nav-item me-0" role="presentation">
-                            <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                              id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"
-                            // onClick={openModal}
-                            >
-                              View On Map</button>
-                          </li>
-                        </ul>
-                        <div class="tab-content flex-grow-1" id="pills-tabContent">
-                          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <div className="row ">
+                        <div className="col-md-8 d-flex flex-column">
+                          <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+                            <li class="nav-item me-0" role="presentation">
+                              <button className={`nav-link fs-4 custom-button-style active rounded-0`}
+                                id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{profileType === "rider" ? ("Traveller Details") : ("Car Offerer Details")}</button>
+                            </li>
+                            <li class="nav-item me-0" role="presentation">
+                              <button className={`nav-link fs-4 custom-button-style rounded-0`}
+                                id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Additional Info</button>
+                            </li>
+                            <li className="nav-item me-0" role="presentation">
+                              <button className={`nav-link fs-4 custom-button-style rounded-0`}
+                                id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"
+                              // onClick={openModal}
+                              >
+                                View On Map</button>
+                            </li>
+                          </ul>
+                          <div class="tab-content flex-grow-1" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                              <div className="row ">
 
-                              <div className="col-md-11">
-                                <div className="row">
-                                  <div className="col-md-12">
-                                    {name !== "" ? (
-                                      <div className="mt-0">
-                                        <h1 className="text-dark fw-bold">{name}</h1>
-                                      </div>
-                                    ) : (
-                                      <>
-                                      </>
-                                    )}
+                                <div className="col-md-11">
+                                  <div className="row">
+                                    <div className="col-md-12">
+                                      {name !== "" ? (
+                                        <div className="mt-0">
+                                          <h1 className="text-dark fw-bold">{name}</h1>
+                                        </div>
+                                      ) : (
+                                        <>
+                                        </>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="row mt-3">
+                                <div className="col-md-9">
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {preferredGender !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Preffered Gender:</h5>
+                                        </>
+                                      ) : (
+                                        <>
+                                        </>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{preferredGender}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {origin !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Point of Origin:</h5>
+                                        </>
+                                      ) : (
+                                        <>
+                                        </>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{origin}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {timeDepart !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Pickup Timings:</h5>
+                                        </>
+                                      ) : (
+                                        <>
+
+                                        </>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{timeDepart}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {destination !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
+                                        </>
+                                      ) : (
+                                        <>
+
+                                        </>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{destination}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {timeReturn !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Return Timings:</h5>
+                                        </>
+                                      ) : (
+                                        <>
+
+                                        </>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{timeReturn}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {days !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
+                                        </>
+                                      ) : (
+                                        <>
+
+                                        </>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{days}</h5>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div className="row mt-3">
-                              <div className="col-md-9">
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {preferredGender !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Preffered Gender:</h5>
-                                      </>
-                                    ) : (
-                                      <>
-                                      </>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{preferredGender}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {origin !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Point of Origin:</h5>
-                                      </>
-                                    ) : (
-                                      <>
-                                      </>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{origin}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {timeDepart !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Pickup Timings:</h5>
-                                      </>
-                                    ) : (
-                                      <>
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                              <div className="row ">
 
-                                      </>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{timeDepart}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {destination !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
-                                      </>
-                                    ) : (
-                                      <>
-
-                                      </>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{destination}</h5>
+                                <div className="col-md-11">
+                                  <div className="row">
+                                    <div className="col-md-12">
+                                      {name !== "" ? (
+                                        <div className="mt-0">
+                                          <h1 className="text-dark fw-bold">{name}</h1>
+                                        </div>
+                                      ) : (
+                                        <>
+                                        </>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {timeReturn !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Return Timings:</h5>
-                                      </>
-                                    ) : (
-                                      <>
+                              </div>
+                              <div className="row mt-3">
+                                <div className="col-md-9">
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {seats !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">No.of Seats:</h5>
+                                        </>
+                                      ) : (
+                                        <>
 
-                                      </>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{timeReturn}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {days !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
-                                      </>
-                                    ) : (
-                                      <>
+                                        </>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{seats}</h5>
+                                    </div>
+                                    <div className="col-md-4">
+                                      {seatsLeft !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
+                                        </>
+                                      ) : (
+                                        <>
 
-                                      </>
-                                    )}
+                                        </>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{seatsLeft}</h5>
+                                    </div>
                                   </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{days}</h5>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {price !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {date !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Agreement Date:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{formatDate(date)}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {cancelDate !== null ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Cancel Agreement Date:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{cancelDate ? formatDate(cancelDate) : cancelDate}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {carAC !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Car have AC:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{carAC}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {carBrand !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Car Brand:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{carBrand}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {carCC !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Car CC:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{carCC}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {carModel !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Car Model:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{carModel}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {RegNo !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Registration Number:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{RegNo}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {RegYear !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{RegYear}</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-4">
+                                      {carRegYear !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-8">
+                                      <h5 className="fw-bold text-secondary">{carRegYear}</h5>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            <div className="row ">
-
-                              <div className="col-md-11">
-                                <div className="row">
-                                  <div className="col-md-12">
-                                    {name !== "" ? (
-                                      <div className="mt-0">
-                                        <h1 className="text-dark fw-bold">{name}</h1>
-                                      </div>
-                                    ) : (
-                                      <>
-                                      </>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="row mt-3">
-                              <div className="col-md-9">
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {seats !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">No.of Seats:</h5>
-                                      </>
-                                    ) : (
-                                      <>
-
-                                      </>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{seats}</h5>
-                                  </div>
-                                  <div className="col-md-4">
-                                    {seatsLeft !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
-                                      </>
-                                    ) : (
-                                      <>
-
-                                      </>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{seatsLeft}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {price !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {date !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Agreement Date:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{formatDate(date)}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {cancelDate !== null ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Cancel Agreement Date:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{cancelDate ? formatDate(cancelDate) : cancelDate}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {carAC !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Car have AC:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{carAC}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {carBrand !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Car Brand:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{carBrand}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {carCC !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Car CC:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{carCC}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {carModel !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Car Model:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{carModel}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {RegNo !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Registration Number:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{RegNo}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {RegYear !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{RegYear}</h5>
-                                  </div>
-                                </div>
-                                <div className="row mb-2">
-                                  <div className="col-md-4">
-                                    {carRegYear !== "" ? (
-                                      <>
-                                        <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                  <div className="col-md-8">
-                                    <h5 className="fw-bold text-secondary">{carRegYear}</h5>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                            <div className=" row d-flex justify-content-center align-items-center">
-                              <Row style={{ height: "100px", width: "100%" }}>
-                                <GoogleMap
-                                  zoom={10}
-                                  center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                                  mapContainerStyle={{
-                                    width: "100%",
-                                    height: '275%',
-                                  }}
-                                  options={{
-                                    types: ["(regions)"],
-                                    componentRestrictions: { country: "PK" },
-                                  }}
-                                >
-                                  <MarkerF
-                                    position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
-                                    icon={{
-                                      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                            <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                              <div className=" row d-flex justify-content-center align-items-center">
+                                <Row style={{ height: "100px", width: "100%" }}>
+                                  <GoogleMap
+                                    zoom={10}
+                                    center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                                    mapContainerStyle={{
+                                      width: "100%",
+                                      height: '275%',
                                     }}
-                                  />
-                                  <MarkerF
-                                    position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
-                                    icon={{
-                                      url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-                                    }}
-                                  />
-                                  <PolylineF
-                                    path={[
-                                      { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
-                                      { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
-                                    ]}
                                     options={{
-                                      strokeColor: "#FF0000",
-                                      strokeOpacity: 1.0,
-                                      strokeWeight: 3,
+                                      types: ["(regions)"],
+                                      componentRestrictions: { country: "PK" },
                                     }}
-                                  />
-                                </GoogleMap>
-                              </Row>
+                                  >
+                                    <MarkerF
+                                      position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                                      icon={{
+                                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                      }}
+                                    />
+                                    <MarkerF
+                                      position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
+                                      icon={{
+                                        url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                      }}
+                                    />
+                                    <PolylineF
+                                      path={[
+                                        { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
+                                        { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
+                                      ]}
+                                      options={{
+                                        strokeColor: "#FF0000",
+                                        strokeOpacity: 1.0,
+                                        strokeWeight: 3,
+                                      }}
+                                    />
+                                  </GoogleMap>
+                                </Row>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="text-end px-3 py-3">
-                          <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure}>
-                            Cancel Agreement
-                          </Button>
+                          <div className="text-end px-3 py-3">
+                            <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure}>
+                              Cancel Agreement
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
+                      <div className="row d-flex flex-column">
+                        <div className="card-body-inner green-card">
+                          <div className="row d-flex flex-column">
+
+                            <div className="row mb-3 justify-content-between">
+                              <div className="col-md-4">
+                                <div className="card rounded-0">
+                                  <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
+
+                                    {image ? (
+                                      <img
+                                        src={`${IMAGE_URL}${image}`}
+                                        className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                        onClick={() => {
+                                          route(contactId);
+                                        }}
+                                      />
+                                    ) : (
+                                      <img
+                                        src={`${BASE_URL}/assets/images/Vector.png`}
+                                        className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                      />
+                                    )}
+
+                                  </div>
+                                  <div className="card p-2 border-0 rounded-0 bg-card-grey overflow-y-hidden px-4 py-4">
+
+                                    <div className="row">
+                                      <div className="col-md-12">
+                                        <p className="fw-bold fs-6">Name: {name}</p>
+                                        <p className="fw-bold fs-6">Daily Commuting Cost: Rs. &nbsp; {price}/-</p>
+                                        <p className="fw-bold fs-6">Start Date: {date && formatDate(date)}</p>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                  <div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div>
+                              </div>
+                            </div>
+                            {/* <div className="col-md-8">
+                              <Table className="bg-dark text-white border-1 rounded-4">
+                                <TableBody>
+                                  <TableRow>
+                                    <TableCell className="text-white" style={tableCellStyle}> <h2 className="text-light">Daily Commute Details
+                                    </h2></TableCell>
+                                    <TableCell className="text-white" style={tableCellStyle}></TableCell>
+
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell className="text-white" style={tableCellStyle}>Distance</TableCell>
+                                    <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{distance}km</TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell className="text-white" style={tableCellStyle}>Avg. Fuel consumption</TableCell>
+                                    <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{fuelAverage}km/Ltr</TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell className="text-white" style={tableCellStyle}>Fuel Price</TableCell>
+                                    <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
+                                      Rs. {fuelPrice} /-
+                                      <br />
+                                    </TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell className="text-white" style={tableCellStyle}>Liter Consumed</TableCell>
+                                    <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>
+                                      {liter} Ltr
+                                      <br />
+                                    </TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell className="text-white" style={tableCellStyle}>Maintenance</TableCell>
+                                    <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{maintenance}</TableCell>
+                                  </TableRow>
+                                  <TableRow>
+                                    <TableCell className="text-white" style={tableCellStyle}>Wear & Tear</TableCell>
+                                    <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{wearAndTear}</TableCell>
+                                  </TableRow>
+                                </TableBody>
+                              </Table>
+                            </div> */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </>
             )}
@@ -1089,7 +1182,6 @@ const TravelPatners = () => {
 
                   </div>
 
-
                   <div className="col-md-6">  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white  px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={viewTrasaction}>
                     View Transaction History
                   </button></div>
@@ -1097,9 +1189,7 @@ const TravelPatners = () => {
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   );

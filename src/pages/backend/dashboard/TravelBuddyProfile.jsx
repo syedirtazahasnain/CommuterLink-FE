@@ -11,6 +11,18 @@ import { ThreeCircles } from "react-loader-spinner";
 import { displayNotification } from "../../../helpers";
 import { GoogleMap, MarkerF, PolylineF } from "@react-google-maps/api";
 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const monthNames = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+  return `${day}-${monthNames[monthIndex]}-${year}`;
+}
+
 
 const customTheme = createTheme({
   palette: {
@@ -88,6 +100,8 @@ const TravelBuddyProfile = () => {
   const [RegYear, setRegYear] = useState("");
   const [dropOffAddress, setDropOffAddress] = useState("");
   const [pickupAddress, setPickupAddress] = useState("");
+  const [date, setDate] = useState("");
+  const [cancelDate, setCancelDate] = useState(null);
 
   const getDashboardData = async () => {
     try {
@@ -264,7 +278,9 @@ const TravelBuddyProfile = () => {
         setName(jsonresponse.data[0].name);
         setImage(jsonresponse.data[0].commuter_image);
         setGender(jsonresponse.data[0].gender);
-        setPrice(jsonresponse.data[0].price)
+        setPrice(jsonresponse.data[0].price);
+        setDate(jsonresponse.data[0].aggreement_date);
+        setCancelDate(jsonresponse.data[0].cancellation_date);
         setAge(jsonresponse.data[0].age);
         setMobileNo(jsonresponse.data[0].mobile);
         setDays(jsonresponse.data[0].days);
@@ -278,6 +294,14 @@ const TravelBuddyProfile = () => {
         setTimeReturn(jsonresponse.data[0].time_return);
         setDropOffAddress(jsonresponse.data[0].dropoff_address);
         setPickupAddress(jsonresponse.data[0].pickup_address);
+        setCarAC(jsonresponse.data[0].vehicle[0].car_ac);
+        setCarBrand(jsonresponse.data[0].vehicle[0].car_brand);
+        setCarCC(jsonresponse.data[0].vehicle[0].car_cc);
+        setCarModel(jsonresponse.data[0].vehicle[0].car_model);
+        setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
+        setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
+        setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
+        setSeatsLeft(jsonresponse.data[0].vehicle[0].seats_left);
       }
       else if (jsonresponse.status_code === 100) {
         // Swal.fire({
@@ -334,7 +358,7 @@ const TravelBuddyProfile = () => {
       cancelButtonColor: 'swal-custom',
       customClass: {
         confirmButton: 'swal-custom',
-        cancelButton:'swal-custom',
+        cancelButton: 'swal-custom',
       },
       confirmButtonText: 'Yes'
     }).then((result) => {
@@ -476,9 +500,9 @@ const TravelBuddyProfile = () => {
                 </li>
                 <li className="nav-item me-0" role="presentation">
                   <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" 
-                    // onClick={openModal}
-                    >
+                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"
+                  // onClick={openModal}
+                  >
                     View On Map</button>
                 </li>
               </ul>
@@ -635,6 +659,20 @@ const TravelBuddyProfile = () => {
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary">{seats}</h5>
                         </div>
+                        <div className="col-md-4">
+                          {seatsLeft !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
+                            </>
+                          ) : (
+                            <>
+
+                            </>
+                          )}
+                        </div>
+                        <div className="col-md-8">
+                          <h5 className="fw-bold text-secondary">{seatsLeft}</h5>
+                        </div>
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
@@ -647,15 +685,42 @@ const TravelBuddyProfile = () => {
                           )}
                         </div>
                         <div className="col-md-8">
-                          
                           <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
+                        </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-4">
+                          {date !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">Agreement Date:</h5>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="col-md-8">
+                          <h5 className="fw-bold text-secondary">{formatDate(date)}</h5>
+                        </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-4">
+                          {cancelDate !== null ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">Cancel Agreement Date:</h5>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="col-md-8">
+                          <h5 className="fw-bold text-secondary">{cancelDate ? formatDate(cancelDate) : cancelDate}</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-4">
                           {carAC !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Car has AC:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">Car have AC:</h5>
                             </>
                           ) : (
                             <></>
@@ -705,49 +770,48 @@ const TravelBuddyProfile = () => {
                         </div>
                         <div className="col-md-8">
                           <h5 className="fw-bold text-secondary">{carModel}</h5>
-                          {carModel}
                         </div>
-                        <div className="row mb-2">
-                          <div className="col-md-4">
-                            {RegNo !== "" ? (
-                              <>
-                                <h5 className="text-dark-green fw-bold font-custom">Registration Number:</h5>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
-                          <div className="col-md-8">
-                            <h5 className="fw-bold text-secondary">{RegNo}</h5>
-                          </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-4">
+                          {RegNo !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">Registration Number:</h5>
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </div>
-                        <div className="row mb-2">
-                          <div className="col-md-4">
-                            {RegYear !== "" ? (
-                              <>
-                                <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
-                          <div className="col-md-8">
-                            <h5 className="fw-bold text-secondary">{RegYear}</h5>
-                          </div>
+                        <div className="col-md-8">
+                          <h5 className="fw-bold text-secondary">{RegNo}</h5>
                         </div>
-                        <div className="row mb-2">
-                          <div className="col-md-4">
-                            {carRegYear !== "" ? (
-                              <>
-                                <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
-                          <div className="col-md-8">
-                            <h5 className="fw-bold text-secondary">{carRegYear}</h5>
-                          </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-4">
+                          {RegYear !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="col-md-8">
+                          <h5 className="fw-bold text-secondary">{RegYear}</h5>
+                        </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-4">
+                          {carRegYear !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="col-md-8">
+                          <h5 className="fw-bold text-secondary">{carRegYear}</h5>
                         </div>
                       </div>
                     </div>

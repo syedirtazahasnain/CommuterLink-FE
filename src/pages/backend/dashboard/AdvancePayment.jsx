@@ -31,7 +31,7 @@ const AdvancePayment = () => {
   const [userId, setUserId] = useState("");
   const [payment, setPayment] = useState("");
   const [profileType, setProfileType] = useState("");
-  const paymentURL = `https://be.staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
+  const paymentURL = `https://be.staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${parseInt(payment)}&mobile=sjkdhaskjdhs`;
 
 
   const crumbs = [
@@ -186,12 +186,10 @@ const AdvancePayment = () => {
           },
         }
       );
-
-      const jsonresponse = await response.json();
-      if (jsonresponse) {
-        setPayment(jsonresponse);
-      }
-      console.log("Payment Details:", jsonresponse);
+  
+      const textResponse = await response.text();
+      setPayment(textResponse);
+      console.log("Payment Details:", textResponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
