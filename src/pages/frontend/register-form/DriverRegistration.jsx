@@ -1634,7 +1634,7 @@ const DriverRegistration = () => {
                       >
                         <h2 className="text-success mb-3 text-center">
                           STARTING POINT
-                          {/* <Tooltip title={<h6 className="text-center">{"To get maximum suggestions/matches please select prominent landmark"}</h6>}>
+                          <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
                             <Link
                               // to='/notification'
                               className='mx-1 h-15px d-inline-block'
@@ -1642,7 +1642,7 @@ const DriverRegistration = () => {
                             >
                               <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                             </Link>
-                          </Tooltip> */}
+                          </Tooltip>
                         </h2>
 
 
@@ -1665,7 +1665,7 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
+                              {/* <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
                                 <Link
                                   // to='/notification'
                                   className='mx-1 h-15px d-inline-block'
@@ -1673,7 +1673,7 @@ const DriverRegistration = () => {
                                 >
                                   <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
-                              </Tooltip>
+                              </Tooltip> */}
 
                             </p></div>
                           <Form.Select
@@ -1840,6 +1840,15 @@ const DriverRegistration = () => {
                       >
                         <h2 className="text-success mb-3 text-center">
                           DROP-OFF POINT
+                          <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
+                            <Link
+                              // to='/notification'
+                              className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                            </Link>
+                          </Tooltip>
                         </h2>
                         <Form.Group
                           as={Col}
@@ -1860,7 +1869,7 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
+                              {/* <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
                                 <Link
                                   // to='/notification'
                                   className='mx-1 h-15px d-inline-block'
@@ -1868,7 +1877,7 @@ const DriverRegistration = () => {
                                 >
                                   <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
-                              </Tooltip>
+                              </Tooltip> */}
 
                             </p></div>
 

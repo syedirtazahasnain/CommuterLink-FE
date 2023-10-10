@@ -548,10 +548,18 @@ const Driver = () => {
                                                     <div className="container my-5">
 
                                                         <Button
-                                                            className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-2 mb-3"
+                                                            className="font-custom btn btn-sm fs-6 mr-3 fw-bold btn-dark-green text-white px-3 py-2 mb-3"
                                                             onClick={sendRequest}
                                                         >
                                                             Update
+                                                        </Button>
+                                                        <Button
+                                                            className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-2 mb-3"
+                                                            onClick={() => {
+                                                                setShowField(false);
+                                                            }}
+                                                        >
+                                                            Cancel
                                                         </Button>
                                                     </div>
                                                 </Box></>) : (<> <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">

@@ -881,7 +881,7 @@ const Resubmit = () => {
                                 startIcon={<CloudUpload />}
                                 className="w-100 bg-light text-success"
                               >
-                                Front Side of Your CNIC
+                                Upload a clear image of your CNIC Front Side
                               </Button>
                             </label>
                             {selectedImageCnicFront && (
@@ -890,10 +890,10 @@ const Resubmit = () => {
                                   variant="body1"
                                   fullWidth
                                 >
-                                  Front Side CNIC Image:
+                                  Upload a clear image of your CNIC Front Side
                                 </Typography>
                                 <img
-                                  className="mt-1"
+                                  className="mt-1 w-50 h-50 overflow-hidden text-center"
                                   src={URL.createObjectURL(selectedImageCnicFront)}
                                   alt="Selected"
                                 />
@@ -920,7 +920,7 @@ const Resubmit = () => {
                                 startIcon={<CloudUpload />}
                                 className="w-100 bg-light text-success"
                               >
-                                Back Side of Your CNIC
+                                 Upload a clear image of your CNIC Back Side
                               </Button>
                             </label>
                             {selectedImageCnicBack && (
@@ -929,10 +929,10 @@ const Resubmit = () => {
                                   variant="body1"
                                   fullWidth
                                 >
-                                  Back Side CNIC Image:
+                               Upload a clear image of your CNIC Back Side
                                 </Typography>
                                 <img
-                                  className="mt-1"
+                                  className="mt-1 w-50 h-50 overflow-hidden text-center"
                                   src={URL.createObjectURL(selectedImageCnicBack)}
                                   alt="Selected"
                                 />
@@ -957,16 +957,16 @@ const Resubmit = () => {
                                 startIcon={<CloudUpload />}
                                 className="w-100 bg-light text-success"
                               >
-                                Profile Picture
+                               Upload a clear Profile Picture
                               </Button>
                             </label>
                             {selectedImage && (
                               <div>
                                 <Typography variant="body1" fullWidth>
-                                  Profile Picture:
+                                Upload a clear Profile Picture
                                 </Typography>
                                 <img
-                                  className="mt-1"
+                                  className="mt-1 w-50 h-50 overflow-hidden text-center"
                                   src={URL.createObjectURL(selectedImage)}
                                   alt="Selected"
                                 />

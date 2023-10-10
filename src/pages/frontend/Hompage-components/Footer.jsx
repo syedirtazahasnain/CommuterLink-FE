@@ -94,8 +94,8 @@ const Footer = () => {
               <div className="col-lg-3 col-md-6 footer-links  my-4">
                 <h4>Contact Us</h4>
                 <ul>
-                  <li className='mb-2'>
-                    <i className="fa-solid fa-location-dot text-success me-1"></i>
+                  <li className='mb-2 ml-1'>
+                    <i className="fa-solid fa-location-dot text-success"></i>
                     <span className="ml-2">
                       Office # 7, 14 & 15, Ground Floor, Hamdan Heights, <br />
                     </span>

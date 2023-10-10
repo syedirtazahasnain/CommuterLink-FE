@@ -447,17 +447,16 @@ const Signup = () => {
                 </h1>{" "}
                 <p
                   className="text-center fs-6 text-danger text-custom"
-                  style={{}}
+               
                 >
                   {" "}
                   <div
-                    class="alert alert-info alert-dismissible fade show"
+                    className="alert alert-info alert-dismissible fade show"
                     role="alert"
                   >
-                    <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i>{" "}
-                    You may proceed with registration if you are 18 years or
-                    older. For students below 18 years their
-                    parents can register.
+                  {" "}
+                <h6 className="text-left">  <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i>You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register.
+                   </h6>  
                     <button
                       type=""
                       class="btn-close"

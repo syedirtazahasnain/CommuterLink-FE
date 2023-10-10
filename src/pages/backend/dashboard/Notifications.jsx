@@ -143,7 +143,7 @@ const Notifications = () => {
                         {/* {index + 1}: {notification} */}
                         {notification}
                       </p>
-                      <em className='d-flex flex-end fs-9'>{formatTime(time[index])}</em>
+                      <em className='d-flex text-right fs-9'>{formatTime(time[index])}</em>
                       <hr style={{ color: "grey" }} />
                     </div>
                   ))}

@@ -320,49 +320,32 @@ const TermsCondition1 = () => {
       <div className="card p-4 bg-light p-2">
         <div className="card bg-light">
           <div className="card-body">
-            <p>1. Your car is in a good shape and is roadworthy</p>
+          <p>1. The car offeror will wait 15 mins after agreed time for you to join. </p>
             <p className="">
-              2. You are committed to provide the car for commuting of partners
-              on all days mentioned by your travel buddy in the agreement
+              2. If due to any unforeseen reason you cannot commute on a certain day, fee will be still be charged as your seat remains reserved for you
             </p>
             <p>
-              3. If due to any unforeseen reason you cannot commute on a certain
-              day, no fee will be paid for that day
-            </p>
-            <p> 
-              4. You will inform the travel buddy partners well in advance (at least 12 hours)
-              about your inability to commute on a certain day. In case of any
-              emergency this can be waived off under exceptional circumstances
+              3. You will inform the partners well in advance (at least 12 hours) about your inability to commute on a certain day. In case of an emergency this can be waived off under exceptional circumstances
             </p>
             <p>
-              5. You will be paid on daily basis for actual number of days that
-              your car is used
+              4. You will pay one month 15 days cost in advance. The money will remain in your wallet and will be transferred to car owner every week after on daily basis confirmation that the service was provided. You will recharge your wallet every week to maintain 15 days commuting balance in wallet all the time
             </p>
             <p>
-              6. If a commuting partner misses the car and fails to commute due
-              to late arrival/time off you will still be paid for that day
+              5. You will be charged on daily basis for actual number of days that you avail share the car. No charges will be levied for public holidays or number of days that the car owner does not turn up
             </p>
             <p>
-              7. You will wait at least 15 minutes after the agreed time for
-              commuting partner to join you
+              6. You will update the scheduler in your dashboard on daily (as and when required basis)
             </p>
             <p>
-              8. You will update the scheduler in your dashboard on daily (as and
-              when required basis)
+              7. You will pay your share of fee cost through CommutersLink and there will be no direct transaction between you and your commuting partner. (insert a link here “why to receive payment through commutersLink)
             </p>
             <p>
-              9. You will receive your share of fee through CommutersLink and
-              there will be no direct transaction between you and your commuting
-              travel buddy partner
+              8. If you wish to discontinue your partnership with a member due a reason or other CommutersLink will inform the partner on your behalf. Minimum 1 week notice is required
             </p>
             <p>
-              10. If you wish to discontinue your partnership with a member due
-              a reason or other CommutersLink will inform the partner on your
-              behalf. You are required to give at least 1 week notice(insert a link here "why to receive
-              payment through commutersLink")
+              9. Any complaints, grievances will be addressed to CommutersLink for resolution
             </p>
-            11. Any complaints, grievances will be addressed to CommutersLink
-            for resolution.
+            
           </div>
           <div className="text-center">
             <Button
