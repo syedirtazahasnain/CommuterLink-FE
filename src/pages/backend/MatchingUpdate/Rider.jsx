@@ -68,8 +68,8 @@ const Rider = () => {
       );
 
       const jsonresponse = await response.json();
-      setSelectedHomeTime(jsonresponse[0].matches.time_depart);
-      setSelectedOfficeTime(jsonresponse[0].matches.time_return);
+      setSelectedHomeTime(jsonresponse[0].matches.time_depart_id);
+      setSelectedOfficeTime(jsonresponse[0].matches.time_return_id);
       setPreferredGender(jsonresponse[0].contact.preferred_gender);
       console.log("Update Driver Details Data", jsonresponse);
       const mynewarray = jsonresponse[0].matches.days.split(',');

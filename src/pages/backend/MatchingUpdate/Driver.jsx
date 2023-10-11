@@ -86,14 +86,14 @@ const Driver = () => {
             if (jsonresponse) {
                 setOption(jsonresponse[0].userlist.vehicle_option);
             }
-            setSelectedHomeTime(jsonresponse[0].matches.time_depart);
-            setSelectedOfficeTime(jsonresponse[0].matches.time_return);
+            setSelectedHomeTime(jsonresponse[0].matches.time_depart_id);
+            setSelectedOfficeTime(jsonresponse[0].matches.time_return_id);
             setPreferredGender(jsonresponse[0].contact.preferred_gender);
             // setDaysSelected(jsonresponse[0].matches.days);
             setSelectedCarBrand(jsonresponse[0].vehicle.car_make);
-            setSelectedCarCC(jsonresponse[0].vehicle.car_cc);
+            setSelectedCarCC(jsonresponse[0].vehicle.car_cc_id);
             setSelectedModelName(jsonresponse[0].vehicle.car_model);
-            setSelectedRegYear(jsonresponse[0].vehicle.car_reg_year);
+            setSelectedRegYear(jsonresponse[0].vehicle.car_reg_year_id);
             console.log("Update Driver Details Data", jsonresponse);
             const mynewarray = jsonresponse[0].matches.days.split(',');
             setDaysSelected(mynewarray.map(day => day.trim()));

@@ -289,7 +289,6 @@ const ViewProfile = () => {
                         variant="outlined"
                         label="Full Name"
                         value={name}
-                        required
                         size="small"
                         onChange={(e) => setName(e.target.value)}
                         disabled
@@ -314,7 +313,6 @@ const ViewProfile = () => {
                         type="email"
                         label="Email"
                         value={email}
-                        required
                         size="small"
                         disabled
                       />
@@ -335,7 +333,6 @@ const ViewProfile = () => {
                         variant="outlined"
                         value={mobileNo}
                         label="Mobile Number (03xxxxxxxxx)"
-                        required
                         size="small"
                         disabled
                       />
@@ -496,7 +493,6 @@ const ViewProfile = () => {
                           variant="outlined"
                           label="Full Name"
                           value={name}
-                          required
                           size="small"
                           disabled
 
@@ -520,7 +516,6 @@ const ViewProfile = () => {
                           type="email"
                           label="Email"
                           value={email}
-                          required
                           size="small"
                           disabled
                         />
@@ -541,7 +536,6 @@ const ViewProfile = () => {
                           variant="outlined"
                           value={mobileNo}
                           label="Mobile Number (03xxxxxxxxx)"
-                          required
                           size="small"
                           disabled
                         />
