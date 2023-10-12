@@ -31,7 +31,8 @@ const AdvancePayment = () => {
   const [userId, setUserId] = useState("");
   const [payment, setPayment] = useState("");
   const [profileType, setProfileType] = useState("");
-  const paymentURL = `https://be.staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${parseInt(payment)}&mobile=sjkdhaskjdhs`;
+  const formattedPayment = parseInt(payment.replace(/,/g, ''), 10);
+  const paymentURL = `https://be.staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${formattedPayment}&mobile=sjkdhaskjdhs`;
 
 
   const crumbs = [
