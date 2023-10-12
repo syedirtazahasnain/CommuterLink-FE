@@ -657,7 +657,7 @@ const Signup = () => {
                         />
                       }
                       label={
-                        <div id="span-text" className="mr-5 small">
+                        <div id="span-text" className="mr-5  text-bold">
                           I agree with all statements in
                           <Link
                             // to={"/terms_services"}
@@ -667,6 +667,7 @@ const Signup = () => {
                               style={{
                                 color: "#198754",
                                 textDecoration: "none",
+                              
                               }} 
                               onClick={openPopup}
                             >

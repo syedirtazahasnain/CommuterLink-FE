@@ -156,7 +156,7 @@ const Forget1 = () => {
                             }}>
 
                                 <div
-                                    className="card text-center"
+                                    className="card"
                                     style={{ borderRadius: "10px" }}
                                 >
                                     <div
@@ -174,7 +174,7 @@ const Forget1 = () => {
                                             {" "}
                                             Forgot <span>Password</span>
                                         </h2>{" "}
-                                        <h5 className=" text-custom  mb-2 mt-1">Enter the email address <span>associated with your account.</span></h5>
+                                        <h5 className=" text-custom  mb-2 mt-1">Enter the email address associated with your account.</h5>
                                         <Form className="text-center">
                                             <Form.Group
                                                 className=" mt-4 text-center"

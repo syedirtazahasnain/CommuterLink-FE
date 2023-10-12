@@ -996,7 +996,7 @@ const TravelPatners = () => {
                                   {image ? (
                                     <img
                                       src={`${BASE_URL}/assets/images/Vector.png`} //${IMAGE_URL}${img}
-                                      className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
+                                      className="card-img-top w-100px m-auto h-100px cursor-pointer"
                                       onClick={() => {
                                         route(contactId);
                                       }}
@@ -1072,7 +1072,7 @@ const TravelPatners = () => {
                                   {image ? (
                                     <img
                                       src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
+                                      className="card-img-top w-100px m-auto h-100px cursor-pointer"
                                       onClick={() => {
                                         route(contactId);
                                       }}

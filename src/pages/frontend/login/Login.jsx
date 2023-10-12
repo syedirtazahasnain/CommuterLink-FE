@@ -151,10 +151,10 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    if(email === "" || password ===""){
+    if (email === "" || password === "") {
       displayNotification("warning", "Please Fill All Fields");
     }
-    else  {
+    else {
       await postData();
     }
   };
@@ -421,7 +421,7 @@ const Login = () => {
                       }}
                     />
                   </Form.Group>
-                     
+
                   <div className="py-1 text-right">    <Link to={'/forget'} style={{ textDecoration: "none" }}>
                     <span
                       style={{
@@ -446,12 +446,12 @@ const Login = () => {
                         />
                       }
                       label={
-                        <div id="span-text" className="mr-5 small">
+                        <div id="span-text" className="mr-5 text-bold">
                           I agree with all statements in
-                          <Link 
-                          // to={'/terms_services'}
-                          onClick={openPopup}
-                           style={{ textDecoration: "none" }}>
+                          <Link
+                            // to={'/terms_services'}
+                            onClick={openPopup}
+                            style={{ textDecoration: "none" }}>
                             <span
                               style={{
                                 color: "#198754",
@@ -467,16 +467,16 @@ const Login = () => {
                       }
                     />
                   </div>
-                  <div className="text-center"> 
-                  <Button
-                    className="btn-custom1 mx-2 text-center border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
-                    onClick={handleLogin}
-                  >
-                    Login
-                  </Button></div>
-                 
+                  <div className="text-center">
+                    <Button
+                      className="btn-custom1 mx-2 text-center border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                      onClick={handleLogin}
+                    >
+                      Login
+                    </Button></div>
 
-                 
+
+
                   <div className="container">
                     <div className="row d-flex justify-content-center">
                       <div className="column mt-2">

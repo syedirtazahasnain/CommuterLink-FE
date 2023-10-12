@@ -604,7 +604,7 @@ const CommuterProfile1 = () => {
                   <div className="row mt-3">
                     <div className="col-md-9">
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {seats !== "" ? (
                             <>
                               <h5 className="text-dark-green fw-bold font-custom">No.of Seats:</h5>
@@ -615,10 +615,10 @@ const CommuterProfile1 = () => {
                             </>
                           )}
                         </div>
-                        <div className="col-md-8">
-                          <h5 className="fw-bold text-secondary">{seats}</h5>
+                        <div className="col-md-6">
+                          <h5 className="fw-bold text-secondary">{seats}/{seats_left}</h5>
                         </div>
-                        <div className="col-md-4">
+                        {/* <div className="col-md-6">
                           {seats_left !== "" ? (
                             <>
                               <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
@@ -629,12 +629,12 @@ const CommuterProfile1 = () => {
                             </>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{seats_left}</h5>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {price !== "" ? (
                             <>
                               <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
@@ -643,13 +643,13 @@ const CommuterProfile1 = () => {
                             <></>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
 
                           <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {car_ac !== "" ? (
                             <>
                               {car_ac && (
@@ -662,12 +662,12 @@ const CommuterProfile1 = () => {
                             <></>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{car_ac}</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {car_brand !== "" ? (
                             <>
                               {car_brand && (
@@ -680,12 +680,12 @@ const CommuterProfile1 = () => {
                             <></>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{car_brand}</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {car_model !== "" ? (
                             <>
                               {car_model && (
@@ -698,12 +698,12 @@ const CommuterProfile1 = () => {
                             <></>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{car_model}</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {car_cc !== "" ? (
                             <>
                               {car_cc && (
@@ -716,12 +716,12 @@ const CommuterProfile1 = () => {
                             <></>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{car_cc}</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {reg_no !== "" ? (
                             <>
                               {reg_no && (
@@ -734,12 +734,12 @@ const CommuterProfile1 = () => {
                             <></>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{reg_no}</h5>
                         </div>
                       </div>
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {reg_year !== "" ? (
                             <>
                               {reg_year && (
@@ -752,13 +752,13 @@ const CommuterProfile1 = () => {
                             <></>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{reg_year}</h5>
 
                         </div>
                       </div>
                       <div className="row mb-2">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                           {car_reg_year !== "" ? (
                             <>
                               {car_reg_year && (
@@ -771,7 +771,7 @@ const CommuterProfile1 = () => {
                             <></>
                           )}
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{car_reg_year}</h5>
                         </div>
                       </div>
@@ -818,8 +818,11 @@ const CommuterProfile1 = () => {
                         />
                       </GoogleMap>
                     </Row>
+                    
                   </div>
+                
                 </div>
+              
               </div>
             </div>
             <div className="text-end px-3 py-3">
