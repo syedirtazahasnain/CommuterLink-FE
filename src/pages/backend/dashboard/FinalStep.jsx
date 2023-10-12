@@ -343,6 +343,7 @@ const FinalStep = () => {
                       sx={{ width: "100%", }}
                       value={selectedDate}
                       onChange={handleDateChange}
+                      disablePast
                     />
                   </DemoContainer>
                 </LocalizationProvider>
