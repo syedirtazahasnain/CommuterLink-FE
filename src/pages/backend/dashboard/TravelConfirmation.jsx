@@ -435,7 +435,7 @@ const TravelConfirmation = () => {
                           />
                         </LocalizationProvider> */}
 
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}> 
                           <DateCalendar
                             value={selectedDate}
                             onChange={handleDateChange}
@@ -488,7 +488,7 @@ const TravelConfirmation = () => {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                padding:"1px",
+                                padding: "1px",
                               },
                               "& .MuiPickersCalendarHeader-labelContainer": {
                                 fontSize: "1.5rem"

@@ -471,11 +471,11 @@ const CommuterProfile1 = () => {
                   </div>
                   <div className="row mt-3">
                     <div className="col-md-9">
-                      <div className="row mb-2">
+                      <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-4">
                           {preferred_gender !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Preffered Gender:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">Prefered Gender:</h5>
                             </>
                           ) : (
                             <>
@@ -486,7 +486,7 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{preferred_gender}</h5>
                         </div>
                       </div>
-                      <div className="row mb-2">
+                      <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-4">
                           {origin !== "" ? (
                             <>
@@ -501,7 +501,7 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{origin}</h5>
                         </div>
                       </div>
-                      <div className="row mb-2">
+                      <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-4">
                           {time_depart !== "" ? (
                             <>
@@ -517,7 +517,7 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{time_depart}</h5>
                         </div>
                       </div>
-                      <div className="row mb-2">
+                      <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-4">
                           {destination !== "" ? (
                             <>
@@ -533,7 +533,7 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{destination}</h5>
                         </div>
                       </div>
-                      <div className="row mb-2">
+                      <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-4">
                           {time_return !== "" ? (
                             <>
@@ -549,7 +549,7 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{time_return}</h5>
                         </div>
                       </div>
-                      <div className="row mb-2">
+                      <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-4">
                           {days !== "" ? (
                             <>
@@ -603,7 +603,8 @@ const CommuterProfile1 = () => {
                   </div>
                   <div className="row mt-3">
                     <div className="col-md-9">
-                      <div className="row mb-2">
+                      
+                     <div className="row mb-2">
                         <div className="col-md-6">
                           {seats !== "" ? (
                             <>
@@ -616,23 +617,28 @@ const CommuterProfile1 = () => {
                           )}
                         </div>
                         <div className="col-md-6">
-                          <h5 className="fw-bold text-secondary">{seats}/{seats_left}</h5>
+                          <h5 className="fw-bold text-secondary">{seats}</h5>
                         </div>
-                        {/* <div className="col-md-6">
+                        <div className="col-md-6">
                           {seats_left !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
+                            {seats_left && (
+                                <>
+                                  <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
+                                </>
+                              )}
                             </>
                           ) : (
                             <>
-
                             </>
                           )}
                         </div>
                         <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{seats_left}</h5>
-                        </div> */}
+                        </div>
                       </div>
+                    
+                    
                       <div className="row mb-2">
                         <div className="col-md-6">
                           {price !== "" ? (
@@ -666,6 +672,7 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{car_ac}</h5>
                         </div>
                       </div>
+                    
                       <div className="row mb-2">
                         <div className="col-md-6">
                           {car_brand !== "" ? (
@@ -780,13 +787,13 @@ const CommuterProfile1 = () => {
                 </div>
                 <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                   <div className=" row d-flex justify-content-center align-items-center">
-                    <Row style={{ height: "100px", width: "100%" }}>
+                    <Row style={{ height: "275px", width: "100%" }}>
                       <GoogleMap
                         zoom={10}
                         center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
                         mapContainerStyle={{
                           width: "100%",
-                          height: '275%',
+                          height: '100%',
                         }}
                         options={{
                           types: ["(regions)"],
@@ -819,10 +826,17 @@ const CommuterProfile1 = () => {
                       </GoogleMap>
                     </Row>
                     
+                    <div className="row justify-content-end">
+                      <div className="col-md-12 text-end">
+                        <div className="row justify-content-end">
+                          <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-primary"></i><span className="font-custom">Start Point</span></div>
+                          <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-danger"></i><span className="font-custom">Drop-off Point</span></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 
                 </div>
-              
               </div>
             </div>
             <div className="text-end px-3 py-3">

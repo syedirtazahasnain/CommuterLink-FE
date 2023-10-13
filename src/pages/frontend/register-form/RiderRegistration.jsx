@@ -1988,7 +1988,7 @@ const RiderRegistration = () => {
                     />
                     {!isValidCnic && (
                       <div className="invalid-feedback">
-                        Please Enter a Valid CNIC in the Format 1234512345671.
+                        Please Enter a Valid CNIC without dashes in the Format 1234512345671.
                       </div>
                     )}
                   </Form.Group>
