@@ -832,7 +832,7 @@ const DriverRegistration = () => {
       }
       else {
 
-        displayNotification("warning", "Your file is exceeds 10MB");
+        displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
         }, 100);
@@ -858,7 +858,7 @@ const DriverRegistration = () => {
       }
       else {
 
-        displayNotification("warning", "Your file is exceeds 10MB");
+        displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
         }, 100);
@@ -947,7 +947,7 @@ const DriverRegistration = () => {
       }
       else {
 
-        displayNotification("warning", "Your file is exceeds 10MB");
+        displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
         }, 100);
@@ -982,7 +982,7 @@ const DriverRegistration = () => {
     const file = e.target.files[0];
     const maxSize = 51200000;
     if (file) {
- 
+
       if (file.size <= maxSize) {
         const reader = new FileReader();
         reader.onload = () => {
@@ -2624,7 +2624,7 @@ const DriverRegistration = () => {
                         />
                         {!isValidCnic && (
                           <div className="invalid-feedback">
-                            Please enter a valid CNIC in the format 1234512345671.
+                            Please enter a valid CNIC without dashes in the format 1234512345671.
                           </div>
                         )}
                       </Form.Group>
@@ -3803,7 +3803,7 @@ const DriverRegistration = () => {
                               />
                               {!isValidCnic1 && (
                                 <div className="invalid-feedback">
-                                  Please enter a valid CNIC in the format 1234512345671.
+                                  Please enter a valid CNIC without dashes in the format 1234512345671.
                                 </div>
                               )}
                             </Form.Group>
@@ -4491,7 +4491,7 @@ const DriverRegistration = () => {
                             />
                             {!isValidCnic1 && (
                               <div className="invalid-feedback">
-                                Please enter a valid CNIC in the format 1234512345671.
+                                Please enter a valid CNIC without dashed in the format 1234512345671.
                               </div>
                             )}
                           </Form.Group>
@@ -4796,21 +4796,17 @@ const DriverRegistration = () => {
                         className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
-                          Bank/Payment Details
+                          Bank/Payment Details <Tooltip title={<h6 className="px-2">{"You can add or update your preferred payment method from your profile page."}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                </Link>
+                              </Tooltip>
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID.<br /> Atleast one field must be filled. <Link
-
-                          style={{ textDecoration: "none" }}
-                        >
-
-                        </Link> </p>
-                        <div class="container text-center">
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
-                        </div>
-                        <span
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID.<br /> <span
                           style={{
                             color: "#198754",
                             textDecoration: "none",
@@ -4820,7 +4816,7 @@ const DriverRegistration = () => {
                           }}
                           className="fw-bold  "
 
-                        ><div className="d-flex justify-content-between align-items-center px-4 pt-4">
+                        ><div className="text-center px-4">
                             <p className="text-center" onClick={openPopup}> Why Process Payment through CommuterLink?</p>
 
 
@@ -4833,19 +4829,23 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="px-2">{"You can add or update your preferred payment method from your profile page."}</h6>}>
-                                <Link
-                                  // to='/notification'
-                                  className='mx-1 h-15px d-inline-block'
-                                  style={{ cursor: "pointer" }}
-                                >
-                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
-                                </Link>
-                              </Tooltip>
+                             
 
                             </p>
                           </div>
-                        </span>
+                        </span><Link
+
+                          style={{ textDecoration: "none" }}
+                        >
+
+                        </Link> </p>
+                        <div class="container text-center">
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                          <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+                        </div>
+                        
                         {/* <form id="paymentForm">
                           <div className="mt-2 px-3">
                             <TextField

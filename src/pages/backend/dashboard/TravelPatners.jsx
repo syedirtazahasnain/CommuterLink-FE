@@ -950,18 +950,18 @@ const TravelPatners = () => {
                                       </div>
                                     </div>
                                     <div className="row mb-2">
-                                      <div className="col-md-8">
+                                      <div className="col-md-6">
                                         {price !== "" ? (
                                           <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:Rs.</h5>
+                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
                                           </>
                                         ) : (
                                           <>
                                           </>
                                         )}
                                       </div>
-                                      <div className="col-md-4">
-                                        <h5 className="fw-bold text-secondary">{price}/-</h5>
+                                      <div className="col-md-6">
+                                        <h5 className="fw-bold text-secondary">Rs.{price}/-</h5>
                                       </div>
                                     </div>
                                     <div className="row mb-2">
@@ -1031,7 +1031,7 @@ const TravelPatners = () => {
                                       <div className="col-md-8">
                                         {price !== "" ? (
                                           <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:Rs.</h5>
+                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
                                           </>
                                         ) : (
                                           <>
@@ -1039,7 +1039,7 @@ const TravelPatners = () => {
                                         )}
                                       </div>
                                       <div className="col-md-4">
-                                        {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
+                                        {/* <h5 className="fw-bold text-secondary"> Rs. {price}/-</h5> */}
                                       </div>
                                     </div>
                                     <div className="row mb-2">

@@ -320,6 +320,9 @@ display: block;
 .swal-custom:hover {
   background-color: #2b9f8a;
 }
+.swal2-popup .swal2-html-container {
+  text-align: justify;
+}
 
 .bg-medium-teal{
   background-color: var(--bg-medium-teal);

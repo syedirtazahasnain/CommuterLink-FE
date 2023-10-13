@@ -17,7 +17,7 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import { Box, Link } from "@mui/material";
 import { width } from "@mui/system";
-import { API_URL, IMAGE_URL  } from "../../../constants";
+import { API_URL, IMAGE_URL } from "../../../constants";
 import Swal from "sweetalert2";
 import { displayNotification } from "../../../helpers";
 
@@ -290,8 +290,34 @@ const PartnerCancellation = () => {
   //   return () => clearInterval(intervalId);
   // }, [statusData]);
 
-
-
+  const youSure = () => {
+    Swal.fire({
+      title: 'Are you sure you want to terminate your agreement?',
+      html: `
+        Please be aware that terminating in this manner is not the recommended procedure, 
+        as your travel partner has reserved a seat for you. To prevent any inconvenience 
+        and compensate your travel partner [Name of Car Offeror], the amount equivalent to 
+        5 days will be transferred to your travel partner's [Name of Car Offeror] wallet.
+      `,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, terminate',
+      cancelButtonText: 'No',
+      customClass: {
+        confirmButton: 'swal-custom',
+        cancelButton: 'swal-custom',
+        htmlContainer: 'custom-html-container',
+      },
+      reverseButtons: true, 
+    }).then((result) => {
+      if (result.isConfirmed) {
+        sendRequest();
+      }
+    });
+  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
@@ -404,7 +430,7 @@ const PartnerCancellation = () => {
       <Badge
         key={props.day.toString()}
         overlap="circular"
-        //badgeContent={isSelected ? marker : undefined}
+      //badgeContent={isSelected ? marker : undefined}
       >
         <PickersDay
           {...other}
@@ -458,6 +484,19 @@ const PartnerCancellation = () => {
     <div>
       <div className="page-title">
         <h3 className="card bg-medium-teal p-4 text-dark-green my-2 fw-bold">CANCELLATION DATE</h3>
+        {checkStatus === 0 ?
+          (
+            <div className="">
+
+              <h5 className="card bg-medium-teal p-2  px-4 text-dark-green ">{`Please choose a termination date from the calendar below. It's important to keep in mind that the agreement will only be concluded five days after the date you select. Additionally, a notification will be sent to your travel partner, ${name}. This grace period allows your travel partner, who has reserved a seat for you, ample time to seek an alternative arrangement.`}</h5>
+
+            </div>
+          )
+          :
+          (<h5 className="card bg-medium-teal p-2  px-4 text-dark-green ">{`Please choose a termination date from the calendar below. It's important to keep in mind that the agreement will only be concluded five days after the date you select. Additionally, a notification will be sent to your travel partner, ${name}. This grace period allows your travel partner, who has reserved a seat for you, ample time to seek an alternative arrangement.`}</h5>
+
+          )}
+
       </div>
       <div className="card">
         <div className="card bg-light">
@@ -581,8 +620,9 @@ const PartnerCancellation = () => {
                                           className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 mb-3 mx-4"
                                           style={{ cursor: 'pointer' }}
                                           onClick={() => {
-                                            sendRequest();
+                                            // sendRequest();
                                             setRider("cancel_now");
+                                            youSure();
                                           }}
                                         >
                                           Cancel Now
