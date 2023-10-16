@@ -136,15 +136,14 @@ const Notifications = () => {
                   </div>
                 </div>
               ) : (
-                <div>
+                <div >
                   {notifications.map((notification, index) => (
-                    <div key={index}> {/* Add a key prop */}
-                      <p className="card-title text-dark py-1">
+                    <div className="border-bottom py-2" key={index}> {/* Add a key prop */}
+                      <span className="card-title text-dark">
                         {/* {index + 1}: {notification} */}
                         {notification}
-                      </p>
-                      <em className='d-flex text-right fs-9'>{formatTime(time[index])}</em>
-                      <hr style={{ color: "grey" }} />
+                      </span><br/>
+                      <span className='d-flex text-right fw-bold text-success fs-9'>{formatTime(time[index])}</span>
                     </div>
                   ))}
                 </div>

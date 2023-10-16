@@ -1,5 +1,5 @@
-:root{
-  --bg-white:'#fff';
+:root {
+  --bg-white: '#fff';
   --bg-green: #008d55;
   --bs-green: #008d55;
   --bs-text-green: rgba(32, 158, 141, 1);
@@ -8,24 +8,28 @@
   --bg-dark-green: #0A6155;
   --bg-dark-green-hover: #08483f;
   --bs-dark-green: #0A6155;
-   --bs-texgrey: #8B8E8E;
+  --bs-texgrey: #8B8E8E;
   --bg-medium-teal: #BFE0DB;
   --bg-secondary-border: rgba(1, 1, 1, 0.2);
   --bg-secondary-90: #E6E7E9;
   --bg-gradient-green: linear-gradient(to top right, rgba(28, 196, 172, 1), rgba(6, 55, 58, 1));
   --bg-gradient-grey: linear-gradient(to top right, rgba(107, 107, 107, 1), rgba(36, 36, 36, 1));
-  --bs-dark-blue:'#1439bf';
+  --bs-dark-blue: '#1439bf';
 }
 
 
-.btn-sm, .btn-group-sm > .btn {
+.btn-sm,
+.btn-group-sm>.btn {
   --bs-btn-font-size: 1.2rem !important;
   --bs-btn-padding-y: 0.25rem !important;
   --bs-btn-padding-x: 0.25rem !important;
 }
-.btn, .btn span {
+
+.btn,
+.btn span {
   font-family: "Sohne-Buch";
 }
+
 .btn {
   border-radius: 0;
 }
@@ -33,38 +37,48 @@
 .corner-rounded {
   border-radius: 20px 0px !important;
 }
+
 .btn-menu-blue-left {
   background-color: #5a9b87;
   /* background-image: url(../images/CL-logo-small.png);
   background-repeat: no-repeat;
   background-position: 6% 0%; */
 }
-.btn-menu-blue-left:hover, .btn-menu-blue-left:focus, .btn-menu-blue-left:active {
+
+.btn-menu-blue-left:hover,
+.btn-menu-blue-left:focus,
+.btn-menu-blue-left:active {
   background-color: #275e4e;
 }
 
-.btn-dark-green{
+.btn-dark-green {
   background-color: var(--bg-dark-green);
 }
-.btn-dark-green:hover{
-  background-color:var(--bg-dark-green-hover);
+
+.btn-dark-green:hover {
+  background-color: var(--bg-dark-green-hover);
 }
+
 .btn.btn-dark {
   background-color: var(--bs-dark);
 }
-.btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon).btn-sm, .btn-group-sm > .btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon) {
+
+.btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon).btn-sm,
+.btn-group-sm>.btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon) {
   padding: calc(0.25rem + 1px) calc(0.75rem + 1px);
 }
+
 [data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link.active {
   transition: all 0.1s;
   border-bottom: none;
   border-top: none;
   background-color: var(--bs-light-teal);
-  border-left:3px solid rgb(191, 216, 210);
+  border-left: 3px solid rgb(191, 216, 210);
   /* color: var(--bg-dark-green); */
- 
- 
+
+
 }
+
 [data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-title {
   color: var(--bg-dark-green) !important;
 }
@@ -72,40 +86,50 @@
 .font-family-default {
   font-family: "Sohne-Buch" !important;
 }
+
 .border-pvs {
   border-color: var(--pvs-them-color-primary) !important;
 }
+
 .symbol.symbol-35px {
   padding: 2px;
 }
+
 .app-container {
   background-color: white;
 }
+
 .text-end {
   font-family: "Sohne-Buch";
 }
+
 .app-sidebar .app-sidebar-logo .px-6 {
   border-bottom: #363740;
 }
+
 .menu-title {
   font-family: "Sohne-Buch";
   font-size: 16px;
 }
+
 .btn-custom {
   border: 1px solid #198754;
   background: none;
 }
+
 .btn-custom:hover {
   border: 1px solid #198754;
   background-color: var(--bg-primary);
   color: #fff;
 }
-.menu-item:hover, .menu-item.active{
+
+.menu-item:hover,
+.menu-item.active {
   border-bottom: none;
   border-top: none;
   background-color: var(--bs-light-teal);
-  border-left:3px solid var(--bg-dark-green);
- 
+  border-left: 3px solid var(--bg-dark-green);
+
 }
 
 [data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-logo {
@@ -119,184 +143,218 @@
  
 } */
 
-.border-custom{
+.border-custom {
   border-bottom: 1px solid #606060;
 }
 
-.bg-light-lime{
+.bg-light-lime {
   background-color: #ddf9f338;
-  
+
 }
+
 .woah-logo {
   height: 50px;
 }
+
 .pvs-logo {
   height: 50px;
 }
+
 hr {
   color: #dfe0eb;
   margin-bottom: 2px;
   opacity: 20%;
 }
+
 .bg-custom {
   background-color: #d9d9d9;
 }
+
 .card-woah {
   background-color: rgb(255 242 206 / 25%);
   /* background-color: #fffcf0; */
 }
-.card-woah > .card-body {
+
+.card-woah>.card-body {
   padding: 1.3rem 1.55rem;
 }
+
 .pvs-title {
   font-family: "Sohne-Buch";
   font-size: 1.25rem;
   color: black;
 }
+
 .card-title1 {
   font-family: "SohneSchmal-Dreiviertelfett";
   font-size: 40px;
   color: black;
 }
+
 .card-title2 {
   font-family: "SohneSchmal-Dreiviertelfett";
   font-size: 30px;
   color: black;
 }
-.corner-rounded{
+
+.corner-rounded {
   border-radius: 20px 0px;
 }
-.btn-grey{
+
+.btn-grey {
   background-color: var(--bg-grey);
 }
-.btn-grey:hover{
+
+.btn-grey:hover {
   background-color: #777777;
 }
-.btn-green{
+
+.btn-green {
   background-color: var(--bg-green);
 }
-.btn-green:hover{
+
+.btn-green:hover {
   background-color: #008d55;
 }
-.btn-blue{
+
+.btn-blue {
   background-color: var(--bg-blue);
 }
-.btn-blue:hover{
+
+.btn-blue:hover {
   background-color: #17329c;
 }
-.btn-orange{
+
+.btn-orange {
   background-color: var(--bg-primary);
 }
-.btn-orange:hover{
+
+.btn-orange:hover {
   background-color: #e74214;
 }
 
-.icon-green{
- color: rgb(6, 55, 58) !important;
+.icon-green {
+  color: rgb(6, 55, 58) !important;
 }
 
 .header-right-items {
   margin-left: auto;
   margin-top: 0;
 }
+
 ul {
   /* display: flex; */
   list-style-type: none;
 }
+
 a {
   color: black;
   font-family: "SohneSchmal-Halbfett";
 }
-.header-right-items > ul > li > a {
+
+.header-right-items>ul>li>a {
   font-size: 24px;
 }
+
 .app-sidebar-menu .menu-item .menu-icon>i {
   font-size: 1.3rem;
   color: var(--bg-dark-green) !important;
 }
+
 .line {
   padding: 0 5px;
 }
+
 .dropdown-item {
   font-family: "Sohne-Buch";
 }
+
 .form-check-input[type=checkbox] {
   border-radius: 0rem;
   width: 15px;
   height: 15px;
   background-color: white;
 }
+
 .form-check-input:checked {
   background-color: var(--primary) !important;
   border-color: var(--primary) !important;
 }
+
 .card-custom-background {
   background-color: #dce9f4 !important;
 }
+
 .gray-border {
   border: 2px solid #27282a52;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: rgba(231, 229, 218, 0.25) !important;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(231, 229, 218, 0.25) !important;
 }
-body{
- background-color: rgb(217, 217, 217)!important;
+
+body {
+  background-color: rgb(217, 217, 217) !important;
 }
 
 /* .Profile{
   background-color: #9ccfc3;
   
  } */
- .Profile:hover{
+.Profile:hover {
   background-color: #c2ccc9;
-  
- }
- .app-header{
-  background-color:rgb(217, 217, 217)!important;
+
+}
+
+.app-header {
+  background-color: rgb(217, 217, 217) !important;
   /* color: #df0707ef; */
   font-family: 'Roboto', sans-serif;
- }
+}
 
- .sidebar-bg{
+.sidebar-bg {
   background-color: var(--bg-light-grey);
- 
- }
+
+}
 
 
-.font-custom{
+.font-custom {
   font-family: 'Roboto', sans-serif;
   /* font-family: 'GFS Didot', serif; */
 }
+
 /* .backgroundColor{
   background-color: rgb(205,219,217) !important;
 } */
 
-.align-middle{
+.align-middle {
   font-family: 'Roboto', sans-serif;
 }
 
 .custom-scroll-color::-webkit-scrollbar {
-  width: 10px; 
+  width: 10px;
   overflow-y: hidden;
 }
 
 .custom-scroll-color::-webkit-scrollbar-thumb {
-  background-color: green; 
-  border-radius: 5px; 
+  background-color: green;
+  border-radius: 5px;
   overflow-y: hidden;
 }
 
 .custom-scroll-color::-webkit-scrollbar-track {
-  background-color: green; 
+  background-color: green;
   overflow-y: hidden;
 }
- 
-.headerColor{
+
+.headerColor {
   background-color: var(--bg-dark-green)
 }
+
 .swal-text {
   font-size: 18px;
   color: #333;
@@ -312,7 +370,7 @@ body{
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
-display: block;
+  display: block;
 }
 
 
@@ -320,72 +378,86 @@ display: block;
 .swal-custom:hover {
   background-color: #2b9f8a;
 }
+
 .swal2-popup .swal2-html-container {
   text-align: justify;
+
+}
+.text-center {
+  margin: auto;
+
 }
 
-.bg-medium-teal{
+.bg-medium-teal {
   background-color: var(--bg-medium-teal);
 }
 
-.border-secondary-light{
+.border-secondary-light {
   border-color: 0.5px solid var(--bg-secondary-border);
 }
 
-.bg-card-grey{
+.bg-card-grey {
   background-color: var(--bg-secondary-90);
 }
 
-.text-dark-green{
+.text-dark-green {
   color: var(--bs-dark-green);
 }
-.nav-tabs-wider .nav-link {
-}
 
-.tab{
+.nav-tabs-wider .nav-link {}
+
+.tab {
   color: white;
   background-color: var(--bg-light-grey);
 }
-.tab:hover{
+
+.tab:hover {
   color: black;
   background-color: var(--bg-medium-teal);
 }
 
 .active-tab {
-  background-color: var(--bg-medium-teal); /* Change this to the desired background color */
-  color: black; /* Change this to the desired text color */
+  background-color: var(--bg-medium-teal);
+  /* Change this to the desired background color */
+  color: black;
+  /* Change this to the desired text color */
 }
 
-.custom-button-style{
+.custom-button-style {
   background-color: var(--bg-light-grey) !important;
   color: var(--bs-texgrey) !important;
 }
-.custom-button-style:hover{
+
+.custom-button-style:hover {
   background-color: var(--bg-medium-teal) !important;
   color: var(--bs-dark) !important;
-  
+
 }
-.custom-button-style.active{
+
+.custom-button-style.active {
   background-color: var(--bs-dark-green) !important;
   color: white !important;
 }
 
-.header-teal{
+.header-teal {
   background-color: var(--bg-dark-teal) !important;
 }
-.text-green{
+
+.text-green {
   color: var(--bs-text-green) !important;
 }
-.background-body-green{
+
+.background-body-green {
   background: var(--bg-gradient-green) !important;
   color: white !important
 }
-.background-body-grey{
+
+.background-body-grey {
   background: var(--bg-gradient-grey) !important;
   color: white !important
 }
 
-.table-bg{
+.table-bg {
   background: transparent !important;
 }
 
@@ -393,6 +465,7 @@ display: block;
   background-color: transparent !important;
 }
 
-.background_body{
+.background_body {
   background: linear-gradient(to top right, rgba(28, 196, 172, 1), rgba(6, 55, 58, 1)) !important;
-  color: white !important}
+  color: white !important
+}
