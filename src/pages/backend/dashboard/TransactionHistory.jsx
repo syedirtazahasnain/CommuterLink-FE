@@ -125,12 +125,12 @@ const TransactionHistory = () => {
             ) : (
               <>
                 <h5 className="text-center pb-2 fw-bold text-dark">{monthYear}</h5>
-                <div className="col-md-12 col-sm-6">
+                <div className="col-md-12 col-sm-12">
                   <div className="row">
-                    <div className="col-md-12 ">
+                    <div className="col-md-12  ">
                       <div className="">
 
-                        <Table className="bg-dark text-white border-1 rounded-top-4">
+                        {/* <Table className="bg-dark text-white border-1 rounded-top-4">
                           <TableBody>
                             <TableRow>
                               <TableCell className="text-white" style={tableCellStyle}>
@@ -138,8 +138,8 @@ const TransactionHistory = () => {
                               </TableCell>
                             </TableRow>
                           </TableBody>
-                        </Table>
-                        <Table className="bg-dark text-white border-1 rounded-bottom-4">
+                        </Table> */}
+                        <Table className="bg-dark text-white border-1 rounded-bottom-4 rounded-top-4">
                           <TableHead>
                             <TableRow>
                               <TableCell className="text-white" style={tableCellStyle}>Date</TableCell>

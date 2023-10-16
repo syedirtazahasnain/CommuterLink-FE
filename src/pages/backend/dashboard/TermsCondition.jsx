@@ -108,7 +108,7 @@ const TermsCondition = () => {
 
         </div>
         <div className="col-md-6">
-          <div className="card  mt-3 mb-5 bg-light" >
+          <div className="card h-100 mb-5 bg-light" >
             <div
               className="card-header"
               // style={{ backgroundColor: "#2a402a" }}
