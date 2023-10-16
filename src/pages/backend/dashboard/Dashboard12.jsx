@@ -80,6 +80,15 @@ const Dashboard12 = () => {
         </div>
       ) : (
         <>
+          <div className="alert alert-danger alert-dismissible fade show overflow-hidden" role="alert">
+            <strong>Dear [Name of Traveler],<br/></strong>We would like to inform you that your termination of agreement, which was initiated on [Date], is currently in the process of being handled. A notification has been sent to your travel partner [Name of Car Offeror] and the travel agreement will be canceled on [Date].
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <div className="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Dear [Name of Car Offeror],</strong><br/>We would like to inform you that your termination notification, which was initiated on [Date], is currently in the process of being handled. We are notifying all travel partners regarding this matter. According to this notification, the travel agreement will be canceled on [Date].
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
           <CommuterLinkSuggestions />
           {/* <RequestsByMembers /> */}
           <TravelPatners />

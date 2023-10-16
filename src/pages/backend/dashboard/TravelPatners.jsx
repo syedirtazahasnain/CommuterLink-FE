@@ -380,25 +380,25 @@ const TravelPatners = () => {
   };
 
   const youSure = () => {
-    Swal.fire({
-      position: 'top',
-      title: 'Are you sure?',
-      text: "You want to cancel the agreement",
-      showCancelButton: true,
-      cancelButtonColor: 'swal-custom',
-      customClass: {
-        confirmButton: 'swal-custom',
-        cancelButton: 'swal-custom',
-      },
-      confirmButtonText: 'Yes'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        calendarPicker(contactId);
-
-      }
-    })
+    calendarPicker(contactId);
+    // Swal.fire({
+    //   position: 'top',
+    //   title: 'Are you sure?',
+    //   html: `You want to cancel the agreement`,
+    //   showCancelButton: true,
+    //   cancelButtonColor: 'swal-custom',
+    //   customClass: {
+    //     confirmButton: 'swal-custom',
+    //     cancelButton: 'swal-custom',
+    //     htmlContainer: 'text-center',
+    //   },
+    //   confirmButtonText: 'Yes'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     calendarPicker(contactId);
+    //   }
+    // })
   }
-
   const tableCellStyle = {
     color: 'black',
     fontWeight: 'bold',
@@ -680,7 +680,7 @@ const TravelPatners = () => {
                               <div className="row mt-3">
                                 <div className="col-md-9">
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {seats !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">No.of Seats:</h5>
@@ -691,10 +691,10 @@ const TravelPatners = () => {
                                         </>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{seats}</h5>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {seatsLeft !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
@@ -705,12 +705,12 @@ const TravelPatners = () => {
                                         </>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{seatsLeft}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {price !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
@@ -719,12 +719,12 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {date !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Agreement Date:</h5>
@@ -733,12 +733,12 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{formatDate(date)}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {cancelDate !== null ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Cancel Agreement Date:</h5>
@@ -747,26 +747,26 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{cancelDate ? formatDate(cancelDate) : cancelDate}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {carAC !== "" ? (
                                         <>
-                                          <h5 className="text-dark-green fw-bold font-custom">Car have AC:</h5>
+                                          <h5 className="text-dark-green fw-bold font-custom">Car has AC:</h5>
                                         </>
                                       ) : (
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{carAC}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {carBrand !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Car Brand:</h5>
@@ -775,12 +775,12 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{carBrand}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {carCC !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Car CC:</h5>
@@ -789,12 +789,12 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{carCC}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {carModel !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Car Model:</h5>
@@ -803,12 +803,12 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{carModel}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {RegNo !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Registration Number:</h5>
@@ -817,12 +817,12 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{RegNo}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {RegYear !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
@@ -831,12 +831,12 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{RegYear}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                       {carRegYear !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
@@ -845,7 +845,7 @@ const TravelPatners = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{carRegYear}</h5>
                                     </div>
                                   </div>
@@ -854,13 +854,13 @@ const TravelPatners = () => {
                             </div>
                             <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                               <div className=" row d-flex justify-content-center align-items-center">
-                                <Row style={{ height: "100px", width: "100%" }}>
+                                <Row style={{ height: "275px", width: "100%" }}>
                                   <GoogleMap
                                     zoom={10}
                                     center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
                                     mapContainerStyle={{
                                       width: "100%",
-                                      height: '275%',
+                                      height: '100%',
                                     }}
                                     options={{
                                       types: ["(regions)"],
@@ -892,6 +892,14 @@ const TravelPatners = () => {
                                     />
                                   </GoogleMap>
                                 </Row>
+                                <div className="row justify-content-end">
+                                  <div className="col-md-12 text-end">
+                                    <div className="row justify-content-end">
+                                      <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-primary"></i><span className="font-custom">Start Point</span></div>
+                                      <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-danger"></i><span className="font-custom">Drop-off Point</span></div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -904,247 +912,247 @@ const TravelPatners = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="row"> 
-                    <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
-                    <div className="row d-flex flex-column">
-                      <div className="card-body-inner green-card">
+                    <div className="row">
+                      <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
                         <div className="row d-flex flex-column">
+                          <div className="card-body-inner green-card">
+                            <div className="row d-flex flex-column">
 
-                          <div className="row mb-3 justify-content-between">
-                            <div className="col-md-4">
-                              <div className="card rounded-0">
-                                <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
+                              <div className="row mb-3 justify-content-between">
+                                <div className="col-md-4">
+                                  <div className="card rounded-0">
+                                    <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
 
-                                  {image ? (
-                                    <img
-                                      src={`${IMAGE_URL}${image}`}
-                                      className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
-                                      // onClick={() => {
-                                      //   route(contactId);
-                                      // }}
-                                    />
-                                  ) : (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
-                                    />
-                                  )}
+                                      {image ? (
+                                        <img
+                                          src={`${IMAGE_URL}${image}`}
+                                          className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
+                                        // onClick={() => {
+                                        //   route(contactId);
+                                        // }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                        />
+                                      )}
 
+                                    </div>
+
+                                    <div className="card-body bg-card-grey">
+                                      <div className="card-text">
+                                        <div className="row mb-2">
+                                          <div className="col-md-6 ">
+                                            {name !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-secondary">{name}</h5>
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {price !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {date && formatDate(date) !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5>
+                                          </div>
+                                        </div>
+                                        <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2" onClick={() => {
+                                          route(contactId);
+                                        }}>View Profile</button></div>
+
+                                      </div>
+                                    </div>
+                                    <div>
+                                    </div>
+                                  </div>
                                 </div>
-                             
-                                <div className="card-body bg-card-grey">
-                                  <div className="card-text">
-                                    <div className="row mb-2">
-                                      <div className="col-md-6 ">
-                                        {name !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        <h5 className="fw-bold text-secondary">{name}</h5>
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-6">
-                                        {price !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        <h5 className="fw-bold text-secondary">Rs.{price}/-</h5>
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-6">
-                                        {date && formatDate(date) !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5>
-                                      </div>
-                                    </div>
-                                    <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2"   onClick={() => {
-                                        route(contactId);
-                                      }}>View Profile</button></div>
+                                <div className="col-md-4">
+                                  <div className="card rounded-0">
+                                    <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
 
+                                      {image ? (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`} //${IMAGE_URL}${img}
+                                          className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                          onClick={() => {
+                                            route(contactId);
+                                          }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                        />
+                                      )}
+
+                                    </div>
+
+                                    <div className="card-body bg-card-grey">
+                                      <div className="card-text">
+                                        <div className="row mb-2">
+                                          <div className="col-md-6 ">
+                                            {name !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-8">
+                                            {price !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-4">
+                                            {/* <h5 className="fw-bold text-secondary"> Rs. {price}/-</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {date && formatDate(date) !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
+
+                                      </div>
+                                    </div>
+                                    <div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="col-md-4">
+                                  <div className="card rounded-0">
+                                    <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
+
+                                      {image ? (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-100px m-auto h-100px cursor-pointer"
+                                          onClick={() => {
+                                            route(contactId);
+                                          }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                        />
+                                      )}
+
+                                    </div>
+
+                                    <div className="card-body bg-card-grey">
+                                      <div className="card-text">
+                                        <div className="row mb-2">
+                                          <div className="col-md-6 ">
+                                            {name !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-8">
+                                            {price !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:Rs.</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-4">
+                                            {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {date && formatDate(date) !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                      <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
+                                    </div>
+                                    <div>
+                                    </div>
                                   </div>
                                 </div>
                                 <div>
                                 </div>
                               </div>
-                            </div>
-                            <div className="col-md-4">
-                              <div className="card rounded-0">
-                                <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
-
-                                  {image ? (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`} //${IMAGE_URL}${img}
-                                      className="card-img-top w-100px m-auto h-100px cursor-pointer"
-                                      onClick={() => {
-                                        route(contactId);
-                                      }}
-                                    />
-                                  ) : (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
-                                    />
-                                  )}
-
-                                </div>
-                             
-                                <div className="card-body bg-card-grey">
-                                  <div className="card-text">
-                                    <div className="row mb-2">
-                                      <div className="col-md-6 ">
-                                        {name !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-8">
-                                        {price !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-4">
-                                        {/* <h5 className="fw-bold text-secondary"> Rs. {price}/-</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-6">
-                                        {date && formatDate(date) !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
-
-                                  </div>
-                                </div>
-                                <div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-md-4">
-                              <div className="card rounded-0">
-                                <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
-
-                                  {image ? (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-100px m-auto h-100px cursor-pointer"
-                                      onClick={() => {
-                                        route(contactId);
-                                      }}
-                                    />
-                                  ) : (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
-                                    />
-                                  )}
-
-                                </div>
-                             
-                                <div className="card-body bg-card-grey">
-                                  <div className="card-text">
-                                    <div className="row mb-2">
-                                      <div className="col-md-6 ">
-                                        {name !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-8">
-                                        {price !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:Rs.</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-4">
-                                        {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-6">
-                                        {date && formatDate(date) !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
-                                      </div>
-                                    </div>
-
-                                  </div>
-                                  <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
-                                </div>
-                                <div>
-                                </div>
-                              </div>
-                            </div>
-                            <div>
-                            </div>
-                          </div>
-                          {/* <div className="col-md-8">
+                              {/* <div className="col-md-8">
                             <Table className="bg-dark text-white border-1 rounded-4">
                               <TableBody>
                                 <TableRow>
@@ -1186,14 +1194,14 @@ const TravelPatners = () => {
                               </TableBody>
                             </Table>
                           </div> */}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  </div>
                   )}
-                
-                 
+
+
                 </div>
               </>
             )}

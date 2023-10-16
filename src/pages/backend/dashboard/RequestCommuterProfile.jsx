@@ -485,7 +485,7 @@ const RequestCommuterProfile = () => {
                                     <div className="row mt-3">
                                         <div className="col-md-9">
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {seats_left !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
@@ -496,12 +496,12 @@ const RequestCommuterProfile = () => {
                                                         </>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{seats_left}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {price !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
@@ -510,13 +510,13 @@ const RequestCommuterProfile = () => {
                                                         <></>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
 
                                                     <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {car_ac !== "" ? (
                                                         <>
                                                             {car_ac && (
@@ -529,12 +529,12 @@ const RequestCommuterProfile = () => {
                                                         <></>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{car_ac}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {car_brand !== "" ? (
                                                         <>
                                                             {car_brand && (
@@ -547,12 +547,12 @@ const RequestCommuterProfile = () => {
                                                         <></>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{car_brand}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {car_cc !== "" ? (
                                                         <>
                                                             {car_cc && (
@@ -565,12 +565,12 @@ const RequestCommuterProfile = () => {
                                                         <></>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{car_cc}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {car_model !== "" ? (
                                                         <>
                                                             {car_model && (
@@ -583,12 +583,12 @@ const RequestCommuterProfile = () => {
                                                         <></>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{car_model}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {reg_no !== "" ? (
                                                         <>
                                                             {reg_no && (
@@ -601,14 +601,14 @@ const RequestCommuterProfile = () => {
                                                         <></>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{reg_no}</h5>
 
                                                 </div>
 
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {reg_year !== "" ? (
                                                         <>
                                                             {reg_year && (
@@ -621,13 +621,13 @@ const RequestCommuterProfile = () => {
                                                         <></>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{reg_year}</h5>
 
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {car_reg_year !== "" ? (
                                                         <>
                                                             {car_reg_year && (
@@ -640,7 +640,7 @@ const RequestCommuterProfile = () => {
                                                         <></>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{car_reg_year}</h5>
                                                 </div>
                                             </div>
@@ -649,13 +649,13 @@ const RequestCommuterProfile = () => {
                                 </div>
                                 <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                                     <div className=" row d-flex justify-content-center align-items-center">
-                                        <Row style={{ height: "100px", width: "100%" }}>
+                                        <Row style={{ height: "275px", width: "100%" }}>
                                             <GoogleMap
                                                 zoom={10}
                                                 center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
                                                 mapContainerStyle={{
                                                     width: "100%",
-                                                    height: '275%',
+                                                    height: '100%',
                                                 }}
                                                 options={{
                                                     types: ["(regions)"],
@@ -687,6 +687,14 @@ const RequestCommuterProfile = () => {
                                                 />
                                             </GoogleMap>
                                         </Row>
+                                        <div className="row justify-content-end">
+                                            <div className="col-md-12 text-end">
+                                                <div className="row justify-content-end">
+                                                    <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-primary"></i><span className="font-custom">Start Point</span></div>
+                                                    <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-danger"></i><span className="font-custom">Drop-off Point</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

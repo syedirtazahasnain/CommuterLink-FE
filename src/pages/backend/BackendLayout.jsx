@@ -77,6 +77,7 @@ const BackendLayout = ({ children }) => {
         customClass: {
           confirmButton: 'swal-custom',
           cancelButton: 'swal-custom',
+          htmlContainer: 'text-center',
         },
         // cancelClass:{
 
