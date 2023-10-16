@@ -102,6 +102,7 @@ const TravelBuddyProfile = () => {
   const [pickupAddress, setPickupAddress] = useState("");
   const [date, setDate] = useState("");
   const [cancelDate, setCancelDate] = useState(null);
+  const [cancelDisabled, setCancelDisabled] = useState(false);
 
   const getDashboardData = async () => {
     try {
@@ -335,6 +336,12 @@ const TravelBuddyProfile = () => {
       getProfileData();
     }
   }, [contactId]);
+
+  useEffect(() => {
+    if (cancelDate) {
+      setCancelDisabled(true);
+    }
+  }, [cancelDate]);
 
   useEffect(() => {
     getTravelData();
@@ -872,7 +879,7 @@ const TravelBuddyProfile = () => {
                 </div>
               </div>
               <div className="text-end px-3 py-3">
-                <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure}>
+                <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure} disabled={!cancelDisabled}>
                   Cancel Agreement
                 </Button>
               </div>

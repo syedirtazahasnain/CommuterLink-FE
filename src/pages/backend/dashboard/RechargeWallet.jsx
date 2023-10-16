@@ -24,9 +24,10 @@ const RechargeWallet = () => {
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
   const [windowClosedManually, setWindowClosedManually] = useState(false);
+  const payment = useSelector((s) => s.general.data.amount);
   const [memberId, setMemberId] = useState("");
   const [userId, setUserId] = useState("");
-  const [payment, setPayment] = useState("");
+  // const [payment, setPayment] = useState("");
   const [profileType, setProfileType] = useState("");
   const userToken = useSelector((s) => s.login.data.token);
   const paymentURL =`https://be.staging.commuterslink.com/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
@@ -50,12 +51,6 @@ const RechargeWallet = () => {
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-
-  useEffect(() => {
-    if(memberId){
-      getPaymentDetails();
-    }
-  }, [memberId]);
 
   useEffect(() => {
     // Listen for the beforeunload event
@@ -144,30 +139,6 @@ const RechargeWallet = () => {
         }
       }
       console.log("Advance Payment Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
-
-  const getPaymentDetails = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/advance-seat-cost/${memberId}`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
-
-      const jsonresponse = await response.json();
-      if(jsonresponse){
-        setPayment(jsonresponse);
-      }
-      console.log("Payment Details:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }

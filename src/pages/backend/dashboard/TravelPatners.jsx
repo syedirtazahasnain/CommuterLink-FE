@@ -29,6 +29,7 @@ const TravelPatners = () => {
   const [submitbtn, setSubmit] = useState(false);
   const [loading, setLoading] = useState(true);
   const [recentLoading, setRecentLoading] = useState(true);
+  const [cancelDisabled, setCancelDisabled] = useState(false);
 
   // For Travel Data
   // const [contactId, setContactId] = useState("");
@@ -146,11 +147,17 @@ const TravelPatners = () => {
   }, []);
 
   useEffect(() => {
+    if (cancelDate) {
+      setCancelDisabled(true);
+    }
+  }, [cancelDate]);
+
+  useEffect(() => {
     getSeatCostDetail();
   }, [userType, contactId]);
 
   const onNavigate = () => {
-    navigate("/rechargewallet");
+    navigate("/amountvalidation");
   };
   const viewTrasaction = () => {
     navigate("/transaction-history")
@@ -943,7 +950,7 @@ const TravelPatners = () => {
                             </div>
                           </div>
                           <div className="text-end px-3 py-3">
-                            <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure}>
+                            <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure} disabled={!cancelDisabled}>
                               Cancel Agreement
                             </Button>
                           </div>

@@ -2,38 +2,33 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/base";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage } from "../../../redux/generalSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API_URL } from "../../../constants";
 import { displayNotification } from "../../../helpers";
+import { setAmountState } from "../../../redux/generalSlice";
 
 const AmountValidation = () => {
-    const [amount, setAmount] = useState('');
-
-
-
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [amount, setAmount] = useState(null);
 
     const handleAmountChange = (event) => {
         const input = event.target.value;
-        if (/^\d*$/.test(input) || input === '') {
+        if (/^\d*$/.test(input) || input === null) {
             setAmount(input);
         }
     };
 
     const handleCheckAmount = () => {
-        if (parseInt(amount) < 2000) {
+        if (amount < 2000) {
             displayNotification("warning", "Amount must be at least 2000");
         }
+        else {
+            dispatch(setAmountState(amount));
+            navigate("/rechargewallet");
+        }
     };
-
-
-
-
-
-
-
 
     return (
         <div>
@@ -61,16 +56,12 @@ const AmountValidation = () => {
                 </h5>
                 <div className=" bg-white">
                     <div className="">
-
                         <div className="row text-left">
                             <div
                                 className="col-md-12"
-
                             >
                                 <form action="#" method="post">
                                     <div className="row">
-
-
                                         <div className="col-md-12">
                                             <TextField
                                                 className="mb-3 bg-light"
@@ -89,12 +80,11 @@ const AmountValidation = () => {
                                                 }}
                                             />
                                         </div>
-
                                     </div>
                                 </form>
                                 <div className="d-flex justify-content-center mt-3">
                                     <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={handleCheckAmount}>
-                                        Check Amount
+                                        Submit
                                     </Button>
                                 </div>
                             </div>

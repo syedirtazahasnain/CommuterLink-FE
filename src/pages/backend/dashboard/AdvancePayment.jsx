@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { createTheme,Breadcrumbs } from "@mui/material";
+import { createTheme, Breadcrumbs } from "@mui/material";
 import { API_URL, BASE_URL } from "../../../constants";
-import { Link, useNavigate,useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button } from "@mui/base";
 
@@ -187,7 +187,7 @@ const AdvancePayment = () => {
           },
         }
       );
-  
+
       const textResponse = await response.text();
       setPayment(textResponse);
       console.log("Payment Details:", textResponse);
@@ -248,7 +248,7 @@ const AdvancePayment = () => {
   return (
     <div>
       <div className="page-title">
-      <h3 className="px-4 py-2 text-success my-2 fw-bold">
+        <h3 className="px-4 py-2 text-success my-2 fw-bold">
           <Breadcrumbs aria-label="breadcrumb">
             {crumbs.map((crumb, index) => (
               <Link
@@ -267,17 +267,19 @@ const AdvancePayment = () => {
           </Breadcrumbs>
         </h3>
         <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
-      <div className="d-flex justify-content-between align-items-xl-baseline">
-        <h3 className="text-dark-green my-2 fw-bold m-0">
-        TWO WEEKS ADVANCE MIN. PAYMENT DUE: Rs. {payment}/-{" "}
-        </h3>
-        <Link
+          <div className="d-flex justify-content-between align-items-xl-baseline">
+            <h3 className="text-dark-green my-2 fw-bold m-0">
+              TWO WEEKS ADVANCE MIN. PAYMENT DUE: Rs. {payment}/-{" "}
+            </h3>
+            <Link
               to={"/whyprocesspayment1"} >
               <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
               </button>
-            </Link></div></div>
+            </Link>
+          </div>
+        </div>
       </div>
       <div className="card p-4  p-2">
         <div className="">
@@ -308,20 +310,20 @@ const AdvancePayment = () => {
                       </button>
                     </div>
                   </div>
-              
+
                   <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
                     <div>
                       <button
                         className="font-custom btn  text-success fw-bold fs-5 lh-1"
-                        // onClick={openAndCloseWindow}
-                         >
+                      // onClick={openAndCloseWindow}
+                      >
                         <span className="font-custom">
-                        <img
-                          src={`${BASE_URL}/assets/images/ep.png`}
-                          className="font-custom card-img-top w-25px h-30px  mx-2 " />
+                          <img
+                            src={`${BASE_URL}/assets/images/ep.png`}
+                            className="font-custom card-img-top w-25px h-30px  mx-2 " />
                         </span>
                         easypaisa
-                        
+
                       </button>
                     </div>
                   </div>
@@ -329,12 +331,14 @@ const AdvancePayment = () => {
                     <div>
                       <button
                         className="font-custom btn  advancecolor text-success fw-bold fs-5 ml-3 lh-1"
-                        onClick={openAndCloseWindow} >
+                        onClick={openAndCloseWindow}
+                        disabled={windowClosedManually}
+                      >
                         <span><img
                           src={`${BASE_URL}/assets/images/jazz.png`}
                           className="font-custom  w-40px" />
                         </span>
-                       &nbsp; Jazz Cash
+                        &nbsp; Jazz Cash
                       </button>
                     </div>
                   </div>
@@ -352,7 +356,7 @@ const AdvancePayment = () => {
               Skip Payment
             </Button> */}
             <Button
-              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3 ml-2" 
+              className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3 ml-2"
               // style={{ backgroundColor: "rgb(42, 64, 42)" }}
               onClick={route}
               disabled={!windowClosedManually}

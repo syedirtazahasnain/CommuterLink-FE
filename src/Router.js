@@ -193,6 +193,7 @@ const Router = () => {
             <Route path='/termscondition' element={<BackendLayout children={<TermsCondition />} />} />
             <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />} />
             <Route path="/rechargewallet" element={<BackendLayout children={<RechargeWallet />} />} />
+            <Route path='/amountvalidation' element={<BackendLayout children={<AmountValidation />} />} />
           </>
         )}
         {!userLogin && <Route path="*" element={<Navigate to="/" />} />}
