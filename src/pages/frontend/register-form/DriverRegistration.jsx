@@ -168,6 +168,7 @@ const DriverRegistration = () => {
   const [isValidProfession, setIsValidProfession] = useState(true);
   const [isCarBrandValid, setIsCarBrandValid] = useState(true);
   const [isLicenseValid, setIsLicenseValid] = useState(true);
+  
   // For Start Point
   const [startBounds, setStartBounds] = useState([]);
   const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
@@ -499,7 +500,7 @@ const DriverRegistration = () => {
   useEffect(() => {
     // Filter registration years based on the selected manufacturing year.
     if (selectedManYear) {
-      const filteredYears = regYear.filter((reg) => reg.car_year_ranges > selectedManYear);
+      const filteredYears = regYear.filter((reg) => reg.car_year_ranges >= selectedManYear);
       setFilteredRegYears(filteredYears);
     } else {
       // If no manufacturing year is selected, show all registration years.
@@ -1525,7 +1526,7 @@ const DriverRegistration = () => {
         option: 1,
         car_brand: selectedCarBrand,
         car_cc: selectedCarCC,
-        car_year_ranges: selectedRegYear,
+        car_year_ranges: selectedManYear,
         car_model: selectedModelName,
         reg_year: selectedRegYear,
         reg_no: selectedRegNumber,
@@ -1828,7 +1829,38 @@ const DriverRegistration = () => {
 
                         {cityStartId && (
                           <>
-                            {addNewStartDropdown && (
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom56"
+                            >
+                              <Form.Label className="text-black">
+                                Area
+                              </Form.Label>
+                              <Autocomplete
+                                onLoad={(autocomplete) =>
+                                  (autocompleteRef.current = autocomplete)
+                                }
+                                onPlaceChanged={handlePlaceSelectStart}
+                                restrictions={{ country: "PK" }}
+                                bounds={autocompleteStartBounds}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  autoComplete="on"
+                                  required
+                                  type="text"
+                                  value={locationStartStringField}
+                                  onChange={handleLocationStartField}
+                                  className="text-dark mt-1"
+                                  placeholder="Enter your area"
+                                  autocomplete="on"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+
+                            {/* {addNewStartDropdown && (
                               <Form.Group
                                 as={Col}
                                 md="12"
@@ -1873,7 +1905,7 @@ const DriverRegistration = () => {
                                 </Form.Select>
                               </Form.Group>
 
-                            )}
+                            )} */}
 
                             {/* {addNewStartField && (
                               <Form.Group
@@ -1885,7 +1917,7 @@ const DriverRegistration = () => {
                               </Form.Group>
                             )} */}
 
-                            {addNewStart && (
+                            {/* {addNewStart && (
                               <Form.Group
                                 as={Col}
                                 md="12"
@@ -1916,7 +1948,7 @@ const DriverRegistration = () => {
                                   />
                                 </Autocomplete>
                               </Form.Group>
-                            )}
+                            )} */}
                           </>
                         )}
 
@@ -2031,7 +2063,37 @@ const DriverRegistration = () => {
 
                         {cityEndId && (
                           <>
-                            {addNewEndDropdown && (
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom08"
+                            >
+                              <Form.Label className="text-black">
+                                Area
+                              </Form.Label>
+                              <Autocomplete
+                                onLoad={(autocomplete) =>
+                                  (autocompleteRef.current = autocomplete)
+                                }
+                                onPlaceChanged={handlePlaceSelectEnd}
+                                restrictions={{ country: "PK" }}
+                                bounds={autocompleteEndBounds}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  autoComplete="on"
+                                  required
+                                  type="text"
+                                  value={locationEndStringField}
+                                  onChange={handleLocationEndField}
+                                  className="text-dark mt-1"
+                                  placeholder="Enter your area"
+                                  autocomplete="on"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+                            {/* {addNewEndDropdown && (
                               <Form.Group
                                 as={Col}
                                 md="12"
@@ -2074,11 +2136,11 @@ const DriverRegistration = () => {
                                   ))}
                                 </Form.Select>
                               </Form.Group>
-                            )}
+                            )} */}
 
 
 
-                            {addNewEnd && (
+                            {/* {addNewEnd && (
                               <Form.Group
                                 as={Col}
                                 md="12"
@@ -2109,7 +2171,7 @@ const DriverRegistration = () => {
                                   />
                                 </Autocomplete>
                               </Form.Group>
-                            )}
+                            )} */}
                           </>
                         )}
 

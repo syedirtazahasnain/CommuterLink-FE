@@ -453,12 +453,12 @@ const CommuterProfile1 = () => {
                           {contact_id !== "" ? (
                             req_stage === 0 ? (
                               <div>
-                                <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
+                                <h3 className="fw-bold" style={{ color: "#FF8A00" }}>Member {contact_id}</h3>
                               </div>
                             ) :
                               (
                                 <div className="row d-flex">
-                                  <h3 className="text-success fw-bold">{contact_id}</h3>
+                                  <h3 className="text-success fw-bold">Member {contact_id}</h3>
                                 </div>
                               )
                           ) : (
@@ -585,12 +585,12 @@ const CommuterProfile1 = () => {
                           {contact_id !== "" ? (
                             req_stage === 0 ? (
                               <div>
-                                <h3 className="fw-bold" style={{ color: "#FF8A00" }}>{contact_id}</h3>
+                                <h3 className="fw-bold" style={{ color: "#FF8A00" }}>Member {contact_id}</h3>
                               </div>
                             ) :
                               (
                                 <div className="row d-flex">
-                                  <h3 className="text-success fw-bold">{contact_id}</h3>
+                                  <h3 className="text-success fw-bold">Member {contact_id}</h3>
                                 </div>
                               )
                           ) : (
@@ -747,6 +747,24 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="row mb-2">
                         <div className="col-md-6">
+                          {car_reg_year !== "" ? (
+                            <>
+                              {car_reg_year && (
+                                <>
+                                  <h5 className="text-dark-green fw-bold font-custom">Car Manufacture Year:</h5>
+                                </>
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="col-md-6">
+                          <h5 className="fw-bold text-secondary">{car_reg_year}</h5>
+                        </div>
+                      </div>
+                      <div className="row mb-2">
+                        <div className="col-md-6">
                           {reg_year !== "" ? (
                             <>
                               {reg_year && (
@@ -762,24 +780,6 @@ const CommuterProfile1 = () => {
                         <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{reg_year}</h5>
 
-                        </div>
-                      </div>
-                      <div className="row mb-2">
-                        <div className="col-md-6">
-                          {car_reg_year !== "" ? (
-                            <>
-                              {car_reg_year && (
-                                <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Car Registration Year:</h5>
-                                </>
-                              )}
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                        <div className="col-md-6">
-                          <h5 className="fw-bold text-secondary">{car_reg_year}</h5>
                         </div>
                       </div>
                     </div>
@@ -835,7 +835,6 @@ const CommuterProfile1 = () => {
                       </div>
                     </div>
                   </div>
-                
                 </div>
               </div>
             </div>

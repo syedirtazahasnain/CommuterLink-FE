@@ -1172,7 +1172,37 @@ const RiderRegistration = () => {
 
                     {cityStartId && (
                       <>
-                        {addNewStartDropdown && (
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom05"
+                        >
+                          <Form.Label className="text-black">
+                            Area
+                          </Form.Label>
+                          <Autocomplete
+                            onLoad={(autocomplete) =>
+                              (autocompleteRef.current = autocomplete)
+                            }
+                            onPlaceChanged={handlePlaceSelectStart}
+                            restrictions={{ country: "PK" }}
+                            bounds={autocompleteStartBounds}
+                            options={{ strictBounds: true }}
+                          >
+                            <Form.Control
+                              autoComplete="on"
+                              required
+                              type="text"
+                              value={locationStartStringField}
+                              onChange={handleLocationStartField}
+                              className="text-dark mt-1"
+                              placeholder="Enter your area"
+                              autocomplete="on"
+                              defaultValue=""
+                            />
+                          </Autocomplete>
+                        </Form.Group>
+                        {/* {addNewStartDropdown && (
                           <Form.Group
                             as={Col}
                             md="12"
@@ -1215,7 +1245,7 @@ const RiderRegistration = () => {
                               ))}
                             </Form.Select>
                           </Form.Group>
-                        )}
+                        )} */}
 
                         {/* {addNewStartField && (
                           <Form.Group
@@ -1238,7 +1268,7 @@ const RiderRegistration = () => {
                           </Form.Group>
                         )} */}
 
-                        {addNewStart && (
+                        {/* {addNewStart && (
                           <Form.Group
                             as={Col}
                             md="12"
@@ -1269,7 +1299,7 @@ const RiderRegistration = () => {
                               />
                             </Autocomplete>
                           </Form.Group>
-                        )}
+                        )} */}
                       </>
                     )}
 
@@ -1380,7 +1410,37 @@ const RiderRegistration = () => {
 
                     {cityEndId && (
                       <>
-                        {addNewEndDropdown && (
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom11"
+                        >
+                          <Form.Label className="text-black">
+                            Area
+                          </Form.Label>
+                          <Autocomplete
+                            onLoad={(autocomplete) =>
+                              (autocompleteRef.current = autocomplete)
+                            }
+                            onPlaceChanged={handlePlaceSelectEnd}
+                            restrictions={{ country: "PK" }}
+                            bounds={autocompleteEndBounds}
+                            options={{ strictBounds: true }}
+                          >
+                            <Form.Control
+                              autoComplete="on"
+                              required
+                              type="text"
+                              value={locationEndStringField}
+                              onChange={handleLocationEndField}
+                              className="text-dark mt-1"
+                              placeholder="Enter your area"
+                              autocomplete="on"
+                              defaultValue=""
+                            />
+                          </Autocomplete>
+                        </Form.Group>
+                        {/* {addNewEndDropdown && (
                           <Form.Group
                             as={Col}
                             md="12"
@@ -1423,9 +1483,9 @@ const RiderRegistration = () => {
                               ))}
                             </Form.Select>
                           </Form.Group>
-                        )}
+                        )} */}
 
-                        {addNewEnd && (
+                        {/* {addNewEnd && (
                           <Form.Group
                             as={Col}
                             md="12"
@@ -1456,7 +1516,7 @@ const RiderRegistration = () => {
                               />
                             </Autocomplete>
                           </Form.Group>
-                        )}
+                        )} */}
                       </>
                     )}
 

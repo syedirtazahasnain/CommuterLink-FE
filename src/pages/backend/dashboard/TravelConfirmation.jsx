@@ -29,6 +29,7 @@ const TravelConfirmation = () => {
   const [selectedDate, setSelectedDate] = useState(date ? date : initialValue);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dateChanged, setDateChanged] = useState(false);
+  const [daysCount, setDaysCount] = useState("");
   const [statusData, setStatusData] = useState([]);
 
   useEffect(() => {
@@ -50,8 +51,33 @@ const TravelConfirmation = () => {
 
   useEffect(() => {
     getTravelData();
+    getDaysCount();
   }, []);
 
+  // Fetch status data from the API
+  const getDaysCount = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/days-travelled/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      console.log("Date Count:", jsonresponse);
+      if(jsonresponse.status_code === 200){
+        setDaysCount(jsonresponse.data[0]);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   useEffect(() => {
     // Fetch status data from the API
@@ -435,7 +461,7 @@ const TravelConfirmation = () => {
                           />
                         </LocalizationProvider> */}
 
-                        <LocalizationProvider dateAdapter={AdapterDayjs}> 
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DateCalendar
                             value={selectedDate}
                             onChange={handleDateChange}
@@ -563,8 +589,9 @@ const TravelConfirmation = () => {
                           </div>
                           <div className="my-auto py-4">
                             <h4 className="font-custom text-center fw-bold text-decoration-none text-dark">
-                              No. of Days Travelled</h4>
-                            <h2 className="text-center">300 (e.g.)</h2>
+                              No. of Days Travelled
+                            </h4>
+                            <h2 className="text-center">{daysCount ? daysCount : 0}</h2>
                           </div>
                           <button className="cursor-pointer font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white px-4 px-sm-5 py-2 py-sm-3" onClick={route} >
                             View Full History</button>

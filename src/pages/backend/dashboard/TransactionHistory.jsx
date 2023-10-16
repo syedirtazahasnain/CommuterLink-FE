@@ -41,7 +41,7 @@ const TransactionHistory = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${API_URL}/api/v1/monthtravelhistory`,
+          `${API_URL}/api/v1/transaction-history/`,
           {
             method: "GET",
             headers: {
@@ -53,7 +53,7 @@ const TransactionHistory = () => {
         );
 
         const jsonresponse = await response.json();
-        console.log("Month History:", jsonresponse);
+        console.log("Transaction History:", jsonresponse);
         if (jsonresponse.success === true) {
           setData(jsonresponse.data);
           if (jsonresponse.data.length > 0) {
@@ -78,31 +78,7 @@ const TransactionHistory = () => {
     fetchData();
   }, [userToken]);
 
-  const getDisplay = (status) => {
-    switch (status) {
-      case 0:
-        return "Not Travelled";
-      case 1:
-        return "Travelled | Amount Transferred to Wallet";
-      case -1:
-        return "Driver Didn't Come";
-      default:
-        return "";
-    }
-  };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 0:
-        return "#eeeec4";
-      case 1:
-        return "#ccffcc";
-      case -1:
-        return "#ffc2b3";
-      default:
-        return "white";
-    }
-  };
   const tableCellStyle = {
     color: 'black',
     fontWeight: 'bold',
@@ -150,69 +126,49 @@ const TransactionHistory = () => {
               <>
                 <h5 className="text-center pb-2 fw-bold text-dark">{monthYear}</h5>
                 <div className="col-md-12 col-sm-6">
-                <div className="row">
-                  <div className="col-md-12 ">
-                    <div className="">
-                     
-                      <Table className="bg-dark text-white border-1 rounded-top-4">
-                        <TableBody>
-                          <TableRow>
-                            <TableCell className="text-white" style={tableCellStyle}> <h2 className="text-light">Recent Transactions
-                            </h2></TableCell>
+                  <div className="row">
+                    <div className="col-md-12 ">
+                      <div className="">
 
-                          </TableRow></TableBody></Table>
-                      <Table className="bg-dark text-white border-1 rounded-bottom-4">
-                        <TableBody>
-                          <TableRow>
-                            <TableCell className="text-white" style={tableCellStyle}>Date</TableCell>
-                            <TableCell className="text-white text-center" style={tableCellStyle}>Message</TableCell>
-                            <TableCell className="text-white" style={tableCellStyle}>Amount</TableCell>
-
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>02 Oct,2023</TableCell>
-                            <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }} >02 Oct,2023</TableCell>
-                            <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }} >02 Oct,2023</TableCell>
-                            <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }} >02 Oct,2023</TableCell>
-                            <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }} >02 Oct,2023</TableCell>
-                            <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }} >02 Oct,2023</TableCell>
-                            <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }} >02 Oct,2023</TableCell>
-                            <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-                        </TableBody>
-                      </Table>
+                        <Table className="bg-dark text-white border-1 rounded-top-4">
+                          <TableBody>
+                            <TableRow>
+                              <TableCell className="text-white" style={tableCellStyle}>
+                                <h2 className="text-light">Transaction History</h2>
+                              </TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                        <Table className="bg-dark text-white border-1 rounded-bottom-4">
+                          <TableHead>
+                            <TableRow>
+                              <TableCell className="text-white" style={tableCellStyle}>Date</TableCell>
+                              <TableCell className="text-white text-center" style={tableCellStyle}>Description</TableCell>
+                              <TableCell className="text-white" style={tableCellStyle}>Amount</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {data.length === 0 ? (
+                              <TableRow>
+                                <TableCell colSpan={3} className="text-center text-white fw-bold">
+                                  No Data Found
+                                </TableCell>
+                              </TableRow>
+                            ) : (
+                              data.map((item, index) => (
+                                <TableRow key={index}>
+                                  <TableCell className="text-white text-center">{item.date}</TableCell>
+                                  <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{item.Description}</TableCell>
+                                  <TableCell className="text-white text-center">{`Rs. ${item.wallet_transfer}/-`}</TableCell>
+                                </TableRow>
+                              ))
+                            )}
+                          </TableBody>
+                        </Table>
+                      </div>
                     </div>
-
                   </div>
                 </div>
-
-              </div>
               </>
             )}
           </div>

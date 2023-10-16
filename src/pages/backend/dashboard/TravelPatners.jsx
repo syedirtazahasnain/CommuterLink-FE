@@ -3,7 +3,7 @@ import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { setContactIdState } from "../../../redux/generalSlice";
 import { GoogleMap, MarkerF, PolylineF } from "@react-google-maps/api";
 import { ThreeCircles } from "react-loader-spinner";
@@ -28,6 +28,7 @@ const TravelPatners = () => {
   const userToken = useSelector((s) => s.login.data.token);
   const [submitbtn, setSubmit] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [recentLoading, setRecentLoading] = useState(true);
 
   // For Travel Data
   // const [contactId, setContactId] = useState("");
@@ -72,6 +73,9 @@ const TravelPatners = () => {
   const [dropOffAddress, setDropOffAddress] = useState("");
   const [pickupAddress, setPickupAddress] = useState("");
 
+  // For Recent Transcations
+  const [recentData, setRecentData] = useState([]);
+
   // Travel Cost Data
   const [distance, setDistance] = useState("");
   const [fuelAverage, setFuelAverage] = useState("");
@@ -79,6 +83,41 @@ const TravelPatners = () => {
   const [liter, setLiter] = useState("");
   const [maintenance, setMaintenance] = useState("");
   const [wearAndTear, setWearAndTear] = useState("");
+
+  useEffect(() => {
+    // Fetch status data from the API
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/v1/latest-record/`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
+
+        const jsonresponse = await response.json();
+        console.log("Recent History:", jsonresponse);
+        if (jsonresponse.success === true) {
+          setRecentData(jsonresponse.data);
+
+          // Add a delay of 1.5 seconds before removing the loading message
+          setTimeout(() => {
+            setRecentLoading(false);
+          }, 1500);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setRecentLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [userToken]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -904,247 +943,254 @@ const TravelPatners = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="row"> 
-                    <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
-                    <div className="row d-flex flex-column">
-                      <div className="card-body-inner green-card">
+                    <div className="row">
+                      <div className="card-body" style={{ background: "rgb(214 219 218)" }}>
                         <div className="row d-flex flex-column">
+                          <div className="card-body-inner green-card">
+                            <div className="row d-flex flex-column">
 
-                          <div className="row mb-3 justify-content-between">
-                            <div className="col-md-4">
-                              <div className="card rounded-0">
-                                <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
+                              <div className="row mb-3 justify-content-between">
+                                <div className="col-md-4">
+                                  <div className="card rounded-0">
+                                    <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
 
-                                  {image ? (
-                                    <img
-                                      src={`${IMAGE_URL}${image}`}
-                                      className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
-                                      // onClick={() => {
-                                      //   route(contactId);
-                                      // }}
-                                    />
-                                  ) : (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
-                                    />
-                                  )}
+                                      {image ? (
+                                        <img
+                                          src={`${IMAGE_URL}${image}`}
+                                          className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
+                                        // onClick={() => {
+                                        //   route(contactId);
+                                        // }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                        />
+                                      )}
 
-                                </div>
-                             
-                                <div className="card-body bg-card-grey">
-                                  <div className="card-text">
-                                    <div className="row mb-2">
-                                      <div className="col-md-6 ">
-                                        {name !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        <h5 className="fw-bold text-secondary">{name}</h5>
+                                    </div>
+
+                                    <div className="card-body bg-card-grey">
+                                      <div className="card-text">
+                                        <div className="row mb-2">
+                                          <div className="col-md-6 ">
+                                            {name !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-secondary">{name}</h5>
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-8">
+                                            {price !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-4">
+                                            <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {date && formatDate(date) !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5>
+                                          </div>
+                                        </div>
+                                        <div className="text-center">
+                                          <button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2" onClick={() => {
+                                            route(contactId);
+                                          }}>View Profile</button>
+                                        </div>
+
                                       </div>
                                     </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-6">
-                                        {price !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        <h5 className="fw-bold text-secondary">Rs.{price}/-</h5>
-                                      </div>
+                                    <div>
                                     </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-6">
-                                        {date && formatDate(date) !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5>
-                                      </div>
-                                    </div>
-                                    <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2"   onClick={() => {
-                                        route(contactId);
-                                      }}>View Profile</button></div>
-
                                   </div>
                                 </div>
-                                <div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-md-4">
-                              <div className="card rounded-0">
-                                <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
+                                <div className="col-md-4">
+                                  <div className="card rounded-0">
+                                    <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
 
-                                  {image ? (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`} //${IMAGE_URL}${img}
-                                      className="card-img-top w-100px m-auto h-100px cursor-pointer"
-                                      onClick={() => {
-                                        route(contactId);
-                                      }}
-                                    />
-                                  ) : (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
-                                    />
-                                  )}
+                                      {image ? (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-100px m-auto h-100px rounded-circle"
+                                        // onClick={() => {
+                                        //   route(contactId);
+                                        // }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                        />
+                                      )}
 
-                                </div>
-                             
-                                <div className="card-body bg-card-grey">
-                                  <div className="card-text">
-                                    <div className="row mb-2">
-                                      <div className="col-md-6 ">
-                                        {name !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
-                                      </div>
                                     </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-8">
-                                        {price !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-4">
-                                        {/* <h5 className="fw-bold text-secondary"> Rs. {price}/-</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-6">
-                                        {date && formatDate(date) !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
 
+                                    <div className="card-body bg-card-grey">
+                                      <div className="card-text">
+                                        <div className="row mb-2">
+                                          <div className="col-md-6 ">
+                                            {name !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-8">
+                                            {price !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-4">
+                                            {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {date && formatDate(date) !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                      <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
+                                    </div>
+                                    <div>
+                                    </div>
                                   </div>
                                 </div>
-                                <div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-md-4">
-                              <div className="card rounded-0">
-                                <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
+                                <div className="col-md-4">
+                                  <div className="card rounded-0">
+                                    <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
 
-                                  {image ? (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-100px m-auto h-100px cursor-pointer"
-                                      onClick={() => {
-                                        route(contactId);
-                                      }}
-                                    />
-                                  ) : (
-                                    <img
-                                      src={`${BASE_URL}/assets/images/Vector.png`}
-                                      className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
-                                    />
-                                  )}
+                                      {image ? (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-100px m-auto h-100px rounded-circle"
+                                        // onClick={() => {
+                                        //   route(contactId);
+                                        // }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={`${BASE_URL}/assets/images/Vector.png`}
+                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                        />
+                                      )}
 
-                                </div>
-                             
-                                <div className="card-body bg-card-grey">
-                                  <div className="card-text">
-                                    <div className="row mb-2">
-                                      <div className="col-md-6 ">
-                                        {name !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-8">
-                                        {price !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:Rs.</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-4">
-                                        {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
-                                      </div>
-                                    </div>
-                                    <div className="row mb-2">
-                                      <div className="col-md-6">
-                                        {date && formatDate(date) !== "" ? (
-                                          <>
-                                            <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
-                                          </>
-                                        ) : (
-                                          <>
-                                          </>
-                                        )}
-                                      </div>
-                                      <div className="col-md-6">
-                                        {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
-                                      </div>
                                     </div>
 
+                                    <div className="card-body bg-card-grey">
+                                      <div className="card-text">
+                                        <div className="row mb-2">
+                                          <div className="col-md-6 ">
+                                            {name !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-8">
+                                            {price !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:Rs.</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-4">
+                                            {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
+                                          </div>
+                                        </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {date && formatDate(date) !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                      <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
+                                    </div>
+                                    <div>
+                                    </div>
                                   </div>
-                                  <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
-                                </div>
-                                <div>
                                 </div>
                               </div>
-                            </div>
-                            <div>
+                              <div>
+                              </div>
                             </div>
                           </div>
-                          {/* <div className="col-md-8">
+                          <div>
+                          </div>
+                        </div >
+                        {/* <div className="col-md-8">
                             <Table className="bg-dark text-white border-1 rounded-4">
                               <TableBody>
                                 <TableRow>
@@ -1186,18 +1232,13 @@ const TravelPatners = () => {
                               </TableBody>
                             </Table>
                           </div> */}
-                        </div>
-                      </div>
+                      </div >
                     </div>
-                  </div>
-                  </div>
                   )}
-                
-                 
-                </div>
+                </div >
               </>
             )}
-          </div>
+          </div >
         )}
       <div className="card  mt-3 mb-5">
         <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
@@ -1312,44 +1353,61 @@ const TravelPatners = () => {
                 <div className="row">
                   <div className="col-md-12 ">
                     <div className="">
-
                       <Table className="bg-dark text-white border-1 rounded-top-4">
                         <TableBody>
                           <TableRow>
-                            <TableCell className="text-white" style={tableCellStyle}> <h2 className="text-light">Recent Transactions
-                            </h2></TableCell>
-
-                          </TableRow></TableBody></Table>
-                      <Table className="bg-dark text-white border-1 rounded-bottom-4">
-                        <TableBody>
-                          <TableRow>
-                            <TableCell className="text-white" style={tableCellStyle}>Date</TableCell>
-                            <TableCell className="text-white" style={tableCellStyle}>Discription</TableCell>
-                            <TableCell className="text-white" style={tableCellStyle}>Amount</TableCell>
-
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>02 Oct,2023</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }} >02 Oct,2023</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }} >02 Oct,2023</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Transferred to Car Offer on Monday</TableCell>
-                            <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Rs. 360/-</TableCell>
+                            <TableCell className="text-white" style={tableCellStyle}>
+                              <h2 className="text-light">Recent Transactions</h2>
+                            </TableCell>
                           </TableRow>
                         </TableBody>
                       </Table>
+                      <Table className="bg-dark text-white border-1 rounded-bottom-4">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell className="text-white" style={tableCellStyle}>Date</TableCell>
+                            <TableCell className="text-white" style={tableCellStyle}>Description</TableCell>
+                            <TableCell className="text-white" style={tableCellStyle}>Amount</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {recentLoading ? (
+                            <TableRow>
+                              <TableCell colSpan={3} className="d-flex align-items-center mx-auto my-auto">
+                                <ThreeCircles
+                                  height={30}
+                                  width={30}
+                                  color="#4fa94d"
+                                  visible={true}
+                                  ariaLabel="three-circles-rotating"
+                                  outerCircleColor=""
+                                  innerCircleColor=""
+                                  middleCircleColor=""
+                                />
+                              </TableCell>
+                            </TableRow>
+                          ) : (
+                            recentData.length === 0 ? (
+                              <TableRow>
+                                <TableCell colSpan={3} className="text-center text-white fw-bold">
+                                  No Data Found
+                                </TableCell>
+                              </TableRow>
+                            ) : (
+                              recentData.map((item, index) => (
+                                <TableRow key={index}>
+                                  <TableCell className="text-white text-center">{item.date}</TableCell>
+                                  <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{item.Description}</TableCell>
+                                  <TableCell className="text-white text-center">{`Rs. ${item.wallet_transfer}/-`}</TableCell>
+                                </TableRow>
+                              ))
+                            )
+                          )}
+                        </TableBody>
+                      </Table>
                     </div>
-
                   </div>
                 </div>
-
               </div>
             </div>
             <div className="row pt-5 d-flex justify-content-between">
@@ -1381,16 +1439,18 @@ const TravelPatners = () => {
 
                   </div>
 
-                  <div className="col-md-6">  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white  px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={viewTrasaction}>
-                    View Transaction History
-                  </button></div>
+                  <div className="col-md-6">
+                    <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white  px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={viewTrasaction}>
+                      View Transaction History
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
