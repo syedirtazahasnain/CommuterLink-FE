@@ -68,6 +68,7 @@ import Terms_Services from "./pages/frontend/terms-services/Terms_Services";
 import Forget1 from "./pages/frontend/forgot/Forget1";
 import Forget2 from "./pages/frontend/forgot/Forget2";
 import TransactionHistory from "./pages/backend/dashboard/TransactionHistory";
+import AmountValidation from "./pages/backend/amountrestriction/AmountValidation";
 
 const LazyHome = React.lazy(()=>import("./pages/frontend/Home"));
 const Router = () => {
@@ -104,6 +105,7 @@ const Router = () => {
         {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />
         <Route path='/commuterprofile1' element={<BackendLayout children={<CommuterProfile1 />} />} />
+        <Route path='/amountvalidation' element={<BackendLayout children={<AmountValidation />} />} />
 
 
         <Route path='/replytoconfirmdates1' element={<BackendLayout children={<ReplyToConfirmDates1 />} />} />

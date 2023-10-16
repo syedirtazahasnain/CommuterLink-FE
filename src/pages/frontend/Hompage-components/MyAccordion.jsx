@@ -50,16 +50,16 @@ const MyAccordion = () => {
                 apps and CommutersLink is that we are offering long term solutions for daily commute
                 instead of onetime ride. The concept is to collectively
                 defeat the impact of price hike by cost sharing. It’s not a source of earning but saving</p>
-              <div className="container px-5">
+              <div className="container">
                 <div className="row ">
                   <div className="col-md-4 mb-3 text-center">
                     <a data-bs-toggle="collapse" href="#collapseOne" className="text-decoration-none">
                       <div class="card card-pink h-100 ">
                         <div class="card-body">
                           <i class="fa-solid fs-1 fa-car-side mb-3"></i>
-                          <h3 class="card-subtitle mb-2 text-muted">Use
+                          <h5 class="card-subtitle mb-2 text-muted">Use
                             your Car or Ride with
-                            Others</h3>
+                            Others</h5>
                         </div>
                       </div>
                     </a>
@@ -70,7 +70,7 @@ const MyAccordion = () => {
                       <div class="card card-orange h-100" >
                         <div class="card-body">
                           <i class="fa-solid fa-stopwatch fs-1 mb-3"></i>
-                          <h3 class="card-subtitle mb-2 text-muted">Long Term Commitment</h3>
+                          <h5 class="card-subtitle mb-2 text-muted">Long Term Commitment</h5>
                         </div>
                       </div>
                     </a>
@@ -81,8 +81,8 @@ const MyAccordion = () => {
                       <div class="card card-purple h-100">
                         <div class="card-body">
                           <i class="fa-solid fa-money-bill-1-wave mb-3 fs-1"></i>
-                          <h3 class="card-subtitle mb-2 text-muted">Share Cost of
-                            Commuting</h3>
+                          <h5 class="card-subtitle mb-2 text-muted">Share Cost of
+                            Commuting</h5>
                         </div>
                       </div>
                     </a>
