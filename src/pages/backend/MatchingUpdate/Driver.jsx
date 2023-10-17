@@ -117,7 +117,7 @@ const Driver = () => {
                 (city) => city.id == cityStartId
             );
 
-            setLocationStartString(citystring[0].value);
+            setLocationStartString(citystring[0]?.value);
             setSelectedStartCityArea(filteredStartCities ? filteredStartCities : []);
         }
     }, [cityStartId]);
@@ -134,7 +134,7 @@ const Driver = () => {
                 (city) => city.id == cityEndId
             );
 
-            setLocationEndString(citystring[0].value);
+            setLocationEndString(citystring[0]?.value);
             setSelectedEndCityArea(filteredEndCities ? filteredEndCities : []);
         }
     }, [cityEndId]);
@@ -334,9 +334,12 @@ const Driver = () => {
             setSelectedHomeTime(jsonresponse[0].matches.time_depart_id);
             setSelectedOfficeTime(jsonresponse[0].matches.time_return_id);
             setPreferredGender(jsonresponse[0].contact.preferred_gender);
-            // setProvinceStartId(jsonresponse[0].location.start_province_id);
-            // setCityStartId(jsonresponse[0].location.start_city_id);
-            // setLocationStartStringId(jsonresponse[0].location.start_area_id);
+            setProvinceStartId(jsonresponse[0].location.start_province_id);
+            setCityStartId(jsonresponse[0].location.start_city_id);
+            setLocationStartStringId(jsonresponse[0].location.start_area_id);
+            setProvinceEndId(jsonresponse[0].location.end_province_id);
+            setCityEndId(jsonresponse[0].location.end_city_id);
+            setLocationEndStringId(jsonresponse[0].location.end_area_id);
             setStartArea(jsonresponse[0].location.start_area);
             setEndArea(jsonresponse[0].location.end_area);
             // setDaysSelected(jsonresponse[0].matches.days);
