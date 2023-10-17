@@ -124,7 +124,7 @@ const Rejection = () => {
                   ) : (
                     <>
                       <p>
-                        Dear {option === 0 ? "Traveller" : "Car Offerer"} your request has not been approved due to the following
+                        Dear {option === 0 ? "Traveller" : "Car Offeror"} your request has not been approved due to the following
                         reasons:
                       </p>
                       {rejectedData && rejectedData.length > 0 && (

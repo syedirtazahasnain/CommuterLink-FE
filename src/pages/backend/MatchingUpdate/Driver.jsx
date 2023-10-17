@@ -647,18 +647,31 @@ const Driver = () => {
                                         <Form className="text-center">
                                             {showfield === true ? (
                                                 <>
-                                                    <h3 className="text-success mb-3 text-center">
-                                                        STARTING POINT
-                                                        <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
-                                                            <Link
-                                                                // to='/notification'
-                                                                className='mx-1 h-15px d-inline-block'
-                                                                style={{ cursor: "pointer" }}
-                                                            >
-                                                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
-                                                            </Link>
-                                                        </Tooltip>
-                                                    </h3>
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <Form.Label className="fs-6 text-success">
+                                                            {" "}
+                                                            STARTING POINT
+                                                        </Form.Label>
+                                                        <p
+                                                            className="colorplace text-danger"
+                                                            style={{
+                                                                cursor: "pointer",
+                                                                textDecoration: "underline",
+                                                            }}
+                                                        // onClick={AddNewStart}
+                                                        >
+                                                            <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
+                                                                <Link
+                                                                    // to='/notification'
+                                                                    className='mx-1 h-15px d-inline-block'
+                                                                    style={{ cursor: "pointer" }}
+                                                                >
+                                                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                                                </Link>
+                                                            </Tooltip>
+
+                                                        </p></div>
+
                                                     <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                         <FormControl fullWidth size="small">
                                                             <InputLabel id="demo-simple-select-label" color='success'>Select a Province</InputLabel>
@@ -670,7 +683,7 @@ const Driver = () => {
                                                                 onChange={handleProvinceStartChange}
                                                                 className="bg-light text-left"
                                                                 label="Select a Province"
-                                                                // required
+                                                            // required
                                                             >
                                                                 {dropdownStartdata?.countries[0]?.provinces?.map(
                                                                     (province) => (
@@ -794,20 +807,30 @@ const Driver = () => {
                                                             )}
                                                         </>
                                                     )}
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <Form.Label className="fs-6 text-success">
+                                                            {" "}
+                                                            DROP-OFF POINT
+                                                        </Form.Label>
+                                                        <p
+                                                            className="colorplace text-danger"
+                                                            style={{
+                                                                cursor: "pointer",
+                                                                textDecoration: "underline",
+                                                            }}
+                                                        // onClick={AddNewStart}
+                                                        >
+                                                            <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
+                                                                <Link
+                                                                    // to='/notification'
+                                                                    className='mx-1 h-15px d-inline-block'
+                                                                    style={{ cursor: "pointer" }}
+                                                                >
+                                                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                                                </Link>
+                                                            </Tooltip>
 
-                                                    <h3 className="text-success mb-3 text-center">
-                                                        DROP-OFF POINT
-                                                        <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
-                                                            <Link
-                                                                // to='/notification'
-                                                                className='mx-1 h-15px d-inline-block'
-                                                                style={{ cursor: "pointer" }}
-                                                            >
-                                                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
-                                                            </Link>
-                                                        </Tooltip>
-                                                    </h3>
-
+                                                        </p></div>
                                                     <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                         <FormControl fullWidth size="small">
                                                             <InputLabel id="demo-simple-select-label" color='success'>Province</InputLabel>
@@ -819,7 +842,7 @@ const Driver = () => {
                                                                 onChange={handleProvinceEndChange}
                                                                 className="bg-light text-left"
                                                                 label="Select a Province"
-                                                                // required
+                                                            // required
                                                             >
                                                                 {dropdownEnddata?.countries[0]?.provinces?.map(
                                                                     (province) => (
@@ -899,7 +922,7 @@ const Driver = () => {
                                                                             onChange={handleLocationEnd}
                                                                             className="bg-light text-left"
                                                                             label="Select Area from Dropdown"
-                                                                            // required
+                                                                        // required
                                                                         >
                                                                             {selectedEndCityArea?.map((province) => (
                                                                                 <MenuItem
@@ -1087,13 +1110,13 @@ const Driver = () => {
                                                     </Box>
                                                     <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
                                                         <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
-                                                            <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
+                                                            <Form.Label className="pt-3 text-left">
                                                                 I Commute (Select Days)
                                                             </Form.Label>
                                                         </Form.Group>
 
                                                         <div className="row d-flex">
-                                                            <div className="col">
+                                                            <div className="col text-left">
                                                                 {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
                                                                     <FormControlLabel
                                                                         key={index}
@@ -1310,13 +1333,13 @@ const Driver = () => {
                                                     </Box>
                                                     <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
                                                         <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
-                                                            <Form.Label style={{ color: "#000" }} className="pt-3 text-left">
+                                                            <Form.Label className="pt-3 text-left text-secondary">
                                                                 I Commute (Select Days)
                                                             </Form.Label>
                                                         </Form.Group>
 
-                                                        <div className="row d-flex">
-                                                            <div className="col">
+                                                        <div className="row">
+                                                            <div className="col text-left">
                                                                 {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
                                                                     <FormControlLabel
                                                                         key={index}

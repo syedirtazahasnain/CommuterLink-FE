@@ -327,7 +327,7 @@ const RequestCommuterProfile = () => {
                             <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                                 <li class="nav-item me-0" role="presentation">
                                     <button className={`nav-link fs-4 custom-button-style active rounded-0`}
-                                        id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{option === 0 ? ("Car Offerer Details") : ("Traveller Details")}</button>
+                                        id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{option === 0 ? ("Car Offeror Details") : ("Traveller Details")}</button>
                                 </li>
                                 <li class="nav-item me-0" role="presentation">
                                     <button className={`nav-link fs-4 custom-button-style rounded-0`}

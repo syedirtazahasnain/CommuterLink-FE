@@ -110,10 +110,10 @@ const EditProfile = () => {
         setEmail("");
       }
 
-      if(jsonresponse.statusCode === 500){
+      if (jsonresponse.statusCode === 500) {
         Swal.fire({
-          position:'top',
-        
+          position: 'top',
+
           text: `${jsonresponse.message}`
         })
       }
@@ -130,7 +130,7 @@ const EditProfile = () => {
         // alert("Please Fill All Fields!");
         // Swal.fire({
         //   position:'top',
-        
+
         //  text: 'Please Fill All Fields!',
         //  customClass: {
         //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
@@ -142,7 +142,7 @@ const EditProfile = () => {
         // alert("Confirm password is not matched with new password!")
         // Swal.fire({
         //   position:'top',
-        
+
         //  text: 'Confirm password is not matched with new password!',
         //  customClass: {
         //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
@@ -177,7 +177,7 @@ const EditProfile = () => {
           // alert(jsonresponse.message);
           // Swal.fire({
           //   position:'top',
-          
+
           //  text: `${jsonresponse.message}`,
           //  customClass: {
           //   confirmButton: 'swal-custom' , // Apply custom CSS class to the OK button
@@ -191,16 +191,16 @@ const EditProfile = () => {
           // alert("Error: " + jsonresponse.message);
           // Swal.fire({
           //   position:'top',
-        
+
           //   text: `${jsonresponse.message}`
           // })
           displayNotification("error", `${jsonresponse.message}`);
         }
 
-        if(jsonresponse.statusCode === 500){
+        if (jsonresponse.statusCode === 500) {
           // Swal.fire({
           //   position:'top',
-        
+
           //   text: `${jsonresponse.message}`
           // })
           displayNotification("error", `${jsonresponse.message}`);
@@ -380,8 +380,8 @@ const EditProfile = () => {
                   </FormControl>
                 </Form.Group>
                 <div className="container my-5">
-                  <Button 
-                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-4 py-2 mb-3" 
+                  <Button
+                    className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-4 py-2 mb-3"
                     onClick={ResetPassword}
                   >
                     Save
@@ -392,7 +392,7 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
-      <Rider/>
+      <Rider />
     </div>
   );
 };
