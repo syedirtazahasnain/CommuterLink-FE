@@ -337,9 +337,11 @@ const Driver = () => {
             setProvinceStartId(jsonresponse[0].location.start_province_id);
             setCityStartId(jsonresponse[0].location.start_city_id);
             setLocationStartStringId(jsonresponse[0].location.start_area_id);
+            setLocationStartStringField(jsonresponse[0].location.start_area);
             setProvinceEndId(jsonresponse[0].location.end_province_id);
             setCityEndId(jsonresponse[0].location.end_city_id);
             setLocationEndStringId(jsonresponse[0].location.end_area_id);
+            setLocationEndStringField(jsonresponse[0].location.end_area);
             setStartArea(jsonresponse[0].location.start_area);
             setEndArea(jsonresponse[0].location.end_area);
             // setDaysSelected(jsonresponse[0].matches.days);
@@ -734,7 +736,35 @@ const Driver = () => {
                                                     </Box>
                                                     {cityStartId && (
                                                         <>
-                                                            {addNewStartDropdown && (
+                                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                                <FormControl fullWidth size="small">
+                                                                    <Autocomplete
+                                                                        onLoad={(autocomplete) =>
+                                                                            (autocompleteRef.current = autocomplete)
+                                                                        }
+                                                                        onPlaceChanged={handlePlaceSelectStart}
+                                                                        restrictions={{ country: "PK" }}
+                                                                        bounds={autocompleteStartBounds}
+                                                                        options={{ strictBounds: true }}
+                                                                    >
+                                                                        <TextField
+                                                                            required
+                                                                            fullWidth
+                                                                            size='small'
+                                                                            type="text"
+                                                                            color='success'
+                                                                            className="bg-light text-left"
+                                                                            value={locationStartStringField}
+                                                                            onChange={handleLocationStartField}
+                                                                            placeholder="Enter your area"
+                                                                            id='outlined-basic'
+                                                                            defaultValue=""
+                                                                        />
+                                                                    </Autocomplete>
+                                                                </FormControl>
+                                                            </Box>
+
+                                                            {/* {addNewStartDropdown && (
                                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                                     <div className="d-flex justify-content-end">
                                                                         {addNewStartField && (
@@ -774,9 +804,9 @@ const Driver = () => {
                                                                         </Select>
                                                                     </FormControl>
                                                                 </Box>
-                                                            )}
+                                                            )} */}
 
-                                                            {addNewStart && (
+                                                            {/* {addNewStart && (
                                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                                     <FormControl fullWidth size="small">
                                                                         <Autocomplete
@@ -804,7 +834,7 @@ const Driver = () => {
                                                                         </Autocomplete>
                                                                     </FormControl>
                                                                 </Box>
-                                                            )}
+                                                            )} */}
                                                         </>
                                                     )}
                                                     <div className="d-flex justify-content-between align-items-center">
@@ -895,7 +925,35 @@ const Driver = () => {
 
                                                     {cityEndId && (
                                                         <>
-                                                            {addNewEndDropdown && (
+                                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                                <FormControl fullWidth size="small">
+                                                                    <Autocomplete
+                                                                        onLoad={(autocomplete) =>
+                                                                            (autocompleteRef.current = autocomplete)
+                                                                        }
+                                                                        onPlaceChanged={handlePlaceSelectEnd}
+                                                                        restrictions={{ country: "PK" }}
+                                                                        bounds={autocompleteEndBounds}
+                                                                        options={{ strictBounds: true }}
+                                                                    >
+                                                                        <TextField
+                                                                            required
+                                                                            fullWidth
+                                                                            size='small'
+                                                                            type="text"
+                                                                            color='success'
+                                                                            className="bg-light text-left"
+                                                                            value={locationEndStringField}
+                                                                            onChange={handleLocationEndField}
+                                                                            placeholder="Enter your area"
+                                                                            id='outlined-basic'
+                                                                            defaultValue=""
+                                                                        />
+                                                                    </Autocomplete>
+                                                                </FormControl>
+                                                            </Box>
+
+                                                            {/* {addNewEndDropdown && (
                                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                                     <div className="d-flex justify-content-end">
                                                                         {addNewEndField && (
@@ -935,9 +993,9 @@ const Driver = () => {
                                                                         </Select>
                                                                     </FormControl>
                                                                 </Box>
-                                                            )}
+                                                            )} */}
 
-                                                            {addNewEnd && (
+                                                            {/* {addNewEnd && (
                                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                                     <FormControl fullWidth size="small">
                                                                         <Autocomplete
@@ -965,7 +1023,7 @@ const Driver = () => {
                                                                         </Autocomplete>
                                                                     </FormControl>
                                                                 </Box>
-                                                            )}
+                                                            )} */}
                                                         </>
                                                     )}
 
