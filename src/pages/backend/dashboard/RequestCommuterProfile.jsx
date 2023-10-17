@@ -486,7 +486,7 @@ const RequestCommuterProfile = () => {
                                         <div className="col-md-9">
                                             <div className="row mb-2">
                                                 <div className="col-md-6">
-                                                    {seats_left !== "" ? (
+                                                    {seats_left && seats_left !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
                                                         </>
@@ -651,7 +651,7 @@ const RequestCommuterProfile = () => {
                                     <div className=" row d-flex justify-content-center align-items-center">
                                         <Row style={{ height: "275px", width: "100%" }}>
                                             <GoogleMap
-                                                zoom={10}
+                                                zoom={12}
                                                 center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
                                                 mapContainerStyle={{
                                                     width: "100%",

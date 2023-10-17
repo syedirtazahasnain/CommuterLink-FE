@@ -836,7 +836,7 @@ const TravelBuddyProfile = () => {
                   <div className=" row d-flex justify-content-center align-items-center">
                     <Row style={{ height: "275px", width: "100%" }}>
                       <GoogleMap
-                        zoom={10}
+                        zoom={12}
                         center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
                         mapContainerStyle={{
                           width: "100%",
