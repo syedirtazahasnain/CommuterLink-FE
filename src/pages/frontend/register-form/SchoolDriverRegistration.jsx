@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { Container, Row, Modal } from 'react-bootstrap';
@@ -9,14 +9,15 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from 'dayjs';
-import Button from "@mui/material/Button";
+import { Button } from "@mui/base";
 import Stack from "@mui/material/Stack";
 import { GoogleMap, Autocomplete, MarkerF, } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
-import { Checkbox } from '@mui/material';
+import { Checkbox, TextField, Tooltip } from '@mui/material';
 import { FormControlLabel } from '@mui/material';
 import Swal from "sweetalert2";
+import { displayNotification } from "../../../helpers";
 
 const eighteenYearsAgo = dayjs().subtract(18, "years");
 
@@ -33,6 +34,9 @@ const DriverRegistration = () => {
   const [addNewEndField, setAddNewEndField] = useState(true);
   const [daysSelected, setDaysSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isValidJazzCash, setIsValidJazzCash] = useState(true);
+  const [isValidEasyPaisa, setIsValidEasyPaisa] = useState(true);
+  const [isValidRaastID, setIsValidRaastID] = useState(true);
 
   const [isValidUniversityName, setIsValidUniversityName] = useState(true);
   const [isValidUniversityAddress, setIsValidUniversityAddress] = useState(true);
@@ -43,9 +47,33 @@ const DriverRegistration = () => {
   };
 
   const handleCarBrandChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
+    value = value.replace(/[^a-zA-Z]/g, '');
     setSelectedCarBrand(value);
     setIsCarBrandValid(value !== '');
+    if (value.length > 20) {
+      value = value.slice(0, 20);
+    }// Set validation based on whether a value is selected or not
+    setSelectedCarBrand(value);
+
+    // Check if the entered value is valid and reset the validation state
+    setIsCarBrandValid(value.length === 20);
+  };
+
+  // Enforce a maximum length of 24 characters
+
+  const handleDrivingLicenseMySelf = (e) => {
+    let value = e.target.value;
+    value = value.replace(/[^a-zA-Z0-9-]/g, '');
+    setInputDrivingLicenseMySelf(value);
+    setIsLicenseValid(value !== '');
+    if (value.length > 20) {
+      value = value.slice(0, 20);
+    }// Set validation based on whether a value is selected or not
+    setInputDrivingLicenseMySelf(value);
+
+    // Check if the entered value is valid and reset the validation state
+    setIsLicenseValid(value.length === 20);
   };
 
   const AddNewStart = () => {
@@ -58,6 +86,59 @@ const DriverRegistration = () => {
     setAddNewEnd(true);
     setAddNewEndDropdown(false);
     setAddNewEndField(false);
+  };
+
+  const openPopup = () => {
+    Swal.fire({
+
+      html: `
+        <div>
+          <div class="container mt-5 pt-1 fw-bold fs-1 mb-5">
+            <span><i class=" p-3 wallet-margin fa-solid text-success fa-wallet fs-1"></i>
+              Why Process Payment through CommutersLink</span>
+          </div>
+          <div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8  col-lg-12 col-sm-8 mb-5">
+                  <div class="bg-light text-left">
+                    <ol class="p-4 text-justify">
+                      <li>
+                      Commuterslink holds 15 days advance from the traveler and, upon confirming the journey, will transfer the daily ride cost to your wallet. Subsequently, you can receive these funds through the chosen preferred payment method at the time of registration. Your money is not only secure but also protected with end-to-end encryption.
+                      </li>
+                  
+                   
+                      <li >
+                      No bargaining involved. Commuterslink works out the per-day per-seat cost based upon a fixed rationalized formula. If the petrol prices go up or down, the same will be adjusted.
+                      </li>
+                 
+                  
+                    <li> No dispute on cost,payments,number of days the services were utilized etc.</li>
+        
+                   <li>If you stop provision of car seat to a partner for a reason or other with 1 week, your payment is secure and you will still be able to get another match.</li> 
+                            
+                          <li>
+                          CommutersLink verifies all the data of its members and ensures your safety and security.                        </li>
+                     
+                      <li>
+                      By receiving money through CommutersLink you remain an active member and have access to other options to find travel buddies.                       </li>
+                         
+                           <li>
+                           Last but not the least, it is the most respectable way of receiving money as you do not have to ask your travel buddy to pay you cash.                                            </li>
+                           <li>You can add or update your preferred payment method from your profile page.</li>
+                           </ol>
+
+                           </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `,
+      width: '50%', // Adjust the width as needed
+      showCloseButton: true,
+      showConfirmButton: false, // Remove confirm button if not needed
+    });
   };
 
 
@@ -75,6 +156,7 @@ const DriverRegistration = () => {
   const [education, setEducation] = useState("");
   const [cnic, setCnic] = useState('');
   const [isValidCnic, setIsValidCnic] = useState(true);
+  const [isValidCnic1, setIsValidCnic1] = useState(true);
   const [cnicFront, setCnicFront] = useState("");
   const [cnicFrontExt, setCnicFrontExt] = useState("");
   const [cnicBack, setCnicBack] = useState("");
@@ -86,6 +168,9 @@ const DriverRegistration = () => {
   const [universityAddress, setUniversityAddress] = useState("");
   const [isValidProfession, setIsValidProfession] = useState(true);
   const [isCarBrandValid, setIsCarBrandValid] = useState(true);
+  const [isLicenseValid, setIsLicenseValid] = useState(true);
+
+
   // For Start Point
   const [startBounds, setStartBounds] = useState([]);
   const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
@@ -146,6 +231,7 @@ const DriverRegistration = () => {
   const [selectedSeatGender, setSelectedSeatGender] = useState("");
   const [selectedMidRoutePartner, setSelectedMidRoutePartner] = useState("");
   const [selectedOneRoutePartner, setSelectedOneRoutePartner] = useState("");
+  const [selectedOption, setSelectedOption] = useState(''); // State to store the selected option
   const [inputBankAccount, setInputBankAccount] = useState("");
   const [inputEasyPaisa, setInputEasyPaisa] = useState("");
   const [inputJazzCash, setInputJazzCash] = useState("");
@@ -170,6 +256,7 @@ const DriverRegistration = () => {
   const [inputDriverLicenseNumber, setInputDriverLicenseNumber] = useState("");
   const [inputDriverValidUpto, setInputDriverValidUpto] = useState(null);
   const inputDriverValidUptoFormat = inputDriverValidUpto ? inputDriverValidUpto.format('DD-MM-YYYY') : '';
+  const [isIBANValid, setIsIBANValid] = useState(true);
 
   // For License Fields
   const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
@@ -179,13 +266,17 @@ const DriverRegistration = () => {
 
   // For Driver Form
   const [showDriverForm, setShowDriverForm] = useState(false);
-  const [showmyself, setshowmyself] = useState(false);
+  const [showmyself, setshowmyself] = useState(true);
   const [showmydriver, setshowmydriver] = useState(false);
   const [showboth, setshowboth] = useState(false);
 
   useEffect(() => {
     getdropdownStartdata();
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate, showDriverForm]);
 
   useEffect(() => {
 
@@ -298,9 +389,8 @@ const DriverRegistration = () => {
     };
     getGeocodeEndData();
   }, [locationEndString, locationEndStringField]);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [navigate]);
+
+
   const getdropdownStartdata = async () => {
     const response = await fetch(
       `${API_URL}/api/v1/list/data`,
@@ -361,7 +451,7 @@ const DriverRegistration = () => {
         new window.google.maps.LatLng(startBounds.southwest.lat, startBounds.southwest.lng),
         new window.google.maps.LatLng(startBounds.northeast.lat, startBounds.northeast.lng)
       );
-  
+
       setAutocompleteStartBounds(bounds);
     }
   }, [startBounds]);
@@ -402,7 +492,7 @@ const DriverRegistration = () => {
         new window.google.maps.LatLng(endBounds.southwest.lat, endBounds.southwest.lng),
         new window.google.maps.LatLng(endBounds.northeast.lat, endBounds.northeast.lng)
       );
-  
+
       setAutocompleteEndBounds(bounds);
     }
   }, [endBounds]);
@@ -410,7 +500,7 @@ const DriverRegistration = () => {
   useEffect(() => {
     // Filter registration years based on the selected manufacturing year.
     if (selectedManYear) {
-      const filteredYears = regYear.filter((reg) => reg.car_year_ranges > selectedManYear);
+      const filteredYears = regYear.filter((reg) => reg.car_year_ranges >= selectedManYear);
       setFilteredRegYears(filteredYears);
     } else {
       // If no manufacturing year is selected, show all registration years.
@@ -423,12 +513,14 @@ const DriverRegistration = () => {
     setLocationStartStringField("");
     setProvinceStartId(event.target.value);
   };
+
   function validateProfession(profession) {
     // A simple regular expression to match alphabetic characters and spaces
     const professionPattern = /^[A-Za-z\s]+$/;
 
     return professionPattern.test(profession);
   }
+
   const handleProfessionChange = (e) => {
     const newProfession = e.target.value;
     setProfession(newProfession);
@@ -450,6 +542,7 @@ const DriverRegistration = () => {
     setValidated(true);
   };
 
+
   const handleLocationStart = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
     const selectedValue = selectedOption.value;
@@ -460,9 +553,49 @@ const DriverRegistration = () => {
     handleShowStartModal();
   };
 
+  const validateJazzCash = (inputJazzCash) => {
+    // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+    const phonePattern = /^03\d{9}$/;
+    if (inputJazzCash === "" || phonePattern.test(inputJazzCash)) {
+      setInputJazzCash(inputJazzCash);
+      setIsValidJazzCash(true);
+    } else {
+      setInputJazzCash(inputJazzCash);
+      setIsValidJazzCash(false);
+    }
+  };
+
   const handleLocationStartField = (e) => {
     setLocationStartStringField(e.target.value);
     setLocationStartString(e.target.value);
+  };
+
+  const validateEasyPaisa = (inputEasyPaisa) => {
+    // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+    const phonePattern = /^03\d{9}$/;
+    if (inputEasyPaisa === "" || phonePattern.test(inputEasyPaisa)) {
+      setInputEasyPaisa(inputEasyPaisa);
+      setIsValidEasyPaisa(true);
+    } else {
+      setInputEasyPaisa(inputEasyPaisa);
+      setIsValidEasyPaisa(false);
+    }
+  };
+
+  const validateRaastID = (inputRaastID) => {
+    // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+    const phonePattern = /^03\d{9}$/;
+    if (inputRaastID === "" || phonePattern.test(inputRaastID)) {
+      setInputRaastID(inputRaastID);
+      setIsValidRaastID(true);
+    } else {
+      setInputRaastID(inputRaastID);
+      setIsValidRaastID(false);
+    }
+  };
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value); // Update the selected option
   };
 
   const handlePlaceSelectStart = () => {
@@ -488,14 +621,15 @@ const DriverRegistration = () => {
           handleShowStartModal();
         }
       } else if (!isIslamabad) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: `Please select a place in ${cityStart}.`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: `Please select a place in ${cityStart}.`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", `Please select a place in ${cityStart}.`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -541,14 +675,15 @@ const DriverRegistration = () => {
           handleShowEndModal();
         }
       } else if (!isIslamabad) {
-        Swal.fire({
-          position: 'top',
-          // // icon: 'warning',
-          text: `Please select a place in ${cityEnd}.`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        });
+        // Swal.fire({
+        //   position: 'top',
+        //   // // icon: 'warning',
+        //   text: `Please select a place in ${cityEnd}.`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+        //   },
+        // });
+        displayNotification("warning", `Please select a place in ${cityEnd}.`);
       }
     } else {
       // Handle the case when place is not valid.
@@ -614,6 +749,7 @@ const DriverRegistration = () => {
 
     return universityPattern.test(name);
   }
+
   const handleUniversityNameChange = (e) => {
     const newUniversityName = e.target.value;
     setUniversityName(newUniversityName);
@@ -638,9 +774,14 @@ const DriverRegistration = () => {
 
     return cnicPattern.test(cnic);
   }
+
+
   const handleCnicChange = (event) => {
     const inputCnic = event.target.value.replace(/\D/g, '');
 
+    if (cnic.length < 15 && cnic.length > 15) {
+      setIsValidCnic(false);
+    }
     if (inputCnic.length <= 13) {
       const formattedCnic = inputCnic.replace(
         /^(\d{5})(\d{7})(\d{1})$/,
@@ -648,12 +789,35 @@ const DriverRegistration = () => {
       );
       setCnic(formattedCnic);
       setIsValidCnic(validateCnic(formattedCnic));
-    } else {
-      setIsValidCnic(false);
     }
   };
+
+  function validateCnic1(inputDriverCnicNumber) {
+    // Regular expression pattern for validating Pakistani CNIC (12345-1234567-1)
+    const cnicPattern = /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/;
+
+    return cnicPattern.test(inputDriverCnicNumber);
+  }
+
+  const handleCnicChange1 = (event) => {
+    const inputCnic = event.target.value.replace(/\D/g, '');
+
+    if (inputDriverCnicNumber.length < 15 && inputDriverCnicNumber.length > 15) {
+      setIsValidCnic1(false);
+    }
+    if (inputCnic.length <= 13) {
+      const formattedCnic = inputCnic.replace(
+        /^(\d{5})(\d{7})(\d{1})$/,
+        '$1-$2-$3'
+      );
+      setInputDriverCnicNumber(formattedCnic);
+      setIsValidCnic1(validateCnic1(formattedCnic));
+    }
+  };
+
   const handleCnicFront = (e) => {
     const file = e.target.files[0];
+    const maxSize = 5120000;
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -661,6 +825,16 @@ const DriverRegistration = () => {
         setCnicFrontExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
+      if (file.size <= maxSize) {
+
+      }
+      else {
+
+        displayNotification("warning", "Your file is exceeds 5MB");
+        setTimeout(() => {
+          e.target.value = null;
+        }, 100);
+      }
     }
   };
 
@@ -669,6 +843,7 @@ const DriverRegistration = () => {
 
   const handleCnicBack = (e) => {
     const file = e.target.files[0];
+    const maxSize = 5120000;
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -676,7 +851,34 @@ const DriverRegistration = () => {
         setCnicBackExt(file.name.split('.').pop());
       };
       reader.readAsDataURL(file);
+      if (file.size <= maxSize) {
+
+      }
+      else {
+
+        displayNotification("warning", "Your file is exceeds 5MB");
+        setTimeout(() => {
+          e.target.value = null;
+        }, 100);
+      }
     }
+  };
+
+  const handleInputChange = (e) => {
+    let value = e.target.value;
+
+    // Remove any special characters and spaces
+    value = value.replace(/[^a-zA-Z0-9]/g, '');
+
+    // Enforce a maximum length of 24 characters
+    if (value.length > 24) {
+      value = value.slice(0, 24);
+    }
+
+    setInputBankAccount(value);
+
+    // Check if the entered value is valid and reset the validation state
+    setIsIBANValid(value.length === 24);
   };
 
   //console.log("Back Image:", cnicBack);
@@ -684,13 +886,23 @@ const DriverRegistration = () => {
 
   const handlePicture = (e) => {
     const file = e.target.files[0];
+    const maxSize = 5120000;
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setPicture(reader.result.split(",")[1]);
-        setPictureExt(file.name.split('.').pop());
-      };
-      reader.readAsDataURL(file);
+      if (file.size <= maxSize) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setPicture(reader.result.split(",")[1]);
+          setPictureExt(file.name.split('.').pop());
+        };
+        reader.readAsDataURL(file);
+      }
+      else {
+
+        displayNotification("warning", "Your file is exceeds 5MB");
+        setTimeout(() => {
+          e.target.value = null;
+        }, 100);
+      }
     }
   };
 
@@ -699,61 +911,114 @@ const DriverRegistration = () => {
 
   const handleCnicFrontDriver = (e) => {
     const file = e.target.files[0];
+    const maxSize = 5120000;
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setInputDriverCnicFront(reader.result.split(",")[1]);
-        setInputDriverCnicFrontExt(file.name.split('.').pop());
-      };
-      reader.readAsDataURL(file);
+      if (file.size <= maxSize) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setInputDriverCnicFront(reader.result.split(",")[1]);
+          setInputDriverCnicFrontExt(file.name.split('.').pop());
+        };
+        reader.readAsDataURL(file);
+      }
+      else {
+
+        displayNotification("warning", "Your file is exceeds 5MB");
+        setTimeout(() => {
+          e.target.value = null;
+        }, 100);
+      }
     }
   };
 
   const handleCnicBackDriver = (e) => {
     const file = e.target.files[0];
+    const maxSize = 5120000;
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setInputDriverCnicBack(reader.result.split(",")[1]);
-        setInputDriverCnicBackExt(file.name.split('.').pop());
-      };
-      reader.readAsDataURL(file);
+      if (file.size <= maxSize) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setInputDriverCnicBack(reader.result.split(",")[1]);
+          setInputDriverCnicBackExt(file.name.split('.').pop());
+        };
+        reader.readAsDataURL(file);
+      }
+      else {
+
+        displayNotification("warning", "Your file is exceeds 5MB");
+        setTimeout(() => {
+          e.target.value = null;
+        }, 100);
+      }
     }
   };
 
   const handleLicenseFrontDriver = (e) => {
     const file = e.target.files[0];
+    const maxSize = 5120000;
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedImageLicenseFront(reader.result.split(",")[1]);
-        setSelectedImageLicenseFrontExt(file.name.split('.').pop());
-      };
-      reader.readAsDataURL(file);
+
+      if (file.size <= maxSize) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setSelectedImageLicenseFront(reader.result.split(",")[1]);
+          setSelectedImageLicenseFrontExt(file.name.split('.').pop());
+        };
+        reader.readAsDataURL(file);
+      }
+      else {
+
+        displayNotification("warning", "Your file is exceeds 5MB");
+        setTimeout(() => {
+          e.target.value = null;
+        }, 100);
+      }
     }
   };
 
   const handleLicenseBackDriver = (e) => {
     const file = e.target.files[0];
+    const maxSize = 51200000;
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedImageLicenseBackExt(reader.result.split(",")[1]);
-        setSelectedImageLicenseBackExt(file.name.split('.').pop());
-      };
-      reader.readAsDataURL(file);
+
+      if (file.size <= maxSize) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setSelectedImageLicenseBackExt(reader.result.split(",")[1]);
+          setSelectedImageLicenseBackExt(file.name.split('.').pop());
+        };
+        reader.readAsDataURL(file);
+      }
+      else {
+
+        displayNotification("warning", "Your file is exceeds 5MB");
+        setTimeout(() => {
+          e.target.value = null;
+        }, 100);
+      }
     }
   };
 
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
+    const maxSize = 5120000;
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedCarImage(reader.result.split(",")[1]);
-        setSelectedCarImageExt(file.name.split('.').pop());
-      };
-      reader.readAsDataURL(file);
+
+      if (file.size <= maxSize) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setSelectedCarImage(reader.result.split(",")[1]);
+          setSelectedCarImageExt(file.name.split('.').pop());
+        };
+        reader.readAsDataURL(file);
+      }
+      else {
+
+        displayNotification("warning", "Your file is exceeds 5MB");
+        setTimeout(() => {
+          e.target.value = null;
+        }, 100);
+      }
     }
   };
 
@@ -808,6 +1073,11 @@ const DriverRegistration = () => {
 
 
   // For Modal Open & Close Functionality
+  const isValidIBAN = (iban) => {
+    // Regular expression for a 24-digit IBAN
+    const ibanRegex = /^[A-Z0-9]{24}$/;
+    return ibanRegex.test(iban);
+  };
 
   const handleShowStartModal = () => {
     setShowStartModal(true);
@@ -825,6 +1095,17 @@ const DriverRegistration = () => {
     setShowEndModal(false);
   };
 
+  const PersonalFormFields = [
+    martialStatus,
+    cnic,
+    selectedDateFormat,
+    gender,
+    preferredGender,
+    profession,
+    education,
+    universityName,
+    universityAddress
+  ];
 
   const requiredFieldsLogin = [
     cityStartId, provinceStartId,
@@ -844,9 +1125,12 @@ const DriverRegistration = () => {
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
     selectedCarImageExt, selectedSeat, preferredGender,
-    selectedMidRoutePartner, inputDrivingLicenseMySelf,
-    inputValidUptoMySelf, inputPlaceIssueMySelf
+    selectedMidRoutePartner,
+    // inputDrivingLicenseMySelf,
+    // inputValidUptoMySelf, inputPlaceIssueMySelf
   ];
+
+  console.log({ requiredFieldsLogin });
 
   console.log({ requiredFieldsDriver });
 
@@ -859,13 +1143,11 @@ const DriverRegistration = () => {
       setIsLoading(true); // Start loading
 
       try {
-        await LocationForm();
-        await PersonalForm();
-        await ImagesFormCnicFront();
-        await ImagesFormCnicBack();
-        await ImagesFormPicture();
-        setIsLoading(false);
-        // setShowDriverForm(true);
+        if (PersonalFormFields.every(
+          (field) => field !== "" && field !== null && field !== undefined
+        )) {
+          await PersonalForm();
+        }
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -873,26 +1155,61 @@ const DriverRegistration = () => {
       }
     } else {
       setIsLoading(false);
-      // alert("Please Fill All Fields!");
-      Swal.fire({
-        position: 'top',
-        // icon: 'warning',
-        text: 'Please Fill All Fields!',
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      }
-      )
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'warning',
+      //   text: 'Please Fill All Fields!',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("warning", "Please Fill All Personal Form Fields!");
     }
   };
+
+  // const handleLogin = async () => {
+  //   if (
+  //     requiredFieldsLogin.every(
+  //       (field) => field !== "" && field !== null && field !== undefined
+  //     )
+  //   ) {
+  //     setIsLoading(true); // Start loading
+
+  //     try {
+  //       await LocationForm();
+  //       await PersonalForm();
+  //       await ImagesFormCnicFront();
+  //       await ImagesFormCnicBack();
+  //       await ImagesFormPicture();
+  //       setIsLoading(false);
+  //       // setShowDriverForm(true);
+  //     } catch (error) {
+  //       setIsLoading(false);
+  //       // Handle the error appropriately, e.g., show an error message
+  //       console.error('API call error:', error);
+  //     }
+  //   } else {
+  //     setIsLoading(false);
+  //     // alert("Please Fill All Fields!");
+  //     Swal.fire({
+  //       position: 'top',
+  //       // icon: 'warning',
+  //       text: 'Please Fill All Fields!',
+  //       customClass: {
+  //         confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+  //       },
+  //     }
+  //     )
+  //   }
+  // };
 
   const handleDriver = async () => {
     if (requiredFieldsDriver.every(field => field !== "" && field !== null && field !== undefined)) {
       setIsLoading(true); // Start loading
       try {
+        await handleLogin();
         await DriverForm();
-        await PaymentForm();
-        setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -901,15 +1218,16 @@ const DriverRegistration = () => {
     } else {
       setIsLoading(false);
       // alert("Please Fill All Driver Form Fields!");
-      Swal.fire({
-        position: 'top',
-        // icon: 'warning',
-        text: 'Please Fill All Driver Form Fields!',
-        customClass: {
-          confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        },
-      }
-      )
+      // Swal.fire({
+      //   position: 'top',
+      //   // icon: 'warning',
+      //   text: 'Please Fill All Driver Form Fields!',
+      //   customClass: {
+      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+      //   },
+      // }
+      // )
+      displayNotification("warning", "Please Fill All Driver Form Fields!");
     }
   };
 
@@ -1024,17 +1342,26 @@ const DriverRegistration = () => {
 
       if (jsonresponse.statusCode == 200) {
         console.log("Personal Form Response:", jsonresponse);
-      } else {
-        // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
+        await LocationForm();
+        await ImagesFormCnicFront();
+        await ImagesFormCnicBack();
+        await ImagesFormPicture();
+      } else if (jsonresponse.statusCode === 422) {
+        console.log("Personal Form CNIC Issue Response:", jsonresponse);
+        const errors = jsonresponse.errors;
+        for (const field of Object.keys(errors)) {
+          Swal.fire({
+            position: "top",
+            // icon: "error",
+            // text: `${jsonresponse.message}`,
+            text: `${errors[field][0]}`,
+            customClass: {
+              confirmButton: "bg-success",
+              // Apply custom CSS class to the OK button
+            },
+          });
         }
-        )
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error.message);
@@ -1235,17 +1562,32 @@ const DriverRegistration = () => {
 
       if (jsonresponse.statusCode == 200) {
         console.log("Driver Form Response:", jsonresponse);
-      } else {
-        // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        await PaymentForm();
+        setIsLoading(false);
+      } else if (jsonresponse.statusCode === 100) {
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
+        setIsLoading(false);
+      }
+      else if (jsonresponse.statusCode === 500) {
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'error',
+        //   text: `${jsonresponse.message}`,
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("error", `${jsonresponse.message}`);
       }
     } catch (error) {
       console.log(error.message);
@@ -1283,42 +1625,45 @@ const DriverRegistration = () => {
         if (jsonresponse.statusCode == 200) {
           console.log("Payment Form Response:", jsonresponse);
           // alert("Driver Form Submitted Successfully");
-          Swal.fire({
-            position: 'top',
-            title: 'Congratulations!',
-            text: 'Driver Form Submitted Successfully',
-            icon: 'success',
-            showCancelButton: false,
-            confirmButtonText: 'OK',
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          });
+          // Swal.fire({
+          //   position: 'top',
+          //   title: 'Congratulations!',
+          //   text: 'Driver Form Submitted Successfully',
+          //   icon: 'success',
+          //   showCancelButton: false,
+          //   confirmButtonText: 'OK',
+          //   customClass: {
+          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("success", "Driver Registration Form Submitted Successfully");
           route();
-        } else {
+        }
+        else if (jsonresponse.statusCode === 500) {
           // alert("Error: " + jsonresponse.message);
-          Swal.fire({
-            position: 'top',
-            // icon: 'error',
-            text: `${jsonresponse.message}`,
-            customClass: {
-              confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-            },
-          }
-          )
+          // Swal.fire({
+          //   position: 'top',
+          //   // icon: 'error',
+          //   text: `${jsonresponse.message}`,
+          //   customClass: {
+          //     confirmButton: 'swal-custom',
+          //   },
+          // }
+          // )
+          displayNotification("error", `${jsonresponse.message}`);
         }
       }
       else {
-        // alert("Please Enter Payment Details!");
-        Swal.fire({
-          position: 'top',
-          // icon: 'warning',
-          text: 'Please Enter Payment Details!',
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
-        }
-        )
+        // Swal.fire({
+        //   position: 'top',
+        //   // icon: 'warning',
+        //   text: 'Please Enter Payment Details!',
+        //   customClass: {
+        //     confirmButton: 'swal-custom',
+        //   },
+        // }
+        // )
+        displayNotification("warning", "Please Enter Payment Details!");
       }
     } catch (error) {
       console.log(error.message);
@@ -1329,6 +1674,7 @@ const DriverRegistration = () => {
 
   return (
     <>
+
       {!showDriverForm && (
         <>
           <div className="main-bg">
@@ -1352,32 +1698,66 @@ const DriverRegistration = () => {
                 </ul>
               </div >
               <div className="row justify-content-center">
-                <div className="col-md-6 bg-white mt-5 mb-5">
-                  <div className="row shadow
-                " style={{ backgroundColor: '#1F5F5B' }}>    <h1
-                      className="text-center text-white py-4"
-                    >
+                <div className="col-md-6 bg-white mt-5 mb-5"  >
+
+                  <div
+                    className="row shadow  form-color-header"
+                  // style={{ backgroundColor: '#1F5F5B' }}
+                  >
+                    <h1 className="text-center text-white py-4">
                       Registration Form
                     </h1></div>
-                  <Form className="p-3" noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Form className="p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    <div className="row mb-3 shadow shadow-sm ">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                      // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           STARTING POINT
+                          <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
+                            <Link
+                              // to='/notification'
+                              className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                            </Link>
+                          </Tooltip>
                         </h2>
+
+
+
                         <Form.Group
                           as={Col}
                           md={cityStartId ? "12" : "12"}
                           controlId="validationCustom01"
                           className="mb-2"
                         >
-                          <Form.Label className="text-black fs-6">
-                            Province
-                          </Form.Label>
+                          <div className="d-flex justify-content-between align-items-center">
+                            <Form.Label className="text-black fs-6">
+                              Province
+                            </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                            // onClick={AddNewStart}
+                            >
+                              {/* <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                </Link>
+                              </Tooltip> */}
+
+                            </p></div>
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
@@ -1396,7 +1776,11 @@ const DriverRegistration = () => {
                               )
                             )}
                           </Form.Select>
+
+
                         </Form.Group>
+
+
                         <Form.Group as={Col} md={cityStartId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
                           <Form.Label className="text-black fs-6">City</Form.Label>
                           <Form.Select
@@ -1436,11 +1820,42 @@ const DriverRegistration = () => {
 
                         {cityStartId && (
                           <>
-                            {addNewStartDropdown && (
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom56"
+                            >
+                              <Form.Label className="text-black">
+                                Area
+                              </Form.Label>
+                              <Autocomplete
+                                onLoad={(autocomplete) =>
+                                  (autocompleteRef.current = autocomplete)
+                                }
+                                onPlaceChanged={handlePlaceSelectStart}
+                                restrictions={{ country: "PK" }}
+                                bounds={autocompleteStartBounds}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  autoComplete="on"
+                                  required
+                                  type="text"
+                                  value={locationStartStringField}
+                                  onChange={handleLocationStartField}
+                                  className="text-dark mt-1"
+                                  placeholder="Enter your area"
+                                  autocomplete="on"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+
+                            {/* {addNewStartDropdown && (
                               <Form.Group
                                 as={Col}
                                 md="12"
-                                controlId="validationCustom03"
+                                controlId="validationCustom55"
                               >
                                 <div className="d-flex justify-content-between align-items-center">
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
@@ -1480,34 +1895,24 @@ const DriverRegistration = () => {
                                   ))}
                                 </Form.Select>
                               </Form.Group>
-                            )}
+
+                            )} */}
 
                             {/* {addNewStartField && (
                               <Form.Group
                                 as={Col}
                                 md="12"
                                 className="mt-3"
-                                controlId="validationCustom04"
+                                controlId="validationCustom02"
                               >
-                                <span
-                                  className="colorplace text-danger"
-                                  style={{
-                                    cursor: "pointer",
-                                    textDecoration: "underline",
-                                  }}
-                                  onClick={AddNewStart}
-                                >
-                                  Can't find your area?
-                                  <a> Add Here</a>
-                                </span>
                               </Form.Group>
                             )} */}
 
-                            {addNewStart && (
+                            {/* {addNewStart && (
                               <Form.Group
                                 as={Col}
                                 md="12"
-                                controlId="validationCustom05"
+                                controlId="validationCustom56"
                               >
                                 <Form.Label className="text-black">
                                   Area
@@ -1534,30 +1939,61 @@ const DriverRegistration = () => {
                                   />
                                 </Autocomplete>
                               </Form.Group>
-                            )}
+                            )} */}
                           </>
                         )}
 
                       </div>
                     </div>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    <div className="row mb-3 shadow shadow-sm ">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                      // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           DROP-OFF POINT
+                          <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
+                            <Link
+                              // to='/notification'
+                              className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                            </Link>
+                          </Tooltip>
                         </h2>
                         <Form.Group
                           as={Col}
                           md={cityEndId ? "12" : "12"}
-                          controlId="validationCustom07"
+                          controlId="validationCustom57"
                           className="mb-2"
                         >
-                          <Form.Label className="text-black fs-6">
-                            Province
-                          </Form.Label>
+
+                          <div className="d-flex justify-content-between align-items-center">
+                            <Form.Label className="text-black fs-6">
+                              Province
+                            </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                            // onClick={AddNewStart}
+                            >
+                              {/* <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                </Link>
+                              </Tooltip> */}
+
+                            </p></div>
+
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
@@ -1577,7 +2013,7 @@ const DriverRegistration = () => {
                             )}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md={cityEndId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
+                        <Form.Group as={Col} md={cityEndId ? "12" : "12"} controlId="validationCustom58" className="mb-2">
                           <Form.Label className="text-black fs-6">City</Form.Label>
                           <Form.Select
                             aria-label="Default select example"
@@ -1614,13 +2050,45 @@ const DriverRegistration = () => {
                           </Form.Select>
                         </Form.Group>
 
+
+
                         {cityEndId && (
                           <>
-                            {addNewEndDropdown && (
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom08"
+                            >
+                              <Form.Label className="text-black">
+                                Area
+                              </Form.Label>
+                              <Autocomplete
+                                onLoad={(autocomplete) =>
+                                  (autocompleteRef.current = autocomplete)
+                                }
+                                onPlaceChanged={handlePlaceSelectEnd}
+                                restrictions={{ country: "PK" }}
+                                bounds={autocompleteEndBounds}
+                                options={{ strictBounds: true }}
+                              >
+                                <Form.Control
+                                  autoComplete="on"
+                                  required
+                                  type="text"
+                                  value={locationEndStringField}
+                                  onChange={handleLocationEndField}
+                                  className="text-dark mt-1"
+                                  placeholder="Enter your area"
+                                  autocomplete="on"
+                                  defaultValue=""
+                                />
+                              </Autocomplete>
+                            </Form.Group>
+                            {/* {addNewEndDropdown && (
                               <Form.Group
                                 as={Col}
                                 md="12"
-                                controlId="validationCustom09"
+                                controlId="validationCustom06"
                               >
                                 <div className="d-flex justify-content-between align-items-center">
                                   <p className="mt-2 text-dark fs-6 fw-bold">Select Area from Dropdown</p>
@@ -1659,34 +2127,15 @@ const DriverRegistration = () => {
                                   ))}
                                 </Form.Select>
                               </Form.Group>
-                            )}
-
-                            {/* {addNewEndField && (
-                              <Form.Group
-                                as={Col}
-                                md="12"
-                                className="mt-3"
-                                controlId="validationCustom10"
-                              >
-                                <span
-                                  className="colorplace text-danger"
-                                  style={{
-                                    cursor: "pointer",
-                                    textDecoration: "underline",
-                                  }}
-                                  onClick={AddNewEnd}
-                                >
-                                  Can't find your area?
-                                  <a> Add Here</a>
-                                </span>
-                              </Form.Group>
                             )} */}
 
-                            {addNewEnd && (
+
+
+                            {/* {addNewEnd && (
                               <Form.Group
                                 as={Col}
                                 md="12"
-                                controlId="validationCustom11"
+                                controlId="validationCustom08"
                               >
                                 <Form.Label className="text-black">
                                   Area
@@ -1713,42 +2162,16 @@ const DriverRegistration = () => {
                                   />
                                 </Autocomplete>
                               </Form.Group>
-                            )}
+                            )} */}
                           </>
                         )}
-                        {/* <Form.Group
-                          as={Col}
-                          md="12"
-                          controlId="validationCustom12"
-                          className="mb-2 mt-3"
-                        >
-                          <Form.Label className="text-black fs-6">
-                            Timings (+/- 15 Minutes)
-                          </Form.Label>
-                          <Form.Select
-                            aria-label="Default select example"
-                            className="text-secondary"
-                            value={selectedOfficeTime}
-                            onChange={(e) => setSelectedOfficeTime(e.target.value)}
-                            required
-                          >
-                            <option value="" hidden>
-                              Drop-off Timings
-                            </option>
-                            {officeTimeSlots?.map((time) => (
-                              <option key={time.id} value={time.id}>
-                                {time.time_string}
-                              </option>
-                            ))}
-                          </Form.Select>
-                        </Form.Group> */}
+
                       </div>
                     </div>
-
                     <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                      <Modal.Header closeButton>
+                      <Modal.Header className="d-block" >
                         <Modal.Title>Select Starting Location</Modal.Title>
-                        <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point.</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1774,22 +2197,25 @@ const DriverRegistration = () => {
                         </Container>
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant="contained" onClick={handleCloseStartModal}>
-                          Submit
+                        <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseStartModal}>
+                          Select
                         </Button>
                       </Modal.Footer>
                     </Modal>
 
                     <Modal show={showEndModal} onHide={handleCloseEndModal}>
-                      <Modal.Header closeButton>
+                      <Modal.Header className="d-block" >
                         <Modal.Title>Select Drop-off Location</Modal.Title>
-                        <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         <Container className="d-flex justify-content-center align-items-center mb-3">
                           <Row style={{ height: "100%", width: "100%" }}>
                             <GoogleMap
                               zoom={15}
+                              // center={
+                              //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
+                              // }
                               center={defaultEndCenter}
                               mapContainerStyle={{ width: "100%", height: "50vh" }}
                               onClick={handleMapClickEnd}
@@ -1811,77 +2237,56 @@ const DriverRegistration = () => {
                         </Container>
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant="contained" onClick={handleCloseEndModal}>
-                          Submit
+                        <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseEndModal}>
+                          Select
                         </Button>
                       </Modal.Footer>
                     </Modal>
 
-                    {/* <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          Timings (+/- 15 Minutes)
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
 
-                          value={selectedHomeTime}
-                          onChange={(e) => setSelectedHomeTime(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>
-                            Home to Office
-                          </option>
-                          {homeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.id}>
-                              {time.time_string}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
-                          Drop-off Time
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={selectedOfficeTime}
-                          onChange={(e) => setSelectedOfficeTime(e.target.value)}
-                          required
-                        >
-                          <option value="" disabled hidden>
-                            Office to Home
-                          </option>
-                          {officeTimeSlots?.map((time) => (
-                            <option key={time.id} value={time.id}>
-                              {time.time_string}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                    </Row> */}
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+                      // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           Timing
                         </h2>
-
                         <Form.Group
                           as={Col}
                           md="12"
                           controlId="validationCustomtime1"
                           className="mb-2 mt-3"
                         >
-                          <Form.Label className="text-black fs-6">
-                            Start Time (From start point to destination +/- 30 Minutes)
-                          </Form.Label>
+
+
+                          <div className="d-flex justify-content-between align-items-center">
+                            <Form.Label className="text-black fs-6">
+                              Start Time
+                              {/* (From start point to destination +/- 30 Minutes) */}
+                            </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                              }}
+                            // onClick={AddNewStart}
+                            >
+                              <Tooltip title={<h6 className="px-2">{"You can specify the times you are available for commuting by selecting both the start and return times."}</h6>}>
+                                <Link
+                                  // to='/notification'
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                </Link>
+                              </Tooltip>
+
+                            </p></div>
                           <Form.Select
                             aria-label="Default select example"
-                            className="text-secondary drop-down"
+                            className="text-secondary"
                             value={selectedHomeTime}
                             onChange={(e) => setSelectedHomeTime(e.target.value)}
                             required
@@ -1899,11 +2304,12 @@ const DriverRegistration = () => {
                         <Form.Group
                           as={Col}
                           md="12"
-                          controlId="validationCustom12"
+                          controlId="validationCustomtime2"
                           className="mb-2 mt-3"
                         >
                           <Form.Label className="text-black fs-6">
-                            Return Time (From destination to start point +/- 30 Minutes)
+                            Return Time
+                            {/* (From destination to start point +/- 30 Minutes) */}
                           </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
@@ -1924,14 +2330,16 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </div>
                     </div>
-                    <Row className="my-3" style={{ border: '1px solid #cddbd9', backgroundColor: '#cddbd9' }}>
-                      <Form.Group as={Col} md="12" controlId="validationCustom13">
-                        <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
+                    <Row className="my-3 form-color-field"
+                    // style={{ border: '1px solid #cddbd9', backgroundColor: "#cddbd9" }}
+                    >
+                      <Form.Group as={Col} md="12" controlId="validationCustom10">
+                        <Form.Label className="pt-3 px-3 text-black">
                           I Commute (Select Days)
                         </Form.Label>
                       </Form.Group>
 
-                      <div className="row d-flex px-4">
+                      <div className="row d-flex px-4" >
                         <div className="col">
                           {["checkbox"].map((type) => (
                             <div key={`inline-${type}`} className="mb-3 d-flex flex-wrap">
@@ -2066,8 +2474,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
-                                  // disabled
-                                  // required
+                                  // //required
                                   />
                                 }
                                 label="Saturday"
@@ -2091,8 +2498,8 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
-                                  // disabled
                                   // required
+                                  // disabled
                                   />
                                 }
                                 label="Sunday"
@@ -2115,191 +2522,8 @@ const DriverRegistration = () => {
 
                     {/* {daysSelected} */}
 
-                    {/* <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>Gender</Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={gender}
-                          onChange={(e) => setGender(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden> Gender </option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
-                          Preferred Gender
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={preferredGender}
-                          onChange={(e) => setPreferredGender(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Gender</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Both">Both</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          Year of Birth
-                        </Form.Label>
-                        <LocalizationProvider dateAdapter={AdapterDayjs} sx="w">
-                          <DemoContainer components={["DatePicker"]}>
-                            <DatePicker
-                              label={
-                                <span>
-                                  MM/DD/YY
-                                </span>
-                              }
-                              value={selectedDate}
-                              onChange={handleDateChange}
-                              sx={{ width: "100%" }}
-                              inputProps={{ style: { color: '#000' } }}
-                              required
-                            />
-                          </DemoContainer>
-                        </LocalizationProvider>
-                      </Form.Group>
-
-
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
-                          Martial Status
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-
-                          value={martialStatus}
-                          onChange={(e) => setMartialStatus(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Martial Status</option>
-                          <option value="Married">Married</option>
-                          <option value="Single">Single</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>
-                          Education
-                        </Form.Label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          style={{ color: "#000" }}
-                          value={education}
-                          onChange={(e) => setEducation(e.target.value)}
-                          required
-                        >
-                          <option value="" hidden>Education</option>
-                          <option value="Phd">Phd</option>
-                          <option value="Master">Master</option>
-                          <option value="Bachelor">Bachelor</option>
-                          <option value="BA">BA</option>
-                          <option value="BSC">BSC</option>
-                          <option value="FSC">FSC</option>
-                          <option value="FA">FA</option>
-                          <option value="I.Com">I.Com</option>
-                          <option value="Matric">Matric</option>
-                          <option value="Middle">Middle</option>
-                          <option value="Primary">Primary</option>
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group as={Col} md="6" controlId="validationCustom02">
-                        <Form.Label style={{ color: "#000" }}>
-                          Profession
-                        </Form.Label>
-                        <Form.Control
-                          required
-                          type="text"
-                          className={`${isValidProfession ? '' : 'is-invalid'}`}
-                          placeholder="Profession (Engineer, Doctor, etc)"
-                          value={profession}
-                          onChange={handleProfessionChange}
-                        />
-                        {!isValidProfession && (
-                          <div className="invalid-feedback">
-                            Please enter a valid profession.
-                          </div>
-                        )}
-                      </Form.Group>
-                    </Row>
-                    
-                    <Row className="mb-3">
-                      <Form.Group as={Col} md="6" controlId="validationCustom01">
-                        <Form.Label style={{ color: "#000" }}>CNIC</Form.Label>
-
-                        <Form.Control
-                          required
-                          type="text"
-                          className={` ${isValidCnic ? '' : 'is-invalid'}`}
-                          placeholder="12345-1234567-1"
-                          value={cnic}
-                          onChange={handleCnicChange}
-                        />
-                        {!isValidCnic && (
-                          <div className="invalid-feedback">
-                            Please enter a valid CNIC in the format 12345-1234567-1.
-                          </div>
-                        )}
-                      </Form.Group>
-                      <Form.Group
-                        controlId="formFile"
-                        as={Col}
-                        md="6"
-                        className="mb-3"
-                      >
-                        <Form.Label style={{ color: "#000" }}>
-                          Upload your picture
-                        </Form.Label>
-                        <Form.Control type="file" required onChange={handlePicture} />
-                        <Form.Text style={{ color: "#000" }}>
-                          The picture will only be shown to members with whom you
-                          agree to commute
-                        </Form.Text>
-                      </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                      <Form.Group
-                        controlId="formFile"
-                        as={Col}
-                        md="6"
-                        className="mb-3"
-                      >
-                        <Form.Label style={{ color: "#000" }}>
-                          {" "}
-                          Upload CNIC (Front)
-                        </Form.Label>
-                        <Form.Control type="file" required onChange={handleCnicFront} />
-                      </Form.Group>
-                      <Form.Group
-                        controlId="formFile"
-                        as={Col}
-                        md="6"
-                        className="mb-3"
-                      >
-                        <Form.Label style={{ color: "#000" }}>
-                          {" "}
-                          Upload CNIC (back)
-                        </Form.Label>
-                        <Form.Control type="file" required onChange={handleCnicBack} />
-                      </Form.Group>
-                    </Row> */}
-
-                    <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
-                      <Form.Group as={Col} md="12" controlId="validationCustom14" className="mb-2">
+                    <Row className="mb-3 py-3 px-3 shadow shadow-sm form-color-field">
+                      <Form.Group as={Col} md="12" controlId="validationCustom11" className="mb-2">
                         <Form.Label className="fs-6 text-black">My Gender</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
@@ -2313,10 +2537,32 @@ const DriverRegistration = () => {
                           <option value="Female">Female</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom15" className="mb-2">
-                        <Form.Label className="fs-6 text-black">
-                          Preferred gender of travel partner
-                        </Form.Label>
+                      <Form.Group as={Col} md="12" controlId="validationCustom12" className="mb-2">
+
+                        <div className="d-flex justify-content-between align-items-center">
+                          <Form.Label className="fs-6 text-black">
+                            Preferred Gender of Travel Partner
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          // onClick={AddNewStart}
+                          >
+                            <Tooltip title={<h6 className="px-2">{"You can choose the gender of your travel partner based on your comfort level."}</h6>}>
+                              <Link
+                                // to='/notification'
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+
                         <Form.Select
                           aria-label="Default select example"
                           className="text-secondary"
@@ -2332,16 +2578,15 @@ const DriverRegistration = () => {
                       </Form.Group>
                     </Row>
 
-                    <Row className="mb-3 py-3 shadow shadow-sm" style={{ backgroundColor: ' #cddbd9' }}>
-                      <Form.Group as={Col} md="12" controlId="validationCustom16" className="mb-2">
+                    <Row className="mb-3 py-3 px-3  shadow shadow-sm form-color-field">
+                      <Form.Group as={Col} md="12" controlId="validationCustom13" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Year of Birth
                         </Form.Label>
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
-                          <DatePicker
-                            label={
-                              "MM/DD/YY"
-                            }
+                          <DatePicker label={
+                            "MM/DD/YY"
+                          }
                             className="bg-white"
                             slotProps={{ textField: { size: "small", color: "success" } }}
                             sx={{ width: "100%" }}
@@ -2355,7 +2600,7 @@ const DriverRegistration = () => {
 
                       {/* {selectedDate} */}
 
-                      <Form.Group as={Col} md="12" controlId="validationCustom17" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom14" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Martial Status
                         </Form.Label>
@@ -2371,7 +2616,7 @@ const DriverRegistration = () => {
                           <option value="Single">Single</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom18" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom15" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Education
                         </Form.Label>
@@ -2396,7 +2641,7 @@ const DriverRegistration = () => {
                           <option value="Primary">Primary</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom19" className="mb-2">
+                      <Form.Group as={Col} md="12" controlId="validationCustom16" className="mb-2">
                         <Form.Label className="fs-6 text-black">
                           Profession
                         </Form.Label>
@@ -2415,29 +2660,24 @@ const DriverRegistration = () => {
                         )}
                       </Form.Group>
                     </Row>
+                    {/* 
+                    <Row className="mb-3">
+                    </Row> */}
+                    <Row className="mb-3 py-3 px-3 shadow shadow-sm form-color-field">
 
-                    <Row
-                      className="mb-3 py-3 shadow shadow-sm"
-                      style={{ backgroundColor: " #cddbd9" }}
-                    >
-                      <Form.Group
-                        as={Col}
-                        md="12"
-                        controlId="validationCustom20"
-                        className="mb-2"
-                      >
+                      <Form.Group as={Col} md="12" controlId="validationCustom17" className="mb-2">
                         <Form.Label className="fs-6 text-black">CNIC</Form.Label>
                         <Form.Control
                           required
                           type="text"
-                          className={`${isValidCnic ? "" : "is-invalid"}`}
-                          placeholder="12345-1234567-1"
+                          className={`${isValidCnic ? '' : 'is-invalid'}`}
+                          placeholder="1234512345671"
                           value={cnic}
                           onChange={handleCnicChange}
                         />
                         {!isValidCnic && (
                           <div className="invalid-feedback">
-                            Please enter a valid CNIC in the format 12345-1234567-1.
+                            Please enter a valid CNIC without dashes in the format 1234512345671.
                           </div>
                         )}
                       </Form.Group>
@@ -2445,67 +2685,109 @@ const DriverRegistration = () => {
                         controlId="formFile"
                         as={Col}
                         md="12"
-                        className="mb-2"
+                        className="mb-1"
                       >
-                        <Form.Label className="fs-6 text-black">
-                          {" "}
-                          Upload CNIC (front)
-                        </Form.Label>
-                        <Form.Control
-                          type="file"
-                          accept="image/png, image/jpeg"
-                          required
-                          onChange={handleCnicFront}
-                        />
-                        <Form.Text className="text-danger" style={{ color: "#000" }}>
-                          The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                        </Form.Text>
-                      </Form.Group>
-                      <Form.Group
-                        controlId="formFile"
-                        as={Col}
-                        md="12"
-                        className="mb-2"
-                      >
-                        <Form.Label className="fs-6 text-black">
-                          {" "}
-                          Upload CNIC (back)
-                        </Form.Label>
-                        <Form.Control
-                          type="file"
-                          accept="image/png, image/jpeg"
-                          required
-                          onChange={handleCnicBack}
-                        />
-                        <Form.Text className="text-danger" style={{ color: "#000" }}>
-                          The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                        </Form.Text>
-                      </Form.Group>
-                      <Form.Group
-                        controlId="formFile"
-                        as={Col}
-                        md="12"
-                        className="mb-3"
-                      >
-                        <Form.Label className="fs-6 text-black">
-                          Upload Your Picture
-                        </Form.Label>
-                        <Form.Control
-                          type="file"
-                          accept="image/png, image/jpeg"
-                          required
-                          onChange={handlePicture}
-                        />
+                        <div className="d-flex justify-content-between align-items-center pt-1">
+                          <Form.Label className="fs-6 text-black">
+                            {" "}
+                            Upload CNIC (Front)
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
 
-                        <Form.Text
-                          className="text-danger"
-                          style={{ color: "#000" }}
-                        >
-                          The picture will only be shown to members with whom you
-                          agree to commute
-                        </Form.Text>
+                            }}
+
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                              <Link
+
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+
+                        <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFront} />
+
+                      </Form.Group>
+                      <Form.Group
+                        controlId="formFile"
+                        as={Col}
+                        md="12"
+                        className="mb-1"
+                      >
+                        <div className="d-flex justify-content-between align-items-center pt-1">
+                          <Form.Label className="fs-6 text-black">
+                            {" "}
+                            Upload CNIC (Back)
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+
+                            }}
+
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                              <Link
+
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p></div>
+
+                        <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
+
+                      </Form.Group>
+                      <Form.Group
+                        controlId="formFile"
+                        as={Col}
+                        md="12"
+                        className="mb-1"
+                      >
+                        <div className="d-flex justify-content-between align-items-center pt-2">
+                          <Form.Label className="fs-6 text-black">
+                            Upload Your Picture
+                          </Form.Label>
+                          <p
+                            className="colorplace text-danger"
+                            style={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+
+                            }}
+
+                          >
+                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your recent picture in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 5MB."}</h6>}>
+                              <Link
+
+                                className='mx-1 h-15px d-inline-block'
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                              </Link>
+                            </Tooltip>
+
+                          </p>
+                        </div>
+
+                        <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handlePicture} />
+
                       </Form.Group>
                     </Row>
+
                     <Row className=" mb-3 py-3 shadow shadow-sm"
                       style={{ backgroundColor: " #cddbd9" }}>
                       <Form.Group as={Col} md="12" className="mb-2" controlId="validationCustom21">
@@ -2605,7 +2887,10 @@ const DriverRegistration = () => {
               </div >
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
-                  <div className="row shadow" style={{ backgroundColor: '#1F5F5B' }}>
+                  <div
+                    className="row shadow form-color-header"
+                  // style={{ backgroundColor: '#1F5F5B' }}
+                  >
                     <h1
                       className="text-center text-white py-4"
 
@@ -2615,23 +2900,43 @@ const DriverRegistration = () => {
                     </h1>{" "}
                   </div>
 
-                  <Form className="p-3" noValidate validated={validated} onSubmit={handleSubmit}>
+                  <Form
+                    className=" p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}
+                  >
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
-                      >     <h2 className="text-success mb-3 text-center">
+                        className="col-md-12 px-2 py-3 form-color-field"
+                      >
+                        <h2 className="text-success mb-3 text-center">
                           Car Details
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom23" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom18" className="mb-2">
                           <Form.Label className="text-dark fs-6">Car Brand</Form.Label>
-                          <Form.Select
+                          <Form.Control
+                            required
+                            type="text"
+                            className="text-secondary"
+                            value={selectedCarBrand}
+                            onChange={handleCarBrandChange}
+                            error={!isCarBrandValid && selectedCarBrand !== ""}
+                            helperText={
+                              !isCarBrandValid &&
+                              selectedCarBrand !== "" &&
+                              "Please enter a valid 24-digit IBAN."
+                            }
+                            // value={selectedModelName}
+                            // onChange={(e) => setSelectedModelName(e.target.value)}
+                            placeholder="Enter your Car Brand (Honda, Toyota etc)"
+                            defaultValue=""
+                          />
+                          {/* <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
                             value={selectedCarBrand}
                             onChange={handleCarBrandChange}
                             required
-
+                          // isValid={isCarBrandValid}
+                          // isInvalid={!isCarBrandValid}
                           >
                             <option value="" hidden>Car Brand</option>
                             {carBrand?.map((car) => (
@@ -2639,9 +2944,9 @@ const DriverRegistration = () => {
                                 {car.brand_name}
                               </option>
                             ))}
-                          </Form.Select>
+                          </Form.Select> */}
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom24" className="mb-2" >
+                        <Form.Group as={Col} md="12" controlId="validationCustom19" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Model Name
                           </Form.Label>
@@ -2655,7 +2960,7 @@ const DriverRegistration = () => {
                             defaultValue=""
                           />
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom25" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom20" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Manufacturing Year
                           </Form.Label>
@@ -2674,7 +2979,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom26" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom21" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             My Car has AC
                           </Form.Label>
@@ -2685,13 +2990,13 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedCarAC(e.target.value)}
                             required
                           >
-                            <option value="" hidden>AC</option>
+                            <option value="" hidden>Select from Dropdown</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" className="mb-2" controlId="validationCustom27">
-                          <Form.Label className="text-dark fs-6" >
+                        <Form.Group as={Col} md="12" controlId="validationCustom22" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
                             Car CC
                           </Form.Label>
                           <Form.Select
@@ -2709,39 +3014,55 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group
-                          controlId="formFile"
-                          as={Col}
-                          md="12"
-                          className="mb-2"
+                        <Form.Group controlId="formFile" as={Col} md="12"
                         >
-                          <Form.Label className="text-dark fs-6">
-                            Upload Car Image with visible number plate
-                          </Form.Label>
+                          <div className="d-flex justify-content-between align-items-center pt-1">
+                            <Form.Label className="text-dark fs-6">
+                              Upload Car Image with visible number plate
+                            </Form.Label>
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+
+                              }}
+
+                            >
+                              <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your car image in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 5MB."}</h6>}>
+                                <Link
+
+                                  className='mx-1 h-15px d-inline-block'
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                </Link>
+                              </Tooltip>
+
+                            </p></div>
+
                           <Form.Control
                             type="file"
                             accept="image/png, image/jpeg"
-                            className="text-secondary"
                             onChange={handleImageSelect}
                             required
                           />
-                          <Form.Text className="text-danger" style={{ color: "#000" }}>
+                          {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                             The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                          </Form.Text>
+                          </Form.Text> */}
                         </Form.Group>
                       </div>
                     </div>
 
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
                           Car Registration
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
-                          <Form.Label className="text-dark">
+                        <Form.Group as={Col} md="12" controlId="validationCustom23" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
                             Registration Year
                           </Form.Label>
                           <Form.Select
@@ -2759,7 +3080,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        {/* <Form.Group as={Col} md="12" controlId="validationCustom29" className="mb-2">
+                        {/* <Form.Group as={Col} md="12" controlId="validationCustom24" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Car Year Ranges
                           </Form.Label>
@@ -2778,7 +3099,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group> */}
-                        <Form.Group as={Col} md="12" controlId="validationCustom30" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom25" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Registration Number
                           </Form.Label>
@@ -2792,18 +3113,19 @@ const DriverRegistration = () => {
                             defaultValue=""
                           />
                         </Form.Group>
-                      </div></div>
+                      </div>
+                    </div>
 
                     <div className="row mb-3 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
+
                       >
                         <h2 className="text-success mb-3 text-center">
                           Available Seats
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom31" className="mb-2">
-                          <Form.Label className="text-dark fs-6" >
+                        <Form.Group as={Col} md="12" controlId="validationCustom26" className="mb-2">
+                          <Form.Label className="text-dark fs-6">
                             Seats Available
                           </Form.Label>
                           <Form.Select
@@ -2820,7 +3142,7 @@ const DriverRegistration = () => {
                             <option value="4">4</option>
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom32" className="mb-2">
+                        {/* <Form.Group as={Col} md="12" controlId="validationCustom27" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             Seats Available for (Male, Female, Both)
                           </Form.Label>
@@ -2836,10 +3158,10 @@ const DriverRegistration = () => {
                             <option value="Female">Female</option>
                             <option value="Both">Both</option>
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
                       </div></div>
 
-                    <div className="row mb-3 shadow shadow-sm">
+                    {/* <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3"
                         style={{ backgroundColor: "#cddbd9" }}
@@ -2847,8 +3169,7 @@ const DriverRegistration = () => {
                         <h2 className="text-success mb-3 text-center">
                           Route Partner
                         </h2>
-
-                        {/* <Form.Group as={Col} md="12" controlId="validationCustom33" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom28" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             I accept one-route partner
                           </Form.Label>
@@ -2863,9 +3184,9 @@ const DriverRegistration = () => {
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
-                        </Form.Group> */}
+                        </Form.Group>
 
-                        <Form.Group as={Col} md="12" controlId="validationCustom34" className="mb-2">
+                        <Form.Group as={Col} md="12" controlId="validationCustom29" className="mb-2">
                           <Form.Label className="text-dark fs-6">
                             I also accept mid-route partner
                           </Form.Label>
@@ -2881,16 +3202,352 @@ const DriverRegistration = () => {
                             <option value="No">No</option>
                           </Form.Select>
                         </Form.Group>
-
                       </div>
-                    </div>
+                    </div> */}
 
-                    <div className="row " style={{ border: "1px solid #cddbd9" }}>
+
+
+                    <Row >
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#000" }}>Car Brand</Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedCarBrand}
+                          onChange={handleCarBrandChange}
+                          required
+                          isValid={isCarBrandValid}
+                          isInvalid={!isCarBrandValid}
+                        >
+                          <option value="" hidden>Car Brand</option>
+                          {carBrand?.map((car) => (
+                            <option key={car.id} value={car.brand_name}>
+                              {car.brand_name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group> */}
+
+
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#000" }}>
+                          Car Brand
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#000" }}
+                          value={selectedCarBrand}
+                          onChange={(e) => setSelectedCarBrand(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Car Brand</option>
+
+                          {carBrand?.map((car) => (
+                            <option key={car.id} value={car.brand_name}>
+                              {car.brand_name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group> */}
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom02">
+                        <Form.Label style={{ color: "#000" }}>
+                          Model Name
+                        </Form.Label>
+                        <Form.Control
+                          required
+                          type="text"
+                          className="colorplace"
+                          value={selectedModelName}
+                          onChange={(e) => setSelectedModelName(e.target.value)}
+                          placeholder="Car Model"
+                          defaultValue=""
+                        />
+                      </Form.Group> */}
+                    </Row>
+                    <Row >
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#000" }}>
+                          Manufacturing Year
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedManYear}
+                          onChange={(e) => setSelectedManYear(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Manufacturing Year</option>
+                          {manYear?.map((man) => (
+                            <option key={man.id} value={man.car_year_ranges}>
+                              {man.car_year_ranges}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group> */}
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom02">
+                        <Form.Label style={{ color: "#000" }}>
+                          Registration Year
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          style={{ color: "#000" }}
+                          value={selectedRegYear}
+                          onChange={(e) => setSelectedRegYear(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Registration Year</option>
+                          {regYear?.map((reg) => (
+                            <option key={reg.id} value={reg.car_year_ranges}>
+                              {reg.car_year_ranges}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group> */}
+                    </Row>
+
+                    <Row >
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#000" }}>
+                          Registration Car Year Ranges
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedCarYearRanges}
+                          onChange={(e) => setSelectedCarYearRanges(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Select Car Year Ranges</option>
+                          {carYearRanges?.map((man) => (
+                            <option key={man.id} value={man.car_year_ranges}>
+                              {man.car_year_ranges}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group> */}
+                    </Row>
+
+                    {/* {selectedCarYearRanges} */}
+
+                    <Row >
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#000" }}>
+                          Registeration Number
+                        </Form.Label>
+                        <Form.Control
+                          required
+                          type="text"
+                          className="colorplace"
+                          value={selectedRegNumber}
+                          onChange={(e) => setSelectedRegNumber(e.target.value)}
+                          placeholder="Registeration Number"
+                          defaultValue=""
+                        />
+                      </Form.Group> */}
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom02">
+                        <Form.Label style={{ color: "#000" }}>
+                          My Car has AC
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedCarAC}
+                          onChange={(e) => setSelectedCarAC(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>AC</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </Form.Select>
+                      </Form.Group> */}
+                    </Row>
+                    <Row >
+                      {/* <Form.Group
+                        controlId="formFile"
+                        as={Col}
+                        md="6"
+                      >
+                        <Form.Label className="mt-3" style={{ color: "#000" }}>
+                          Upload Car Image with visible number plate
+                        </Form.Label>
+                        <Form.Control
+                          type="file"
+                          onChange={handleImageSelect}
+                          required
+                        />
+                      </Form.Group> */}
+                      {/* <Form.Group as={Col} md="6" className="mb-3" controlId="validationCustom02">
+                        <Form.Label className="mt-3" style={{ color: "#000" }}>
+                          Car CC
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedCarCC}
+                          onChange={(e) => setSelectedCarCC(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Select Car CC</option>
+                          {carCC?.map((car) => (
+                            <option key={car.id} value={car.car_cc}>
+                              {car.car_cc}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group> */}
+                    </Row>
+
+                    {/* {selectedCarCC} */}
+
+                    <Row >
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#000" }}>
+                          Seats Available
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedSeat}
+                          onChange={(e) => setSelectedSeat(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Seats Available</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </Form.Select>
+                      </Form.Group> */}
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom02">
+                        <Form.Label style={{ color: "#000" }}>
+                          Seats Available for (Male, Female, Both)
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedSeatGender}
+                          onChange={(e) => setSelectedSeatGender(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>Seats Available</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Both">Both</option>
+                        </Form.Select>
+                      </Form.Group> */}
+                    </Row>
+                    <Row >
+
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#000" }}>
+                          I accept one-route partner
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedOneRoutePartner}
+                          onChange={(e) => setSelectedOneRoutePartner(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>I accept one-route partner</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </Form.Select>
+                      </Form.Group> */}
+
+                      {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
+                        <Form.Label style={{ color: "#000" }}>
+                          I also accept mid-route partner
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+
+                          value={selectedMidRoutePartner}
+                          onChange={(e) => setSelectedMidRoutePartner(e.target.value)}
+                          required
+                        >
+                          <option value="" hidden>I also accept mid-route partner</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                        </Form.Select>
+                      </Form.Group> */}
+
+                    </Row>
+                    {/* <div className="tab">
+                      <div className="container">
+                        <div className="row justify-content-center">
+                          <div className="col-lg-12">
+                            <div className="card text-center" >
+                              <div className="card-body">
+                                <h5 className="card-title">Bank/Payment Details</h5>
+                                <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                                <div class="container">
+                                  <img src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
+                                  <img src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
+                                  <img src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
+                                  <img src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+                                </div>
+                                <form id="paymentForm">
+                                  <div className="mt-4">
+                                    <input
+                                      type="text"
+                                      className="form-control mb-2 colorplace"
+                                      id="bankAccount"
+                                      name="bankAccount"
+                                      placeholder="Bank Account (IBAN)"
+                                      value={inputBankAccount}
+                                      onChange={(e) => setInputBankAccount(e.target.value)}
+                                      required
+                                    />
+                                  </div>
+                                  <div>
+                                    <input
+                                      type="text"
+                                      className="form-control mb-2 colorplace"
+                                      id="jazzCashAccount"
+                                      name="jazzCashAccount"
+                                      placeholder="Jazz Cash Account Number"
+                                      value={inputJazzCash}
+                                      onChange={(e) => setInputJazzCash(e.target.value)}
+                                      required
+                                    />
+                                  </div>
+                                  <div>
+                                    <input
+                                      type="text"
+                                      className="form-control mb-2 colorplace"
+                                      id="easypaisaAccount"
+                                      name="easypaisaAccount"
+                                      placeholder="EasyPaisa Account Number"
+                                      value={inputEasyPaisa}
+                                      onChange={(e) => setInputEasyPaisa(e.target.value)}
+                                      required
+                                    />
+                                  </div>
+                                  <div>
+                                    <input
+                                      type="text"
+                                      className="form-control mb-2 colorplace"
+                                      id="raastID"
+                                      name="raastID"
+                                      placeholder="Raast ID"
+                                      value={inputRaastID}
+                                      onChange={(e) => setInputRaastID(e.target.value)}
+                                    />
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> */}
+                    <div className="row" style={{ border: "1px solid #cddbd9" }}>
                       <div className="col">
-                        <div className="container text-center d-flex justify-content-center py-2 flex-wrap">
+                        <div className="container text-center d-flex justify-content-center  flex-wrap py-2">
                           <Button
                             variant="outlined"
-                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1 fw-bold`}
+                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"} py-2 btn-toogle  mx-2 mt-1 fw-bold`}
                             onClick={() => {
                               setshowmyself(true);
                               setshowmydriver(false);
@@ -2900,7 +3557,7 @@ const DriverRegistration = () => {
                             }}
                             data-toggle="buttons"
                           >
-                            I Driver MySelf
+                            I Drive MySelf
                           </Button>
                           <Button
                             variant="outlined"
@@ -2940,16 +3597,23 @@ const DriverRegistration = () => {
                       <>
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3"
-                            style={{ backgroundColor: "#cddbd9" }}
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
-                            <h2 className="text-success mb-3 text-center">
-                              Driving License Details
-                            </h2>
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom35" className="mb-2"
+                              controlId="validationCustom30"
+                              className="mb-2"
+                            >
+                              <h2 className="text-success mb-3 text-center">
+                                Driving License Details
+                              </h2>
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom31"
+                              className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
                                 Driving License No.
@@ -2960,14 +3624,24 @@ const DriverRegistration = () => {
                                 className="text-secondary"
                                 placeholder="License No."
                                 value={inputDrivingLicenseMySelf}
-                                onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
+                                // onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
                                 defaultValue=""
+                                onChange={handleDrivingLicenseMySelf}
+                                error={!isLicenseValid && inputDrivingLicenseMySelf !== ""}
+                                helperText={
+                                  !isLicenseValid &&
+                                  inputDrivingLicenseMySelf !== "" &&
+                                  "Please enter a valid License No."
+                                }
                               />
+
                             </Form.Group>
+
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom36" className="mb-2"
+                              controlId="validationCustom32"
+                              className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
                                 Valid Upto
@@ -2985,29 +3659,21 @@ const DriverRegistration = () => {
                                   disablePast
                                 />
                               </LocalizationProvider>
-                              {/* <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Enter Here"
-                              value={inputValidUptoMySelf}
-                              onChange={(e) => setInputValidUptoMySelf(e.target.value)}
-                              defaultValue=""
-                            /> */}
                             </Form.Group>
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom37" className="mb-2"
+                              controlId="validationCustom33"
+                              className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Place of Issued
+                              <Form.Label text-dark fs-6>
+                                Place of Issue
                               </Form.Label>
                               <Form.Control
                                 required
                                 type="text"
                                 className="text-secondary"
-                                placeholder="Enter Here"
+                                placeholder="Place of issue"
                                 value={inputPlaceIssueMySelf}
                                 onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
                                 defaultValue=""
@@ -3016,50 +3682,185 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom38"
+                              controlId="validationCustom34"
                               className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Upload License (front)
-                              </Form.Label>
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
-                                The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
-                            </Form.Group>
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Front)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
 
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                                The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                              </Form.Text> */}
+                            </Form.Group>
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom39"
+                              controlId="validationCustom35"
                               className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Upload License (back)
-                              </Form.Label>
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Back)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                           </div></div>
+                        {/* <Row className="mb-3 mt-3">
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Driving Licence No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="colorplace"
+                              placeholder="License No."
+                              value={inputDrivingLicenseMySelf}
+                              onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                        </Row> */}
+                        {/* <Row className="mb-3">
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Valid Upto
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="colorplace"
+                              placeholder="Enter Here"
+                              value={inputValidUptoMySelf}
+                              onChange={(e) => setInputValidUptoMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                        </Row> */}
+                        {/* <Row className="mb-3 mt-3">
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Place Issued
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="colorplace"
+                              placeholder="Enter Here"
+                              value={inputPlaceIssueMySelf}
+                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                        </Row> */}
+
+                        {/* <Row className="mb-3">
+                          <Form.Group
+                            as={Col}
+                            md="6"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Upload License (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="6"
+                            controlId="validationCustom02"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Upload License (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                          </Form.Group>
+                        </Row> */}
+
                       </>
                     )}
 
                     {showmydriver && (
                       <>
+
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3"
-                            style={{ backgroundColor: "#cddbd9" }}
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
-                            <h2 className="text-success mb-3 text-center">
-                              Driver's Details
-                            </h2>
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom40" className="mb-2"
+                              controlId="validationCustom36"
+                              className="mb-2"
+                            >
+                              <h2 className="text-success mb-3 text-center">
+                                Driver's Details
+                              </h2>
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom37"
+                              className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
                                 Name
@@ -3077,7 +3878,8 @@ const DriverRegistration = () => {
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom41" className="mb-2"
+                              controlId="validationCustom38"
+                              className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
                                 CNIC
@@ -3085,53 +3887,114 @@ const DriverRegistration = () => {
                               <Form.Control
                                 required
                                 type="text"
-                                className="text-secondary"
-                                placeholder="CNIC: xxxxxxxxxxxxx"
+                                className={`${isValidCnic1 ? '' : 'is-invalid'}`}
+                                placeholder="1234512345671"
                                 value={inputDriverCnicNumber}
-                                onChange={(e) => setInputDriverCnicNumber(e.target.value)}
-                                defaultValue=""
-                                maxLength={13}
+                                // onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                                onChange={handleCnicChange1}
+                              // defaultValue=""
+                              // maxLength={13}
                               />
+                              {!isValidCnic1 && (
+                                <div className="invalid-feedback">
+                                  Please enter a valid CNIC without dashes in the format 1234512345671.
+                                </div>
+                              )}
                             </Form.Group>
+
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom42" className="mb-2"
+                              controlId="validationCustom39"
+                              className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Upload CNIC (front)
-                              </Form.Label>
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload CNIC (Front)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom43" className="mb-2"
+                              controlId="validationCustom40"
+                              className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Upload CNIC (back)
-                              </Form.Label>
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark">
+                                  Upload CNIC (Back)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                           </div></div>
+
                         <div className="row mb-3 mt-2 shadow shadow-sm">
                           <div
-                            className="col-md-12 px-2 py-3"
-                            style={{ backgroundColor: "#cddbd9" }}
+                            className="col-md-12 px-2 py-3 form-color-field"
                           >
-                            <h2 className="text-success mb-3 text-center">
-                              License Details
-                            </h2>
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom44" className="mb-2"
+                              controlId="validationCustom41"
+                              className="mb-2"
+                            >
+                              <h2 className="text-success mb-3 text-center">
+                                License Details
+                              </h2>
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom42"
+                              className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
                                 Driving License No.
@@ -3146,11 +4009,11 @@ const DriverRegistration = () => {
                                 defaultValue=""
                               />
                             </Form.Group>
-
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom45" className="mb-2"
+                              controlId="validationCustom43"
+                              className="mb-2"
                             >
                               <Form.Label className="text-dark fs-6">
                                 Valid Upto
@@ -3169,76 +4032,113 @@ const DriverRegistration = () => {
                                 />
                               </LocalizationProvider>
                               {/* <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Enter Here"
-                              value={inputDriverValidUpto}
-                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
-                              defaultValue=""
-                            /> */}
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Enter Here"
+                                value={inputDriverValidUpto}
+                                onChange={(e) => setInputDriverValidUpto(e.target.value)}
+                                defaultValue=""
+                              /> */}
                             </Form.Group>
-                            <Form.Group
+                            {/* <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom46" className="mb-2"
+                              controlId="validationCustom33"
+                              className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Place of Issued
+                              <Form.Label text-dark fs-6>
+                                Place of Issue
                               </Form.Label>
                               <Form.Control
                                 required
                                 type="text"
                                 className="text-secondary"
-                                placeholder="Enter Here"
+                                placeholder="Place of issue"
                                 value={inputPlaceIssueMySelf}
                                 onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
                                 defaultValue=""
                               />
-                            </Form.Group>
+                            </Form.Group> */}
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom47" className="mb-2"
+                              controlId="validationCustom44"
+                              className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Upload License (front)
-                              </Form.Label>
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Front)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
                             <Form.Group
                               as={Col}
                               md="12"
-                              controlId="validationCustom48" className="mb-2"
+                              controlId="validationCustom45"
+                              className="mb-2"
                             >
-                              <Form.Label className="text-dark fs-6">
-                                Upload License (back)
-                              </Form.Label>
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Back)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-                              <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                              </Form.Text>
+                              </Form.Text> */}
                             </Form.Group>
-                          </div>
-                        </div>
-                      </>
-                    )}
-                    {showboth && (<>
-                      <div className="row mb-3 mt-2 shadow shadow-sm">
-                        <div
-                          className="col-md-12 px-2 py-3"
-                          style={{ backgroundColor: "#cddbd9" }}
-                        >
-                          <h2 className="text-success mb-3 text-center">
-                            Driver's Details
-                          </h2>
+                          </div></div>
+                        {/* <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom49" className="mb-2"
+                            controlId="validationCustom01"
+                            className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
                               Name
@@ -3256,7 +4156,8 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom50" className="mb-2"
+                            controlId="validationCustom01"
+                            className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
                               CNIC
@@ -3275,44 +4176,134 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom51" className="mb-2"
+                            controlId="validationCustom01"
+                            className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
                               Upload CNIC (front)
                             </Form.Label>
-                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
-                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
                           </Form.Group>
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom52" className="mb-2"
+                            controlId="validationCustom02"
+                            className="mb-2"
                           >
-                            <Form.Label className="text-dark fs-6">
+                            <Form.Label className="text-dark">
                               Upload CNIC (back)
                             </Form.Label>
-                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
-                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
                           </Form.Group>
-                        </div>
-                      </div>
+                        </Row> */}
 
-                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                        <Row className="">
+                          {/* <Form.Group
+                            as={Col}
+                            md="6"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Upload CNIC (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                          </Form.Group> */}
+                          {/* <Form.Group
+                            as={Col}
+                            md="6"
+                            controlId="validationCustom02"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Upload CNIC (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                          </Form.Group> */}
+                        </Row>
+                        <Row className="">
+                          {/* <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Driving Licence No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="colorplace"
+                              placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group> */}
+                        </Row>
+                        <Row className="">
+                          {/* <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Valid Upto
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="colorplace"
+                              placeholder="Enter Here"
+                              value={inputDriverValidUpto}
+                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group> */}
+                        </Row>
+                        <Row className="">
+                          {/* <Form.Group
+                            as={Col}
+                            md="6"
+                            controlId="validationCustom01"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Upload License (front)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseFrontDriver} />
+                          </Form.Group> */}
+                          {/* <Form.Group
+                            as={Col}
+                            md="6"
+                            controlId="validationCustom02"
+                          >
+                            <Form.Label style={{ color: "#000" }}>
+                              Upload License (back)
+                            </Form.Label>
+                            <Form.Control type="file" required onChange={handleLicenseBackDriver} />
+                          </Form.Group> */}
+                        </Row>
+                      </>
+                    )}
+                    {showboth && (<>
+
+                      {/* <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
-                          className="col-md-12 px-2 py-3"
-                          style={{ backgroundColor: "#cddbd9" }}
+                          className="col-md-12 px-2 py-3 form-color-field"
                         >
-                          <h2 className="text-success mb-3 text-center">
-                            Driver's License Details
-                          </h2>
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom53" className="mb-2"
+                            controlId="validationCustom50"
+                            className="mb-2"
+                          >
+                            <h2 className="text-success mb-3 text-center">
+                              My Driver Details
+                            </h2>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom51"
+                            className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
                               Driving License No.
@@ -3330,7 +4321,448 @@ const DriverRegistration = () => {
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom54" className="mb-2"
+                            controlId="validationCustom52"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Valid Upto
+                            </Form.Label>
+                            <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputDriverValidUpto}
+                                  onChange={handleValidDriverChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
+                        
+                          </Form.Group>
+                          <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom33"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place of Issue
+                              </Form.Label>
+                              <Form.ControlEarning
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Place of issue"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom53"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (front)
+                            </Form.Label>
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                        </Form.Text>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom54"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Upload License (back)
+                            </Form.Label>
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                          </Form.Group>
+                        </div></div> */}
+                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                        <div
+                          className="col-md-12 px-2 py-3 form-color-field"
+                        >
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom30"
+                            className="mb-2"
+                          >
+                            <h2 className="text-success mb-3 text-center">
+                              I Drive MySelf License Details
+                            </h2>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom31"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Driving License No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="License No."
+                              value={inputDrivingLicenseMySelf}
+                              onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom32"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Valid Upto
+                            </Form.Label>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DatePicker
+                                label={"MM/DD/YY"}
+                                className="bg-white"
+                                slotProps={{
+                                  textField: { size: "small", color: "success" },
+                                }}
+                                sx={{ width: "100%" }}
+                                value={inputValidUptoMySelf}
+                                onChange={handleValidChange}
+                                disablePast
+                              />
+                            </LocalizationProvider>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom33"
+                            className="mb-2"
+                          >
+                            <Form.Label text-dark fs-6>
+                              Place of Issue
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Place of issue"
+                              value={inputPlaceIssueMySelf}
+                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom34"
+                            className="mb-2"
+                          >
+                            <div className="d-flex justify-content-between align-items-center pt-1">
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (Front)
+                              </Form.Label>
+                              <p
+                                className="colorplace text-danger"
+                                style={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+
+                                }}
+
+                              >
+                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Link
+
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                  </Link>
+                                </Tooltip>
+
+                              </p></div>
+
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                            </Form.Text> */}
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom35"
+                            className="mb-2"
+                          >
+                            <div className="d-flex justify-content-between align-items-center pt-1">
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (Back)
+                              </Form.Label>
+                              <p
+                                className="colorplace text-danger"
+                                style={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+
+                                }}
+
+                              >
+                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Link
+
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                  </Link>
+                                </Tooltip>
+
+                              </p></div>
+
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                            </Form.Text> */}
+                          </Form.Group>
+                        </div></div>
+                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                        <div
+                          className="col-md-12 px-2 py-3 form-color-field"
+                        >
+
+
+                          <h2 className="text-success mb-3 text-center">
+                            My Driver's Details
+                          </h2>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom46"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Name
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="Name"
+                              value={inputDriverName}
+                              onChange={(e) => setInputDriverName(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom38"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              CNIC
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className={`${isValidCnic1 ? '' : 'is-invalid'}`}
+                              placeholder="1234512345671"
+                              value={inputDriverCnicNumber}
+                              // onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                              onChange={handleCnicChange1}
+                            // defaultValue=""
+                            // maxLength={13}
+                            />
+                            {!isValidCnic1 && (
+                              <div className="invalid-feedback">
+                                Please enter a valid CNIC without dashed in the format 1234512345671.
+                              </div>
+                            )}
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom48"
+                            className="mb-2"
+                          >
+                            <div className="d-flex justify-content-between align-items-center pt-1">
+                              <Form.Label className="text-dark fs-6">
+                                Upload CNIC (Front)
+                              </Form.Label>
+                              <p
+                                className="colorplace text-danger"
+                                style={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+
+                                }}
+
+                              >
+                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Link
+
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                  </Link>
+                                </Tooltip>
+
+                              </p></div>
+
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                            </Form.Text> */}
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom49"
+                            className="mb-2"
+                          >
+                            <div className="d-flex justify-content-between align-items-center pt-1">
+                              <Form.Label className="text-dark">
+                                Upload CNIC (Back)
+                              </Form.Label>
+                              <p
+                                className="colorplace text-danger"
+                                style={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+
+                                }}
+
+                              >
+                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Link
+
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                  </Link>
+                                </Tooltip>
+
+                              </p></div>
+
+                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                            </Form.Text> */}
+                          </Form.Group>
+                        </div></div>
+                      {/* <Row className="mb-3 mt-3">
+                        <Form.Group
+                          as={Col}
+                          md="6"
+                          controlId="validationCustom01"
+                        >
+                          <Form.Label style={{ color: "#000" }}>
+                            Name
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            type="text"
+                            className="colorplace"
+                            placeholder="Name"
+                            value={inputDriverName}
+                            onChange={(e) => setInputDriverName(e.target.value)}
+                            defaultValue=""
+                          />
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="6"
+                          controlId="validationCustom01"
+                        >
+                          <Form.Label style={{ color: "#000" }}>
+                            CNIC
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            type="text"
+                            className="colorplace"
+                            placeholder="CNIC: xxxxxxxxxxxxx"
+                            value={inputDriverCnicNumber}
+                            onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                            defaultValue=""
+                            maxLength={13}
+                          />
+                        </Form.Group>
+                      </Row>
+
+                      <Row className="mb-3">
+                        <Form.Group
+                          as={Col}
+                          md="6"
+                          controlId="validationCustom01"
+                        >
+                          <Form.Label style={{ color: "#000" }}>
+                            Upload CNIC (front)
+                          </Form.Label>
+                          <Form.Control type="file" required onChange={handleCnicFrontDriver} />
+                        </Form.Group>
+                        <Form.Group
+                          as={Col}
+                          md="6"
+                          controlId="validationCustom02"
+                        >
+                          <Form.Label style={{ color: "#000" }}>
+                            Upload CNIC (back)
+                          </Form.Label>
+                          <Form.Control type="file" required onChange={handleCnicBackDriver} />
+                        </Form.Group>
+                      </Row> */}
+
+                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                        <div
+                          className="col-md-12 px-2 py-3 form-color-field"
+                        >
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom50"
+                            className="mb-2"
+                          >
+                            <h2 className="text-success mb-3 text-center">
+                              My Driver's License Details
+                            </h2>
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom51"
+                            className="mb-2"
+                          >
+                            <Form.Label className="text-dark fs-6">
+                              Driving License No.
+                            </Form.Label>
+                            <Form.Control
+                              required
+                              type="text"
+                              className="text-secondary"
+                              placeholder="License No."
+                              value={inputDriverLicenseNumber}
+                              onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                              defaultValue=""
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            as={Col}
+                            md="12"
+                            controlId="validationCustom52"
+                            className="mb-2"
                           >
                             <Form.Label className="text-dark fs-6">
                               Valid Upto
@@ -3358,125 +4790,385 @@ const DriverRegistration = () => {
                               defaultValue=""
                             /> */}
                           </Form.Group>
+                          {/* <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom33"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place of Issue
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Place of issue"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group> */}
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom55" className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Place of Issued
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Enter Here"
-                              value={inputPlaceIssueMySelf}
-                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom56"
+                            controlId="validationCustom53"
                             className="mb-2"
                           >
-                            <Form.Label className="text-dark fs-6">
-                              Upload License (front)
-                            </Form.Label>
+                            <div className="d-flex justify-content-between align-items-center pt-1">
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (Front)
+                              </Form.Label>
+                              <p
+                                className="colorplace text-danger"
+                                style={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+
+                                }}
+
+                              >
+                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Link
+
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                  </Link>
+                                </Tooltip>
+
+                              </p></div>
+
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
+                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
+                            </Form.Text> */}
                           </Form.Group>
                           <Form.Group
                             as={Col}
                             md="12"
-                            controlId="validationCustom57"
+                            controlId="validationCustom54"
                             className="mb-2"
                           >
-                            <Form.Label className="text-dark fs-6">
-                              Upload License (back)
-                            </Form.Label>
+                            <div className="d-flex justify-content-between align-items-center pt-1">
+                              <Form.Label className="text-dark fs-6">
+                                Upload License (Back)
+                              </Form.Label>
+                              <p
+                                className="colorplace text-danger"
+                                style={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+
+                                }}
+
+                              >
+                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Link
+
+                                    className='mx-1 h-15px d-inline-block'
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                  </Link>
+                                </Tooltip>
+
+                              </p></div>
+
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-                            <Form.Text className="text-danger" style={{ color: "#000" }}>
-                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text>
                           </Form.Group>
-                        </div></div>
+                        </div>
+                      </div>
+
+
+
                     </>)
                     }
-
-                    <div className="row mb-3 mt-3 shadow shadow-sm">
+                    <div className="row mb-3 mt-2 shadow shadow-sm">
                       <div
-                        className="col-md-12 px-2 py-3"
-                        style={{ backgroundColor: "#cddbd9" }}
+                        className="col-md-12 px-2 py-3 form-color-field"
                       >
                         <h2 className="text-success mb-3 text-center">
-                          Bank/Payment Details
+                          Bank/Payment Details <Tooltip title={<h6 className="px-2">{"You can add or update your preferred payment method from your profile page."}</h6>}>
+                            <Link
+                              // to='/notification'
+                              className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                            </Link>
+                          </Tooltip>
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID. Atleast one field must be filled. </p>
+                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID.<br /> <span
+                          style={{
+                            color: "#198754",
+                            textDecoration: "none",
+                            textAlign: "center",
+                            cursor: "pointer"
+
+                          }}
+                          className="fw-bold  "
+
+                        ><div className="text-center px-4">
+                            <p className="text-center" onClick={openPopup}> Why Process Payment through CommuterLink?</p>
+
+
+                            <p
+                              className="colorplace text-danger"
+                              style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+
+                              }}
+                            // onClick={AddNewStart}
+                            >
+
+
+                            </p>
+                          </div>
+                        </span><Link
+
+                          style={{ textDecoration: "none" }}
+                        >
+
+                          </Link> </p>
                         <div class="container text-center">
                           <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
-
-                          <form id="paymentForm">
-                            <div className="mt-4">
-                              <input
-                                type="text"
-                                className="form-control mb-2 text-secondary"
-                                id="bankAccount"
-                                name="bankAccount"
-                                placeholder="Bank Account (IBAN)"
-                                value={inputBankAccount}
-                                onChange={(e) => setInputBankAccount(e.target.value)}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <input
-                                type="text"
-                                className="form-control mb-2 text-secondary"
-                                id="jazzCashAccount"
-                                name="jazzCashAccount"
-                                placeholder="Jazz Cash Account Number"
-                                value={inputJazzCash}
-                                onChange={(e) => setInputJazzCash(e.target.value)}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <input
-                                type="text"
-                                className="form-control mb-2 text-secondary"
-                                id="easypaisaAccount"
-                                name="easypaisaAccount"
-                                placeholder="EasyPaisa Account Number"
-                                value={inputEasyPaisa}
-                                onChange={(e) => setInputEasyPaisa(e.target.value)}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <input
-                                type="text"
-                                className="form-control mb-2 text-secondary"
-                                id="raastID"
-                                name="raastID"
-                                placeholder="Raast ID"
-                                value={inputRaastID}
-                                onChange={(e) => setInputRaastID(e.target.value)}
-                              />
-                            </div>
-                          </form>
                         </div>
 
-                      </div>
-                    </div>
+                        {/* <form id="paymentForm">
+                          <div className="mt-2 px-3">
+                            <TextField
+                              type="text"
+                              className="form-control"
+                              id="bankAccount"
+                              size="small"
+                              name="bankAccount"
+                              placeholder="Bank Account (IBAN-24 Character)"
+                              value={inputBankAccount}
+                              onChange={handleInputChange}
+                              error={!isIBANValid && inputBankAccount !== ""}
+                              helperText={
+                                !isIBANValid &&
+                                inputBankAccount !== "" &&
+                                "Please enter a valid 24-digit IBAN."
+                              }
+                            />
+                           
 
+                          </div>
+                          <div className="mt-2 px-3">
+                            <TextField
+                              type="text"
+                              className="form-control"
+                              id="jazzCashAccount"
+                              name="jazzCashAccount"
+                              size="small"
+                              placeholder="Jazz Cash Account Number"
+                              value={inputJazzCash}
+                              // onChange={(e) => c(e.target.value)}
+                              // required
+                              onChange={(e) => {
+                                if (/^\d{0,11}$/.test(e.target.value)) {
+                                  setInputJazzCash(e.target.value);
+                                  validateJazzCash(e.target.value);
+                                }
+
+                              }}
+                              error={!isValidJazzCash && inputJazzCash !== ""}
+                              helperText={
+                                !isValidJazzCash &&
+                                inputJazzCash !== "" &&
+                                "Please enter a valid Account Number starting with '03' and having 11 digits."
+                              }
+
+                            />
+                          </div>
+                          <div className="mt-2 px-3">
+                            <TextField
+                              type="text"
+                              className="form-control mb-2 text-secondary"
+                              id="easypaisaAccount"
+                              size="small"
+                              name="easypaisaAccount"
+                              placeholder="EasyPaisa Account Number"
+                              value={inputEasyPaisa}
+                              // onChange={(e) => setInputEasyPaisa(e.target.value)}
+                              // required
+                              onChange={(e) => {
+                                if (/^\d{0,11}$/.test(e.target.value)) {
+                                  setInputEasyPaisa(e.target.value);
+                                  validateEasyPaisa(e.target.value);
+                                }
+
+                              }}
+                              error={!isValidEasyPaisa && inputEasyPaisa !== ""}
+                              helperText={
+                                !isValidEasyPaisa &&
+                                inputEasyPaisa !== "" &&
+                                "Please enter a valid Account Number starting with '03' and having 11 digits."
+                              }
+                            />
+                          </div>
+                          <div className="mt-2 px-3">
+                            <TextField
+                              type="text"
+                              className="form-control mb-2"
+                              id="raastID"
+                              size="small"
+                              name="raastID"
+                              placeholder="Raast ID"
+                              value={inputRaastID}
+                              // onChange={(e) => setInputRaastID(e.target.value)}
+                              onChange={(e) => {
+                                if (/^\d{0,11}$/.test(e.target.value)) {
+                                  setInputRaastID(e.target.value);
+                                  validateRaastID(e.target.value);
+                                }
+
+                              }}
+                              error={!isValidRaastID && inputRaastID !== ""}
+                              helperText={
+                                !isValidRaastID &&
+                                inputRaastID !== "" &&
+                                "Please enter a valid Account Number starting with '03' and having 11 digits."
+                              }
+                            />
+                          </div>
+
+                        </form> */}
+                        <form id="paymentForm">
+                          <div className="mt-2 px-1">
+                            <Form.Group as={Col} md="12" className="mb-2">
+                              <Form.Label className="text-dark fs-6">
+                                Select any payment method
+                              </Form.Label>
+                              <Form.Select aria-label="Default select example"
+                                className="text-secondary" value={selectedOption} onChange={handleOptionChange}>
+                                <option value="">Select an option</option>
+                                <option value="bankAccount">Bank Account</option>
+                                <option value="jazzCashAccount">Jazz Cash Account</option>
+                                <option value="easypaisaAccount">EasyPaisa Account</option>
+                                <option value="raastID">Raast ID</option>
+                              </Form.Select>
+                              {selectedOption === 'bankAccount' && (
+                                <div className="mt-2">
+                                  {/* Bank Account input field */}
+                                  <TextField
+                                    type="text"
+                                    // className={`form-control mb-2 text-secondary ${isIBANValid ? '' : 'is-invalid'}`}
+                                    className="form-control"
+                                    id="bankAccount"
+                                    size="small"
+                                    name="bankAccount"
+                                    placeholder="Bank Account (IBAN-24 Character)"
+                                    value={inputBankAccount}
+                                    onChange={handleInputChange}
+                                    error={!isIBANValid && inputBankAccount !== ""}
+                                    helperText={
+                                      !isIBANValid &&
+                                      inputBankAccount !== "" &&
+                                      "Please enter a valid 24-digit IBAN."
+                                    }
+                                  />
+                                </div>
+                              )}
+                              {selectedOption === 'jazzCashAccount' && (
+                                <div className="mt-2">
+                                  {/* Jazz Cash Account input field */}
+                                  <TextField
+                                    type="text"
+                                    className="form-control"
+                                    id="jazzCashAccount"
+                                    name="jazzCashAccount"
+                                    size="small"
+                                    placeholder="Jazz Cash Account Number"
+                                    value={inputJazzCash}
+                                    // onChange={(e) => c(e.target.value)}
+                                    // required
+                                    onChange={(e) => {
+                                      if (/^\d{0,11}$/.test(e.target.value)) {
+                                        setInputJazzCash(e.target.value);
+                                        validateJazzCash(e.target.value);
+                                      }
+
+                                    }}
+                                    error={!isValidJazzCash && inputJazzCash !== ""}
+                                    helperText={
+                                      !isValidJazzCash &&
+                                      inputJazzCash !== "" &&
+                                      "Please enter a valid Account Number starting with '03' and having 11 digits."
+                                    }
+
+                                  />
+                                </div>
+                              )}
+                              {selectedOption === 'easypaisaAccount' && (
+                                <div className="mt-2">
+                                  {/* EasyPaisa Account input field */}
+                                  <TextField
+                                    type="text"
+                                    className="form-control  text-secondary"
+                                    id="easypaisaAccount"
+                                    size="small"
+                                    name="easypaisaAccount"
+                                    placeholder="EasyPaisa Account Number"
+                                    value={inputEasyPaisa}
+                                    // onChange={(e) => setInputEasyPaisa(e.target.value)}
+                                    // required
+                                    onChange={(e) => {
+                                      if (/^\d{0,11}$/.test(e.target.value)) {
+                                        setInputEasyPaisa(e.target.value);
+                                        validateEasyPaisa(e.target.value);
+                                      }
+
+                                    }}
+                                    error={!isValidEasyPaisa && inputEasyPaisa !== ""}
+                                    helperText={
+                                      !isValidEasyPaisa &&
+                                      inputEasyPaisa !== "" &&
+                                      "Please enter a valid Account Number starting with '03' and having 11 digits."
+                                    }
+                                  />
+                                </div>
+                              )}
+                              {selectedOption === 'raastID' && (
+                                <div className="mt-2">
+                                  {/* Raast ID input field */}
+                                  <TextField
+                                    type="text"
+                                    className="form-control"
+                                    id="raastID"
+                                    size="small"
+                                    name="raastID"
+                                    placeholder="Raast ID"
+                                    value={inputRaastID}
+                                    // onChange={(e) => setInputRaastID(e.target.value)}
+                                    onChange={(e) => {
+                                      if (/^\d{0,11}$/.test(e.target.value)) {
+                                        setInputRaastID(e.target.value);
+                                        validateRaastID(e.target.value);
+                                      }
+
+                                    }}
+                                    error={!isValidRaastID && inputRaastID !== ""}
+                                    helperText={
+                                      !isValidRaastID &&
+                                      inputRaastID !== "" &&
+                                      "Please enter a valid Account Number starting with '03' and having 11 digits."
+                                    }
+                                  />
+                                </div>
+                              )}
+
+                            </Form.Group>
+                          </div>
+                        </form>
+                      </div></div>
                     <Stack
                       direction="row"
                       className="mb-4 mt-3"
@@ -3496,7 +5188,6 @@ const DriverRegistration = () => {
                         variant=""
                         className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                         onClick={() => {
-                          handleLogin();
                           handleDriver();
                         }}
                         disabled={isLoading}

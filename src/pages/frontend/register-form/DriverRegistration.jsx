@@ -255,6 +255,7 @@ const DriverRegistration = () => {
   const [inputDriverValidUpto, setInputDriverValidUpto] = useState(null);
   const inputDriverValidUptoFormat = inputDriverValidUpto ? inputDriverValidUpto.format('DD-MM-YYYY') : '';
   const [isIBANValid, setIsIBANValid] = useState(true);
+  
   // For License Fields
   const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
   const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] = useState("");
@@ -513,12 +514,14 @@ const DriverRegistration = () => {
     setLocationStartStringField("");
     setProvinceStartId(event.target.value);
   };
+
   function validateProfession(profession) {
     // A simple regular expression to match alphabetic characters and spaces
     const professionPattern = /^[A-Za-z\s]+$/;
 
     return professionPattern.test(profession);
   }
+
   const handleProfessionChange = (e) => {
     const newProfession = e.target.value;
     setProfession(newProfession);
@@ -549,6 +552,7 @@ const DriverRegistration = () => {
     setAddNewStartField(false);
     handleShowStartModal();
   };
+  
   const validateJazzCash = (inputJazzCash) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
     const phonePattern = /^03\d{9}$/;
@@ -560,6 +564,7 @@ const DriverRegistration = () => {
       setIsValidJazzCash(false);
     }
   };
+
   const handleLocationStartField = (e) => {
     setLocationStartStringField(e.target.value);
     setLocationStartString(e.target.value);
@@ -782,6 +787,7 @@ const DriverRegistration = () => {
 
     return cnicPattern.test(cnic);
   }
+
   const handleCnicChange = (event) => {
     const inputCnic = event.target.value.replace(/\D/g, '');
 
@@ -797,12 +803,14 @@ const DriverRegistration = () => {
       setIsValidCnic(validateCnic(formattedCnic));
     }
   };
+
   function validateCnic1(inputDriverCnicNumber) {
     // Regular expression pattern for validating Pakistani CNIC (12345-1234567-1)
     const cnicPattern = /^[0-9]{5}-[0-9]{7}-[0-9]{1}$/;
 
     return cnicPattern.test(inputDriverCnicNumber);
   }
+
   const handleCnicChange1 = (event) => {
     const inputCnic = event.target.value.replace(/\D/g, '');
 
@@ -818,6 +826,8 @@ const DriverRegistration = () => {
       setIsValidCnic1(validateCnic1(formattedCnic));
     }
   };
+
+  
   const handleCnicFront = (e) => {
     const file = e.target.files[0];
     const maxSize = 5120000;
