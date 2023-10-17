@@ -10,6 +10,7 @@ import { Button } from '@mui/base';
 import Rider from '../MatchingUpdate/Rider';
 import Driver from '../MatchingUpdate/Driver';
 import { displayNotification } from '../../../helpers';
+import { ThreeCircles } from 'react-loader-spinner';
 
 const ViewProfile = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const ViewProfile = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
+  const [loading, setLoading] = useState(true);
   const crumbs = [
     {
       // path: "/portal/document-management",
@@ -115,6 +117,10 @@ const ViewProfile = () => {
         setMobileNo("");
         setImage("");
       }
+      // Add a delay of 1.5 seconds before removing the loading message
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
       console.log("Profile Page Data", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
@@ -210,355 +216,372 @@ const ViewProfile = () => {
 
   return (
     <div>
-      <div className="page-title">
-        <h3 className="card px-4 py-2 text-success my-2 fw-bold">
-          <Breadcrumbs aria-label="breadcrumb">
-            {crumbs.map((crumb, index) => (
-              <Link
-                key={index}
-                to={crumb.path || ""}
-                style={{
-                  color: crumb.active ? "black" : "#ff4815",
-                  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                  pointerEvents: crumb.path ? "auto" : "none",
-                  textDecoration: "none"
-
-                }}
-              >
-                {crumb.label}
-              </Link>
-            ))}
-          </Breadcrumbs>
-        </h3>
-      </div>
-      <div className="page-title">
-        <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
-          <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="text-dark-green my-2 fw-bold m-0">USER PROFILE</h3>
-            <Link
-              to={"/dashboard"} >
-
-              <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
-                <i className="fas fa-angle-left text-white" />
-                Back
-              </button>
-            </Link>
-          </div>
+      {loading ? (
+        <div className="text-center" style={{ height: "20vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <ThreeCircles
+            height={50}
+            width={50}
+            color="#4fa94d"
+            visible={true}
+            ariaLabel="three-circles-rotating"
+            outerCircleColor=""
+            innerCircleColor=""
+            middleCircleColor=""
+          />
         </div>
-      </div>
-      <div className="card p-4  p-2">
-        <div className="card bg-light" >
-          <div className="row text-right pt-2 px-2">
+      ) : (
+        <div>
+          <div className="page-title">
+            <h3 className="card px-4 py-2 text-success my-2 fw-bold">
+              <Breadcrumbs aria-label="breadcrumb">
+                {crumbs.map((crumb, index) => (
+                  <Link
+                    key={index}
+                    to={crumb.path || ""}
+                    style={{
+                      color: crumb.active ? "black" : "#ff4815",
+                      fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                      pointerEvents: crumb.path ? "auto" : "none",
+                      textDecoration: "none"
 
-            <Link
-              to={""} >
-              <Button variant=""
-                className="btn font-custom btn align-end btn-dark-green rounded-0 text-white fs-6 lh-1"
-
-                onClick={() => {
-                  setShowField(true);
-                }}
-              >
-                <i className="fa-solid fa-pen text-white" />
-                Edit
-              </Button>
-            </Link>
-
+                    }}
+                  >
+                    {crumb.label}
+                  </Link>
+                ))}
+              </Breadcrumbs>
+            </h3>
           </div>
-          <div className="card-body text-dark">
-            <div className="container text-center">
-              <img src={`${IMAGE_URL}${image}`} style={{ height: "150px", width: "150px" }} className='border border-2 rounded rounded-circle' />
-              <p>{name}</p>
+          <div className="page-title">
+            <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
+              <div className="d-flex justify-content-between align-items-xl-baseline">
+                <h3 className="text-dark-green my-2 fw-bold m-0">USER PROFILE</h3>
+                <Link
+                  to={"/dashboard"} >
 
-              <Form className="text-center">
-                {showfield === true ? (
-                  <>
-                    <Form.Group
-                      className="mt-2 mb-1 text-center"
-                      controlId="formfullName"
-                    >
-                      <TextField
-                        fullWidth
-                        sx={{
-                          "& .MuiInputBase-input.Mui-disabled": {
-                            WebkitTextFillColor: "#000000",
-                          },
-                        }}
-                        className="bg-light"
-                        color='success'
-                        variant="outlined"
-                        label="Full Name"
-                        value={name}
-                        size="small"
-                        onChange={(e) => setName(e.target.value)}
-                        disabled
+                  <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
+                    <i className="fas fa-angle-left text-white" />
+                    Back
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="card p-4  p-2">
+            <div className="card bg-light" >
+              <div className="row text-right pt-2 px-2">
 
-                      />
-                    </Form.Group>
+                <Link
+                  to={""} >
+                  <Button variant=""
+                    className="btn font-custom btn align-end btn-dark-green rounded-0 text-white fs-6 lh-1"
 
-                    <Form.Group
-                      className="mt-2 mb-1 text-center"
-                      controlId="formBasicEmail"
-                    >
-                      <TextField
-                        fullWidth
-                        sx={{
-                          "& .MuiInputBase-input.Mui-disabled": {
-                            WebkitTextFillColor: "#000000",
-                          },
-                        }}
-                        className="bg-light"
-                        color='success'
-                        variant="outlined"
-                        type="email"
-                        label="Email"
-                        value={email}
-                        size="small"
-                        disabled
-                      />
-                    </Form.Group>
-                    <Form.Group
-                      className="mt-2 mb-1 text-center"
-                      controlId="formBasicEmail"
-                    >
-                      <TextField
-                        fullWidth
-                        sx={{
-                          "& .MuiInputBase-input.Mui-disabled": {
-                            WebkitTextFillColor: "#000000",
-                          },
-                        }}
-                        className="bg-light"
-                        color='success'
-                        variant="outlined"
-                        value={mobileNo}
-                        label="Mobile Number (03xxxxxxxxx)"
-                        size="small"
-                        disabled
-                      />
-                    </Form.Group>
-                    <Form.Group
-                      className="mt-2 mb-1 text-center"
-                      controlId="formBasicEmail"
-                    >
-                      <FormControl
-                        color="success"
-                        className="bg-light"
-                        size="small"
-                        sx={{ width: "100%" }}
-                        variant="outlined"
-                      >
-                        <InputLabel htmlFor="outlined-adornment-password">
-                          Current Password
-                        </InputLabel>
-                        <OutlinedInput
-                          id="outlined-adornment-password"
-                          type={showPassword ? "text" : "password"}
-                          value={currentPassword}
-                          onChange={(e) => setCurrentPassword(e.target.value)}
-                          endAdornment={
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                              >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                              </IconButton>
-                            </InputAdornment>
-                          }
-                          label="Current Password"
-                        />
-                      </FormControl>
-                    </Form.Group>
-                    <Form.Group
-                      className="mt-2 mb-1 text-center"
-                      controlId="formBasicEmail"
-                    >
-                      <FormControl
-                        color="success"
-                        className="bg-light"
-                        size="small"
-                        sx={{ width: "100%" }}
-                        variant="outlined"
-                      >
-                        <InputLabel htmlFor="outlined-adornment-password">
-                          New Password
-                        </InputLabel>
-                        <OutlinedInput
-                          id="outlined-adornment-password"
-                          type={showPassword1 ? "text" : "password"}
-                          value={newPassword}
-                          onChange={(e) => validatePassword(e.target.value)}
-                          required
-                          size="small"
-                          error={!isValidPassword}
-                          helperText={
-                            !isValidPassword &&
-                            "Password must have at least 8 characters with mix of letters numbers special  characters"
-                          }
-                          endAdornment={
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword1}
-                                onMouseDown={handleMouseDownPassword1}
-                                edge="end"
-                              >
-                                {showPassword1 ? <VisibilityOff /> : <Visibility />}
-                              </IconButton>
-                            </InputAdornment>
-                          }
-                          label="New Password"
-                        />
-                      </FormControl>
-                    </Form.Group>
-                    <Form.Group
-                      className="mt-2 mb-1 text-center"
-                      controlId="formBasicEmail"
-                    >
-                      <FormControl
-                        color="success"
-                        className="bg-light"
-                        size="small"
-                        sx={{ width: "100%" }}
-                        variant="outlined"
-                      >
-                        <InputLabel htmlFor="outlined-adornment-password">
-                          Confirm Password
-                        </InputLabel>
-                        <OutlinedInput
-                          id="outlined-adornment-password"
-                          type={showPassword2 ? "text" : "password"}
-                          value={confirmPassword}
-                          onChange={(e) => checkconfirmPassword(e.target.value)}
-                          required
-                          size="small"
-                          error={!isValidConfirmPassword}
-                          helperText={
-                            !isValidConfirmPassword &&
-                            "Both passwords must be the same"
-                          }
-                          endAdornment={
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword2}
-                                onMouseDown={handleMouseDownPassword2}
-                                edge="end"
-                              >
-                                {showPassword2 ? <VisibilityOff /> : <Visibility />}
-                              </IconButton>
-                            </InputAdornment>
-                          }
-                          label="Confirm Password"
-                        />
-                      </FormControl>
-                    </Form.Group>
-                    <div className="container  my-4">
+                    onClick={() => {
+                      setShowField(true);
+                    }}
+                  >
+                    <i className="fa-solid fa-pen text-white" />
+                    Edit
+                  </Button>
+                </Link>
 
-                      <Button
-                        className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white mr-3 px-3 py-2"
-                        onClick={sendRequest}
-                      >
-                        Update
-                      </Button>
-                      <Button
-                        className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2"
-                        onClick={() => {
-                          setShowField(false);
-                        }}
-                      >
-                       Cancel
-                      </Button>
-                    </div>
-                  </>
-                ) :
-                  (
-                    <>
-                      <Form.Group
-                        className="mt-2 mb-1 text-center"
-                        controlId="formfullName"
-                      >
-                        <TextField
-                          fullWidth
-                          sx={{
-                            "& .MuiInputBase-input.Mui-disabled": {
-                              WebkitTextFillColor: "#000000",
-                            },
-                          }}
-                          className="bg-light"
-                          color='success'
-                          variant="outlined"
-                          label="Full Name"
-                          value={name}
-                          size="small"
-                          disabled
+              </div>
+              <div className="card-body text-dark">
+                <div className="container text-center">
+                  <img src={`${IMAGE_URL}${image}`} style={{ height: "150px", width: "150px" }} className='border border-2 rounded rounded-circle' />
+                  <p>{name}</p>
 
-                        />
-                      </Form.Group>
+                  <Form className="text-center">
+                    {showfield === true ? (
+                      <>
+                        <Form.Group
+                          className="mt-2 mb-1 text-center"
+                          controlId="formfullName"
+                        >
+                          <TextField
+                            fullWidth
+                            sx={{
+                              "& .MuiInputBase-input.Mui-disabled": {
+                                WebkitTextFillColor: "#000000",
+                              },
+                            }}
+                            className="bg-light"
+                            color='success'
+                            variant="outlined"
+                            label="Full Name"
+                            value={name}
+                            size="small"
+                            onChange={(e) => setName(e.target.value)}
+                            disabled
 
-                      <Form.Group
-                        className="mt-2 mb-1 text-center"
-                        controlId="formBasicEmail"
-                      >
-                        <TextField
-                          fullWidth
-                          sx={{
-                            "& .MuiInputBase-input.Mui-disabled": {
-                              WebkitTextFillColor: "#000000",
-                            },
-                          }}
-                          className="bg-light"
-                          color='success'
-                          variant="outlined"
-                          type="email"
-                          label="Email"
-                          value={email}
-                          size="small"
-                          disabled
-                        />
-                      </Form.Group>
-                      <Form.Group
-                        className="mt-2 mb-1 text-center"
-                        controlId="formBasicEmail"
-                      >
-                        <TextField
-                          fullWidth
-                          sx={{
-                            "& .MuiInputBase-input.Mui-disabled": {
-                              WebkitTextFillColor: "#000000",
-                            },
-                          }}
-                          className="bg-light"
-                          color='success'
-                          variant="outlined"
-                          value={mobileNo}
-                          label="Mobile Number (03xxxxxxxxx)"
-                          size="small"
-                          disabled
-                        />
-                      </Form.Group>
-                    </>
-                  )
-                }
-                <div className="container my-5">
+                          />
+                        </Form.Group>
 
-                  {/* <Link className="font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-3 mb-3"
+                        <Form.Group
+                          className="mt-2 mb-1 text-center"
+                          controlId="formBasicEmail"
+                        >
+                          <TextField
+                            fullWidth
+                            sx={{
+                              "& .MuiInputBase-input.Mui-disabled": {
+                                WebkitTextFillColor: "#000000",
+                              },
+                            }}
+                            className="bg-light"
+                            color='success'
+                            variant="outlined"
+                            type="email"
+                            label="Email"
+                            value={email}
+                            size="small"
+                            disabled
+                          />
+                        </Form.Group>
+                        <Form.Group
+                          className="mt-2 mb-1 text-center"
+                          controlId="formBasicEmail"
+                        >
+                          <TextField
+                            fullWidth
+                            sx={{
+                              "& .MuiInputBase-input.Mui-disabled": {
+                                WebkitTextFillColor: "#000000",
+                              },
+                            }}
+                            className="bg-light"
+                            color='success'
+                            variant="outlined"
+                            value={mobileNo}
+                            label="Mobile Number (03xxxxxxxxx)"
+                            size="small"
+                            disabled
+                          />
+                        </Form.Group>
+                        <Form.Group
+                          className="mt-2 mb-1 text-center"
+                          controlId="formBasicEmail"
+                        >
+                          <FormControl
+                            color="success"
+                            className="bg-light"
+                            size="small"
+                            sx={{ width: "100%" }}
+                            variant="outlined"
+                          >
+                            <InputLabel htmlFor="outlined-adornment-password">
+                              Current Password
+                            </InputLabel>
+                            <OutlinedInput
+                              id="outlined-adornment-password"
+                              type={showPassword ? "text" : "password"}
+                              value={currentPassword}
+                              onChange={(e) => setCurrentPassword(e.target.value)}
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                  >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                              label="Current Password"
+                            />
+                          </FormControl>
+                        </Form.Group>
+                        <Form.Group
+                          className="mt-2 mb-1 text-center"
+                          controlId="formBasicEmail"
+                        >
+                          <FormControl
+                            color="success"
+                            className="bg-light"
+                            size="small"
+                            sx={{ width: "100%" }}
+                            variant="outlined"
+                          >
+                            <InputLabel htmlFor="outlined-adornment-password">
+                              New Password
+                            </InputLabel>
+                            <OutlinedInput
+                              id="outlined-adornment-password"
+                              type={showPassword1 ? "text" : "password"}
+                              value={newPassword}
+                              onChange={(e) => validatePassword(e.target.value)}
+                              required
+                              size="small"
+                              error={!isValidPassword}
+                              helperText={
+                                !isValidPassword &&
+                                "Password must have at least 8 characters with mix of letters numbers special  characters"
+                              }
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword1}
+                                    onMouseDown={handleMouseDownPassword1}
+                                    edge="end"
+                                  >
+                                    {showPassword1 ? <VisibilityOff /> : <Visibility />}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                              label="New Password"
+                            />
+                          </FormControl>
+                        </Form.Group>
+                        <Form.Group
+                          className="mt-2 mb-1 text-center"
+                          controlId="formBasicEmail"
+                        >
+                          <FormControl
+                            color="success"
+                            className="bg-light"
+                            size="small"
+                            sx={{ width: "100%" }}
+                            variant="outlined"
+                          >
+                            <InputLabel htmlFor="outlined-adornment-password">
+                              Confirm Password
+                            </InputLabel>
+                            <OutlinedInput
+                              id="outlined-adornment-password"
+                              type={showPassword2 ? "text" : "password"}
+                              value={confirmPassword}
+                              onChange={(e) => checkconfirmPassword(e.target.value)}
+                              required
+                              size="small"
+                              error={!isValidConfirmPassword}
+                              helperText={
+                                !isValidConfirmPassword &&
+                                "Both passwords must be the same"
+                              }
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword2}
+                                    onMouseDown={handleMouseDownPassword2}
+                                    edge="end"
+                                  >
+                                    {showPassword2 ? <VisibilityOff /> : <Visibility />}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                              label="Confirm Password"
+                            />
+                          </FormControl>
+                        </Form.Group>
+                        <div className="container  my-4">
+
+                          <Button
+                            className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white mr-3 px-3 py-2"
+                            onClick={sendRequest}
+                          >
+                            Update
+                          </Button>
+                          <Button
+                            className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2"
+                            onClick={() => {
+                              setShowField(false);
+                            }}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </>
+                    ) :
+                      (
+                        <>
+                          <Form.Group
+                            className="mt-2 mb-1 text-center"
+                            controlId="formfullName"
+                          >
+                            <TextField
+                              fullWidth
+                              sx={{
+                                "& .MuiInputBase-input.Mui-disabled": {
+                                  WebkitTextFillColor: "#000000",
+                                },
+                              }}
+                              className="bg-light"
+                              color='success'
+                              variant="outlined"
+                              label="Full Name"
+                              value={name}
+                              size="small"
+                              disabled
+
+                            />
+                          </Form.Group>
+
+                          <Form.Group
+                            className="mt-2 mb-1 text-center"
+                            controlId="formBasicEmail"
+                          >
+                            <TextField
+                              fullWidth
+                              sx={{
+                                "& .MuiInputBase-input.Mui-disabled": {
+                                  WebkitTextFillColor: "#000000",
+                                },
+                              }}
+                              className="bg-light"
+                              color='success'
+                              variant="outlined"
+                              type="email"
+                              label="Email"
+                              value={email}
+                              size="small"
+                              disabled
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            className="mt-2 mb-1 text-center"
+                            controlId="formBasicEmail"
+                          >
+                            <TextField
+                              fullWidth
+                              sx={{
+                                "& .MuiInputBase-input.Mui-disabled": {
+                                  WebkitTextFillColor: "#000000",
+                                },
+                              }}
+                              className="bg-light"
+                              color='success'
+                              variant="outlined"
+                              value={mobileNo}
+                              label="Mobile Number (03xxxxxxxxx)"
+                              size="small"
+                              disabled
+                            />
+                          </Form.Group>
+                        </>
+                      )
+                    }
+                    <div className="container my-5">
+
+                      {/* <Link className="font-custom text-decoration-none btn-sm fs-6 fw-bold btn-dark-green text-white px-3 py-3 mb-3"
                     to={"/editprofile"}
                   >
                     Change Password
 
                   </Link> */}
 
+                    </div>
+                  </Form>
                 </div>
-              </Form>
+              </div>
             </div>
           </div>
+          <Driver />
         </div>
-      </div>
-      <Driver />
+      )}
     </div>
   )
 }
