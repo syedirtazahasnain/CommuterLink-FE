@@ -74,6 +74,20 @@ const TravelPatners = () => {
   const [dropOffAddress, setDropOffAddress] = useState("");
   const [pickupAddress, setPickupAddress] = useState("");
 
+  // For second person
+  const [contactId1, setContactId1] = useState("");
+  const [name1, setName1] = useState("");
+  const [image1, setImage1] = useState("");
+  const [price1, setPrice1] = useState("");
+  const [date1, setDate1] = useState("");
+
+  // For third person
+  const [contactId2, setContactId2] = useState("");
+  const [name2, setName2] = useState("");
+  const [image2, setImage2] = useState("");
+  const [price2, setPrice2] = useState("");
+  const [date2, setDate2] = useState("");
+
   // For Recent Transcations
   const [recentData, setRecentData] = useState([]);
 
@@ -147,8 +161,9 @@ const TravelPatners = () => {
   }, []);
 
   useEffect(() => {
-    if (cancelDate) {
+    if (cancelDate !== null) {
       setCancelDisabled(true);
+
     }
   }, [cancelDate]);
 
@@ -164,11 +179,35 @@ const TravelPatners = () => {
   }
 
   const route = (contactId) => {
-    setSubmit(true);
 
-    if (!submitbtn) {
+    if (contactId !== "") {
       dispatch(setContactIdState(contactId));
       navigate("/travel-buddy");
+    }
+    else {
+      return;
+    }
+  };
+
+  const route1 = (contactId1) => {
+
+    if (contactId1 !== "") {
+      dispatch(setContactIdState(contactId1));
+      navigate("/travel-buddy");
+    }
+    else {
+      return;
+    }
+  };
+
+  const route2 = (contactId2) => {
+
+    if (contactId2 !== "") {
+      dispatch(setContactIdState(contactId2));
+      navigate("/travel-buddy");
+    }
+    else {
+      return;
     }
   };
 
@@ -312,7 +351,7 @@ const TravelPatners = () => {
       );
 
       const jsonresponse = await response.json();
-      if (jsonresponse.data && jsonresponse.data.length > 0) {
+      if (jsonresponse.data[0]) {
         setContactId(jsonresponse.data[0].contact_id);
         setName(jsonresponse.data[0].name);
         setImage(jsonresponse.data[0].commuter_image);
@@ -323,7 +362,7 @@ const TravelPatners = () => {
         setName(jsonresponse.data[0].name);
         setImage(jsonresponse.data[0].commuter_image);
         setGender(jsonresponse.data[0].gender);
-        setPrice(jsonresponse.data[0].price)
+        setPrice(jsonresponse.data[0].price);
         setAge(jsonresponse.data[0].age);
         setMobileNo(jsonresponse.data[0].mobile);
         setDays(jsonresponse.data[0].days);
@@ -337,14 +376,28 @@ const TravelPatners = () => {
         setTimeReturn(jsonresponse.data[0].time_return);
         setDropOffAddress(jsonresponse.data[0].dropoff_address);
         setPickupAddress(jsonresponse.data[0].pickup_address);
-        setCarAC(jsonresponse.data[0].vehicle[0].car_ac);
-        setCarBrand(jsonresponse.data[0].vehicle[0].car_brand);
-        setCarCC(jsonresponse.data[0].vehicle[0].car_cc);
-        setCarModel(jsonresponse.data[0].vehicle[0].car_model);
-        setCarRegYear(jsonresponse.data[0].vehicle[0].car_reg_year);
-        setRegNo(jsonresponse.data[0].vehicle[0].reg_no);
-        setRegYear(jsonresponse.data[0].vehicle[0].reg_year);
-        setSeatsLeft(jsonresponse.data[0].vehicle[0].seats_left);
+        setCarAC(jsonresponse.data[0]?.vehicle[0]?.car_ac);
+        setCarBrand(jsonresponse.data[0]?.vehicle[0]?.car_brand);
+        setCarCC(jsonresponse.data[0]?.vehicle[0]?.car_cc);
+        setCarModel(jsonresponse.data[0]?.vehicle[0]?.car_model);
+        setCarRegYear(jsonresponse.data[0]?.vehicle[0]?.car_reg_year);
+        setRegNo(jsonresponse.data[0]?.vehicle[0]?.reg_no);
+        setRegYear(jsonresponse.data[0]?.vehicle[0]?.reg_year);
+        setSeatsLeft(jsonresponse.data[0]?.vehicle[0]?.seats_left);
+      }
+      if (jsonresponse.data[1]) {
+        setContactId1(jsonresponse.data[1].contact_id);
+        setName1(jsonresponse.data[1].name);
+        setImage1(jsonresponse.data[1].commuter_image);
+        setPrice1(jsonresponse.data[1].price);
+        setDate1(jsonresponse.data[1].aggreement_date);
+      }
+      if (jsonresponse.data[2]) {
+        setContactId2(jsonresponse.data[2].contact_id);
+        setName2(jsonresponse.data[2].name);
+        setImage2(jsonresponse.data[2].commuter_image);
+        setPrice2(jsonresponse.data[2].price);
+        setDate2(jsonresponse.data[2].aggreement_date);
       }
       else if (jsonresponse.status_code === 100) {
         setData(jsonresponse.message);
@@ -950,7 +1003,7 @@ const TravelPatners = () => {
                             </div>
                           </div>
                           <div className="text-end px-3 py-3">
-                            <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure} disabled={!cancelDisabled}>
+                            <Button className={`my-auto font-custom btn btn-sm fs-6 fw-bold rounded-0 px-3 py-3 ${cancelDisabled === true ? 'btn-secondary text-white' : 'btn-dark-green text-white'}`} onClick={youSure} disabled={cancelDisabled === true}>
                               Cancel Agreement
                             </Button>
                           </div>
@@ -973,9 +1026,6 @@ const TravelPatners = () => {
                                         <img
                                           src={`${IMAGE_URL}${image}`}
                                           className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
-                                        // onClick={() => {
-                                        //   route(contactId);
-                                        // }}
                                         />
                                       ) : (
                                         <img
@@ -1034,9 +1084,13 @@ const TravelPatners = () => {
                                           </div>
                                         </div>
                                         <div className="text-center">
-                                          <button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2" onClick={() => {
-                                            route(contactId);
-                                          }}>View Profile</button>
+                                          <button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2"
+                                            onClick={() => {
+                                              route(contactId);
+                                            }}
+                                          >
+                                            View Profile
+                                          </button>
                                         </div>
 
                                       </div>
@@ -1049,18 +1103,15 @@ const TravelPatners = () => {
                                   <div className="card rounded-0">
                                     <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
 
-                                      {image ? (
+                                      {image1 ? (
                                         <img
-                                          src={`${BASE_URL}/assets/images/Vector.png`}
-                                          className="card-img-top w-100px m-auto h-100px "
-                                        // onClick={() => {
-                                        //   route(contactId);
-                                        // }}
+                                          src={`${IMAGE_URL}${image1}`}
+                                          className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
                                         />
                                       ) : (
                                         <img
                                           src={`${BASE_URL}/assets/images/Vector.png`}
-                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                          className="card-img-top w-100px m-auto h-100px"
                                         />
                                       )}
 
@@ -1070,37 +1121,39 @@ const TravelPatners = () => {
                                       <div className="card-text">
                                         <div className="row mb-2">
                                           <div className="col-md-6 ">
-                                            {name !== "" ? (
+                                            {name1 !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
                                               </>
                                             )}
                                           </div>
                                           <div className="col-md-6">
-                                            {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
+                                            <h5 className="fw-bold text-secondary">{name1}</h5>
                                           </div>
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {price !== "" ? (
+                                            {price1 !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
                                               </>
                                             )}
                                           </div>
                                           <div className="col-md-6">
-                                            {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
+                                            <h5 className="fw-bold text-secondary">{price1 && `Rs. ${price1}/-`}</h5>
                                           </div>
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {date && formatDate(date) !== "" ? (
+                                            {date1 && formatDate(date1) !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
                                               </>
@@ -1110,12 +1163,21 @@ const TravelPatners = () => {
                                             )}
                                           </div>
                                           <div className="col-md-6">
-                                            {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
+                                            <h5 className="fw-bold text-secondary">{date1 && formatDate(date1)}</h5>
                                           </div>
                                         </div>
 
                                       </div>
-                                      <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
+                                      <div className="text-center">
+                                        <button
+                                          className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white py-2"
+                                          onClick={() => {
+                                            route1(contactId1);
+                                          }}
+                                        >
+                                          View Profile
+                                        </button>
+                                      </div>
                                     </div>
                                     <div>
                                     </div>
@@ -1125,18 +1187,15 @@ const TravelPatners = () => {
                                   <div className="card rounded-0">
                                     <div className="card-img-top bg-medium-teal rounded-0 text-center py-2">
 
-                                      {image ? (
+                                      {image2 ? (
                                         <img
-                                          src={`${BASE_URL}/assets/images/Vector.png`}
-                                          className="card-img-top w-100px m-auto h-100px "
-                                        // onClick={() => {
-                                        //   route(contactId);
-                                        // }}
+                                          src={`${IMAGE_URL}${image2}`}
+                                          className="card-img-top w-100px m-auto h-100px cursor-pointer rounded-circle"
                                         />
                                       ) : (
                                         <img
                                           src={`${BASE_URL}/assets/images/Vector.png`}
-                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                          className="card-img-top w-100px m-auto h-100px"
                                         />
                                       )}
 
@@ -1146,37 +1205,39 @@ const TravelPatners = () => {
                                       <div className="card-text">
                                         <div className="row mb-2">
                                           <div className="col-md-6 ">
-                                            {name !== "" ? (
+                                            {name2 !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
                                               </>
                                             )}
                                           </div>
                                           <div className="col-md-6">
-                                            {/* <h5 className="fw-bold text-secondary">{name}</h5> */}
+                                            <h5 className="fw-bold text-secondary">{name2 && name2}</h5>
                                           </div>
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {price !== "" ? (
+                                            {price2 !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
                                               </>
                                             )}
                                           </div>
                                           <div className="col-md-4">
-                                            {/* <h5 className="fw-bold text-secondary">Rs. {price}/-</h5> */}
+                                            <h5 className="fw-bold text-secondary">{price2 && `Rs. ${price2}/-`}</h5>
                                           </div>
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {date && formatDate(date) !== "" ? (
+                                            {date2 && formatDate(date2) !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
                                               </>
@@ -1186,12 +1247,21 @@ const TravelPatners = () => {
                                             )}
                                           </div>
                                           <div className="col-md-6">
-                                            {/* <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5> */}
+                                            <h5 className="fw-bold text-secondary">{date2 && formatDate(date2)}</h5>
                                           </div>
                                         </div>
 
                                       </div>
-                                      <div className="text-center"><button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2">View Profile</button></div>
+                                      <div className="text-center">
+                                        <button
+                                          className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white py-2"
+                                          onClick={() => {
+                                            route2(contactId2);
+                                          }}
+                                        >
+                                          View Profile
+                                        </button>
+                                      </div>
                                     </div>
                                     <div>
                                     </div>
