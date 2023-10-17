@@ -302,7 +302,9 @@ const AdvancePayment = () => {
                     <div>
                       <button
                         className="font-custom btn  text-success fw-bold fs-5 lh-1"
-                        onClick={openAndCloseWindow} >
+                        onClick={openAndCloseWindow}
+                        disabled={windowClosedManually} 
+                      >
                         <span className="font-custom">
                           <i className="fa-solid fs-3 fa-wallet text-success mx-2" />
                         </span>
@@ -315,7 +317,8 @@ const AdvancePayment = () => {
                     <div>
                       <button
                         className="font-custom btn  text-success fw-bold fs-5 lh-1"
-                      // onClick={openAndCloseWindow}
+                        // onClick={openAndCloseWindow}
+                        disabled={windowClosedManually}
                       >
                         <span className="font-custom">
                           <img

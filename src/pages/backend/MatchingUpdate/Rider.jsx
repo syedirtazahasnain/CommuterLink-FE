@@ -98,11 +98,11 @@ const Rider = () => {
 
     if (cityStartId) {
 
-      const filteredStartCities = dropdownStartdata.area.filter(
+      const filteredStartCities = dropdownStartdata?.area?.filter(
         (city) => city.parent_id == cityStartId
       );
 
-      const citystring = selectedStartProvinceCities.filter(
+      const citystring = selectedStartProvinceCities?.filter(
         (city) => city.id == cityStartId
       );
 
@@ -115,11 +115,11 @@ const Rider = () => {
 
     if (cityEndId) {
 
-      const filteredEndCities = dropdownEnddata.area.filter(
+      const filteredEndCities = dropdownEnddata?.area?.filter(
         (city) => city.parent_id == cityEndId
       );
 
-      const citystring = selectedEndProvinceCities.filter(
+      const citystring = selectedEndProvinceCities?.filter(
         (city) => city.id == cityEndId
       );
 
