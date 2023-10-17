@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Nav, Tab, Container, Row, Col } from 'react-bootstrap';
 import { TextField, createTheme } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/base";
@@ -10,6 +10,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import { ThreeCircles } from "react-loader-spinner";
 import { displayNotification } from "../../../helpers";
 import { GoogleMap, MarkerF, PolylineF } from "@react-google-maps/api";
+import { setContactIdState } from "../../../redux/generalSlice";
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -41,6 +42,7 @@ const backgroundLogo = {
 
 const TravelBuddyProfile = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [submitbtn, setSubmit] = useState(false);
   const userToken = useSelector((s) => s.login.data.token);
   const [requestStage, setRequestStage] = useState("");
@@ -340,6 +342,7 @@ const TravelBuddyProfile = () => {
   useEffect(() => {
     if (cancelDate) {
       setCancelDisabled(true);
+   
     }
   }, [cancelDate]);
 
@@ -352,28 +355,30 @@ const TravelBuddyProfile = () => {
   };
 
 
-  const calendarPicker = () => {
+  const calendarPicker = (contactId) => {
+    dispatch(setContactIdState(contactId));
     navigate("/partner-cancellation");
-
   };
-  const youSure = () => {
-    Swal.fire({
-      position: 'top',
-      title: 'Are you sure?',
-      text: "You want to cancel the agreement",
-      showCancelButton: true,
-      cancelButtonColor: 'swal-custom',
-      customClass: {
-        confirmButton: 'swal-custom',
-        cancelButton: 'swal-custom',
-      },
-      confirmButtonText: 'Yes'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        calendarPicker();
 
-      }
-    })
+  const youSure = () => {
+    calendarPicker(contactId);
+    // Swal.fire({
+    //   position: 'top',
+    //   title: 'Are you sure?',
+    //   html: `You want to cancel the agreement`,
+    //   showCancelButton: true,
+    //   cancelButtonColor: 'swal-custom',
+    //   customClass: {
+    //     confirmButton: 'swal-custom',
+    //     cancelButton: 'swal-custom',
+    //     htmlContainer: 'text-center',
+    //   },
+    //   confirmButtonText: 'Yes'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     calendarPicker(contactId);
+    //   }
+    // })
   }
 
   const sendRequest = () => {
@@ -879,7 +884,11 @@ const TravelBuddyProfile = () => {
                 </div>
               </div>
               <div className="text-end px-3 py-3">
-                <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-0 px-3 py-3" onClick={youSure} disabled={!cancelDisabled}>
+                {/* <Button className="my-auto font-custom btn btn-sm fs-6 fw-bold  btn-dark-green text-white rounded-0 px-3 py-3" >
+                  Cancel Agreement
+                </Button> */}
+
+                <Button className={`my-auto font-custom btn btn-sm fs-6 fw-bold rounded-0 px-3 py-3 ${!cancelDisabled? 'btn-secondary text-white':'btn-dark-green text-white'}`}onClick={youSure} disabled={!cancelDisabled}>
                   Cancel Agreement
                 </Button>
               </div>
