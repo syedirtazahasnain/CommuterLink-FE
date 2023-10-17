@@ -124,7 +124,7 @@ const WhyProcessPayment1 = () => {
                 get another match.
               </p>
               <p>
-                5.CommutersLink verifies all the data of its members and ensures
+                5. CommutersLink verifies all the data of its members and ensures
                 your safety and security
               </p>
               <p>

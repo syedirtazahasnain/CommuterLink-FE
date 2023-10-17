@@ -1000,11 +1000,11 @@ const TravelPatners = () => {
                                             )}
                                           </div>
                                           <div className="col-md-6">
-                                            <h5 className="fw-bold text-secondary">{name}</h5>
+                                            <h5 className="fw-bold text-secondary text-center font-custom">{name}</h5>
                                           </div>
                                         </div>
                                         <div className="row mb-2">
-                                          <div className="col-md-8">
+                                          <div className="col-md-6">
                                             {price !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
@@ -1014,8 +1014,8 @@ const TravelPatners = () => {
                                               </>
                                             )}
                                           </div>
-                                          <div className="col-md-4">
-                                            <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-center text-secondary">Rs. {price}/-</h5>
                                           </div>
                                         </div>
                                         <div className="row mb-2">
@@ -1052,7 +1052,7 @@ const TravelPatners = () => {
                                       {image ? (
                                         <img
                                           src={`${BASE_URL}/assets/images/Vector.png`}
-                                          className="card-img-top w-100px m-auto h-100px rounded-circle"
+                                          className="card-img-top w-100px m-auto h-100px "
                                         // onClick={() => {
                                         //   route(contactId);
                                         // }}
@@ -1084,7 +1084,7 @@ const TravelPatners = () => {
                                           </div>
                                         </div>
                                         <div className="row mb-2">
-                                          <div className="col-md-8">
+                                          <div className="col-md-6">
                                             {price !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
@@ -1094,7 +1094,7 @@ const TravelPatners = () => {
                                               </>
                                             )}
                                           </div>
-                                          <div className="col-md-4">
+                                          <div className="col-md-6">
                                             {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
                                           </div>
                                         </div>
@@ -1128,7 +1128,7 @@ const TravelPatners = () => {
                                       {image ? (
                                         <img
                                           src={`${BASE_URL}/assets/images/Vector.png`}
-                                          className="card-img-top w-100px m-auto h-100px rounded-circle"
+                                          className="card-img-top w-100px m-auto h-100px "
                                         // onClick={() => {
                                         //   route(contactId);
                                         // }}
@@ -1160,10 +1160,10 @@ const TravelPatners = () => {
                                           </div>
                                         </div>
                                         <div className="row mb-2">
-                                          <div className="col-md-8">
+                                          <div className="col-md-6">
                                             {price !== "" ? (
                                               <>
-                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:Rs.</h5>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
                                               </>
                                             ) : (
                                               <>
@@ -1171,7 +1171,7 @@ const TravelPatners = () => {
                                             )}
                                           </div>
                                           <div className="col-md-4">
-                                            {/* <h5 className="fw-bold text-secondary">{price}/-</h5> */}
+                                            {/* <h5 className="fw-bold text-secondary">Rs. {price}/-</h5> */}
                                           </div>
                                         </div>
                                         <div className="row mb-2">

@@ -2788,8 +2788,8 @@ const DriverRegistration = () => {
                       </Form.Group>
                     </Row>
 
-                    <Row className=" mb-3 py-3 shadow shadow-sm"
-                      style={{ backgroundColor: " #cddbd9" }}>
+                    <Row className="mb-3 py-3 px-3 shadow shadow-sm form-color-field">
+                    
                       <Form.Group as={Col} md="12" className="mb-2" controlId="validationCustom21">
                         <Form.Label style={{ color: "#000" }}>
                           University Name

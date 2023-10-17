@@ -2175,8 +2175,8 @@ const SchoolRegistration = () => {
                 </Row>
 
                 <Row
-                  className="mb-3 py-3 shadow shadow-sm"
-                  style={{ backgroundColor: " #cddbd9" }}
+                  className="mb-3 py-3 px-3 shadow shadow-sm form-color-field"
+                  // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}

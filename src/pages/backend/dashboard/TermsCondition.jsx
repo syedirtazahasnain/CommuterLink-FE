@@ -152,7 +152,7 @@ const TermsCondition = () => {
         </div>
       </div>
    
-    </div>
+     </div>
   );
 };
 
