@@ -113,7 +113,9 @@ const SchoolRegistration = () => {
   }
   const handleCnicChange = (event) => {
     const inputCnic = event.target.value.replace(/\D/g, "");
-
+    if (cnic.length < 15 && cnic.length > 15) {
+      setIsValidCnic(false);
+    }
     if (inputCnic.length <= 13) {
       const formattedCnic = inputCnic.replace(
         /^(\d{5})(\d{7})(\d{1})$/,
@@ -121,8 +123,6 @@ const SchoolRegistration = () => {
       );
       setCnic(formattedCnic);
       setIsValidCnic(validateCnic(formattedCnic));
-    } else {
-      setIsValidCnic(false);
     }
   };
   // For Registration
