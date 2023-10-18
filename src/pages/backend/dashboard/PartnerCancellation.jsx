@@ -91,157 +91,118 @@ const PartnerCancellation = () => {
   const sendRequest = async () => {
     try {
       if (!selectedDate) {
-        // Swal.fire({
-        //   position: 'top',
-        //   // // icon: 'warning',
-        //   text: 'Please select a date',
-        //   customClass: {
-        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        //   },
-        // });
         displayNotification("warning", "Please select a date");
         return;
       }
-
+  
       if (checkStatus === 1) {
-        const body = {
-          option: "driver",
-          date: selectedDate.format('YYYY-MM-DD'),
-        };
-
-        console.log('sendRequest Body:', body);
-
-        const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${requestContactId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: `Bearer ${userToken}`,
+        const result = await Swal.fire({
+          position: 'top',
+          title: 'Are you sure?',
+          html: 'You want to cancel the agreement',
+          showCancelButton: true,
+          cancelButtonColor: 'swal-custom',
+          customClass: {
+            confirmButton: 'swal-custom',
+            cancelButton: 'swal-custom',
+            htmlContainer: 'text-center',
           },
-          body: JSON.stringify(body),
+          confirmButtonText: 'Confirm',
         });
-
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
+  
+        if (result.isConfirmed) {
+          const body = {
+            option: 'driver',
+            date: selectedDate.format('YYYY-MM-DD'),
+          };
+  
+          console.log('sendRequest Body:', body);
+  
+          const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${requestContactId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Request failed with status: ${response.status}`);
+          }
+  
+          const jsonresponse = await response.json();
+          console.log('sendRequest API Response', jsonresponse);
+  
+          if (jsonresponse.status_code === 200) {
+            displayNotification("success", jsonresponse.message);
+            navigate('/dashboard');
+          } else if (jsonresponse.status_code === 100) {
+            displayNotification("error", jsonresponse.message);
+          } else if (jsonresponse.status_code === 500) {
+            displayNotification("error", jsonresponse.message);
+          } else {
+            displayNotification("error", jsonresponse.message);
+          }
         }
-
-        const jsonresponse = await response.json();
-        console.log('sendRequest API Response', jsonresponse);
-
-        if (jsonresponse.status_code === 200) {
-          displayNotification("success", `${jsonresponse.message}`);
-          navigate('/dashboard');
-        }
-        else if (jsonresponse.status_code === 100) {
-          // Swal.fire({
-          //   position: 'top',
-          //   // // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          //   },
-          // });
-          displayNotification("error", `${jsonresponse.message}`);
-        }
-        else if (jsonresponse.status_code === 500) {
-          // Swal.fire({
-          //   position: 'top',
-          //   // // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          //   },
-          // });
-          displayNotification("error", `${jsonresponse.message}`);
-        }
-        else {
-          // Swal.fire({
-          //   position: 'top',
-          //   // // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          //   },
-          // });
-          displayNotification("error", `${jsonresponse.message}`);
-        }
-      }
-      else {
-        const body = {
-          option: "rider",
-          date: selectedDate.format('YYYY-MM-DD'),
-        };
-
-        console.log('sendRequest Body:', body);
-
-        const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${requestContactId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: `Bearer ${userToken}`,
+      } else {
+        const result = await Swal.fire({
+          position: 'top',
+          title: 'Are you sure?',
+          html: 'You want to cancel the agreement',
+          showCancelButton: true,
+          cancelButtonColor: 'swal-custom',
+          customClass: {
+            confirmButton: 'swal-custom',
+            cancelButton: 'swal-custom',
+            htmlContainer: 'text-center',
           },
-          body: JSON.stringify(body),
+          confirmButtonText: 'Confirm',
         });
-
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
-        }
-
-        const jsonresponse = await response.json();
-        console.log('sendRequest API Response', jsonresponse);
-
-        if (jsonresponse.status_code === 200) {
-          displayNotification("success", `${jsonresponse.message}`);
-          navigate('/dashboard');
-        }
-        else if (jsonresponse.status_code === 100) {
-          // Swal.fire({
-          //   position: 'top',
-          //   // // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          //   },
-          // });
-          displayNotification("error", `${jsonresponse.message}`);
-        }
-        else if (jsonresponse.status_code === 500) {
-          // Swal.fire({
-          //   position: 'top',
-          //   // // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          //   },
-          // });
-          displayNotification("error", `${jsonresponse.message}`);
-        }
-        else {
-          // Swal.fire({
-          //   position: 'top',
-          //   // // icon: 'error',
-          //   text: `${jsonresponse.message}`,
-          //   customClass: {
-          //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          //   },
-          // });
-          displayNotification("error", `${jsonresponse.message}`);
+  
+        if (result.isConfirmed) {
+          const body = {
+            option: 'rider',
+            date: selectedDate.format('YYYY-MM-DD'),
+          };
+  
+          console.log('sendRequest Body:', body);
+  
+          const response = await fetch(`${API_URL}/api/v1/aggreement-cancellation/${requestContactId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(body),
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Request failed with status: ${response.status}`);
+          }
+  
+          const jsonresponse = await response.json();
+          console.log('sendRequest API Response', jsonresponse);
+  
+          if (jsonresponse.status_code === 200) {
+            displayNotification("success", jsonresponse.message);
+            navigate('/dashboard');
+          } else if (jsonresponse.status_code === 100) {
+            displayNotification("error", jsonresponse.message);
+          } else if (jsonresponse.status_code === 500) {
+            displayNotification("error", jsonresponse.message);
+          } else {
+            displayNotification("error", jsonresponse.message);
+          }
         }
       }
     } catch (error) {
       console.error('An error occurred:', error);
-      // Swal.fire({
-      //   position: 'top',
-      //   // // icon: 'error',
-      //   text: 'An error occurred while sending the request.',
-      //   customClass: {
-      //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-      //   },
-      // });
-      displayNotification("warning", "An error occured while sending the request.");
+      displayNotification("warning", "An error occurred while sending the request.");
     }
-  };
+  };  
 
   // useEffect(() => {
   //   // Fetch status data from the API

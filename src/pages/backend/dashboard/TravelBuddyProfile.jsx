@@ -881,7 +881,7 @@ const TravelBuddyProfile = () => {
                   </div>
                 </div>
                 <div className="text-end px-3 py-3">
-                  <Button className={`my-auto font-custom btn btn-sm fs-6 fw-bold rounded-0 px-3 py-3 ${cancelDisabled === true ? 'btn-secondary text-white' : 'btn-dark-green text-white'}`} onClick={youSure(contact_id)} disabled={cancelDisabled === true}>
+                  <Button className={`my-auto font-custom btn btn-sm fs-6 fw-bold rounded-0 px-3 py-3 ${cancelDisabled === true ? 'btn-secondary text-white' : 'btn-dark-green text-white'}`} onClick={()=>{youSure(contact_id)}} disabled={cancelDisabled === true}>
                     Cancel Agreement
                   </Button>
                 </div>
