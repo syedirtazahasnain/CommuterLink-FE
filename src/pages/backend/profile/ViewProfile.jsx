@@ -302,7 +302,7 @@ const ViewProfile = () => {
                             fullWidth
                             sx={{
                               "& .MuiInputBase-input.Mui-disabled": {
-                                WebkitTextFillColor: "#000000",
+                                WebkitTextFillColor: "#00000057",
                               },
                             }}
                             className="bg-light"
@@ -325,7 +325,7 @@ const ViewProfile = () => {
                             fullWidth
                             sx={{
                               "& .MuiInputBase-input.Mui-disabled": {
-                                WebkitTextFillColor: "#000000",
+                                WebkitTextFillColor: "#00000057",
                               },
                             }}
                             className="bg-light"
@@ -346,7 +346,7 @@ const ViewProfile = () => {
                             fullWidth
                             sx={{
                               "& .MuiInputBase-input.Mui-disabled": {
-                                WebkitTextFillColor: "#000000",
+                                WebkitTextFillColor: "#00000057",
                               },
                             }}
                             className="bg-light"
@@ -506,7 +506,7 @@ const ViewProfile = () => {
                               fullWidth
                               sx={{
                                 "& .MuiInputBase-input.Mui-disabled": {
-                                  WebkitTextFillColor: "#000000",
+                                  WebkitTextFillColor: "#00000057",
                                 },
                               }}
                               className="bg-light"
@@ -528,7 +528,7 @@ const ViewProfile = () => {
                               fullWidth
                               sx={{
                                 "& .MuiInputBase-input.Mui-disabled": {
-                                  WebkitTextFillColor: "#000000",
+                                  WebkitTextFillColor: "#00000057",
                                 },
                               }}
                               className="bg-light"
@@ -549,7 +549,7 @@ const ViewProfile = () => {
                               fullWidth
                               sx={{
                                 "& .MuiInputBase-input.Mui-disabled": {
-                                  WebkitTextFillColor: "#000000",
+                                  WebkitTextFillColor: "#00000057",
                                 },
                               }}
                               className="bg-light"

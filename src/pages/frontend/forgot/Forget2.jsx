@@ -181,7 +181,7 @@ const Forget2 = () => {
                                             }}
                                         >
                                             Forgot{" "}
-                                           <span>Password</span>
+                                            <span>Password</span>
                                         </h2>{" "}
                                         <h5 className=" text-custom  mb-2">Enter the new password  <span>for accessing account.</span></h5>
                                         <Form className="text-center">

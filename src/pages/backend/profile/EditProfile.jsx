@@ -306,7 +306,7 @@ const EditProfile = () => {
                     sx={{ width: "100%" }}
                     variant="outlined"
                   >
-                    <InputLabel htmlFor="outlined-adornment-password">
+                    <InputLabel htmlFor="outlined-adornment-password" style={{color:'#000000'}}>
                       New Password
                     </InputLabel>
                     <OutlinedInput
