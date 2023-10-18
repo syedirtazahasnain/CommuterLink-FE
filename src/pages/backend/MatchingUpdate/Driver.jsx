@@ -34,7 +34,12 @@ const Driver = () => {
     const [startArea, setStartArea] = useState("");
     const [endArea, setEndArea] = useState("");
     const [showfield, setShowField] = useState(false);
-
+    const [selectedOption, setSelectedOption] = useState(''); // State to store the selected option
+    const [inputBankAccount, setInputBankAccount] = useState("");
+    const [inputEasyPaisa, setInputEasyPaisa] = useState("");
+    const [inputJazzCash, setInputJazzCash] = useState("");
+    const [inputRaastID, setInputRaastID] = useState("");
+    const [isIBANValid, setIsIBANValid] = useState(true);
     // For Start Point
     const [startBounds, setStartBounds] = useState([]);
     const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
@@ -47,7 +52,9 @@ const Driver = () => {
     const [cityStart, setCityStart] = useState("");
     const [cityStartId, setCityStartId] = useState("");
     const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
-
+    const [isValidJazzCash, setIsValidJazzCash] = useState(true);
+    const [isValidEasyPaisa, setIsValidEasyPaisa] = useState(true);
+    const [isValidRaastID, setIsValidRaastID] = useState(true);
     // For End Point
     const [endBounds, setEndBounds] = useState([]);
     const [autocompleteEndBounds, setAutocompleteEndBounds] = useState(null);
@@ -399,6 +406,49 @@ const Driver = () => {
     const handleCloseEndModal = () => {
         setShowEndModal(false);
     };
+    const handleOptionChange = (e) => {
+        setSelectedOption(e.target.value); // Update the selected option
+      };
+      const handleInputChange = (e) => {
+        let value = e.target.value;
+    
+        // Remove any special characters and spaces
+        value = value.replace(/[^a-zA-Z0-9]/g, '');
+    
+        // Enforce a maximum length of 24 characters
+        if (value.length > 24) {
+          value = value.slice(0, 24);
+        }
+    
+        setInputBankAccount(value);
+    
+        // Check if the entered value is valid and reset the validation state
+        setIsIBANValid(value.length === 24);
+      };
+
+      const validateEasyPaisa = (inputEasyPaisa) => {
+        // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+        const phonePattern = /^03\d{9}$/;
+        if (inputEasyPaisa === "" || phonePattern.test(inputEasyPaisa)) {
+          setInputEasyPaisa(inputEasyPaisa);
+          setIsValidEasyPaisa(true);
+        } else {
+          setInputEasyPaisa(inputEasyPaisa);
+          setIsValidEasyPaisa(false);
+        }
+      };
+
+      const validateRaastID = (inputRaastID) => {
+        // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+        const phonePattern = /^03\d{9}$/;
+        if (inputRaastID === "" || phonePattern.test(inputRaastID)) {
+          setInputRaastID(inputRaastID);
+          setIsValidRaastID(true);
+        } else {
+          setInputRaastID(inputRaastID);
+          setIsValidRaastID(false);
+        }
+      };
 
     const AddNewStart = () => {
         setAddNewStart(true);
@@ -517,7 +567,18 @@ const Driver = () => {
             lng: event.latLng.lng(),
         });
     };
-
+    const validateJazzCash = (inputJazzCash) => {
+        // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
+        const phonePattern = /^03\d{9}$/;
+        if (inputJazzCash === "" || phonePattern.test(inputJazzCash)) {
+          setInputJazzCash(inputJazzCash);
+          setIsValidJazzCash(true);
+        } else {
+          setInputJazzCash(inputJazzCash);
+          setIsValidJazzCash(false);
+        }
+      };
+    
     const handleMapClickEnd = (event) => {
         console.log(event);
         setMarkerPositionEnd({
@@ -1275,7 +1336,133 @@ const Driver = () => {
                                                                 ))}
                                                             </Select>
                                                         </FormControl>
+                                                        <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                         
+                                                                <Form.Group  className="mb-2 mt-2 text-left">
+                                                                    <Form.Label className="text-success fs-6 ">
+                                                                        Select any payment method
+                                                                    </Form.Label>
+                                                                    <Form.Select aria-label="Default select example"
+                                                                        className="text-secondary" value={selectedOption} onChange={handleOptionChange}>
+                                                                        <option value="">Select an option</option>
+                                                                        <option value="bankAccount">Bank Account</option>
+                                                                        <option value="jazzCashAccount">Jazz Cash Account</option>
+                                                                        <option value="easypaisaAccount">EasyPaisa Account</option>
+                                                                        <option value="raastID">Raast ID</option>
+                                                                    </Form.Select>
+                                                                    {selectedOption === 'bankAccount' && (
+                                                                        <div className="mt-2">
+                                                                            {/* Bank Account input field */}
+                                                                            <TextField
+                                                                                type="text"
+                                                                                // className={`form-control mb-2 text-secondary ${isIBANValid ? '' : 'is-invalid'}`}
+                                                                                className="form-control"
+                                                                                id="bankAccount"
+                                                                                size="small"
+                                                                                name="bankAccount"
+                                                                                placeholder="Bank Account (IBAN-24 Character)"
+                                                                                value={inputBankAccount}
+                                                                                onChange={handleInputChange}
+                                                                                error={!isIBANValid && inputBankAccount !== ""}
+                                                                                helperText={
+                                                                                    !isIBANValid &&
+                                                                                    inputBankAccount !== "" &&
+                                                                                    "Please enter a valid 24-digit IBAN."
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    )}
+                                                                    {selectedOption === 'jazzCashAccount' && (
+                                                                        <div className="mt-2">
+                                                                            {/* Jazz Cash Account input field */}
+                                                                            <TextField
+                                                                                type="text"
+                                                                                className="form-control"
+                                                                                id="jazzCashAccount"
+                                                                                name="jazzCashAccount"
+                                                                                size="small"
+                                                                                placeholder="Jazz Cash Account Number"
+                                                                                value={inputJazzCash}
+                                                                                // onChange={(e) => c(e.target.value)}
+                                                                                // required
+                                                                                onChange={(e) => {
+                                                                                    if (/^\d{0,11}$/.test(e.target.value)) {
+                                                                                        setInputJazzCash(e.target.value);
+                                                                                        validateJazzCash(e.target.value);
+                                                                                    }
 
+                                                                                }}
+                                                                                error={!isValidJazzCash && inputJazzCash !== ""}
+                                                                                helperText={
+                                                                                    !isValidJazzCash &&
+                                                                                    inputJazzCash !== "" &&
+                                                                                    "Please enter a valid Account Number starting with '03' and having 11 digits."
+                                                                                }
+
+                                                                            />
+                                                                        </div>
+                                                                    )}
+                                                                    {selectedOption === 'easypaisaAccount' && (
+                                                                        <div className="mt-2">
+                                                                            {/* EasyPaisa Account input field */}
+                                                                            <TextField
+                                                                                type="text"
+                                                                                className="form-control  text-secondary"
+                                                                                id="easypaisaAccount"
+                                                                                size="small"
+                                                                                name="easypaisaAccount"
+                                                                                placeholder="EasyPaisa Account Number"
+                                                                                value={inputEasyPaisa}
+                                                                                // onChange={(e) => setInputEasyPaisa(e.target.value)}
+                                                                                // required
+                                                                                onChange={(e) => {
+                                                                                    if (/^\d{0,11}$/.test(e.target.value)) {
+                                                                                        setInputEasyPaisa(e.target.value);
+                                                                                        validateEasyPaisa(e.target.value);
+                                                                                    }
+
+                                                                                }}
+                                                                                error={!isValidEasyPaisa && inputEasyPaisa !== ""}
+                                                                                helperText={
+                                                                                    !isValidEasyPaisa &&
+                                                                                    inputEasyPaisa !== "" &&
+                                                                                    "Please enter a valid Account Number starting with '03' and having 11 digits."
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    )}
+                                                                    {selectedOption === 'raastID' && (
+                                                                        <div className="mt-2">
+                                                                            {/* Raast ID input field */}
+                                                                            <TextField
+                                                                                type="text"
+                                                                                className="form-control"
+                                                                                id="raastID"
+                                                                                size="small"
+                                                                                name="raastID"
+                                                                                placeholder="Raast ID"
+                                                                                value={inputRaastID}
+                                                                                // onChange={(e) => setInputRaastID(e.target.value)}
+                                                                                onChange={(e) => {
+                                                                                    if (/^\d{0,11}$/.test(e.target.value)) {
+                                                                                        setInputRaastID(e.target.value);
+                                                                                        validateRaastID(e.target.value);
+                                                                                    }
+
+                                                                                }}
+                                                                                error={!isValidRaastID && inputRaastID !== ""}
+                                                                                helperText={
+                                                                                    !isValidRaastID &&
+                                                                                    inputRaastID !== "" &&
+                                                                                    "Please enter a valid Account Number starting with '03' and having 11 digits."
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    )}
+
+                                                                </Form.Group>
+                                                        
+                                                        </Box>
                                                         <div className="container my-5">
 
                                                             <Button
@@ -1391,7 +1578,7 @@ const Driver = () => {
                                                     </Box>
                                                     <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
                                                         <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
-                                                            <Form.Label className="pt-3 text-left" style={{color:"#00000057"}}>
+                                                            <Form.Label className="pt-3 text-left" style={{ color: "#00000057" }}>
                                                                 I Commute (Select Days)
                                                             </Form.Label>
                                                         </Form.Group>
