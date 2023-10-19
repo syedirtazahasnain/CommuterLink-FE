@@ -153,9 +153,6 @@ const DriverRegistration = () => {
   const [selectedLicenseBackDriver, setSelectedLicenseBackDriver] = useState(null);
   const [selectedCnicFrontDriver, setSelectedCnicFrontDriver] = useState(null);
   const [selectedCnicBackDriver, setSelectedCnicBackDriver] = useState(null);
-
-
-
   const [homeTimeSlots, setHomeTimeSlots] = useState([]);
   const [selectedHomeTime, setSelectedHomeTime] = useState("");
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
@@ -1099,6 +1096,10 @@ const DriverRegistration = () => {
     }
   };
 
+  useEffect(() => {
+    handleDriverTypeForm();
+  }, [inputDriverType]);
+
   const handleDriverTypeForm = () => {
 
     if (inputDriverType === "I Drive Myself") {
@@ -1112,6 +1113,8 @@ const DriverRegistration = () => {
       setSelectedImageLicenseFrontExt("");
       setSelectedImageLicenseBack("");
       setSelectedImageLicenseBackExt("");
+      setSelectedCnicFrontDriver(null);
+      setSelectedCnicBackDriver(null);
       setSelectedLicenseFrontDriver(null);
       setSelectedLicenseBackDriver(null);
     }
@@ -1130,6 +1133,8 @@ const DriverRegistration = () => {
       setSelectedImageLicenseFrontExt("");
       setSelectedImageLicenseBack("");
       setSelectedImageLicenseBackExt("");
+      setSelectedCnicFrontDriver(null);
+      setSelectedCnicBackDriver(null);
       setSelectedLicenseFrontDriver(null);
       setSelectedLicenseBackDriver(null);
     }
@@ -1148,6 +1153,8 @@ const DriverRegistration = () => {
       setSelectedImageLicenseFrontExt("");
       setSelectedImageLicenseBack("");
       setSelectedImageLicenseBackExt("");
+      setSelectedCnicFrontDriver(null);
+      setSelectedCnicBackDriver(null);
       setSelectedLicenseFrontDriver(null);
       setSelectedLicenseBackDriver(null);
     }
@@ -4069,7 +4076,7 @@ const DriverRegistration = () => {
                                   </Tooltip>
 
                                 </p></div>
-                              {selectedCnicFrontDriver ? (
+                              {selectedCnicBackDriver ? (
 
                                 <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
                                   <strong>{selectedCnicBackDriver.name}</strong>
@@ -4879,7 +4886,7 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </Row> */}
 
-                      <div className="row mb-3 mt-2 shadow shadow-sm">
+                      {/* <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
                           className="col-md-12 px-2 py-3 form-color-field"
                         >
@@ -4934,35 +4941,7 @@ const DriverRegistration = () => {
                                 disablePast
                               />
                             </LocalizationProvider>
-                            {/* <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Enter Here"
-                              value={inputDriverValidUpto}
-                              onChange={(e) => setInputDriverValidUpto(e.target.value)}
-                              defaultValue=""
-                            /> */}
                           </Form.Group>
-                          {/* <Form.Group
-                              as={Col}
-                              md="12"
-                              controlId="validationCustom33"
-                              className="mb-2"
-                            >
-                              <Form.Label text-dark fs-6>
-                                Place of Issue
-                              </Form.Label>
-                              <Form.Control
-                                required
-                                type="text"
-                                className="text-secondary"
-                                placeholder="Place of issue"
-                                value={inputPlaceIssueMySelf}
-                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
-                                defaultValue=""
-                              />
-                            </Form.Group> */}
                           <Form.Group
                             as={Col}
                             md="12"
@@ -5003,9 +4982,6 @@ const DriverRegistration = () => {
                               <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
 
                             )}
-                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
-                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text> */}
                           </Form.Group>
                           <Form.Group
                             as={Col}
@@ -5049,7 +5025,7 @@ const DriverRegistration = () => {
                             )}
                           </Form.Group>
                         </div>
-                      </div>
+                      </div> */}
 
 
 
@@ -5219,7 +5195,7 @@ const DriverRegistration = () => {
                               </Form.Label>
                               <Form.Select aria-label="Default select example"
                                 className="text-secondary" value={selectedOption} onChange={handleOptionChange}>
-                                <option value="">Select an option</option>
+                                <option value="" hidden>Select an option</option>
                                 <option value="bankAccount">Bank Account</option>
                                 <option value="jazzCashAccount">Jazz Cash Account</option>
                                 <option value="easypaisaAccount">EasyPaisa Account</option>
