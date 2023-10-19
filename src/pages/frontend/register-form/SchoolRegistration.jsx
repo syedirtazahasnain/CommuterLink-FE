@@ -785,17 +785,28 @@ const SchoolRegistration = () => {
 
       if (jsonresponse.statusCode == 200) {
         console.log("Personal Form Response:", jsonresponse);
-      } else {
-        // alert("Error: " + jsonresponse.message);
-        Swal.fire({
-          position: 'top',
-          // icon: 'error',
-          text: `${jsonresponse.message}`,
-          customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-          },
+        await LocationForm();
+        await ImagesFormCnicFront();
+        await ImagesFormCnicBack();
+        await ImagesFormPicture();
+        setIsLoading(false);
+      } else if (jsonresponse.statusCode === 422) {
+        console.log("Personal Form CNIC Issue Response:", jsonresponse);
+        const errors = jsonresponse.errors;
+        for (const field of Object.keys(errors)) {
+          // Swal.fire({
+          //   position: "top",
+          //   // icon: "error",
+          //   // text: `${jsonresponse.message}`,
+          //   text: `${errors[field][0]}`,
+          //   customClass: {
+          //     confirmButton: "swal-custom",
+          //     // Apply custom CSS class to the OK button
+          //   },
+          // });
+          displayNotification("error", `${errors[field][0]}`);
         }
-        )
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error.message);
