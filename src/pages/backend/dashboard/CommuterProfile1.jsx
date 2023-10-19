@@ -319,6 +319,8 @@ const CommuterProfile1 = () => {
       request_id,
       dropoff_address,
       pickup_address,
+      university_name,
+      university_address,
     } = user;
 
     const {
@@ -394,7 +396,7 @@ const CommuterProfile1 = () => {
                       <div className="col-md-6">
                         {age !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold text-end font-custom"> Age:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">Age:</h5>
                           </>
                         ) : (
                           <>
@@ -418,6 +420,38 @@ const CommuterProfile1 = () => {
                       </div>
                       <div className="col-md-6">
                         <h5 className="fw-bold text-secondary">{profession}</h5>
+                      </div>
+                    </div>
+                    
+                    <div className="row mb-2">
+                      <div className="col-md-6">
+                        {university_name && university_name !== "" ? (
+                          <>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">University Name:</h5>
+                          </>
+                        ) : (
+                          <>
+                          </>
+                        )}
+                      </div>
+                      <div className="col-md-6">
+                        <h5 className="fw-bold text-secondary">{university_name}</h5>
+                      </div>
+                    </div>
+
+                    <div className="row mb-2">
+                      <div className="col-md-6">
+                        {university_address && university_address !== "" ? (
+                          <>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">University Address:</h5>
+                          </>
+                        ) : (
+                          <>
+                          </>
+                        )}
+                      </div>
+                      <div className="col-md-6">
+                        <h5 className="fw-bold text-secondary">{university_address}</h5>
                       </div>
                     </div>
 
@@ -603,8 +637,8 @@ const CommuterProfile1 = () => {
                   </div>
                   <div className="row mt-3">
                     <div className="col-md-9">
-                      
-                     <div className="row mb-2">
+
+                      <div className="row mb-2">
                         <div className="col-md-6">
                           {seats !== "" ? (
                             <>
@@ -622,7 +656,7 @@ const CommuterProfile1 = () => {
                         <div className="col-md-6">
                           {seats_left !== "" ? (
                             <>
-                            {seats_left && (
+                              {seats_left && (
                                 <>
                                   <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
                                 </>
@@ -637,8 +671,8 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{seats_left}</h5>
                         </div>
                       </div>
-                    
-                    
+
+
                       <div className="row mb-2">
                         <div className="col-md-6">
                           {price !== "" ? (
@@ -672,7 +706,7 @@ const CommuterProfile1 = () => {
                           <h5 className="fw-bold text-secondary">{car_ac}</h5>
                         </div>
                       </div>
-                    
+
                       <div className="row mb-2">
                         <div className="col-md-6">
                           {car_brand !== "" ? (
@@ -825,7 +859,7 @@ const CommuterProfile1 = () => {
                         />
                       </GoogleMap>
                     </Row>
-                    
+
                     <div className="row justify-content-end">
                       <div className="col-md-12 text-end">
                         <div className="row justify-content-end">

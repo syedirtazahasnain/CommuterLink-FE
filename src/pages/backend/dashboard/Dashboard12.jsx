@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import { API_URL } from '../../../constants'
 import { ThreeCircles } from 'react-loader-spinner'
 import { displayNotification } from '../../../helpers'
+import MyWallet from './MyWallet'
 
 
 const Dashboard12 = () => {
@@ -89,13 +90,20 @@ const Dashboard12 = () => {
             <strong>Dear [Name of Car Offeror],</strong><br/>We would like to inform you that your termination notification, which was initiated on [Date], is currently in the process of being handled. We are notifying all travel partners regarding this matter. According to this notification, the travel agreement will be canceled on [Date].
             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div> */}
-          <CommuterLinkSuggestions />
-          {/* <RequestsByMembers /> */}
-          <TravelPatners />
+
           {data !== "" ? (
-            <></>
+            <>
+              <CommuterLinkSuggestions />
+              {/* <RequestsByMembers /> */}
+              <MyWallet />
+            </>
           ) : (
-            <TravelConfirmation />
+            <>
+              <TravelPatners />
+              <MyWallet />
+              <TravelConfirmation />
+              <CommuterLinkSuggestions />
+            </>
           )}
         </>
       )}

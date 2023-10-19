@@ -223,6 +223,8 @@ const RequestCommuterProfile = () => {
             destination,
             time_depart,
             time_return,
+            university_name,
+            university_address,
         } = profile.user[0];
 
         const {
@@ -316,6 +318,38 @@ const RequestCommuterProfile = () => {
                                             </div>
                                             <div className="col-md-6">
                                                 <h5 className="fw-bold text-secondary">{profession}</h5>
+                                            </div>
+                                        </div>
+
+                                        <div className="row mb-2">
+                                            <div className="col-md-6">
+                                                {university_name && university_name !== "" ? (
+                                                    <>
+                                                        <h5 className="text-dark-green fw-bold text-end font-custom">University Name:</h5>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                    </>
+                                                )}
+                                            </div>
+                                            <div className="col-md-6">
+                                                <h5 className="fw-bold text-secondary">{university_name}</h5>
+                                            </div>
+                                        </div>
+
+                                        <div className="row mb-2">
+                                            <div className="col-md-6">
+                                                {university_address && university_address !== "" ? (
+                                                    <>
+                                                        <h5 className="text-dark-green fw-bold text-end font-custom">University Address:</h5>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                    </>
+                                                )}
+                                            </div>
+                                            <div className="col-md-6">
+                                                <h5 className="fw-bold text-secondary">{university_address}</h5>
                                             </div>
                                         </div>
 

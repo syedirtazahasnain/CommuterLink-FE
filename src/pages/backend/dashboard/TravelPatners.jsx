@@ -73,6 +73,8 @@ const TravelPatners = () => {
   const [RegYear, setRegYear] = useState("");
   const [dropOffAddress, setDropOffAddress] = useState("");
   const [pickupAddress, setPickupAddress] = useState("");
+  const [universityAddress, setUniversityAddress] = useState("");
+  const [universityName, setUniversityName] = useState("");
 
   // For second person
   const [contactId1, setContactId1] = useState("");
@@ -376,6 +378,8 @@ const TravelPatners = () => {
         setTimeReturn(jsonresponse.data[0].time_return);
         setDropOffAddress(jsonresponse.data[0].dropoff_address);
         setPickupAddress(jsonresponse.data[0].pickup_address);
+        setUniversityName(jsonresponse.data[0].university_name);
+        setUniversityAddress(jsonresponse.data[0].university_address);
         setCarAC(jsonresponse.data[0]?.vehicle[0]?.car_ac);
         setCarBrand(jsonresponse.data[0]?.vehicle[0]?.car_brand);
         setCarCC(jsonresponse.data[0]?.vehicle[0]?.car_cc);
@@ -616,6 +620,37 @@ const TravelPatners = () => {
                                   </div>
                                   <div className="col-md-6">
                                     <h5 className="fw-bold text-secondary">{mobileNo}</h5>
+                                  </div>
+                                </div>
+                                <div className="row mb-2">
+                                  <div className="col-md-6">
+                                    {universityName && universityName !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold text-end font-custom">University Name:</h5>
+                                      </>
+                                    ) : (
+                                      <>
+                                      </>
+                                    )}
+                                  </div>
+                                  <div className="col-md-6">
+                                    <h5 className="fw-bold text-secondary">{universityName}</h5>
+                                  </div>
+                                </div>
+
+                                <div className="row mb-2">
+                                  <div className="col-md-6">
+                                    {universityAddress && universityAddress !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold text-end font-custom">University Address:</h5>
+                                      </>
+                                    ) : (
+                                      <>
+                                      </>
+                                    )}
+                                  </div>
+                                  <div className="col-md-6">
+                                    <h5 className="fw-bold text-secondary">{universityAddress}</h5>
                                   </div>
                                 </div>
                               </div>
@@ -1030,7 +1065,7 @@ const TravelPatners = () => {
                                       ) : (
                                         <img
                                           src={`${BASE_URL}/assets/images/Vector.png`}
-                                          className="card-img-top w-70px h-70 m-auto mt-2 cursor-pointer"
+                                          className="card-img-top w-100px m-auto h-100px"
                                         />
                                       )}
 
@@ -1046,11 +1081,12 @@ const TravelPatners = () => {
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Name:</h5>
                                               </>
                                             )}
                                           </div>
                                           <div className="col-md-6">
-                                            <h5 className="fw-bold text-secondary text-center font-custom">{name}</h5>
+                                            <h5 className="fw-bold text-secondary">{name}</h5>
                                           </div>
                                         </div>
                                         <div className="row mb-2">
@@ -1061,21 +1097,23 @@ const TravelPatners = () => {
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Commuting Cost:</h5>
                                               </>
                                             )}
                                           </div>
                                           <div className="col-md-6">
-                                            <h5 className="fw-bold text-center text-secondary">Rs. {price}/-</h5>
+                                            <h5 className="fw-bold text-secondary">{price && `Rs. ${price}/-`}</h5>
                                           </div>
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {date && formatDate(date) !== "" ? (
+                                            {date !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
                                               </>
                                             )}
                                           </div>
@@ -1083,16 +1121,17 @@ const TravelPatners = () => {
                                             <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5>
                                           </div>
                                         </div>
-                                        <div className="text-center">
-                                          <button className="font-custom btn btn-sm  fs-6 fw-bold btn-dark-green text-white py-2"
-                                            onClick={() => {
-                                              route(contactId);
-                                            }}
-                                          >
-                                            View Profile
-                                          </button>
-                                        </div>
 
+                                      </div>
+                                      <div className="text-center">
+                                        <button
+                                          className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white py-2"
+                                          onClick={() => {
+                                            route1(contactId);
+                                          }}
+                                        >
+                                          View Profile
+                                        </button>
                                       </div>
                                     </div>
                                     <div>
@@ -1153,12 +1192,13 @@ const TravelPatners = () => {
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {date1 && formatDate(date1) !== "" ? (
+                                            {date1 !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
                                               </>
                                             )}
                                           </div>
@@ -1237,12 +1277,13 @@ const TravelPatners = () => {
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {date2 && formatDate(date2) !== "" ? (
+                                            {date2 !== "" ? (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
                                               </>
                                             ) : (
                                               <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Start Date:</h5>
                                               </>
                                             )}
                                           </div>
@@ -1325,216 +1366,6 @@ const TravelPatners = () => {
             )}
           </div >
         )}
-      <div className="card  mt-3 mb-5">
-        <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
-          <h4 className="text-center fw-bold text-warning m-auto">
-            {" "}
-            MY WALLET{" "}
-          </h4>{" "}
-        </div>
-        {/* <div className="card mx-4 my-4" style={{ background: "rgb(214 219 218)" }}>
-          <div className="card-body">
-          <div className="row">
-            <div className="col-md-8">
-              <div className="row d-flex justify-content-between">
-            <div className="col-md-6 col-sm-12 px-5 py-0 bg-light text-center border-2 rounded-4">
-              <div className="text-center">  <i className=" p-3 wallet-margin fa-solid text-success fa-wallet fs-1"></i></div>
-          
-            <p className="py-3 text-center fw-bold text-success fs-3">
-                    Rs. &nbsp; {walletAmount} /-
-                  </p>
-            </div>
-            <div className="col-md-4 col-sm-12 mx-5 py-3"> <img
-                        className="d-block img-fluid w-auto h-auto"
-                        src={`${BASE_URL}/assets/images/signup-3.png`}
-                        alt="First slide"
-                      /></div>
-            </div>
-            
-            </div>
-            <div className="col-md-8">
-              <div className="row">
-                <div className="col-md-4">
-                  <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
-                </div>
-                <div className="col-md-10">
-
-                  <p className="py-3 text-center fw-bold text-success fs-3">
-                    Rs. &nbsp; {walletAmount} /-
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 col-sm-12 text-center py-4">
-              {userType === 0 ?
-                (
-                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
-                    Recharge
-                  </button>
-                ) :
-                (
-                    <div className="alert alert-info  text-center fw-bold fs-5" role="alert">
-                      <i className="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Your wallet is secure and end to end encrypted.
-                    </div>
-                )}
-              <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
-                View Transaction History
-              </button>
-            </div>
-          </div>
-          </div>
-         
-        </div> */}
-        <div className="card mx-4 my-4 broder-0" style={{ background: "rgb(214 219 218)" }}>
-          <div className="card-body">
-            <div className="row">
-              <div className="col-md-4 px-4">
-                <div className="row  justify-content-between mb-2">
-                  <div className="col-md-12 col-sm-12  py-6 background_body text-center border-2 rounded-4">
-                    <div className="text-center">  <i className=" p-3 wallet-margin fa-solid fa-wallet fs-1"></i></div>
-
-                    <h1 className="py-4 text-center fw-bold  ">
-                      Rs. {walletAmount} /-
-                    </h1>
-                  </div>
-                  {/* <div className="col-md-4 col-sm-12 mx-5 py-3"> <img
-                    className="d-block img-fluid w-auto h-auto"
-                    src={`${BASE_URL}/assets/images/signup-3.png`}
-                    alt="First slide"
-                  /></div> */}
-                </div>
-
-              </div>
-              {/* <div className="col-md-8">
-              <div className="row">
-                <div className="col-md-4">
-                  <i className=" p-3 px-4 fa-solid text-success fa-wallet fs-1"></i>
-                </div>
-                <div className="col-md-10">
-
-                  <p className="py-3 text-center fw-bold text-success fs-3">
-                    Rs. &nbsp; {walletAmount} /-
-                  </p>
-                </div>
-              </div>
-            </div> */}
-              {/* <div className="col-md-4 col-sm-12 text-center py-4">
-              {userType === 0 ?
-                (
-                  <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
-                    Recharge
-                  </button>
-                ) :
-                (
-                    <div className="alert alert-info  text-center fw-bold fs-5" role="alert">
-                      <i className="fa-solid fa-triangle-exclamation fs-5 text-warning"></i>Your wallet is secure and end to end encrypted.
-                    </div>
-                )}
-              <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white rounded-4 px-4 px-sm-5 py-3 py-sm-3 mb-3" >
-                View Transaction History
-              </button>
-            </div> */}
-              <div className="col-md-8 col-sm-12">
-                <div className="row">
-                  <div className="col-md-12 col-sm-12">
-                    <div className="">
-                      <Table className="bg-dark text-white border-1 rounded-top-4">
-                        <TableBody>
-                          <TableRow>
-                            <TableCell className="text-white" style={tableCellStyle}>
-                              <h2 className="text-light">Recent Transactions</h2>
-                            </TableCell>
-                          </TableRow>
-                        </TableBody>
-                      </Table>
-                      <Table className="bg-dark text-white border-1 rounded-bottom-4">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell className="text-white" style={tableCellStyle}>Date</TableCell>
-                            <TableCell className="text-white" style={tableCellStyle}>Description</TableCell>
-                            <TableCell className="text-white" style={tableCellStyle}>Amount</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {recentLoading ? (
-                            <TableRow>
-                              <TableCell colSpan={3} className="d-flex align-items-center mx-auto my-auto">
-                                <ThreeCircles
-                                  height={30}
-                                  width={30}
-                                  color="#4fa94d"
-                                  visible={true}
-                                  ariaLabel="three-circles-rotating"
-                                  outerCircleColor=""
-                                  innerCircleColor=""
-                                  middleCircleColor=""
-                                />
-                              </TableCell>
-                            </TableRow>
-                          ) : (
-                            recentData.length === 0 ? (
-                              <TableRow>
-                                <TableCell colSpan={3} className="text-center text-white fw-bold">
-                                  No Data Found
-                                </TableCell>
-                              </TableRow>
-                            ) : (
-                              recentData.map((item, index) => (
-                                <TableRow key={index}>
-                                  <TableCell className="text-white text-center">{item.date}</TableCell>
-                                  <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{item.Description}</TableCell>
-                                  <TableCell className="text-white text-center">{`Rs. ${item.wallet_transfer}/-`}</TableCell>
-                                </TableRow>
-                              ))
-                            )
-                          )}
-                        </TableBody>
-                      </Table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row pt-5 d-flex justify-content-between">
-              <div className="col-md-4 d-flex">
-                <div className="row d-flex">
-                  <div className="col-md-2"><img src={`${BASE_URL}/assets/images/data_security_icon.png`} className="w-50px h-50px" /></div>
-                </div>
-                <div className="col-md-8 fs-auto fw-bold"> Your wallet is secured  and<br /> end-to-end encrypted.</div>
-
-              </div>
-              <div className="col-md-6 col-sm-12">
-                <div className="row d-flex justify-content-between">
-                  <div className="col-md-6">
-                    {userType === 0 ?
-                      (
-                        <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={onNavigate} >
-                          Recharge
-                        </button>
-                      ) :
-                      (
-                        <div
-                        //  className="alert alert-info font-custom w-md-100 w-sm-auto me-3  fw-bold fs-auto" role="alert"
-
-                        >
-                          {/* <i className="fa-solid fa-triangle-exclamation fs-auto  text-warning"></i>Your wallet is secure and end to end encrypted. */}
-                        </div>
-
-                      )}
-
-                  </div>
-
-                  <div className="col-md-6">
-                    <button className="font-custom btn btn-sm me-3 w-100 w-sm-auto w-md-75 fs-6 fw-bold btn-dark-green text-white  px-4 px-sm-5 py-3 py-sm-3 mb-3" onClick={viewTrasaction}>
-                      View Transaction History
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div >
   );
 };

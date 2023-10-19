@@ -395,6 +395,8 @@ const TravelBuddyProfile = () => {
       car_model,
       car_reg_year,
       days,
+      university_name,
+      university_address,
     } = user;
 
     setCancelDate(cancellation_date);
@@ -482,6 +484,7 @@ const TravelBuddyProfile = () => {
                           <h5 className="fw-bold text-secondary">{profession}</h5>
                         </div>
                       </div>
+                      
                       <div className="row mb-2">
                         <div className="col-md-6">
                           {mobile !== "" ? (
@@ -496,6 +499,39 @@ const TravelBuddyProfile = () => {
                           <h5 className="fw-bold text-secondary">{mobile}</h5>
                         </div>
                       </div>
+
+                      <div className="row mb-2">
+                        <div className="col-md-6">
+                          {university_name && university_name !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold text-end font-custom">University Name:</h5>
+                            </>
+                          ) : (
+                            <>
+                            </>
+                          )}
+                        </div>
+                        <div className="col-md-6">
+                          <h5 className="fw-bold text-secondary">{university_name}</h5>
+                        </div>
+                      </div>
+
+                      <div className="row mb-2">
+                        <div className="col-md-6">
+                          {university_address && university_address !== "" ? (
+                            <>
+                              <h5 className="text-dark-green fw-bold text-end font-custom">University Address:</h5>
+                            </>
+                          ) : (
+                            <>
+                            </>
+                          )}
+                        </div>
+                        <div className="col-md-6">
+                          <h5 className="fw-bold text-secondary">{university_address}</h5>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -715,7 +751,7 @@ const TravelBuddyProfile = () => {
                           </div>
                         </div>
                         <div className="row mb-2">
-                          <div className="col-md-4">
+                          <div className="col-md-6">
                             {cancellation_date && cancellation_date !== null ? (
                               <>
                                 <h5 className="text-dark-green fw-bold font-custom">Cancel Agreement Date:</h5>
@@ -724,7 +760,7 @@ const TravelBuddyProfile = () => {
                               <></>
                             )}
                           </div>
-                          <div className="col-md-8">
+                          <div className="col-md-6">
                             <h5 className="fw-bold text-secondary">{cancellation_date && formatDate(cancellation_date)}</h5>
                           </div>
                         </div>
@@ -881,7 +917,7 @@ const TravelBuddyProfile = () => {
                   </div>
                 </div>
                 <div className="text-end px-3 py-3">
-                  <Button className={`my-auto font-custom btn btn-sm fs-6 fw-bold rounded-0 px-3 py-3 ${cancelDisabled === true ? 'btn-secondary text-white' : 'btn-dark-green text-white'}`} onClick={()=>{youSure(contact_id)}} disabled={cancelDisabled === true}>
+                  <Button className={`my-auto font-custom btn btn-sm fs-6 fw-bold rounded-0 px-3 py-3 ${cancelDisabled === true ? 'btn-secondary text-white' : 'btn-dark-green text-white'}`} onClick={() => { youSure(contact_id) }} disabled={cancelDisabled === true}>
                     Cancel Agreement
                   </Button>
                 </div>
