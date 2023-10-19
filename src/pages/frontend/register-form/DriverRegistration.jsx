@@ -145,6 +145,17 @@ const DriverRegistration = () => {
 
   // For Registration
   const [validated, setValidated] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedCnicFront, setSelectedCnicFront] = useState(null);
+  const [selectedCnicBack, setSelectedCnicBack] = useState(null);
+  const [selectedCarPlate, setSelectedCarPlate] = useState(null);
+  const [selectedLicenseFrontDriver, setSelectedLicenseFrontDriver] = useState(null);
+  const [selectedLicenseBackDriver, setSelectedLicenseBackDriver] = useState(null);
+  const [selectedCnicFrontDriver, setSelectedCnicFrontDriver] = useState(null);
+  const [selectedCnicBackDriver, setSelectedCnicBackDriver] = useState(null);
+
+
+
   const [homeTimeSlots, setHomeTimeSlots] = useState([]);
   const [selectedHomeTime, setSelectedHomeTime] = useState("");
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
@@ -168,7 +179,7 @@ const DriverRegistration = () => {
   const [isValidProfession, setIsValidProfession] = useState(true);
   const [isCarBrandValid, setIsCarBrandValid] = useState(true);
   const [isLicenseValid, setIsLicenseValid] = useState(true);
-  
+
   // For Start Point
   const [startBounds, setStartBounds] = useState([]);
   const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
@@ -255,7 +266,7 @@ const DriverRegistration = () => {
   const [inputDriverValidUpto, setInputDriverValidUpto] = useState(null);
   const inputDriverValidUptoFormat = inputDriverValidUpto ? inputDriverValidUpto.format('DD-MM-YYYY') : '';
   const [isIBANValid, setIsIBANValid] = useState(true);
-  
+
   // For License Fields
   const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
   const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] = useState("");
@@ -552,7 +563,7 @@ const DriverRegistration = () => {
     setAddNewStartField(false);
     handleShowStartModal();
   };
-  
+
   const validateJazzCash = (inputJazzCash) => {
     // Regular expression pattern for validating Pakistan phone numbers (must start with "03" and have 11 digits)
     const phonePattern = /^03\d{9}$/;
@@ -827,7 +838,7 @@ const DriverRegistration = () => {
     }
   };
 
-  
+
   const handleCnicFront = (e) => {
     const file = e.target.files[0];
     const maxSize = 5120000;
@@ -836,6 +847,7 @@ const DriverRegistration = () => {
       reader.onload = () => {
         setCnicFront(reader.result.split(",")[1]);
         setCnicFrontExt(file.name.split('.').pop());
+        setSelectedCnicFront(file);
       };
       reader.readAsDataURL(file);
       if (file.size <= maxSize) {
@@ -862,6 +874,7 @@ const DriverRegistration = () => {
       reader.onload = () => {
         setCnicBack(reader.result.split(",")[1]);
         setCnicBackExt(file.name.split('.').pop());
+        setSelectedCnicBack(file);
       };
       reader.readAsDataURL(file);
       if (file.size <= maxSize) {
@@ -906,6 +919,7 @@ const DriverRegistration = () => {
         reader.onload = () => {
           setPicture(reader.result.split(",")[1]);
           setPictureExt(file.name.split('.').pop());
+          setSelectedFile(file);
         };
         reader.readAsDataURL(file);
       }
@@ -919,8 +933,53 @@ const DriverRegistration = () => {
     }
   };
 
+  const handlePicturePreview = (e) => {
+    setSelectedFile(null);
+    setPicture("");
+    setPictureExt("");
+  };
+  const handleCnicFrontPreview = (e) => {
+    setSelectedCnicFront(null);
+    setCnicFront("");
+    setCnicFrontExt("");
+  }
+
+  const handleCnicBackPreview = (e) => {
+    setSelectedCnicBack(null);
+    setCnicBack("");
+    setCnicBackExt("");
+  }
+
+  const handleLicenseFrontDriverPreview = (e) => {
+    setSelectedLicenseFrontDriver(null);
+    setSelectedImageLicenseFront("");
+    setSelectedImageLicenseFrontExt("");
+  }
+
+  const handleLicenseBackDriverPreview = (e) => {
+    setSelectedLicenseBackDriver(null);
+    setSelectedImageLicenseBack("");
+    setSelectedImageLicenseBackExt("");
+  }
+
   // console.log("Picture:", picture);
   // console.log("Picture Extension:", pictureExt);
+  const handleCarPlatePreview = (e) => {
+    setSelectedCarPlate(null);
+    setSelectedCarImage("");
+    setSelectedCarImageExt("");
+  }
+  const handleCnicFrontDriverPreview = (e) => {
+    setSelectedCnicFrontDriver(null);
+    setInputDriverCnicFront("");
+    setInputDriverCnicFrontExt("");
+  }
+
+  const handleCnicBackDriverPreview = (e) => {
+    setSelectedCnicBackDriver(null);
+    setInputDriverCnicBack("");
+    setInputDriverCnicBackExt("");
+  }
 
   const handleCnicFrontDriver = (e) => {
     const file = e.target.files[0];
@@ -931,6 +990,7 @@ const DriverRegistration = () => {
         reader.onload = () => {
           setInputDriverCnicFront(reader.result.split(",")[1]);
           setInputDriverCnicFrontExt(file.name.split('.').pop());
+          setSelectedCnicFrontDriver(file);
         };
         reader.readAsDataURL(file);
       }
@@ -953,6 +1013,7 @@ const DriverRegistration = () => {
         reader.onload = () => {
           setInputDriverCnicBack(reader.result.split(",")[1]);
           setInputDriverCnicBackExt(file.name.split('.').pop());
+          setSelectedCnicBackDriver(file);
         };
         reader.readAsDataURL(file);
       }
@@ -976,6 +1037,7 @@ const DriverRegistration = () => {
         reader.onload = () => {
           setSelectedImageLicenseFront(reader.result.split(",")[1]);
           setSelectedImageLicenseFrontExt(file.name.split('.').pop());
+          setSelectedLicenseFrontDriver(file);
         };
         reader.readAsDataURL(file);
       }
@@ -999,6 +1061,7 @@ const DriverRegistration = () => {
         reader.onload = () => {
           setSelectedImageLicenseBackExt(reader.result.split(",")[1]);
           setSelectedImageLicenseBackExt(file.name.split('.').pop());
+          setSelectedLicenseBackDriver(file);
         };
         reader.readAsDataURL(file);
       }
@@ -1022,6 +1085,7 @@ const DriverRegistration = () => {
         reader.onload = () => {
           setSelectedCarImage(reader.result.split(",")[1]);
           setSelectedCarImageExt(file.name.split('.').pop());
+          setSelectedCarPlate(file);
         };
         reader.readAsDataURL(file);
       }
@@ -1048,6 +1112,8 @@ const DriverRegistration = () => {
       setSelectedImageLicenseFrontExt("");
       setSelectedImageLicenseBack("");
       setSelectedImageLicenseBackExt("");
+      setSelectedLicenseFrontDriver(null);
+      setSelectedLicenseBackDriver(null);
     }
 
     if (inputDriverType === "Driver") {
@@ -1064,6 +1130,8 @@ const DriverRegistration = () => {
       setSelectedImageLicenseFrontExt("");
       setSelectedImageLicenseBack("");
       setSelectedImageLicenseBackExt("");
+      setSelectedLicenseFrontDriver(null);
+      setSelectedLicenseBackDriver(null);
     }
 
     if (inputDriverType === "Both") {
@@ -1080,6 +1148,8 @@ const DriverRegistration = () => {
       setSelectedImageLicenseFrontExt("");
       setSelectedImageLicenseBack("");
       setSelectedImageLicenseBackExt("");
+      setSelectedLicenseFrontDriver(null);
+      setSelectedLicenseBackDriver(null);
     }
 
   };
@@ -2731,8 +2801,14 @@ const DriverRegistration = () => {
                             </Tooltip>
 
                           </p></div>
+                        {selectedCnicFront ? (
 
-                        <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFront} />
+                          <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                            <strong>{selectedCnicFront.name}</strong>
+                            <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontPreview}></button>
+                          </div>
+                        ) : (
+                          <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFront} />)}
 
                       </Form.Group>
                       <Form.Group
@@ -2766,8 +2842,16 @@ const DriverRegistration = () => {
                             </Tooltip>
 
                           </p></div>
+                        {selectedCnicBack ? (
 
-                        <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
+                          <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                            <strong>{selectedCnicBack.name}</strong>
+                            <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackPreview}></button>
+                          </div>
+                        ) : (
+                          <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
+                        )}
+
 
                       </Form.Group>
                       <Form.Group
@@ -2800,8 +2884,15 @@ const DriverRegistration = () => {
                             </Tooltip>
 
                           </p></div>
+                        {selectedFile ? (
 
-                        <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handlePicture} />
+                          <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                            <strong>{selectedFile.name}</strong>
+                            <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handlePicturePreview}></button>
+                          </div>
+                        ) : (
+                          <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handlePicture} />
+                        )}
 
                       </Form.Group>
                     </Row>
@@ -3018,13 +3109,21 @@ const DriverRegistration = () => {
                               </Tooltip>
 
                             </p></div>
+                          {selectedCarPlate ? (
 
-                          <Form.Control
-                            type="file"
-                            accept="image/png, image/jpeg"
-                            onChange={handleImageSelect}
-                            required
-                          />
+                            <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                              <strong>{selectedCarPlate.name}</strong>
+                              <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCarPlatePreview}></button>
+                            </div>
+                          ) : (
+                            <Form.Control
+                              type="file"
+                              accept="image/png, image/jpeg"
+                              onChange={handleImageSelect}
+                              required
+                            />
+                          )}
+
                           {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                             The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                           </Form.Text> */}
@@ -3687,8 +3786,16 @@ const DriverRegistration = () => {
                                   </Tooltip>
 
                                 </p></div>
+                              {selectedLicenseFrontDriver ? (
 
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                  <strong>{selectedLicenseFrontDriver.name}</strong>
+                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
+                                </div>
+                              ) : (
+                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+
+                              )}
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
@@ -3723,8 +3830,17 @@ const DriverRegistration = () => {
                                   </Tooltip>
 
                                 </p></div>
+                              {selectedLicenseBackDriver ? (
 
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                  <strong>{selectedLicenseBackDriver.name}</strong>
+                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
+                                </div>
+                              ) : (
+                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+
+                              )}
+
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
@@ -3910,8 +4026,15 @@ const DriverRegistration = () => {
                                   </Tooltip>
 
                                 </p></div>
+                              {selectedCnicFrontDriver ? (
 
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
+                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                  <strong>{selectedCnicFrontDriver.name}</strong>
+                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontDriverPreview}></button>
+                                </div>
+                              ) : (
+                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />)}
+
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
@@ -3946,8 +4069,14 @@ const DriverRegistration = () => {
                                   </Tooltip>
 
                                 </p></div>
+                              {selectedCnicFrontDriver ? (
 
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
+                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                  <strong>{selectedCnicBackDriver.name}</strong>
+                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackDriverPreview}></button>
+                                </div>
+                              ) : (
+                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />)}
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
@@ -4068,8 +4197,16 @@ const DriverRegistration = () => {
                                   </Tooltip>
 
                                 </p></div>
+                              {selectedLicenseFrontDriver ? (
 
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                  <strong>{selectedLicenseFrontDriver.name}</strong>
+                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
+                                </div>
+                              ) : (
+                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+
+                              )}
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
@@ -4104,8 +4241,17 @@ const DriverRegistration = () => {
                                   </Tooltip>
 
                                 </p></div>
+                              {selectedLicenseBackDriver ? (
 
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                  <strong>{selectedLicenseBackDriver.name}</strong>
+                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
+                                </div>
+                              ) : (
+                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+
+                              )}
+
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
@@ -4470,8 +4616,16 @@ const DriverRegistration = () => {
                                 </Tooltip>
 
                               </p></div>
+                            {selectedLicenseFrontDriver ? (
 
-                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <strong>{selectedLicenseFrontDriver.name}</strong>
+                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
+                              </div>
+                            ) : (
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+
+                            )}
                             {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
@@ -4506,8 +4660,16 @@ const DriverRegistration = () => {
                                 </Tooltip>
 
                               </p></div>
+                            {selectedLicenseBackDriver ? (
 
-                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <strong>{selectedLicenseBackDriver.name}</strong>
+                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
+                              </div>
+                            ) : (
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+
+                            )}
                             {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
@@ -4597,8 +4759,15 @@ const DriverRegistration = () => {
                                 </Tooltip>
 
                               </p></div>
+                            {selectedCnicFrontDriver ? (
 
-                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />
+                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <strong>{selectedCnicFrontDriver.name}</strong>
+                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontDriverPreview}></button>
+                              </div>
+                            ) : (
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />)}
+
                             {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
@@ -4633,8 +4802,15 @@ const DriverRegistration = () => {
                                 </Tooltip>
 
                               </p></div>
+                            {selectedCnicBackDriver ? (
 
-                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />
+                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <strong>{selectedCnicBackDriver.name}</strong>
+                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackDriverPreview}></button>
+                              </div>
+                            ) : (
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />)}
+
                             {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
@@ -4817,8 +4993,16 @@ const DriverRegistration = () => {
                                 </Tooltip>
 
                               </p></div>
+                            {selectedLicenseFrontDriver ? (
 
-                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <strong>{selectedLicenseFrontDriver.name}</strong>
+                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
+                              </div>
+                            ) : (
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+
+                            )}
                             {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
@@ -4853,8 +5037,16 @@ const DriverRegistration = () => {
                                 </Tooltip>
 
                               </p></div>
+                            {selectedLicenseBackDriver ? (
 
-                            <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <strong>{selectedLicenseBackDriver.name}</strong>
+                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
+                              </div>
+                            ) : (
+                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+
+                            )}
                           </Form.Group>
                         </div>
                       </div>
@@ -4869,14 +5061,14 @@ const DriverRegistration = () => {
                       >
                         <h2 className="text-success mb-3 text-center">
                           Bank/Payment Details <Tooltip title={<h6 className="px-2">{"You can add or update your preferred payment method from your profile page."}</h6>}>
-                                <Link
-                                  // to='/notification'
-                                  className='mx-1 h-15px d-inline-block'
-                                  style={{ cursor: "pointer" }}
-                                >
-                                  <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
-                                </Link>
-                              </Tooltip>
+                            <Link
+                              // to='/notification'
+                              className='mx-1 h-15px d-inline-block'
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                            </Link>
+                          </Tooltip>
                         </h2>
                         <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID.<br /> <span
                           style={{
@@ -4901,7 +5093,7 @@ const DriverRegistration = () => {
                               }}
                             // onClick={AddNewStart}
                             >
-                             
+
 
                             </p>
                           </div>
@@ -4910,14 +5102,14 @@ const DriverRegistration = () => {
                           style={{ textDecoration: "none" }}
                         >
 
-                        </Link> </p>
+                          </Link> </p>
                         <div class="container text-center">
                           <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
                           <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
                         </div>
-                        
+
                         {/* <form id="paymentForm">
                           <div className="mt-2 px-3">
                             <TextField
