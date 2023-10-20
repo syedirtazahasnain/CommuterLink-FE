@@ -26,10 +26,10 @@ const TermsCondition1 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const userToken = useSelector((s) => s.login.data.token);
+  const userId = useSelector((s) => s.general.data.id);
   const requestId = useSelector((s) => s.general.data.contact_id);
-  const [requestedAs, setRequestedAs] = useState("");
+  const requestedAs = useSelector((s) => s.general.data.request_as);
   const [option, setOption] = useState("");
-  const [userId, setUserId] = useState("");
 
   const crumbs = [
     {
@@ -44,7 +44,6 @@ const TermsCondition1 = () => {
   ];
 
   useEffect(() => {
-    getMemberData();
     document.getElementById("root").classList.remove("w-100");
     document.getElementById("root").classList.add("d-flex");
     document.getElementById("root").classList.add("flex-grow-1");
@@ -80,30 +79,30 @@ const TermsCondition1 = () => {
     }
   };
 
-  const getMemberData = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/requests`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+  // const getMemberData = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${API_URL}/api/v1/requests`,
+  //       {
+  //         method: "get",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Accept: "application/json",
+  //           Authorization: `Bearer ${userToken}`,
+  //         },
+  //       }
+  //     );
 
-      const jsonresponse = await response.json();
-      if (jsonresponse.data && jsonresponse.data.length > 0) {
-        setRequestedAs(jsonresponse.data[0].requested_as);
-        setUserId(jsonresponse.data[0].id);
-      }
-      console.log("Request Member Terms Condition Data:", jsonresponse);
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
+  //     const jsonresponse = await response.json();
+  //     if (jsonresponse.data && jsonresponse.data.length > 0) {
+  //       setRequestedAs(jsonresponse.data[0].requested_as);
+  //       setUserId(jsonresponse.data[0].id);
+  //     }
+  //     console.log("Request Member Terms Condition Data:", jsonresponse);
+  //   } catch (error) {
+  //     console.error("An error occurred:", error);
+  //   }
+  // };
 
   const route = async () => {
     if (requestedAs === "rider") {
@@ -120,6 +119,7 @@ const TermsCondition1 = () => {
           confirmButton: 'swal-custom',
         },
       });
+      
       // Check if the user confirmed the cancellation
       if (result.isConfirmed) {
         const body = {

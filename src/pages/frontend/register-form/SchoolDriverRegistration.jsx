@@ -1203,7 +1203,7 @@ const DriverRegistration = () => {
     selectedModelName, selectedRegYear, selectedRegNumber,
     selectedManYear, selectedCarAC, selectedCarImage,
     selectedCarImageExt, selectedSeat, preferredGender,
-    selectedMidRoutePartner,
+    // selectedMidRoutePartner,
     // inputDrivingLicenseMySelf,
     // inputValidUptoMySelf, inputPlaceIssueMySelf
   ];

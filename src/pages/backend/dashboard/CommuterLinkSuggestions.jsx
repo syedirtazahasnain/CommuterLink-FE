@@ -374,7 +374,7 @@ const CommuterLinkSuggestions = () => {
                   if (userType === "rider" && user.vehicle_option === 1 && user.req_stage !== 3) {
                     // Show rider card only for riders and when req_stage is not 3
                     return <RiderCard user={user} key={index} />;
-                  } else if (userType === "driver" && user.vehicle_option === 0) {
+                  } else if (userType === "driver" && user.vehicle_option === 0 && user.req_stage !== 3) {
                     // Show driver card only for drivers
                     return <DriverCard user={user} key={index} />;
                   } else if (user.req_stage !== 3) {
