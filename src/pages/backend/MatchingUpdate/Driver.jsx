@@ -154,9 +154,9 @@ const Driver = () => {
         const getGeocodeStartData = async () => {
             try {
 
-                if (locationStartString) {
+                if (locationStartString || locationStartStringField) {
                     const response = await fetch(
-                        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+                        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString ? locationStartString : locationStartStringField)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
                     );
 
                     const data = await response.json(); // Parse the response as JSON
@@ -180,9 +180,9 @@ const Driver = () => {
         // Function to fetch the geocoding data
         const getGeocodeEndData = async () => {
             try {
-                if (locationEndString) {
+                if (locationEndString || locationEndStringField) {
                     const response = await fetch(
-                        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+                        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString ? locationEndString : locationEndStringField)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
                     );
 
                     const data = await response.json(); // Parse the response as JSON
@@ -293,25 +293,25 @@ const Driver = () => {
     }, [navigate]);
 
     useEffect(() => {
-        if(inputBankAccount !== null){
+        if (inputBankAccount !== null) {
             setSelectedOption("bank_account_number");
         }
     }, [inputBankAccount]);
 
     useEffect(() => {
-        if(inputJazzCash !== null){
+        if (inputJazzCash !== null) {
             setSelectedOption("jazz_cash_number");
         }
     }, [inputJazzCash]);
 
     useEffect(() => {
-        if(inputEasyPaisa !== null){
+        if (inputEasyPaisa !== null) {
             setSelectedOption("easy_paisa_number");
         }
     }, [inputEasyPaisa]);
 
     useEffect(() => {
-        if(inputRaastID !== null){
+        if (inputRaastID !== null) {
             setSelectedOption("raast_number");
         }
     }, [inputRaastID]);
@@ -367,25 +367,27 @@ const Driver = () => {
             setSelectedOfficeTime(jsonresponse[0].matches.time_return_id);
             setPreferredGender(jsonresponse[0].contact.preferred_gender);
             setProvinceStartId(jsonresponse[0].location.start_province_id);
+            setCityStart(jsonresponse[0].location.start_city);
             setCityStartId(jsonresponse[0].location.start_city_id);
             setLocationStartStringId(jsonresponse[0].location.start_area_id);
             setLocationStartStringField(jsonresponse[0].location.start_area);
             setProvinceEndId(jsonresponse[0].location.end_province_id);
             setCityEndId(jsonresponse[0].location.end_city_id);
+            setCityEnd(jsonresponse[0].location.end_city);
             setLocationEndStringId(jsonresponse[0].location.end_area_id);
             setLocationEndStringField(jsonresponse[0].location.end_area);
             setStartArea(jsonresponse[0].location.start_area);
             setEndArea(jsonresponse[0].location.end_area);
-            setInputBankAccount(jsonresponse[0].driver_account.bank_account_number);
-            setInputJazzCash(jsonresponse[0].driver_account.jazz_cash_number);
-            setInputEasyPaisa(jsonresponse[0].driver_account.easy_paisa_number);
-            setInputRaastID(jsonresponse[0].driver_account.raast_number);
-            setPaymentOptions(jsonresponse[0].driver_account);
+            setInputBankAccount(jsonresponse[0]?.driver_account?.bank_account_number);
+            setInputJazzCash(jsonresponse[0]?.driver_account?.jazz_cash_number);
+            setInputEasyPaisa(jsonresponse[0]?.driver_account?.easy_paisa_number);
+            setInputRaastID(jsonresponse[0]?.driver_account?.raast_number);
+            setPaymentOptions(jsonresponse[0]?.driver_account);
             // setDaysSelected(jsonresponse[0].matches.days);
-            setSelectedCarBrand(jsonresponse[0].vehicle.car_make);
-            setSelectedCarCC(jsonresponse[0].vehicle.car_cc_id);
-            setSelectedModelName(jsonresponse[0].vehicle.car_model);
-            setSelectedRegYear(jsonresponse[0].vehicle.car_reg_year_id);
+            setSelectedCarBrand(jsonresponse[0]?.vehicle?.car_make);
+            setSelectedCarCC(jsonresponse[0]?.vehicle?.car_cc_id);
+            setSelectedModelName(jsonresponse[0]?.vehicle?.car_model);
+            setSelectedRegYear(jsonresponse[0]?.vehicle?.car_reg_year_id);
             console.log("Update Driver Details Data", jsonresponse);
             const mynewarray = jsonresponse[0].matches.days.split(',');
             setDaysSelected(mynewarray.map(day => day.trim()));
@@ -646,8 +648,7 @@ const Driver = () => {
                 || selectedModelName === "" || selectedRegYear === "" || cityStartId === ""
                 || provinceStartId === "" || locationStartStringId === "" || locationStartString === ""
                 || myStringStart === "" || cityEndId === "" || provinceEndId === ""
-                || locationEndStringId === "" || locationEndString === "" || myStringEnd === "" || inputBankAccount
-                || inputEasyPaisa || inputJazzCash || inputRaastID) {
+                || locationEndStringId === "" || locationEndString === "" || myStringEnd === "") {
                 displayNotification("warning", "Please fill all fields!");
             }
             else {
@@ -828,9 +829,9 @@ const Driver = () => {
 
                                                                     // Set the value
                                                                     setCityStart(selectedId);
-                                                                    setAddNewStartDropdown(true);
-                                                                    setAddNewStart(false);
-                                                                    setAddNewStartField(true);
+                                                                    // setAddNewStartDropdown(true);
+                                                                    // setAddNewStart(false);
+                                                                    // setAddNewStartField(true);
                                                                 }}
                                                                 className="bg-light text-left"
                                                                 label="Select a City"
@@ -849,37 +850,9 @@ const Driver = () => {
                                                     </Box>
                                                     {cityStartId && (
                                                         <>
-                                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                                <FormControl fullWidth size="small">
-                                                                    <Autocomplete
-                                                                        onLoad={(autocomplete) =>
-                                                                            (autocompleteRef.current = autocomplete)
-                                                                        }
-                                                                        onPlaceChanged={handlePlaceSelectStart}
-                                                                        restrictions={{ country: "PK" }}
-                                                                        bounds={autocompleteStartBounds}
-                                                                        options={{ strictBounds: true }}
-                                                                    >
-                                                                        <TextField
-                                                                            required
-                                                                            fullWidth
-                                                                            size='small'
-                                                                            type="text"
-                                                                            color='success'
-                                                                            className="bg-light text-left"
-                                                                            value={locationStartStringField}
-                                                                            onChange={handleLocationStartField}
-                                                                            placeholder="Enter your area"
-                                                                            id='outlined-basic'
-                                                                            defaultValue=""
-                                                                        />
-                                                                    </Autocomplete>
-                                                                </FormControl>
-                                                            </Box>
-
-                                                            {/* {addNewStartDropdown && (
+                                                            {addNewStartDropdown && (
                                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                                    <div className="d-flex justify-content-end">
+                                                                    <div className="d-flex justify-content-start">
                                                                         {addNewStartField && (
                                                                             <p
                                                                                 className="colorplace text-danger"
@@ -889,37 +862,35 @@ const Driver = () => {
                                                                                 }}
                                                                                 onClick={AddNewStart}
                                                                             >
-                                                                                Can't find your area?
-                                                                                <a> Add Here</a>
+                                                                                <a> Click here to change your start area</a>
                                                                             </p>
                                                                         )}
                                                                     </div>
-                                                                    <FormControl fullWidth size="small">
-                                                                        <InputLabel id="demo-simple-select-label" color='success'>Select Area from Dropdown</InputLabel>
-                                                                        <Select
-                                                                            labelId="demo-simple-select-label"
-                                                                            id="demo-simple-select"
-                                                                            color='success'
-                                                                            value={locationStartStringId}
-                                                                            onChange={handleLocationStart}
-                                                                            className="bg-light text-left"
-                                                                            label="Select Area from Dropdown"
-                                                                        // required
-                                                                        >
-                                                                            {selectedStartCityArea?.map((province) => (
-                                                                                <MenuItem
-                                                                                    key={province.id}
-                                                                                    value={province.id}
-                                                                                >
-                                                                                    {province.value}
-                                                                                </MenuItem>
-                                                                            ))}
-                                                                        </Select>
-                                                                    </FormControl>
-                                                                </Box>
-                                                            )} */}
+                                                                    {locationStartStringField && (
+                                                                        <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                                            <FormControl fullWidth size="small">
+                                                                                <TextField
+                                                                                    required
+                                                                                    fullWidth
+                                                                                    size='small'
+                                                                                    type="text"
+                                                                                    color='success'
+                                                                                    className="bg-light text-left"
+                                                                                    value={locationStartStringField}
+                                                                                    onChange={handleLocationStartField}
+                                                                                    placeholder="Start Area"
+                                                                                    id='outlined-basic'
+                                                                                    defaultValue=""
+                                                                                    disabled
+                                                                                />
 
-                                                            {/* {addNewStart && (
+                                                                            </FormControl>
+                                                                        </Box>
+                                                                    )}
+                                                                </Box>
+                                                            )}
+
+                                                            {addNewStart && (
                                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                                     <FormControl fullWidth size="small">
                                                                         <Autocomplete
@@ -947,9 +918,10 @@ const Driver = () => {
                                                                         </Autocomplete>
                                                                     </FormControl>
                                                                 </Box>
-                                                            )} */}
+                                                            )}
                                                         </>
                                                     )}
+
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <Form.Label className="fs-6 text-success">
                                                             {" "}
@@ -973,7 +945,8 @@ const Driver = () => {
                                                                 </Link>
                                                             </Tooltip>
 
-                                                        </p></div>
+                                                        </p>
+                                                    </div>
                                                     <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                         <FormControl fullWidth size="small">
                                                             <InputLabel id="demo-simple-select-label" color='success'>Province</InputLabel>
@@ -1038,37 +1011,9 @@ const Driver = () => {
 
                                                     {cityEndId && (
                                                         <>
-                                                            <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                                <FormControl fullWidth size="small">
-                                                                    <Autocomplete
-                                                                        onLoad={(autocomplete) =>
-                                                                            (autocompleteRef.current = autocomplete)
-                                                                        }
-                                                                        onPlaceChanged={handlePlaceSelectEnd}
-                                                                        restrictions={{ country: "PK" }}
-                                                                        bounds={autocompleteEndBounds}
-                                                                        options={{ strictBounds: true }}
-                                                                    >
-                                                                        <TextField
-                                                                            required
-                                                                            fullWidth
-                                                                            size='small'
-                                                                            type="text"
-                                                                            color='success'
-                                                                            className="bg-light text-left"
-                                                                            value={locationEndStringField}
-                                                                            onChange={handleLocationEndField}
-                                                                            placeholder="Enter your area"
-                                                                            id='outlined-basic'
-                                                                            defaultValue=""
-                                                                        />
-                                                                    </Autocomplete>
-                                                                </FormControl>
-                                                            </Box>
-
-                                                            {/* {addNewEndDropdown && (
+                                                            {addNewEndDropdown && (
                                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                                                                    <div className="d-flex justify-content-end">
+                                                                    <div className="d-flex justify-content-start">
                                                                         {addNewEndField && (
                                                                             <p
                                                                                 className="colorplace text-danger"
@@ -1078,37 +1023,35 @@ const Driver = () => {
                                                                                 }}
                                                                                 onClick={AddNewEnd}
                                                                             >
-                                                                                Can't find your area?
-                                                                                <a> Add Here</a>
+                                                                                <a> Click here to change your end area</a>
                                                                             </p>
                                                                         )}
                                                                     </div>
-                                                                    <FormControl fullWidth size="small">
-                                                                        <InputLabel id="demo-simple-select-label" color='success'>Select Area from Dropdown</InputLabel>
-                                                                        <Select
-                                                                            labelId="demo-simple-select-label"
-                                                                            id="demo-simple-select"
-                                                                            color='success'
-                                                                            value={locationEndStringId}
-                                                                            onChange={handleLocationEnd}
-                                                                            className="bg-light text-left"
-                                                                            label="Select Area from Dropdown"
-                                                                        // required
-                                                                        >
-                                                                            {selectedEndCityArea?.map((province) => (
-                                                                                <MenuItem
-                                                                                    key={province.id}
-                                                                                    value={province.id}
-                                                                                >
-                                                                                    {province.value}
-                                                                                </MenuItem>
-                                                                            ))}
-                                                                        </Select>
-                                                                    </FormControl>
-                                                                </Box>
-                                                            )} */}
+                                                                    {locationEndStringField && (
+                                                                        <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                                            <FormControl fullWidth size="small">
+                                                                                <TextField
+                                                                                    required
+                                                                                    fullWidth
+                                                                                    size='small'
+                                                                                    type="text"
+                                                                                    color='success'
+                                                                                    className="bg-light text-left"
+                                                                                    value={locationEndStringField}
+                                                                                    onChange={handleLocationEndField}
+                                                                                    placeholder="Start Area"
+                                                                                    id='outlined-basic'
+                                                                                    defaultValue=""
+                                                                                    disabled
+                                                                                />
 
-                                                            {/* {addNewEnd && (
+                                                                            </FormControl>
+                                                                        </Box>
+                                                                    )}
+                                                                </Box>
+                                                            )}
+
+                                                            {addNewEnd && (
                                                                 <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
                                                                     <FormControl fullWidth size="small">
                                                                         <Autocomplete
@@ -1136,7 +1079,7 @@ const Driver = () => {
                                                                         </Autocomplete>
                                                                     </FormControl>
                                                                 </Box>
-                                                            )} */}
+                                                            )}
                                                         </>
                                                     )}
 

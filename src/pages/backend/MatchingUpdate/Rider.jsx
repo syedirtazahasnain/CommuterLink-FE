@@ -471,11 +471,15 @@ const Rider = () => {
       setSelectedOfficeTime(jsonresponse[0].matches.time_return_id);
       setPreferredGender(jsonresponse[0].contact.preferred_gender);
       setProvinceStartId(jsonresponse[0].location.start_province_id);
+      setCityStart(jsonresponse[0].location.start_city);
       setCityStartId(jsonresponse[0].location.start_city_id);
       setLocationStartStringId(jsonresponse[0].location.start_area_id);
+      setLocationStartStringField(jsonresponse[0].location.start_area);
       setProvinceEndId(jsonresponse[0].location.end_province_id);
       setCityEndId(jsonresponse[0].location.end_city_id);
+      setCityEnd(jsonresponse[0].location.end_city);
       setLocationEndStringId(jsonresponse[0].location.end_area_id);
+      setLocationEndStringField(jsonresponse[0].location.end_area);
       setStartArea(jsonresponse[0].location.start_area);
       setEndArea(jsonresponse[0].location.end_area);
       console.log("Update Driver Details Data", jsonresponse);
@@ -716,7 +720,7 @@ const Rider = () => {
                       <>
                         {addNewStartDropdown && (
                           <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                            <div className="d-flex justify-content-end">
+                            <div className="d-flex justify-content-start">
                               {addNewStartField && (
                                 <p
                                   className="colorplace text-danger"
@@ -726,33 +730,31 @@ const Rider = () => {
                                   }}
                                   onClick={AddNewStart}
                                 >
-                                  Can't find your area?
-                                  <a> Add Here</a>
+                                  <a> Click here to change your start area</a>
                                 </p>
                               )}
                             </div>
-                            <FormControl fullWidth size="small">
-                              <InputLabel id="demo-simple-select-label" color='success'>Select Area from Dropdown</InputLabel>
-                              <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                color='success'
-                                value={locationStartStringId}
-                                onChange={handleLocationStart}
-                                className="bg-light text-left"
-                                label="Select Area from Dropdown"
-                              // required
-                              >
-                                {selectedStartCityArea?.map((province) => (
-                                  <MenuItem
-                                    key={province.id}
-                                    value={province.id}
-                                  >
-                                    {province.value}
-                                  </MenuItem>
-                                ))}
-                              </Select>
-                            </FormControl>
+                            {locationStartStringField && (
+                              <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                <FormControl fullWidth size="small">
+                                  <TextField
+                                    required
+                                    fullWidth
+                                    size='small'
+                                    type="text"
+                                    color='success'
+                                    className="bg-light text-left"
+                                    value={locationStartStringField}
+                                    onChange={handleLocationStartField}
+                                    placeholder="Start Area"
+                                    id='outlined-basic'
+                                    defaultValue=""
+                                    disabled
+                                  />
+
+                                </FormControl>
+                              </Box>
+                            )}
                           </Box>
                         )}
 
@@ -787,6 +789,7 @@ const Rider = () => {
                         )}
                       </>
                     )}
+
                     <div className="d-flex justify-content-between align-items-center">
                       <Form.Label className="fs-6 text-success">
                         {" "}
@@ -877,7 +880,7 @@ const Rider = () => {
                       <>
                         {addNewEndDropdown && (
                           <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
-                            <div className="d-flex justify-content-end">
+                            <div className="d-flex justify-content-start">
                               {addNewEndField && (
                                 <p
                                   className="colorplace text-danger"
@@ -887,33 +890,31 @@ const Rider = () => {
                                   }}
                                   onClick={AddNewEnd}
                                 >
-                                  Can't find your area?
-                                  <a> Add Here</a>
+                                  <a> Click here to change your end area</a>
                                 </p>
                               )}
                             </div>
-                            <FormControl fullWidth size="small">
-                              <InputLabel id="demo-simple-select-label" color='success'>Select Area from Dropdown</InputLabel>
-                              <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                color='success'
-                                value={locationEndStringId}
-                                onChange={handleLocationEnd}
-                                className="bg-light text-left"
-                                label="Select Area from Dropdown"
-                              // required
-                              >
-                                {selectedEndCityArea?.map((province) => (
-                                  <MenuItem
-                                    key={province.id}
-                                    value={province.id}
-                                  >
-                                    {province.value}
-                                  </MenuItem>
-                                ))}
-                              </Select>
-                            </FormControl>
+                            {locationEndStringField && (
+                              <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                <FormControl fullWidth size="small">
+                                  <TextField
+                                    required
+                                    fullWidth
+                                    size='small'
+                                    type="text"
+                                    color='success'
+                                    className="bg-light text-left"
+                                    value={locationEndStringField}
+                                    onChange={handleLocationEndField}
+                                    placeholder="Start Area"
+                                    id='outlined-basic'
+                                    defaultValue=""
+                                    disabled
+                                  />
+
+                                </FormControl>
+                              </Box>
+                            )}
                           </Box>
                         )}
 
@@ -1092,7 +1093,7 @@ const Rider = () => {
                     </Box>
                     <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
                       <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
-                        <Form.Label  className="pt-3 text-left">
+                        <Form.Label className="pt-3 text-left">
                           I Commute (Select Days)
                         </Form.Label>
                       </Form.Group>
@@ -1351,7 +1352,7 @@ const Rider = () => {
                       </Box>
                       <Row className="my-3 mx-0 px-1" style={{ border: '1px solid grey' }}>
                         <Form.Group as={Col} md="12" className="text-left  " controlId="validationCustom01">
-                          <Form.Label  className="pt-3 text-left " style={{color:"#00000057"}}>
+                          <Form.Label className="pt-3 text-left " style={{ color: "#00000057" }}>
                             I Commute (Select Days)
                           </Form.Label>
                         </Form.Group>

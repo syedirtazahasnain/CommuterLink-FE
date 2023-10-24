@@ -13,18 +13,21 @@ import { Button } from '@mui/base';
 
 const WouldYouLikeToSchool = () => {
 
-  const [radio1, setRadio1] = useState("");
-  const [radio2, setRadio2] = useState("");
+  const [selectedOption, setSelectedOption] = useState('');
 
   const navigate = useNavigate();
 
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   const route = () => {
 
-    if (radio1) {
+    if (selectedOption === "school-form") {
       navigate("/school-form");
     }
 
-    if (radio2) {
+    if (selectedOption === "school-driver-form") {
       navigate("/school-driver-form");
     }
   };
@@ -105,7 +108,7 @@ const WouldYouLikeToSchool = () => {
 
                         <div className="text-left"> <div>
                           <label className="radio-button ">
-                            <input type="radio" id="option1" name="option" value={radio1} onClick={setRadio1} />
+                            <input type="radio" id="option1" name="option" value="school-form" checked={selectedOption === 'school-form'} onChange={handleOptionChange} />
                             <span className="ml-3"><strong>Ride in other’s car</strong> </span>
 
                           </label></div>
@@ -114,7 +117,7 @@ const WouldYouLikeToSchool = () => {
                           </div></div>
                         <div className="text-left"><div>
                           <label className="radio-button ">
-                            <input type="radio" id="option2" name="option" value={radio2} onClick={setRadio2} />
+                            <input type="radio" id="option2" name="option" value="school-driver-form" checked={selectedOption === 'school-driver-form'} onChange={handleOptionChange} />
                             <span className="ml-3"><strong>Use your car and offer available seats</strong></span>
                           </label>
                         </div>

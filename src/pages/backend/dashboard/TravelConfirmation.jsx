@@ -470,7 +470,7 @@ const TravelConfirmation = () => {
                             onMonthChange={handleMonthChange}
                             renderLoading={() => <DayCalendarSkeleton />}
                             shouldDisableDate={isWeekend}
-                            // disablePast
+                            disablePast
                             slots={{
                               day: ServerDay,
                             }}
