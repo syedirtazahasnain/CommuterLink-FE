@@ -664,9 +664,9 @@ const MyWallet = () => {
                             ) : (
                               recentData.map((item, index) => (
                                 <TableRow key={index}>
-                                  <TableCell className="text-white text-center">{item.date}</TableCell>
-                                  <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{item.Description}</TableCell>
-                                  <TableCell className="text-white text-center">{`Rs. ${item.wallet_transfer}/-`}</TableCell>
+                                  <TableCell className="text-white ">{item.date}</TableCell>
+                                  <TableCell className="text-white" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{item.Description}</TableCell>
+                                  <TableCell className="text-white">{`Rs. ${item.wallet_transfer}/-`}</TableCell>
                                 </TableRow>
                               ))
                             )

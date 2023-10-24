@@ -208,7 +208,7 @@ const CommuterDetails = () => {
                 backgroundColor: "#D9D9D9",
               }}
             >
-              <div class="card-header bg-dark mb-2">
+              <div className="card-header bg-dark mb-2">
                 <h3 className="text-center text-warning m-auto">
                   {" "}
                   TRAVEL BUDDIES FOR YOUR CAR{" "}
@@ -241,9 +241,9 @@ const CommuterDetails = () => {
                           backgroundColor: "#D9D9D9",
                         }}
                       >
-                        <div class="row d-flex justify-content-center">
+                        <div className="row d-flex justify-content-center">
                           {contactId !== "" ? (
-                            <div className="col-sm-2">
+                            <div className="col-sm-2 mb-5">
                               <div
                                 className="card"
                                 style={{ width: "6rem", fontWeight: "bold", backgroundColor: "rgb(32 155 98)" }}
@@ -269,7 +269,7 @@ const CommuterDetails = () => {
                             </div>
                           ) :
                             (
-                              <div className="col-sm-2">
+                              <div className="col-sm-2 mb-5">
                                 <div
                                   className="card bg-success"
                                   style={{ width: "6rem", cursor: "pointer" }}
@@ -296,7 +296,7 @@ const CommuterDetails = () => {
                               </div>
                             )
                           }
-                          <div className="col-sm-2">
+                          <div className="col-sm-2 mb-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -324,7 +324,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-sm-2">
+                          <div className="col-sm-2 mb-5">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -349,7 +349,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2 mb-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -371,7 +371,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2 mb-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -393,7 +393,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2 mb-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -433,7 +433,7 @@ const CommuterDetails = () => {
                 backgroundColor: "#D9D9D9",
               }}
             >
-              <div class="card-header bg-dark  mb-2">
+              <div className="card-header bg-dark  mb-2">
                 <h3 className="text-center text-warning m-auto">
                   {" "}
                   GET A SEAT/S IN THEIR CAR{" "}
@@ -466,7 +466,7 @@ const CommuterDetails = () => {
                           backgroundColor: "#D9D9D9",
                         }}
                       >
-                        <div class="row d-flex justify-content-center">
+                        <div className="row d-flex justify-content-center">
                           <div className="col-sm-2">
                             <div
                               className="card bg-success"
@@ -492,7 +492,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -514,7 +514,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -536,7 +536,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -558,7 +558,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -580,7 +580,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -621,7 +621,7 @@ const CommuterDetails = () => {
                 backgroundColor: "#D9D9D9",
               }}
             >
-              <div class="card-header bg-dark mb-2">
+              <div className="card-header bg-dark mb-2">
                 <h3 className="text-center text-warning m-auto">
                   {" "}
                   MY TRAVEL PARTNERS{" "}
@@ -641,7 +641,7 @@ const CommuterDetails = () => {
                           backgroundColor: "#D9D9D9",
                         }}
                       >
-                        <div class="row d-flex justify-content-center">
+                        <div className="row d-flex justify-content-center">
                           <div className="col-sm-2">
                             <div
                               className="card bg-success"
@@ -664,7 +664,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -686,7 +686,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -708,7 +708,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -730,7 +730,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -752,7 +752,7 @@ const CommuterDetails = () => {
                               />
                             </div>
                           </div>
-                          <div class="col-sm-2">
+                          <div className="col-sm-2">
                             <div
                               className="card bg-success"
                               style={{ width: "6rem" }}
@@ -884,7 +884,7 @@ const CommuterDetails = () => {
                                       width: "15rem",
                                     }}
                                   >
-                                    <div class="row d-flex fw-bold text-center text-success justify-content-center">
+                                    <div className="row d-flex fw-bold text-center text-success justify-content-center">
                                       Rs.0000/-
                                     </div>
                                   </div>
@@ -906,7 +906,7 @@ const CommuterDetails = () => {
                 backgroundColor: "#D9D9D9",
               }}
             >
-              <div class="card-header bg-dark">
+              <div className="card-header bg-dark">
                 <h3 className="text-center text-warning m-auto">
                   TRAVEL CONFIRMATION
                 </h3>

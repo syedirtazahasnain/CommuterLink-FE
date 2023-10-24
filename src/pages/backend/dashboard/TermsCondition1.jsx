@@ -117,6 +117,7 @@ const TermsCondition1 = () => {
         showCloseButton: true,
         customClass: {
           confirmButton: 'swal-custom',
+          htmlContainer: 'text-center',
         },
       });
       
