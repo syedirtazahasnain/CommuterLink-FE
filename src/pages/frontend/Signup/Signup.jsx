@@ -307,9 +307,14 @@ const Signup = () => {
         confirmPassword === ""
       ) {
         displayNotification("warning", "Please Fill All Fields");
-      } else if (password !== confirmPassword) {
+      } 
+      else if (password !== confirmPassword) {
         displayNotification("warning", "Confirm password is not matched with new password!");
-      } else {
+      }
+      else if (fullName.length < 4) {
+        displayNotification("warning", "Full Name should have alteast 4 characters");
+      }
+      else {
         if (termsService) {
           const body = {
             email: email,
