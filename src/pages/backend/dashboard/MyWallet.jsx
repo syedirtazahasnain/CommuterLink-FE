@@ -158,7 +158,7 @@ const MyWallet = () => {
 
   useEffect(() => {
     getTravelData();
-  }, []);
+  }, [userToken]);
 
   useEffect(() => {
     if (cancelDate !== null) {
@@ -351,7 +351,7 @@ const MyWallet = () => {
       );
 
       const jsonresponse = await response.json();
-      if (jsonresponse.data[0]) {
+      if (jsonresponse?.data[0]) {
         setContactId(jsonresponse.data[0].contact_id);
         setName(jsonresponse.data[0].name);
         setImage(jsonresponse.data[0].commuter_image);
@@ -385,14 +385,14 @@ const MyWallet = () => {
         setRegYear(jsonresponse.data[0]?.vehicle[0]?.reg_year);
         setSeatsLeft(jsonresponse.data[0]?.vehicle[0]?.seats_left);
       }
-      if (jsonresponse.data[1]) {
+      if (jsonresponse?.data[1]) {
         setContactId1(jsonresponse.data[1].contact_id);
         setName1(jsonresponse.data[1].name);
         setImage1(jsonresponse.data[1].commuter_image);
         setPrice1(jsonresponse.data[1].price);
         setDate1(jsonresponse.data[1].aggreement_date);
       }
-      if (jsonresponse.data[2]) {
+      if (jsonresponse?.data[2]) {
         setContactId2(jsonresponse.data[2].contact_id);
         setName2(jsonresponse.data[2].name);
         setImage2(jsonresponse.data[2].commuter_image);

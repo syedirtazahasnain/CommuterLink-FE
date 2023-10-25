@@ -1298,7 +1298,6 @@ const DriverRegistration = () => {
       setIsLoading(true); // Start loading
       try {
         await handleLogin();
-        await DriverForm();
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
@@ -1358,6 +1357,7 @@ const DriverRegistration = () => {
         await ImagesFormCnicFront();
         await ImagesFormCnicBack();
         await ImagesFormPicture();
+        await DriverForm();
 
         // setIsLoading(false);
       } else if (jsonresponse.statusCode === 422) {
