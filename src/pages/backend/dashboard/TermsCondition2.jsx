@@ -360,7 +360,7 @@ const TermsCondition2 = () => {
           <div className="text-center">
             <Button
               className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green rounded text-white  px-3 py-2 mb-3"
-             
+              onClick={route}
             >
               I Accept
             </Button>

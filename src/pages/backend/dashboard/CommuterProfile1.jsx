@@ -235,11 +235,14 @@ const CommuterProfile1 = () => {
 
   const sendRequest = (contact_id) => {
     console.log(contact_id);
-    setSubmit(true);
 
-    if (!submitbtn) {
+    if (option === 0) {
       dispatch(setContactIdState(contact_id));
       navigate("/termscondition1");
+    }
+    else if(option === 1) {
+      dispatch(setContactIdState(contact_id));
+      navigate("/termscondition2");
     }
   };
 
@@ -845,7 +848,7 @@ const CommuterProfile1 = () => {
                             url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                           }}
                         />
-                        <PolylineF
+                        {/* <PolylineF
                           path={[
                             { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
                             { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
@@ -855,7 +858,7 @@ const CommuterProfile1 = () => {
                             strokeOpacity: 1.0,
                             strokeWeight: 3,
                           }}
-                        />
+                        /> */}
                       </GoogleMap>
                     </Row>
 
