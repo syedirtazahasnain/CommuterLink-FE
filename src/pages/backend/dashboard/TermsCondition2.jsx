@@ -322,39 +322,40 @@ const TermsCondition2 = () => {
       <div className="card p-4 bg-light p-2">
         <div className="card bg-light">
         <div className="card-body">
-              <p>1. Your car is in a good shape and is roadworthy</p>
-              <p className="">
-                2. You are committed to provide the car for commuting of partners
-                on all days mentioned in the agreement
-              </p>
-              <p>
-                3. If due to any unforeseen reason you cannot commute on certain
+              <ol><li className="mb-2">Your car is in a good shape and is roadworthy</li>
+              <li className="mb-2">You are committed to provide the car for commuting of partners
+                on all days mentioned in the agreement </li>
+                
+              
+              <li className="mb-2">
+                If due to any unforeseen reason you cannot commute on certain
                 day, no fee will be paid for that day
-              </p>
-              <p>
-                4. You will inform the travel buddy partners well in advance (at least 12 hours)
-                about your inability to commute on a certain day. In case of an emergency this can be waived off under exceptional circumstances
-              </p>
-              <p>
-                5. You will be paid on weekly daily basis for actual number of days that your car is used
-              </p>
-              <p>
-                6. If a commuting partner misses the car and fails to commute due to late arrival/time off you will still be paid for that day
-              </p>
-              <p>
-                7. You will wait at least 15 minutes after the agreed time for commuting partner to join you
-              </p>
-              <p>
-                8. You will update the scheduler in your dashboard on daily (as and when required basis)
-              </p>
-              <p>
-                9. You will receive your share of fee through CommutersLink and there will be no direct transaction between you and your commuting travel buddy partner
-              </p>
-              <p>
-                10. If you wish to discontinue your partnership with a member due a reason or other CommutersLink will inform the partner on your behalf. You are required to give at least 1 week notice(insert a link here “why to receive payment through commutersLink)
-              </p>
-              11. Any complaints, grievances will be addressed to CommutersLink
-              for resolution.
+              </li>
+              <li className="mb-2">
+              You will inform the travel buddy partners well in advance (at least 12 hours)
+                about your inability to commute on a certain day. In case of an emergency this can be waived off under exceptional circumstances 
+              </li>
+              <li className="mb-2">
+                You will be paid on weekly daily basis for actual number of days that your car is used
+              </li>
+              <li className="mb-2">
+                If a commuting partner misses the car and fails to commute due to late arrival/time off you will still be paid for that day
+              </li>
+              <li className="mb-2">
+                You will wait at least 15 minutes after the agreed time for commuting partner to join you
+              </li>
+              <li className="mb-2">
+                You will update the scheduler in your dashboard on daily (as and when required basis)
+              </li>
+              <li className="mb-2">
+                You will receive your share of fee through CommutersLink and there will be no direct transaction  between you and your commuting travel buddy partner 
+              </li>
+              <li className="mb-2">
+                If you wish to discontinue your partnership with a member due a reason or other CommutersLink will inform the partner on your behalf. You are required to give at least 1 week notice(insert a link here “why to receive payment through commutersLink) 
+              </li>
+              <li className="mb-2"> Any complaints, grievances will be addressed to CommutersLink
+              for resolution.</li></ol>
+              
             </div>
           <div className="text-center">
             <Button
