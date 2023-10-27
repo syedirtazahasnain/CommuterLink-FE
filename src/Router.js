@@ -35,6 +35,7 @@ import Rejection from "./pages/frontend/register-form/Rejection";
 import AdvancePayment from "./pages/backend/dashboard/AdvancePayment";
 import Contact from "./pages/frontend/Hompage-components/Contact";
 import BeforeApprovalTerms from "./pages/backend/dashboard/BeforeAprrovalTerms";
+import BeforeApprovalTerms1 from "./pages/backend/dashboard/BeforeApprovalTerms1";
 import SchoolRegistration from "./pages/frontend/register-form/SchoolRegistration";
 import PaymentRide from "./pages/backend/dashboard/PaymentRide";
 import PaymentOptions from "./pages/backend/dashboard/PaymentOptions";
@@ -135,6 +136,8 @@ const Router = () => {
         <Route path="/amshareride" element={<FrontendLayout children={<AmShareRide />} />}></Route>
         <Route path="/rider-registration" element={<FrontendLayout children={<RiderRegistration />} />} />
         <Route path="/beforeapprovalterms" element={<BackendLayout children={<BeforeApprovalTerms />} />}></Route>
+        <Route path="/beforeapprovalterms1" element={<BackendLayout children={<BeforeApprovalTerms1 />} />}></Route>
+
         <Route path="/office_school" element={<FrontendLayout children={<Office_School />} />}></Route>
         <Route path="/school-form" element={<FrontendLayout children={<SchoolRegistration />} />}></Route>
         <Route path="/paymentride" element={<BackendLayout children={<PaymentRide />} />}></Route>

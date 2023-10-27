@@ -20,7 +20,7 @@ const backgroundLogo = {
   backgroundColor: "white",
 };
 
-const BeforeApprovalTerms = () => {
+const BeforeApprovalTerms1 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [submitbtn, setSubmit] = useState(false);
@@ -90,35 +90,41 @@ const BeforeApprovalTerms = () => {
         <div className="card" >
           
 
-            <div className="card-body">
-              <ol>
-                <li className="mb-2">The car offeror will wait 15 mins after agreed time for you to join. </li>
-                <li className="mb-2">
-                  If due to any unforeseen reason you cannot commute on a certain day, fee will be still be charged as your seat remains reserved for you
-                </li>
-                <li className="mb-2">
-                  You will inform the partners well in advance (at least 12 hours) about your inability to commute on a certain day. In case of an emergency this can be waived off under exceptional circumstances
-                </li>
-                <li className="mb-2">
-                  You will pay one month 15 days cost in advance. The money will remain in your wallet and will be transferred to car owner every week after on daily basis confirmation that the service was provided. You will recharge your wallet every week to maintain 15 days commuting balance in wallet all the time
-                </li>
-                <li className="mb-2">
-                  You will be charged on daily basis for actual number of days that you avail share the car. No charges will be levied for public holidays or number of days that the car owner does not turn up
-                </li>
-                <li className="mb-2">
-                  You will update the scheduler in your dashboard on daily (as and when required basis)
-                </li>
-                <li className="mb-2">
-                  You will pay your share of fee cost through CommutersLink and there will be no direct transaction between you and your commuting partner. (insert a link here “why to receive payment through commutersLink)
-                </li>
-                <li className="mb-2">
-                  If you wish to discontinue your partnership with a member due a reason or other CommutersLink will inform the partner on your behalf. Minimum 1 week notice is required
-                </li>
-                <li>
-                  Any complaints, grievances will be addressed to CommutersLink for resolution
-                </li>
-              </ol>
-
+        <div className="card-body">
+              <ol><li className="mb-2">Your car is in a good shape and is roadworthy</li>
+              <li className="mb-2">You are committed to provide the car for commuting of partners
+                on all days mentioned in the agreement </li>
+                
+              
+              <li className="mb-2">
+                If due to any unforeseen reason you cannot commute on certain
+                day, no fee will be paid for that day
+              </li>
+              <li className="mb-2">
+              You will inform the travel buddy partners well in advance (at least 12 hours)
+                about your inability to commute on a certain day. In case of an emergency this can be waived off under exceptional circumstances 
+              </li>
+              <li className="mb-2">
+                You will be paid on weekly daily basis for actual number of days that your car is used
+              </li>
+              <li className="mb-2">
+                If a commuting partner misses the car and fails to commute due to late arrival/time off you will still be paid for that day
+              </li>
+              <li className="mb-2">
+                You will wait at least 15 minutes after the agreed time for commuting partner to join you
+              </li>
+              <li className="mb-2">
+                You will update the scheduler in your dashboard on daily (as and when required basis)
+              </li>
+              <li className="mb-2">
+                You will receive your share of fee through CommutersLink and there will be no direct transaction  between you and your commuting travel buddy partner 
+              </li>
+              <li className="mb-2">
+                If you wish to discontinue your partnership with a member due a reason or other CommutersLink will inform the partner on your behalf. You are required to give at least 1 week notice(insert a link here “why to receive payment through commutersLink) 
+              </li>
+              <li className="mb-2"> Any complaints, grievances will be addressed to CommutersLink
+              for resolution.</li></ol>
+              
             </div>
    
           
@@ -136,4 +142,4 @@ const BeforeApprovalTerms = () => {
   );
 };
 
-export default BeforeApprovalTerms;
+export default BeforeApprovalTerms1;
