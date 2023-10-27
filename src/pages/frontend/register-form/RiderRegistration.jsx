@@ -57,7 +57,7 @@ const RiderRegistration = () => {
   const [isValidProfession, setIsValidProfession] = useState(true);
 
   const route = () => {
-    navigate("/verification");
+    navigate("/datasecurity");
   };
 
   const AddNewStart = () => {
@@ -178,7 +178,22 @@ const RiderRegistration = () => {
 
   useEffect(() => {
     getdropdownStartdata();
+    // testFunction();
   }, []);
+
+  // const testFunction = async () => {
+  //   const res = await fetch(`https://api.lecto.ai/v1/translate/text`, {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       'texts': "cricket stadium، فوڈ سٹریٹ، shamsabad, راولپنڈی, پنجاب، pakistan",
+  //       'to': 'en',
+  //       'from': 'ur'
+  //     }),
+  //     headers: { 'X-API-Key': '0W0TEQE-C224NFJ-MBWRM3X-3CYBABR' }
+  //   });
+
+  //   console.log("Translated:", await res.json());
+  // };
 
   useEffect(() => {
     if (provinceStartId) {
@@ -431,19 +446,26 @@ const RiderRegistration = () => {
     setLocationStartString(e.target.value);
   };
 
-  const handlePlaceSelectStart = () => {
+  const handlePlaceSelectStart = async () => {
     const place = autocompleteRef.current.getPlace();
 
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
-      const isIslamabad =
-        place.address_components.some((component) =>
-          component.types.includes("locality") &&
-          component.long_name.toLowerCase() === cityStart.toLowerCase()
-        );
+      const isIslamabad = place.address_components.some((component) =>
+        component.types.includes("locality") &&
+        component.long_name.toLowerCase() === cityStart.toLowerCase()
+      );
 
-      if (isIslamabad) {
-        // The selected place is in Islamabad.
+      console.log("isIslamabad:", isIslamabad);
+
+      // Check if the place's address contains the city name in its formatted address.
+      const containsCityName = place.formatted_address.toLowerCase().includes(cityStart.toLowerCase());
+
+      console.log("Place Formatted Address:", place.formatted_address.toLowerCase());
+
+      console.log("containsCityName:", containsCityName);
+
+      if (isIslamabad || containsCityName) {
         if (place.geometry && place.geometry.location) {
           setMarkerPositionStart({
             lat: place.geometry.location.lat(),
@@ -453,22 +475,15 @@ const RiderRegistration = () => {
           setLocationStartString(place.formatted_address);
           handleShowStartModal();
         }
-      } else if (!isIslamabad) {
-        // Swal.fire({
-        //   position: 'top',
-        //   // // icon: 'warning',
-        //   text: `Please select a place in ${cityStart}.`,
-        //   customClass: {
-        //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
-        //   },
-        // });
-        displayNotification("warning", `Please Select a place in ${cityStart}`);
+      } else {
+        displayNotification("warning", `Please select a place in ${cityStart}`);
       }
     } else {
       // Handle the case when place is not valid.
       console.error('Invalid place object:', place);
     }
   };
+
 
   const handleLocationEnd = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
@@ -584,6 +599,8 @@ const RiderRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setCnicFront(null);
+          setCnicFrontExt(null);
         }, 100);
       }
     }
@@ -611,6 +628,8 @@ const RiderRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setCnicBack(null);
+          setCnicBackExt(null);
         }, 100);
       }
     }
@@ -638,6 +657,8 @@ const RiderRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setPicture(null);
+          setPictureExt(null);
         }, 100);
       }
     }
@@ -718,7 +739,13 @@ const RiderRegistration = () => {
         if (PersonalFormFields.every(
           (field) => field !== "" && field !== null && field !== undefined
         )) {
-          await PersonalForm();
+          if (locationStartString === locationEndString || markerPositionStart === markerPositionEnd) {
+            displayNotification("warning", "Please select different starting and drop-off point");
+            setIsLoading(false);
+          }
+          else {
+            await PersonalForm();
+          }
         }
       } catch (error) {
         setIsLoading(false);

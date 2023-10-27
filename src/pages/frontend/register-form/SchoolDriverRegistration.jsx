@@ -827,21 +827,22 @@ const DriverRegistration = () => {
     const file = e.target.files[0];
     const maxSize = 5120000;
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setCnicFront(reader.result.split(",")[1]);
-        setCnicFrontExt(file.name.split('.').pop());
-        setSelectedCnicFront(file);
-      };
-      reader.readAsDataURL(file);
       if (file.size <= maxSize) {
-
+        const reader = new FileReader();
+        reader.onload = () => {
+          setCnicFront(reader.result.split(",")[1]);
+          setCnicFrontExt(file.name.split('.').pop());
+          setSelectedCnicFront(file);
+        };
+        reader.readAsDataURL(file);
       }
       else {
 
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setCnicFront(null);
+          setCnicFrontExt(null);
         }, 100);
       }
     }
@@ -854,21 +855,22 @@ const DriverRegistration = () => {
     const file = e.target.files[0];
     const maxSize = 5120000;
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setCnicBack(reader.result.split(",")[1]);
-        setCnicBackExt(file.name.split('.').pop());
-        setSelectedCnicBack(file);
-      };
-      reader.readAsDataURL(file);
       if (file.size <= maxSize) {
-
+        const reader = new FileReader();
+        reader.onload = () => {
+          setCnicBack(reader.result.split(",")[1]);
+          setCnicBackExt(file.name.split('.').pop());
+          setSelectedCnicBack(file);
+        };
+        reader.readAsDataURL(file);
       }
       else {
 
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setCnicBack(null);
+          setCnicBackExt(null);
         }, 100);
       }
     }
@@ -912,6 +914,8 @@ const DriverRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setPicture(null);
+          setPictureExt(null);
         }, 100);
       }
     }
@@ -984,6 +988,8 @@ const DriverRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setInputDriverCnicFront(null);
+          setInputDriverCnicFrontExt(null);
         }, 100);
       }
     }
@@ -1007,6 +1013,8 @@ const DriverRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setInputDriverCnicBack(null);
+          setInputDriverCnicBackExt(null);
         }, 100);
       }
     }
@@ -1031,6 +1039,8 @@ const DriverRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setSelectedImageLicenseFront(null);
+          setSelectedImageLicenseFrontExt(null);
         }, 100);
       }
     }
@@ -1055,6 +1065,8 @@ const DriverRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setSelectedImageLicenseBackExt(null);
+          setSelectedImageLicenseBackExt(null);
         }, 100);
       }
     }
@@ -1079,6 +1091,8 @@ const DriverRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setSelectedCarImage(null);
+          setSelectedCarImageExt(null);
         }, 100);
       }
     }
@@ -1224,7 +1238,13 @@ const DriverRegistration = () => {
         if (PersonalFormFields.every(
           (field) => field !== "" && field !== null && field !== undefined
         )) {
-          await PersonalForm();
+          if (locationStartString === locationEndString || markerPositionStart === markerPositionEnd) {
+            displayNotification("warning", "Please select different starting and drop-off point");
+            setIsLoading(false);
+          }
+          else {
+            await PersonalForm();
+          }
         }
       } catch (error) {
         setIsLoading(false);

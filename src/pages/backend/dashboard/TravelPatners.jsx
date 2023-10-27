@@ -520,6 +520,10 @@ const TravelPatners = () => {
   const pickupLatitude = pickupCoords[0];
   const pickupLongitude = pickupCoords[1];
 
+  // Calculate the center point
+  const centerLatitude = (parseFloat(pickupLatitude) + parseFloat(dropoffLatitude)) / 2;
+  const centerLongitude = (parseFloat(pickupLongitude) + parseFloat(dropoffLongitude)) / 2;
+
   return (
     <div>
       {data !== "" ?
@@ -994,8 +998,8 @@ const TravelPatners = () => {
                               <div className=" row d-flex justify-content-center align-items-center">
                                 <Row style={{ height: "275px", width: "100%" }}>
                                   <GoogleMap
-                                    zoom={10}
-                                    center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                                    zoom={11}
+                                    center={{ lat: centerLatitude, lng: centerLongitude }}
                                     mapContainerStyle={{
                                       width: "100%",
                                       height: '100%',
@@ -1017,7 +1021,7 @@ const TravelPatners = () => {
                                         url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                                       }}
                                     />
-                                    <PolylineF
+                                    {/* <PolylineF
                                       path={[
                                         { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
                                         { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
@@ -1027,7 +1031,7 @@ const TravelPatners = () => {
                                         strokeOpacity: 1.0,
                                         strokeWeight: 3,
                                       }}
-                                    />
+                                    /> */}
                                   </GoogleMap>
                                 </Row>
                                 <div className="row justify-content-end">

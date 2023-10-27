@@ -22,40 +22,47 @@ const DataSecurity = () => {
     height: '20vh'
     // Set the desired height of the background area
   };
-  const handleButtonClick = () => {
-    Swal.fire({
-     
-      html: `
-      <div className="col-md-12  text-center" style="margin-top: 4vh; margin-bottom: 3vh;">
-      <div className="container py-3">
-      <div class="text-center "> <h3 class="card-title text-center  text-white">DATA SECURITY</h3></div>
-      <div class="border-bottom m-auto border-white p-2 mb-4 w-50 "></div>
-        <div>
-          <img
-            src="${BASE_URL}/assets/images/data_security_icon.png"
-            alt="Sample photo"
-            style="width: 150px; height: 150px; object-fit: cover; border-radius: 60%;"
-          />
-          <p class="text-white text-justify fs-6 p-2 px-5">
-            CommutersLink has established strict security policies across our processes,
-            systems, resources, and offices that ensure your data is 100% secure.
-          </p>
-        </div></div>
-        <div class="text-center py-2 px-2  mb-4">
-        <a href="">
-          <button class="btnregistration px-3 fs-6 py-2">Next</button>
-        </a>
-      
-      </div></div>
-      `,
-      
-      showConfirmButton: false, 
-      background: 'rgb(22,70,57)',
-    }
-    ,
-   
-    );
+
+  const route = () => {
+    navigate("/verification");
   };
+
+
+  // const handleButtonClick = () => {
+  //   Swal.fire({
+
+  //     html: `
+  //     <div className="col-md-12  text-center" style="margin-top: 4vh; margin-bottom: 3vh;">
+  //     <div className="container py-3">
+  //     <div class="text-center "> <h3 class="card-title text-center  text-white">DATA SECURITY</h3></div>
+  //     <div class="border-bottom m-auto border-white p-2 mb-4 w-50 "></div>
+  //       <div>
+  //         <img
+  //           src="${BASE_URL}/assets/images/data_security_icon.png"
+  //           alt="Sample photo"
+  //           style="width: 150px; height: 150px; object-fit: cover; border-radius: 60%;"
+  //         />
+  //         <p class="text-white text-justify fs-6 p-2 px-5">
+  //           CommutersLink has established strict security policies across our processes,
+  //           systems, resources, and offices that ensure your data is 100% secure.
+  //         </p>
+  //       </div></div>
+  //       <div class="text-center py-2 px-2  mb-4">
+  //       <a href="">
+  //         <button class="btnregistration px-3 fs-6 py-2">Next</button>
+  //       </a>
+
+  //     </div></div>
+  //     `,
+
+  //     showConfirmButton: false,
+  //     background: 'rgb(22,70,57)',
+  //   }
+  //     ,
+
+  //   );
+  // };
+
   return (
 
     <div>
@@ -70,7 +77,7 @@ const DataSecurity = () => {
               }}
             >
 
-<Carousel
+              <Carousel
                 className="carousel-container main-bg"
                 prevIcon={null}
                 nextIcon={null}
@@ -82,7 +89,7 @@ const DataSecurity = () => {
                     src={`${BASE_URL}/assets/images/signup.png`}
                     alt="First slide"
                   />
-                   <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                  <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
                 </Carousel.Item>
 
                 <Carousel.Item interval={4000}>
@@ -100,7 +107,7 @@ const DataSecurity = () => {
                     src={`${BASE_URL}/assets/images/signup-4.png`}
                     alt="First slide"
                   />
-                 <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                  <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
 
                 </Carousel.Item>
                 <Carousel.Item interval={4000}>
@@ -109,20 +116,20 @@ const DataSecurity = () => {
                     src={`${BASE_URL}/assets/images/signup-6.png`}
                     alt="First slide"
                   />
-                 <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
+                  <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
 
                 </Carousel.Item>
               </Carousel>
               {/* </div> */}
             </div>
-            <div className="col-md-6 pt-5" style={{marginTop: "6vh", marginBottom: "9vh"}}>
+            <div className="col-md-6 pt-5" style={{ marginTop: "6vh", marginBottom: "9vh" }}>
               <div
                 className="container py-3"
               >
-               <div className="card p-3 bg-white border border-2 shadow"><div className="mt-3" >
+                <div className="card p-3 bg-white border border-2 shadow"><div className="mt-3" >
                   <div
                     className="text-center"
-                    // style={{ background: "rgb(22,70,57)" }}
+                  // style={{ background: "rgb(22,70,57)" }}
                   >
                     <div>
                       <div>
@@ -132,36 +139,33 @@ const DataSecurity = () => {
                           alt="Sample photo"
                           style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '60%' }}
                         />
-                           <h3 className="card-title py-1 text-center fw-bold text-success" >
-                            DATA SECURITY
-                          </h3>
-                          <div className="border-bottom m-auto border-success p-1 w-50 "></div>
+                        <h3 className="card-title py-1 text-center fw-bold text-success" >
+                          DATA SECURITY
+                        </h3>
+                        <div className="border-bottom m-auto border-success p-1 w-50 "></div>
                       </div>
                     </div>
                     <div className="text-white p-4 ">
                       <p className="text-black text-justify px-4 fs-5 ">
-                       CommutersLink has established strict security policies across our processes,
-                       systems, resources and offices that ensure your data is 100% secure.
+                        CommutersLink has established strict security policies across our processes,
+                        systems, resources and offices that ensure your data is 100% secure.
                       </p>
                     </div>
-                   
-                    
-                      <div className="mb-5">
-                        <Button  className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" 
-                        // onClick={handleButtonClick}
-                        >
-                          Next
-                        </Button>
-                      </div>
-                    
+
+
+                    <div className="mb-5">
+                      <Button className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                        onClick={route}
+                      >
+                        Next
+                      </Button>
+                    </div>
+
                   </div>
-                </div></div>
-                
+                </div>
+                </div>
               </div>
             </div>
-
-
-
 
             {/* <div className="col-md-6 pt-5" style={{marginTop: "6vh", marginBottom: "9vh"}}>
             <div>

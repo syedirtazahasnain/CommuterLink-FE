@@ -52,7 +52,7 @@ const SchoolRegistration = () => {
   const [isValidUniversityAddress, setIsValidUniversityAddress] = useState(true);
 
   const route = () => {
-    navigate("/verification");
+    navigate("/datasecurity");
   };
 
   const AddNewStart = () => {
@@ -601,6 +601,8 @@ const SchoolRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setCnicFront(null);
+          setCnicFrontExt(null);
         }, 100);
       }
     }
@@ -625,6 +627,8 @@ const SchoolRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setCnicBack(null);
+          setCnicBackExt(null);
         }, 100);
       }
     }
@@ -649,6 +653,8 @@ const SchoolRegistration = () => {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
+          setPicture(null);
+          setPictureExt(null);
         }, 100);
       }
     }
@@ -729,7 +735,13 @@ const SchoolRegistration = () => {
         if (PersonalFormFields.every(
           (field) => field !== "" && field !== null && field !== undefined
         )) {
-          await PersonalForm();
+          if (locationStartString === locationEndString || markerPositionStart === markerPositionEnd) {
+            displayNotification("warning", "Please select different starting and drop-off point");
+            setIsLoading(false);
+          }
+          else {
+            await PersonalForm();
+          }
         }
       } catch (error) {
         setIsLoading(false);
@@ -2187,7 +2199,7 @@ const SchoolRegistration = () => {
 
                 <Row
                   className="mb-3 py-3 px-3 shadow shadow-sm form-color-field"
-                  // style={{ backgroundColor: " #cddbd9" }}
+                // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}

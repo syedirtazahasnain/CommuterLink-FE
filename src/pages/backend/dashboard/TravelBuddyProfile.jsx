@@ -411,6 +411,10 @@ const TravelBuddyProfile = () => {
     const pickupLatitude = pickupCoords[0];
     const pickupLongitude = pickupCoords[1];
 
+    // Calculate the center point
+    const centerLatitude = (parseFloat(pickupLatitude) + parseFloat(dropoffLatitude)) / 2;
+    const centerLongitude = (parseFloat(pickupLongitude) + parseFloat(dropoffLongitude)) / 2;
+
     console.log({ user });
 
     return (
@@ -484,7 +488,7 @@ const TravelBuddyProfile = () => {
                           <h5 className="fw-bold text-secondary">{profession}</h5>
                         </div>
                       </div>
-                      
+
                       <div className="row mb-2">
                         <div className="col-md-6">
                           {mobile !== "" ? (
@@ -869,8 +873,8 @@ const TravelBuddyProfile = () => {
                     <div className=" row d-flex justify-content-center align-items-center">
                       <Row style={{ height: "275px", width: "100%" }}>
                         <GoogleMap
-                          zoom={12}
-                          center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                          zoom={11}
+                          center={{ lat: centerLatitude, lng: centerLongitude }}
                           mapContainerStyle={{
                             width: "100%",
                             height: '100%',
@@ -892,7 +896,7 @@ const TravelBuddyProfile = () => {
                               url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                             }}
                           />
-                          <PolylineF
+                          {/* <PolylineF
                             path={[
                               { lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) },
                               { lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) },
@@ -902,7 +906,7 @@ const TravelBuddyProfile = () => {
                               strokeOpacity: 1.0,
                               strokeWeight: 3,
                             }}
-                          />
+                          /> */}
                         </GoogleMap>
                       </Row>
                       <div className="row justify-content-end">

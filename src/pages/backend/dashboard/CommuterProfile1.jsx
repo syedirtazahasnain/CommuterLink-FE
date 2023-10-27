@@ -354,6 +354,10 @@ const CommuterProfile1 = () => {
     const pickupLatitude = pickupCoords[0];
     const pickupLongitude = pickupCoords[1];
 
+    // Calculate the center point
+    const centerLatitude = (parseFloat(pickupLatitude) + parseFloat(dropoffLatitude)) / 2;
+    const centerLongitude = (parseFloat(pickupLongitude) + parseFloat(dropoffLongitude)) / 2;
+
     console.log({ user });
     console.log("User Details:", userDetails[0]);
 
@@ -818,8 +822,8 @@ const CommuterProfile1 = () => {
                   <div className=" row d-flex justify-content-center align-items-center">
                     <Row style={{ height: "275px", width: "100%" }}>
                       <GoogleMap
-                        zoom={12}
-                        center={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                        zoom={11}
+                        center={{ lat: centerLatitude, lng: centerLongitude }}
                         mapContainerStyle={{
                           width: "100%",
                           height: '100%',
