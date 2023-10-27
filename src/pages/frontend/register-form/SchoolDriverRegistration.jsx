@@ -1786,6 +1786,27 @@ const DriverRegistration = () => {
                       Registration Form
                     </h1>
                   </div>
+                  <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <div className="container">
+                      <div>
+                        <div>
+                          {" "}
+                          <img
+                            src={`${BASE_URL}/assets/images/data_security_icon.png`}
+                            alt="Sample photo"
+                            style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '60%' }}
+                          />
+
+                        </div>
+                      </div>
+                      <div className="text-white">
+                        <p className="text-black text-justify px-4 fs-5 ">
+                          CommutersLink has established strict security policies across our processes,
+                          systems, resources and offices that ensure your data is 100% secure.
+                        </p>
+                      </div>
+                    </div>
+                  </nav>
                   <Form className="p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}>
 
                     <div className="row mb-3 shadow shadow-sm ">
@@ -2998,7 +3019,27 @@ const DriverRegistration = () => {
                       Driver's Registration Form
                     </h1>{" "}
                   </div>
+                  <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <div className="container">
+                      <div>
+                        <div>
+                          {" "}
+                          <img
+                            src={`${BASE_URL}/assets/images/data_security_icon.png`}
+                            alt="Sample photo"
+                            style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '60%' }}
+                          />
 
+                        </div>
+                      </div>
+                      <div className="text-white">
+                        <p className="text-black text-justify px-4 fs-5 ">
+                          CommutersLink has established strict security policies across our processes,
+                          systems, resources and offices that ensure your data is 100% secure.
+                        </p>
+                      </div>
+                    </div>
+                  </nav>
                   <Form
                     className=" p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}
                   >
