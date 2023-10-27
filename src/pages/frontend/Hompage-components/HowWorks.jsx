@@ -16,7 +16,7 @@ function HowWorks() {
       <section id="working">
         <div className="section-title text-center">
           <h1 className="heading-color text-black">How It Works?</h1>
-          <h3 className="fs-5">
+          <h3 className="fs-4">
             It’s a long term commitment between the car owner
             and travel buddies for ride sharing and not a one-time drop-off
           </h3>

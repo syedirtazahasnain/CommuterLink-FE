@@ -4,6 +4,8 @@ import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 
 export default class SimpleSlider extends Component {
+
+ 
   render() {
     const settings = {
       dots: false,
@@ -17,10 +19,11 @@ export default class SimpleSlider extends Component {
     };
     return (
       <div className="my-4" id="contribute">
-        <div className="section-title text-center">
+        <div className="section-title text-center mb-1">
           <h1 className="heading-color text-black">Socioeconomic
             Angle</h1>
-          <h3 className="fs-5 mb-3">Commuterslink has a socioeconomic welfare angle by reducing traffic, hazards, pollution, government spending on communication infrastructure and improving citizen mental health
+          <h3 className="fs-4 pb-5 px-5" style={{overflowY:'hidden'}} >Commuterslink has a socioeconomic welfare angle by reducing traffic, hazards, pollution, government spending on communication infrastructure and improving citizen mental health
+          {/* style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} */}
           </h3>
         </div>
         <Slider {...settings}>
