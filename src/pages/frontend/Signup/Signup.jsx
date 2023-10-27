@@ -519,7 +519,7 @@ const Signup = () => {
                     role="alert"
                   >
                   {" "}
-                <h6 className="text-left">  <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i>You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register.
+                <h6 className="text-left">  <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i>You may proceed with registration if you are 18 years or <span className="ms-4">older. For students below 18 years their parents can</span><br/> <span className="ms-4">register.</span>
                    </h6>  
                     <button
                       type=""
