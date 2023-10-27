@@ -299,6 +299,8 @@ const Signup = () => {
 
   const postData = async () => {
     try {
+      const phonePattern = /^03\d{9}$/;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (
         fullName === "" ||
         email === "" ||
@@ -310,6 +312,12 @@ const Signup = () => {
       } 
       else if (password !== confirmPassword) {
         displayNotification("warning", "Confirm password is not matched with new password!");
+      }
+      else if (!phonePattern.test(phoneNumber)) {
+        displayNotification("warning", "Please follow the correct phone number format");
+      }
+      else if (!emailPattern.test(email)) {
+        displayNotification("warning", "Please follow the correct email format");
       }
       else if (fullName.length < 4) {
         displayNotification("warning", "Full Name should have alteast 4 characters");
