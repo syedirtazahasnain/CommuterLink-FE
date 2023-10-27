@@ -56,7 +56,7 @@ const TravelBuddyProfile = () => {
       navigate("/termscondition1");
     }
     else if (requestedAs === "driver") {
-      navigate("/beforeapprovalterms");
+      navigate("/beforeapprovalterms1");
     }
   };
 

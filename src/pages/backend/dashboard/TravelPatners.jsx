@@ -701,7 +701,7 @@ const TravelPatners = () => {
                               <div className="row mt-3">
                                 <div className="col-md-9">
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-5">
                                       {preferredGender !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Preffered Gender:</h5>
@@ -711,12 +711,26 @@ const TravelPatners = () => {
                                         </>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{preferredGender}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-5">
+                                      {price !== "" ? (
+                                        <>
+                                          <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
+                                    <div className="col-md-6">
+                                      <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
+                                    </div>
+                                  </div>
+                                  <div className="row mb-2">
+                                    <div className="col-md-5">
                                       {origin !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Point of Origin:</h5>
@@ -726,12 +740,12 @@ const TravelPatners = () => {
                                         </>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{origin}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-5">
                                       {timeDepart !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Pickup Timings:</h5>
@@ -742,12 +756,12 @@ const TravelPatners = () => {
                                         </>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{timeDepart}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-5">
                                       {destination !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
@@ -758,12 +772,12 @@ const TravelPatners = () => {
                                         </>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{destination}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-5">
                                       {timeReturn !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Return Timings:</h5>
@@ -774,12 +788,12 @@ const TravelPatners = () => {
                                         </>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{timeReturn}</h5>
                                     </div>
                                   </div>
                                   <div className="row mb-2">
-                                    <div className="col-md-4">
+                                    <div className="col-md-5">
                                       {days !== "" ? (
                                         <>
                                           <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
@@ -790,7 +804,7 @@ const TravelPatners = () => {
                                         </>
                                       )}
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{days}</h5>
                                     </div>
                                   </div>
@@ -845,20 +859,6 @@ const TravelPatners = () => {
                                     </div>
                                     <div className="col-md-6">
                                       <h5 className="fw-bold text-secondary">{seatsLeft}</h5>
-                                    </div>
-                                  </div>
-                                  <div className="row mb-2">
-                                    <div className="col-md-6">
-                                      {price !== "" ? (
-                                        <>
-                                          <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
-                                        </>
-                                      ) : (
-                                        <></>
-                                      )}
-                                    </div>
-                                    <div className="col-md-6">
-                                      <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
                                     </div>
                                   </div>
                                   {date && (

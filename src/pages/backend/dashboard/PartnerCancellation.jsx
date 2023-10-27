@@ -276,6 +276,7 @@ const PartnerCancellation = () => {
       }
     });
   }
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -577,7 +578,7 @@ const PartnerCancellation = () => {
                                   {checkStatus === 0 ?
                                     (
                                       <div className="py-5">
-                                        <Button
+                                        {/* <Button
                                           className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 mb-3 mx-4"
                                           style={{ cursor: 'pointer' }}
                                           onClick={() => {
@@ -587,7 +588,7 @@ const PartnerCancellation = () => {
                                           }}
                                         >
                                           Cancel Now
-                                        </Button>
+                                        </Button> */}
                                         <Button
                                           className="font-custom text-decoration-none btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3  mb-3 mx-4"
                                           style={{ cursor: 'pointer' }}
