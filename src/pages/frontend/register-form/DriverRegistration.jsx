@@ -2931,7 +2931,7 @@ const DriverRegistration = () => {
                         {selectedCnicBack ? (
 
                           <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                          {selectedCnicBack.name}
+                            {selectedCnicBack.name}
                             <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackPreview}></button>
                           </div>
                         ) : (
@@ -4074,12 +4074,12 @@ const DriverRegistration = () => {
                                 onChange={handleDriverNameChange}
                                 onKeyPress={preventNumbers1}
                               />
-                      
-                        {!isValidDriverName && (
-                          <div className="invalid-feedback">
-                           Full Name must contain only alphabetic characters and be at least 4 characters long
-                          </div>
-                        )}
+
+                              {!isValidDriverName && (
+                                <div className="invalid-feedback">
+                                  Full Name must contain only alphabetic characters and be at least 4 characters long
+                                </div>
+                              )}
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -4806,14 +4806,20 @@ const DriverRegistration = () => {
                               Name
                             </Form.Label>
                             <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Name"
-                              value={inputDriverName}
-                              onChange={(e) => setInputDriverName(e.target.value)}
-                              defaultValue=""
-                            />
+                                required
+                                type="text"
+                                className={`${isValidDriverName ? '' : 'is-invalid'}`}
+                                placeholder="Name"
+                                value={inputDriverName}
+                                onChange={handleDriverNameChange}
+                                onKeyPress={preventNumbers1}
+                              />
+
+                              {!isValidDriverName && (
+                                <div className="invalid-feedback">
+                                  Full Name must contain only alphabetic characters and be at least 4 characters long
+                                </div>
+                              )}
                           </Form.Group>
                           <Form.Group
                             as={Col}

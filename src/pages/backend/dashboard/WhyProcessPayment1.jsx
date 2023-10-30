@@ -107,21 +107,21 @@ const WhyProcessPayment1 = () => {
               <p>
                 1. Commuters link keeps a month's advance and your money is
                 secure and will be paid transferrred to you wallet on daily
-                basis.
+                basis
               </p>
               <p className="">
                 2. No bargaining involved. Commuterslink works out per day cost
                 based upon a fixed relationized formula. If the petrol prices go
-                up or down the same will be adjusted.
+                up or down the same will be adjusted
               </p>
               <p>
                 3. No dispute on cost,payments,number of days the services were
-                utilized etc.
+                utilized etc
               </p>
               <p>
                 4. If you stop provision of car seat to a partner for a reason
                 or other with 1 week, your payment is secure and you will still be able to
-                get another match.
+                get another match
               </p>
               <p>
                 5. CommutersLink verifies all the data of its members and ensures
@@ -129,7 +129,7 @@ const WhyProcessPayment1 = () => {
               </p>
               <p>
                 6. By receiving money through CommutersLink you remain an active
-                member and have access to to other options to find travel buddies.
+                member and have access to to other options to find travel buddies
               </p>
               <p>
                 7. Last but not the least it is the most respectable way of
