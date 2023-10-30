@@ -92,7 +92,7 @@ const RequestCommuterProfile = () => {
             dispatch(setRequestAsState(requested_as));
             dispatch(setIdState(id));
             dispatch(setContactIdState(contact_id));
-            navigate("/beforeapprovalterms1");
+            navigate("/beforeapprovalterms");
         }
     };
 
