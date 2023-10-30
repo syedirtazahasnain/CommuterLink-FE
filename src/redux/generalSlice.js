@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   data: {
     id: "",
+    name: "",
     contact_id: "",
     request_as: "",
     amount: null,
@@ -20,6 +21,10 @@ export const generalSlice = createSlice({
 
     setIdState: (state, payload = true) => {
       state.data.id = payload.payload;
+    },
+
+    setNameState: (state, payload = true) => {
+      state.data.name = payload.payload;
     },
 
     setContactIdState: (state, payload = true) => {
@@ -42,5 +47,5 @@ export const generalSlice = createSlice({
   },
 });
 
-export const { setIdState, setContactIdState, setAmountState, setRequestAsState, setSidebarState, setCurrentPage } = generalSlice.actions;
+export const { setIdState, setNameState, setContactIdState, setAmountState, setRequestAsState, setSidebarState, setCurrentPage } = generalSlice.actions;
 export default generalSlice.reducer;

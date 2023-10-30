@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumbs } from '@mui/material'
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
-import { setContactIdState, setIdState } from "../../../redux/generalSlice";
+import { setContactIdState, setIdState, setNameState } from "../../../redux/generalSlice";
 import { ThreeCircles } from "react-loader-spinner";
 import Modal from 'react-bootstrap/Modal';
 import { GoogleMap, LoadScript, MarkerF, PolylineF } from "@react-google-maps/api";
@@ -223,11 +223,12 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const requestViewDriver = (name, request_id) => {
+  const requestViewDriver = (name, request_id, contact_id) => {
     setSubmit(true);
 
     if (!submitbtn) {
-      dispatch(setContactIdState(name));
+      dispatch(setNameState(name));
+      dispatch(setContactIdState(contact_id));
       dispatch(setIdState(request_id));
       navigate("/driver-acceptance");
     }
@@ -884,7 +885,7 @@ const CommuterProfile1 = () => {
                   Cancel Request
                 </Button>
               ) : req_stage === 2 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(name, request_id) }}>
+                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(name, request_id, contact_id) }}>
                   Proceed to Final Step
                 </Button>
               ) : (

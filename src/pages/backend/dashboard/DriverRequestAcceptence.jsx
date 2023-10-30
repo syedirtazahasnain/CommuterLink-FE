@@ -27,6 +27,7 @@ const DriverRequestAcceptence = () => {
   const dispatch = useDispatch();
   const userToken = useSelector((s) => s.login.data.token);
   const requestContactId = useSelector((s) => s.general.data.contact_id);
+  const requestName = useSelector((s) => s.general.data.name);
   const requestId = useSelector((s) => s.general.data.id);
   const [name, setName] = useState("");
   const [driverName, setDriverName] = useState("");
@@ -199,7 +200,7 @@ const DriverRequestAcceptence = () => {
         DRIVER REQUEST ACCEPTANCE
         </h3>
         <Link
-              to={"/"} >
+              to={"/dashboard"} >
               <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
@@ -210,7 +211,7 @@ const DriverRequestAcceptence = () => {
         <div className="card bg-light">
           <div className="card-body">
 
-            <p>Dear {requestContactId}</p>
+            <p>Dear {requestName}</p>
             <p className="">
               Thank you very much for accepting me as a travel buddy to ride on your car.
               I also think that we are a suitable match to commute together. so I also formally
