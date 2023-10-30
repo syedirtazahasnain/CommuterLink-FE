@@ -163,7 +163,7 @@ const PartnerCancellation = () => {
   
         if (result.isConfirmed) {
           const body = {
-            option: 'rider',
+            option: 'week_notice',
             date: selectedDate.format('YYYY-MM-DD'),
           };
   
@@ -594,7 +594,7 @@ const PartnerCancellation = () => {
                                           style={{ cursor: 'pointer' }}
                                           onClick={() => {
                                             sendRequest();
-                                            setRider("week_notice");
+                                            //setRider("week_notice");
                                           }}
                                         >
                                           Week Notice
@@ -607,7 +607,7 @@ const PartnerCancellation = () => {
                                       style={{ cursor: 'pointer' }}
                                       onClick={() => {
                                         sendRequest();
-                                        setDriver("driver");
+                                        //setDriver("driver");
                                       }}
                                     >
                                       Submit
