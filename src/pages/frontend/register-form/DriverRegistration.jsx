@@ -253,6 +253,7 @@ const DriverRegistration = () => {
 
   // For Driver & Both Fields
   const [inputDriverName, setInputDriverName] = useState("");
+  const [isValidDriverName, setIsValidDriverName] = useState(true);
   const [inputDriverCnicNumber, setInputDriverCnicNumber] = useState("");
   const [inputDriverCnicFront, setInputDriverCnicFront] = useState("");
   const [inputDriverCnicFrontExt, setInputDriverCnicFrontExt] = useState("");
@@ -522,18 +523,54 @@ const DriverRegistration = () => {
     setProvinceStartId(event.target.value);
   };
 
-  function validateProfession(profession) {
-    // A simple regular expression to match alphabetic characters and spaces
+  // function validateProfession(profession) {
+
+  //   const professionPattern = /^[A-Za-z\s]+$/;
+
+  //   return professionPattern.test(profession);
+  // }
+
+  // const handleProfessionChange = (e) => {
+  //   const newProfession = e.target.value;
+  //   setProfession(newProfession);
+  //   setIsValidProfession(validateProfession(newProfession));
+  // };
+  const handleProfessionChange = (e) => {
+    let newProfession = e.target.value;
+    newProfession = newProfession.replace(/\s+/g, ' ').substring(0, 30);
     const professionPattern = /^[A-Za-z\s]+$/;
 
-    return professionPattern.test(profession);
-  }
+    // Check if the input matches the pattern.
+    const isValid = professionPattern.test(newProfession);
 
-  const handleProfessionChange = (e) => {
-    const newProfession = e.target.value;
+    setIsValidProfession(isValid);
     setProfession(newProfession);
-    setIsValidProfession(validateProfession(newProfession));
   };
+  const preventNumbers = (e) => {
+    const inputChar = String.fromCharCode(e.which);
+    if (!/[A-Za-z\s]/.test(inputChar)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleDriverNameChange = (e) => {
+    let newName = e.target.value;
+    newName = newName.replace(/\s+/g, ' ').substring(0, 25);
+    const NamePattern = /^[A-Za-z\s]+$/;
+
+    // Check if the input matches the pattern.
+    const isValid = NamePattern.test(newName);
+
+    setIsValidDriverName(isValid);
+    setInputDriverName(newName);
+  };
+  const preventNumbers1 = (e) => {
+    const inputChar = String.fromCharCode(e.which);
+    if (!/[A-Za-z\s]/.test(inputChar)) {
+      e.preventDefault();
+    }
+  };
+
 
   const handleProvinceEndChange = (event) => {
     setCityEndId("");
@@ -2789,10 +2826,11 @@ const DriverRegistration = () => {
                           placeholder="Profession (Engineer, Doctor, etc)"
                           value={profession}
                           onChange={handleProfessionChange}
+                          onKeyPress={preventNumbers}
                         />
                         {!isValidProfession && (
                           <div className="invalid-feedback">
-                            Please enter a valid profession.
+                            Please enter a valid profession in maximum 30 words.
                           </div>
                         )}
                       </Form.Group>
@@ -2852,7 +2890,7 @@ const DriverRegistration = () => {
                         {selectedCnicFront ? (
 
                           <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                            <strong>{selectedCnicFront.name}</strong>
+                            {selectedCnicFront.name}
                             <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontPreview}></button>
                           </div>
                         ) : (
@@ -2893,7 +2931,7 @@ const DriverRegistration = () => {
                         {selectedCnicBack ? (
 
                           <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                            <strong>{selectedCnicBack.name}</strong>
+                          {selectedCnicBack.name}
                             <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackPreview}></button>
                           </div>
                         ) : (
@@ -2935,7 +2973,7 @@ const DriverRegistration = () => {
                         {selectedFile ? (
 
                           <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                            <strong>{selectedFile.name}</strong>
+                            {selectedFile.name}
                             <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handlePicturePreview}></button>
                           </div>
                         ) : (
@@ -3180,7 +3218,7 @@ const DriverRegistration = () => {
                           {selectedCarPlate ? (
 
                             <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                              <strong>{selectedCarPlate.name}</strong>
+                              {selectedCarPlate.name}
                               <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCarPlatePreview}></button>
                             </div>
                           ) : (
@@ -3857,7 +3895,7 @@ const DriverRegistration = () => {
                               {selectedLicenseFrontDriver ? (
 
                                 <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                  <strong>{selectedLicenseFrontDriver.name}</strong>
+                                  {selectedLicenseFrontDriver.name}
                                   <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
                                 </div>
                               ) : (
@@ -3901,7 +3939,7 @@ const DriverRegistration = () => {
                               {selectedLicenseBackDriver ? (
 
                                 <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                  <strong>{selectedLicenseBackDriver.name}</strong>
+                                  {selectedLicenseBackDriver.name}
                                   <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
                                 </div>
                               ) : (
@@ -4030,12 +4068,18 @@ const DriverRegistration = () => {
                               <Form.Control
                                 required
                                 type="text"
-                                className="text-secondary"
+                                className={`${isValidDriverName ? '' : 'is-invalid'}`}
                                 placeholder="Name"
                                 value={inputDriverName}
-                                onChange={(e) => setInputDriverName(e.target.value)}
-                                defaultValue=""
+                                onChange={handleDriverNameChange}
+                                onKeyPress={preventNumbers1}
                               />
+                      
+                        {!isValidDriverName && (
+                          <div className="invalid-feedback">
+                           Full Name must contain only alphabetic characters and be at least 4 characters long
+                          </div>
+                        )}
                             </Form.Group>
                             <Form.Group
                               as={Col}
@@ -4097,7 +4141,7 @@ const DriverRegistration = () => {
                               {selectedCnicFrontDriver ? (
 
                                 <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                  <strong>{selectedCnicFrontDriver.name}</strong>
+                                  {selectedCnicFrontDriver.name}
                                   <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontDriverPreview}></button>
                                 </div>
                               ) : (
@@ -4140,7 +4184,7 @@ const DriverRegistration = () => {
                               {selectedCnicBackDriver ? (
 
                                 <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                  <strong>{selectedCnicBackDriver.name}</strong>
+                                  {selectedCnicBackDriver.name}
                                   <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackDriverPreview}></button>
                                 </div>
                               ) : (
@@ -4268,7 +4312,7 @@ const DriverRegistration = () => {
                               {selectedLicenseFrontDriver ? (
 
                                 <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                  <strong>{selectedLicenseFrontDriver.name}</strong>
+                                  {selectedLicenseFrontDriver.name}
                                   <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
                                 </div>
                               ) : (
@@ -4312,7 +4356,7 @@ const DriverRegistration = () => {
                               {selectedLicenseBackDriver ? (
 
                                 <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                  <strong>{selectedLicenseBackDriver.name}</strong>
+                                  {selectedLicenseBackDriver.name}
                                   <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
                                 </div>
                               ) : (
@@ -4687,7 +4731,7 @@ const DriverRegistration = () => {
                             {selectedLicenseFrontDriver ? (
 
                               <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                <strong>{selectedLicenseFrontDriver.name}</strong>
+                                {selectedLicenseFrontDriver.name}
                                 <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
                               </div>
                             ) : (
@@ -4731,7 +4775,7 @@ const DriverRegistration = () => {
                             {selectedLicenseBackDriver ? (
 
                               <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                <strong>{selectedLicenseBackDriver.name}</strong>
+                                {selectedLicenseBackDriver.name}
                                 <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
                               </div>
                             ) : (
@@ -4830,7 +4874,7 @@ const DriverRegistration = () => {
                             {selectedCnicFrontDriver ? (
 
                               <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                <strong>{selectedCnicFrontDriver.name}</strong>
+                                {selectedCnicFrontDriver.name}
                                 <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontDriverPreview}></button>
                               </div>
                             ) : (
@@ -4873,7 +4917,7 @@ const DriverRegistration = () => {
                             {selectedCnicBackDriver ? (
 
                               <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                <strong>{selectedCnicBackDriver.name}</strong>
+                                {selectedCnicBackDriver.name}
                                 <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackDriverPreview}></button>
                               </div>
                             ) : (
