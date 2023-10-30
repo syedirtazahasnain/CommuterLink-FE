@@ -351,7 +351,7 @@ const TermsCondition2 = () => {
                 You will receive your share of fee through CommutersLink and there will be no direct transaction  between you and your commuting travel buddy partner 
               </li>
               <li className="mb-2">
-                If you wish to discontinue your partnership with a member due a reason or other CommutersLink will inform the partner on your behalf. You are required to give at least 1 week notice(insert a link here “why to receive payment through commutersLink) 
+                If you wish to discontinue your partnership with a member due a reason or other CommutersLink will inform the partner on your behalf. You are required to give at least 1 week notice(insert a link here "why to receive payment through commutersLink") 
               </li>
               <li className="mb-2"> Any complaints, grievances will be addressed to CommutersLink
               for resolution.</li></ol>
