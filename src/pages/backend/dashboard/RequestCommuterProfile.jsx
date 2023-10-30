@@ -403,7 +403,7 @@ const RequestCommuterProfile = () => {
                                     <div className="row mt-3">
                                         <div className="col-md-9">
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {gender !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">Gender:</h5>
@@ -413,12 +413,27 @@ const RequestCommuterProfile = () => {
                                                         </>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{gender}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
+                                                    {price !== "" ? (
+                                                        <>
+                                                            <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
+                                                        </>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </div>
+                                                <div className="col-md-6">
+
+                                                    <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
+                                                </div>
+                                            </div>
+                                            <div className="row mb-2">
+                                                <div className="col-md-6">
                                                     {origin !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">Point of Origin:</h5>
@@ -428,12 +443,12 @@ const RequestCommuterProfile = () => {
                                                         </>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{origin}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {time_depart !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">Pickup Timings:</h5>
@@ -444,12 +459,12 @@ const RequestCommuterProfile = () => {
                                                         </>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{time_depart}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {destination !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
@@ -460,12 +475,12 @@ const RequestCommuterProfile = () => {
                                                         </>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{destination}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {time_return !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">Return Timings:</h5>
@@ -476,12 +491,12 @@ const RequestCommuterProfile = () => {
                                                         </>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{time_return}</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     {days !== "" ? (
                                                         <>
                                                             <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
@@ -492,7 +507,7 @@ const RequestCommuterProfile = () => {
                                                         </>
                                                     )}
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{days}</h5>
                                                 </div>
                                             </div>
@@ -536,21 +551,6 @@ const RequestCommuterProfile = () => {
                                                 </div>
                                                 <div className="col-md-6">
                                                     <h5 className="fw-bold text-secondary">{seats_left}</h5>
-                                                </div>
-                                            </div>
-                                            <div className="row mb-2">
-                                                <div className="col-md-6">
-                                                    {price !== "" ? (
-                                                        <>
-                                                            <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
-                                                        </>
-                                                    ) : (
-                                                        <></>
-                                                    )}
-                                                </div>
-                                                <div className="col-md-6">
-
-                                                    <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
                                                 </div>
                                             </div>
                                             <div className="row mb-2">
@@ -790,9 +790,9 @@ const RequestCommuterProfile = () => {
                     </div>
 
                 </div>
-                <div className = "card bg-medium-teal p-2 px-4 text-success my-2 fw-bold">  <h5 className="text-dark-green">{`The below request has been initiated by the member based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share. Further details will be shown to you after you accept the request.`}
+                <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold">  <h5 className="text-dark-green">{`The below request has been initiated by the member based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share. Further details will be shown to you after you accept the request.`}
                 </h5></div>
-              
+
             </div>
             {loading ? (
                 <div className="d-flex justify-content-center">

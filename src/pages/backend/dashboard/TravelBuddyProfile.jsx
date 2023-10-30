@@ -77,6 +77,7 @@ const TravelBuddyProfile = () => {
   // For Dashboard Data
   const [profileType, setProfileType] = useState("");
   const [contactId, setContactId] = useState("");
+  const [option, setOption] = useState(null);
   const [memberId, setMemberId] = useState("");
   const [id, setId] = useState("");
   const [requestedAs, setRequestedAs] = useState("");
@@ -107,6 +108,30 @@ const TravelBuddyProfile = () => {
   const [date, setDate] = useState("");
   const [cancelDate, setCancelDate] = useState(null);
   const [cancelDisabled, setCancelDisabled] = useState(false);
+
+  const getProfileUserData = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/profile`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const jsonresponse = await response.json();
+      if (jsonresponse) {
+        setOption(jsonresponse[0].userlist.vehicle_option);
+      }
+      console.log("Commuter Profile Data", jsonresponse);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   const getDashboardData = async () => {
     try {
@@ -323,6 +348,7 @@ const TravelBuddyProfile = () => {
 
   useEffect(() => {
     getTravelData();
+    getProfileUserData();
   }, []);
 
   const GoBack = () => {
@@ -544,7 +570,7 @@ const TravelBuddyProfile = () => {
                 <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                   <li class="nav-item me-0" role="presentation">
                     <button className={`nav-link fs-4 custom-button-style active rounded-0`}
-                      id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{profileType === "rider" ? ("Traveller Details") : ("Car Offerer Details")}</button>
+                      id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{option === 0 ? ("Car Offeror Details") : ("Traveller Details")}</button>
                   </li>
                   <li class="nav-item me-0" role="presentation">
                     <button className={`nav-link fs-4 custom-button-style rounded-0`}
@@ -580,7 +606,7 @@ const TravelBuddyProfile = () => {
                     <div className="row mt-3">
                       <div className="col-md-9">
                         <div className="row mb-2">
-                          <div className="col-md-4">
+                          <div className="col-md-6">
                             {preferred_gender !== "" ? (
                               <>
                                 <h5 className="text-dark-green fw-bold font-custom">Preferred Gender:</h5>
@@ -590,12 +616,26 @@ const TravelBuddyProfile = () => {
                               </>
                             )}
                           </div>
-                          <div className="col-md-8">
+                          <div className="col-md-6">
                             <h5 className="fw-bold text-secondary">{preferred_gender}</h5>
                           </div>
                         </div>
                         <div className="row mb-2">
-                          <div className="col-md-4">
+                          <div className="col-md-6">
+                            {price && price !== "" ? (
+                              <>
+                                <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                          <div className="col-md-6">
+                            <h5 className="fw-bold text-secondary">{price && `Rs. ${price}/-`}</h5>
+                          </div>
+                        </div>
+                        <div className="row mb-2">
+                          <div className="col-md-6">
                             {origin !== "" ? (
                               <>
                                 <h5 className="text-dark-green fw-bold font-custom">Point of Origin:</h5>
@@ -605,12 +645,12 @@ const TravelBuddyProfile = () => {
                               </>
                             )}
                           </div>
-                          <div className="col-md-8">
+                          <div className="col-md-6">
                             <h5 className="fw-bold text-secondary">{origin}</h5>
                           </div>
                         </div>
                         <div className="row mb-2">
-                          <div className="col-md-4">
+                          <div className="col-md-6">
                             {time_depart !== "" ? (
                               <>
                                 <h5 className="text-dark-green fw-bold font-custom">Pickup Timings:</h5>
@@ -621,12 +661,12 @@ const TravelBuddyProfile = () => {
                               </>
                             )}
                           </div>
-                          <div className="col-md-8">
+                          <div className="col-md-6">
                             <h5 className="fw-bold text-secondary">{time_depart}</h5>
                           </div>
                         </div>
                         <div className="row mb-2">
-                          <div className="col-md-4">
+                          <div className="col-md-6">
                             {destination !== "" ? (
                               <>
                                 <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
@@ -637,12 +677,12 @@ const TravelBuddyProfile = () => {
                               </>
                             )}
                           </div>
-                          <div className="col-md-8">
+                          <div className="col-md-6">
                             <h5 className="fw-bold text-secondary">{destination}</h5>
                           </div>
                         </div>
                         <div className="row mb-2">
-                          <div className="col-md-4">
+                          <div className="col-md-6">
                             {time_return !== "" ? (
                               <>
                                 <h5 className="text-dark-green fw-bold font-custom">Return Timings:</h5>
@@ -653,12 +693,12 @@ const TravelBuddyProfile = () => {
                               </>
                             )}
                           </div>
-                          <div className="col-md-8">
+                          <div className="col-md-6">
                             <h5 className="fw-bold text-secondary">{time_return}</h5>
                           </div>
                         </div>
                         <div className="row mb-2">
-                          <div className="col-md-4">
+                          <div className="col-md-6">
                             {days && days !== "" ? (
                               <>
                                 <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
@@ -669,7 +709,7 @@ const TravelBuddyProfile = () => {
                               </>
                             )}
                           </div>
-                          <div className="col-md-8">
+                          <div className="col-md-6">
                             <h5 className="fw-bold text-secondary">{days && days}</h5>
                           </div>
                         </div>
@@ -724,20 +764,6 @@ const TravelBuddyProfile = () => {
                           </div>
                           <div className="col-md-6">
                             <h5 className="fw-bold text-secondary">{seats_left}</h5>
-                          </div>
-                        </div>
-                        <div className="row mb-2">
-                          <div className="col-md-6">
-                            {price && price !== "" ? (
-                              <>
-                                <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
-                              </>
-                            ) : (
-                              <></>
-                            )}
-                          </div>
-                          <div className="col-md-6">
-                            <h5 className="fw-bold text-secondary">{price && `Rs. ${price}/-`}</h5>
                           </div>
                         </div>
                         <div className="row mb-2">
