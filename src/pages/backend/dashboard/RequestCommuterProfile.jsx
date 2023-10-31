@@ -194,7 +194,8 @@ const RequestCommuterProfile = () => {
             position: 'top',
             text: 'Request is waiting for response!',
             customClass: {
-                confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+                confirmButton: 'swal-custom',
+                htmlContainer: 'text-center', // Apply custom CSS class to the OK button
             },
         }
         )
@@ -728,8 +729,8 @@ const RequestCommuterProfile = () => {
                                         <div className="row justify-content-end">
                                             <div className="col-md-12 text-end">
                                                 <div className="row justify-content-end">
-                                                    <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-primary"></i><span className="font-custom">Start Point</span></div>
-                                                    <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-danger"></i><span className="font-custom">Drop-off Point</span></div>
+                                                    <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-primary"></i><span className="font-custom fw-bold">Start Point</span></div>
+                                                    <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-danger"></i><span className="font-custom fw-bold">Drop-off Point</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -739,7 +740,7 @@ const RequestCommuterProfile = () => {
                         </div>
                         <div className="text-end px-3 py-4">
                             {request_stage === 1 || request_stage === 2 ? (
-                                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={requestAccepeted} style={{ background: "#ff8a00" }}>
+                                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={requestAccepeted} style={{ background: "#ff8a00" }}>
                                     Request Accepted
                                 </Button>
                             ) : (

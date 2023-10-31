@@ -104,29 +104,29 @@ const DriverRegistration = () => {
                 <div class="col-md-8  col-lg-12 col-sm-8 mb-5">
                   <div class="bg-light text-left">
                     <ol class="p-4 text-justify">
-                      <li>
+                      <li class = "mb-2">
                       Commuterslink holds 15 days advance from the traveler and, upon confirming the journey, will transfer the daily ride cost to your wallet. Subsequently, you can receive these funds through the chosen preferred payment method at the time of registration. Your money is not only secure but also protected with end-to-end encryption.
                       </li>
                   
                    
-                      <li >
+                      <li class = "mb-2">
                       No bargaining involved. Commuterslink works out the per-day per-seat cost based upon a fixed rationalized formula. If the petrol prices go up or down, the same will be adjusted.
                       </li>
                  
                   
-                    <li> No dispute on cost,payments,number of days the services were utilized etc.</li>
+                    <li class = "mb-2"> No dispute on cost,payments,number of days the services were utilized etc.</li>
         
-                   <li>If you stop provision of car seat to a partner for a reason or other with 1 week, your payment is secure and you will still be able to get another match.</li> 
+                   <li class = "mb-2">If you stop provision of car seat to a partner for a reason or other with 1 week, your payment is secure and you will still be able to get another match.</li> 
                             
-                          <li>
+                          <li class = "mb-2">
                           CommutersLink verifies all the data of its members and ensures your safety and security.                        </li>
                      
-                      <li>
+                      <li class = "mb-2">
                       By receiving money through CommutersLink you remain an active member and have access to other options to find travel buddies.                       </li>
                          
-                           <li>
+                           <li class = "mb-2">
                            Last but not the least, it is the most respectable way of receiving money as you do not have to ask your travel buddy to pay you cash.                                            </li>
-                           <li>You can add or update your preferred payment method from your profile page.</li>
+                           <li class = "mb-2">You can add or update your preferred payment method from your profile page.</li>
                            </ol>
 
                            </div>
@@ -1858,29 +1858,9 @@ const DriverRegistration = () => {
                   // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1 className="text-center text-white py-4">
-                      Registration Form
+                      Registration Form 1/2
                     </h1></div>
-                  <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <div className="container">
-                      <div>
-                        <div>
-                          {" "}
-                          <img
-                            src={`${BASE_URL}/assets/images/data_security_icon.png`}
-                            alt="Sample photo"
-                            style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '60%' }}
-                          />
-
-                        </div>
-                      </div>
-                      <div className="text-white">
-                        <p className="text-black text-justify px-4 fs-5 ">
-                          CommutersLink has established strict security policies across our processes,
-                          systems, resources and offices that ensure your data is 100% secure.
-                        </p>
-                      </div>
-                    </div>
-                  </nav>
+                 
                   <Form className="p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}>
 
                     <div className="row mb-3 shadow shadow-sm ">
@@ -3051,30 +3031,10 @@ const DriverRegistration = () => {
 
                     >
                       {" "}
-                      Driver's Registration Form
+                      Registration Form 2/2
                     </h1>{" "}
                   </div>
-                  <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <div className="container">
-                      <div>
-                        <div>
-                          {" "}
-                          <img
-                            src={`${BASE_URL}/assets/images/data_security_icon.png`}
-                            alt="Sample photo"
-                            style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '60%' }}
-                          />
-
-                        </div>
-                      </div>
-                      <div className="text-white">
-                        <p className="text-black text-justify px-4 fs-5 ">
-                          CommutersLink has established strict security policies across our processes,
-                          systems, resources and offices that ensure your data is 100% secure.
-                        </p>
-                      </div>
-                    </div>
-                  </nav>
+                
                   <Form
                     className=" p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}
                   >
@@ -4933,6 +4893,146 @@ const DriverRegistration = () => {
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
                           </Form.Group>
+                          <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom42"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Driving License No.
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="License No."
+                                value={inputDriverLicenseNumber}
+                                onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom43"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Valid Upto
+                              </Form.Label>
+                              <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: { size: "small", color: "success" },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputDriverValidUpto}
+                                  onChange={handleValidDriverChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
+                              {/* <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Enter Here"
+                                value={inputDriverValidUpto}
+                                onChange={(e) => setInputDriverValidUpto(e.target.value)}
+                                defaultValue=""
+                              /> */}
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom44"
+                              className="mb-2"
+                            >
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Front)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+                              {selectedLicenseFrontDriver ? (
+
+                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                  {selectedLicenseFrontDriver.name}
+                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
+                                </div>
+                              ) : (
+                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
+
+                              )}
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                                The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                              </Form.Text> */}
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom45"
+                              className="mb-2"
+                            >
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Back)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+
+                                  }}
+
+                                >
+                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                    <Link
+
+                                      className='mx-1 h-15px d-inline-block'
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+
+                                </p></div>
+                              {selectedLicenseBackDriver ? (
+
+                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                  {selectedLicenseBackDriver.name}
+                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
+                                </div>
+                              ) : (
+                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
+
+                              )}
+
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                                The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                              </Form.Text> */}
+                            </Form.Group>
                         </div></div>
                       {/* <Row className="mb-3 mt-3">
                         <Form.Group

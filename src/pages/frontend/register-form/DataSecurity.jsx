@@ -71,7 +71,7 @@ const DataSecurity = () => {
           {" "}
           <div className="row">
             <div
-              className="col-md-6 d-flex"
+              className="col-md-6 d-flex justify-content-center"
               style={{
                 marginTop: "12vh"
               }}
@@ -86,39 +86,39 @@ const DataSecurity = () => {
                 <Carousel.Item interval={4000}>
                   <img
                     className="d-block img-fluid w-auto"
-                    src={`${BASE_URL}/assets/images/signup.png`}
+                    src={`${BASE_URL}/assets/images/data_security_icon.png`}
                     alt="First slide"
                   />
-                  <h4 className="text-success fw-bold text-center mt-2">Share Actual Cost</h4>
+                  <h4 className="text-success fw-bold text-center mt-2">Data is Encrypted</h4>
                 </Carousel.Item>
 
-                <Carousel.Item interval={4000}>
+                <Carousel.Item interval={40000000}>
                   <img
                     className="d-block img-fluid w-auto"
-                    src={`${BASE_URL}/assets/images/signup-3.png`}
+                    src={`${BASE_URL}/assets/images/data_security_icon.png`}
                     alt="First slide"
                   />
-                  <h4 className="text-success fw-bold text-center mt-2">Offer Your Car or Get a Seat in Other's Car</h4>
+                  <h4 className="text-success fw-bold text-center mt-4 mx-3">Data is Encrypted</h4>
 
                 </Carousel.Item>
-                <Carousel.Item interval={4000}>
+                <Carousel.Item interval={400000000}>
                   <img
                     className="d-block img-fluid w-auto"
-                    src={`${BASE_URL}/assets/images/signup-4.png`}
+                    src={`${BASE_URL}/assets/images/data_security_icon.png`}
                     alt="First slide"
                   />
-                  <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                  <h4 className="text-success fw-bold text-center mt-4 mx-3"></h4>
 
                 </Carousel.Item>
-                <Carousel.Item interval={4000}>
+                {/* <Carousel.Item interval={400000000}>
                   <img
                     className="d-block img-fluid w-auto"
-                    src={`${BASE_URL}/assets/images/signup-6.png`}
+                    src={`${BASE_URL}/assets/images/data_security_icon.png`}
                     alt="First slide"
                   />
                   <h4 className="text-success fw-bold text-center mt-2">Share Ride For Office</h4>
 
-                </Carousel.Item>
+                </Carousel.Item> */}
               </Carousel>
               {/* </div> */}
             </div>
@@ -134,11 +134,11 @@ const DataSecurity = () => {
                     <div>
                       <div>
                         {" "}
-                        <img
+                        {/* <img
                           src={`${BASE_URL}/assets/images/data_security_icon.png`}
                           alt="Sample photo"
                           style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '60%' }}
-                        />
+                        /> */}
                         <h3 className="card-title py-1 text-center fw-bold text-success" >
                           DATA SECURITY
                         </h3>

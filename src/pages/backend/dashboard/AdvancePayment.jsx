@@ -282,8 +282,8 @@ const AdvancePayment = () => {
         </div>
       </div>
       <div className="card p-4  p-2">
-        <div className="">
-          <div className="card-body text-dark">
+        
+          <div className="card-body px-5 text-dark">
             <p>
               Money will stay in your wallet & will be transferred to car owner
               on weekly basis after you have availed the services.
@@ -298,7 +298,7 @@ const AdvancePayment = () => {
             <div className="page-title">
               <div className="container text-center">
                 <div className="row">
-                  <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
+                  <div className="col-12 mb-2 bg-light mt-2  border border-success rounded rounded-3">
                     <div>
                       <button
                         className="font-custom btn  text-success fw-bold fs-5 lh-1"
@@ -369,7 +369,7 @@ const AdvancePayment = () => {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 };
 

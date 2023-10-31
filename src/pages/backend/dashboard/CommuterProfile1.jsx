@@ -865,8 +865,8 @@ const CommuterProfile1 = () => {
                     <div className="row justify-content-end">
                       <div className="col-md-12 text-end">
                         <div className="row justify-content-end">
-                          <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-primary"></i><span className="font-custom">Start Point</span></div>
-                          <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-danger"></i><span className="font-custom">Drop-off Point</span></div>
+                          <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-primary"></i><span className="font-custom fw-bold">Start Point</span></div>
+                          <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-danger"></i><span className="font-custom fw-bold">Drop-off Point</span></div>
                         </div>
                       </div>
                     </div>

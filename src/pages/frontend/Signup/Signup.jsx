@@ -319,8 +319,8 @@ const Signup = () => {
       else if (!emailPattern.test(email)) {
         displayNotification("warning", "Please follow the correct email format");
       }
-      else if (fullName.length < 4) {
-        displayNotification("warning", "Full Name should have alteast 4 characters");
+      else if (fullName.length < 3) {
+        displayNotification("warning", "Full Name should have alteast 3 characters");
       }
       else {
         if (termsService) {
@@ -371,9 +371,9 @@ const Signup = () => {
     const value = e.target.value.replace(/[^a-z" "]/gi, "");
     setFullName(value);
 
-    if (!/^[a-zA-Z" "]+$/.test(value) || value.length < 4) {
+    if (!/^[a-zA-Z" "]+$/.test(value) || value.length < 3) {
       setFullNameError(
-        "Full Name must contain only alphabetic characters and be at least 4 characters long"
+        "Full Name must contain only alphabetic characters and be at least 3 characters long"
       );
     } else {
       setFullNameError("");

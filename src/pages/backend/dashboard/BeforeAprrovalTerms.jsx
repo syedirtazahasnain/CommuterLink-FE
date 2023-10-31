@@ -92,7 +92,7 @@ const BeforeApprovalTerms = () => {
 
             <div className="card-body">
               <ol>
-                <li className="mb-2">The car offeror will wait 15 mins after agreed time for you to join. </li>
+                <li className="mb-2">The car offeror will wait 15 mins after agreed time for you to join </li>
                 <li className="mb-2">
                   If due to any unforeseen reason you cannot commute on a certain day, fee will be still be charged as your seat remains reserved for you
                 </li>
@@ -109,13 +109,13 @@ const BeforeApprovalTerms = () => {
                   You will update the scheduler in your dashboard on daily (as and when required basis)
                 </li>
                 <li className="mb-2">
-                  You will pay your share of fee cost through CommutersLink and there will be no direct transaction between you and your commuting partner. (insert a link here “why to receive payment through commutersLink)
+                  You will pay your share of fee cost through CommutersLink and there will be no direct transaction between you and your commuting partner. (insert a link here “why to receive payment through commutersLink")
                 </li>
                 <li className="mb-2">
                   If you wish to discontinue your partnership with a member due a reason or other CommutersLink will inform the partner on your behalf. Minimum 1 week notice is required
                 </li>
                 <li>
-                  Any complaints, grievances will be addressed to CommutersLink for resolution
+                  Any complaints, grievances will be addressed to CommutersLink for resolution.
                 </li>
               </ol>
 
