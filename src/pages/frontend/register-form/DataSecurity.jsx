@@ -92,7 +92,7 @@ const DataSecurity = () => {
                   <h4 className="text-success fw-bold text-center mt-2">Data is Encrypted</h4>
                 </Carousel.Item>
 
-                <Carousel.Item interval={40000000}>
+                <Carousel.Item interval={40000000000}>
                   <img
                     className="d-block img-fluid w-auto"
                     src={`${BASE_URL}/assets/images/data_security_icon.png`}
@@ -101,7 +101,7 @@ const DataSecurity = () => {
                   <h4 className="text-success fw-bold text-center mt-4 mx-3">Data is Encrypted</h4>
 
                 </Carousel.Item>
-                <Carousel.Item interval={400000000}>
+                <Carousel.Item interval={400000000000}>
                   <img
                     className="d-block img-fluid w-auto"
                     src={`${BASE_URL}/assets/images/data_security_icon.png`}

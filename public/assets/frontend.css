@@ -21,6 +21,8 @@
   --bg-dark-green: rgba(29, 104, 93, 1);
   --bg-dark-success-light: rgb(89, 238, 216);
   --bs-dark-blue:'#1439bf';
+  --bs-scrollbar-color: rgba(29, 104, 93, 1) !important;
+  --bs-scrollbar-hover-color: rgba(29, 104, 93, 1) !important;
  }
 
  .text-yellow{
