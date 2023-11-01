@@ -218,7 +218,7 @@ const AdvancePayment = () => {
         clearInterval(intervalId);
         getPaymentSuccess();
       };
-    }, 1000);
+    }, 500);
   };
 
   const getPaymentSuccess = async () => {

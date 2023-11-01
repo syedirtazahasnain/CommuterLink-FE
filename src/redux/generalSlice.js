@@ -7,6 +7,7 @@ const initialState = {
     contact_id: "",
     request_as: "",
     amount: null,
+    selectedOption: "",
   },
 };
 
@@ -33,6 +34,11 @@ export const generalSlice = createSlice({
     setAmountState: (state, payload = true) => {
       state.data.amount = payload.payload;
     },
+
+    setSelectedOptionState: (state, payload = true) => {
+      state.data.selectedOption = payload.payload;
+    },
+
     setRequestAsState: (state, payload = true) => {
       state.data.request_as = payload.payload;
     },
@@ -47,5 +53,5 @@ export const generalSlice = createSlice({
   },
 });
 
-export const { setIdState, setNameState, setContactIdState, setAmountState, setRequestAsState, setSidebarState, setCurrentPage } = generalSlice.actions;
+export const { setIdState, setNameState, setContactIdState, setAmountState, setSelectedOptionState, setRequestAsState, setSidebarState, setCurrentPage } = generalSlice.actions;
 export default generalSlice.reducer;

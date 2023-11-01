@@ -129,6 +129,8 @@ const SchoolRegistration = () => {
   const [validated, setValidated] = useState(false);
   const [homeTimeSlots, setHomeTimeSlots] = useState([]);
   const [selectedHomeTime, setSelectedHomeTime] = useState("");
+  const [selectedHomeTimeValue, setSelectedHomeTimeValue] = useState("");
+  const [filteredOfficeTimeSlots, setFilteredOfficeTimeSlots] = useState([]);
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
   const [gender, setGender] = useState("");
@@ -181,8 +183,8 @@ const SchoolRegistration = () => {
     lng: 69.3451,
   });
   const [markerPositionStart, setMarkerPositionStart] = useState({
-    lat: 30.3753,
-    lng: 69.3451,
+    lat: null,
+    lng: null,
   });
 
   // For End Point
@@ -191,8 +193,8 @@ const SchoolRegistration = () => {
     lng: 69.3451,
   });
   const [markerPositionEnd, setMarkerPositionEnd] = useState({
-    lat: 30.3753,
-    lng: 69.3451,
+    lat: null,
+    lng: null,
   });
 
   // For Modals
@@ -276,7 +278,7 @@ const SchoolRegistration = () => {
           if (data.status === 'OK' && data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
             setDefaultStartCenter({ lat, lng });
-            setMarkerPositionStart({ lat, lng });
+            //setMarkerPositionStart({ lat, lng });
           } else {
             console.error('Geocoding API response error');
           }
@@ -301,7 +303,7 @@ const SchoolRegistration = () => {
           if (data.status === 'OK' && data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
             setDefaultEndCenter({ lat, lng });
-            setMarkerPositionEnd({ lat, lng });
+            //setMarkerPositionEnd({ lat, lng });
           } else {
             console.error('Geocoding API response error');
           }
@@ -413,6 +415,17 @@ const SchoolRegistration = () => {
     }
   }, [endBounds]);
 
+  useEffect(() => {
+    // Filter registration years based on the selected manufacturing year.
+    if (selectedHomeTimeValue) {
+      const filteredYears = homeTimeSlots.filter((time) => time.time_string > selectedHomeTimeValue);
+      setFilteredOfficeTimeSlots(filteredYears);
+    } else {
+      // If no manufacturing year is selected, show all registration years.
+      setFilteredOfficeTimeSlots(homeTimeSlots);
+    }
+  }, [selectedHomeTimeValue]);
+
   const handleProvinceStartChange = (event) => {
     setCityStartId("");
     setLocationStartStringField("");
@@ -464,9 +477,13 @@ const SchoolRegistration = () => {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
           setMarkerPositionStart({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
+            lat: null,
+            lng: null,
           });
+          // setMarkerPositionStart({
+          //   lat: place.geometry.location.lat(),
+          //   lng: place.geometry.location.lng(),
+          // });
           setLocationStartStringField(place.formatted_address);
           setLocationStartString(place.formatted_address);
           handleShowStartModal();
@@ -519,9 +536,13 @@ const SchoolRegistration = () => {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
           setMarkerPositionEnd({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
+            lat: null,
+            lng: null,
           });
+          // setMarkerPositionEnd({
+          //   lat: place.geometry.location.lat(),
+          //   lng: place.geometry.location.lng(),
+          // });
           setLocationEndStringField(place.formatted_address);
           setLocationEndString(place.formatted_address);
           handleShowEndModal();
@@ -670,7 +691,12 @@ const SchoolRegistration = () => {
   };
 
   const handleCloseStartModal = () => {
-    setShowStartModal(false);
+    if(markerPositionStart.lat === null && markerPositionStart.lng === null ){
+      displayNotification("warning", "Please select a Starting Location from Map");
+    }
+    else{
+      setShowStartModal(false);
+    }
   };
 
   const handleShowEndModal = () => {
@@ -678,7 +704,12 @@ const SchoolRegistration = () => {
   };
 
   const handleCloseEndModal = () => {
-    setShowEndModal(false);
+    if(markerPositionEnd.lat === null && markerPositionEnd.lng === null ){
+      displayNotification("warning", "Please select a Drop-off Location from Map");
+    }
+    else{
+      setShowEndModal(false);
+    }
   };
 
   const PersonalFormFields = [
@@ -1681,14 +1712,24 @@ const SchoolRegistration = () => {
                         className="text-secondary"
 
                         value={selectedHomeTime}
-                        onChange={(e) => setSelectedHomeTime(e.target.value)}
+                        onChange={(e) => {
+                          const selectedOption = e.target.options[e.target.selectedIndex];
+                          const selectedValue = selectedOption.value;
+                          const selectedId = selectedOption.getAttribute("data-id");
+
+                          // Set the ID
+                          setSelectedHomeTime(selectedValue)
+
+                          // Set the value
+                          setSelectedHomeTimeValue(selectedId);
+                        }}
                         required
                       >
                         <option value="" hidden>
                           Start Time
                         </option>
                         {homeTimeSlots?.map((time) => (
-                          <option key={time.id} value={time.id}>
+                          <option key={time.id} value={time.id} data-id={time.time_string}>
                             {time.time_string}
                           </option>
                         ))}
@@ -1714,7 +1755,7 @@ const SchoolRegistration = () => {
                         <option value="" hidden>
                           Return Time
                         </option>
-                        {officeTimeSlots?.map((time) => (
+                        {filteredOfficeTimeSlots?.map((time) => (
                           <option key={time.id} value={time.id}>
                             {time.time_string}
                           </option>

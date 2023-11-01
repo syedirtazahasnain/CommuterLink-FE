@@ -154,6 +154,8 @@ const DriverRegistration = () => {
   const [selectedCnicBackDriver, setSelectedCnicBackDriver] = useState(null);
   const [homeTimeSlots, setHomeTimeSlots] = useState([]);
   const [selectedHomeTime, setSelectedHomeTime] = useState("");
+  const [selectedHomeTimeValue, setSelectedHomeTimeValue] = useState("");
+  const [filteredOfficeTimeSlots, setFilteredOfficeTimeSlots] = useState([]);
   const [officeTimeSlots, setOfficeTimeSlots] = useState([]);
   const [selectedOfficeTime, setSelectedOfficeTime] = useState("");
   const [gender, setGender] = useState("");
@@ -208,11 +210,11 @@ const DriverRegistration = () => {
 
   // For Start Point
   const [defaultStartCenter, setDefaultStartCenter] = useState({ lat: 30.3753, lng: 69.3451 });
-  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: 30.3753, lng: 69.3451 });
+  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: null, lng: null });
 
   // For End Point
   const [defaultEndCenter, setDefaultEndCenter] = useState({ lat: 30.3753, lng: 69.3451 });
-  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: 30.3753, lng: 69.3451 });
+  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: null, lng: null });
 
   // For Modals
   const [showStartModal, setShowStartModal] = useState(false);
@@ -362,7 +364,7 @@ const DriverRegistration = () => {
           if (data.status === 'OK' && data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
             setDefaultStartCenter({ lat, lng });
-            setMarkerPositionStart({ lat, lng });
+            //setMarkerPositionStart({ lat, lng });
           } else {
             console.error('Geocoding API response error');
           }
@@ -387,7 +389,7 @@ const DriverRegistration = () => {
           if (data.status === 'OK' && data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
             setDefaultEndCenter({ lat, lng });
-            setMarkerPositionEnd({ lat, lng });
+            //setMarkerPositionEnd({ lat, lng });
           } else {
             console.error('Geocoding API response error');
           }
@@ -516,6 +518,17 @@ const DriverRegistration = () => {
       setFilteredRegYears(regYear);
     }
   }, [selectedManYear]);
+
+  useEffect(() => {
+    // Filter registration years based on the selected manufacturing year.
+    if (selectedHomeTimeValue) {
+      const filteredYears = homeTimeSlots.filter((time) => time.time_string > selectedHomeTimeValue);
+      setFilteredOfficeTimeSlots(filteredYears);
+    } else {
+      // If no manufacturing year is selected, show all registration years.
+      setFilteredOfficeTimeSlots(homeTimeSlots);
+    }
+  }, [selectedHomeTimeValue]);
 
   const handleProvinceStartChange = (event) => {
     setCityStartId("");
@@ -656,9 +669,13 @@ const DriverRegistration = () => {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
           setMarkerPositionStart({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
+            lat: null,
+            lng: null,
           });
+          // setMarkerPositionStart({
+          //   lat: place.geometry.location.lat(),
+          //   lng: place.geometry.location.lng(),
+          // });
           setLocationStartStringField(place.formatted_address);
           setLocationStartString(place.formatted_address);
           handleShowStartModal();
@@ -710,9 +727,13 @@ const DriverRegistration = () => {
         // The selected place is in Islamabad.
         if (place.geometry && place.geometry.location) {
           setMarkerPositionEnd({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
+            lat: null,
+            lng: null,
           });
+          // setMarkerPositionEnd({
+          //   lat: place.geometry.location.lat(),
+          //   lng: place.geometry.location.lng(),
+          // });
           setLocationEndStringField(place.formatted_address);
           setLocationEndString(place.formatted_address);
           handleShowEndModal();
@@ -1211,7 +1232,12 @@ const DriverRegistration = () => {
   };
 
   const handleCloseStartModal = () => {
-    setShowStartModal(false);
+    if (markerPositionStart.lat === null && markerPositionStart.lng === null) {
+      displayNotification("warning", "Please select a Starting Location from Map");
+    }
+    else {
+      setShowStartModal(false);
+    }
   };
 
   const handleShowEndModal = () => {
@@ -1219,7 +1245,12 @@ const DriverRegistration = () => {
   };
 
   const handleCloseEndModal = () => {
-    setShowEndModal(false);
+    if (markerPositionEnd.lat === null && markerPositionEnd.lng === null) {
+      displayNotification("warning", "Please select a Drop-off Location from Map");
+    }
+    else {
+      setShowEndModal(false);
+    }
   };
 
   const PersonalFormFields = [
@@ -2423,14 +2454,24 @@ const DriverRegistration = () => {
                             aria-label="Default select example"
                             className="text-secondary"
                             value={selectedHomeTime}
-                            onChange={(e) => setSelectedHomeTime(e.target.value)}
+                            onChange={(e) => {
+                              const selectedOption = e.target.options[e.target.selectedIndex];
+                              const selectedValue = selectedOption.value;
+                              const selectedId = selectedOption.getAttribute("data-id");
+
+                              // Set the ID
+                              setSelectedHomeTime(selectedValue)
+
+                              // Set the value
+                              setSelectedHomeTimeValue(selectedId);
+                            }}
                             required
                           >
                             <option value="" hidden>
                               Start Time
                             </option>
                             {homeTimeSlots?.map((time) => (
-                              <option key={time.id} value={time.id}>
+                              <option key={time.id} value={time.id} data-id={time.time_string}>
                                 {time.time_string}
                               </option>
                             ))}
@@ -2456,7 +2497,7 @@ const DriverRegistration = () => {
                             <option value="" hidden>
                               Return Time
                             </option>
-                            {officeTimeSlots?.map((time) => (
+                            {filteredOfficeTimeSlots?.map((time) => (
                               <option key={time.id} value={time.id}>
                                 {time.time_string}
                               </option>
@@ -4787,20 +4828,20 @@ const DriverRegistration = () => {
                               Name
                             </Form.Label>
                             <Form.Control
-                                required
-                                type="text"
-                                className={`${isValidDriverName ? '' : 'is-invalid'}`}
-                                placeholder="Name"
-                                value={inputDriverName}
-                                onChange={handleDriverNameChange}
-                                onKeyPress={preventNumbers1}
-                              />
+                              required
+                              type="text"
+                              className={`${isValidDriverName ? '' : 'is-invalid'}`}
+                              placeholder="Name"
+                              value={inputDriverName}
+                              onChange={handleDriverNameChange}
+                              onKeyPress={preventNumbers1}
+                            />
 
-                              {!isValidDriverName && (
-                                <div className="invalid-feedback">
-                                  Full Name must contain only alphabetic characters and be at least 4 characters long
-                                </div>
-                              )}
+                            {!isValidDriverName && (
+                              <div className="invalid-feedback">
+                                Full Name must contain only alphabetic characters and be at least 4 characters long
+                              </div>
+                            )}
                           </Form.Group>
                           <Form.Group
                             as={Col}

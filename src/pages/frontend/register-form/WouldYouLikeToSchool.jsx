@@ -10,12 +10,16 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/base';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedOptionState } from '../../../redux/generalSlice';
 
 const WouldYouLikeToSchool = () => {
 
   const [selectedOption, setSelectedOption] = useState('');
+  const requestedOption = useSelector((s) => s.general.data.selectedOption);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
@@ -23,11 +27,13 @@ const WouldYouLikeToSchool = () => {
 
   const route = () => {
 
-    if (selectedOption === "school-form") {
+    if (selectedOption === "school-form" || requestedOption === "school-form") {
+      dispatch(setSelectedOptionState(selectedOption));
       navigate("/school-form");
     }
 
-    if (selectedOption === "school-driver-form") {
+    if (selectedOption === "school-driver-form" || requestedOption === "school-driver-form") {
+      dispatch(setSelectedOptionState(selectedOption));
       navigate("/school-driver-form");
     }
   };
@@ -108,7 +114,7 @@ const WouldYouLikeToSchool = () => {
 
                         <div className="text-left"> <div>
                           <label className="radio-button ">
-                            <input type="radio" id="option1" name="option" value="school-form" checked={selectedOption === 'school-form'} onChange={handleOptionChange} />
+                            <input type="radio" id="option1" name="option" value="school-form" checked={requestedOption === 'school-form' ? requestedOption === 'school-form' : selectedOption === 'school-form'} onChange={handleOptionChange} />
                             <span className="ml-3"><strong>Ride in other’s car</strong> </span>
 
                           </label></div>
@@ -117,7 +123,7 @@ const WouldYouLikeToSchool = () => {
                           </div></div>
                         <div className="text-left"><div>
                           <label className="radio-button ">
-                            <input type="radio" id="option2" name="option" value="school-driver-form" checked={selectedOption === 'school-driver-form'} onChange={handleOptionChange} />
+                            <input type="radio" id="option2" name="option" value="school-driver-form" checked={requestedOption === 'school-driver-form' ? requestedOption === 'school-driver-form' : selectedOption === 'school-driver-form'} onChange={handleOptionChange} />
                             <span className="ml-3"><strong>Use your car and offer available seats</strong></span>
                           </label>
                         </div>
