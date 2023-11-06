@@ -6,6 +6,7 @@ import Carousel from "react-bootstrap/Carousel";
 import { useNavigate } from "react-router-dom";
 import { setloginState } from "../../../redux/loginSlice";
 import { setsignupState } from "../../../redux/signupSlice";
+import { setSelectedOptionState } from "../../../redux/generalSlice";
 
 
 const Verification = () => {
@@ -21,6 +22,7 @@ const Verification = () => {
   const route = () => {
     dispatch(setloginState(""));
     dispatch(setsignupState(""));
+    dispatch(setSelectedOptionState(""));
     window.location.href = "/";
   };
 
