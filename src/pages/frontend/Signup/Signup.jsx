@@ -367,19 +367,31 @@ const Signup = () => {
     }
   };
 
-  const handleFullNameChange = (e) => {
-    const value = e.target.value.replace(/[^a-z" "]/gi, "");
-    setFullName(value);
+  // const handleFullNameChange = (e) => {
+  //   const value = e.target.value.replace(/[^a-z" "]/gi, "");
+  //   setFullName(value);
 
-    if (!/^[a-zA-Z" "]+$/.test(value) || value.length < 3) {
+  //   if (!/^[a-zA-Z" "]+$/.test(value) || value.length < 3) {
+  //     setFullNameError(
+  //       "Full Name must contain only alphabetic characters and be at least 3 characters long"
+  //     );
+  //   } else {
+  //     setFullNameError("");
+  //   }
+  // };
+
+  const handleFullNameChange = (e) => {
+    const value = e.target.value.replace(/[^a-zA-Z" "]/gi, "");
+    setFullName(value);
+  
+    if (value.replace(/ /g, "").length < 3) {
       setFullNameError(
-        "Full Name must contain only alphabetic characters and be at least 3 characters long"
+        "Full Name must contain at least 3 alphabetic characters (excluding spaces)"
       );
     } else {
       setFullNameError("");
     }
   };
-
   const validateEmail = (email) => {
     // Regular expression pattern for validating email addresses
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -519,7 +531,7 @@ const Signup = () => {
                     role="alert"
                   >
                   {" "}
-                <h6 className="text-left">  <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i>You may proceed with registration if you are 18 years or <span className="ms-4">older. For students below 18 years their parents can</span><br/> <span className="ms-4">register.</span>
+                <h6 className="text-left d-flex"> <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i><li style={{listStyle:'none'}}> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register.</li>
                    </h6>  
                     <button
                       type=""

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from "react-bootstrap/Form";
 // import Button from "react-bootstrap/Button";
 import { BASE_URL } from "../../../constants";
@@ -24,6 +24,7 @@ const WouldYouLikeTo = () => {
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
+ 
 
   const route = () => {
 
@@ -38,12 +39,17 @@ const WouldYouLikeTo = () => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
+
   return (
     <div>
       <div>
         <section
           id="sign-up"
           className="mt-5 main-bg"
+          style={{height:'90vh'}}
         >
           <div className="container">
             <div className="row">

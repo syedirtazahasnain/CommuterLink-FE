@@ -86,7 +86,7 @@ const Verification = () => {
             <div
               className="col-md-6 d-flex fixed"
               style={{
-                marginTop: "10vh"
+                marginTop: "18vh"
               }}
             >
 

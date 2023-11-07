@@ -83,7 +83,7 @@ const DataSecurity = () => {
                 nextIcon={null}
                 indicators={null}
               >
-                <Carousel.Item interval={4000}>
+                <Carousel.Item interval={40000000000}>
                   <img
                     className="d-block img-fluid w-auto"
                     src={`${BASE_URL}/assets/images/data_security_icon.png`}

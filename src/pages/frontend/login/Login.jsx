@@ -211,40 +211,39 @@ const Login = () => {
 
       html: `
         <div>
-          <div class="container mt-5 pt-1 fw-bold fs-1 mb-5">
+          <div class="container mt-5 pt-1 align-center fw-bold fs-1 mb-5">
             <span>
-           
               Terms & Services</span>
           </div>
           <div>
             <div class="container">
               <div class="row">
-                <div class="col-md-8 m-auto  col-lg-12 col-sm-12 mb-5">
-                  <div class="bg-light text-left">
+                <div class="col-md-8 m-auto col-lg-12 col-sm-12 mb-5">
+                  <div class="bg-light text-left text-danger">
                     <ol class="p-4 text-justify">
-                      <li>
+                      <li class="mb-2">
                       Your car is in good shape and is roadworthy</li>
 
-                      <li>
+                      <li class="mb-2">
                       You are committed to providing the car for commuting of partners on all days mentioned by your travel buddy
                       </li>
                  
                   
-                    <li>If due to any unforeseen reason you cannot commute on a certain day, no fee will be paid for that day</li>
+                    <li class="mb-2">If due to any unforeseen reason you cannot commute on a certain day, no fee will be paid for that day</li>
         
-                   <li> You will inform the travel buddy well in advance (at least 12 hours) about your inability to commute on a certain day. In case of any emergency, this can be waived off under exceptional circumstances</li> 
+                   <li class="mb-2"> You will inform the travel buddy well in advance (at least 12 hours) about your inability to commute on a certain day. In case of any emergency, this can be waived off under exceptional circumstances</li> 
                             
-                          <li>
+                          <li class="mb-2">
                           You will be paid on weekly basis for the actual number of days that your car is used                      </li>
-                      <li>
+                      <li class="mb-2">
                       If a commuting partner misses the car and fails to commute due to late arrival/time off, you will still be paid for that day </li>
                          
-                           <li>
+                           <li class="mb-2">
                            You will wait at least 15 minutes after the agreed time for the commuting partner to join you                                          </li>
-                           <li>You will update the scheduler in your dashboard on a daily (as and when required basis)</li>
-                           <li>You will receive your share of the fee through CommutersLink, and there will be no direct transaction between you and your commuting partner</li>
-                           <li>If you wish to discontinue your partnership with a member due to a reason or other, CommutersLink will inform the partner on your behalf. You are required to give at least 1 week notice</li>
-                           <li>Any complaints or grievances will be addressed to CommutersLink for resolution.</li>
+                           <li class="mb-2">You will update the scheduler in your dashboard on a daily (as and when required basis)</li>
+                           <li class="mb-2">You will receive your share of the fee through CommutersLink, and there will be no direct transaction between you and your commuting partner</li>
+                           <li class="mb-2">If you wish to discontinue your partnership with a member due to a reason or other, CommutersLink will inform the partner on your behalf. You are required to give at least 1 week notice</li>
+                           <li class="mb-2">Any complaints or grievances will be addressed to CommutersLink for resolution.</li>
                            </ol>
 
                            </div>

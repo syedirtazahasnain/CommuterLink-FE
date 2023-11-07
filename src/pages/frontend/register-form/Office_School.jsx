@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 // import Button from "react-bootstrap/Button";
 import { BASE_URL } from "../../../constants";
@@ -39,6 +39,10 @@ const Office_School = () => {
   const officeRoute = () => {
     navigate("/nested");
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   console.log(name, email);
 

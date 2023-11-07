@@ -36,7 +36,7 @@ const Footer = () => {
                     placeholder="Enter Your Email" 
                   />
                   <input 
-                    className='btn-custom1 fs-5 text-white py-2 rounded-3 px-4' 
+                    className='btn-custom1 fs-5 text-white py-2 mx-2 rounded-3 px-4' 
                     type="submit" 
                     value="Subscribe" 
                   />
