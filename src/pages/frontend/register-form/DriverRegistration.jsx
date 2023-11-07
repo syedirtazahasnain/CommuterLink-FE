@@ -4594,7 +4594,7 @@ const DriverRegistration = () => {
                             className="mb-2"
                           >
                             <h2 className="text-success mb-3 text-center">
-                              I Drive MySelf License Details
+                              MySelf License Details
                             </h2>
                           </Form.Group>
                           <Form.Group
