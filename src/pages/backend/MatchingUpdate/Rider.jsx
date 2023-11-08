@@ -474,11 +474,13 @@ const Rider = () => {
       setCityStart(jsonresponse[0].location.start_city);
       setCityStartId(jsonresponse[0].location.start_city_id);
       setLocationStartStringId(jsonresponse[0].location.start_area_id);
+      setLocationStartString(jsonresponse[0].location.start_area);
       setLocationStartStringField(jsonresponse[0].location.start_area);
       setProvinceEndId(jsonresponse[0].location.end_province_id);
       setCityEndId(jsonresponse[0].location.end_city_id);
       setCityEnd(jsonresponse[0].location.end_city);
       setLocationEndStringId(jsonresponse[0].location.end_area_id);
+      setLocationEndString(jsonresponse[0].location.end_area);
       setLocationEndStringField(jsonresponse[0].location.end_area);
       setStartArea(jsonresponse[0].location.start_area);
       setEndArea(jsonresponse[0].location.end_area);
@@ -529,7 +531,7 @@ const Rider = () => {
           start_point: {
             city_id: cityStartId,
             province_id: provinceStartId,
-            area_id: locationStartStringId,
+            area_id: null,
             area_google: {
               name: locationStartString,
               "place_id": "ChIJGQ_wq43t3zgRel4CwxgjgQs"
@@ -539,7 +541,7 @@ const Rider = () => {
           end_point: {
             city_id: cityEndId,
             province_id: provinceEndId,
-            area_id: locationEndStringId,
+            area_id: null,
             area_google: {
               name: locationEndString,
               place_id: "ChIJGQ_wq43t3zgRel4CwxgjgQs"
