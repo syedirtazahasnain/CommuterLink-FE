@@ -1117,7 +1117,7 @@ const DriverRegistration = () => {
 
   const handleLicenseBackDriver = (e) => {
     const file = e.target.files[0];
-    const maxSize = 51200000;
+    const maxSize = 5120000;
     if (file) {
 
       if (file.size <= maxSize) {
