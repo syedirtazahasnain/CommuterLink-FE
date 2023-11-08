@@ -1005,7 +1005,9 @@ a.nav-link:hover {
 @media (min-width: 992px) {
   .btn-customfooter {
     font-size: 24px; /* Adjust font size for large screens */
-    padding: 15px 20px !important
+    padding: 15px 20px !important;
+    border: none;
+    background: var(--bg-blue-green);
      /* Adjust padding for large screens */
   }
 }
@@ -1014,7 +1016,9 @@ a.nav-link:hover {
 @media (max-width: 991px) and (min-width: 768px) {
   .btn-customfooter {
     font-size: 20px; /* Adjust font size for medium screens */
-    padding: 12px 90px  !important /* Adjust padding for medium screens */
+    padding: 12px 90px  !important; /* Adjust padding for medium screens */
+    border: none;
+    background: var(--bg-blue-green);
   }
 }
 
@@ -1022,6 +1026,8 @@ a.nav-link:hover {
 @media (max-width: 767px) {
   .btn-customfooter {
     font-size: 18px; /* Adjust font size for small screens */
-    padding: 10px 90px  !important /* Adjust padding for small screens */
+    padding: 10px 90px  !important; /* Adjust padding for small screens */
+    border: none;
+    background: var(--bg-blue-green);
   }
 }
