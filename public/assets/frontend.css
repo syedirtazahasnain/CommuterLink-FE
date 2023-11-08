@@ -997,3 +997,31 @@ a.nav-link:hover {
 .icon-tooltip-blue{
   color:rgba(32, 158, 141, 1)!important;
 }
+.btn-customfooter{
+  border: none;
+  background: var(--bg-blue-green);
+}
+
+@media (min-width: 992px) {
+  .btn-customfooter {
+    font-size: 24px; /* Adjust font size for large screens */
+    padding: 15px 20px !important
+     /* Adjust padding for large screens */
+  }
+}
+
+/* Media query for medium screens */
+@media (max-width: 991px) and (min-width: 768px) {
+  .btn-customfooter {
+    font-size: 20px; /* Adjust font size for medium screens */
+    padding: 12px 90px  !important /* Adjust padding for medium screens */
+  }
+}
+
+/* Media query for small screens */
+@media (max-width: 767px) {
+  .btn-customfooter {
+    font-size: 18px; /* Adjust font size for small screens */
+    padding: 10px 90px  !important /* Adjust padding for small screens */
+  }
+}
