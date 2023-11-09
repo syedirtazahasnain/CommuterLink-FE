@@ -33,6 +33,8 @@ const Driver = () => {
     const [option, setOption] = useState("");
     const [startArea, setStartArea] = useState("");
     const [endArea, setEndArea] = useState("");
+    const [seats, setSeats] = useState("");
+    const [seatsLeft, setSeatsLeft] = useState("");
     const [showfield, setShowField] = useState(false);
     const [selectedOption, setSelectedOption] = useState(''); // State to store the selected option
     const [inputBankAccount, setInputBankAccount] = useState(null);
@@ -380,6 +382,8 @@ const Driver = () => {
             setLocationEndStringField(jsonresponse[0].location.end_area);
             setStartArea(jsonresponse[0].location.start_area);
             setEndArea(jsonresponse[0].location.end_area);
+            setSeats(jsonresponse[0].seats.seats);
+            setSeatsLeft(jsonresponse[0].seats.seats_left);
             setInputBankAccount(jsonresponse[0]?.driver_account?.bank_account_number);
             setInputJazzCash(jsonresponse[0]?.driver_account?.jazz_cash_number);
             setInputEasyPaisa(jsonresponse[0]?.driver_account?.easy_paisa_number);
@@ -1507,6 +1511,36 @@ const Driver = () => {
                                                             value={endArea}
                                                             onChange={(e) => setEndArea(e.target.value)}
                                                             label="End Area"
+                                                            id='outlined-basic'
+                                                            defaultValue=""
+                                                            disabled
+                                                        />
+                                                    </Box>
+                                                    <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                        <TextField
+                                                            fullWidth
+                                                            size='small'
+                                                            type="text"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            value={seats}
+                                                            onChange={(e) => setSeats(e.target.value)}
+                                                            label="No. of Seats"
+                                                            id='outlined-basic'
+                                                            defaultValue=""
+                                                            disabled
+                                                        />
+                                                    </Box>
+                                                    <Box sx={{ minWidth: 120, color: 'success' }} className="mb-3">
+                                                        <TextField
+                                                            fullWidth
+                                                            size='small'
+                                                            type="text"
+                                                            color='success'
+                                                            className="bg-light text-left"
+                                                            value={seatsLeft}
+                                                            onChange={(e) => setSeatsLeft(e.target.value)}
+                                                            label="No. of Seats Left"
                                                             id='outlined-basic'
                                                             defaultValue=""
                                                             disabled
