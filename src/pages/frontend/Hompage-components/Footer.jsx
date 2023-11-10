@@ -88,6 +88,10 @@ const Footer = () => {
                     <i className="bx bx-chevron-right"></i>
                     <Link to="/faq" onClick={home} smooth="true" offset={20} duration={50}>FAQs</Link>
                   </li>
+                  <li className='cursor-pointer'>
+                    <i className="bx bx-chevron-right"></i>
+                    <Link to="/policy" onClick={home} smooth="true" offset={20} duration={50}>Policy</Link>
+                  </li>
                 </ul>
               </div>
 
