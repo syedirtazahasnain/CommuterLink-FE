@@ -15,6 +15,7 @@ import Verification from "./pages/frontend/register-form/Verification";
 import WhyProcessPayment2 from "./pages/frontend/whyprocesspayment/WhyProcessPayment";
 import { useSelector } from "react-redux";
 import Faq from "./pages/frontend/faq/Faq";
+import Policy from "./pages/frontend/faq/Policy";
 import Login from "./pages/frontend/login/Login";
 import SeatCostVerification from "./pages/frontend/register-form/SeatCostVerification";
 import BackendLayout from "./pages/backend/BackendLayout";
@@ -93,6 +94,7 @@ const Router = () => {
         <Route path="/signup" element={<FrontendLayout children={<Signup />} />} />
         <Route path="/login" element={<FrontendLayout children={<Login />} />} />
         <Route path="/faq" element={<FrontendLayout children={<Faq />} />} />
+        <Route path="/policy" element={<FrontendLayout children={<Policy />} />} />
         <Route path="/number-generate" element={<FrontendLayout children={<NumberGenerate />} />}></Route>
         <Route path="/resubmit" element={<FrontendLayout children={<Resubmit />} />} />
         <Route path="/whyprocesspayment2" element={<FrontendLayout children={<WhyProcessPayment2 />} />} />
