@@ -2797,7 +2797,7 @@ const DriverRegistration = () => {
 
                       <Form.Group as={Col} md="12" controlId="validationCustom14" className="mb-2">
                         <Form.Label className="fs-6 text-black">
-                          Martial Status
+                          Marital Status
                         </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
@@ -2806,7 +2806,7 @@ const DriverRegistration = () => {
                           onChange={(e) => setMartialStatus(e.target.value)}
                           required
                         >
-                          <option value="" hidden>Martial Status</option>
+                          <option value="" hidden>Marital Status</option>
                           <option value="Married">Married</option>
                           <option value="Single">Single</option>
                         </Form.Select>

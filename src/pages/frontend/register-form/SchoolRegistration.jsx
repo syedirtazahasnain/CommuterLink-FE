@@ -2019,7 +2019,7 @@ const SchoolRegistration = () => {
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
-                      Martial Status
+                      Marital Status
                     </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
@@ -2029,7 +2029,7 @@ const SchoolRegistration = () => {
                       required
                     >
                       <option value="" hidden>
-                        Martial Status
+                        Marital Status
                       </option>
                       <option value="Married">Married</option>
                       <option value="Single">Single</option>
