@@ -1031,3 +1031,58 @@ a.nav-link:hover {
     background: var(--bg-blue-green);
   }
 }
+
+@media(max-width: 991px){
+.card-body1{
+  flex: 0 0 auto;
+  width: 33.33% !important;
+}
+}
+
+@media (min-width: 768px) {
+  .card-body1 {
+  flex: 0 0 auto;
+  width: 33.3333% !important;
+  }
+}
+
+@media (min-width: 767px) {
+  .card-body1 {
+  flex: 0 0 auto;
+  width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) and (min-width: 360px) {
+  .card-body1 {
+  flex: 0 0 auto;
+  width: 100% !important;
+  }
+}
+
+@media (max-width: 844px) and (min-width: 390px) {
+  .card-body1 {
+  flex: 0 0 auto;
+  width: 100% !important;
+  }
+}
+
+@media (max-width: 896px) and (min-width: 414px) {
+  .card-body1 {
+  flex: 0 0 auto;
+  width: 100% !important;
+  }
+}
+
+@media (max-width: 873px) and (min-width: 393px) {
+  .card-body1 {
+  flex: 0 0 auto;
+  width: 100% !important;
+  }
+}
+@media (max-width: 915px) and (min-width: 412px) {
+  .card-body1 {
+  flex: 0 0 auto;
+  width: 100% !important;
+  }
+}

@@ -41,7 +41,7 @@ const NewBanner = () => {
       >
         <div className="p-0 d-flex bg-dark">
           <div className="col-12 m-auto py-4 px-5">
-            <h1 className='text-yellow'>YOUR FUEL-SAVING DAILY COMMUTING SOLUTION!</h1>
+            <h1 className='text-yellow'>YOUR COST SAVING DAILY COMMUTING SOLUTION!</h1>
           </div>
         </div>
       </div>

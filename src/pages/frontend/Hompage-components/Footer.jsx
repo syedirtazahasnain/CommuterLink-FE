@@ -28,13 +28,15 @@ const Footer = () => {
               <div className="col-md-4">
                 <p className="text-white fs-4 mt-1">To Remain Updated, Please Subscribe to Our Newsletters</p>
               </div>
-              <div className="col-md-4 mt-2 text-center" style={{justifyContent:'space-between'}}>
+              <div className="col-md-4 mt-2 text-center" >
+              &nbsp;
                   <input 
                     type="email"
                     name="email" 
                     class="input fs-5 rounded-3 border-0 px-5 mb-2 py-2 shadow shadow-sm" 
                     placeholder="Enter Your Email" 
                   />
+                  &nbsp;
                   <input 
                     className='btn-customfooter fs-5 text-white py-2   rounded-3' 
                     type="submit" 
