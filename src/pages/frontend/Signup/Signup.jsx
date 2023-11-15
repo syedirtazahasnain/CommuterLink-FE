@@ -767,7 +767,7 @@ const Signup = () => {
                               </Tooltip>
                             </LoginSocialFacebook>
                           </li>
-                          <li>
+                          {/* <li>
                             <LoginSocialLinkedin
                               client_id="86th1m5dtehgx3"
                               client_secret="YY1HZ3JYb4jM5btI"
@@ -793,7 +793,7 @@ const Signup = () => {
                                 </a>
                               </Tooltip>
                             </LoginSocialLinkedin>
-                          </li>
+                          </li> */}
                         </ul>
                       </div>
                     </div>
