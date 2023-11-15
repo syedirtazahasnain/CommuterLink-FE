@@ -93,7 +93,7 @@ const SchoolRegistration = () => {
 
   function validateUniversityAddress(address) {
     // A simple regular expression to match alphabetic characters and spaces
-    const universityPattern = /^[A-Za-z\s]+$/;
+ const universityPattern = /^[A-Za-z\s\d#$&()_{}\[\]:;<>,.\\/-]+$/;
 
     return universityPattern.test(address);
   }
