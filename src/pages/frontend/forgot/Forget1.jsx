@@ -39,12 +39,13 @@ const Forget1 = () => {
         // Regular expression pattern for validating email addresses
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (emailPattern.test(email)) {
-          setEmail(email);
-          setIsValidEmail(true);
+            setEmail(email);
+            setIsValidEmail(true);
         } else {
-          setIsValidEmail(false);
+            setIsValidEmail(false);
+            setEmail(email);
         }
-      };
+    };
 
     const sendRequest = async () => {
         if (email === "") {
@@ -68,27 +69,19 @@ const Forget1 = () => {
                 }
             );
 
-            if (!response.ok) {
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
-
             const jsonresponse = await response.json();
             console.log("API Response", jsonresponse);
 
             if (jsonresponse.statusCode === 200) {
                 dispatch(setloginState(jsonresponse.token));
             }
-            else {
-                displayNotification("error", `Email does not exist`);
-            }
-            // else if (jsonresponse.statusCode === 422) {
-            //     // console.log("hi");
-            //     // return;
-            //     const errors = jsonresponse.errors;
-            //     for (const field of Object.keys(errors)) {
-            //         displayNotification("error", `${errors[field][0]}`);
-            //     }
-            // }          
+            else if (jsonresponse.statusCode === 422) {
+                const errorMessage = jsonresponse.errors.email[0];
+                displayNotification("error", errorMessage);
+            } else {
+                // Handle other error cases if needed
+                displayNotification("error", "An unexpected error occurred.");
+            }       
         }
     };
 
@@ -190,7 +183,7 @@ const Forget1 = () => {
                                                     <TextField
                                                         id="outlined-adornment-password"
                                                         type="email"
-                                                        // value={email}
+                                                        //value={email}
                                                         onChange={(e) => validateEmail(e.target.value)}
                                                         // required
                                                         error={!isValidEmail}
