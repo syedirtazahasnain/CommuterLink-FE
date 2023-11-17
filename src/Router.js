@@ -72,6 +72,7 @@ import Forget2 from "./pages/frontend/forgot/Forget2";
 import TransactionHistory from "./pages/backend/dashboard/TransactionHistory";
 import AmountValidation from "./pages/backend/amountrestriction/AmountValidation";
 import TermsCondition2 from "./pages/backend/dashboard/TermsCondition2";
+import DispatchAmount from "./pages/backend/dispatch/DispatchAmount";
 
 const LazyHome = React.lazy(()=>import("./pages/frontend/Home"));
 const Router = () => {
@@ -105,6 +106,7 @@ const Router = () => {
         <Route path="/verifiedmember" element={<FrontendLayout children={<VerifiedMember />} />} />
         <Route path="/forget" element={<FrontendLayout children={<Forget1 />} />} />
         <Route path="/forget-password" element={<FrontendLayout children={<Forget2 />} />} />
+        <Route path="/dispatch-amount" element={<DispatchAmount />} />
 
         {/* Testing Routes */}
         <Route path='/dashboard' element={<BackendLayout children={<Dashboard12 />} />} />
@@ -197,7 +199,6 @@ const Router = () => {
             <Route path="/driverfinalstep" element={<BackendLayout children={<DriverFinalStep />} />}></Route>
             <Route path='/termscondition1' element={<BackendLayout children={<TermsCondition1 />} />} />
             <Route path='/termscondition2' element={<BackendLayout children={<TermsCondition2 />} />} />
-
             <Route path='/termscondition' element={<BackendLayout children={<TermsCondition />} />} />
             <Route path="/advancepayment" element={<BackendLayout children={<AdvancePayment />} />} />
             <Route path="/rechargewallet" element={<BackendLayout children={<RechargeWallet />} />} />
