@@ -17,15 +17,19 @@ const tableHeaderCellStyle = {
 
 const DispatchAmount = () => {
     return (
-        <div className='mt-4'>
-            <Table className="bg-dark text-white border-1 rounded-bottom-4 rounded-top-4">
-                <TableHead>
+        <div className='mt-5 container'>
+            <h2 className='text-center'>Dispatch Amount List</h2>
+            <Table className="bg-dark text-white border-1 rounded-bottom-4">
+                <TableHead className="rounded-top-4">
                     <TableRow>
                         <TableCell className="text-white" style={tableHeaderCellStyle}>
                             Sr. No
                         </TableCell>
                         <TableCell className="text-white" style={tableHeaderCellStyle}>
-                            Agreement Fees
+                            Driver Name
+                        </TableCell>
+                        <TableCell className="text-white" style={tableHeaderCellStyle}>
+                            Agreement Fee
                         </TableCell>
                         <TableCell className="text-white" style={tableHeaderCellStyle}>
                             Wallet Amount
@@ -35,6 +39,7 @@ const DispatchAmount = () => {
                 <TableBody>
                     <TableRow>
                         <TableCell className="text-white text-center">17-Nov-2023</TableCell>
+                        <TableCell className="text-white text-center">Ali Malik</TableCell>
                         <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{`Rs. 250/-`}</TableCell>
                         <TableCell className="text-white text-center">{`Rs. 1200/-`}</TableCell>
                     </TableRow>
