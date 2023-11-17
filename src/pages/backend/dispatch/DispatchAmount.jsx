@@ -35,7 +35,7 @@ const DispatchAmount = () => {
 
         const jsonresponse = await response.json();
         console.log("Dispatch Amount History:", jsonresponse);
-        if (jsonresponse.status_code === 200) {
+        if (jsonresponse.success === true) {
           SetDispacthData(jsonresponse.data);
 
           // Add a delay of 1.5 seconds before removing the loading message
