@@ -17,25 +17,25 @@ const tableHeaderCellStyle = {
 
 const DispatchAmount = () => {
     return (
-        <div>
+        <div className='mt-4'>
             <Table className="bg-dark text-white border-1 rounded-bottom-4 rounded-top-4">
                 <TableHead>
                     <TableRow>
                         <TableCell className="text-white" style={tableHeaderCellStyle}>
-                            Date
+                            Sr. No
                         </TableCell>
                         <TableCell className="text-white" style={tableHeaderCellStyle}>
-                            Description
+                            Agreement Fees
                         </TableCell>
                         <TableCell className="text-white" style={tableHeaderCellStyle}>
-                            Amount
+                            Wallet Amount
                         </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     <TableRow>
                         <TableCell className="text-white text-center">17-Nov-2023</TableCell>
-                        <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>Description section</TableCell>
+                        <TableCell className="text-white text-center" style={{ fontSize: '13px', paddingBottom: '6px', paddingTop: '6px' }}>{`Rs. 250/-`}</TableCell>
                         <TableCell className="text-white text-center">{`Rs. 1200/-`}</TableCell>
                     </TableRow>
                     {/* {data.length === 0 ? (
