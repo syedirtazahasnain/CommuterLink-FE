@@ -11,6 +11,10 @@ export const IMAGE_URL = process.env.REACT_APP_IMAGE_URL
     ? process.env.REACT_APP_IMAGE_URL 
     : 'https://be.staging.commuterslink.com/uploads/picture/';
 
+export const Client_Id = process.env.GOOGLE_CLIENT_ID 
+    ? process.env.GOOGLE_CLIENT_ID 
+    : '380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com';
+
 export const ENV_SITE_DEV = process.env.REACT_APP_SITE_DEV ? String(process.env.REACT_APP_SITE_DEV).toLowerCase() == 'true' : false;
 
 export const LAST_SYSTEM_UPDATE_DATETIME = '17-Jul-2023 (04: 37 PM)';

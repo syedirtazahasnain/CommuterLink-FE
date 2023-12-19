@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { API_URL, BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL, Client_Id } from "../../../constants";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/base";
 import Checkbox from "@mui/material/Checkbox";
@@ -74,8 +74,9 @@ const Signup = () => {
   }
 
   const googlesignup = useGoogleLogin({
-    clientId:
-      "380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
+    // clientId:
+    //   "380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
+    clientId: Client_Id,
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
     onError: (codeResponse) => handleFailure(codeResponse),
   });
