@@ -5,6 +5,7 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
+import { Client_Id } from "../../constants";
 import { persistStore } from 'redux-persist';
 import store from "./redux/store";
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -18,7 +19,8 @@ const key = "AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA";
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <GoogleOAuthProvider clientId="380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com">
+      {/* <GoogleOAuthProvider clientId="380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com"> */}
+      <GoogleOAuthProvider clientId={Client_Id}>
         <LoadScript googleMapsApiKey={key} libraries={mapLibraries}>
           <PersistGate loading={null} persistor={persistor}>
             <App />

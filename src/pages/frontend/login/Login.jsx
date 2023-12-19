@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import { API_URL, BASE_URL } from "../../../constants";
+import { API_URL, BASE_URL, Client_Id } from "../../../constants";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
@@ -106,7 +106,8 @@ const Login = () => {
   }, [userToken]);
 
   const googlesignup = useGoogleLogin({
-    clientId: "380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
+    // clientId: "380385507444-lr0o69cgjb9l3jf35sm2h87ffuv650m6.apps.googleusercontent.com",
+    clientId: Client_Id,
     onSuccess: (codeResponse) => handleSuccess(codeResponse),
     onError: (codeResponse) => handleFailure(codeResponse),
   });
