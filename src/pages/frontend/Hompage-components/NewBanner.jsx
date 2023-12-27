@@ -33,9 +33,9 @@ const NewBanner = () => {
       <div
         className="position-absolute new-banner-rectangle"
         style={{
-          left: "200px",
+          // left: "200px",
           top: "90%",
-          transform: 'translateY(-50%)',
+          transform: 'translateY(-180%)',
           // width: "1150px"
         }}
       >
