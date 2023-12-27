@@ -145,10 +145,12 @@ const Footer = () => {
                 <h4 className="text-center">Download CommutersLink now and revolutionize your daily commute</h4>
                 <ul className="list-unstyled d-flex pt-1">
                   <li className="mr-3">
+                    <a href="https://play.google.com/store/apps/details?id=com.karwaan.commuterslink" target='_blank' rel='noopener noreferrer'>
                     <img
                       className="img-fluid"
                       src="https://www.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
 
+                  </a>
                   </li>
                   <li>
                     <img
