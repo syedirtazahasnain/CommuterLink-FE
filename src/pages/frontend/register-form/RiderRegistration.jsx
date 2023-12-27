@@ -57,7 +57,8 @@ const RiderRegistration = () => {
   const [isValidProfession, setIsValidProfession] = useState(true);
 
   const route = () => {
-    navigate("/datasecurity");
+    // navigate("/datasecurity");
+    navigate("/verification");
   };
 
   const AddNewStart = () => {

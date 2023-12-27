@@ -14,7 +14,8 @@ const SeatCostVerification = () => {
   const [option, setOption] = useState("");
 
   const onSubmit = () => {
-    navigate("/datasecurity");
+    // navigate("/datasecurity");
+    navigate("/verification");
   };
 
   useEffect(() => {
