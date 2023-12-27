@@ -86,7 +86,8 @@ const OtpPage = () => {
         if (jsonresponse.statusCode == 200) {
           console.log(jsonresponse);
           dispatch(setloginState(jsonresponse.access_token));
-          navigate("/office_school");
+          // navigate("/office_school");
+          navigate("/datasecurity");
         }
       } else {
         //alert("Error: " + jsonresponse.message);

@@ -24,7 +24,8 @@ const DataSecurity = () => {
   };
 
   const route = () => {
-    navigate("/verification");
+    navigate("/office_school");
+    // navigate("/verification");
   };
 
 
