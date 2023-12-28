@@ -532,7 +532,7 @@ const Signup = () => {
                     role="alert"
                   >
                   {" "}
-                <h6 className="text-left d-flex"> <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i><li style={{listStyle:'none'}}> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register.</li>
+                <h6 className="text-left d-flex"> <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i><li style={{listStyle:'none'}}> If you are offering your car, you may proceed with registration, if you are 18 and older and you have a driving license.</li>
                    </h6>  
                     <button
                       type=""
