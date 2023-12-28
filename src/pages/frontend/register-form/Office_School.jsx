@@ -89,7 +89,7 @@ const Office_School = () => {
                       src={`${BASE_URL}/assets/images/signup-4.png`}
                       alt="First slide"
                     />
-                    <h4 className="text-success fw-bold text-center mt-2">Share Ride for School University</h4>
+                    <h4 className="text-success fw-bold text-center mt-2">Share Ride for University</h4>
                   </Carousel.Item>
                   <Carousel.Item interval={4000}>
                     <img
@@ -157,7 +157,7 @@ const Office_School = () => {
                                       className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                                       onClick={schoolRoute}
                                     >
-                                      School/University
+                                      University
                                     </Button>
                                   </div>
                                   <form id="numberForm">

@@ -2776,7 +2776,7 @@ const DriverRegistration = () => {
                     <Row className="mb-3 py-3 px-3  shadow shadow-sm form-color-field">
                       <Form.Group as={Col} md="12" controlId="validationCustom13" className="mb-2">
                         <Form.Label className="fs-6 text-black">
-                          Year of Birth
+                          Date of Birth
                         </Form.Label>
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
                           <DatePicker label={
