@@ -148,14 +148,16 @@ const Footer = () => {
                     <a href="https://play.google.com/store/apps/details?id=com.karwaan.commuterslink" target='_blank' rel='noopener noreferrer'>
                     <img
                       className="img-fluid"
-                      src="https://www.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
+                      // src="https://www.be.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
+                      src="https://be.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
 
                   </a>
                   </li>
                   <li>
                     <img
                       className="img-fluid"
-                      src="https://www.commuterslink.com/front_assets/img/Apple-store.png" style={{ width: "400px" }} />
+                      /* src="https://www.commuterslink.com/front_assets/img/Apple-store.png" style={{ width: "400px" }} /> */
+                      src="https://be.commuterslink.com/front_assets/img/Apple-store.png" style={{ width: "400px" }} />
 
                   </li>
                 </ul>
@@ -169,7 +171,8 @@ const Footer = () => {
           <div className="copyright text-center my-3">
             <img
               className="img-fluid"
-              src="https://www.commuterslink.com/front_assets/img/Sysreformslogo.png"
+              src="https://be.commuterslink.com/front_assets/img/Sysreformslogo.png"
+              // "https://be.commuterslink.com/uploads/picture/"
               style={{ width: '250px' }}
             />
             <div className="copyright text-center mt-3">
