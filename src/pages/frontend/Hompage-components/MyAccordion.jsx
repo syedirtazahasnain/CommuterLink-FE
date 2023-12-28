@@ -23,23 +23,6 @@ const MyAccordion = () => {
           Your Fuel-Saving Daily Commuting Solution!
         </h1>
       </div> */}
-      <div className="row g-0 bg-secondary-light" id="aboutSection">
-        <div className="col-md-6 d-flex">
-          <div className="container my-auto px-5">
-            <h1 className="text-yellow mb-3">Earn through Sharing and Saving</h1>
-            <p className="text-white fs-5 mb-5">Where Drivers Save and Earn, and Passengers Pay for Only Their Seat – A Win-Win Commuting Solution!"
-              For drivers, CommutersLink is about saving money through sharing seats in their car. Passengers only pay for the seat they occupy, calculated based on car model, CC, distance to be traveled, fuel consumption, and a nominal maintenance fee for wear and tear. CommutersLink calculates all the costs for you
-            </p>
-            <button
-              className="btn-custom1  border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={() => handleScroll()}>
-              Download App
-            </button>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <img src={`${BASE_URL}/assets/images/diagonal-picture.png`} className='img-fluid w-100' />
-        </div>
-      </div>
       <div id="costEarningSection">
         <div className="row g-0 bg-light-secondary">
           <div className="col-md-6 d-flex p-5">
@@ -132,6 +115,23 @@ const MyAccordion = () => {
           <Link to="/Faq" className="text-green fw-bold fs-4 faq-text h-50 text-decoration-none ms-3">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link>
           </div>
 
+        </div>
+      </div>
+      <div className="row g-0 bg-secondary-light" id="aboutSection">
+        <div className="col-md-6 d-flex">
+          <div className="container my-auto px-5">
+            <h1 className="text-yellow mb-3">Earn through Sharing and Saving</h1>
+            <p className="text-white fs-5 mb-5">Where Drivers Save and Earn, and Passengers Pay for Only Their Seat – A Win-Win Commuting Solution!"
+              For drivers, CommutersLink is about saving money through sharing seats in their car. Passengers only pay for the seat they occupy, calculated based on car model, CC, distance to be traveled, fuel consumption, and a nominal maintenance fee for wear and tear. CommutersLink calculates all the costs for you
+            </p>
+            <button
+              className="btn-custom1  border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={() => handleScroll()}>
+              Download App
+            </button>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <img src={`${BASE_URL}/assets/images/diagonal-picture.png`} className='img-fluid w-100' />
         </div>
       </div>
     </div>
