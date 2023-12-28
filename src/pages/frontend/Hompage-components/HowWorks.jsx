@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { BASE_URL } from "../../../constants";
 
 function HowWorks() {
+  const baseUrl = process.env.REACT_APP_API_URL;
   return (
     <div id="howworks" className="bg-light-secondary">
       <section id="working">
@@ -32,7 +33,9 @@ function HowWorks() {
                         className="media mt-10vh mx-auto mb-1"
                         component="img"
                         sx={{ width: 40 }}
-                        image="https://www.commuterslink.com/front_assets/img/icons/signup-01.png"
+                        // image={`${process.env.REACT_APP_API_URL}/front_assets/img/icons/signup-01.png`}
+                        // REACT_APP_API_URL
+                        image="https://be.commuterslink.com/front_assets/img/icons/signup-01.png"
                         alt="green iguana"
                       />
                       <Typography className="heading" gutterBottom variant="h5" component="div">
@@ -55,7 +58,7 @@ function HowWorks() {
                         className="media mt-10vh mx-auto mb-1"
                         component="img"
                         sx={{ width: 40 }}
-                        image="https://www.commuterslink.com/front_assets/img/icons/connect.png"
+                        image="https://be.commuterslink.com/front_assets/img/icons/connect.png"
                         alt="green iguana"
                       />
                       <Typography className="heading" gutterBottom variant="h5" component="div">
@@ -78,7 +81,7 @@ function HowWorks() {
                         className="media mt-10vh mx-auto mb-1"
                         component="img"
                         sx={{ width: 40 }}
-                        image="https://www.commuterslink.com/front_assets/img/icons/fuel-pump-01.png"
+                        image="https://be.commuterslink.com/front_assets/img/icons/fuel-pump-01.png"
                         alt="green iguana"
                       />
                       <Typography className="heading" gutterBottom variant="h5" component="div">
@@ -101,7 +104,7 @@ function HowWorks() {
                         className="media mx-auto mb-1"
                         component="img"
                         sx={{ width: 30 }}
-                        image="https://www.commuterslink.com/front_assets/img/icons/pay-01.png"
+                        image="https://be.commuterslink.com/front_assets/img/icons/pay-01.png"
                         alt="green iguana"
                       />
                       <Typography className="heading" gutterBottom variant="h5" component="div">
