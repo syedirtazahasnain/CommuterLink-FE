@@ -1992,7 +1992,7 @@ const SchoolRegistration = () => {
                     className="mb-2"
                   >
                     <Form.Label className="fs-6 text-black">
-                      Year of Birth
+                      Date of Birth
                     </Form.Label>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
