@@ -2261,7 +2261,7 @@ const RiderRegistration = () => {
                   >
                     {isLoading ? (
                       <span>
-                        <i className="fa fa-spinner fa-spin" /> Proceed...
+                        <i className="fa fa-spinner fa-spin" /> Submitting...
                       </span>
                     ) : (
                       'Submit'
