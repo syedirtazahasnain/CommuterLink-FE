@@ -143,6 +143,27 @@ const WouldYouLikeTo = () => {
                           <div className="mt-1"> &nbsp;
                           </div>
                         </div>
+                        <div
+                          className="alert alert-info alert-dismissible fade show"
+                          role="alert"
+                        >
+                          {" "}
+                          <h6 className="text-left d-flex">
+                            {" "}
+                            <i className="fa-solid fa-sticky-note  text-warning"></i>
+                            <li style={{ listStyle: "none" }}>
+                              {" "}
+                              Coming Soon - Where you will have both options to
+                              offer your car and look for a car simultaneously
+                            </li>
+                          </h6>
+                          <button
+                            type=""
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                          ></button>
+                        </div>
 
                         <div className="col-12 text-center">
                           {/* onClick={() => setModalShow(true)} */}
