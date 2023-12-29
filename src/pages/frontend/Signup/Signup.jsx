@@ -17,10 +17,10 @@ import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { LoginSocialFacebook, LoginSocialLinkedin } from "reactjs-social-login";
 import { displayNotification } from "../../../helpers";
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 // const REDIRECT_URI = "https://staging.commuterslink.com/auth/linkedin/callback";
 const REDIRECT_URI = window.location.href;
@@ -46,7 +46,7 @@ const Signup = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-   
+
   const togglePasswordVisibility1 = () => {
     setShowPassword1(!showPassword1);
   };
@@ -133,7 +133,6 @@ const Signup = () => {
   };
   const openPopup = () => {
     Swal.fire({
-
       html: `
         <div>
           <div class="container mt-5 pt-1 align-center fw-bold fs-1 mb-5">
@@ -178,7 +177,7 @@ const Signup = () => {
           </div>
         </div>
       `,
-      width: '50%', // Adjust the width as needed
+      width: "50%", // Adjust the width as needed
       showCloseButton: true,
       showConfirmButton: false, // Remove confirm button if not needed
     });
@@ -310,20 +309,27 @@ const Signup = () => {
         confirmPassword === ""
       ) {
         displayNotification("warning", "Please Fill All Fields");
-      } 
-      else if (password !== confirmPassword) {
-        displayNotification("warning", "Confirm password is not matched with new password!");
-      }
-      else if (!phonePattern.test(phoneNumber)) {
-        displayNotification("warning", "Please follow the correct phone number format");
-      }
-      else if (!emailPattern.test(email)) {
-        displayNotification("warning", "Please follow the correct email format");
-      }
-      else if (fullName.length < 3) {
-        displayNotification("warning", "Full Name should have alteast 3 characters");
-      }
-      else {
+      } else if (password !== confirmPassword) {
+        displayNotification(
+          "warning",
+          "Confirm password is not matched with new password!"
+        );
+      } else if (!phonePattern.test(phoneNumber)) {
+        displayNotification(
+          "warning",
+          "Please follow the correct phone number format"
+        );
+      } else if (!emailPattern.test(email)) {
+        displayNotification(
+          "warning",
+          "Please follow the correct email format"
+        );
+      } else if (fullName.length < 3) {
+        displayNotification(
+          "warning",
+          "Full Name should have alteast 3 characters"
+        );
+      } else {
         if (termsService) {
           const body = {
             email: email,
@@ -384,7 +390,7 @@ const Signup = () => {
   const handleFullNameChange = (e) => {
     const value = e.target.value.replace(/[^a-zA-Z" "]/gi, "");
     setFullName(value);
-  
+
     if (value.replace(/ /g, "").length < 3) {
       setFullNameError(
         "Full Name must contain at least 3 alphabetic characters (excluding spaces)"
@@ -522,18 +528,23 @@ const Signup = () => {
                   {" "}
                   Sign up
                 </h1>{" "}
-                <p
-                  className="text-center fs-6 text-danger text-custom"
-               
-                >
+                <p className="text-center fs-6 text-danger text-custom">
                   {" "}
                   <div
                     className="alert alert-info alert-dismissible fade show"
                     role="alert"
                   >
-                  {" "}
-                <h6 className="text-left d-flex"> <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i><li style={{listStyle:'none'}}> If you are offering your car, you may proceed with registration, if you are 18 and older and you have a driving license.</li>
-                   </h6>  
+                    {" "}
+                    <h6 className="text-left d-flex">
+                      {" "}
+                      <i className="fa-solid fa-triangle-exclamation fs-6  text-warning"></i>
+                      <li style={{ listStyle: "none" }}>
+                        {" "}
+                        If you are offering your car, you may proceed with
+                        registration, if you are 18 and older and you have a
+                        driving license.
+                      </li>
+                    </h6>
                     <button
                       type=""
                       class="btn-close"
@@ -616,7 +627,7 @@ const Signup = () => {
                       fullWidth
                       className="bg-light"
                       variant="outlined"
-                      type={showPassword ? 'text': 'password'}
+                      type={showPassword ? "text" : "password"}
                       label="Password"
                       value={password}
                       onChange={(e) => validatePassword(e.target.value)}
@@ -630,8 +641,15 @@ const Signup = () => {
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
-                            <IconButton onClick={togglePasswordVisibility} edge="end">
-                              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            <IconButton
+                              onClick={togglePasswordVisibility}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <VisibilityOffIcon />
+                              ) : (
+                                <VisibilityIcon />
+                              )}
                             </IconButton>
                           </InputAdornment>
                         ),
@@ -646,7 +664,7 @@ const Signup = () => {
                       fullWidth
                       className="bg-light"
                       variant="outlined"
-                      type={showPassword1 ? 'text' : 'password'}
+                      type={showPassword1 ? "text" : "password"}
                       label="Confirm Password"
                       value={confirmPassword}
                       onChange={(e) => checkconfirmPassword(e.target.value)}
@@ -660,8 +678,15 @@ const Signup = () => {
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
-                            <IconButton onClick={togglePasswordVisibility1} edge="end">
-                              {showPassword1 ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            <IconButton
+                              onClick={togglePasswordVisibility1}
+                              edge="end"
+                            >
+                              {showPassword1 ? (
+                                <VisibilityOffIcon />
+                              ) : (
+                                <VisibilityIcon />
+                              )}
                             </IconButton>
                           </InputAdornment>
                         ),
@@ -693,8 +718,7 @@ const Signup = () => {
                               style={{
                                 color: "#198754",
                                 textDecoration: "none",
-                              
-                              }} 
+                              }}
                               onClick={openPopup}
                             >
                               &nbsp; Terms of service
@@ -763,7 +787,11 @@ const Signup = () => {
                                 <img
                                   src={`${BASE_URL}/assets/images/facebook.png`}
                                   alt=""
-                                  style={{ height: "27px", width: "27px", cursor: "pointer" }}
+                                  style={{
+                                    height: "27px",
+                                    width: "27px",
+                                    cursor: "pointer",
+                                  }}
                                 />
                               </Tooltip>
                             </LoginSocialFacebook>
@@ -801,8 +829,12 @@ const Signup = () => {
                     <hr id="hrline2" />
                     <div className="text-center mb-5">
                       Already have account on CommuterLinks? &nbsp;
-                      <Link to={'/login'} style={{ textDecoration: "none" }}>
-                        <span style={{ color: "#198754", textDecoration: "none" }}>Login</span>
+                      <Link to={"/login"} style={{ textDecoration: "none" }}>
+                        <span
+                          style={{ color: "#198754", textDecoration: "none" }}
+                        >
+                          Login
+                        </span>
                       </Link>
                     </div>
                   </div>
