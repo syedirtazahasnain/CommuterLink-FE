@@ -3,26 +3,25 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { Container, Row, Modal } from 'react-bootstrap';
+import { Container, Row, Modal } from "react-bootstrap";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import { Button } from "@mui/base";
 import Stack from "@mui/material/Stack";
-import { GoogleMap, Autocomplete, MarkerF, } from "@react-google-maps/api";
+import { GoogleMap, Autocomplete, MarkerF } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import { API_URL, BASE_URL } from "../../../constants";
-import { Checkbox, TextField, Tooltip } from '@mui/material';
-import { FormControlLabel } from '@mui/material';
+import { Checkbox, TextField, Tooltip } from "@mui/material";
+import { FormControlLabel } from "@mui/material";
 import Swal from "sweetalert2";
 import { displayNotification } from "../../../helpers";
 
 const eighteenYearsAgo = dayjs().subtract(18, "years");
 
 const DriverRegistration = () => {
-
   const navigate = useNavigate();
   const autocompleteRef = useRef(null);
   const userToken = useSelector((s) => s.login.data.token);
@@ -39,21 +38,21 @@ const DriverRegistration = () => {
   const [isValidRaastID, setIsValidRaastID] = useState(true);
 
   const [isValidUniversityName, setIsValidUniversityName] = useState(true);
-  const [isValidUniversityAddress, setIsValidUniversityAddress] = useState(true);
+  const [isValidUniversityAddress, setIsValidUniversityAddress] =
+    useState(true);
 
   const route = () => {
     navigate("/seatcostverification");
-
   };
 
   const handleCarBrandChange = (e) => {
     let value = e.target.value;
-    value = value.replace(/[^a-zA-Z]/g, '');
+    value = value.replace(/[^a-zA-Z]/g, "");
     setSelectedCarBrand(value);
-    setIsCarBrandValid(value !== '');
+    setIsCarBrandValid(value !== "");
     if (value.length > 20) {
       value = value.slice(0, 20);
-    }// Set validation based on whether a value is selected or not
+    } // Set validation based on whether a value is selected or not
     setSelectedCarBrand(value);
 
     // Check if the entered value is valid and reset the validation state
@@ -64,12 +63,12 @@ const DriverRegistration = () => {
 
   const handleDrivingLicenseMySelf = (e) => {
     let value = e.target.value;
-    value = value.replace(/[^a-zA-Z0-9-]/g, '');
+    value = value.replace(/[^a-zA-Z0-9-]/g, "");
     setInputDrivingLicenseMySelf(value);
-    setIsLicenseValid(value !== '');
+    setIsLicenseValid(value !== "");
     if (value.length > 20) {
       value = value.slice(0, 20);
-    }// Set validation based on whether a value is selected or not
+    } // Set validation based on whether a value is selected or not
     setInputDrivingLicenseMySelf(value);
 
     // Check if the entered value is valid and reset the validation state
@@ -90,7 +89,6 @@ const DriverRegistration = () => {
 
   const openPopup = () => {
     Swal.fire({
-
       html: `
         <div>
           <div class="container mt-5 pt-1 fw-bold fs-1 mb-5">
@@ -135,12 +133,11 @@ const DriverRegistration = () => {
           </div>
         </div>
       `,
-      width: '50%', // Adjust the width as needed
+      width: "50%", // Adjust the width as needed
       showCloseButton: true,
       showConfirmButton: false, // Remove confirm button if not needed
     });
   };
-
 
   // For Registration
   const [validated, setValidated] = useState(false);
@@ -148,8 +145,10 @@ const DriverRegistration = () => {
   const [selectedCnicFront, setSelectedCnicFront] = useState(null);
   const [selectedCnicBack, setSelectedCnicBack] = useState(null);
   const [selectedCarPlate, setSelectedCarPlate] = useState(null);
-  const [selectedLicenseFrontDriver, setSelectedLicenseFrontDriver] = useState(null);
-  const [selectedLicenseBackDriver, setSelectedLicenseBackDriver] = useState(null);
+  const [selectedLicenseFrontDriver, setSelectedLicenseFrontDriver] =
+    useState(null);
+  const [selectedLicenseBackDriver, setSelectedLicenseBackDriver] =
+    useState(null);
   const [selectedCnicFrontDriver, setSelectedCnicFrontDriver] = useState(null);
   const [selectedCnicBackDriver, setSelectedCnicBackDriver] = useState(null);
   const [homeTimeSlots, setHomeTimeSlots] = useState([]);
@@ -161,10 +160,12 @@ const DriverRegistration = () => {
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const selectedDateFormat = selectedDate ? selectedDate.format('DD-MM-YYYY') : '';
+  const selectedDateFormat = selectedDate
+    ? selectedDate.format("DD-MM-YYYY")
+    : "";
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
-  const [cnic, setCnic] = useState('');
+  const [cnic, setCnic] = useState("");
   const [isValidCnic, setIsValidCnic] = useState(true);
   const [isValidCnic1, setIsValidCnic1] = useState(true);
   const [cnicFront, setCnicFront] = useState("");
@@ -173,23 +174,24 @@ const DriverRegistration = () => {
   const [cnicBackExt, setCnicBackExt] = useState("");
   const [picture, setPicture] = useState("");
   const [pictureExt, setPictureExt] = useState("");
-  const [profession, setProfession] = useState('');
+  const [profession, setProfession] = useState("");
   const [universityName, setUniversityName] = useState("");
   const [universityAddress, setUniversityAddress] = useState("");
   const [isValidProfession, setIsValidProfession] = useState(true);
   const [isCarBrandValid, setIsCarBrandValid] = useState(true);
   const [isLicenseValid, setIsLicenseValid] = useState(true);
 
-
   // For Start Point
   const [startBounds, setStartBounds] = useState([]);
   const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
   const [locationStartString, setLocationStartString] = useState("");
   const [locationStartStringId, setLocationStartStringId] = useState("");
-  const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
+  const [locationStartStringField, setLocationStartStringField] =
+    useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
-  const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
+  const [selectedStartProvinceCities, setSelectedStartProvinceCities] =
+    useState([]);
   const [cityStart, setCityStart] = useState("");
   const [cityStartId, setCityStartId] = useState("");
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
@@ -199,22 +201,36 @@ const DriverRegistration = () => {
   const [autocompleteEndBounds, setAutocompleteEndBounds] = useState(null);
   const [locationEndString, setLocationEndString] = useState("");
   const [locationEndStringId, setLocationEndStringId] = useState("");
-  const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
+  const [locationEndStringField, setLocationEndStringField] =
+    useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
-  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
+  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState(
+    []
+  );
   const [cityEnd, setCityEnd] = useState("");
   const [cityEndId, setCityEndId] = useState("");
   const [selectedEndCityArea, setSelectedEndCityArea] = useState([]);
 
-
   // For Start Point
-  const [defaultStartCenter, setDefaultStartCenter] = useState({ lat: 30.3753, lng: 69.3451 });
-  const [markerPositionStart, setMarkerPositionStart] = useState({ lat: null, lng: null });
+  const [defaultStartCenter, setDefaultStartCenter] = useState({
+    lat: 30.3753,
+    lng: 69.3451,
+  });
+  const [markerPositionStart, setMarkerPositionStart] = useState({
+    lat: null,
+    lng: null,
+  });
 
   // For End Point
-  const [defaultEndCenter, setDefaultEndCenter] = useState({ lat: 30.3753, lng: 69.3451 });
-  const [markerPositionEnd, setMarkerPositionEnd] = useState({ lat: null, lng: null });
+  const [defaultEndCenter, setDefaultEndCenter] = useState({
+    lat: 30.3753,
+    lng: 69.3451,
+  });
+  const [markerPositionEnd, setMarkerPositionEnd] = useState({
+    lat: null,
+    lng: null,
+  });
 
   // For Modals
   const [showStartModal, setShowStartModal] = useState(false);
@@ -241,7 +257,7 @@ const DriverRegistration = () => {
   const [selectedSeatGender, setSelectedSeatGender] = useState("");
   const [selectedMidRoutePartner, setSelectedMidRoutePartner] = useState("");
   const [selectedOneRoutePartner, setSelectedOneRoutePartner] = useState("");
-  const [selectedOption, setSelectedOption] = useState(''); // State to store the selected option
+  const [selectedOption, setSelectedOption] = useState(""); // State to store the selected option
   const [inputBankAccount, setInputBankAccount] = useState("");
   const [inputEasyPaisa, setInputEasyPaisa] = useState("");
   const [inputJazzCash, setInputJazzCash] = useState("");
@@ -251,9 +267,12 @@ const DriverRegistration = () => {
   const [inputDriverType, setInputDriverType] = useState("");
 
   // I Drive Myself Fields
-  const [inputDrivingLicenseMySelf, setInputDrivingLicenseMySelf] = useState("");
+  const [inputDrivingLicenseMySelf, setInputDrivingLicenseMySelf] =
+    useState("");
   const [inputValidUptoMySelf, setInputValidUptoMySelf] = useState(null);
-  const inputValidUptoMySelfFormat = inputValidUptoMySelf ? inputValidUptoMySelf.format('DD-MM-YYYY') : '';
+  const inputValidUptoMySelfFormat = inputValidUptoMySelf
+    ? inputValidUptoMySelf.format("DD-MM-YYYY")
+    : "";
   const [inputPlaceIssueMySelf, setInputPlaceIssueMySelf] = useState("");
 
   // For Driver & Both Fields
@@ -266,14 +285,19 @@ const DriverRegistration = () => {
   const [inputDriverCnicBackExt, setInputDriverCnicBackExt] = useState("");
   const [inputDriverLicenseNumber, setInputDriverLicenseNumber] = useState("");
   const [inputDriverValidUpto, setInputDriverValidUpto] = useState(null);
-  const inputDriverValidUptoFormat = inputDriverValidUpto ? inputDriverValidUpto.format('DD-MM-YYYY') : '';
+  const inputDriverValidUptoFormat = inputDriverValidUpto
+    ? inputDriverValidUpto.format("DD-MM-YYYY")
+    : "";
   const [isIBANValid, setIsIBANValid] = useState(true);
 
   // For License Fields
-  const [selectedImageLicenseFront, setSelectedImageLicenseFront] = useState("");
-  const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] = useState("");
+  const [selectedImageLicenseFront, setSelectedImageLicenseFront] =
+    useState("");
+  const [selectedImageLicenseFrontExt, setSelectedImageLicenseFrontExt] =
+    useState("");
   const [selectedImageLicenseBack, setSelectedImageLicenseBack] = useState("");
-  const [selectedImageLicenseBackExt, setSelectedImageLicenseBackExt] = useState("");
+  const [selectedImageLicenseBackExt, setSelectedImageLicenseBackExt] =
+    useState("");
 
   // For Driver Form
   const [showDriverForm, setShowDriverForm] = useState(false);
@@ -290,20 +314,18 @@ const DriverRegistration = () => {
   }, [navigate, showDriverForm]);
 
   useEffect(() => {
-
     if (provinceStartId) {
-      const selectedStartProvince = dropdownStartdata?.countries[0]?.provinces.find(
-        (province) => province.id == provinceStartId
-      );
+      const selectedStartProvince =
+        dropdownStartdata?.countries[0]?.provinces.find(
+          (province) => province.id == provinceStartId
+        );
       setSelectedStartProvinceCities(
         selectedStartProvince ? selectedStartProvince.cities : []
       );
     }
   }, [provinceStartId]);
 
-
   useEffect(() => {
-
     if (provinceEndId) {
       const selectedEndProvince = dropdownEnddata?.countries[0]?.provinces.find(
         (province) => province.id == provinceEndId
@@ -315,9 +337,7 @@ const DriverRegistration = () => {
   }, [provinceEndId]);
 
   useEffect(() => {
-
     if (cityStartId) {
-
       const filteredStartCities = dropdownStartdata.area.filter(
         (city) => city.parent_id == cityStartId
       );
@@ -332,9 +352,7 @@ const DriverRegistration = () => {
   }, [cityStartId]);
 
   useEffect(() => {
-
     if (cityEndId) {
-
       const filteredEndCities = dropdownEnddata.area.filter(
         (city) => city.parent_id == cityEndId
       );
@@ -356,21 +374,23 @@ const DriverRegistration = () => {
       try {
         if (locationStartString) {
           const response = await fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+              locationStartString
+            )}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
           );
 
           const data = await response.json(); // Parse the response as JSON
           console.log(data);
-          if (data.status === 'OK' && data.results.length > 0) {
+          if (data.status === "OK" && data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
             setDefaultStartCenter({ lat, lng });
             //setMarkerPositionStart({ lat, lng });
           } else {
-            console.error('Geocoding API response error');
+            console.error("Geocoding API response error");
           }
         }
       } catch (error) {
-        console.error('Error fetching geocoding data:', error);
+        console.error("Error fetching geocoding data:", error);
       }
     };
     getGeocodeStartData();
@@ -382,36 +402,34 @@ const DriverRegistration = () => {
       try {
         if (locationEndString) {
           const response = await fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+              locationEndString
+            )}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
           );
 
           const data = await response.json(); // Parse the response as JSON
-          if (data.status === 'OK' && data.results.length > 0) {
+          if (data.status === "OK" && data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
             setDefaultEndCenter({ lat, lng });
             //setMarkerPositionEnd({ lat, lng });
           } else {
-            console.error('Geocoding API response error');
+            console.error("Geocoding API response error");
           }
         }
       } catch (error) {
-        console.error('Error fetching geocoding data:', error);
+        console.error("Error fetching geocoding data:", error);
       }
     };
     getGeocodeEndData();
   }, [locationEndString, locationEndStringField]);
 
-
   const getdropdownStartdata = async () => {
-    const response = await fetch(
-      `${API_URL}/api/v1/list/data`,
-      {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${API_URL}/api/v1/list/data`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     console.log(response);
     const jsonresponse = await response.json();
     setDropDownStartData(jsonresponse);
@@ -440,13 +458,13 @@ const DriverRegistration = () => {
             console.log("City Start Bounds", cityBounds);
             setStartBounds(cityBounds);
           } else {
-            console.error('City not found');
+            console.error("City not found");
           }
         } else {
-          console.error('Error fetching city data');
+          console.error("Error fetching city data");
         }
       } catch (error) {
-        console.error('An error occurred:', error);
+        console.error("An error occurred:", error);
       }
     };
 
@@ -459,8 +477,14 @@ const DriverRegistration = () => {
     if (startBounds && startBounds.southwest && startBounds.northeast) {
       // Convert startBounds data into LatLngBounds object
       const bounds = new window.google.maps.LatLngBounds(
-        new window.google.maps.LatLng(startBounds.southwest.lat, startBounds.southwest.lng),
-        new window.google.maps.LatLng(startBounds.northeast.lat, startBounds.northeast.lng)
+        new window.google.maps.LatLng(
+          startBounds.southwest.lat,
+          startBounds.southwest.lng
+        ),
+        new window.google.maps.LatLng(
+          startBounds.northeast.lat,
+          startBounds.northeast.lng
+        )
       );
 
       setAutocompleteStartBounds(bounds);
@@ -481,13 +505,13 @@ const DriverRegistration = () => {
             console.log("City End Bounds", cityBounds);
             setEndBounds(cityBounds);
           } else {
-            console.error('City not found');
+            console.error("City not found");
           }
         } else {
-          console.error('Error fetching city data');
+          console.error("Error fetching city data");
         }
       } catch (error) {
-        console.error('An error occurred:', error);
+        console.error("An error occurred:", error);
       }
     };
 
@@ -500,8 +524,14 @@ const DriverRegistration = () => {
     if (endBounds && endBounds.southwest && endBounds.northeast) {
       // Convert startBounds data into LatLngBounds object
       const bounds = new window.google.maps.LatLngBounds(
-        new window.google.maps.LatLng(endBounds.southwest.lat, endBounds.southwest.lng),
-        new window.google.maps.LatLng(endBounds.northeast.lat, endBounds.northeast.lng)
+        new window.google.maps.LatLng(
+          endBounds.southwest.lat,
+          endBounds.southwest.lng
+        ),
+        new window.google.maps.LatLng(
+          endBounds.northeast.lat,
+          endBounds.northeast.lng
+        )
       );
 
       setAutocompleteEndBounds(bounds);
@@ -511,7 +541,9 @@ const DriverRegistration = () => {
   useEffect(() => {
     // Filter registration years based on the selected manufacturing year.
     if (selectedManYear) {
-      const filteredYears = regYear.filter((reg) => reg.car_year_ranges >= selectedManYear);
+      const filteredYears = regYear.filter(
+        (reg) => reg.car_year_ranges >= selectedManYear
+      );
       setFilteredRegYears(filteredYears);
     } else {
       // If no manufacturing year is selected, show all registration years.
@@ -522,7 +554,9 @@ const DriverRegistration = () => {
   useEffect(() => {
     // Filter registration years based on the selected manufacturing year.
     if (selectedHomeTimeValue) {
-      const filteredYears = homeTimeSlots.filter((time) => time.time_string > selectedHomeTimeValue);
+      const filteredYears = homeTimeSlots.filter(
+        (time) => time.time_string > selectedHomeTimeValue
+      );
       setFilteredOfficeTimeSlots(filteredYears);
     } else {
       // If no manufacturing year is selected, show all registration years.
@@ -550,7 +584,7 @@ const DriverRegistration = () => {
 
   const handleProfessionChange = (e) => {
     let newProfession = e.target.value;
-    newProfession = newProfession.replace(/\s+/g, ' ').substring(0, 30);
+    newProfession = newProfession.replace(/\s+/g, " ").substring(0, 30);
     const professionPattern = /^[A-Za-z\s]+$/;
 
     // Check if the input matches the pattern.
@@ -568,7 +602,7 @@ const DriverRegistration = () => {
 
   const handleDriverNameChange = (e) => {
     let newName = e.target.value;
-    newName = newName.replace(/\s+/g, ' ').substring(0, 30);
+    newName = newName.replace(/\s+/g, " ").substring(0, 30);
     const NamePattern = /^[A-Za-z\s]+$/;
 
     // Check if the input matches the pattern.
@@ -597,7 +631,6 @@ const DriverRegistration = () => {
     }
     setValidated(true);
   };
-
 
   const handleLocationStart = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
@@ -659,11 +692,11 @@ const DriverRegistration = () => {
 
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
-      const isIslamabad =
-        place.address_components.some((component) =>
+      const isIslamabad = place.address_components.some(
+        (component) =>
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityStart.toLowerCase()
-        );
+      );
 
       if (isIslamabad) {
         // The selected place is in Islamabad.
@@ -689,11 +722,14 @@ const DriverRegistration = () => {
         //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
         //   },
         // });
-        displayNotification("warning", `Please select a place in ${cityStart}.`);
+        displayNotification(
+          "warning",
+          `Please select a place in ${cityStart}.`
+        );
       }
     } else {
       // Handle the case when place is not valid.
-      console.error('Invalid place object:', place);
+      console.error("Invalid place object:", place);
     }
   };
 
@@ -717,11 +753,11 @@ const DriverRegistration = () => {
 
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
-      const isIslamabad =
-        place.address_components.some((component) =>
+      const isIslamabad = place.address_components.some(
+        (component) =>
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityEnd.toLowerCase()
-        );
+      );
 
       if (isIslamabad) {
         // The selected place is in Islamabad.
@@ -751,7 +787,7 @@ const DriverRegistration = () => {
       }
     } else {
       // Handle the case when place is not valid.
-      console.error('Invalid place object:', place);
+      console.error("Invalid place object:", place);
     }
   };
 
@@ -829,7 +865,9 @@ const DriverRegistration = () => {
   const handleUniversityAddressChange = (e) => {
     const newUniversityAddress = e.target.value;
     setUniversityAddress(newUniversityAddress);
-    setIsValidUniversityAddress(validateUniversityAddress(newUniversityAddress));
+    setIsValidUniversityAddress(
+      validateUniversityAddress(newUniversityAddress)
+    );
   };
 
   function validateCnic(cnic) {
@@ -839,9 +877,8 @@ const DriverRegistration = () => {
     return cnicPattern.test(cnic);
   }
 
-
   const handleCnicChange = (event) => {
-    const inputCnic = event.target.value.replace(/\D/g, '');
+    const inputCnic = event.target.value.replace(/\D/g, "");
 
     if (cnic.length < 15 && cnic.length > 15) {
       setIsValidCnic(false);
@@ -849,7 +886,7 @@ const DriverRegistration = () => {
     if (inputCnic.length <= 13) {
       const formattedCnic = inputCnic.replace(
         /^(\d{5})(\d{7})(\d{1})$/,
-        '$1-$2-$3'
+        "$1-$2-$3"
       );
       setCnic(formattedCnic);
       setIsValidCnic(validateCnic(formattedCnic));
@@ -864,15 +901,18 @@ const DriverRegistration = () => {
   }
 
   const handleCnicChange1 = (event) => {
-    const inputCnic = event.target.value.replace(/\D/g, '');
+    const inputCnic = event.target.value.replace(/\D/g, "");
 
-    if (inputDriverCnicNumber.length < 15 && inputDriverCnicNumber.length > 15) {
+    if (
+      inputDriverCnicNumber.length < 15 &&
+      inputDriverCnicNumber.length > 15
+    ) {
       setIsValidCnic1(false);
     }
     if (inputCnic.length <= 13) {
       const formattedCnic = inputCnic.replace(
         /^(\d{5})(\d{7})(\d{1})$/,
-        '$1-$2-$3'
+        "$1-$2-$3"
       );
       setInputDriverCnicNumber(formattedCnic);
       setIsValidCnic1(validateCnic1(formattedCnic));
@@ -887,13 +927,11 @@ const DriverRegistration = () => {
         const reader = new FileReader();
         reader.onload = () => {
           setCnicFront(reader.result.split(",")[1]);
-          setCnicFrontExt(file.name.split('.').pop());
+          setCnicFrontExt(file.name.split(".").pop());
           setSelectedCnicFront(file);
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -915,13 +953,11 @@ const DriverRegistration = () => {
         const reader = new FileReader();
         reader.onload = () => {
           setCnicBack(reader.result.split(",")[1]);
-          setCnicBackExt(file.name.split('.').pop());
+          setCnicBackExt(file.name.split(".").pop());
           setSelectedCnicBack(file);
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -936,7 +972,7 @@ const DriverRegistration = () => {
     let value = e.target.value;
 
     // Remove any special characters and spaces
-    value = value.replace(/[^a-zA-Z0-9]/g, '');
+    value = value.replace(/[^a-zA-Z0-9]/g, "");
 
     // Enforce a maximum length of 24 characters
     if (value.length > 24) {
@@ -960,13 +996,11 @@ const DriverRegistration = () => {
         const reader = new FileReader();
         reader.onload = () => {
           setPicture(reader.result.split(",")[1]);
-          setPictureExt(file.name.split('.').pop());
+          setPictureExt(file.name.split(".").pop());
           setSelectedFile(file);
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -986,25 +1020,25 @@ const DriverRegistration = () => {
     setSelectedCnicFront(null);
     setCnicFront("");
     setCnicFrontExt("");
-  }
+  };
 
   const handleCnicBackPreview = (e) => {
     setSelectedCnicBack(null);
     setCnicBack("");
     setCnicBackExt("");
-  }
+  };
 
   const handleLicenseFrontDriverPreview = (e) => {
     setSelectedLicenseFrontDriver(null);
     setSelectedImageLicenseFront("");
     setSelectedImageLicenseFrontExt("");
-  }
+  };
 
   const handleLicenseBackDriverPreview = (e) => {
     setSelectedLicenseBackDriver(null);
     setSelectedImageLicenseBack("");
     setSelectedImageLicenseBackExt("");
-  }
+  };
 
   // console.log("Picture:", picture);
   // console.log("Picture Extension:", pictureExt);
@@ -1013,18 +1047,18 @@ const DriverRegistration = () => {
     setSelectedCarPlate(null);
     setSelectedCarImage("");
     setSelectedCarImageExt("");
-  }
+  };
   const handleCnicFrontDriverPreview = (e) => {
     setSelectedCnicFrontDriver(null);
     setInputDriverCnicFront("");
     setInputDriverCnicFrontExt("");
-  }
+  };
 
   const handleCnicBackDriverPreview = (e) => {
     setSelectedCnicBackDriver(null);
     setInputDriverCnicBack("");
     setInputDriverCnicBackExt("");
-  }
+  };
 
   const handleCnicFrontDriver = (e) => {
     const file = e.target.files[0];
@@ -1034,13 +1068,11 @@ const DriverRegistration = () => {
         const reader = new FileReader();
         reader.onload = () => {
           setInputDriverCnicFront(reader.result.split(",")[1]);
-          setInputDriverCnicFrontExt(file.name.split('.').pop());
+          setInputDriverCnicFrontExt(file.name.split(".").pop());
           setSelectedCnicFrontDriver(file);
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -1059,13 +1091,11 @@ const DriverRegistration = () => {
         const reader = new FileReader();
         reader.onload = () => {
           setInputDriverCnicBack(reader.result.split(",")[1]);
-          setInputDriverCnicBackExt(file.name.split('.').pop());
+          setInputDriverCnicBackExt(file.name.split(".").pop());
           setSelectedCnicBackDriver(file);
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -1080,18 +1110,15 @@ const DriverRegistration = () => {
     const file = e.target.files[0];
     const maxSize = 5120000;
     if (file) {
-
       if (file.size <= maxSize) {
         const reader = new FileReader();
         reader.onload = () => {
           setSelectedImageLicenseFront(reader.result.split(",")[1]);
-          setSelectedImageLicenseFrontExt(file.name.split('.').pop());
+          setSelectedImageLicenseFrontExt(file.name.split(".").pop());
           setSelectedLicenseFrontDriver(file);
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -1106,18 +1133,15 @@ const DriverRegistration = () => {
     const file = e.target.files[0];
     const maxSize = 51200000;
     if (file) {
-
       if (file.size <= maxSize) {
         const reader = new FileReader();
         reader.onload = () => {
           setSelectedImageLicenseBackExt(reader.result.split(",")[1]);
-          setSelectedImageLicenseBackExt(file.name.split('.').pop());
+          setSelectedImageLicenseBackExt(file.name.split(".").pop());
           setSelectedLicenseBackDriver(file);
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -1132,18 +1156,15 @@ const DriverRegistration = () => {
     const file = e.target.files[0];
     const maxSize = 5120000;
     if (file) {
-
       if (file.size <= maxSize) {
         const reader = new FileReader();
         reader.onload = () => {
           setSelectedCarImage(reader.result.split(",")[1]);
-          setSelectedCarImageExt(file.name.split('.').pop());
+          setSelectedCarImageExt(file.name.split(".").pop());
           setSelectedCarPlate(file);
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -1159,7 +1180,6 @@ const DriverRegistration = () => {
   }, [inputDriverType]);
 
   const handleDriverTypeForm = () => {
-
     if (inputDriverType === "I Drive Myself") {
       setInputDriverName("");
       setInputDriverCnicNumber("");
@@ -1216,9 +1236,7 @@ const DriverRegistration = () => {
       setSelectedLicenseFrontDriver(null);
       setSelectedLicenseBackDriver(null);
     }
-
   };
-
 
   // For Modal Open & Close Functionality
   const isValidIBAN = (iban) => {
@@ -1233,9 +1251,11 @@ const DriverRegistration = () => {
 
   const handleCloseStartModal = () => {
     if (markerPositionStart.lat === null && markerPositionStart.lng === null) {
-      displayNotification("warning", "Please select a Starting Location from Map");
-    }
-    else {
+      displayNotification(
+        "warning",
+        "Please select a Starting Location from Map"
+      );
+    } else {
       setShowStartModal(false);
     }
   };
@@ -1246,9 +1266,11 @@ const DriverRegistration = () => {
 
   const handleCloseEndModal = () => {
     if (markerPositionEnd.lat === null && markerPositionEnd.lng === null) {
-      displayNotification("warning", "Please select a Drop-off Location from Map");
-    }
-    else {
+      displayNotification(
+        "warning",
+        "Please select a Drop-off Location from Map"
+      );
+    } else {
       setShowEndModal(false);
     }
   };
@@ -1262,27 +1284,50 @@ const DriverRegistration = () => {
     profession,
     education,
     universityName,
-    universityAddress
+    universityAddress,
   ];
 
   const requiredFieldsLogin = [
-    cityStartId, provinceStartId,
-    locationStartString, markerPositionStart,
-    cityEndId, provinceEndId,
-    locationEndString, markerPositionEnd,
-    selectedHomeTime, selectedOfficeTime, daysSelected,
-    martialStatus, cnic, selectedDateFormat,
-    gender, preferredGender, profession,
-    education, cnicFrontExt, cnicFront,
-    cnicBackExt, cnicBack, pictureExt, picture,
-    universityName, universityAddress
+    cityStartId,
+    provinceStartId,
+    locationStartString,
+    markerPositionStart,
+    cityEndId,
+    provinceEndId,
+    locationEndString,
+    markerPositionEnd,
+    selectedHomeTime,
+    selectedOfficeTime,
+    daysSelected,
+    martialStatus,
+    cnic,
+    selectedDateFormat,
+    gender,
+    preferredGender,
+    profession,
+    education,
+    cnicFrontExt,
+    cnicFront,
+    cnicBackExt,
+    cnicBack,
+    pictureExt,
+    picture,
+    universityName,
+    universityAddress,
   ];
 
   const requiredFieldsDriver = [
-    selectedCarBrand, selectedCarCC,
-    selectedModelName, selectedRegYear, selectedRegNumber,
-    selectedManYear, selectedCarAC, selectedCarImage,
-    selectedCarImageExt, selectedSeat, preferredGender,
+    selectedCarBrand,
+    selectedCarCC,
+    selectedModelName,
+    selectedRegYear,
+    selectedRegNumber,
+    selectedManYear,
+    selectedCarAC,
+    selectedCarImage,
+    selectedCarImageExt,
+    selectedSeat,
+    preferredGender,
     // selectedMidRoutePartner,
     // inputDrivingLicenseMySelf,
     // inputValidUptoMySelf, inputPlaceIssueMySelf
@@ -1301,21 +1346,28 @@ const DriverRegistration = () => {
       setIsLoading(true); // Start loading
 
       try {
-        if (PersonalFormFields.every(
-          (field) => field !== "" && field !== null && field !== undefined
-        )) {
-          if (locationStartString === locationEndString || markerPositionStart === markerPositionEnd) {
-            displayNotification("warning", "Please select different starting and drop-off point");
+        if (
+          PersonalFormFields.every(
+            (field) => field !== "" && field !== null && field !== undefined
+          )
+        ) {
+          if (
+            locationStartString === locationEndString ||
+            markerPositionStart === markerPositionEnd
+          ) {
+            displayNotification(
+              "warning",
+              "Please select different starting and drop-off point"
+            );
             setIsLoading(false);
-          }
-          else {
+          } else {
             await PersonalForm();
           }
         }
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
-        console.error('API call error:', error);
+        console.error("API call error:", error);
       }
     } else {
       setIsLoading(false);
@@ -1369,14 +1421,18 @@ const DriverRegistration = () => {
   // };
 
   const handleDriver = async () => {
-    if (requiredFieldsDriver.every(field => field !== "" && field !== null && field !== undefined)) {
+    if (
+      requiredFieldsDriver.every(
+        (field) => field !== "" && field !== null && field !== undefined
+      )
+    ) {
       setIsLoading(true); // Start loading
       try {
         await handleLogin();
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
-        console.error('API call error:', error);
+        console.error("API call error:", error);
       }
     } else {
       setIsLoading(false);
@@ -1424,7 +1480,7 @@ const DriverRegistration = () => {
           area_id: locationEndStringId,
           area_google: {
             name: locationEndString,
-            place_id: "ChIJGQ_wq43t3zgRel4CwxgjgQs"
+            place_id: "ChIJGQ_wq43t3zgRel4CwxgjgQs",
           },
           name: myStringEnd,
           //  "land_mark" : "Clock Tower"
@@ -1434,19 +1490,16 @@ const DriverRegistration = () => {
           return_time_id: selectedOfficeTime,
         },
         days: daysSelected,
-      }
-      const response = await fetch(
-        `${API_URL}/api/v1/registration/location`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json',
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
+      };
+      const response = await fetch(`${API_URL}/api/v1/registration/location`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(body),
+      });
 
       console.log("Location Form Body:", body);
 
@@ -1457,14 +1510,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position: 'top',
+          position: "top",
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
           },
-        }
-        )
+        });
       }
     } catch (error) {
       console.log(error.message);
@@ -1484,20 +1536,17 @@ const DriverRegistration = () => {
         interests: null,
         university_address: universityAddress,
         university_name: universityName,
-        user_type: 299
-      }
-      const response = await fetch(
-        `${API_URL}/api/v1/registration/personal`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json',
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
+        user_type: 299,
+      };
+      const response = await fetch(`${API_URL}/api/v1/registration/personal`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(body),
+      });
 
       console.log("Personal Form Body:", body);
 
@@ -1537,14 +1586,14 @@ const DriverRegistration = () => {
       const body = {
         cnic_front_image_ext: cnicFrontExt,
         cnic_front_image: cnicFront,
-      }
+      };
       const response = await fetch(
         `${API_URL}/api/v1/registration/store-images/cnic_front`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json',
+            Accept: "application/json",
             Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(body),
@@ -1560,14 +1609,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position: 'top',
+          position: "top",
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
           },
-        }
-        )
+        });
       }
     } catch (error) {
       console.log(error.message);
@@ -1579,14 +1627,14 @@ const DriverRegistration = () => {
       const body = {
         cnic_back_image_ext: cnicBackExt,
         cnic_back_image: cnicBack,
-      }
+      };
       const response = await fetch(
         `${API_URL}/api/v1/registration/store-images/cnic_back`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json',
+            Accept: "application/json",
             Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(body),
@@ -1602,14 +1650,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position: 'top',
+          position: "top",
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
           },
-        }
-        )
+        });
       }
     } catch (error) {
       console.log(error.message);
@@ -1621,14 +1668,14 @@ const DriverRegistration = () => {
       const body = {
         picture_image_ext: pictureExt,
         picture: picture,
-      }
+      };
       const response = await fetch(
         `${API_URL}/api/v1/registration/store-images/picture`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json',
+            Accept: "application/json",
             Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(body),
@@ -1636,14 +1683,14 @@ const DriverRegistration = () => {
       );
       const registrationSuccessful = () => {
         Swal.fire({
-          position: 'top',
-          title: 'Congratulations!',
-          text: 'Registration Form Submited Successfully',
-          icon: 'success',
+          position: "top",
+          title: "Congratulations!",
+          text: "Registration Form Submited Successfully",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonText: 'OK',
+          confirmButtonText: "OK",
           customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
           },
         });
       };
@@ -1658,14 +1705,13 @@ const DriverRegistration = () => {
       } else {
         // alert("Error: " + jsonresponse.message);
         Swal.fire({
-          position: 'top',
+          position: "top",
           // icon: 'error',
           text: `${jsonresponse.message}`,
           customClass: {
-            confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
+            confirmButton: "swal-custom", // Apply custom CSS class to the OK button
           },
-        }
-        )
+        });
       }
     } catch (error) {
       console.log(error.message);
@@ -1705,20 +1751,17 @@ const DriverRegistration = () => {
         license_front_image: selectedImageLicenseFront,
         license_back_image: selectedImageLicenseBack,
         license_front_image_ext: selectedImageLicenseFrontExt,
-        license_back_image_ext: selectedImageLicenseBackExt
-      }
-      const response = await fetch(
-        `${API_URL}/api/v1/registration/vehicle`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json',
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
+        license_back_image_ext: selectedImageLicenseBackExt,
+      };
+      const response = await fetch(`${API_URL}/api/v1/registration/vehicle`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(body),
+      });
 
       console.log("Driver Form Body:", body);
 
@@ -1740,8 +1783,7 @@ const DriverRegistration = () => {
         // )
         displayNotification("error", `${jsonresponse.message}`);
         setIsLoading(false);
-      }
-      else if (jsonresponse.statusCode === 500) {
+      } else if (jsonresponse.statusCode === 500) {
         // Swal.fire({
         //   position: 'top',
         //   // icon: 'error',
@@ -1767,20 +1809,17 @@ const DriverRegistration = () => {
           bank_account_number: inputBankAccount,
           easy_paisa_number: inputEasyPaisa,
           jazz_cash_number: inputJazzCash,
-          raast_number: inputRaastID
-        }
-        const response = await fetch(
-          `${API_URL}/api/v1/registration/driver`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              'Accept': 'application/json',
-              Authorization: `Bearer ${userToken}`,
-            },
-            body: JSON.stringify(body),
-          }
-        );
+          raast_number: inputRaastID,
+        };
+        const response = await fetch(`${API_URL}/api/v1/registration/driver`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        });
 
         console.log("Payment Form Body:", body);
 
@@ -1800,10 +1839,12 @@ const DriverRegistration = () => {
           //     confirmButton: 'swal-custom', // Apply custom CSS class to the OK button
           //   },
           // });
-          displayNotification("success", "Driver Registration Form Submitted Successfully");
+          displayNotification(
+            "success",
+            "Driver Registration Form Submitted Successfully"
+          );
           route();
-        }
-        else if (jsonresponse.statusCode === 500) {
+        } else if (jsonresponse.statusCode === 500) {
           // alert("Error: " + jsonresponse.message);
           // Swal.fire({
           //   position: 'top',
@@ -1816,8 +1857,7 @@ const DriverRegistration = () => {
           // )
           displayNotification("error", `${jsonresponse.message}`);
         }
-      }
-      else {
+      } else {
         // Swal.fire({
         //   position: 'top',
         //   // icon: 'warning',
@@ -1838,12 +1878,11 @@ const DriverRegistration = () => {
 
   return (
     <>
-
       {!showDriverForm && (
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
-              <div className="area" >
+              <div className="area">
                 <ul className="circles">
                   <li></li>
                   <li></li>
@@ -1860,40 +1899,49 @@ const DriverRegistration = () => {
                   <li></li>
                   <li></li>
                 </ul>
-              </div >
+              </div>
               <div className="row justify-content-center">
-                <div className="col-md-6 bg-white mt-5 mb-5"  >
-
+                <div className="col-md-6 bg-white mt-5 mb-5">
                   <div
                     className="row shadow form-color-header"
-                  // style={{ backgroundColor: '#1F5F5B' }}
+                    // style={{ backgroundColor: '#1F5F5B' }}
                   >
                     <h1 className="text-center text-white py-4">
                       Registration Form 1/2
                     </h1>
                   </div>
-                
-                  <Form className="p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}>
 
+                  <Form
+                    className="p-3 top-form"
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleSubmit}
+                  >
                     <div className="row mb-3 shadow shadow-sm ">
                       <div
                         className="col-md-12 px-2 py-3 form-color-field"
-                      // style={{ backgroundColor: "#cddbd9" }}
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           STARTING POINT
-                          <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
+                          <Tooltip
+                            title={
+                              <h6 className="px-2">
+                                {
+                                  "You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."
+                                }
+                              </h6>
+                            }
+                          >
                             <Link
                               // to='/notification'
-                              className='mx-1 h-15px d-inline-block'
+                              className="mx-1 h-15px d-inline-block"
                               style={{ cursor: "pointer" }}
                             >
                               <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                             </Link>
                           </Tooltip>
                         </h2>
-
-
 
                         <Form.Group
                           as={Col}
@@ -1911,7 +1959,7 @@ const DriverRegistration = () => {
                                 cursor: "pointer",
                                 textDecoration: "underline",
                               }}
-                            // onClick={AddNewStart}
+                              // onClick={AddNewStart}
                             >
                               {/* <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
                                 <Link
@@ -1922,8 +1970,8 @@ const DriverRegistration = () => {
                                   <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip> */}
-
-                            </p></div>
+                            </p>
+                          </div>
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
@@ -1942,21 +1990,27 @@ const DriverRegistration = () => {
                               )
                             )}
                           </Form.Select>
-
-
                         </Form.Group>
 
-
-                        <Form.Group as={Col} md={cityStartId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
-                          <Form.Label className="text-black fs-6">City</Form.Label>
+                        <Form.Group
+                          as={Col}
+                          md={cityStartId ? "12" : "12"}
+                          controlId="validationCustom02"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-black fs-6">
+                            City
+                          </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
                             value={cityStartId}
                             onChange={(e) => {
-                              const selectedOption = e.target.options[e.target.selectedIndex];
+                              const selectedOption =
+                                e.target.options[e.target.selectedIndex];
                               const selectedValue = selectedOption.value;
-                              const selectedId = selectedOption.getAttribute("data-id");
+                              const selectedId =
+                                selectedOption.getAttribute("data-id");
 
                               // Set the ID
                               setCityStartId(selectedValue);
@@ -2108,21 +2162,28 @@ const DriverRegistration = () => {
                             )} */}
                           </>
                         )}
-
                       </div>
                     </div>
 
                     <div className="row mb-3 shadow shadow-sm ">
                       <div
                         className="col-md-12 px-2 py-3 form-color-field"
-                      // style={{ backgroundColor: "#cddbd9" }}
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           DROP-OFF POINT
-                          <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
+                          <Tooltip
+                            title={
+                              <h6 className="px-2">
+                                {
+                                  "You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."
+                                }
+                              </h6>
+                            }
+                          >
                             <Link
                               // to='/notification'
-                              className='mx-1 h-15px d-inline-block'
+                              className="mx-1 h-15px d-inline-block"
                               style={{ cursor: "pointer" }}
                             >
                               <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
@@ -2135,7 +2196,6 @@ const DriverRegistration = () => {
                           controlId="validationCustom57"
                           className="mb-2"
                         >
-
                           <div className="d-flex justify-content-between align-items-center">
                             <Form.Label className="text-black fs-6">
                               Province
@@ -2146,7 +2206,7 @@ const DriverRegistration = () => {
                                 cursor: "pointer",
                                 textDecoration: "underline",
                               }}
-                            // onClick={AddNewStart}
+                              // onClick={AddNewStart}
                             >
                               {/* <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
                                 <Link
@@ -2157,8 +2217,8 @@ const DriverRegistration = () => {
                                   <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip> */}
-
-                            </p></div>
+                            </p>
+                          </div>
 
                           <Form.Select
                             aria-label="Default select example"
@@ -2179,16 +2239,25 @@ const DriverRegistration = () => {
                             )}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md={cityEndId ? "12" : "12"} controlId="validationCustom58" className="mb-2">
-                          <Form.Label className="text-black fs-6">City</Form.Label>
+                        <Form.Group
+                          as={Col}
+                          md={cityEndId ? "12" : "12"}
+                          controlId="validationCustom58"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-black fs-6">
+                            City
+                          </Form.Label>
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
                             value={cityEndId}
                             onChange={(e) => {
-                              const selectedOption = e.target.options[e.target.selectedIndex];
+                              const selectedOption =
+                                e.target.options[e.target.selectedIndex];
                               const selectedValue = selectedOption.value;
-                              const selectedId = selectedOption.getAttribute("data-id");
+                              const selectedId =
+                                selectedOption.getAttribute("data-id");
 
                               // Set the ID
                               setCityEndId(selectedValue);
@@ -2215,8 +2284,6 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-
-
 
                         {cityEndId && (
                           <>
@@ -2295,8 +2362,6 @@ const DriverRegistration = () => {
                               </Form.Group>
                             )} */}
 
-
-
                             {/* {addNewEnd && (
                               <Form.Group
                                 as={Col}
@@ -2331,13 +2396,16 @@ const DriverRegistration = () => {
                             )} */}
                           </>
                         )}
-
                       </div>
                     </div>
                     <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                      <Modal.Header className="d-block" >
+                      <Modal.Header className="d-block">
                         <Modal.Title>Select Starting Location</Modal.Title>
-                        <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point.</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">
+                          To get maximum suggestions/matches please select
+                          prominent landmark or community/society gate as a
+                          pickup point.
+                        </Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -2345,7 +2413,10 @@ const DriverRegistration = () => {
                             <GoogleMap
                               zoom={15}
                               center={defaultStartCenter}
-                              mapContainerStyle={{ width: "100%", height: "50vh" }}
+                              mapContainerStyle={{
+                                width: "100%",
+                                height: "50vh",
+                              }}
                               onClick={handleMapClickStart}
                               options={{
                                 types: ["(regions)"],
@@ -2363,16 +2434,24 @@ const DriverRegistration = () => {
                         </Container>
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseStartModal}>
+                        <Button
+                          variant="contained"
+                          className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                          onClick={handleCloseStartModal}
+                        >
                           Select
                         </Button>
                       </Modal.Footer>
                     </Modal>
 
                     <Modal show={showEndModal} onHide={handleCloseEndModal}>
-                      <Modal.Header className="d-block" >
+                      <Modal.Header className="d-block">
                         <Modal.Title>Select Drop-off Location</Modal.Title>
-                        <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
+                        <Modal.Title className="text-danger fs-7">
+                          To get maximum suggestions/matches please select
+                          prominent landmark or community/society gate as a
+                          pickup point
+                        </Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -2383,37 +2462,41 @@ const DriverRegistration = () => {
                               //  defaultStartCenter ? defaultStartCenter : defaultEndCenter
                               // }
                               center={defaultEndCenter}
-                              mapContainerStyle={{ width: "100%", height: "50vh" }}
+                              mapContainerStyle={{
+                                width: "100%",
+                                height: "50vh",
+                              }}
                               onClick={handleMapClickEnd}
                               options={{
                                 types: ["(regions)"],
                                 componentRestrictions: { country: "PK" },
                               }}
                             >
-
                               <MarkerF
                                 position={markerPositionEnd}
                                 icon={{
                                   url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                                 }}
                               />
-
                             </GoogleMap>
                           </Row>
                         </Container>
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant="contained" className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold" onClick={handleCloseEndModal}>
+                        <Button
+                          variant="contained"
+                          className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                          onClick={handleCloseEndModal}
+                        >
                           Select
                         </Button>
                       </Modal.Footer>
                     </Modal>
 
-
                     <div className="row mb-3 shadow shadow-sm">
                       <div
                         className="col-md-12 px-2 py-3 form-color-field"
-                      // style={{ backgroundColor: "#cddbd9" }}
+                        // style={{ backgroundColor: "#cddbd9" }}
                       >
                         <h2 className="text-success mb-3 text-center">
                           Timing
@@ -2424,8 +2507,6 @@ const DriverRegistration = () => {
                           controlId="validationCustomtime1"
                           className="mb-2 mt-3"
                         >
-
-
                           <div className="d-flex justify-content-between align-items-center">
                             <Form.Label className="text-black fs-6">
                               Start Time
@@ -2437,30 +2518,40 @@ const DriverRegistration = () => {
                                 cursor: "pointer",
                                 textDecoration: "underline",
                               }}
-                            // onClick={AddNewStart}
+                              // onClick={AddNewStart}
                             >
-                              <Tooltip title={<h6 className="px-2">{"You can specify the times you are available for commuting by selecting both the start and return times."}</h6>}>
+                              <Tooltip
+                                title={
+                                  <h6 className="px-2">
+                                    {
+                                      "You can specify the times you are available for commuting by selecting both the start and return times."
+                                    }
+                                  </h6>
+                                }
+                              >
                                 <Link
                                   // to='/notification'
-                                  className='mx-1 h-15px d-inline-block'
+                                  className="mx-1 h-15px d-inline-block"
                                   style={{ cursor: "pointer" }}
                                 >
                                   <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip>
-
-                            </p></div>
+                            </p>
+                          </div>
                           <Form.Select
                             aria-label="Default select example"
                             className="text-secondary"
                             value={selectedHomeTime}
                             onChange={(e) => {
-                              const selectedOption = e.target.options[e.target.selectedIndex];
+                              const selectedOption =
+                                e.target.options[e.target.selectedIndex];
                               const selectedValue = selectedOption.value;
-                              const selectedId = selectedOption.getAttribute("data-id");
+                              const selectedId =
+                                selectedOption.getAttribute("data-id");
 
                               // Set the ID
-                              setSelectedHomeTime(selectedValue)
+                              setSelectedHomeTime(selectedValue);
 
                               // Set the value
                               setSelectedHomeTimeValue(selectedId);
@@ -2471,7 +2562,11 @@ const DriverRegistration = () => {
                               Start Time
                             </option>
                             {homeTimeSlots?.map((time) => (
-                              <option key={time.id} value={time.id} data-id={time.time_string}>
+                              <option
+                                key={time.id}
+                                value={time.id}
+                                data-id={time.time_string}
+                              >
                                 {time.time_string}
                               </option>
                             ))}
@@ -2491,7 +2586,9 @@ const DriverRegistration = () => {
                             aria-label="Default select example"
                             className="text-secondary"
                             value={selectedOfficeTime}
-                            onChange={(e) => setSelectedOfficeTime(e.target.value)}
+                            onChange={(e) =>
+                              setSelectedOfficeTime(e.target.value)
+                            }
                             required
                           >
                             <option value="" hidden>
@@ -2506,19 +2603,27 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </div>
                     </div>
-                    <Row className="my-3 form-color-field"
-                    // style={{ border: '1px solid #cddbd9', backgroundColor: "#cddbd9" }}
+                    <Row
+                      className="my-3 form-color-field"
+                      // style={{ border: '1px solid #cddbd9', backgroundColor: "#cddbd9" }}
                     >
-                      <Form.Group as={Col} md="12" controlId="validationCustom10">
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        controlId="validationCustom10"
+                      >
                         <Form.Label className="pt-3 px-3 text-black">
                           I Commute (Select Days)
                         </Form.Label>
                       </Form.Group>
 
-                      <div className="row d-flex px-4" >
+                      <div className="row d-flex px-4">
                         <div className="col">
                           {["checkbox"].map((type) => (
-                            <div key={`inline-${type}`} className="mb-3 d-flex flex-wrap">
+                            <div
+                              key={`inline-${type}`}
+                              className="mb-3 d-flex flex-wrap"
+                            >
                               <FormControlLabel
                                 control={
                                   <Checkbox
@@ -2527,7 +2632,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Monday")}
                                     onChange={handleCheckboxChange}
-                                  // required
+                                    // required
                                   />
                                 }
                                 label="Monday"
@@ -2552,7 +2657,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Tuesday")}
                                     onChange={handleCheckboxChange}
-                                  // required
+                                    // required
                                   />
                                 }
                                 label="Tuesday"
@@ -2577,7 +2682,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Wednesday")}
                                     onChange={handleCheckboxChange}
-                                  // required
+                                    // required
                                   />
                                 }
                                 label="Wednesday"
@@ -2601,7 +2706,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Thursday")}
                                     onChange={handleCheckboxChange}
-                                  // required
+                                    // required
                                   />
                                 }
                                 label="Thursday"
@@ -2625,7 +2730,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Friday")}
                                     onChange={handleCheckboxChange}
-                                  // required
+                                    // required
                                   />
                                 }
                                 label="Friday"
@@ -2641,7 +2746,6 @@ const DriverRegistration = () => {
                                 required
                               /> */}
 
-
                               <FormControlLabel
                                 control={
                                   <Checkbox
@@ -2650,7 +2754,7 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Saturday")}
                                     onChange={handleCheckboxChange}
-                                  // //required
+                                    // //required
                                   />
                                 }
                                 label="Saturday"
@@ -2674,8 +2778,8 @@ const DriverRegistration = () => {
                                     color="success"
                                     checked={daysSelected.includes("Sunday")}
                                     onChange={handleCheckboxChange}
-                                  // required
-                                  // disabled
+                                    // required
+                                    // disabled
                                   />
                                 }
                                 label="Sunday"
@@ -2699,8 +2803,15 @@ const DriverRegistration = () => {
                     {/* {daysSelected} */}
 
                     <Row className="mb-3 py-3 px-3 shadow shadow-sm form-color-field">
-                      <Form.Group as={Col} md="12" controlId="validationCustom11" className="mb-2">
-                        <Form.Label className="fs-6 text-black">My Gender</Form.Label>
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        controlId="validationCustom11"
+                        className="mb-2"
+                      >
+                        <Form.Label className="fs-6 text-black">
+                          My Gender
+                        </Form.Label>
                         <Form.Select
                           aria-label="Default select example"
                           className="text-secondary"
@@ -2708,13 +2819,20 @@ const DriverRegistration = () => {
                           onChange={(e) => setGender(e.target.value)}
                           required
                         >
-                          <option value="" hidden> Gender </option>
+                          <option value="" hidden>
+                            {" "}
+                            Gender{" "}
+                          </option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom12" className="mb-2">
-
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        controlId="validationCustom12"
+                        className="mb-2"
+                      >
                         <div className="d-flex justify-content-between align-items-center">
                           <Form.Label className="fs-6 text-black">
                             Preferred Gender of Travel Partner
@@ -2725,19 +2843,27 @@ const DriverRegistration = () => {
                               cursor: "pointer",
                               textDecoration: "underline",
                             }}
-                          // onClick={AddNewStart}
+                            // onClick={AddNewStart}
                           >
-                            <Tooltip title={<h6 className="px-2">{"You can choose the gender of your travel partner based on your comfort level."}</h6>}>
+                            <Tooltip
+                              title={
+                                <h6 className="px-2">
+                                  {
+                                    "You can choose the gender of your travel partner based on your comfort level."
+                                  }
+                                </h6>
+                              }
+                            >
                               <Link
                                 // to='/notification'
-                                className='mx-1 h-15px d-inline-block'
+                                className="mx-1 h-15px d-inline-block"
                                 style={{ cursor: "pointer" }}
                               >
                                 <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                               </Link>
                             </Tooltip>
-
-                          </p></div>
+                          </p>
+                        </div>
 
                         <Form.Select
                           aria-label="Default select example"
@@ -2746,7 +2872,9 @@ const DriverRegistration = () => {
                           onChange={(e) => setPreferredGender(e.target.value)}
                           required
                         >
-                          <option value="" hidden>Preferred Gender</option>
+                          <option value="" hidden>
+                            Preferred Gender
+                          </option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                           <option value="Both">Both</option>
@@ -2755,16 +2883,22 @@ const DriverRegistration = () => {
                     </Row>
 
                     <Row className="mb-3 py-3 px-3  shadow shadow-sm form-color-field">
-                      <Form.Group as={Col} md="12" controlId="validationCustom13" className="mb-2">
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        controlId="validationCustom13"
+                        className="mb-2"
+                      >
                         <Form.Label className="fs-6 text-black">
                           Date of Birth
                         </Form.Label>
-                        <LocalizationProvider dateAdapter={AdapterDayjs} >
-                          <DatePicker label={
-                            "MM/DD/YY"
-                          }
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DatePicker
+                            label={"MM/DD/YY"}
                             className="bg-white"
-                            slotProps={{ textField: { size: "small", color: "success" } }}
+                            slotProps={{
+                              textField: { size: "small", color: "success" },
+                            }}
                             sx={{ width: "100%" }}
                             value={selectedDate}
                             onChange={handleDateChange}
@@ -2776,7 +2910,12 @@ const DriverRegistration = () => {
 
                       {/* {selectedDate} */}
 
-                      <Form.Group as={Col} md="12" controlId="validationCustom14" className="mb-2">
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        controlId="validationCustom14"
+                        className="mb-2"
+                      >
                         <Form.Label className="fs-6 text-black">
                           Marital Status
                         </Form.Label>
@@ -2787,12 +2926,19 @@ const DriverRegistration = () => {
                           onChange={(e) => setMartialStatus(e.target.value)}
                           required
                         >
-                          <option value="" hidden>Marital Status</option>
+                          <option value="" hidden>
+                            Marital Status
+                          </option>
                           <option value="Married">Married</option>
                           <option value="Single">Single</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom15" className="mb-2">
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        controlId="validationCustom15"
+                        className="mb-2"
+                      >
                         <Form.Label className="fs-6 text-black">
                           Education
                         </Form.Label>
@@ -2803,7 +2949,9 @@ const DriverRegistration = () => {
                           onChange={(e) => setEducation(e.target.value)}
                           required
                         >
-                          <option value="" hidden>Education</option>
+                          <option value="" hidden>
+                            Education
+                          </option>
                           <option value="Phd">Phd</option>
                           <option value="Master">Master</option>
                           <option value="Bachelor">Bachelor</option>
@@ -2817,14 +2965,19 @@ const DriverRegistration = () => {
                           <option value="Primary">Primary</option>
                         </Form.Select>
                       </Form.Group>
-                      <Form.Group as={Col} md="12" controlId="validationCustom16" className="mb-2">
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        controlId="validationCustom16"
+                        className="mb-2"
+                      >
                         <Form.Label className="fs-6 text-black">
                           Profession
                         </Form.Label>
                         <Form.Control
                           required
                           type="text"
-                          className={`${isValidProfession ? '' : 'is-invalid'}`}
+                          className={`${isValidProfession ? "" : "is-invalid"}`}
                           placeholder="Profession (Engineer, Doctor, etc)"
                           value={profession}
                           onChange={handleProfessionChange}
@@ -2841,20 +2994,27 @@ const DriverRegistration = () => {
                     <Row className="mb-3">
                     </Row> */}
                     <Row className="mb-3 py-3 px-3 shadow shadow-sm form-color-field">
-
-                      <Form.Group as={Col} md="12" controlId="validationCustom17" className="mb-2">
-                        <Form.Label className="fs-6 text-black">CNIC</Form.Label>
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        controlId="validationCustom17"
+                        className="mb-2"
+                      >
+                        <Form.Label className="fs-6 text-black">
+                          CNIC
+                        </Form.Label>
                         <Form.Control
                           required
                           type="text"
-                          className={`${isValidCnic ? '' : 'is-invalid'}`}
+                          className={`${isValidCnic ? "" : "is-invalid"}`}
                           placeholder="1234512345671"
                           value={cnic}
                           onChange={handleCnicChange}
                         />
                         {!isValidCnic && (
                           <div className="invalid-feedback">
-                            Please enter a valid CNIC without dashes in the format 1234512345671.
+                            Please enter a valid CNIC without dashes in the
+                            format 1234512345671.
                           </div>
                         )}
                       </Form.Group>
@@ -2874,30 +3034,48 @@ const DriverRegistration = () => {
                             style={{
                               cursor: "pointer",
                               textDecoration: "underline",
-
                             }}
-
                           >
-                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                            <Tooltip
+                              title={
+                                <h6 className="px-2">
+                                  {
+                                    "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                  }
+                                </h6>
+                              }
+                            >
                               <Link
-
-                                className='mx-1 h-15px d-inline-block'
+                                className="mx-1 h-15px d-inline-block"
                                 style={{ cursor: "pointer" }}
                               >
                                 <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                               </Link>
                             </Tooltip>
-
-                          </p></div>
+                          </p>
+                        </div>
                         {selectedCnicFront ? (
-
-                          <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                          <div
+                            className="alert alert-light py-2 alert-dismissible fade show"
+                            role="alert"
+                          >
                             {selectedCnicFront.name}
-                            <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontPreview}></button>
+                            <button
+                              type="button"
+                              className="btn-close py-2 mt-1"
+                              data-bs-dismiss="alert"
+                              aria-label="Close"
+                              onClick={handleCnicFrontPreview}
+                            ></button>
                           </div>
                         ) : (
-                          <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFront} />)}
-
+                          <Form.Control
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            onChange={handleCnicFront}
+                          />
+                        )}
                       </Form.Group>
                       <Form.Group
                         controlId="formFile"
@@ -2915,32 +3093,48 @@ const DriverRegistration = () => {
                             style={{
                               cursor: "pointer",
                               textDecoration: "underline",
-
                             }}
-
                           >
-                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                            <Tooltip
+                              title={
+                                <h6 className="px-2">
+                                  {
+                                    "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                  }
+                                </h6>
+                              }
+                            >
                               <Link
-
-                                className='mx-1 h-15px d-inline-block'
+                                className="mx-1 h-15px d-inline-block"
                                 style={{ cursor: "pointer" }}
                               >
                                 <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                               </Link>
                             </Tooltip>
-
-                          </p></div>
+                          </p>
+                        </div>
                         {selectedCnicBack ? (
-
-                          <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                          <div
+                            className="alert alert-light py-2 alert-dismissible fade show"
+                            role="alert"
+                          >
                             {selectedCnicBack.name}
-                            <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackPreview}></button>
+                            <button
+                              type="button"
+                              className="btn-close py-2 mt-1"
+                              data-bs-dismiss="alert"
+                              aria-label="Close"
+                              onClick={handleCnicBackPreview}
+                            ></button>
                           </div>
                         ) : (
-                          <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBack} />
+                          <Form.Control
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            onChange={handleCnicBack}
+                          />
                         )}
-
-
                       </Form.Group>
                       <Form.Group
                         controlId="formFile"
@@ -2957,44 +3151,67 @@ const DriverRegistration = () => {
                             style={{
                               cursor: "pointer",
                               textDecoration: "underline",
-
                             }}
-
                           >
-                            <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your recent picture in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 5MB."}</h6>}>
+                            <Tooltip
+                              title={
+                                <h6 className="px-2">
+                                  {
+                                    "Please submit a high-quality image of your recent picture in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 5MB."
+                                  }
+                                </h6>
+                              }
+                            >
                               <Link
-
-                                className='mx-1 h-15px d-inline-block'
+                                className="mx-1 h-15px d-inline-block"
                                 style={{ cursor: "pointer" }}
                               >
                                 <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                               </Link>
                             </Tooltip>
-
-                          </p></div>
+                          </p>
+                        </div>
                         {selectedFile ? (
-
-                          <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                          <div
+                            className="alert alert-light py-2 alert-dismissible fade show"
+                            role="alert"
+                          >
                             {selectedFile.name}
-                            <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handlePicturePreview}></button>
+                            <button
+                              type="button"
+                              className="btn-close py-2 mt-1"
+                              data-bs-dismiss="alert"
+                              aria-label="Close"
+                              onClick={handlePicturePreview}
+                            ></button>
                           </div>
                         ) : (
-                          <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handlePicture} />
+                          <Form.Control
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            onChange={handlePicture}
+                          />
                         )}
-
                       </Form.Group>
                     </Row>
 
                     <Row className="mb-3 py-3 px-3 shadow shadow-sm form-color-field">
-
-                      <Form.Group as={Col} md="12" className="mb-2" controlId="validationCustom21">
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        className="mb-2"
+                        controlId="validationCustom21"
+                      >
                         <Form.Label style={{ color: "#000" }}>
                           University Name
                         </Form.Label>
                         <Form.Control
                           required
                           type="text"
-                          className={` ${isValidUniversityName ? '' : 'is-invalid'}`}
+                          className={` ${
+                            isValidUniversityName ? "" : "is-invalid"
+                          }`}
                           placeholder="Enter your university name"
                           value={universityName}
                           onChange={handleUniversityNameChange}
@@ -3005,14 +3222,21 @@ const DriverRegistration = () => {
                           </div>
                         )}
                       </Form.Group>
-                      <Form.Group as={Col} md="12" className="mb-2" controlId="validationCustom22">
+                      <Form.Group
+                        as={Col}
+                        md="12"
+                        className="mb-2"
+                        controlId="validationCustom22"
+                      >
                         <Form.Label style={{ color: "#000" }}>
                           University Address
                         </Form.Label>
                         <Form.Control
                           required
                           type="text"
-                          className={` ${isValidUniversityAddress ? '' : 'is-invalid'}`}
+                          className={` ${
+                            isValidUniversityAddress ? "" : "is-invalid"
+                          }`}
                           placeholder="Enter your university address"
                           value={universityAddress}
                           onChange={handleUniversityAddressChange}
@@ -3038,7 +3262,7 @@ const DriverRegistration = () => {
                         onClick={() => {
                           setShowDriverForm(true);
                         }}
-                      // disabled={isLoading}
+                        // disabled={isLoading}
                       >
                         Next
                         {/* {isLoading ? (
@@ -3051,12 +3275,10 @@ const DriverRegistration = () => {
                       </Button>
                     </Stack>
                   </Form>
-
                 </div>
               </div>
             </div>
           </div>
-
         </>
       )}
 
@@ -3064,7 +3286,7 @@ const DriverRegistration = () => {
         <>
           <div className="main-bg">
             <div className="containter p-5 position-relative">
-              <div className="area" >
+              <div className="area">
                 <ul className="circles">
                   <li></li>
                   <li></li>
@@ -3081,34 +3303,39 @@ const DriverRegistration = () => {
                   <li></li>
                   <li></li>
                 </ul>
-              </div >
+              </div>
               <div className="row justify-content-center">
                 <div className="col-md-6 bg-white  mt-5 mb-5">
                   <div
                     className="row shadow form-color-header"
-                  // style={{ backgroundColor: '#1F5F5B' }}
+                    // style={{ backgroundColor: '#1F5F5B' }}
                   >
-                    <h1
-                      className="text-center text-white py-4"
-
-                    >
+                    <h1 className="text-center text-white py-4">
                       {" "}
                       Registration Form 2/2
                     </h1>{" "}
                   </div>
-                 
+
                   <Form
-                    className=" p-3 top-form" noValidate validated={validated} onSubmit={handleSubmit}
+                    className=" p-3 top-form"
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleSubmit}
                   >
                     <div className="row mb-3 shadow shadow-sm">
-                      <div
-                        className="col-md-12 px-2 py-3 form-color-field"
-                      >
+                      <div className="col-md-12 px-2 py-3 form-color-field">
                         <h2 className="text-success mb-3 text-center">
                           Car Details
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom18" className="mb-2">
-                          <Form.Label className="text-dark fs-6">Car Brand</Form.Label>
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom18"
+                          className="mb-2"
+                        >
+                          <Form.Label className="text-dark fs-6">
+                            Car Brand
+                          </Form.Label>
                           <Form.Control
                             required
                             type="text"
@@ -3143,7 +3370,12 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select> */}
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom19" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom19"
+                          className="mb-2"
+                        >
                           <Form.Label className="text-dark fs-6">
                             Model Name
                           </Form.Label>
@@ -3152,12 +3384,19 @@ const DriverRegistration = () => {
                             type="text"
                             className="text-secondary"
                             value={selectedModelName}
-                            onChange={(e) => setSelectedModelName(e.target.value)}
+                            onChange={(e) =>
+                              setSelectedModelName(e.target.value)
+                            }
                             placeholder="Model Name (Civic, City etc)"
                             defaultValue=""
                           />
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom20" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom20"
+                          className="mb-2"
+                        >
                           <Form.Label className="text-dark fs-6">
                             Manufacturing Year
                           </Form.Label>
@@ -3168,7 +3407,9 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedManYear(e.target.value)}
                             required
                           >
-                            <option value="" hidden>Manufacturing Year</option>
+                            <option value="" hidden>
+                              Manufacturing Year
+                            </option>
                             {manYear?.map((man) => (
                               <option key={man.id} value={man.car_year_ranges}>
                                 {man.car_year_ranges}
@@ -3176,7 +3417,12 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom21" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom21"
+                          className="mb-2"
+                        >
                           <Form.Label className="text-dark fs-6">
                             My Car has AC
                           </Form.Label>
@@ -3187,12 +3433,19 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedCarAC(e.target.value)}
                             required
                           >
-                            <option value="" hidden>Select from Dropdown</option>
+                            <option value="" hidden>
+                              Select from Dropdown
+                            </option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group as={Col} md="12" controlId="validationCustom22" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom22"
+                          className="mb-2"
+                        >
                           <Form.Label className="text-dark fs-6">
                             Car CC
                           </Form.Label>
@@ -3203,7 +3456,9 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedCarCC(e.target.value)}
                             required
                           >
-                            <option value="" hidden>Select Car CC</option>
+                            <option value="" hidden>
+                              Select Car CC
+                            </option>
                             {carCC?.map((car) => (
                               <option key={car.id} value={car.car_cc}>
                                 {car.car_cc}
@@ -3211,8 +3466,7 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group controlId="formFile" as={Col} md="12"
-                        >
+                        <Form.Group controlId="formFile" as={Col} md="12">
                           <div className="d-flex justify-content-between align-items-center pt-1">
                             <Form.Label className="text-dark fs-6">
                               Upload Car Image with visible number plate
@@ -3222,26 +3476,39 @@ const DriverRegistration = () => {
                               style={{
                                 cursor: "pointer",
                                 textDecoration: "underline",
-
                               }}
-
                             >
-                              <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your car image in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 5MB."}</h6>}>
+                              <Tooltip
+                                title={
+                                  <h6 className="px-2">
+                                    {
+                                      "Please submit a high-quality image of your car image in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 5MB."
+                                    }
+                                  </h6>
+                                }
+                              >
                                 <Link
-
-                                  className='mx-1 h-15px d-inline-block'
+                                  className="mx-1 h-15px d-inline-block"
                                   style={{ cursor: "pointer" }}
                                 >
                                   <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                 </Link>
                               </Tooltip>
-
-                            </p></div>
+                            </p>
+                          </div>
                           {selectedCarPlate ? (
-
-                            <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                            <div
+                              className="alert alert-light py-2 alert-dismissible fade show"
+                              role="alert"
+                            >
                               {selectedCarPlate.name}
-                              <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCarPlatePreview}></button>
+                              <button
+                                type="button"
+                                className="btn-close py-2 mt-1"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                                onClick={handleCarPlatePreview}
+                              ></button>
                             </div>
                           ) : (
                             <Form.Control
@@ -3260,13 +3527,16 @@ const DriverRegistration = () => {
                     </div>
 
                     <div className="row mb-3 shadow shadow-sm">
-                      <div
-                        className="col-md-12 px-2 py-3 form-color-field"
-                      >
+                      <div className="col-md-12 px-2 py-3 form-color-field">
                         <h2 className="text-success mb-3 text-center">
                           Car Registration
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom23" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom23"
+                          className="mb-2"
+                        >
                           <Form.Label className="text-dark fs-6">
                             Registration Year
                           </Form.Label>
@@ -3277,7 +3547,9 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedRegYear(e.target.value)}
                             required
                           >
-                            <option value="" hidden>Registration Year</option>
+                            <option value="" hidden>
+                              Registration Year
+                            </option>
                             {filteredRegYears.map((reg) => (
                               <option key={reg.id} value={reg.car_year_ranges}>
                                 {reg.car_year_ranges}
@@ -3304,7 +3576,12 @@ const DriverRegistration = () => {
                             ))}
                           </Form.Select>
                         </Form.Group> */}
-                        <Form.Group as={Col} md="12" controlId="validationCustom25" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom25"
+                          className="mb-2"
+                        >
                           <Form.Label className="text-dark fs-6">
                             Registration Number
                           </Form.Label>
@@ -3313,7 +3590,9 @@ const DriverRegistration = () => {
                             type="text"
                             className="text-secondary"
                             value={selectedRegNumber}
-                            onChange={(e) => setSelectedRegNumber(e.target.value)}
+                            onChange={(e) =>
+                              setSelectedRegNumber(e.target.value)
+                            }
                             placeholder="Registration Number"
                             defaultValue=""
                           />
@@ -3322,14 +3601,16 @@ const DriverRegistration = () => {
                     </div>
 
                     <div className="row mb-3 shadow shadow-sm">
-                      <div
-                        className="col-md-12 px-2 py-3 form-color-field"
-
-                      >
+                      <div className="col-md-12 px-2 py-3 form-color-field">
                         <h2 className="text-success mb-3 text-center">
                           Available Seats
                         </h2>
-                        <Form.Group as={Col} md="12" controlId="validationCustom26" className="mb-2">
+                        <Form.Group
+                          as={Col}
+                          md="12"
+                          controlId="validationCustom26"
+                          className="mb-2"
+                        >
                           <Form.Label className="text-dark fs-6">
                             Seats Available
                           </Form.Label>
@@ -3340,7 +3621,9 @@ const DriverRegistration = () => {
                             onChange={(e) => setSelectedSeat(e.target.value)}
                             required
                           >
-                            <option value="" hidden>Seats Available</option>
+                            <option value="" hidden>
+                              Seats Available
+                            </option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -3364,7 +3647,8 @@ const DriverRegistration = () => {
                             <option value="Both">Both</option>
                           </Form.Select>
                         </Form.Group> */}
-                      </div></div>
+                      </div>
+                    </div>
 
                     {/* <div className="row mb-3 shadow shadow-sm">
                       <div
@@ -3410,9 +3694,7 @@ const DriverRegistration = () => {
                       </div>
                     </div> */}
 
-
-
-                    <Row >
+                    <Row>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>Car Brand</Form.Label>
                         <Form.Select
@@ -3432,7 +3714,6 @@ const DriverRegistration = () => {
                           ))}
                         </Form.Select>
                       </Form.Group> */}
-
 
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>
@@ -3469,7 +3750,7 @@ const DriverRegistration = () => {
                         />
                       </Form.Group> */}
                     </Row>
-                    <Row >
+                    <Row>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>
                           Manufacturing Year
@@ -3510,7 +3791,7 @@ const DriverRegistration = () => {
                       </Form.Group> */}
                     </Row>
 
-                    <Row >
+                    <Row>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>
                           Registration Car Year Ranges
@@ -3534,7 +3815,7 @@ const DriverRegistration = () => {
 
                     {/* {selectedCarYearRanges} */}
 
-                    <Row >
+                    <Row>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>
                           Registeration Number
@@ -3566,7 +3847,7 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group> */}
                     </Row>
-                    <Row >
+                    <Row>
                       {/* <Form.Group
                         controlId="formFile"
                         as={Col}
@@ -3604,7 +3885,7 @@ const DriverRegistration = () => {
 
                     {/* {selectedCarCC} */}
 
-                    <Row >
+                    <Row>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>
                           Seats Available
@@ -3641,8 +3922,7 @@ const DriverRegistration = () => {
                         </Form.Select>
                       </Form.Group> */}
                     </Row>
-                    <Row >
-
+                    <Row>
                       {/* <Form.Group as={Col} md="6" controlId="validationCustom01">
                         <Form.Label style={{ color: "#000" }}>
                           I accept one-route partner
@@ -3676,7 +3956,6 @@ const DriverRegistration = () => {
                           <option value="No">No</option>
                         </Form.Select>
                       </Form.Group> */}
-
                     </Row>
                     {/* <div className="tab">
                       <div className="container">
@@ -3747,12 +4026,17 @@ const DriverRegistration = () => {
                         </div>
                       </div>
                     </div> */}
-                    <div className="row" style={{ border: "1px solid #cddbd9" }}>
+                    <div
+                      className="row"
+                      style={{ border: "1px solid #cddbd9" }}
+                    >
                       <div className="col">
                         <div className="container text-center d-flex justify-content-center  flex-wrap py-2">
                           <Button
                             variant="outlined"
-                            className={`btn ${showmyself === true ? "btnDriver" : "btnWhite"} py-2 btn-toogle  mx-2 mt-1 fw-bold`}
+                            className={`btn ${
+                              showmyself === true ? "btnDriver" : "btnWhite"
+                            } py-2 btn-toogle  mx-2 mt-1 fw-bold`}
                             onClick={() => {
                               setshowmyself(true);
                               setshowmydriver(false);
@@ -3766,7 +4050,9 @@ const DriverRegistration = () => {
                           </Button>
                           <Button
                             variant="outlined"
-                            className={`btn ${showmydriver === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1 fw-bold`}
+                            className={`btn ${
+                              showmydriver === true ? "btnDriver" : "btnWhite"
+                            }  btn-toogle py-2 mx-2 mt-1 fw-bold`}
                             onClick={() => {
                               setshowmyself(false);
                               setshowmydriver(true);
@@ -3780,7 +4066,9 @@ const DriverRegistration = () => {
                           </Button>
                           <Button
                             variant="outlined"
-                            className={`btn ${showboth === true ? "btnDriver" : "btnWhite"}  btn-toogle py-2 mx-2 mt-1 fw-bold`}
+                            className={`btn ${
+                              showboth === true ? "btnDriver" : "btnWhite"
+                            }  btn-toogle py-2 mx-2 mt-1 fw-bold`}
                             onClick={() => {
                               setshowmydriver(false);
                               setshowmyself(false);
@@ -3801,9 +4089,7 @@ const DriverRegistration = () => {
                     {showmyself && (
                       <>
                         <div className="row mb-3 mt-2 shadow shadow-sm">
-                          <div
-                            className="col-md-12 px-2 py-3 form-color-field"
-                          >
+                          <div className="col-md-12 px-2 py-3 form-color-field">
                             <Form.Group
                               as={Col}
                               md="12"
@@ -3832,14 +4118,16 @@ const DriverRegistration = () => {
                                 // onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
                                 defaultValue=""
                                 onChange={handleDrivingLicenseMySelf}
-                                error={!isLicenseValid && inputDrivingLicenseMySelf !== ""}
+                                error={
+                                  !isLicenseValid &&
+                                  inputDrivingLicenseMySelf !== ""
+                                }
                                 helperText={
                                   !isLicenseValid &&
                                   inputDrivingLicenseMySelf !== "" &&
                                   "Please enter a valid License No."
                                 }
                               />
-
                             </Form.Group>
 
                             <Form.Group
@@ -3856,7 +4144,10 @@ const DriverRegistration = () => {
                                   label={"MM/DD/YY"}
                                   className="bg-white"
                                   slotProps={{
-                                    textField: { size: "small", color: "success" },
+                                    textField: {
+                                      size: "small",
+                                      color: "success",
+                                    },
                                   }}
                                   sx={{ width: "100%" }}
                                   value={inputValidUptoMySelf}
@@ -3880,7 +4171,9 @@ const DriverRegistration = () => {
                                 className="text-secondary"
                                 placeholder="Place of issue"
                                 value={inputPlaceIssueMySelf}
-                                onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
+                                onChange={(e) =>
+                                  setInputPlaceIssueMySelf(e.target.value)
+                                }
                                 defaultValue=""
                               />
                             </Form.Group>
@@ -3899,30 +4192,47 @@ const DriverRegistration = () => {
                                   style={{
                                     cursor: "pointer",
                                     textDecoration: "underline",
-
                                   }}
-
                                 >
-                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
+                                  >
                                     <Link
-
-                                      className='mx-1 h-15px d-inline-block'
+                                      className="mx-1 h-15px d-inline-block"
                                       style={{ cursor: "pointer" }}
                                     >
                                       <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                     </Link>
                                   </Tooltip>
-
-                                </p></div>
+                                </p>
+                              </div>
                               {selectedLicenseFrontDriver ? (
-
-                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
                                   {selectedLicenseFrontDriver.name}
-                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleLicenseFrontDriverPreview}
+                                  ></button>
                                 </div>
                               ) : (
-                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleLicenseFrontDriver}
+                                />
                               )}
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
@@ -3943,37 +4253,55 @@ const DriverRegistration = () => {
                                   style={{
                                     cursor: "pointer",
                                     textDecoration: "underline",
-
                                   }}
-
                                 >
-                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
+                                  >
                                     <Link
-
-                                      className='mx-1 h-15px d-inline-block'
+                                      className="mx-1 h-15px d-inline-block"
                                       style={{ cursor: "pointer" }}
                                     >
                                       <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                     </Link>
                                   </Tooltip>
-
-                                </p></div>
+                                </p>
+                              </div>
                               {selectedLicenseBackDriver ? (
-
-                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
                                   {selectedLicenseBackDriver.name}
-                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleLicenseBackDriverPreview}
+                                  ></button>
                                 </div>
                               ) : (
-                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleLicenseBackDriver}
+                                />
                               )}
 
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
                             </Form.Group>
-                          </div></div>
+                          </div>
+                        </div>
                         {/* <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
@@ -4057,17 +4385,13 @@ const DriverRegistration = () => {
                             <Form.Control type="file" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </Row> */}
-
                       </>
                     )}
 
                     {showmydriver && (
                       <>
-
                         <div className="row mb-3 mt-2 shadow shadow-sm">
-                          <div
-                            className="col-md-12 px-2 py-3 form-color-field"
-                          >
+                          <div className="col-md-12 px-2 py-3 form-color-field">
                             <Form.Group
                               as={Col}
                               md="12"
@@ -4090,7 +4414,9 @@ const DriverRegistration = () => {
                               <Form.Control
                                 required
                                 type="text"
-                                className={`${isValidDriverName ? '' : 'is-invalid'}`}
+                                className={`${
+                                  isValidDriverName ? "" : "is-invalid"
+                                }`}
                                 placeholder="Name"
                                 value={inputDriverName}
                                 onChange={handleDriverNameChange}
@@ -4099,7 +4425,8 @@ const DriverRegistration = () => {
 
                               {!isValidDriverName && (
                                 <div className="invalid-feedback">
-                                  Full Name must contain only alphabetic characters and be at least 4 characters long
+                                  Full Name must contain only alphabetic
+                                  characters and be at least 4 characters long
                                 </div>
                               )}
                             </Form.Group>
@@ -4115,17 +4442,20 @@ const DriverRegistration = () => {
                               <Form.Control
                                 required
                                 type="text"
-                                className={`${isValidCnic1 ? '' : 'is-invalid'}`}
+                                className={`${
+                                  isValidCnic1 ? "" : "is-invalid"
+                                }`}
                                 placeholder="1234512345671"
                                 value={inputDriverCnicNumber}
                                 // onChange={(e) => setInputDriverCnicNumber(e.target.value)}
                                 onChange={handleCnicChange1}
-                              // defaultValue=""
-                              // maxLength={13}
+                                // defaultValue=""
+                                // maxLength={13}
                               />
                               {!isValidCnic1 && (
                                 <div className="invalid-feedback">
-                                  Please enter a valid CNIC without dashes in the format 1234512345671.
+                                  Please enter a valid CNIC without dashes in
+                                  the format 1234512345671.
                                 </div>
                               )}
                             </Form.Group>
@@ -4145,29 +4475,48 @@ const DriverRegistration = () => {
                                   style={{
                                     cursor: "pointer",
                                     textDecoration: "underline",
-
                                   }}
-
                                 >
-                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
+                                  >
                                     <Link
-
-                                      className='mx-1 h-15px d-inline-block'
+                                      className="mx-1 h-15px d-inline-block"
                                       style={{ cursor: "pointer" }}
                                     >
                                       <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                     </Link>
                                   </Tooltip>
-
-                                </p></div>
+                                </p>
+                              </div>
                               {selectedCnicFrontDriver ? (
-
-                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
                                   {selectedCnicFrontDriver.name}
-                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontDriverPreview}></button>
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleCnicFrontDriverPreview}
+                                  ></button>
                                 </div>
                               ) : (
-                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />)}
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleCnicFrontDriver}
+                                />
+                              )}
 
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
@@ -4188,39 +4537,57 @@ const DriverRegistration = () => {
                                   style={{
                                     cursor: "pointer",
                                     textDecoration: "underline",
-
                                   }}
-
                                 >
-                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
+                                  >
                                     <Link
-
-                                      className='mx-1 h-15px d-inline-block'
+                                      className="mx-1 h-15px d-inline-block"
                                       style={{ cursor: "pointer" }}
                                     >
                                       <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                     </Link>
                                   </Tooltip>
-
-                                </p></div>
+                                </p>
+                              </div>
                               {selectedCnicBackDriver ? (
-
-                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
                                   {selectedCnicBackDriver.name}
-                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackDriverPreview}></button>
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleCnicBackDriverPreview}
+                                  ></button>
                                 </div>
                               ) : (
-                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />)}
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleCnicBackDriver}
+                                />
+                              )}
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
                             </Form.Group>
-                          </div></div>
+                          </div>
+                        </div>
 
                         <div className="row mb-3 mt-2 shadow shadow-sm">
-                          <div
-                            className="col-md-12 px-2 py-3 form-color-field"
-                          >
+                          <div className="col-md-12 px-2 py-3 form-color-field">
                             <Form.Group
                               as={Col}
                               md="12"
@@ -4246,7 +4613,9 @@ const DriverRegistration = () => {
                                 className="text-secondary"
                                 placeholder="License No."
                                 value={inputDriverLicenseNumber}
-                                onChange={(e) => setInputDriverLicenseNumber(e.target.value)}
+                                onChange={(e) =>
+                                  setInputDriverLicenseNumber(e.target.value)
+                                }
                                 defaultValue=""
                               />
                             </Form.Group>
@@ -4259,12 +4628,15 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Valid Upto
                               </Form.Label>
-                              <LocalizationProvider dateAdapter={AdapterDayjs} >
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                   label={"MM/DD/YY"}
                                   className="bg-white"
                                   slotProps={{
-                                    textField: { size: "small", color: "success" },
+                                    textField: {
+                                      size: "small",
+                                      color: "success",
+                                    },
                                   }}
                                   sx={{ width: "100%" }}
                                   value={inputDriverValidUpto}
@@ -4316,30 +4688,47 @@ const DriverRegistration = () => {
                                   style={{
                                     cursor: "pointer",
                                     textDecoration: "underline",
-
                                   }}
-
                                 >
-                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
+                                  >
                                     <Link
-
-                                      className='mx-1 h-15px d-inline-block'
+                                      className="mx-1 h-15px d-inline-block"
                                       style={{ cursor: "pointer" }}
                                     >
                                       <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                     </Link>
                                   </Tooltip>
-
-                                </p></div>
+                                </p>
+                              </div>
                               {selectedLicenseFrontDriver ? (
-
-                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
                                   {selectedLicenseFrontDriver.name}
-                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleLicenseFrontDriverPreview}
+                                  ></button>
                                 </div>
                               ) : (
-                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleLicenseFrontDriver}
+                                />
                               )}
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
@@ -4360,37 +4749,55 @@ const DriverRegistration = () => {
                                   style={{
                                     cursor: "pointer",
                                     textDecoration: "underline",
-
                                   }}
-
                                 >
-                                  <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
+                                  >
                                     <Link
-
-                                      className='mx-1 h-15px d-inline-block'
+                                      className="mx-1 h-15px d-inline-block"
                                       style={{ cursor: "pointer" }}
                                     >
                                       <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                                     </Link>
                                   </Tooltip>
-
-                                </p></div>
+                                </p>
+                              </div>
                               {selectedLicenseBackDriver ? (
-
-                                <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
                                   {selectedLicenseBackDriver.name}
-                                  <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleLicenseBackDriverPreview}
+                                  ></button>
                                 </div>
                               ) : (
-                                <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleLicenseBackDriver}
+                                />
                               )}
 
                               {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                                 The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                               </Form.Text> */}
                             </Form.Group>
-                          </div></div>
+                          </div>
+                        </div>
                         {/* <Row className="mb-3 mt-3">
                           <Form.Group
                             as={Col}
@@ -4541,9 +4948,9 @@ const DriverRegistration = () => {
                         </Row>
                       </>
                     )}
-                    {showboth && (<>
-
-                      {/* <div className="row mb-3 mt-2 shadow shadow-sm">
+                    {showboth && (
+                      <>
+                        {/* <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
                           className="col-md-12 px-2 py-3 form-color-field"
                         >
@@ -4645,318 +5052,399 @@ const DriverRegistration = () => {
                             <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
                           </Form.Group>
                         </div></div> */}
-                      <div className="row mb-3 mt-2 shadow shadow-sm">
-                        <div
-                          className="col-md-12 px-2 py-3 form-color-field"
-                        >
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom30"
-                            className="mb-2"
-                          >
-                            <h2 className="text-success mb-3 text-center">
-                              I Drive MySelf License Details
-                            </h2>
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom31"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Driving License No.
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="License No."
-                              value={inputDrivingLicenseMySelf}
-                              onChange={(e) => setInputDrivingLicenseMySelf(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom32"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Valid Upto
-                            </Form.Label>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                              <DatePicker
-                                label={"MM/DD/YY"}
-                                className="bg-white"
-                                slotProps={{
-                                  textField: { size: "small", color: "success" },
-                                }}
-                                sx={{ width: "100%" }}
-                                value={inputValidUptoMySelf}
-                                onChange={handleValidChange}
-                                disablePast
+                        <div className="row mb-3 mt-2 shadow shadow-sm">
+                          <div className="col-md-12 px-2 py-3 form-color-field">
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom30"
+                              className="mb-2"
+                            >
+                              <h2 className="text-success mb-3 text-center">
+                                I Drive MySelf License Details
+                              </h2>
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom31"
+                              className="mb-2"
+                            >
+                              <Form.Label className="text-dark fs-6">
+                                Driving License No.
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="License No."
+                                value={inputDrivingLicenseMySelf}
+                                onChange={(e) =>
+                                  setInputDrivingLicenseMySelf(e.target.value)
+                                }
+                                defaultValue=""
                               />
-                            </LocalizationProvider>
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom33"
-                            className="mb-2"
-                          >
-                            <Form.Label text-dark fs-6>
-                              Place of Issue
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className="text-secondary"
-                              placeholder="Place of issue"
-                              value={inputPlaceIssueMySelf}
-                              onChange={(e) => setInputPlaceIssueMySelf(e.target.value)}
-                              defaultValue=""
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom34"
-                            className="mb-2"
-                          >
-                            <div className="d-flex justify-content-between align-items-center pt-1">
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom32"
+                              className="mb-2"
+                            >
                               <Form.Label className="text-dark fs-6">
-                                Upload License (Front)
+                                Valid Upto
                               </Form.Label>
-                              <p
-                                className="colorplace text-danger"
-                                style={{
-                                  cursor: "pointer",
-                                  textDecoration: "underline",
-
-                                }}
-
-                              >
-                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
-                                  <Link
-
-                                    className='mx-1 h-15px d-inline-block'
-                                    style={{ cursor: "pointer" }}
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                  label={"MM/DD/YY"}
+                                  className="bg-white"
+                                  slotProps={{
+                                    textField: {
+                                      size: "small",
+                                      color: "success",
+                                    },
+                                  }}
+                                  sx={{ width: "100%" }}
+                                  value={inputValidUptoMySelf}
+                                  onChange={handleValidChange}
+                                  disablePast
+                                />
+                              </LocalizationProvider>
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom33"
+                              className="mb-2"
+                            >
+                              <Form.Label text-dark fs-6>
+                                Place of Issue
+                              </Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                className="text-secondary"
+                                placeholder="Place of issue"
+                                value={inputPlaceIssueMySelf}
+                                onChange={(e) =>
+                                  setInputPlaceIssueMySelf(e.target.value)
+                                }
+                                defaultValue=""
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom34"
+                              className="mb-2"
+                            >
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Front)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                  }}
+                                >
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
                                   >
-                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
-                                  </Link>
-                                </Tooltip>
-
-                              </p></div>
-                            {selectedLicenseFrontDriver ? (
-
-                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                {selectedLicenseFrontDriver.name}
-                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseFrontDriverPreview}></button>
+                                    <Link
+                                      className="mx-1 h-15px d-inline-block"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+                                </p>
                               </div>
-                            ) : (
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseFrontDriver} />
-
-                            )}
-                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {selectedLicenseFrontDriver ? (
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
+                                  {selectedLicenseFrontDriver.name}
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleLicenseFrontDriverPreview}
+                                  ></button>
+                                </div>
+                              ) : (
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleLicenseFrontDriver}
+                                />
+                              )}
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom35"
-                            className="mb-2"
-                          >
-                            <div className="d-flex justify-content-between align-items-center pt-1">
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom35"
+                              className="mb-2"
+                            >
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload License (Back)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                  }}
+                                >
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
+                                  >
+                                    <Link
+                                      className="mx-1 h-15px d-inline-block"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+                                </p>
+                              </div>
+                              {selectedLicenseBackDriver ? (
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
+                                  {selectedLicenseBackDriver.name}
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleLicenseBackDriverPreview}
+                                  ></button>
+                                </div>
+                              ) : (
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleLicenseBackDriver}
+                                />
+                              )}
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
+                            </Form.Text> */}
+                            </Form.Group>
+                          </div>
+                        </div>
+                        <div className="row mb-3 mt-2 shadow shadow-sm">
+                          <div className="col-md-12 px-2 py-3 form-color-field">
+                            <h2 className="text-success mb-3 text-center">
+                              My Driver's Details
+                            </h2>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom46"
+                              className="mb-2"
+                            >
                               <Form.Label className="text-dark fs-6">
-                                Upload License (Back)
+                                Name
                               </Form.Label>
-                              <p
-                                className="colorplace text-danger"
-                                style={{
-                                  cursor: "pointer",
-                                  textDecoration: "underline",
+                              <Form.Control
+                                required
+                                type="text"
+                                className={`${
+                                  isValidDriverName ? "" : "is-invalid"
+                                }`}
+                                placeholder="Name"
+                                value={inputDriverName}
+                                onChange={handleDriverNameChange}
+                                onKeyPress={preventNumbers1}
+                              />
 
-                                }}
-
-                              >
-                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
-                                  <Link
-
-                                    className='mx-1 h-15px d-inline-block'
-                                    style={{ cursor: "pointer" }}
-                                  >
-                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
-                                  </Link>
-                                </Tooltip>
-
-                              </p></div>
-                            {selectedLicenseBackDriver ? (
-
-                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                {selectedLicenseBackDriver.name}
-                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleLicenseBackDriverPreview}></button>
-                              </div>
-                            ) : (
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleLicenseBackDriver} />
-
-                            )}
-                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
-                              The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
-                            </Form.Text> */}
-                          </Form.Group>
-                        </div></div>
-                      <div className="row mb-3 mt-2 shadow shadow-sm">
-                        <div
-                          className="col-md-12 px-2 py-3 form-color-field"
-                        >
-
-
-                          <h2 className="text-success mb-3 text-center">
-                            My Driver's Details
-                          </h2>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom46"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              Name
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className={`${isValidDriverName ? '' : 'is-invalid'}`}
-                              placeholder="Name"
-                              value={inputDriverName}
-                              onChange={handleDriverNameChange}
-                              onKeyPress={preventNumbers1}
-                            />
-
-                            {!isValidDriverName && (
-                              <div className="invalid-feedback">
-                                Full Name must contain only alphabetic characters and be at least 4 characters long
-                              </div>
-                            )}
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom38"
-                            className="mb-2"
-                          >
-                            <Form.Label className="text-dark fs-6">
-                              CNIC
-                            </Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              className={`${isValidCnic1 ? '' : 'is-invalid'}`}
-                              placeholder="1234512345671"
-                              value={inputDriverCnicNumber}
-                              // onChange={(e) => setInputDriverCnicNumber(e.target.value)}
-                              onChange={handleCnicChange1}
-                            // defaultValue=""
-                            // maxLength={13}
-                            />
-                            {!isValidCnic1 && (
-                              <div className="invalid-feedback">
-                                Please enter a valid CNIC without dashed in the format 1234512345671.
-                              </div>
-                            )}
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom48"
-                            className="mb-2"
-                          >
-                            <div className="d-flex justify-content-between align-items-center pt-1">
+                              {!isValidDriverName && (
+                                <div className="invalid-feedback">
+                                  Full Name must contain only alphabetic
+                                  characters and be at least 4 characters long
+                                </div>
+                              )}
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom38"
+                              className="mb-2"
+                            >
                               <Form.Label className="text-dark fs-6">
-                                Upload CNIC (Front)
+                                CNIC
                               </Form.Label>
-                              <p
-                                className="colorplace text-danger"
-                                style={{
-                                  cursor: "pointer",
-                                  textDecoration: "underline",
-
-                                }}
-
-                              >
-                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
-                                  <Link
-
-                                    className='mx-1 h-15px d-inline-block'
-                                    style={{ cursor: "pointer" }}
+                              <Form.Control
+                                required
+                                type="text"
+                                className={`${
+                                  isValidCnic1 ? "" : "is-invalid"
+                                }`}
+                                placeholder="1234512345671"
+                                value={inputDriverCnicNumber}
+                                // onChange={(e) => setInputDriverCnicNumber(e.target.value)}
+                                onChange={handleCnicChange1}
+                                // defaultValue=""
+                                // maxLength={13}
+                              />
+                              {!isValidCnic1 && (
+                                <div className="invalid-feedback">
+                                  Please enter a valid CNIC without dashed in
+                                  the format 1234512345671.
+                                </div>
+                              )}
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom48"
+                              className="mb-2"
+                            >
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark fs-6">
+                                  Upload CNIC (Front)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                  }}
+                                >
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
                                   >
-                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
-                                  </Link>
-                                </Tooltip>
-
-                              </p></div>
-                            {selectedCnicFrontDriver ? (
-
-                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                {selectedCnicFrontDriver.name}
-                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicFrontDriverPreview}></button>
+                                    <Link
+                                      className="mx-1 h-15px d-inline-block"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+                                </p>
                               </div>
-                            ) : (
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicFrontDriver} />)}
+                              {selectedCnicFrontDriver ? (
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
+                                  {selectedCnicFrontDriver.name}
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleCnicFrontDriverPreview}
+                                  ></button>
+                                </div>
+                              ) : (
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleCnicFrontDriver}
+                                />
+                              )}
 
-                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            md="12"
-                            controlId="validationCustom49"
-                            className="mb-2"
-                          >
-                            <div className="d-flex justify-content-between align-items-center pt-1">
-                              <Form.Label className="text-dark">
-                                Upload CNIC (Back)
-                              </Form.Label>
-                              <p
-                                className="colorplace text-danger"
-                                style={{
-                                  cursor: "pointer",
-                                  textDecoration: "underline",
-
-                                }}
-
-                              >
-                                <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
-                                  <Link
-
-                                    className='mx-1 h-15px d-inline-block'
-                                    style={{ cursor: "pointer" }}
+                            </Form.Group>
+                            <Form.Group
+                              as={Col}
+                              md="12"
+                              controlId="validationCustom49"
+                              className="mb-2"
+                            >
+                              <div className="d-flex justify-content-between align-items-center pt-1">
+                                <Form.Label className="text-dark">
+                                  Upload CNIC (Back)
+                                </Form.Label>
+                                <p
+                                  className="colorplace text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    textDecoration: "underline",
+                                  }}
+                                >
+                                  <Tooltip
+                                    title={
+                                      <h6 className="px-2">
+                                        {
+                                          "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                                        }
+                                      </h6>
+                                    }
                                   >
-                                    <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
-                                  </Link>
-                                </Tooltip>
-
-                              </p></div>
-                            {selectedCnicBackDriver ? (
-
-                              <div className="alert alert-light py-2 alert-dismissible fade show" role="alert">
-                                {selectedCnicBackDriver.name}
-                                <button type="button" className="btn-close py-2 mt-1" data-bs-dismiss="alert" aria-label="Close" onClick={handleCnicBackDriverPreview}></button>
+                                    <Link
+                                      className="mx-1 h-15px d-inline-block"
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
+                                    </Link>
+                                  </Tooltip>
+                                </p>
                               </div>
-                            ) : (
-                              <Form.Control type="file" accept="image/png, image/jpeg" required onChange={handleCnicBackDriver} />)}
+                              {selectedCnicBackDriver ? (
+                                <div
+                                  className="alert alert-light py-2 alert-dismissible fade show"
+                                  role="alert"
+                                >
+                                  {selectedCnicBackDriver.name}
+                                  <button
+                                    type="button"
+                                    className="btn-close py-2 mt-1"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                    onClick={handleCnicBackDriverPreview}
+                                  ></button>
+                                </div>
+                              ) : (
+                                <Form.Control
+                                  type="file"
+                                  accept="image/png, image/jpeg"
+                                  required
+                                  onChange={handleCnicBackDriver}
+                                />
+                              )}
 
-                            {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
+                              {/* <Form.Text className="text-danger" style={{ color: "#000" }}>
                               The picture must be of type: jpg, png, jpeg, heic (max size: 10MB).
                             </Form.Text> */}
-                          </Form.Group>
-                        </div></div>
-                      {/* <Row className="mb-3 mt-3">
+                            </Form.Group>
+                          </div>
+                        </div>
+                        {/* <Row className="mb-3 mt-3">
                         <Form.Group
                           as={Col}
                           md="6"
@@ -5019,7 +5507,7 @@ const DriverRegistration = () => {
                         </Form.Group>
                       </Row> */}
 
-                      {/* <div className="row mb-3 mt-2 shadow shadow-sm">
+                        {/* <div className="row mb-3 mt-2 shadow shadow-sm">
                         <div
                           className="col-md-12 px-2 py-3 form-color-field"
                         >
@@ -5159,64 +5647,82 @@ const DriverRegistration = () => {
                           </Form.Group>
                         </div>
                       </div> */}
-
-
-
-                    </>)
-                    }
+                      </>
+                    )}
                     <div className="row mb-3 mt-2 shadow shadow-sm">
-                      <div
-                        className="col-md-12 px-2 py-3 form-color-field"
-                      >
+                      <div className="col-md-12 px-2 py-3 form-color-field">
                         <h2 className="text-success mb-3 text-center">
-                          Bank/Payment Details <Tooltip title={<h6 className="px-2">{"You can add or update your preferred payment method from your profile page."}</h6>}>
+                          Bank/Payment Details{" "}
+                          <Tooltip
+                            title={
+                              <h6 className="px-2">
+                                {
+                                  "You can add or update your preferred payment method from your profile page."
+                                }
+                              </h6>
+                            }
+                          >
                             <Link
                               // to='/notification'
-                              className='mx-1 h-15px d-inline-block'
+                              className="mx-1 h-15px d-inline-block"
                               style={{ cursor: "pointer" }}
                             >
                               <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                             </Link>
                           </Tooltip>
                         </h2>
-                        <p className="small-text text-center">Please provide details to receive payment through Bank Account, Jazz Cash, EasyPaisa or Raast ID.<br /> <span
-                          style={{
-                            color: "#198754",
-                            textDecoration: "none",
-                            textAlign: "center",
-                            cursor: "pointer"
+                        <p className="small-text text-center">
+                          Please provide details to receive payment through Bank
+                          Account, Jazz Cash, EasyPaisa or Raast ID.
+                          <br />{" "}
+                          <span
+                            style={{
+                              color: "#198754",
+                              textDecoration: "none",
+                              textAlign: "center",
+                              cursor: "pointer",
+                            }}
+                            className="fw-bold  "
+                          >
+                            <div className="text-center px-4">
+                              <p className="text-center" onClick={openPopup}>
+                                {" "}
+                                Why Process Payment through CommuterLink?
+                              </p>
 
-                          }}
-                          className="fw-bold  "
-
-                        ><div className="text-center px-4">
-                            <p className="text-center" onClick={openPopup}> Why Process Payment through CommuterLink?</p>
-
-
-                            <p
-                              className="colorplace text-danger"
-                              style={{
-                                cursor: "pointer",
-                                textDecoration: "underline",
-
-                              }}
-                            // onClick={AddNewStart}
-                            >
-
-
-                            </p>
-                          </div>
-                        </span><Link
-
-                          style={{ textDecoration: "none" }}
-                        >
-
-                          </Link> </p>
+                              <p
+                                className="colorplace text-danger"
+                                style={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+                                }}
+                                // onClick={AddNewStart}
+                              ></p>
+                            </div>
+                          </span>
+                          <Link style={{ textDecoration: "none" }}></Link>{" "}
+                        </p>
                         <div class="container text-center">
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/iban.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/ep.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/jazz.png`} alt="" />{" "}
-                          <img className="mx-2" src={`${BASE_URL}/assets/images/raast.png`} alt="" />
+                          <img
+                            className="mx-2"
+                            src={`${BASE_URL}/assets/images/iban.png`}
+                            alt=""
+                          />{" "}
+                          <img
+                            className="mx-2"
+                            src={`${BASE_URL}/assets/images/ep.png`}
+                            alt=""
+                          />{" "}
+                          <img
+                            className="mx-2"
+                            src={`${BASE_URL}/assets/images/jazz.png`}
+                            alt=""
+                          />{" "}
+                          <img
+                            className="mx-2"
+                            src={`${BASE_URL}/assets/images/raast.png`}
+                            alt=""
+                          />
                         </div>
 
                         {/* <form id="paymentForm">
@@ -5326,15 +5832,27 @@ const DriverRegistration = () => {
                               <Form.Label className="text-dark fs-6">
                                 Select any payment method
                               </Form.Label>
-                              <Form.Select aria-label="Default select example"
-                                className="text-secondary" value={selectedOption} onChange={handleOptionChange}>
-                                <option value="" hidden>Select an option</option>
-                                <option value="bankAccount">Bank Account</option>
-                                <option value="jazzCashAccount">Jazz Cash Account</option>
-                                <option value="easypaisaAccount">EasyPaisa Account</option>
+                              <Form.Select
+                                aria-label="Default select example"
+                                className="text-secondary"
+                                value={selectedOption}
+                                onChange={handleOptionChange}
+                              >
+                                <option value="" hidden>
+                                  Select an option
+                                </option>
+                                <option value="bankAccount">
+                                  Bank Account
+                                </option>
+                                <option value="jazzCashAccount">
+                                  Jazz Cash Account
+                                </option>
+                                <option value="easypaisaAccount">
+                                  EasyPaisa Account
+                                </option>
                                 <option value="raastID">Raast ID</option>
                               </Form.Select>
-                              {selectedOption === 'bankAccount' && (
+                              {selectedOption === "bankAccount" && (
                                 <div className="mt-2">
                                   {/* Bank Account input field */}
                                   <TextField
@@ -5347,7 +5865,9 @@ const DriverRegistration = () => {
                                     placeholder="Bank Account (IBAN-24 Character)"
                                     value={inputBankAccount}
                                     onChange={handleInputChange}
-                                    error={!isIBANValid && inputBankAccount !== ""}
+                                    error={
+                                      !isIBANValid && inputBankAccount !== ""
+                                    }
                                     helperText={
                                       !isIBANValid &&
                                       inputBankAccount !== "" &&
@@ -5356,7 +5876,7 @@ const DriverRegistration = () => {
                                   />
                                 </div>
                               )}
-                              {selectedOption === 'jazzCashAccount' && (
+                              {selectedOption === "jazzCashAccount" && (
                                 <div className="mt-2">
                                   {/* Jazz Cash Account input field */}
                                   <TextField
@@ -5374,19 +5894,19 @@ const DriverRegistration = () => {
                                         setInputJazzCash(e.target.value);
                                         validateJazzCash(e.target.value);
                                       }
-
                                     }}
-                                    error={!isValidJazzCash && inputJazzCash !== ""}
+                                    error={
+                                      !isValidJazzCash && inputJazzCash !== ""
+                                    }
                                     helperText={
                                       !isValidJazzCash &&
                                       inputJazzCash !== "" &&
                                       "Please enter a valid Account Number starting with '03' and having 11 digits."
                                     }
-
                                   />
                                 </div>
                               )}
-                              {selectedOption === 'easypaisaAccount' && (
+                              {selectedOption === "easypaisaAccount" && (
                                 <div className="mt-2">
                                   {/* EasyPaisa Account input field */}
                                   <TextField
@@ -5404,9 +5924,10 @@ const DriverRegistration = () => {
                                         setInputEasyPaisa(e.target.value);
                                         validateEasyPaisa(e.target.value);
                                       }
-
                                     }}
-                                    error={!isValidEasyPaisa && inputEasyPaisa !== ""}
+                                    error={
+                                      !isValidEasyPaisa && inputEasyPaisa !== ""
+                                    }
                                     helperText={
                                       !isValidEasyPaisa &&
                                       inputEasyPaisa !== "" &&
@@ -5415,7 +5936,7 @@ const DriverRegistration = () => {
                                   />
                                 </div>
                               )}
-                              {selectedOption === 'raastID' && (
+                              {selectedOption === "raastID" && (
                                 <div className="mt-2">
                                   {/* Raast ID input field */}
                                   <TextField
@@ -5432,9 +5953,10 @@ const DriverRegistration = () => {
                                         setInputRaastID(e.target.value);
                                         validateRaastID(e.target.value);
                                       }
-
                                     }}
-                                    error={!isValidRaastID && inputRaastID !== ""}
+                                    error={
+                                      !isValidRaastID && inputRaastID !== ""
+                                    }
                                     helperText={
                                       !isValidRaastID &&
                                       inputRaastID !== "" &&
@@ -5443,11 +5965,32 @@ const DriverRegistration = () => {
                                   />
                                 </div>
                               )}
-
                             </Form.Group>
                           </div>
                         </form>
-                      </div></div>
+                      </div>
+                    </div>
+                    <div
+                      className="alert alert-info alert-dismissible fade show"
+                      role="alert"
+                    >
+                      {" "}
+                      <h6 className="text-left d-flex">
+                        {" "}
+                        <i className="fa-solid fa-sticky-note  text-warning"></i>
+                        <li style={{ listStyle: "none" }}>
+                          {" "}
+                          Note - Your data is protected within a secured
+                          environment.
+                        </li>
+                      </h6>
+                      <button
+                        type=""
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
                     <Stack
                       direction="row"
                       className="mb-4 mt-3"
@@ -5473,10 +6016,11 @@ const DriverRegistration = () => {
                       >
                         {isLoading ? (
                           <span>
-                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                            <i className="fa fa-spinner fa-spin" />{" "}
+                            Submitting...
                           </span>
                         ) : (
-                          'Submit'
+                          "Submit"
                         )}
                       </Button>
                     </Stack>

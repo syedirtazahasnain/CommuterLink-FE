@@ -13,12 +13,8 @@ import dayjs from "dayjs";
 import { Button } from "@mui/base";
 import Stack from "@mui/material/Stack";
 import { TextField, Tooltip } from "@mui/material";
-import { ThreeCircles } from 'react-loader-spinner'
-import {
-  GoogleMap,
-  Autocomplete,
-  MarkerF,
-} from "@react-google-maps/api";
+import { ThreeCircles } from "react-loader-spinner";
+import { GoogleMap, Autocomplete, MarkerF } from "@react-google-maps/api";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel } from "@mui/material";
@@ -29,7 +25,6 @@ import { displayNotification } from "../../../helpers";
 const eighteenYearsAgo = dayjs().subtract(18, "years");
 
 const RiderRegistration = () => {
-
   // const option0 = useSelector((s) => s.general.data.option0);
   // console.log(option0);
   const backgroundStyle = {
@@ -116,7 +111,9 @@ const RiderRegistration = () => {
   const [gender, setGender] = useState("");
   const [preferredGender, setPreferredGender] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const selectedDateFormat = selectedDate ? selectedDate.format("DD-MM-YYYY") : "";
+  const selectedDateFormat = selectedDate
+    ? selectedDate.format("DD-MM-YYYY")
+    : "";
   const [martialStatus, setMartialStatus] = useState("");
   const [education, setEducation] = useState("");
   const [profession, setProfession] = useState("");
@@ -134,10 +131,12 @@ const RiderRegistration = () => {
   const [autocompleteStartBounds, setAutocompleteStartBounds] = useState(null);
   const [locationStartString, setLocationStartString] = useState("");
   const [locationStartStringId, setLocationStartStringId] = useState("");
-  const [locationStartStringField, setLocationStartStringField] = useState(locationStartString);
+  const [locationStartStringField, setLocationStartStringField] =
+    useState(locationStartString);
   const [dropdownStartdata, setDropDownStartData] = useState();
   const [provinceStartId, setProvinceStartId] = useState("");
-  const [selectedStartProvinceCities, setSelectedStartProvinceCities] = useState([]);
+  const [selectedStartProvinceCities, setSelectedStartProvinceCities] =
+    useState([]);
   const [cityStart, setCityStart] = useState("");
   const [cityStartId, setCityStartId] = useState("");
   const [selectedStartCityArea, setSelectedStartCityArea] = useState([]);
@@ -147,10 +146,13 @@ const RiderRegistration = () => {
   const [autocompleteEndBounds, setAutocompleteEndBounds] = useState(null);
   const [locationEndString, setLocationEndString] = useState("");
   const [locationEndStringId, setLocationEndStringId] = useState("");
-  const [locationEndStringField, setLocationEndStringField] = useState(locationEndString);
+  const [locationEndStringField, setLocationEndStringField] =
+    useState(locationEndString);
   const [dropdownEnddata, setDropDownEndData] = useState();
   const [provinceEndId, setProvinceEndId] = useState("");
-  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState([]);
+  const [selectedEndProvinceCities, setSelectedEndProvinceCities] = useState(
+    []
+  );
   const [cityEnd, setCityEnd] = useState("");
   const [cityEndId, setCityEndId] = useState("");
   const [selectedEndCityArea, setSelectedEndCityArea] = useState([]);
@@ -260,20 +262,21 @@ const RiderRegistration = () => {
     // Function to fetch the geocoding data
     const getGeocodeStartData = async () => {
       try {
-
         if (locationStartString) {
           const response = await fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationStartString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+              locationStartString
+            )}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
           );
 
           const data = await response.json(); // Parse the response as JSON
           console.log(data);
-          if (data.status === 'OK' && data.results.length > 0) {
+          if (data.status === "OK" && data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
             setDefaultStartCenter({ lat, lng });
             // setMarkerPositionStart({ lat, lng });
           } else {
-            console.error('Geocoding API response error');
+            console.error("Geocoding API response error");
           }
         }
       } catch (error) {
@@ -287,19 +290,20 @@ const RiderRegistration = () => {
     // Function to fetch the geocoding data
     const getGeocodeEndData = async () => {
       try {
-
         if (locationEndString) {
           const response = await fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationEndString)}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+              locationEndString
+            )}&key=AIzaSyCrX4s2Y_jbtM-YZOmUwWK9m-WvlCu7EXA`
           );
 
           const data = await response.json(); // Parse the response as JSON
-          if (data.status === 'OK' && data.results.length > 0) {
+          if (data.status === "OK" && data.results.length > 0) {
             const { lat, lng } = data.results[0].geometry.location;
             setDefaultEndCenter({ lat, lng });
             // setMarkerPositionEnd({ lat, lng });
           } else {
-            console.error('Geocoding API response error');
+            console.error("Geocoding API response error");
           }
         }
       } catch (error) {
@@ -311,15 +315,12 @@ const RiderRegistration = () => {
 
   const getdropdownStartdata = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/list/data`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/list/data`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const jsonresponse = await response.json();
       setDropDownStartData(jsonresponse);
       setDropDownEndData(jsonresponse);
@@ -345,13 +346,13 @@ const RiderRegistration = () => {
             console.log("City Start Bounds", cityBounds);
             setStartBounds(cityBounds);
           } else {
-            console.error('City not found');
+            console.error("City not found");
           }
         } else {
-          console.error('Error fetching city data');
+          console.error("Error fetching city data");
         }
       } catch (error) {
-        console.error('An error occurred:', error);
+        console.error("An error occurred:", error);
       }
     };
 
@@ -364,8 +365,14 @@ const RiderRegistration = () => {
     if (startBounds && startBounds.southwest && startBounds.northeast) {
       // Convert startBounds data into LatLngBounds object
       const bounds = new window.google.maps.LatLngBounds(
-        new window.google.maps.LatLng(startBounds.southwest.lat, startBounds.southwest.lng),
-        new window.google.maps.LatLng(startBounds.northeast.lat, startBounds.northeast.lng)
+        new window.google.maps.LatLng(
+          startBounds.southwest.lat,
+          startBounds.southwest.lng
+        ),
+        new window.google.maps.LatLng(
+          startBounds.northeast.lat,
+          startBounds.northeast.lng
+        )
       );
 
       setAutocompleteStartBounds(bounds);
@@ -386,13 +393,13 @@ const RiderRegistration = () => {
             console.log("City End Bounds", cityBounds);
             setEndBounds(cityBounds);
           } else {
-            console.error('City not found');
+            console.error("City not found");
           }
         } else {
-          console.error('Error fetching city data');
+          console.error("Error fetching city data");
         }
       } catch (error) {
-        console.error('An error occurred:', error);
+        console.error("An error occurred:", error);
       }
     };
 
@@ -405,8 +412,14 @@ const RiderRegistration = () => {
     if (endBounds && endBounds.southwest && endBounds.northeast) {
       // Convert startBounds data into LatLngBounds object
       const bounds = new window.google.maps.LatLngBounds(
-        new window.google.maps.LatLng(endBounds.southwest.lat, endBounds.southwest.lng),
-        new window.google.maps.LatLng(endBounds.northeast.lat, endBounds.northeast.lng)
+        new window.google.maps.LatLng(
+          endBounds.southwest.lat,
+          endBounds.southwest.lng
+        ),
+        new window.google.maps.LatLng(
+          endBounds.northeast.lat,
+          endBounds.northeast.lng
+        )
       );
 
       setAutocompleteEndBounds(bounds);
@@ -416,7 +429,9 @@ const RiderRegistration = () => {
   useEffect(() => {
     // Filter registration years based on the selected manufacturing year.
     if (selectedHomeTimeValue) {
-      const filteredYears = homeTimeSlots.filter((time) => time.time_string > selectedHomeTimeValue);
+      const filteredYears = homeTimeSlots.filter(
+        (time) => time.time_string > selectedHomeTimeValue
+      );
       setFilteredOfficeTimeSlots(filteredYears);
     } else {
       // If no manufacturing year is selected, show all registration years.
@@ -465,17 +480,23 @@ const RiderRegistration = () => {
 
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
-      const isIslamabad = place.address_components.some((component) =>
-        component.types.includes("locality") &&
-        component.long_name.toLowerCase() === cityStart.toLowerCase()
+      const isIslamabad = place.address_components.some(
+        (component) =>
+          component.types.includes("locality") &&
+          component.long_name.toLowerCase() === cityStart.toLowerCase()
       );
 
       console.log("isIslamabad:", isIslamabad);
 
       // Check if the place's address contains the city name in its formatted address.
-      const containsCityName = place.formatted_address.toLowerCase().includes(cityStart.toLowerCase());
+      const containsCityName = place.formatted_address
+        .toLowerCase()
+        .includes(cityStart.toLowerCase());
 
-      console.log("Place Formatted Address:", place.formatted_address.toLowerCase());
+      console.log(
+        "Place Formatted Address:",
+        place.formatted_address.toLowerCase()
+      );
 
       console.log("containsCityName:", containsCityName);
 
@@ -498,10 +519,9 @@ const RiderRegistration = () => {
       }
     } else {
       // Handle the case when place is not valid.
-      console.error('Invalid place object:', place);
+      console.error("Invalid place object:", place);
     }
   };
-
 
   const handleLocationEnd = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
@@ -523,11 +543,11 @@ const RiderRegistration = () => {
 
     // Check if place is defined and has address_components.
     if (place && place.address_components) {
-      const isIslamabad =
-        place.address_components.some((component) =>
+      const isIslamabad = place.address_components.some(
+        (component) =>
           component.types.includes("locality") &&
           component.long_name.toLowerCase() === cityEnd.toLowerCase()
-        );
+      );
 
       if (isIslamabad) {
         // The selected place is in Islamabad.
@@ -557,7 +577,7 @@ const RiderRegistration = () => {
       }
     } else {
       // Handle the case when place is not valid.
-      console.error('Invalid place object:', place);
+      console.error("Invalid place object:", place);
     }
   };
 
@@ -614,10 +634,7 @@ const RiderRegistration = () => {
           setCnicFrontExt(file.name.split(".").pop());
         };
         reader.readAsDataURL(file);
-      }
-
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -626,8 +643,6 @@ const RiderRegistration = () => {
         }, 100);
       }
     }
-
-
   };
 
   // console.log("Front Image:", cnicFront);
@@ -644,9 +659,7 @@ const RiderRegistration = () => {
           setCnicBackExt(file.name.split(".").pop());
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -655,8 +668,6 @@ const RiderRegistration = () => {
         }, 100);
       }
     }
-
-
   };
 
   //console.log("Back Image:", cnicBack);
@@ -673,9 +684,7 @@ const RiderRegistration = () => {
           setPictureExt(file.name.split(".").pop());
         };
         reader.readAsDataURL(file);
-      }
-      else {
-
+      } else {
         displayNotification("warning", "Your file is exceeds 5MB");
         setTimeout(() => {
           e.target.value = null;
@@ -684,8 +693,6 @@ const RiderRegistration = () => {
         }, 100);
       }
     }
-
-
   };
 
   // console.log("Picture:", picture);
@@ -698,10 +705,12 @@ const RiderRegistration = () => {
   };
 
   const handleCloseStartModal = () => {
-    if(markerPositionStart.lat === null && markerPositionStart.lng === null ){
-      displayNotification("warning", "Please select a Starting Location from Map");
-    }
-    else{
+    if (markerPositionStart.lat === null && markerPositionStart.lng === null) {
+      displayNotification(
+        "warning",
+        "Please select a Starting Location from Map"
+      );
+    } else {
       setShowStartModal(false);
     }
   };
@@ -711,10 +720,12 @@ const RiderRegistration = () => {
   };
 
   const handleCloseEndModal = () => {
-    if(markerPositionEnd.lat === null && markerPositionEnd.lng === null ){
-      displayNotification("warning", "Please select a Drop-off Location from Map");
-    }
-    else{
+    if (markerPositionEnd.lat === null && markerPositionEnd.lng === null) {
+      displayNotification(
+        "warning",
+        "Please select a Drop-off Location from Map"
+      );
+    } else {
       setShowEndModal(false);
     }
   };
@@ -768,21 +779,28 @@ const RiderRegistration = () => {
       setIsLoading(true); // Start loading
 
       try {
-        if (PersonalFormFields.every(
-          (field) => field !== "" && field !== null && field !== undefined
-        )) {
-          if (locationStartString === locationEndString || markerPositionStart === markerPositionEnd) {
-            displayNotification("warning", "Please select different starting and drop-off point");
+        if (
+          PersonalFormFields.every(
+            (field) => field !== "" && field !== null && field !== undefined
+          )
+        ) {
+          if (
+            locationStartString === locationEndString ||
+            markerPositionStart === markerPositionEnd
+          ) {
+            displayNotification(
+              "warning",
+              "Please select different starting and drop-off point"
+            );
             setIsLoading(false);
-          }
-          else {
+          } else {
             await PersonalForm();
           }
         }
       } catch (error) {
         setIsLoading(false);
         // Handle the error appropriately, e.g., show an error message
-        console.error('API call error:', error);
+        console.error("API call error:", error);
       }
     } else {
       setIsLoading(false);
@@ -814,18 +832,15 @@ const RiderRegistration = () => {
         university_name: null,
         user_type: 299,
       };
-      const response = await fetch(
-        `${API_URL}/api/v1/registration/personal`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/registration/personal`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(body),
+      });
 
       console.log("Personal Form Body:", body);
 
@@ -903,18 +918,15 @@ const RiderRegistration = () => {
         },
         days: daysSelected,
       };
-      const response = await fetch(
-        `${API_URL}/api/v1/registration/location`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/registration/location`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(body),
+      });
 
       console.log("Location Form Body:", body);
 
@@ -1047,7 +1059,6 @@ const RiderRegistration = () => {
 
       console.log("Images Form Picture Body:", body);
 
-
       const registrationSuccessful = () => {
         // Swal.fire({
         //   position: 'top',
@@ -1060,7 +1071,10 @@ const RiderRegistration = () => {
         //     confirmButton: 'bg-success', // Apply custom CSS class to the OK button
         //   },
         // });
-        displayNotification("success", "Rider Registration Form Submitted successfully");
+        displayNotification(
+          "success",
+          "Rider Registration Form Submitted successfully"
+        );
       };
 
       const jsonresponse = await response.json();
@@ -1091,7 +1105,7 @@ const RiderRegistration = () => {
     <>
       <div className="main-bg">
         <div className="containter p-5 position-relative">
-          <div className="area" >
+          <div className="area">
             <ul className="circles">
               <li></li>
               <li></li>
@@ -1108,18 +1122,18 @@ const RiderRegistration = () => {
               <li></li>
               <li></li>
             </ul>
-          </div >
+          </div>
           <div className="row justify-content-center ">
             <div className="col-md-6 shadow bg-white  mt-5 mb-5">
               <div
                 className="row shadow form-color-header"
-              // style={{ backgroundColor: '#1F5F5B' }}
+                // style={{ backgroundColor: '#1F5F5B' }}
               >
                 <h1 className="text-center text-white py-4">
                   Registration Form
                 </h1>
               </div>
-             
+
               <Form
                 className=" p-3"
                 noValidate
@@ -1129,14 +1143,22 @@ const RiderRegistration = () => {
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3 form-color-field"
-                  // style={{ backgroundColor: "#cddbd9" }}
+                    // style={{ backgroundColor: "#cddbd9" }}
                   >
                     <h2 className="text-success mb-3 text-center">
                       STARTING POINT
-                      <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
+                      <Tooltip
+                        title={
+                          <h6 className="px-2">
+                            {
+                              "You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."
+                            }
+                          </h6>
+                        }
+                      >
                         <Link
                           // to='/notification'
-                          className='mx-1 h-15px d-inline-block'
+                          className="mx-1 h-15px d-inline-block"
                           style={{ cursor: "pointer" }}
                         >
                           <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
@@ -1149,7 +1171,6 @@ const RiderRegistration = () => {
                       controlId="validationCustom01"
                       className="mb-2"
                     >
-
                       <div className="d-flex justify-content-between align-items-center">
                         <Form.Label className="text-black fs-6">
                           Province
@@ -1160,7 +1181,7 @@ const RiderRegistration = () => {
                             cursor: "pointer",
                             textDecoration: "underline",
                           }}
-                        // onClick={AddNewStart}
+                          // onClick={AddNewStart}
                         >
                           {/* <Tooltip title={<h6 className="px-2">{"You have the option to choose your starting or pickup location using Google Map, which becomes accessible once you have selected your province, city and area."}</h6>}>
                             <Link
@@ -1171,8 +1192,8 @@ const RiderRegistration = () => {
                               <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                             </Link>
                           </Tooltip> */}
-
-                        </p></div>
+                        </p>
+                      </div>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
@@ -1192,16 +1213,23 @@ const RiderRegistration = () => {
                         )}
                       </Form.Select>
                     </Form.Group>
-                    <Form.Group as={Col} md={cityStartId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
+                    <Form.Group
+                      as={Col}
+                      md={cityStartId ? "12" : "12"}
+                      controlId="validationCustom02"
+                      className="mb-2"
+                    >
                       <Form.Label className="text-black fs-6">City</Form.Label>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
                         value={cityStartId}
                         onChange={(e) => {
-                          const selectedOption = e.target.options[e.target.selectedIndex];
+                          const selectedOption =
+                            e.target.options[e.target.selectedIndex];
                           const selectedValue = selectedOption.value;
-                          const selectedId = selectedOption.getAttribute("data-id");
+                          const selectedId =
+                            selectedOption.getAttribute("data-id");
 
                           // Set the ID
                           setCityStartId(selectedValue);
@@ -1236,9 +1264,7 @@ const RiderRegistration = () => {
                           md="12"
                           controlId="validationCustom05"
                         >
-                          <Form.Label className="text-black">
-                            Area
-                          </Form.Label>
+                          <Form.Label className="text-black">Area</Form.Label>
                           <Autocomplete
                             onLoad={(autocomplete) =>
                               (autocompleteRef.current = autocomplete)
@@ -1361,20 +1387,27 @@ const RiderRegistration = () => {
                         )} */}
                       </>
                     )}
-
                   </div>
                 </div>
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3 form-color-field"
-                  // style={{ backgroundColor: "#cddbd9" }}
+                    // style={{ backgroundColor: "#cddbd9" }}
                   >
                     <h2 className="text-success mb-3 text-center">
                       DROP-OFF POINT
-                      <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
+                      <Tooltip
+                        title={
+                          <h6 className="px-2">
+                            {
+                              "You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."
+                            }
+                          </h6>
+                        }
+                      >
                         <Link
                           // to='/notification'
-                          className='mx-1 h-15px d-inline-block'
+                          className="mx-1 h-15px d-inline-block"
                           style={{ cursor: "pointer" }}
                         >
                           <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
@@ -1387,7 +1420,6 @@ const RiderRegistration = () => {
                       controlId="validationCustom07"
                       className="mb-2"
                     >
-
                       <div className="d-flex justify-content-between align-items-center">
                         <Form.Label className="text-black fs-6">
                           Province
@@ -1398,7 +1430,7 @@ const RiderRegistration = () => {
                             cursor: "pointer",
                             textDecoration: "underline",
                           }}
-                        // onClick={AddNewStart}
+                          // onClick={AddNewStart}
                         >
                           {/* <Tooltip title={<h6 className="px-2">{"You have the option to choose your drop-off location using Google Map, which becomes accessible once you've selected your province, city and area."}</h6>}>
                             <Link
@@ -1409,8 +1441,8 @@ const RiderRegistration = () => {
                               <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                             </Link>
                           </Tooltip> */}
-
-                        </p></div>
+                        </p>
+                      </div>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
@@ -1430,16 +1462,23 @@ const RiderRegistration = () => {
                         )}
                       </Form.Select>
                     </Form.Group>
-                    <Form.Group as={Col} md={cityEndId ? "12" : "12"} controlId="validationCustom02" className="mb-2">
+                    <Form.Group
+                      as={Col}
+                      md={cityEndId ? "12" : "12"}
+                      controlId="validationCustom02"
+                      className="mb-2"
+                    >
                       <Form.Label className="text-black fs-6">City</Form.Label>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
                         value={cityEndId}
                         onChange={(e) => {
-                          const selectedOption = e.target.options[e.target.selectedIndex];
+                          const selectedOption =
+                            e.target.options[e.target.selectedIndex];
                           const selectedValue = selectedOption.value;
-                          const selectedId = selectedOption.getAttribute("data-id");
+                          const selectedId =
+                            selectedOption.getAttribute("data-id");
 
                           // Set the ID
                           setCityEndId(selectedValue);
@@ -1474,9 +1513,7 @@ const RiderRegistration = () => {
                           md="12"
                           controlId="validationCustom11"
                         >
-                          <Form.Label className="text-black">
-                            Area
-                          </Form.Label>
+                          <Form.Label className="text-black">Area</Form.Label>
                           <Autocomplete
                             onLoad={(autocomplete) =>
                               (autocompleteRef.current = autocomplete)
@@ -1578,17 +1615,20 @@ const RiderRegistration = () => {
                         )} */}
                       </>
                     )}
-
                   </div>
                 </div>
 
                 <Modal show={showStartModal} onHide={handleCloseStartModal}>
-                  <Modal.Header className="d-block" >
+                  <Modal.Header className="d-block">
                     <Modal.Title>Select Starting Location</Modal.Title>
                     <Modal.Title className="text-danger fs-7">
                       <Modal.Title className="text-danger fs-7">
                         <Modal.Title className="text-danger fs-7">
-                          <Modal.Title className="text-danger fs-7">To get maximum suggestions/matches please select prominent landmark or community/society gate as a pickup point</Modal.Title>
+                          <Modal.Title className="text-danger fs-7">
+                            To get maximum suggestions/matches please select
+                            prominent landmark or community/society gate as a
+                            pickup point
+                          </Modal.Title>
                         </Modal.Title>
                       </Modal.Title>
                     </Modal.Title>
@@ -1632,10 +1672,12 @@ const RiderRegistration = () => {
                 </Modal>
 
                 <Modal show={showEndModal} onHide={handleCloseEndModal}>
-
                   <Modal.Header className="d-block">
                     <Modal.Title>Select Drop-off Location</Modal.Title>
-                    <Modal.Title className="text-danger fs-7">If you do not want to give your exact location please choose your nearest landmark?</Modal.Title>
+                    <Modal.Title className="text-danger fs-7">
+                      If you do not want to give your exact location please
+                      choose your nearest landmark?
+                    </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <Container className="d-flex justify-content-center align-items-center mb-3">
@@ -1667,8 +1709,11 @@ const RiderRegistration = () => {
                     </Container>
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button variant="contained" onClick={handleCloseEndModal}
-                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold">
+                    <Button
+                      variant="contained"
+                      onClick={handleCloseEndModal}
+                      className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                    >
                       Select
                     </Button>
                   </Modal.Footer>
@@ -1676,11 +1721,9 @@ const RiderRegistration = () => {
                 <div className="row mb-3 shadow shadow-sm">
                   <div
                     className="col-md-12 px-2 py-3 form-color-field"
-                  // style={{ backgroundColor: "#cddbd9" }}
+                    // style={{ backgroundColor: "#cddbd9" }}
                   >
-                    <h2 className="text-success mb-3 text-center">
-                      Timing
-                    </h2>
+                    <h2 className="text-success mb-3 text-center">Timing</h2>
 
                     <Form.Group
                       as={Col}
@@ -1688,7 +1731,6 @@ const RiderRegistration = () => {
                       controlId="validationCustomtime1"
                       className="mb-2 mt-3"
                     >
-
                       <div className="d-flex justify-content-between align-items-center">
                         <Form.Label className="text-black fs-6">
                           Start Time
@@ -1700,31 +1742,40 @@ const RiderRegistration = () => {
                             cursor: "pointer",
                             textDecoration: "underline",
                           }}
-                        // onClick={AddNewStart}
+                          // onClick={AddNewStart}
                         >
-                          <Tooltip title={<h6 className="px-2">{"You can specify the times you are available for commuting by selecting both the start and return times."}</h6>}>
+                          <Tooltip
+                            title={
+                              <h6 className="px-2">
+                                {
+                                  "You can specify the times you are available for commuting by selecting both the start and return times."
+                                }
+                              </h6>
+                            }
+                          >
                             <Link
                               // to='/notification'
-                              className='mx-1 h-15px d-inline-block'
+                              className="mx-1 h-15px d-inline-block"
                               style={{ cursor: "pointer" }}
                             >
                               <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                             </Link>
                           </Tooltip>
-
-                        </p></div>
+                        </p>
+                      </div>
                       <Form.Select
                         aria-label="Default select example"
                         className="text-secondary"
-
                         value={selectedHomeTime}
                         onChange={(e) => {
-                          const selectedOption = e.target.options[e.target.selectedIndex];
+                          const selectedOption =
+                            e.target.options[e.target.selectedIndex];
                           const selectedValue = selectedOption.value;
-                          const selectedId = selectedOption.getAttribute("data-id");
+                          const selectedId =
+                            selectedOption.getAttribute("data-id");
 
                           // Set the ID
-                          setSelectedHomeTime(selectedValue)
+                          setSelectedHomeTime(selectedValue);
 
                           // Set the value
                           setSelectedHomeTimeValue(selectedId);
@@ -1735,7 +1786,11 @@ const RiderRegistration = () => {
                           Start Time
                         </option>
                         {homeTimeSlots?.map((time) => (
-                          <option key={time.id} value={time.id} data-id={time.time_string}>
+                          <option
+                            key={time.id}
+                            value={time.id}
+                            data-id={time.time_string}
+                          >
                             {time.time_string}
                           </option>
                         ))}
@@ -1748,7 +1803,7 @@ const RiderRegistration = () => {
                       className="mb-2 mt-3"
                     >
                       <Form.Label className="text-black fs-6">
-                        Return  Time
+                        Return Time
                         {/* (From destination to start point +/- 30 Minutes) */}
                       </Form.Label>
                       <Form.Select
@@ -1770,9 +1825,9 @@ const RiderRegistration = () => {
                     </Form.Group>
                   </div>
                 </div>
-                <Row className="mb-3 px-3 form-color-field"
-                //  style={{ border: "1px solid #cddbd9", backgroundColor: '#cddbd9' }}
-
+                <Row
+                  className="mb-3 px-3 form-color-field"
+                  //  style={{ border: "1px solid #cddbd9", backgroundColor: '#cddbd9' }}
                 >
                   <Form.Group as={Col} md="12" controlId="validationCustom20">
                     <Form.Label style={{ color: "#000" }} className="pt-3 px-3">
@@ -1799,7 +1854,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-0`}
                                 checked={daysSelected.includes("Monday")}
                                 onChange={handleCheckboxChange}
-                              // required
+                                // required
                               />
                             }
                             label="Monday"
@@ -1816,7 +1871,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-1`}
                                 checked={daysSelected.includes("Tuesday")}
                                 onChange={handleCheckboxChange}
-                              // required
+                                // required
                               />
                             }
                             label="Tuesday"
@@ -1833,7 +1888,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-2`}
                                 checked={daysSelected.includes("Wednesday")}
                                 onChange={handleCheckboxChange}
-                              // required
+                                // required
                               />
                             }
                             label="Wednesday"
@@ -1850,7 +1905,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-3`}
                                 checked={daysSelected.includes("Thursday")}
                                 onChange={handleCheckboxChange}
-                              // required
+                                // required
                               />
                             }
                             label="Thursday"
@@ -1867,7 +1922,7 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-4`}
                                 checked={daysSelected.includes("Friday")}
                                 onChange={handleCheckboxChange}
-                              // required
+                                // required
                               />
                             }
                             label="Friday"
@@ -1884,8 +1939,8 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-5`}
                                 checked={daysSelected.includes("Saturday")}
                                 onChange={handleCheckboxChange}
-                              // disabled
-                              // required
+                                // disabled
+                                // required
                               />
                             }
                             label="Saturday"
@@ -1902,8 +1957,8 @@ const RiderRegistration = () => {
                                 id={`inline-${type}-6`}
                                 checked={daysSelected.includes("Sunday")}
                                 onChange={handleCheckboxChange}
-                              // disabled
-                              // required
+                                // disabled
+                                // required
                               />
                             }
                             label="Sunday"
@@ -1916,7 +1971,7 @@ const RiderRegistration = () => {
 
                 <Row
                   className="mb-3 py-3 px-3 shadow shadow-sm form-color-field"
-                // style={{ backgroundColor: " #cddbd9" }}
+                  // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}
@@ -1924,7 +1979,9 @@ const RiderRegistration = () => {
                     controlId="validationCustom13"
                     className="mb-2"
                   >
-                    <Form.Label className="fs-6 text-black">My Gender</Form.Label>
+                    <Form.Label className="fs-6 text-black">
+                      My Gender
+                    </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       className="text-secondary"
@@ -1946,7 +2003,6 @@ const RiderRegistration = () => {
                     controlId="validationCustom14"
                     className="mb-2"
                   >
-
                     <div className="d-flex justify-content-between align-items-center">
                       <Form.Label className="fs-6 text-black">
                         Preferred Gender of Travel Partner
@@ -1957,19 +2013,27 @@ const RiderRegistration = () => {
                           cursor: "pointer",
                           textDecoration: "underline",
                         }}
-                      // onClick={AddNewStart}
+                        // onClick={AddNewStart}
                       >
-                        <Tooltip title={<h6 className="px-2">{"You can choose the gender of your travel partner based on your comfort level."}</h6>}>
+                        <Tooltip
+                          title={
+                            <h6 className="px-2">
+                              {
+                                "You can choose the gender of your travel partner based on your comfort level."
+                              }
+                            </h6>
+                          }
+                        >
                           <Link
                             // to='/notification'
-                            className='mx-1 h-15px d-inline-block'
+                            className="mx-1 h-15px d-inline-block"
                             style={{ cursor: "pointer" }}
                           >
                             <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                           </Link>
                         </Tooltip>
-
-                      </p></div>
+                      </p>
+                    </div>
                     <Form.Select
                       aria-label="Default select example"
                       className="text-secondary"
@@ -1989,7 +2053,7 @@ const RiderRegistration = () => {
 
                 <Row
                   className="mb-3 py-3 px-3 shadow shadow-sm form-color-field"
-                // style={{ backgroundColor: " #cddbd9" }}
+                  // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}
@@ -2003,8 +2067,9 @@ const RiderRegistration = () => {
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
                         label={"MM/DD/YY"}
-                        className="bg-white" style={{
-                          scrollbarColor: 'darkblue',
+                        className="bg-white"
+                        style={{
+                          scrollbarColor: "darkblue",
                         }}
                         slotProps={{
                           textField: { size: "small", color: "success" },
@@ -2099,7 +2164,7 @@ const RiderRegistration = () => {
                 </Row>
                 <Row
                   className="mb-3 py-3 px-3 shadow shadow-sm form-color-field"
-                // style={{ backgroundColor: " #cddbd9" }}
+                  // style={{ backgroundColor: " #cddbd9" }}
                 >
                   <Form.Group
                     as={Col}
@@ -2107,7 +2172,6 @@ const RiderRegistration = () => {
                     controlId="validationCustom19"
                     className="mb-2"
                   >
-
                     <Form.Label className="fs-6 text-black">CNIC</Form.Label>
                     <Form.Control
                       required
@@ -2119,7 +2183,8 @@ const RiderRegistration = () => {
                     />
                     {!isValidCnic && (
                       <div className="invalid-feedback">
-                        Please Enter a Valid CNIC without dashes in the Format 1234512345671.
+                        Please Enter a Valid CNIC without dashes in the Format
+                        1234512345671.
                       </div>
                     )}
                   </Form.Group>
@@ -2140,19 +2205,27 @@ const RiderRegistration = () => {
                           cursor: "pointer",
                           textDecoration: "underline",
                         }}
-                      // onClick={AddNewStart}
+                        // onClick={AddNewStart}
                       >
-                        <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                        <Tooltip
+                          title={
+                            <h6 className="px-2">
+                              {
+                                "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                              }
+                            </h6>
+                          }
+                        >
                           <Link
                             // to='/notification'
-                            className='mx-1 h-15px d-inline-block'
+                            className="mx-1 h-15px d-inline-block"
                             style={{ cursor: "pointer" }}
                           >
                             <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                           </Link>
                         </Tooltip>
-
-                      </p></div>
+                      </p>
+                    </div>
 
                     <Form.Control
                       type="file"
@@ -2160,7 +2233,6 @@ const RiderRegistration = () => {
                       required
                       onChange={handleCnicFront}
                     />
-
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
@@ -2179,19 +2251,27 @@ const RiderRegistration = () => {
                           cursor: "pointer",
                           textDecoration: "underline",
                         }}
-                      // onClick={AddNewStart}
+                        // onClick={AddNewStart}
                       >
-                        <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."}</h6>}>
+                        <Tooltip
+                          title={
+                            <h6 className="px-2">
+                              {
+                                "Please submit a high-quality image of your CNIC in one of the specified formats: jpg, png, jpeg, or heic, ensuring that all the information is clearly legible. The file size should not exceed 5MB."
+                              }
+                            </h6>
+                          }
+                        >
                           <Link
                             // to='/notification'
-                            className='mx-1 h-15px d-inline-block'
+                            className="mx-1 h-15px d-inline-block"
                             style={{ cursor: "pointer" }}
                           >
                             <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                           </Link>
                         </Tooltip>
-
-                      </p></div>
+                      </p>
+                    </div>
 
                     <Form.Control
                       type="file"
@@ -2199,7 +2279,6 @@ const RiderRegistration = () => {
                       required
                       onChange={handleCnicBack}
                     />
-
                   </Form.Group>
                   <Form.Group
                     controlId="formFile"
@@ -2217,19 +2296,27 @@ const RiderRegistration = () => {
                           cursor: "pointer",
                           textDecoration: "underline",
                         }}
-                      // onClick={AddNewStart}
+                        // onClick={AddNewStart}
                       >
-                        <Tooltip title={<h6 className="px-2">{"Please submit a high-quality image of your recent picture in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 5MB."}</h6>}>
+                        <Tooltip
+                          title={
+                            <h6 className="px-2">
+                              {
+                                "Please submit a high-quality image of your recent picture in one of the specified formats: jpg, png, jpeg, or heic, ensuring that your face is clearly visible. The file size should not exceed 5MB."
+                              }
+                            </h6>
+                          }
+                        >
                           <Link
                             // to='/notification'
-                            className='mx-1 h-15px d-inline-block'
+                            className="mx-1 h-15px d-inline-block"
                             style={{ cursor: "pointer" }}
                           >
                             <i className="fa-solid fs-4 fa-circle-info icon-tooltip-blue"></i>
                           </Link>
                         </Tooltip>
-
-                      </p></div>
+                      </p>
+                    </div>
 
                     <Form.Control
                       type="file"
@@ -2245,6 +2332,26 @@ const RiderRegistration = () => {
                     </Form.Text> */}
                   </Form.Group>
                 </Row>
+                <div
+                className="alert alert-info alert-dismissible fade show"
+                role="alert"
+              >
+                {" "}
+                <h6 className="text-left d-flex">
+                  {" "}
+                  <i className="fa-solid fa-sticky-note  text-warning"></i>
+                  <li style={{ listStyle: "none" }}>
+                    {" "}
+                    Note - Your data is protected within a secured environment.
+                  </li>
+                </h6>
+                <button
+                  type=""
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
 
                 <Stack
                   direction="row"
@@ -2264,7 +2371,7 @@ const RiderRegistration = () => {
                         <i className="fa fa-spinner fa-spin" /> Submitting...
                       </span>
                     ) : (
-                      'Submit'
+                      "Submit"
                     )}
                   </Button>
                 </Stack>

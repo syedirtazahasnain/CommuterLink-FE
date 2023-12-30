@@ -40,8 +40,13 @@ const NewBanner = () => {
         }}
       >
         <div className="p-0 d-flex bg-dark">
-          <div className="col-12 m-auto py-4 px-5">
-            <h1 className='text-yellow'>YOUR COST SAVING DAILY COMMUTING SOLUTION!</h1>
+          <div className="col-12 m-auto py-2 px-5" style={{color: "cyan !important"}}>
+            <h1 className='text-yellow'>CAR POOLING ON LONG TERM BASIS</h1>
+          </div>
+        </div>
+        <div className="p-0 d-flex bg-dark">
+          <div className="col-12 m-auto py-2 px-5" style={{color: "cyan !important"}}>
+            <h1 className='text-yellow'>Your Cost Saving Daily Commuting Solution!</h1>
           </div>
         </div>
       </div>
