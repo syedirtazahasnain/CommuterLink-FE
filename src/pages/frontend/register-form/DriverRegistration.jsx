@@ -5567,6 +5567,26 @@ const DriverRegistration = () => {
                           </div>
                         </form>
                       </div></div>
+                      <div
+                      className="alert alert-info alert-dismissible fade show"
+                      role="alert"
+                    >
+                      {" "}
+                      <h6 className="text-left d-flex">
+                        {" "}
+                        <i className="fa-solid fa-sticky-note  text-warning"></i>
+                        <li style={{ listStyle: "none" }}>
+                          {" "}
+                          Note - Your data is protected within a secured environment.
+                        </li>
+                      </h6>
+                      <button
+                        type=""
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+              </div>
                     <Stack
                       direction="row"
                       className="mb-4 mt-3"
