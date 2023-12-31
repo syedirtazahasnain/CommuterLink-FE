@@ -380,8 +380,8 @@ const TravelConfirmation = () => {
                             className="w-100 custom-scroll-color overflow-y-hidden"
                             onMonthChange={handleMonthChange}
                             renderLoading={() => <DayCalendarSkeleton />}
-                            // shouldDisableDate={isWeekend}
-                            // disablePast
+                            shouldDisableDate={isWeekend}
+                            disablePast
                             slots={{
                               day: ServerDay,
                             }}
