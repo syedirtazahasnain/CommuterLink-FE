@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../../constants';
 
 const BePartOfCL = () => {
 
@@ -15,8 +16,7 @@ const signupRoute = () => {
                 <div className="col-md-7">
                     <div class="ratio ratio-16x9">
                         {/* <iframe src="https://www.youtube.com/embed/_SoviSNZjso" title="How Teslas Upgrade Over Time!" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe> */}
-                        <iframe src="https://www.youtube.com/embed/zG2pmgNLKBc" title="Your Second Video Title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+                        {/* <iframe src={`${BASE_URL}/assets/images/CommutersLinkVid.mp4`} title="Your Second Video Title" frameborder="0" allow="accelerometer; pause; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
                     </div>
                 </div>
                 <div className="col-md-5 text-center d-flex">

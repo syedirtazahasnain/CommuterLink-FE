@@ -383,6 +383,10 @@ body {
   text-align: justify;
 
 }
+.bg-dark-opaque{
+  /* background-color: rgba(0, 0, 0, .3); */
+  background-color: #0f6c40;
+}
 .text-center {
   margin: auto;
 

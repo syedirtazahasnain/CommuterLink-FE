@@ -13,7 +13,7 @@
   --bs-text-green: rgba(32, 158, 141, 1);
   --bg-light-secondary: rgba(239, 239, 239, 1);
   --bg-card-orange: #F89F5B;
-  --bg-orange: #F89F5B;
+  --bg-orange: hsl(26, 92%, 66%);
   --bg-card-pink: rgba(229, 63, 113, 1) ;
   --bg-card-purple: rgba(192, 63, 166, 1);
   --bg-card-green: #189583;
@@ -60,8 +60,61 @@
 .bg-pink{
   background-color: var(--bg-card-pink);
 }
- .card-pink:hover{
+ .btn-pink:hover{
   background-color: var(--bg-card-pink) !important;
+  color: #fff !important;
+ }
+ .btn-orange:hover{
+  background-color: var(--bg-card-orange) !important;
+  color: #fff !important;
+ }
+ .btn-purple:hover{
+  background-color: var(--bg-card-purple) !important;
+  color: #fff !important;
+ }
+ /* .card-pink:hover .fas{
+  color: #fff !important;
+ } */
+ .btn-pink:hover .fas{
+  color: #fff !important;
+ }
+ .btn-orange:hover .fas{
+  color: #fff !important;
+ }
+ .btn-purple:hover .fas{
+  color: #fff !important;
+ }
+
+ .btn-secondary-light{
+  border: 1px solid #3c3c3c2f !important;
+  background: #fff !important;
+ }
+
+ /* Active state for the button */
+.btn-pink:active, 
+.btn-pink:focus {
+    background-color: var(--bg-card-pink) !important; /* Adjust the active color as per your preference */
+    box-shadow: none; /* Remove box shadow on active state if you want */
+    outline: none; /* Remove outline on focus if you want */
+    color: white; /* Text color on active state */
+}
+.btn-orange:active, 
+.btn-orange:focus {
+    background-color: var(--bg-card-orange) !important; /* Adjust the active color as per your preference */
+    box-shadow: none; /* Remove box shadow on active state if you want */
+    outline: none; /* Remove outline on focus if you want */
+    color: white; /* Text color on active state */
+}
+.btn-purple:active, 
+.btn-purple:focus {
+    background-color: var(--bg-card-purple) !important; /* Adjust the active color as per your preference */
+    box-shadow: none; /* Remove box shadow on active state if you want */
+    outline: none; /* Remove outline on focus if you want */
+    color: white; /* Text color on active state */
+}
+
+ :target{
+  background-color: #0f6c40;
  }
  
  .card-pink1:hover{
@@ -70,13 +123,22 @@
  
  .card-orange:hover{
   background-color: var(--bg-card-orange) !important;
+  color: #fff !important;
  }
+ .card-orange:hover .fas{
+  color: #fff !important;
+ }
+ 
  .card-orange1:hover{
   background-color: var(--bg-card-orange) !important;
  }
  
  .card-purple:hover{
   background-color: var(--bg-card-purple) !important;
+  color: #fff !important;
+ }
+ .card-purple:hover .fas{
+  color: #fff !important;
  }
  .card-purple1:hover{
   background-color: var(--bg-card-purple) !important;
@@ -936,10 +998,14 @@ a.nav-link:hover {
 .arrow-icon:hover{
   color: black !important;
 }
+.bg-dark-opaque{
+  background-color: rgba(0, 0, 0, .5);
+}
 
 .new-banner-circle{
   right: "20px" !important;
-  top: "50%" !important;
+  /* top: "50%" !important; */
+  top: calc(50% - 20px);
   transform: 'translateY(-50%)' !important;
   width: "350px" !important;
 }
@@ -955,11 +1021,101 @@ a.nav-link:hover {
   transform: 'translateY(-50%)' !important;
   width: "350px" !important; */
 }
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .new-banner-rectangle {
     display: none;
   }
 }
+
+@media (mix-width: 1025px) {
+  .new-banner-rectangle {
+    position: relative; 
+    width: fit-content; 
+    left: "450px";
+  }
+} */
+
+.new-banner-rectangle {
+  position: absolute;
+  left: 30%;
+  transform: translateX(-50%); 
+  top: calc(50% - 0px); 
+  font-size: 24px;
+  font-weight: 500;
+}
+
+@media (max-width: 576px) {
+  .new-banner-rectangle {
+    display: none;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .new-banner-rectangle {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .new-banner-rectangle {
+    display: none;
+  }
+  
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+  .new-banner-rectangle {
+    display: block; 
+    width: 50%;
+    max-width: 900px;
+    position: relative;
+    font-size: 20px;
+    top: 200px;  }
+}
+
+
+@media  (min-width: 1021px) and (max-width: 1320px) {
+  .new-banner-rectangle {
+    display: block; 
+    width: 50%;
+    max-width: 900px;
+    position: relative;
+    font-size: 20px;
+    top: 400px;
+  }
+}
+@media  (min-width: 1321px) and (max-width: 1440px) {
+  .new-banner-rectangle {
+    display: block; 
+    width: 50%;
+    max-width: 900px;
+    position: relative;
+    font-size: 24px;
+    top: 500px;
+  }
+}
+
+@media (min-width: 1441px) {
+  .new-banner-rectangle {
+    display: block; 
+    width: 50%;
+    max-width: 900px;
+    position: relative;
+    font-size: 30px;
+    top: 700px;
+  }
+}
+@media (min-width: 2560px) {
+  .new-banner-rectangle {
+    display: block; 
+    width: 50%;
+    max-width: 900px;
+    position: relative;
+    font-size: 30px;
+    top: 900px;
+  }
+}
+
 
 .form-color-header{
   background: var(--bg-blue-green);
