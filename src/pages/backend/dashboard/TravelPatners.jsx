@@ -551,7 +551,7 @@ const TravelPatners = () => {
                 <div className="card-header" style={{ backgroundColor: "#1F5F5B" }}>
                   <h4 className="text-center fw-bold text-warning m-auto">
                     {" "}
-                    AGREEMENT INFORMATION{" "}
+                    YOUR TRAVEL PARTNERS{" "}
                   </h4>{" "}
                 </div>
                 <div className="card my-4 mx-4" style={{
@@ -835,7 +835,7 @@ const TravelPatners = () => {
                                     <div className="col-md-6">
                                       {seats !== "" ? (
                                         <>
-                                          <h5 className="text-dark-green fw-bold font-custom">No.of Seats:</h5>
+                                          <h5 className="text-dark-green fw-bold font-custom">No.of Seats Requested:</h5>
                                         </>
                                       ) : (
                                         <>

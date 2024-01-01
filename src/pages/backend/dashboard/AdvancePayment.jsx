@@ -284,6 +284,9 @@ const AdvancePayment = () => {
       <div className="card p-4  p-2">
         
           <div className="card-body px-5 text-dark">
+              <p>
+              You can pay through JazzCash and Debit/Credit Card only. You will have only 2 mins to enter your data, so please keep your Debit/Credit and Cnic card ready .
+              </p>
             <p>
               Money will stay in your wallet & will be transferred to car owner
               on weekly basis after you have availed the services.
@@ -313,7 +316,7 @@ const AdvancePayment = () => {
                     </div>
                   </div>
 
-                  <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
+                  {/* <div className="col-12 mb-2 bg-light  border border-success rounded rounded-3">
                     <div>
                       <button
                         className="font-custom btn  text-success fw-bold fs-5 lh-1"
@@ -329,7 +332,7 @@ const AdvancePayment = () => {
 
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-12 border bg-light advancecolor border-success rounded rounded-3">
                     <div>
                       <button
