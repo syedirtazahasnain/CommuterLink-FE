@@ -15,8 +15,8 @@ const signupRoute = () => {
             <div className="row g-0">
                 <div className="col-md-7">
                     <div class="ratio ratio-16x9">
-                        {/* <iframe src="https://www.youtube.com/embed/_SoviSNZjso" title="How Teslas Upgrade Over Time!" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe> */}
-                        {/* <iframe src={`${BASE_URL}/assets/images/CommutersLinkVid.mp4`} title="Your Second Video Title" frameborder="0" allow="accelerometer; pause; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
+                        <iframe src="https://www.youtube.com/embed/_SoviSNZjso" title="How Teslas Upgrade Over Time!" frameBorder="0" allow="accelerometer; pause; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                        <iframe src={`${BASE_URL}/assets/images/CommutersLinkVid.mp4`} title="Your Second Video Title" frameborder="0" allow="accelerometer; pause; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div className="col-md-5 text-center d-flex">
