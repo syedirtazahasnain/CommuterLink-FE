@@ -164,7 +164,6 @@ const Footer = () => {
 
                   </li>
                 </ul>
-                <p style= {{paddingLeft: "220px"}}>Coming Soon on Apps Store</p>
                 {/* <div className="container">
                 </div> */}
               </div>
