@@ -5,7 +5,7 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material'
 const NewBanner = () => {
 
   const handleScroll = () => {
-    document.getElementById('aboutSection').scrollIntoView();
+    document.getElementById('costEarningSection').scrollIntoView();
   }
 
   return (
@@ -15,7 +15,7 @@ const NewBanner = () => {
         className="ratio ratio-1x1 position-absolute new-banner-circle"
         style={{
           right: "20px",
-          top: "50%",
+          top: "calc(50% - 20px)",
           transform: 'translateY(-50%)',
           width: "400px"
         }}
@@ -26,27 +26,26 @@ const NewBanner = () => {
               <h1 className="fw-bold text-white">Welcome to CommutersLink</h1>{" "}
               <h2 className='text-yellow fw-bold'>Share to Care</h2>
             </Typography>
-            <i class="fa-solid fa-arrow-down fs-1 cursor-pointer arrow-icon"  onClick={() => handleScroll()}></i>
+            <i class="fa-solid fa-arrow-down fs-1 cursor-pointer arrow-icon" onClick={() => handleScroll()}></i>
           </CardContent>
         </Card>
       </div>
       <div
-        className="position-absolute new-banner-rectangle"
-        style={{
-          // left: "200px",
-          top: "90%",
-          transform: 'translateY(-180%)',
-          // width: "1150px"
-        }}
+        className="position-absolute px-0 new-banner-rectangle"
+        // style={{ margin: ' auto', left: 0, right: 0, textAlign: 'center', top: '550px', maxWidth: 'fit-content', width: '100%' }}
+        // style={{
+        //   left: "550px",
+        //   top: "93%",
+        //   transform: 'translateY(-180%)',
+        // }}
       >
-        <div className="p-0 d-flex bg-dark">
-          <div className="col-12 m-auto py-2 px-5" style={{color: "cyan !important"}}>
-            <h1 className='text-yellow'>CAR POOLING ON LONG TERM BASIS</h1>
+        <div className=" d-flex px-0 justify-content-center py-2" 
+        >
+          <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
+            <div className='text-yellow text-left ps-3'>CAR POOLING ON LONG TERM BASIS</div>
+          <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
+            <div className='text-yellow text-left '>Your Cost Saving Daily Commuting Solution!</div>
           </div>
-        </div>
-        <div className="p-0 d-flex bg-dark">
-          <div className="col-12 m-auto py-2 px-5" style={{color: "cyan !important"}}>
-            <h1 className='text-yellow'>Your Cost Saving Daily Commuting Solution!</h1>
           </div>
         </div>
       </div>

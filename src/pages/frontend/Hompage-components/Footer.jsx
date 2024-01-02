@@ -11,9 +11,9 @@ const Footer = () => {
   const home = () => {
     navigate("/")
   }
-  
-  const footer=()=>{
-   navigate("/footer");
+
+  const footer = () => {
+    navigate("/footer");
   }
 
   return (
@@ -29,19 +29,19 @@ const Footer = () => {
                 <p className="text-white fs-4 mt-1">To Remain Updated, Please Subscribe to Our Newsletters</p>
               </div>
               <div className="col-md-4 mt-2 text-center" >
-              &nbsp;
-                  <input 
-                    type="email"
-                    name="email" 
-                    class="input fs-5 rounded-3 border-0 px-5 mb-2 py-2 shadow shadow-sm" 
-                    placeholder="Enter Your Email" 
-                  />
-                  &nbsp;
-                  <input 
-                    className='btn-customfooter fs-5 text-white py-2   rounded-3' 
-                    type="submit" 
-                    value="Subscribe" 
-                  />
+                &nbsp;
+                <input
+                  type="email"
+                  name="email"
+                  class="input fs-5 rounded-3 border-0 px-5 mb-2 py-2 shadow shadow-sm"
+                  placeholder="Enter Your Email"
+                />
+                &nbsp;
+                <input
+                  className='btn-customfooter fs-5 text-white py-2   rounded-3'
+                  type="submit"
+                  value="Subscribe"
+                />
 
               </div>
             </div>
@@ -66,35 +66,37 @@ const Footer = () => {
 
               <div className="col-lg-2 col-md-6 footer-links  my-4">
                 <h4>Useful Links</h4>
-                <ul>
-                  <li className='cursor-pointer'>
-                    <i className="bx bx-chevron-right cursor-pointer"></i> <DomLink to="carousel" onClick={home} smooth="true" offset={20} duration={50}>Home</DomLink>
+                <ul className="list-unstyled"> {/* Using list-unstyled to remove default list styles */}
+                  <li className="d-flex align-items-center cursor-pointer py-1">
+                    <i className="bx bx-chevron-right me-2"></i> {/* Added a margin to the right for spacing */}
+                    <DomLink to="carousel" onClick={home} smooth="true" offset={20} duration={50}>Home</DomLink>
                   </li>
-                  <li className='cursor-pointer'>
-                    <i className="bx bx-chevron-right cursor-pointer"></i>
+                  <li className="d-flex align-items-center cursor-pointer py-1">
+                    <i className="bx bx-chevron-right me-2"></i>
                     <DomLink to="costEarningSection" onClick={home} smooth="true" offset={20} duration={50}>Concept</DomLink>
                   </li>
-                  <li className='cursor-pointer'>
-                    <i className="bx bx-chevron-right"></i>
+                  <li className="d-flex align-items-center cursor-pointer py-1">
+                    <i className="bx bx-chevron-right me-2"></i>
                     <DomLink to="howworks" onClick={home} offset={20} duration={50}>How It Works?</DomLink>
                   </li>
-                  <li className='cursor-pointer'>
-                    <i className="bx bx-chevron-right"></i>
+                  <li className="d-flex align-items-center cursor-pointer py-1">
+                    <i className="bx bx-chevron-right me-2"></i>
                     <DomLink to="contribute" smooth="true" onClick={home} offset={20} duration={50}>Contribute</DomLink>
                   </li>
-                  <li className='cursor-pointer'>
-                    <i className="bx bx-chevron-right"></i>
+                  <li className="d-flex align-items-center cursor-pointer py-1">
+                    <i className="bx bx-chevron-right me-2"></i>
                     <DomLink to="contact" onClick={home} smooth="true" offset={20} duration={50}>Contact</DomLink>
                   </li>
-                  <li className='cursor-pointer'>
-                    <i className="bx bx-chevron-right"></i>
+                  <li className="d-flex align-items-center cursor-pointer py-1">
+                    <i className="bx bx-chevron-right me-2"></i>
                     <Link to="/faq" onClick={home} smooth="true" offset={20} duration={50}>FAQs</Link>
                   </li>
-                  <li className='cursor-pointer'>
-                    <i className="bx bx-chevron-right"></i>
+                  <li className="d-flex align-items-center cursor-pointer py-1">
+                    <i className="bx bx-chevron-right me-2"></i>
                     <Link to="/policy" onClick={home} smooth="true" offset={20} duration={50}>Policy</Link>
                   </li>
                 </ul>
+
               </div>
 
               <div className="col-lg-3 col-md-6 footer-links  my-4">
@@ -102,15 +104,15 @@ const Footer = () => {
                 <ul>
                   <li className='mb-2'>
                     <i className="fa-solid fa-location-dot text-success"></i>
-                  
+
                     <span className="ml-2">
-                    Office # 7, 14 & 15, Ground Floor, <br />
+                      Office # 7, 14 & 15, Ground Floor, <br />
                     </span>
                     <span className='ms-4'>
-                    Hamdan Heights, Koral Interchange,<br/>
+                      Hamdan Heights, Koral Interchange,<br />
                     </span>
                     <span className='ms-4'>
-                    Express Highway,  Islamabad, 46000.
+                      Express Highway,  Islamabad, 46000.
                     </span>
                   </li>
                   <li className='mb-2'>
@@ -146,18 +148,19 @@ const Footer = () => {
                 <ul className="list-unstyled d-flex pt-1">
                   <li className="mr-3">
                     <a href="https://play.google.com/store/apps/details?id=com.karwaan.commuterslink" target='_blank' rel='noopener noreferrer'>
-                    <img
-                      className="img-fluid"
-                      // src="https://www.be.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
-                      src="https://be.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
+                      <img
+                        className="img-fluid"
+                        // src="https://www.be.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
+                        src="https://be.commuterslink.com/front_assets/img/google-play-store.png" style={{ width: "400px" }} />
 
-                  </a>
+                    </a>
                   </li>
                   <li>
                     <img
                       className="img-fluid"
                       /* src="https://www.commuterslink.com/front_assets/img/Apple-store.png" style={{ width: "400px" }} /> */
                       src="https://be.commuterslink.com/front_assets/img/Apple-store.png" style={{ width: "400px" }} />
+                      <p className='text-center'>Coming Soon on App Store</p>
 
                   </li>
                 </ul>
