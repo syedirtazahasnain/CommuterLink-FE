@@ -740,7 +740,7 @@ const TravelBuddyProfile = () => {
                           <div className="col-md-6">
                             {seats && seats !== "" ? (
                               <>
-                                <h5 className="text-dark-green fw-bold font-custom">No.of Seats:</h5>
+                                <h5 className="text-dark-green fw-bold font-custom">No.of Seats Requested:</h5>
                               </>
                             ) : (
                               <>

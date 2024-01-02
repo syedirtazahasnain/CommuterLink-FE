@@ -574,8 +574,8 @@ const MyWallet = () => {
               <div className="col-md-4 px-4">
                 <div className="row  justify-content-between mb-2">
                   <div className="col-md-12 col-sm-12  py-6 background_body text-center border-2 rounded-4">
+                    <h1>Your Current Balance</h1>
                     <div className="text-center">  <i className=" p-3 wallet-margin fa-solid fa-wallet fs-1"></i></div>
-
                     <h1 className="py-4 text-center fw-bold  ">
                       Rs. {walletAmount} /-
                     </h1>

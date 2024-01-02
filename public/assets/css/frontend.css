@@ -35,8 +35,73 @@ body{
   background-color: var(--bg-blue-green) !important;
 }
 
+.bg-dark-opaque{
+  background-color: rgba(0, 0, 0, .5);
+}
+
 .text-green{
   color: var(--bs-text-green);
+}
+
+/* @media (max-width: 1024px) {
+  .new-banner-rectangle {
+    display: none;
+  }
+}
+
+@media (max-width: 1025px) {
+  .new-banner-rectangle {
+    position: absolute;
+    left: "0px";
+  }
+} */
+/* Default styling for the div */
+.new-banner-rectangle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Center the div horizontally */
+  top: calc(50% - 20px); /* Adjust this value as needed to vertically center */
+  /* Add any other default styles you need */
+}
+
+/* Mobile Devices: Screens up to 576px */
+@media (max-width: 576px) {
+  .new-banner-rectangle {
+    width: 90%; /* Adjust as per your requirement */
+    max-width: 300px; /* Adjust as per your requirement */
+  }
+}
+
+/* Tablets: Screens between 577px and 768px */
+@media (min-width: 577px) and (max-width: 768px) {
+  .new-banner-rectangle {
+    width: 80%; /* Adjust as per your requirement */
+    max-width: 400px; /* Adjust as per your requirement */
+  }
+}
+
+/* Laptops: Screens between 769px and 992px */
+@media (min-width: 769px) and (max-width: 992px) {
+  .new-banner-rectangle {
+    width: 70%; /* Adjust as per your requirement */
+    max-width: 500px; /* Adjust as per your requirement */
+  }
+}
+
+/* Desktops: Screens between 993px and 1200px */
+@media (min-width: 993px) and (max-width: 1200px) {
+  .new-banner-rectangle {
+    width: 60%; /* Adjust as per your requirement */
+    max-width: 600px; /* Adjust as per your requirement */
+  }
+}
+
+/* Large Desktops: Screens above 1200px */
+@media (min-width: 1201px) {
+  .new-banner-rectangle {
+    width: 50%; /* Adjust as per your requirement */
+    max-width: 700px; /* Adjust as per your requirement */
+  }
 }
 
 .card-pink{
