@@ -30,7 +30,7 @@ const RechargeWallet = () => {
   // const [payment, setPayment] = useState("");
   const [profileType, setProfileType] = useState("");
   const userToken = useSelector((s) => s.login.data.token);
-  const paymentURL =`${API_URL}/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
+  const paymentURL = `${API_URL}/getpayments3?id=${userId}&amountPaid=${payment}&mobile=sjkdhaskjdhs`;
 
   const route = () => {
     setSubmit(true);
@@ -39,7 +39,7 @@ const RechargeWallet = () => {
       navigate("/dashboard");
     }
   };
-  
+
   useEffect(() => {
     getDashboardData();
     getMemberData();
@@ -68,20 +68,17 @@ const RechargeWallet = () => {
 
   const getDashboardData = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/matches/office`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/matches/office`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
-       if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
+      if (jsonresponse.drivers && jsonresponse.drivers.length > 0) {
         setProfileType("Driver");
         setMemberId(jsonresponse.drivers[0].contact_id);
       }
@@ -92,21 +89,18 @@ const RechargeWallet = () => {
   };
 
   const getProfileData = async () => {
-    try{
-      const response = await fetch(
-        `${API_URL}/api/v1/profile`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            Authorization : `Bearer ${userToken}`,
-          },
-        }
-      );
+    try {
+      const response = await fetch(`${API_URL}/api/v1/profile`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
-      if(jsonresponse){
+      if (jsonresponse) {
         setUserId(jsonresponse[0].contact.user_id);
       }
       console.log("Advance Payment Profile Data", jsonresponse);
@@ -117,24 +111,20 @@ const RechargeWallet = () => {
 
   const getMemberData = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/requests`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/requests`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
       if (jsonresponse.data && jsonresponse.data.length > 0) {
-        if(profileType === "Driver"){
+        if (profileType === "Driver") {
           setMemberId("");
-        }
-        else{
+        } else {
           setMemberId(jsonresponse.data[0].contact_id);
         }
       }
@@ -152,7 +142,7 @@ const RechargeWallet = () => {
     const windowHeight = 600; // Height of the new window
     const leftPosition = (screenWidth - windowWidth) / 2;
     const topPosition = (screenHeight - windowHeight) / 2;
-  
+
     // Open a new window at the center
     const newWindow = window.open(
       paymentURL,
@@ -165,43 +155,41 @@ const RechargeWallet = () => {
       if (newWindow && newWindow.closed) {
         clearInterval(intervalId);
         getPaymentSuccess();
-        };
+      }
     }, 1000);
   };
-  
+
   const getPaymentSuccess = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/apppaymentinquiry`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/apppaymentinquiry`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
-      if(jsonresponse.success === true){
+      if (jsonresponse.success === true) {
         setWindowClosedManually(true);
       }
       console.log("Payment Success Message:", jsonresponse);
     } catch (error) {
       console.error("An error occurred:", error);
     }
-  }
+  };
 
   return (
     <div>
       <div className="page-title">
         <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
           <div className="d-flex justify-content-between align-items-xl-baseline">
-            <h3 className="bg-medium-teal text-dark-green my-2 fw-bold m-0">  TWO WEEKS ADVANCE MIN. PAYMENT DUE: RS {payment}/-{" "}</h3>
-            <Link
-              to={"/dashboard"} >
-
+            <h3 className="bg-medium-teal text-dark-green my-2 fw-bold m-0">
+              {" "}
+              PAYMENT: RS {payment}/-{" "}
+            </h3>
+            <Link to={"/dashboard"}>
               <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                 <i className="fas fa-angle-left text-white" />
                 Back
@@ -232,39 +220,33 @@ const RechargeWallet = () => {
                   <div className="row">
                     <div className="col-12 mb-2  border border-success rounded rounded-3 bg-light">
                       <div>
-                        <button 
-                          className="font-custom btn  text-success fw-bold fs-5 lh-1" 
+                        <button
+                          className="font-custom btn  text-success fw-bold fs-5 lh-1"
                           onClick={openAndCloseWindow}
                         >
-                          <span><i className="fa-solid fs-3 fa-wallet text-success mx-2" /></span>
+                          {/* <span><i className="fa-solid fs-3 fa-wallet text-success mx-2" /></span> */}
+                          <span>
+                            <img
+                              src={`${BASE_URL}/assets/images/download_visa_img.jpeg`}
+                              className="card-img-top w-40px m-auto mx-4"
+                            />
+                          </span>
                           Credit/Debit Card
-                        </button>
-                      </div>
-                    </div>
-                    <div className="col-12 mb-2  border border-success rounded rounded-3 bg-light">
-                      <div>
-                        <button 
-                          className="font-custom btn  text-success fw-bold fs-5 lh-1" 
-                          // onClick={openAndCloseWindow}
-                        >
-                          <span><img
-                            src={`${BASE_URL}/assets/images/ep.png`}
-                            className="card-img-top w-40px m-auto mx-4"
-                          /></span>
-                          easypaisa
                         </button>
                       </div>
                     </div>
                     <div className="col-12 border advancecolor border-success rounded rounded-3 bg-light">
                       <div>
-                        <button 
+                        <button
                           className="font-custom btn btncol advancecolor text-success fw-bold fs-5 lh-1"
-                          onClick={openAndCloseWindow} 
+                          onClick={openAndCloseWindow}
                         >
-                          <span><img
-                            src={`${BASE_URL}/assets/images/jazz.png`}
-                            className="card-img-top w-40px m-auto mx-4"
-                          /></span>
+                          <span>
+                            <img
+                              src={`${BASE_URL}/assets/images/jazz.png`}
+                              className="card-img-top w-40px m-auto mx-4"
+                            />
+                          </span>
                           Jazz Cash
                         </button>
                       </div>
