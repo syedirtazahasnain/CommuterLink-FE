@@ -21,8 +21,8 @@ const AmountValidation = () => {
     };
 
     const handleCheckAmount = () => {
-        if (amount < 2000) {
-            displayNotification("warning", "Amount must be at least 2000");
+        if (amount < 5) {
+            displayNotification("warning", "Amount must be at least in double digits");
         }
         else {
             dispatch(setAmountState(amount));
