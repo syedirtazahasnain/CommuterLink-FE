@@ -149,7 +149,7 @@ const Contact = () => {
 
         <div className="container">
           <div className="row text-left">
-            <div className="col-md-5 contactcolor px-5 pt-3 pb-4 mb-3 sha m-auto rounded rounded-4">
+            <div className="col-md-5 bg-white px-5 pt-3 pb-4 mb-3 sha m-auto rounded rounded-4">
               <h3 className="text-success text-center pb-3">Contact Us</h3>
               <form action="#" method="post">
                 <div className="row">
