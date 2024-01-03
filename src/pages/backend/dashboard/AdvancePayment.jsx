@@ -308,9 +308,13 @@ const AdvancePayment = () => {
                         onClick={openAndCloseWindow}
                         disabled={windowClosedManually} 
                       >
-                        <span className="font-custom">
-                          <i className="fa-solid fs-3 fa-wallet text-success mx-2" />
-                        </span>
+                        {/* <span><i className="fa-solid fs-3 fa-wallet text-success mx-2" /></span> */}
+                        <span>
+                            <img
+                              src={`${BASE_URL}/assets/images/download_visa_img.jpeg`}
+                              className="card-img-top w-40px m-auto mx-4"
+                            />
+                          </span>
                         Credit/Debit Card
                       </button>
                     </div>

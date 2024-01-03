@@ -450,12 +450,12 @@ const PartnerCancellation = () => {
           (
             <div className="">
 
-              <h5 className="card bg-medium-teal p-2  px-4 text-dark-green ">{`Please choose a termination date from the calendar below. It's important to keep in mind that the agreement will only be concluded five days after the date you select. Additionally, a notification will be sent to your travel partner, ${name}. This grace period allows your travel partner, who has reserved a seat for you, ample time to seek an alternative arrangement.`}</h5>
+              <h5 className="card bg-medium-teal p-2  px-4 text-dark-green ">{`Please choose a termination date from the calendar below. The car offerer will have to be given 5 days notice so as to make alternate arrangements. Hence you can only select a date of cancellation 5 days ahead of today. Additionally, a notification will be sent to your travel partner, ${name}.`}</h5>
 
             </div>
           )
           :
-          (<h5 className="card bg-medium-teal p-2  px-4 text-dark-green ">{`Please choose a termination date from the calendar below. It's important to keep in mind that the agreement will only be concluded five days after the date you select. Additionally, a notification will be sent to your travel partner, ${name}. This grace period allows your travel partner, who has reserved a seat for you, ample time to seek an alternative arrangement.`}</h5>
+          (<h5 className="card bg-medium-teal p-2  px-4 text-dark-green ">{`Please choose a termination date from the calendar below. The car offerer will have to be given 5 days notice so as to make alternate arrangements. Hence you can only select a date of cancellation 5 days ahead of today. Additionally, a notification will be sent to your travel partner, ${name}.`}</h5>
 
           )}
 
