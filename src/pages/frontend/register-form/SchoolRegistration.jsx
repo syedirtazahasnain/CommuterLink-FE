@@ -2298,10 +2298,10 @@ const SchoolRegistration = () => {
                 {" "}
                 <h6 className="text-left d-flex">
                   {" "}
-                  <i className="fa-solid fa-sticky-note  text-warning"></i>
-                  <li style={{ listStyle: "none" }}>
+                  <i className="fa-solid fa-lock fa-fw text-danger text-center pe-3"></i>
+                  <li className="text-danger" style={{ listStyle: "none" }} >
                     {" "}
-                    Note - Your data is protected within a secured environment.
+                    Your data is protected within a secured environment.
                   </li>
                 </h6>
                 <button

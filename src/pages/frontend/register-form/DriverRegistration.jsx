@@ -5574,7 +5574,7 @@ const DriverRegistration = () => {
                       {" "}
                       <h6 className="text-left d-flex">
                         {" "}
-                        <i className="fa-solid fa-sticky-note  text-danger"></i>
+                        <i className="fa-solid fa-lock fa-fw text-danger text-center pe-3"></i>
                         <li className="text-danger" style={{ listStyle: "none" }} >
                           {" "}
                         Your data is protected within a secured environment.

@@ -673,6 +673,8 @@ const MyWallet = () => {
                           )}
                         </TableBody>
                       </Table>
+                      <br />
+                        <p className="text-center font-weight-bold">To pay to the car offerer please mark your attendance regularly.</p>
                     </div>
                   </div>
                 </div>
