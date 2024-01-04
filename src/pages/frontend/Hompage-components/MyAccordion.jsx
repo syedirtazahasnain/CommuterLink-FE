@@ -30,8 +30,8 @@ const MyAccordion = () => {
           </div> */}
           <div className="col-md-6 d-flex p-5 justify-content-end">
             <div className="container">
-              <h3 className="text-dark fw-bold mb-2">How CommutersLink is Different</h3>
-              <h1 className="text-green mb-3">Cost Sharing & Saving</h1>
+              <h1 className="text-dark fw-bold mb-2">How CommutersLink is Different</h1>
+              <h3 className="text-green mb-3">Cost Sharing & Saving</h3>
               <p className="text-dark fs-5">The basic difference between other carpooling
                 apps and CommutersLink is that we are offering long term solutions for daily commute
                 instead of onetime ride. The concept is to collectively
@@ -92,7 +92,7 @@ const MyAccordion = () => {
           </div>
           <div className="col-md-5 p-5 d-block justify-content-start mb-5">
             <div className=" collapse show fade" id="collapseOne" data-bs-parent="#costEarningSection">
-              <img className='img-fluid w-100  p-3' src={`${BASE_URL}/assets/images/useyourcar.jpeg`} style={{ maxWidth: '750px', maxHeight:"400px" }} />
+              <img className='img-fluid w-100  p-3' src={`${BASE_URL}/assets/images/banner-big.jpg`} style={{ maxWidth: '750px', maxHeight:"400px" }} />
               <h5 className="text-dark fw-bold ps-3 mb-3">Choose between Using your  Car or Ride with
                 Others</h5>
               <p className="text-dark mb-3 ps-3 text-justified">CommutersLink simultaneously offers you partners, who are a suitable match to ride your car and at the same time matches you up with car owners with whom we think you can ride with. Both choices are made available at the same time</p>

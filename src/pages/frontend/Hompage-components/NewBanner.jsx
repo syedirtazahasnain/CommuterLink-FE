@@ -10,7 +10,7 @@ const NewBanner = () => {
 
   return (
     <div className='position-relative' id='carousel'>
-      <video className='w-100' autoPlay loop>
+      <video className='w-100' autoPlay loop muted>
         <source src={`${BASE_URL}/assets/images/banner_video.mp4`} type="video/mp4" />
       </video>
       <div
@@ -41,12 +41,12 @@ const NewBanner = () => {
       //   transform: 'translateY(-180%)',
       // }}
       >
-        <div className=" d-flex px-0 justify-content-center py-2 bg-dark-opaque"
+        <div className=" d-flex px-0 justify-content-center py-2"
         >
           <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
-            <div className='text-yellow text-left ps-3'>CAR POOLING ON LONG TERM BASIS</div>
+            <div className='text-white text-left ps-3 text-shadow'>CAR POOLING ON LONG TERM BASIS</div>
             <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
-              <div className='text-yellow text-left '>Your Cost Saving Daily Commuting Solution!</div>
+              <div className='text-white text-left text-shadow'>Your Cost Saving Daily Commuting Solution!</div>
             </div>
           </div>
         </div>
