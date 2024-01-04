@@ -21,7 +21,7 @@ body{
 }
 .new-banner-circle{
   right: "20px" !important;
-  top: "50%" !important;
+  top: "30%" !important;
   transform: 'translateY(-50%)' !important;
   width: "350px" !important;
 }
@@ -41,6 +41,10 @@ body{
 
 .text-green{
   color: var(--bs-text-green);
+}
+
+.text-shadow{
+  text-shadow: 2px 2px #000;
 }
 
 /* @media (max-width: 1024px) {

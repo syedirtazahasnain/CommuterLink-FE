@@ -985,6 +985,10 @@ a.nav-link:hover {
 .bg-teal{
   background-color: var(--bg-light-teal) !important;
 }
+
+.text-shadow{
+  text-shadow: 2px 2px #000;
+}
 .bg-teal-dark{
   background-color: var(--bg-dark-teal) !important;
 }
@@ -1005,7 +1009,7 @@ a.nav-link:hover {
 .new-banner-circle{
   right: "20px" !important;
   /* top: "50%" !important; */
-  top: calc(50% - 20px);
+  top: calc(50% - 10px);
   transform: 'translateY(-50%)' !important;
   width: "350px" !important;
 }
@@ -1081,7 +1085,7 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 20px;
-    top: 400px;
+    top: 200px;
   }
 }
 @media  (min-width: 1321px) and (max-width: 1440px) {
@@ -1091,7 +1095,7 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 24px;
-    top: 500px;
+    top: 300px;
   }
 }
 
