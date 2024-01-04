@@ -784,7 +784,7 @@ const TravelBuddyProfile = () => {
                           <div className="col-md-6">
                             {cancellation_date && cancellation_date !== null ? (
                               <>
-                                <h5 className="text-dark-green fw-bold font-custom">Cancel Agreement Date:</h5>
+                                <h5 className="text-dark-green fw-bold font-custom">Travel Partner Cancellation Date:</h5>
                               </>
                             ) : (
                               <></>
