@@ -285,7 +285,7 @@ const AdvancePayment = () => {
         
           <div className="card-body px-5 text-dark">
               <p>
-              You can pay through JazzCash and Debit/Credit Card only. You will have only 2 mins to enter your data, so please keep your Debit/Credit and Cnic card ready .
+              You can pay through JazzCash and Debit/Credit Card only. You will have only 2 mins to enter your data, so please keep your Debit/Credit and CNIC card ready .
               </p>
             <p>
               Money will stay in your wallet & will be transferred to car owner
