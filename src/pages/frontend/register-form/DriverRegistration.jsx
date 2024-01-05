@@ -20,7 +20,6 @@ import Swal from "sweetalert2";
 import { displayNotification } from "../../../helpers";
 
 const eighteenYearsAgo = dayjs().subtract(18, "years");
-
 const DriverRegistration = () => {
 
   const navigate = useNavigate();
@@ -41,6 +40,8 @@ const DriverRegistration = () => {
   const route = () => {
     navigate("/seatcostverification");
   };
+
+
 
   const handleCarBrandChange = (e) => {
     let value = e.target.value;
@@ -825,7 +826,7 @@ const DriverRegistration = () => {
     }
   };
 
-  const handleDateChange = (newDate) => {
+const handleDateChange = (newDate) => {
     if (newDate) {
       const newDateObject = dayjs(newDate);
       setSelectedDate(newDateObject);
@@ -837,6 +838,19 @@ const DriverRegistration = () => {
       const newDateObject = dayjs(newDate);
       setInputValidUptoMySelf(newDateObject);
     }
+  };
+
+  const today = dayjs();
+  const threeMonthsLater = today.add(3, 'month');
+  const maxAllowedDate = dayjs().add(3, 'month').endOf('month');
+
+  useEffect(() => {
+    // Auto-select the first date after 3 months
+    setInputValidUptoMySelf(maxAllowedDate);
+  }, []);
+
+  const shouldDisableDate = (date) => {
+    return date.isAfter(maxAllowedDate);
   };
 
   const handleValidDriverChange = (newDate) => {
@@ -3841,6 +3855,7 @@ const DriverRegistration = () => {
                                   value={inputValidUptoMySelf}
                                   onChange={handleValidChange}
                                   disablePast
+                                  shouldDisableDate={shouldDisableDate}
                                 />
                               </LocalizationProvider>
                             </Form.Group>
@@ -4249,6 +4264,7 @@ const DriverRegistration = () => {
                                   value={inputDriverValidUpto}
                                   onChange={handleValidDriverChange}
                                   disablePast
+                                  shouldDisableDate={shouldDisableDate}
                                 />
                               </LocalizationProvider>
                               {/* <Form.Control
@@ -4677,6 +4693,7 @@ const DriverRegistration = () => {
                                 value={inputValidUptoMySelf}
                                 onChange={handleValidChange}
                                 disablePast
+                                shouldDisableDate={shouldDisableDate}
                               />
                             </LocalizationProvider>
                           </Form.Group>
@@ -4973,6 +4990,7 @@ const DriverRegistration = () => {
                                   value={inputDriverValidUpto}
                                   onChange={handleValidDriverChange}
                                   disablePast
+                                  shouldDisableDate={shouldDisableDate}
                                 />
                               </LocalizationProvider>
                               {/* <Form.Control
