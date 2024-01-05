@@ -1129,6 +1129,22 @@ const TravelPatners = () => {
                                             <h5 className="fw-bold text-secondary">{date && formatDate(date)}</h5>
                                           </div>
                                         </div>
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {cancelDate !== "" ? (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
+                                              </>
+                                            ) : (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-secondary">{cancelDate && formatDate(cancelDate)}</h5>
+                                          </div>
+                                        </div>
 
                                       </div>
                                       <div className="text-center">

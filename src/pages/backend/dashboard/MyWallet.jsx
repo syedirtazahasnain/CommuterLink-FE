@@ -674,7 +674,16 @@ const MyWallet = () => {
                         </TableBody>
                       </Table>
                       <br />
-                        <p className="text-center font-weight-bold">To pay to the car offerer please mark your attendance regularly.</p>
+                      {userType === 0 ?
+                      (
+                        <p className="text-center font-weight-bold fs-5">To pay to the car offerer please mark your attendance regularly.</p>
+                      ) :
+                      (
+                        <div>
+                        <p className="text-center font-weight-bold fs-5">To receive payment in your wallet please mark your attendace regularly.</p>
+                        </div>
+
+                      )}
                     </div>
                   </div>
                 </div>
