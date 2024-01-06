@@ -50,14 +50,14 @@ const MyAccordion = () => {
     return null;
   };
   return (
-    <div>
+    <div className="accordion-padding">
       {/* <div className="container">
         <h1 className="text-light text-center py-4 bg-col-3">
           Your Fuel-Saving Daily Commuting Solution!
         </h1>
       </div> */}
       <div id="costEarningSection">
-        <div className="row g-0 bg-light-secondary">
+        <div className="row g-0 bg-light-secondary ">
           {/* <div className="col-md-1">
           </div> */}
           <div className="col-md-6 d-flex p-5 justify-content-end">

@@ -11,14 +11,15 @@ const NewBanner = () => {
 
   return (
     <>
-      <div className='position-relative'>
+      <div className='position-relative video-container'>
       <video className='video-width' autoPlay loop muted>
         <source className="home-video" src={`${BASE_URL}/assets/images/banner_video.mp4`} type="video/mp4" />
       </video>
       <div
-        className="position-absolute pt-1 rounded-top"
+        className="position-absolute pt-1 rounded-top signup-mobile"
         style={{
-          right: "80px",
+          right: "40px",
+          paddingLeft:'20px',
           top: "calc(50% - 20px)",
           transform: 'translateY(-50%)',
         
@@ -29,12 +30,6 @@ const NewBanner = () => {
       </div>
       <div
         className="position-absolute px-0 new-banner-rectangle"
-      // style={{ margin: ' auto', left: 0, right: 0, textAlign: 'center', top: '550px', maxWidth: 'fit-content', width: '100%' }}
-      // style={{
-      //   left: "550px",
-      //   top: "93%",
-      //   transform: 'translateY(-180%)',
-      // }}
       >
         <div className=" d-flex px-0 justify-content-center py-2"
         >
