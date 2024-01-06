@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Component } from "react";
 
 const MyAccordion = () => {
-  const [openCollapse, setOpenCollapse] = useState('');
+  const [openCollapse, setOpenCollapse] = useState('#collapseOne');
   const navigate = useNavigate();
   const signupRoute = () => {
     navigate("/signup");
