@@ -90,7 +90,7 @@ const Navbar = () => {
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item nav-grey">
                     <Link
-                      className="nav-link text-black mr-3 ml-3"
+                      className="nav-link text-black mr-3 ml-3 fw-bold fs-6"
                       style={checkStatus ? { pointerEvents: "none" } : null}
                       to="carousel"
                       onClick={home}
@@ -100,7 +100,7 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item nav-grey">
                     <Link
-                      className="nav-link text-black mr-3 ml-3"
+                      className="nav-link text-black mr-3 ml-3 fw-bold fs-6"
                       to="costEarningSection"
                       style={checkStatus ? { pointerEvents: "none" } : null}
                       onClick={home}
@@ -113,7 +113,7 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item nav-grey">
                     <Link
-                      className="nav-link text-black mr-3 ml-3"
+                      className="nav-link text-black mr-3 ml-3 fw-bold fs-6"
                       style={checkStatus ? { pointerEvents: "none" } : null}
                       to="howworks"
                       onClick={home}
@@ -125,7 +125,7 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item nav-grey">
                     <Link
-                      className="nav-link text-black mr-3 ml-3"
+                      className="nav-link text-black mr-3 ml-3 fw-bold fs-6"
                       style={checkStatus ? { pointerEvents: "none" } : null}
                       to="contribute"
                       smooth="true"
@@ -133,13 +133,13 @@ const Navbar = () => {
                       offset={20}
                       duration={50}
                     >
-                      CONTRIBUTE
+                      IMPACT
                     </Link>
 
                   </li>
                   <li className="nav-item nav-grey">
                     <DomLink
-                      className="nav-link text-black mr-3 ml-3 text-dark"
+                      className="nav-link text-black mr-3 ml-3 text-dark fw-bold fs-6"
                       style={checkStatus ? { pointerEvents: "none" } : null}
                       to="/Faq"
                     >
@@ -148,7 +148,7 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item nav-grey">
                     <Link
-                      className="nav-link text-black mr-3 ml-3"
+                      className="nav-link text-black mr-3 ml-3 fw-bold fs-6"
                       style={checkStatus ? { pointerEvents: "none" } : null}
                       to="contact"
                       onClick={home}
@@ -162,16 +162,16 @@ const Navbar = () => {
                 </ul>
 
                 <div>
-                  <button
+                  {/* <button
                     className="btn-custom mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                     onClick={signupRoute}
                     disabled={checkStatus}
                   >
                     Sign up
-                  </button>
+                  </button> */}
 
                   <button
-                    className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
+                    className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold fs-6"
                     onClick={loginRoute}
                     disabled={checkStatus}
                   >

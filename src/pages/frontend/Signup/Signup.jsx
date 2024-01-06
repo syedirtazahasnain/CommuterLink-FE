@@ -392,9 +392,10 @@ const Signup = () => {
     setFullName(value);
 
     if (value.replace(/ /g, "").length < 3) {
-      setFullNameError(
-        "Full Name must contain at least 3 alphabetic characters (excluding spaces)"
-      );
+      // setFullNameError(
+      //   "Full Name must contain at least 3 alphabetic characters (excluding spaces)"
+      // );
+      displayNotification("warning", "Full Name must contain at least 3 alphabetic characters (excluding spaces)Please Check Terms of Service");
     } else {
       setFullNameError("");
     }
@@ -450,13 +451,16 @@ const Signup = () => {
       <div>
         <section
           id="sign-up"
-          className="mt-5"
-          style={{ backgroundColor: "#eee" }}
+
+          style={{ backgroundColor: "#eee", borderTopLeftRadius: '20px', borderTopRightRadius: '20px' }}
         >
-          <div className="container">
-            {" "}
+          <div className="container rounded-top">
+            <div className="row d-flex">
+              <div className="col-md-6  p-4 text-center text-dark fs-5 fw-bold" style={{ backgroundColor: 'white', borderTopLeftRadius: '20px' }}><i className="fa-solid fa-car text-dark"></i>Looking for a car</div>
+              <div className="col-md-6  p-4 text-center text-warning fs-5 fw-bold" style={{ backgroundColor: '#3D3E3E', borderTopRightRadius: '20px' }}><i className="fa-regular fa-steering-wheel"></i>Offer Your car</div>
+            </div>
             <div className="row">
-              <div
+              {/* <div
                 className="col-md-6 d-flex"
                 style={{
                   marginTop: "12vh",
@@ -513,22 +517,22 @@ const Signup = () => {
                     </h4>
                   </Carousel.Item>
                 </Carousel>
-                {/* </div> */}
-              </div>
+             
+              </div> */}
 
-              <div className="col-md-5 mb-2 px-5">
+              <div className="col-12 col-md-12 col-sm-6 mb-2 px-5">
                 <h1
-                  className="text-center text-custom  mb-2"
+                  className="text-center text-custom"
                   style={{
                     color: "#198754",
-                    marginBottom: "5px",
-                    marginTop: "10vh",
+                    marginBottom: "2px",
+                    marginTop: "2px",
                   }}
                 >
                   {" "}
                   Sign up
                 </h1>{" "}
-                <p className="text-center fs-6 text-danger text-custom">
+                {/* <p className="text-center fs-6 text-danger text-custom">
                   {" "}
                   <div
                     className="alert alert-info alert-dismissible fade show"
@@ -552,13 +556,11 @@ const Signup = () => {
                       aria-label="Close"
                     ></button>
                   </div>
-                  {/* <div class="alert alert-danger  text-center alert-dismissible text-danger fs-6" role="alert">
-                            <i class="fa-solid fa-triangle-exclamation fs-6 text-warning"></i> You may proceed with registration if you are 18 years or older. For students below 18 years their parents can register
-                          </div> */}
-                </p>{" "}
+                
+                </p> */}
                 <Form className="text-center">
                   <Form.Group
-                    className="mt-3 mb-1 text-center"
+                    className="mt-2 mb-1 text-center"
                     controlId="formfullName"
                   >
                     <TextField
@@ -577,7 +579,7 @@ const Signup = () => {
                   </Form.Group>
 
                   <Form.Group
-                    className="mt-3 text-center"
+                    className="mt-2 text-center"
                     controlId="formBasicEmail"
                   >
                     <TextField
@@ -591,11 +593,13 @@ const Signup = () => {
                       // required
                       size="small"
                       error={!isValidEmail}
-                      helperText={!isValidEmail && "Please enter a valid email"}
+                      helperText={!isValidEmail &&
+                        displayNotification( "Please enter a valid email")
+                      }
                     />
                   </Form.Group>
                   <Form.Group
-                    className="mt-3 text-center"
+                    className="mt-2 text-center"
                     controlId="formBasicEmail"
                   >
                     <TextField
@@ -614,13 +618,14 @@ const Signup = () => {
                       error={!isValidPhoneNumber && phoneNumber !== ""}
                       helperText={
                         !isValidPhoneNumber &&
-                        phoneNumber !== "" &&
-                        "Please enter a valid Phone Number starting with '03' and having 11 digits."
+                        phoneNumber !== "" &&  
+                        displayNotification("Please enter a valid Phone Number starting with '03' and having 11 digits.")
+                       
                       }
                     />
                   </Form.Group>
                   <Form.Group
-                    className="mt-3 text-center"
+                    className="mt-2 text-center"
                     controlId="formBasicEmail"
                   >
                     <TextField
@@ -636,7 +641,8 @@ const Signup = () => {
                       error={!isValidPassword}
                       helperText={
                         !isValidPassword &&
-                        "Password must have at least 8 characters with mix of letters numbers special characters"
+                        displayNotification("Password must have at least 8 characters with mix of letters numbers special characters"
+                        )
                       }
                       InputProps={{
                         endAdornment: (
@@ -657,7 +663,7 @@ const Signup = () => {
                     />
                   </Form.Group>
                   <Form.Group
-                    className="mt-3 text-center"
+                    className="mt-2 text-center"
                     controlId="formBasicEmail"
                   >
                     <TextField
@@ -672,8 +678,9 @@ const Signup = () => {
                       size="small"
                       error={!isValidConfirmPassword}
                       helperText={
-                        !isValidConfirmPassword &&
-                        "Both passwords must be the same"
+                        !isValidConfirmPassword 
+                        // &&
+                        // "Both passwords must be the same"
                       }
                       InputProps={{
                         endAdornment: (
@@ -694,7 +701,7 @@ const Signup = () => {
                     />
                   </Form.Group>
                   <Form.Group
-                    className="mt-3 text-center"
+                    className="mt-2 text-center"
                     controlId="formBasicEmail"
                   >
                     <FormControlLabel
@@ -728,7 +735,7 @@ const Signup = () => {
                       }
                     />
                   </Form.Group>
-                  <div className="col-md-12  mt-3 text-center">
+                  <div className="col-md-12   text-center">
                     <Button
                       className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                       onClick={() => postData()}
@@ -744,7 +751,7 @@ const Signup = () => {
                   </div>
                   <div className="container text-center">
                     <div className="row d-flex">
-                      <div className="column mr-3 mt-2">
+                      <div className="column mr-3">
                         <p className=" text-muted" id="text2">
                           Or continue with
                         </p>
@@ -827,7 +834,7 @@ const Signup = () => {
                       </div>
                     </div>
                     <hr id="hrline2" />
-                    <div className="text-center mb-5">
+                    <div className="text-center mb-1">
                       Already have account on CommuterLinks? &nbsp;
                       <Link to={"/login"} style={{ textDecoration: "none" }}>
                         <span
@@ -840,7 +847,7 @@ const Signup = () => {
                   </div>
                 </Form>
               </div>
-              <div className="col-md-1"></div>
+
             </div>
           </div>
         </section>
