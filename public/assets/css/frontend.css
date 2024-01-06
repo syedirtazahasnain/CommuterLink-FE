@@ -656,4 +656,13 @@ i {
   color: var(--bs-dark-blue) !important;
 }
 
+.card-first{
+  border-radius: 20%;
+  border:1px solid #ccc;
 
+}
+.rounded-left {
+  border-top-right-radius:0;
+  border-bottom-right-radius:0;
+  border-bottom-left-radius:0;
+}

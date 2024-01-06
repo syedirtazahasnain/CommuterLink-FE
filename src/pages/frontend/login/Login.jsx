@@ -53,7 +53,7 @@ const Login = () => {
           },
         }
       );
-
+      
       const jsonresponse = await response.json();
 
       console.log("Profile Response:", jsonresponse);
@@ -305,7 +305,9 @@ const Login = () => {
       console.error("Error:", error.message);
     }
   };
-
+  const home = () => {
+    navigate("/")
+  }
   return (
     <div>
       <div>
@@ -550,7 +552,7 @@ const Login = () => {
                     <hr id="hrline2" />
                     <div id="span-text" className="text-center mb-5">
                       Not have account on CommutersLink? &nbsp;
-                      <Link to="/signup" style={{ textDecoration: 'none' }}>
+                      <Link to={"/"} style={{ textDecoration: 'none' }}>
                         <span className="reg-text" style={{ textDecoration: 'none' }}>Signup</span>
                       </Link>
                     </div>

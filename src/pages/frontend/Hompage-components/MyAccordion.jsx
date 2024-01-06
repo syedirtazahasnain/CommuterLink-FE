@@ -1,12 +1,12 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { BASE_URL } from "../../../constants";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Component } from "react";
 
 const MyAccordion = () => {
-
+  const [openCollapse, setOpenCollapse] = useState('#collapseOne');
   const navigate = useNavigate();
   const signupRoute = () => {
     navigate("/signup");
@@ -15,8 +15,40 @@ const MyAccordion = () => {
   const handleScroll = () => {
     document.getElementById('footer').scrollIntoView();
   }
+  const handleButtonClick = (target) => {
+    setOpenCollapse(target);
+  };
 
-
+  const renderCollapseContent = () => {
+    if (openCollapse === '#collapseOne') {
+      return (
+        <>
+          {/* Content for collapseOne */}
+          <img className='img-fluid w-100 p-3' src={`${BASE_URL}/assets/images/banner-big.jpg`} style={{ maxWidth: '750px', maxHeight: "400px" }} />
+          <h5 className="text-dark fw-bold ps-3 mb-3">Choose between Using your Car or Ride with Others</h5>
+          <p className="text-dark mb-3 ps-3 text-justified">CommutersLink simultaneously offers you partners, who are a suitable match to ride your car and at the same time matches you up with car owners with whom we think you can ride with. Both choices are made available at the same time</p>
+        </>
+      );
+    } else if (openCollapse === '#collapseTwo') {
+      return (
+        <>
+          <img className='img-fluid w-100 p-3' src={`${BASE_URL}/assets/images/longTermCommitment.jpg`} style={{ maxWidth: '750px', maxHeight: "400px" }} />
+          <h5 className="text-dark fw-bold mb-3 ps-3"> Long Term Commitment</h5>
+          <p className="text-dark mb-3 ps-3 text-justified">The commuting buddies would mostly belong to same neighbourhood and community. It’s a long term solution for cost effective commute to Work/Office or University/School and not a one-time drop off.</p>
+          {/* <Link to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link> */}
+        </>
+      );
+    } else if (openCollapse === '#collapseThree') {
+      return (
+        <>
+          <img src={`${BASE_URL}/assets/images/costsharing.jpg`} className='img-fluid w-100 p-3' style={{ maxWidth: '750px', maxHeight: "400px" }} />
+          <h5 className="text-dark fw-bold mb-3 ps-3">Share Cost of Commuting</h5>
+          <p className="text-dark mb-3 ps-3 text-justified">CommutersLink aims to empower society to manage ever increasing cost of living and inflation by distributing the burden of commuting in a respectable manner</p>
+        </>
+      );
+    }
+    return null;
+  };
   return (
     <div>
       {/* <div className="container">
@@ -39,38 +71,50 @@ const MyAccordion = () => {
 
               <div className="row ">
                 <div className="col-md-12  mb-1 text-center">
-                  <a data-bs-toggle="collapse" href="#collapseOne" className="text-decoration-none  ">
-                    <button type="button" className="btn btn-pink h-100 w-100 btn-secondary-light">
-                      <div className="d-flex flex-column align-items-center justify-content-center">
-                        <i className="fas fs-1 fa-car-side mb-2"></i>
-                        <h5 className="mb-1 text-center text-wrap">Use your Car or Ride with Others</h5>
-                      </div>
-                    </button>
-                  </a>
+                  <button
+                    type="button"
+                    className={`btn btn-pink h-100 w-100 btn-secondary-light ${openCollapse === '#collapseOne' ? 'active' : ''
+                      }`}
+                    onClick={() => handleButtonClick('#collapseOne')}
+                  >
+                    <div className="d-flex flex-column align-items-center justify-content-center">
+                      <i className="fas fs-1 fa-car-side mb-2"></i>
+                      <h5 className="mb-1 text-center text-wrap">Use your Car or Ride with Others</h5>
+                    </div>
+                  </button>
+
                 </div>
 
                 {/* <div className="col-md-3"></div> */}
                 <div className="col-md-12  mb-1 text-center">
-                  <a data-bs-toggle="collapse" href="#collapseTwo" className="text-decoration-none"> 
-                  <button type="button" className="btn btn-orange h-100 w-100 btn-secondary-light">
-                      <div className="d-flex flex-column align-items-center justify-content-center">
-                        <i className="fas fs-1 fa-stopwatch mb-2"></i>
-                        <h5 className="mb-1 text-center text-wrap">Long Term Commitment</h5>
-                      </div>
-                    </button>
-                  </a>
+                  <button
+                    type="button"
+                    className={`btn btn-orange h-100 w-100 btn-secondary-light ${openCollapse === '#collapseTwo' ? 'active' : ''
+                      }`}
+                    onClick={() => handleButtonClick('#collapseTwo')}
+                  >
+                    <div className="d-flex flex-column align-items-center justify-content-center">
+                      <i className="fas fs-1 fa-stopwatch mb-2"></i>
+                      <h5 className="mb-1 text-center text-wrap">Long Term Commitment</h5>
+                    </div>
+                  </button>
+
                 </div>
                 {/* <div className="col-md-3"></div> */}
                 <div className="col-md-12  mb-2 text-center">
-                  <a data-bs-toggle="collapse" href="#collapseThree" className="text-decoration-none">
-                  <button type="button" className="btn btn-purple h-100 w-100 btn-secondary-light">
+                <button
+                    type="button"
+                    className={`btn btn-purple h-100 w-100 btn-secondary-light ${openCollapse === '#collapseThree' ? 'active' : ''
+                      }`}
+                    onClick={() => handleButtonClick('#collapseThree')}
+                  >
                       <div className="d-flex flex-column align-items-center justify-content-center">
                         <i className="fas fs-1 fa-money-bill-1-wave  mb-2"></i>
                         <h5 className="mb-1 ">Share Cost of
                           Commuting</h5>
                       </div>
                     </button>
-                  </a>
+                
                 </div>
                 {/* <div className="col-md-3"></div> */}
                 {/* <div className="col-md-6 mb-3 text-center">
@@ -92,22 +136,13 @@ const MyAccordion = () => {
           </div>
           <div className="col-md-5 p-5 d-block justify-content-start mb-5">
             <div className=" collapse show fade" id="collapseOne" data-bs-parent="#costEarningSection">
-              <img className='img-fluid w-100  p-3' src={`${BASE_URL}/assets/images/banner-big.jpg`} style={{ maxWidth: '750px', maxHeight:"400px" }} />
-              <h5 className="text-dark fw-bold ps-3 mb-3">Choose between Using your  Car or Ride with
-                Others</h5>
-              <p className="text-dark mb-3 ps-3 text-justified">CommutersLink simultaneously offers you partners, who are a suitable match to ride your car and at the same time matches you up with car owners with whom we think you can ride with. Both choices are made available at the same time</p>
-              {/* <Link to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link> */}
+            {renderCollapseContent()}
             </div>
             <div className="collapse fade" id="collapseTwo" data-bs-parent="#costEarningSection">
-              <img className='img-fluid w-100 p-3' src={`${BASE_URL}/assets/images/longTermCommitment.jpg`} style={{ maxWidth: '750px', maxHeight:"400px" }} />
-              <h5 className="text-dark fw-bold mb-3 ps-3"> Long Term Commitment</h5>
-              <p className="text-dark mb-3 ps-3 text-justified">The commuting buddies would mostly belong to same neighbourhood and community. It’s a long term solution for cost effective commute to Work/Office or University/School and not a one-time drop off.</p>
-              {/* <Link to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link> */}
+            {renderCollapseContent()}
             </div>
             <div className="collapse fade" id="collapseThree" data-bs-parent="#costEarningSection">
-              <img src={`${BASE_URL}/assets/images/costsharing.jpg`} className='img-fluid w-100 p-3' style={{ maxWidth: '750px', maxHeight:"400px" }} />
-              <h5 className="text-dark fw-bold mb-3 ps-3">Share Cost of Commuting</h5>
-              <p className="text-dark mb-3 ps-3 text-justified">CommutersLink aims to empower society to manage ever increasing cost of living and inflation by distributing the burden of commuting in a respectable manner</p>
+            {renderCollapseContent()}
               {/* <Link to="/Faq" className="text-green fw-bold fs-4 faq-text text-decoration-none ms-3">To Learn More Please Visit FAQs <i class="fa-solid fa-arrow-right-long fs-4"></i>  </Link> */}
             </div>
             {/* <div className="collapse fade" id="collapseFour" data-bs-parent="#costEarningSection">
