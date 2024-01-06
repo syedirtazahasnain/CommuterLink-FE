@@ -452,12 +452,12 @@ const Signup = () => {
         <section
           id="sign-up"
 
-          style={{ backgroundColor: "#eee", borderTopLeftRadius: '20px', borderTopRightRadius: '20px' }}
+          style={{ backgroundColor: "#eee", borderTopLeftRadius: '0', borderTopRightRadius: '0' }}
         >
           <div className="container rounded-top">
             <div className="row d-flex">
-              <div className="col-md-6  p-4 text-center text-dark fs-5 fw-bold" style={{ backgroundColor: 'white', borderTopLeftRadius: '20px' }}><i className="fa-solid fa-car text-dark"></i>Looking for a car</div>
-              <div className="col-md-6  p-4 text-center text-warning fs-5 fw-bold" style={{ backgroundColor: '#3D3E3E', borderTopRightRadius: '20px' }}><i className="fa-regular fa-steering-wheel"></i>Offer Your car</div>
+              <div className="col-md-6  p-4 text-center text-dark fs-5 fw-bold" style={{ backgroundColor: 'white', borderTopLeftRadius: '0px' }}><i className="fa-solid fa-car text-dark"></i>Looking for a car</div>
+              <div className="col-md-6  p-4 text-center text-warning fs-5 fw-bold" style={{ backgroundColor: '#3D3E3E', borderTopRightRadius: '0px' }}><i className="fa-regular fa-steering-wheel"></i>Offer Your car</div>
             </div>
             <div className="row">
               {/* <div
@@ -593,8 +593,9 @@ const Signup = () => {
                       // required
                       size="small"
                       error={!isValidEmail}
-                      helperText={!isValidEmail &&
-                        displayNotification( "Please enter a valid email")
+                      helperText={!isValidEmail 
+                        // &&
+                        // displayNotification( "Please enter a valid email")
                       }
                     />
                   </Form.Group>
@@ -619,7 +620,7 @@ const Signup = () => {
                       helperText={
                         !isValidPhoneNumber &&
                         phoneNumber !== "" &&  
-                        displayNotification("Please enter a valid Phone Number starting with '03' and having 11 digits.")
+                       alert("Please Enter a valid phone number")
                        
                       }
                     />
@@ -640,9 +641,10 @@ const Signup = () => {
                       size="small"
                       error={!isValidPassword}
                       helperText={
-                        !isValidPassword &&
-                        displayNotification("Password must have at least 8 characters with mix of letters numbers special characters"
-                        )
+                        !isValidPassword
+                        //  &&
+                        // displayNotification("Password must have at least 8 characters with mix of letters numbers special characters"
+                        // )
                       }
                       InputProps={{
                         endAdornment: (

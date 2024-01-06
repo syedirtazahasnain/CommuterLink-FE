@@ -1086,7 +1086,7 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 20px;
-    top: 450px;
+    top: 70px;
   }
 }
 @media  (min-width: 1321px) and (max-width: 1440px) {
@@ -1274,15 +1274,24 @@ a.nav-link:hover {
 /* .video-width {
   width: 100%;
 } */
-
-@media (max-width: 576){
-  .video-width{
-
-    height: 400vh !important;
-  }
-
+@media (max-width: 480px) {
+.video-width{
+  height: 50vh;
+}
 }
 
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .video-width{
+    height: 200vh;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px){
+ .video-width{
+  width:100% !important;
+  height: auto;
+ }
+}
 @media  (min-width: 1321px) and (max-width: 1440px) {
   .video-width {
     width: 100% !important;
@@ -1324,6 +1333,7 @@ a.nav-link:hover {
 
 @media  (min-width: 1021px) and (max-width: 1320px) {
   .home-video {
+    width:"50px"
     height: 400px
 }}
 @media  (min-width: 1321px) and (max-width: 1440px) {
@@ -1341,4 +1351,42 @@ a.nav-link:hover {
  .home-video{
     height: auto;
   }
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+/* Mobile view styling */
+@media (max-width: 767px) {
+  .video-container {
+    position: relative;
+  }
+
+  .video-width {
+    width: 100%;
+ /* Set video width to 100% on smaller screens */
+  }
+
+  @media  (max-width: 1024px){
+    .signup-mobile {
+      margin-top: 80vh !important;
+  }
+}
+ 
+
+  .position-absolute {
+    position: relative; /* Change position to relative for stacking */
+    transform: none; /* Reset transform */
+  }
+  .signup-mobile {
+    margin-top: 78vh; /* Adjust margin-top as needed */
+  }
+  .accordion-padding{
+    margin-top: 98vh;
+  }
+}
+
+.position-absolute {
+  position: absolute;
 }
