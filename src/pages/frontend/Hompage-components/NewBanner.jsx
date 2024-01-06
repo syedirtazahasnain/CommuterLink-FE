@@ -20,7 +20,7 @@ const NewBanner = () => {
         style={{
           right: "40px",
           paddingLeft:'20px',
-          top: "calc(50% - 20px)",
+          top: "calc(50% - 0px)",
           transform: 'translateY(-50%)',
         
         }}
@@ -34,7 +34,7 @@ const NewBanner = () => {
         <div className=" d-flex px-0 justify-content-center py-2"
         >
           <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
-            <div className='text-white text-left ps-3 '>CAR POOLING ON LONG TERM BASIS</div>
+            <div className='text-white text-left ps-3'>CAR POOLING ON LONG TERM BASIS</div>
             <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
               <div className='text-yellow text-left  text-shadow'>Your Cost Saving Daily Commuting Solution!</div>
             </div>
