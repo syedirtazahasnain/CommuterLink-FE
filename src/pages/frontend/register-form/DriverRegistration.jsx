@@ -20,6 +20,7 @@ import Swal from "sweetalert2";
 import { displayNotification } from "../../../helpers";
 
 const eighteenYearsAgo = dayjs().subtract(18, "years");
+const ThreeMonthsFromNow = dayjs().add(3, 'month');
 const DriverRegistration = () => {
 
   const navigate = useNavigate();
@@ -40,8 +41,6 @@ const DriverRegistration = () => {
   const route = () => {
     navigate("/seatcostverification");
   };
-
-
 
   const handleCarBrandChange = (e) => {
     let value = e.target.value;
@@ -77,7 +76,21 @@ const DriverRegistration = () => {
     setIsLicenseValid(value.length === 20);
   };
 
+  // const handleValidChange = (date) => {
+  //   setInputValidUptoMySelf(date);
+  // };
 
+  const handleValidChange = (newDate) => {
+    if (newDate) {
+      const newDateObject = dayjs(newDate);
+      setInputValidUptoMySelf(newDateObject);
+    }
+  };
+
+  const shouldDisableDate = (date) => {
+    // Disable dates within the next 3 months
+    return date.isBefore(ThreeMonthsFromNow);
+  };
   const AddNewStart = () => {
     setAddNewStart(true);
     setAddNewStartDropdown(false);
@@ -826,32 +839,14 @@ const DriverRegistration = () => {
     }
   };
 
-const handleDateChange = (newDate) => {
+  const handleDateChange = (newDate) => {
     if (newDate) {
       const newDateObject = dayjs(newDate);
       setSelectedDate(newDateObject);
     }
   };
 
-  const handleValidChange = (newDate) => {
-    if (newDate) {
-      const newDateObject = dayjs(newDate);
-      setInputValidUptoMySelf(newDateObject);
-    }
-  };
 
-  const today = dayjs();
-  const threeMonthsLater = today.add(3, 'month');
-  const maxAllowedDate = dayjs().add(3, 'month').endOf('month');
-
-  useEffect(() => {
-    // Auto-select the first date after 3 months
-    setInputValidUptoMySelf(maxAllowedDate);
-  }, []);
-
-  const shouldDisableDate = (date) => {
-    return date.isAfter(maxAllowedDate);
-  };
 
   const handleValidDriverChange = (newDate) => {
     if (newDate) {
@@ -3854,8 +3849,8 @@ const handleDateChange = (newDate) => {
                                   sx={{ width: "100%" }}
                                   value={inputValidUptoMySelf}
                                   onChange={handleValidChange}
-                                  disablePast
                                   shouldDisableDate={shouldDisableDate}
+                                  disablePast 
                                 />
                               </LocalizationProvider>
                             </Form.Group>
@@ -4263,8 +4258,8 @@ const handleDateChange = (newDate) => {
                                   sx={{ width: "100%" }}
                                   value={inputDriverValidUpto}
                                   onChange={handleValidDriverChange}
-                                  disablePast
                                   shouldDisableDate={shouldDisableDate}
+                                  disablePast 
                                 />
                               </LocalizationProvider>
                               {/* <Form.Control
@@ -4692,8 +4687,8 @@ const handleDateChange = (newDate) => {
                                 sx={{ width: "100%" }}
                                 value={inputValidUptoMySelf}
                                 onChange={handleValidChange}
-                                disablePast
                                 shouldDisableDate={shouldDisableDate}
+                                disablePast 
                               />
                             </LocalizationProvider>
                           </Form.Group>
@@ -4989,8 +4984,8 @@ const handleDateChange = (newDate) => {
                                   sx={{ width: "100%" }}
                                   value={inputDriverValidUpto}
                                   onChange={handleValidDriverChange}
-                                  disablePast
                                   shouldDisableDate={shouldDisableDate}
+                                  disablePast 
                                 />
                               </LocalizationProvider>
                               {/* <Form.Control
