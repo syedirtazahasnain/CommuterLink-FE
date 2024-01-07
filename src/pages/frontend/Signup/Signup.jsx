@@ -619,8 +619,9 @@ const Signup = () => {
                       error={!isValidPhoneNumber && phoneNumber !== ""}
                       helperText={
                         !isValidPhoneNumber &&
-                        phoneNumber !== "" &&  
-                       alert("Please Enter a valid phone number")
+                        phoneNumber !== "" 
+                      //   &&  
+                      //  alert("Please Enter a valid phone number")
                        
                       }
                     />

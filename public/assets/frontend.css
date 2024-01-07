@@ -1042,10 +1042,10 @@ a.nav-link:hover {
 
 .new-banner-rectangle {
   position: absolute;
-  left: 30%;
+  left: 5%;
   transform: translateX(-50%); 
   top: calc(50% - 0px); 
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 500;
 }
 
@@ -1075,7 +1075,8 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 20px;
-    top: 200px;  }
+    top: 200px; 
+   }
 }
 
 
@@ -1085,8 +1086,8 @@ a.nav-link:hover {
     width: 50%;
     max-width: 900px;
     position: relative;
-    font-size: 20px;
-    top: 70px;
+    font-size: 22px;
+    top: 40vh;
   }
 }
 @media  (min-width: 1321px) and (max-width: 1440px) {
@@ -1095,8 +1096,9 @@ a.nav-link:hover {
     width: 50%;
     max-width: 900px;
     position: relative;
-    font-size: 24px;
-    top: 400px;
+    font-size: 28px;
+    top: 50vh;
+
   }
 }
 
@@ -1106,7 +1108,7 @@ a.nav-link:hover {
     /* width: 50%; */
     max-width: 900px;
     position: relative;
-    font-size: 30px;
+    font-size: 35px;
     /* top: 700px !important; */
   }
 }
@@ -1116,8 +1118,8 @@ a.nav-link:hover {
     width: 50%;
     max-width: 900px;
     position: relative;
-    font-size: 30px;
-    top: 900px;
+    font-size: 40px;
+    top: 100vh;
   }
 }
 
@@ -1312,7 +1314,6 @@ a.nav-link:hover {
 
 @media (min-width: 577px) and (max-width: 768px) {
   .home-video {
-    
     height: 400vh;
   }
 }
@@ -1368,25 +1369,36 @@ a.nav-link:hover {
  /* Set video width to 100% on smaller screens */
   }
 
-  @media  (max-width: 1024px){
-    .signup-mobile {
-      margin-top: 80vh !important;
-  }
-}
- 
-
-  .position-absolute {
-    position: relative; /* Change position to relative for stacking */
-    transform: none; /* Reset transform */
-  }
-  .signup-mobile {
-    margin-top: 78vh; /* Adjust margin-top as needed */
-  }
-  .accordion-padding{
-    margin-top: 98vh;
-  }
 }
 
 .position-absolute {
-  position: absolute;
+  position: relative; /* Change position to relative for stacking */
+  transform: none; /* Reset transform */
+}
+
+
+@media (max-width: 480px) {
+  .signup-mobile {
+    margin-top: 70vh; /* Adjust margin-top as needed */
+  }
+  .accordion-padding{
+    margin-top: 100vh;
+  }
+}
+@media (min-width: 768px){
+  .signup-mobile {
+    top: 10vh; 
+  }
+
+}
+@media  (min-width: 1021px) and (max-width: 1320px) {
+  .signup-mobile {
+    top: 100vh; 
+  }
+
+}
+@media (min-width: 2560px) {
+  .signup-mobile {
+    margin-right: 500px; 
+  }
 }

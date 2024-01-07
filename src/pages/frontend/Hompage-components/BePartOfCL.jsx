@@ -1,19 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../../constants';
 
 const BePartOfCL = () => {
-    const [autoplay, setAutoplay] = useState(false);
-    const videoRef = useRef();
     const navigate = useNavigate();
     const signupRoute = () => {
         navigate("/signup");
 
-    };
-
-    const handleVideoClick = () => {
-        setAutoplay(true);
-        videoRef.current.src = videoRef.current.src;
     };
 
     return (
@@ -23,15 +16,7 @@ const BePartOfCL = () => {
                     <div class="ratio ratio-16x9"
 
                     >
-                        <iframe src={`${BASE_URL}/assets/images/CommutersLinkVid.mp4`}
-                            ref={videoRef}
-                            title="Your Second Video Title"
-                            frameBorder="0"
-                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                            autoPlay={autoplay}
-                            muted  // Muted is required for autoplay on many browsers
-                            onClick={handleVideoClick}></iframe>
+                         <iframe src={`${BASE_URL}/assets/images/CommutersLinkVid.mp4`} title="Your Second Video Title" frameborder="0" allow="accelerometer; pause; muted; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div className="col-md-5 text-center d-flex">
