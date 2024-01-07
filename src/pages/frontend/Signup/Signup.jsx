@@ -593,7 +593,7 @@ const Signup = () => {
                       // required
                       size="small"
                       error={!isValidEmail}
-                      helperText={!isValidEmail 
+                      helperText={!isValidEmail
                         // &&
                         // displayNotification( "Please enter a valid email")
                       }
@@ -619,10 +619,10 @@ const Signup = () => {
                       error={!isValidPhoneNumber && phoneNumber !== ""}
                       helperText={
                         !isValidPhoneNumber &&
-                        phoneNumber !== "" 
-                      //   &&  
-                      //  alert("Please Enter a valid phone number")
-                       
+                        phoneNumber !== ""
+                        //   &&  
+                        //  alert("Please Enter a valid phone number")
+
                       }
                     />
                   </Form.Group>
@@ -630,78 +630,82 @@ const Signup = () => {
                     className="mt-2 text-center"
                     controlId="formBasicEmail"
                   >
-                    <TextField
-                      fullWidth
-                      className="bg-light"
-                      variant="outlined"
-                      type={showPassword ? "text" : "password"}
-                      label="Password must have alpha numeric & special char"
-                      value={password}
-                      onChange={(e) => validatePassword(e.target.value)}
-                      // required
-                      size="small"
-                      error={!isValidPassword}
-                      helperText={
-                        !isValidPassword
-                        //  &&
-                        // displayNotification("Password must have at least 8 characters with mix of letters numbers special characters"
-                        // )
-                      }
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={togglePasswordVisibility}
-                              edge="end"
-                            >
-                              {showPassword ? (
-                                <VisibilityOffIcon />
-                              ) : (
-                                <VisibilityIcon />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
+                    <Tooltip title="Password must have 8 characters with alpha numeric & special character" arrow>
+                      <TextField
+                        fullWidth
+                        className="bg-light"
+                        variant="outlined"
+                        type={showPassword ? "text" : "password"}
+                        label="Password"
+                        value={password}
+                        onChange={(e) => validatePassword(e.target.value)}
+                        // required
+                        size="small"
+                        error={!isValidPassword}
+                        helperText={
+                          !isValidPassword
+                          //  &&
+                          // displayNotification("Password must have at least 8 characters with mix of letters numbers special characters"
+                          // )
+                        }
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={togglePasswordVisibility}
+                                edge="end"
+                              >
+                                {showPassword ? (
+                                  <VisibilityOffIcon />
+                                ) : (
+                                  <VisibilityIcon />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </Tooltip>
                   </Form.Group>
                   <Form.Group
                     className="mt-2 text-center"
                     controlId="formBasicEmail"
                   >
-                    <TextField
-                      fullWidth
-                      className="bg-light"
-                      variant="outlined"
-                      type={showPassword1 ? "text" : "password"}
-                      label="Password must be same"
-                      value={confirmPassword}
-                      onChange={(e) => checkconfirmPassword(e.target.value)}
-                      // required
-                      size="small"
-                      error={!isValidConfirmPassword}
-                      helperText={
-                        !isValidConfirmPassword 
-                        // &&
-                        // "Both passwords must be the same"
-                      }
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={togglePasswordVisibility1}
-                              edge="end"
-                            >
-                              {showPassword1 ? (
-                                <VisibilityOffIcon />
-                              ) : (
-                                <VisibilityIcon />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
+                    <Tooltip title="Password must be same" arrow>
+                      <TextField
+                        fullWidth
+                        className="bg-light"
+                        variant="outlined"
+                        type={showPassword1 ? "text" : "password"}
+                        label="Confirm Password"
+                        value={confirmPassword}
+                        onChange={(e) => checkconfirmPassword(e.target.value)}
+                        // required
+                        size="small"
+                        error={!isValidConfirmPassword}
+                        helperText={
+                          !isValidConfirmPassword
+                          // &&
+                          // "Both passwords must be the same"
+                        }
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={togglePasswordVisibility1}
+                                edge="end"
+                              >
+                                {showPassword1 ? (
+                                  <VisibilityOffIcon />
+                                ) : (
+                                  <VisibilityIcon />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </Tooltip>
                   </Form.Group>
                   <Form.Group
                     className="mt-2 text-center"
