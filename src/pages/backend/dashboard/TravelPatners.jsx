@@ -37,7 +37,7 @@ const TravelPatners = () => {
   // const [image, setImage] = useState("");
   // const [price, setPrice] = useState("");
   const [date, setDate] = useState("");
-  const [cancelDate, setCancelDate] = useState(null);
+  const [cancelDate, setCancelDate] = useState("");
   const [walletAmount, setWalletAmount] = useState("");
   const [userType, setUserType] = useState("");
   const [data, setData] = useState("");
@@ -82,6 +82,7 @@ const TravelPatners = () => {
   const [image1, setImage1] = useState("");
   const [price1, setPrice1] = useState("");
   const [date1, setDate1] = useState("");
+  const [cancelDate1, setCancelDate1] = useState("");
 
   // For third person
   const [contactId2, setContactId2] = useState("");
@@ -89,6 +90,7 @@ const TravelPatners = () => {
   const [image2, setImage2] = useState("");
   const [price2, setPrice2] = useState("");
   const [date2, setDate2] = useState("");
+  const [cancelDate2, setCancelDate2] = useState("");
 
   // For Recent Transcations
   const [recentData, setRecentData] = useState([]);
@@ -395,6 +397,7 @@ const TravelPatners = () => {
         setImage1(jsonresponse.data[1].commuter_image);
         setPrice1(jsonresponse.data[1].price);
         setDate1(jsonresponse.data[1].aggreement_date);
+        setCancelDate1(jsonresponse.data[1].cancellation_date);
       }
       if (jsonresponse.data[2]) {
         setContactId2(jsonresponse.data[2].contact_id);
@@ -402,6 +405,7 @@ const TravelPatners = () => {
         setImage2(jsonresponse.data[2].commuter_image);
         setPrice2(jsonresponse.data[2].price);
         setDate2(jsonresponse.data[2].aggreement_date);
+        setCancelDate2(jsonresponse.data[2].cancellation_date);
       }
       else if (jsonresponse.status_code === 100) {
         setData(jsonresponse.message);
@@ -624,6 +628,20 @@ const TravelPatners = () => {
                                   </div>
                                   <div className="col-md-6">
                                     <h5 className="fw-bold text-secondary">{mobileNo}</h5>
+                                  </div>
+                                </div>
+                                <div className="row mb-2">
+                                  <div className="col-md-6">
+                                    {cancelDate !== "" ? (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold text-end font-custom">Cancellation Date:</h5>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                  <div className="col-md-6">
+                                    <h5 className="fw-bold text-secondary">{cancelDate  && formatDate(cancelDate)}</h5>
                                   </div>
                                 </div>
                                 <div className="row mb-2">
@@ -1131,10 +1149,8 @@ const TravelPatners = () => {
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {cancelDate !== "" ? (
-                                              <>
-                                                <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
-                                              </>
+                                            {cancelDate == "" ? (
+                                              <></>
                                             ) : (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
@@ -1231,6 +1247,21 @@ const TravelPatners = () => {
                                           </div>
                                         </div>
 
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {cancelDate1 == "" ? (
+                                              <></>
+                                            ) : (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-secondary">{cancelDate1 && formatDate(cancelDate1)}</h5>
+                                          </div>
+                                        </div>
+
                                       </div>
                                       <div className="text-center">
                                         <button
@@ -1313,6 +1344,21 @@ const TravelPatners = () => {
                                           </div>
                                           <div className="col-md-6">
                                             <h5 className="fw-bold text-secondary">{date2 && formatDate(date2)}</h5>
+                                          </div>
+                                        </div>
+
+                                        <div className="row mb-2">
+                                          <div className="col-md-6">
+                                            {cancelDate2 == "" ? (
+                                              <></>
+                                            ) : (
+                                              <>
+                                                <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
+                                              </>
+                                            )}
+                                          </div>
+                                          <div className="col-md-6">
+                                            <h5 className="fw-bold text-secondary">{cancelDate2 && formatDate(cancelDate2)}</h5>
                                           </div>
                                         </div>
 
