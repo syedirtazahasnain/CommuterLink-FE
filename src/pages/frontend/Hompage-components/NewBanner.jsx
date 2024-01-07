@@ -13,7 +13,7 @@ const NewBanner = () => {
     <>
       <div className='position-relative video-container'>
       <video className='video-width' autoPlay loop muted>
-        <source src={`${BASE_URL}/assets/images/banner_video.mp4`} type="video/mp4" />
+        <source  src={`${BASE_URL}/assets/images/banner_video.mp4`} type="video/mp4" />
       </video>
       <div
         className="position-absolute pt-1 rounded-top signup-mobile"

@@ -1397,7 +1397,7 @@ a.nav-link:hover {
 }
 @media  (min-width: 1021px) and (max-width: 1320px) {
   .signup-mobile {
-    top: 70vh !important; 
+    top: 64vh !important; 
     position: absolute;
   }
 

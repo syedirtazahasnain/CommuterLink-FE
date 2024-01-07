@@ -395,7 +395,7 @@ const Signup = () => {
       // setFullNameError(
       //   "Full Name must contain at least 3 alphabetic characters (excluding spaces)"
       // );
-      displayNotification("warning", "Full Name must contain at least 3 alphabetic characters (excluding spaces)Please Check Terms of Service");
+      // displayNotification("warning", "Full Name must contain at least 3 alphabetic characters (excluding spaces)Please Check Terms of Service");
     } else {
       setFullNameError("");
     }
@@ -563,6 +563,7 @@ const Signup = () => {
                     className="mt-2 mb-1 text-center"
                     controlId="formfullName"
                   >
+                    <Tooltip title="Full Name must contain at least 3 alphabetic characters (excluding spaces)Please Check Terms of Service" arrow>
                     <TextField
                       fullWidth
                       className="bg-light"
@@ -575,7 +576,7 @@ const Signup = () => {
                       size="small"
                       error={!!fullNameError}
                       helperText={fullNameError}
-                    />
+                    /></Tooltip>
                   </Form.Group>
 
                   <Form.Group
