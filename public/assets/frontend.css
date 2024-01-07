@@ -1087,7 +1087,10 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 22px;
-    top: 40vh;
+    
+  }
+  .commuters-text{
+    width: 200px !important;
   }
 }
 @media  (min-width: 1321px) and (max-width: 1440px) {
@@ -1097,8 +1100,11 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 28px;
-    top: 50vh;
+    top: 30vh;
 
+  }
+  .commuters-text{
+    width: 300px !important;
   }
 }
 
@@ -1119,7 +1125,10 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 40px;
-    top: 100vh;
+    top: 70vh;
+  }
+  .commuters-text{
+    width: 400px !important;
   }
 }
 
@@ -1265,13 +1274,7 @@ a.nav-link:hover {
 
 }
 
-.home-video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  position: relative;
-}
+
 
 /* .video-width {
   width: 100%;
@@ -1294,17 +1297,26 @@ a.nav-link:hover {
   height: auto;
  }
 }
+
+@media  (min-width: 1021px) and (max-width: 1320px) {
+  .video-width{
+    width:100% !important;
+    height: auto;
+   }
+}
 @media  (min-width: 1321px) and (max-width: 1440px) {
   .video-width {
-    width: 100% !important;
-    height: auto;
+    width:100% !important;
+  height: auto;
+  display: block;
+  position: relative;
   }
 }
 @media (min-width: 1441px) {
-  .video-width {
+  /* .video-width {
     width: 100%;
    height: auto;
-  }
+  } */
 }
 @media (max-width: 576px) {
   .home-video {
@@ -1313,44 +1325,36 @@ a.nav-link:hover {
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
-  .home-video {
-    height: 400vh;
-  }
+
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
-  .home-video {
-    height: 500vh;
-  }
+ 
   
 }
 
 @media (min-width: 993px) and (max-width: 1200px) {
- .home-video{
-    height: 300px;
-  }
+
 }
 
 
 @media  (min-width: 1021px) and (max-width: 1320px) {
-  .home-video {
-    width:"50px"
-    height: 400px
-}}
+
+}
 @media  (min-width: 1321px) and (max-width: 1440px) {
-  .home-video {
-    height: auto;
-  }
+
+
 }
 
 @media (min-width: 1441px) {
-  .home-video {
-   height: auto;
-  }
+
 }
 @media (min-width: 2560px) {
- .home-video{
-    height: auto;
+  .video-width {
+  width:98.5% !important;
+  height: auto;
+  display: block;
+  position: relative;
   }
 }
 
@@ -1393,7 +1397,8 @@ a.nav-link:hover {
 }
 @media  (min-width: 1021px) and (max-width: 1320px) {
   .signup-mobile {
-    top: 100vh; 
+    top: 70vh !important; 
+    position: absolute;
   }
 
 }

@@ -13,7 +13,7 @@ const NewBanner = () => {
     <>
       <div className='position-relative video-container'>
       <video className='video-width' autoPlay loop muted>
-        <source className="home-video" src={`${BASE_URL}/assets/images/banner_video.mp4`} type="video/mp4" />
+        <source src={`${BASE_URL}/assets/images/banner_video.mp4`} type="video/mp4" />
       </video>
       <div
         className="position-absolute pt-1 rounded-top signup-mobile"
@@ -37,6 +37,7 @@ const NewBanner = () => {
             <div className='text-white text-left ps-3'>CAR POOLING ON LONG TERM BASIS</div>
             <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
               <div className='text-yellow text-left  text-shadow'>Your Cost Saving Daily Commuting Solution!</div>
+            <div ><img className="commuters-text" src={`${BASE_URL}/assets/images/CommutersLink-text.png`}></img></div>
             </div>
           </div>
         </div>
