@@ -635,7 +635,7 @@ const Signup = () => {
                       className="bg-light"
                       variant="outlined"
                       type={showPassword ? "text" : "password"}
-                      label="Password"
+                      label="Password must have alpha numeric & special char"
                       value={password}
                       onChange={(e) => validatePassword(e.target.value)}
                       // required
@@ -674,7 +674,7 @@ const Signup = () => {
                       className="bg-light"
                       variant="outlined"
                       type={showPassword1 ? "text" : "password"}
-                      label="Confirm Password"
+                      label="Password must be same"
                       value={confirmPassword}
                       onChange={(e) => checkconfirmPassword(e.target.value)}
                       // required
