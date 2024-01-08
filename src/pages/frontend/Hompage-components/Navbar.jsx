@@ -173,7 +173,7 @@ const Navbar = () => {
                   <button
                     className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold fs-6"
                     onClick={loginRoute}
-                    disabled={checkStatus}
+                    //disabled={checkStatus}
                   >
                     Login
                   </button>

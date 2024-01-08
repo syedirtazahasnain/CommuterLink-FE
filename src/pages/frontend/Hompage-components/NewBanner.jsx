@@ -20,7 +20,7 @@ const NewBanner = () => {
         style={{
           right: "40px",
           paddingLeft:'20px',
-          top: "calc(45% - 0px)",
+          top: "calc(35% - 0px)",
           transform: 'translateY(-50%)',
         
         }}
@@ -36,8 +36,8 @@ const NewBanner = () => {
           <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
             <div className='text-white text-left ps-3'>CAR POOLING ON LONG TERM BASIS</div>
             <div className="col-12 m-auto" style={{ color: "cyan !important" }}>
-              <div className='text-yellow text-left  text-shadow'>Your Cost Saving Daily Commuting Solution!</div>
-            <div ><img className="commuters-text" src={`${BASE_URL}/assets/images/CommutersLink-text.png`}></img></div>
+              <div className='text-yellow  text-shadow'>Your Cost Saving Daily Commuting Solution!</div>
+            <div className="text-center"><img className="commuters-text pt-4" src={`${BASE_URL}/assets/images/CommutersLink-text.png`}></img></div>
             </div>
           </div>
         </div>

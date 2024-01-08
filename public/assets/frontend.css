@@ -1044,7 +1044,7 @@ a.nav-link:hover {
   position: absolute;
   left: 5%;
   transform: translateX(-50%); 
-  top: calc(50% - 0px); 
+  top: calc(30% - 0px); 
   font-size: 28px;
   font-weight: 500;
 }
@@ -1090,11 +1090,10 @@ a.nav-link:hover {
     width: 50%;
     max-width: 900px;
     position: relative;
-    font-size: 22px;
-    
+    font-size: 28px;
   }
   .commuters-text{
-    width: 200px !important;
+    width: 300px !important;
   }
 }
 @media  (min-width: 1321px) and (max-width: 1440px) {
@@ -1103,10 +1102,11 @@ a.nav-link:hover {
     width: 50%;
     max-width: 900px;
     position: relative;
-    font-size: 28px;
-    top: 30vh;
+    font-size: 29px;
+    top: 20vh;
 
   }
+  
   .commuters-text{
     width: 300px !important;
   }
@@ -1118,8 +1118,10 @@ a.nav-link:hover {
     /* width: 50%; */
     max-width: 900px;
     position: relative;
-    font-size: 35px;
-   
+    font-size: 35px; 
+  }
+  .commuters-text{
+    width: 320px !important;
   }
 }
 @media (min-width: 2560px) {
@@ -1129,10 +1131,10 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 40px;
-    top: 70vh;
+    top: 45vh;
   }
   .commuters-text{
-    width: 200px !important;
+    width: 500px !important;
   }
 }
 
@@ -1313,7 +1315,7 @@ a.nav-link:hover {
 }
 @media  (min-width: 1321px) and (max-width: 1440px) {
   .video-width {
-    width:100% !important;
+  width:100% !important;
   height: auto;
   display: block;
   position: relative;
@@ -1404,11 +1406,25 @@ a.nav-link:hover {
 }
 @media  (min-width: 1021px) and (max-width: 1320px) {
   .signup-mobile {
-    top: 64vh !important; 
+    top: 50vh !important; 
+    position: absolute;
+  } 
+}
+
+@media (max-width: 1024px) {
+  .signup-mobile {
+    top: 40vh !important; 
+    position: absolute;
+  } 
+}
+
+@media (min-width: 1321px) and (max-width: 1440px) {
+  .signup-mobile {
+    top: 50vh !important; 
     position: absolute;
   }
+  }
 
-}
 @media (min-width: 2560px) {
   .signup-mobile {
     margin-right: 500px; 
