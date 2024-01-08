@@ -20,7 +20,7 @@ const NewBanner = () => {
         style={{
           right: "40px",
           paddingLeft:'20px',
-          top: "calc(50% - 0px)",
+          top: "calc(45% - 0px)",
           transform: 'translateY(-50%)',
         
         }}

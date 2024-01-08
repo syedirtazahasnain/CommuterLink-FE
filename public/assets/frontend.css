@@ -1119,7 +1119,7 @@ a.nav-link:hover {
     max-width: 900px;
     position: relative;
     font-size: 35px;
-    /* top: 700px !important; */
+   
   }
 }
 @media (min-width: 2560px) {
