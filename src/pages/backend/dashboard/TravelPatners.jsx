@@ -37,7 +37,7 @@ const TravelPatners = () => {
   // const [image, setImage] = useState("");
   // const [price, setPrice] = useState("");
   const [date, setDate] = useState("");
-  const [cancelDate, setCancelDate] = useState("");
+  const [cancelDate, setCancelDate] = useState(null);
   const [walletAmount, setWalletAmount] = useState("");
   const [userType, setUserType] = useState("");
   const [data, setData] = useState("");
@@ -82,7 +82,7 @@ const TravelPatners = () => {
   const [image1, setImage1] = useState("");
   const [price1, setPrice1] = useState("");
   const [date1, setDate1] = useState("");
-  const [cancelDate1, setCancelDate1] = useState("");
+  const [cancelDate1, setCancelDate1] = useState(null);
 
   // For third person
   const [contactId2, setContactId2] = useState("");
@@ -90,7 +90,7 @@ const TravelPatners = () => {
   const [image2, setImage2] = useState("");
   const [price2, setPrice2] = useState("");
   const [date2, setDate2] = useState("");
-  const [cancelDate2, setCancelDate2] = useState("");
+  const [cancelDate2, setCancelDate2] = useState(null);
 
   // For Recent Transcations
   const [recentData, setRecentData] = useState([]);
@@ -355,6 +355,7 @@ const TravelPatners = () => {
       );
 
       const jsonresponse = await response.json();
+      // console.log('irtaza_json', jsonresponse);
       if (jsonresponse.data[0]) {
         setContactId(jsonresponse.data[0].contact_id);
         setName(jsonresponse.data[0].name);
@@ -632,12 +633,10 @@ const TravelPatners = () => {
                                 </div>
                                 <div className="row mb-2">
                                   <div className="col-md-6">
-                                    {cancelDate !== "" ? (
+                                    {cancelDate !== null && (
                                       <>
                                         <h5 className="text-dark-green fw-bold text-end font-custom">Cancellation Date:</h5>
                                       </>
-                                    ) : (
-                                      <></>
                                     )}
                                   </div>
                                   <div className="col-md-6">
@@ -882,12 +881,10 @@ const TravelPatners = () => {
                                   {date && (
                                     <div className="row mb-2">
                                       <div className="col-md-6">
-                                        {date !== "" ? (
+                                        {date !== "" && (
                                           <>
                                             <h5 className="text-dark-green fw-bold font-custom">Agreement Date:</h5>
                                           </>
-                                        ) : (
-                                          <></>
                                         )}
                                       </div>
                                       <div className="col-md-6">
@@ -898,12 +895,10 @@ const TravelPatners = () => {
                                   {cancelDate && (
                                     <div className="row mb-2">
                                       <div className="col-md-6">
-                                        {cancelDate !== null ? (
+                                        {cancelDate !== null && (
                                           <>
                                             <h5 className="text-dark-green fw-bold font-custom">Cancel Agreement Date:</h5>
                                           </>
-                                        ) : (
-                                          <></>
                                         )}
                                       </div>
                                       <div className="col-md-6">
@@ -1149,9 +1144,7 @@ const TravelPatners = () => {
                                         </div>
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {cancelDate == "" ? (
-                                              <></>
-                                            ) : (
+                                            {cancelDate !== null && (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
                                               </>
@@ -1249,9 +1242,7 @@ const TravelPatners = () => {
 
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {cancelDate1 == "" ? (
-                                              <></>
-                                            ) : (
+                                            {cancelDate1 !== null && (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
                                               </>
@@ -1349,9 +1340,7 @@ const TravelPatners = () => {
 
                                         <div className="row mb-2">
                                           <div className="col-md-6">
-                                            {cancelDate2 == "" ? (
-                                              <></>
-                                            ) : (
+                                            {cancelDate2 !== null && (
                                               <>
                                                 <h5 className="text-dark-green fw-bold font-custom">Cancellation Date:</h5>
                                               </>

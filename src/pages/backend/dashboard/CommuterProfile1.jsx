@@ -3,13 +3,22 @@ import { createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, BASE_URL, IMAGE_URL } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs } from '@mui/material'
+import { Breadcrumbs } from "@mui/material";
 import { Button } from "@mui/base";
 import Swal from "sweetalert2";
-import { setContactIdState, setIdState, setNameState } from "../../../redux/generalSlice";
+import {
+  setContactIdState,
+  setIdState,
+  setNameState,
+} from "../../../redux/generalSlice";
 import { ThreeCircles } from "react-loader-spinner";
-import Modal from 'react-bootstrap/Modal';
-import { GoogleMap, LoadScript, MarkerF, PolylineF } from "@react-google-maps/api";
+import Modal from "react-bootstrap/Modal";
+import {
+  GoogleMap,
+  LoadScript,
+  MarkerF,
+  PolylineF,
+} from "@react-google-maps/api";
 import { Container, Row } from "react-bootstrap";
 
 const customTheme = createTheme({
@@ -48,10 +57,10 @@ const CommuterProfile1 = () => {
   const [userType, setUserType] = useState("");
   const [userProfiles, setUserProfiles] = useState([]);
   const [userProfileDetails, setUserProfileDetails] = useState([]);
+  const [currentUserSeats, setCurrentUserSeats] = useState(null);
 
   const crumbs = [
     {
-
       label: "Home",
       active: true,
     },
@@ -78,7 +87,6 @@ const CommuterProfile1 = () => {
     window.KTToggle.init();
     window.KTScroll.init();
   }, []);
-
 
   useEffect(() => {
     if (option !== "") {
@@ -111,21 +119,19 @@ const CommuterProfile1 = () => {
 
   const getProfileData = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/v1/profile`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/v1/profile`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
 
       const jsonresponse = await response.json();
       if (jsonresponse) {
         setOption(jsonresponse[0].userlist.vehicle_option);
+        setCurrentUserSeats(jsonresponse[0].seats.seats_left);
       }
       console.log("Commuter Profile Data", jsonresponse);
     } catch (error) {
@@ -234,16 +240,103 @@ const CommuterProfile1 = () => {
     }
   };
 
-  const sendRequest = (contact_id) => {
+  const sendRequest = async (contact_id, currentUserSeats) => {
     console.log(contact_id);
+    if (currentUserSeats === 0) {
+      if (option === 0) {
+        const body = {
+          reciever_contact_id: contact_id,
+          request_type: "rider",
+          message: "Dear CL Member, CL have found us as matching xyz",
+          start_date: "2023-06-10",
+        };
 
-    if (option === 0) {
-      dispatch(setContactIdState(contact_id));
-      navigate("/termscondition1");
-    }
-    else if(option === 1) {
-      dispatch(setContactIdState(contact_id));
-      navigate("/termscondition2");
+        console.log({ body });
+
+        const response = await fetch(`${API_URL}/api/v1/request`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        });
+        const jsonresponse = await response.json();
+        console.log("API Response", jsonresponse);
+        if (jsonresponse.statusCode === 200) {
+          navigate("/dashboard");
+        } else if (jsonresponse.statusCode === 100) {
+          // alert("Resend Error: " + jsonresponse.message);
+          Swal.fire({
+            position: "top",
+            // icon: 'error',
+            text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: "swal-custom",
+            },
+          });
+        } else if (jsonresponse.statusCode === 500) {
+          Swal.fire({
+            position: "top",
+            // icon: 'error',
+            text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: "swal-custom",
+            },
+          });
+        }
+      } else if (option === 1) {
+        const body = {
+          reciever_contact_id: contact_id,
+          request_type: "driver",
+          message: "Dear CL Member, CL have found us as matching xyz",
+          start_date: "2023-06-10",
+        };
+
+        console.log({ body });
+
+        const response = await fetch(`${API_URL}/api/v1/request`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        });
+        const jsonresponse = await response.json();
+        console.log("API Response", jsonresponse);
+        if (jsonresponse.statusCode === 200) {
+          navigate("/dashboard");
+        } else if (jsonresponse.statusCode === 100) {
+          Swal.fire({
+            position: "top",
+            // icon: 'error',
+            text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: "swal-custom",
+            },
+          });
+        } else if (jsonresponse.statusCode === 500) {
+          Swal.fire({
+            position: "top",
+
+            text: `${jsonresponse.message}`,
+            customClass: {
+              confirmButton: "swal-custom",
+            },
+          });
+        }
+      }
+    } else {
+      if (option === 0) {
+        dispatch(setContactIdState(contact_id));
+        navigate("/termscondition1");
+      } else if (option === 1) {
+        dispatch(setContactIdState(contact_id));
+        navigate("/termscondition2");
+      }
     }
   };
 
@@ -251,15 +344,15 @@ const CommuterProfile1 = () => {
     try {
       // Display a confirmation dialog with a close button
       const result = await Swal.fire({
-        position: 'top',
-        title: 'Are you sure?',
-        text: 'You are about to cancel the request',
+        position: "top",
+        title: "Are you sure?",
+        text: "You are about to cancel the request",
         // confirmButtonColor: 'green',
-        cancelButtonColor: 'green',
-        confirmButtonText: 'Confirm',
+        cancelButtonColor: "green",
+        confirmButtonText: "Confirm",
         showCloseButton: true,
         customClass: {
-          confirmButton: 'swal-custom',
+          confirmButton: "swal-custom",
         },
       });
 
@@ -271,18 +364,15 @@ const CommuterProfile1 = () => {
 
         console.log("Cancel Request Body:", body);
 
-        const response = await fetch(
-          `${API_URL}/api/v1/cancel-request`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              'Accept': 'application/json',
-              Authorization: `Bearer ${userToken}`,
-            },
-            body: JSON.stringify(body),
-          }
-        );
+        const response = await fetch(`${API_URL}/api/v1/cancel-request`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify(body),
+        });
 
         const jsonResponse = await response.json();
         console.log("Cancel API Response", jsonResponse);
@@ -290,10 +380,10 @@ const CommuterProfile1 = () => {
         if (jsonResponse.statusCode === 200) {
           // Display a success message using Swal
           Swal.fire({
-            position: 'top',
+            position: "top",
             text: `${jsonResponse.message}`,
             customClass: {
-              confirmButton: 'swal-custom',
+              confirmButton: "swal-custom",
             },
           });
 
@@ -328,13 +418,9 @@ const CommuterProfile1 = () => {
       university_address,
     } = user;
 
-    const {
-      days,
-      price,
-      mobile,
-    } = userDetails[0];
+    const { days, price, mobile } = userDetails[0];
 
-    const {
+    let {
       seats_left,
       reg_no,
       reg_year,
@@ -343,14 +429,31 @@ const CommuterProfile1 = () => {
       car_cc,
       car_model,
       car_reg_year,
-    } = (userDetails[0]?.vehicle?.[0] || {}) || {};
+    } = {};
+
+    if (userDetails && userDetails.length > 0 && userDetails[0]?.vehicle?.[0]) {
+      ({
+        seats_left,
+        reg_no,
+        reg_year,
+        car_ac,
+        car_brand,
+        car_cc,
+        car_model,
+        car_reg_year,
+      } = userDetails[0]?.vehicle?.[0]);
+    }
+
+    if (seats_left === undefined) {
+      seats_left = null;
+    }
 
     setLocationStartString(origin);
     setLocationEndString(destination);
 
     // Splitting the latitude and longitude
-    const dropoffCoords = dropoff_address.split(',');
-    const pickupCoords = pickup_address.split(',');
+    const dropoffCoords = dropoff_address.split(",");
+    const pickupCoords = pickup_address.split(",");
 
     const dropoffLatitude = dropoffCoords[0];
     const dropoffLongitude = dropoffCoords[1];
@@ -359,30 +462,39 @@ const CommuterProfile1 = () => {
     const pickupLongitude = pickupCoords[1];
 
     // Calculate the center point
-    const centerLatitude = (parseFloat(pickupLatitude) + parseFloat(dropoffLatitude)) / 2;
-    const centerLongitude = (parseFloat(pickupLongitude) + parseFloat(dropoffLongitude)) / 2;
+    const centerLatitude =
+      (parseFloat(pickupLatitude) + parseFloat(dropoffLatitude)) / 2;
+    const centerLongitude =
+      (parseFloat(pickupLongitude) + parseFloat(dropoffLongitude)) / 2;
 
     console.log({ user });
     console.log("User Details:", userDetails[0]);
 
     return (
       <div>
-        {req_stage === 1 || req_stage === 2 ?
+        {req_stage === 1 || req_stage === 2 ? (
           <h5 className="card bg-medium-teal p-2 px-4 text-success">{`Your request has been accepted`}</h5>
-          :
+        ) : (
           <h5 className="card bg-medium-teal p-2  px-4 text-dark-green ">{`The below suggestion is based upon the start point and destination which match yours. Exact details will be shown after both have accepted to share.`}</h5>
-        }
-        <div className="card p-4 bg-white rounded-0" >
+        )}
+        <div className="card p-4 bg-white rounded-0">
           <div className="row">
             <div className="col-md-4">
               <div className="card rounded-0">
                 <div className="card-img-top bg-medium-teal rounded-0 text-center py-5">
                   {req_stage === 0 ? (
-                    <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#ff8a00" }} />
-                  ) :
-                    (
-                      <img className="p-4" src={`${BASE_URL}/assets/images/Vector.png`} style={{ height: "100px", backgroundColor: "#0A6155" }} />
-                    )}
+                    <img
+                      className="p-4"
+                      src={`${BASE_URL}/assets/images/Vector.png`}
+                      style={{ height: "100px", backgroundColor: "#ff8a00" }}
+                    />
+                  ) : (
+                    <img
+                      className="p-4"
+                      src={`${BASE_URL}/assets/images/Vector.png`}
+                      style={{ height: "100px", backgroundColor: "#0A6155" }}
+                    />
+                  )}
                 </div>
                 <div className="card-body bg-card-grey">
                   <div className="card-text">
@@ -390,11 +502,12 @@ const CommuterProfile1 = () => {
                       <div className="col-md-6 ">
                         {gender !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold text-end font-custom">Gender:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">
+                              Gender:
+                            </h5>
                           </>
                         ) : (
-                          <>
-                          </>
+                          <></>
                         )}
                       </div>
                       <div className="col-md-6">
@@ -405,11 +518,12 @@ const CommuterProfile1 = () => {
                       <div className="col-md-6">
                         {age !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold text-end font-custom">Age:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">
+                              Age:
+                            </h5>
                           </>
                         ) : (
-                          <>
-                          </>
+                          <></>
                         )}
                       </div>
                       <div className="col-md-6">
@@ -420,11 +534,12 @@ const CommuterProfile1 = () => {
                       <div className="col-md-6">
                         {profession !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold text-end font-custom">Profession:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">
+                              Profession:
+                            </h5>
                           </>
                         ) : (
-                          <>
-                          </>
+                          <></>
                         )}
                       </div>
                       <div className="col-md-6">
@@ -436,15 +551,18 @@ const CommuterProfile1 = () => {
                       <div className="col-md-6">
                         {university_name && university_name !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold text-end font-custom">University Name:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">
+                              University Name:
+                            </h5>
                           </>
                         ) : (
-                          <>
-                          </>
+                          <></>
                         )}
                       </div>
                       <div className="col-md-6">
-                        <h5 className="fw-bold text-secondary">{university_name}</h5>
+                        <h5 className="fw-bold text-secondary">
+                          {university_name}
+                        </h5>
                       </div>
                     </div>
 
@@ -452,61 +570,104 @@ const CommuterProfile1 = () => {
                       <div className="col-md-6">
                         {university_address && university_address !== "" ? (
                           <>
-                            <h5 className="text-dark-green fw-bold text-end font-custom">University Address:</h5>
+                            <h5 className="text-dark-green fw-bold text-end font-custom">
+                              University Address:
+                            </h5>
                           </>
                         ) : (
-                          <>
-                          </>
+                          <></>
                         )}
                       </div>
                       <div className="col-md-6">
-                        <h5 className="fw-bold text-secondary">{university_address}</h5>
+                        <h5 className="fw-bold text-secondary">
+                          {university_address}
+                        </h5>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-md-8 d-flex flex-column">
-              <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+              <ul
+                class="nav nav-pills mb-3 nav-justified"
+                id="pills-tab"
+                role="tablist"
+              >
                 <li class="nav-item me-0" role="presentation">
-                  <button className={`nav-link fs-4 custom-button-style active rounded-0`}
-                    id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{option === 0 ? ("Car Offeror Details") : ("Traveller Details")}</button>
+                  <button
+                    className={`nav-link fs-4 custom-button-style active rounded-0`}
+                    id="pills-home-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-home"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-home"
+                    aria-selected="true"
+                  >
+                    {option === 0 ? "Car Offeror Details" : "Traveller Details"}
+                  </button>
                 </li>
                 <li class="nav-item me-0" role="presentation">
-                  <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                    id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Additional Info</button>
+                  <button
+                    className={`nav-link fs-4 custom-button-style rounded-0`}
+                    id="pills-profile-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-profile"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-profile"
+                    aria-selected="false"
+                  >
+                    Additional Info
+                  </button>
                 </li>
                 <li className="nav-item me-0" role="presentation">
-                  <button className={`nav-link fs-4 custom-button-style rounded-0`}
-                    id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"
-                  // onClick={openModal}
+                  <button
+                    className={`nav-link fs-4 custom-button-style rounded-0`}
+                    id="pills-contact-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-contact"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-contact"
+                    aria-selected="false"
+                    // onClick={openModal}
                   >
-                    View On Map</button>
+                    View On Map
+                  </button>
                 </li>
               </ul>
               <div className="tab-content flex-grow-1" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div
+                  class="tab-pane fade show active"
+                  id="pills-home"
+                  role="tabpanel"
+                  aria-labelledby="pills-home-tab"
+                >
                   <div className="row ">
-
                     <div className="col-md-11">
                       <div className="row">
                         <div className="col-md-6">
                           {contact_id !== "" ? (
                             req_stage === 0 ? (
                               <div>
-                                <h3 className="fw-bold" style={{ color: "#FF8A00" }}>Member {contact_id}</h3>
+                                <h3
+                                  className="fw-bold"
+                                  style={{ color: "#FF8A00" }}
+                                >
+                                  Member {contact_id}
+                                </h3>
                               </div>
-                            ) :
-                              (
-                                <div className="row d-flex">
-                                  <h3 className="text-success fw-bold">Member {contact_id}</h3>
-                                </div>
-                              )
+                            ) : (
+                              <div className="row d-flex">
+                                <h3 className="text-success fw-bold">
+                                  Member {contact_id}
+                                </h3>
+                              </div>
+                            )
                           ) : (
-                            <>
-                            </>
+                            <></>
                           )}
                         </div>
                       </div>
@@ -518,15 +679,18 @@ const CommuterProfile1 = () => {
                         <div className="col-md-6">
                           {preferred_gender !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Prefered Gender:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">
+                                Prefered Gender:
+                              </h5>
                             </>
                           ) : (
-                            <>
-                            </>
+                            <></>
                           )}
                         </div>
                         <div className="col-md-6">
-                          <h5 className="fw-bold text-secondary">{preferred_gender}</h5>
+                          <h5 className="fw-bold text-secondary">
+                            {preferred_gender}
+                          </h5>
                         </div>
                       </div>
 
@@ -536,14 +700,18 @@ const CommuterProfile1 = () => {
                             <>
                               {price && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Payment Terms (per day):</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    Payment Terms (per day):
+                                  </h5>
                                 </>
                               )}
                             </>
                           </div>
                         )}
                         <div className="col-md-6">
-                          <h5 className="fw-bold text-secondary">Rs. {price}/-</h5>
+                          <h5 className="fw-bold text-secondary">
+                            Rs. {price}/-
+                          </h5>
                         </div>
                       </div>
 
@@ -551,11 +719,12 @@ const CommuterProfile1 = () => {
                         <div className="col-md-6">
                           {origin !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Point of Origin:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">
+                                Point of Origin:
+                              </h5>
                             </>
                           ) : (
-                            <>
-                            </>
+                            <></>
                           )}
                         </div>
                         <div className="col-md-6">
@@ -566,60 +735,66 @@ const CommuterProfile1 = () => {
                         <div className="col-md-6">
                           {time_depart !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Pickup Timings:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">
+                                Pickup Timings:
+                              </h5>
                             </>
                           ) : (
-                            <>
-
-                            </>
+                            <></>
                           )}
                         </div>
                         <div className="col-md-6">
-                          <h5 className="fw-bold text-secondary">{time_depart}</h5>
+                          <h5 className="fw-bold text-secondary">
+                            {time_depart}
+                          </h5>
                         </div>
                       </div>
                       <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-6">
                           {destination !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Destination:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">
+                                Destination:
+                              </h5>
                             </>
                           ) : (
-                            <>
-
-                            </>
+                            <></>
                           )}
                         </div>
                         <div className="col-md-6">
-                          <h5 className="fw-bold text-secondary">{destination}</h5>
+                          <h5 className="fw-bold text-secondary">
+                            {destination}
+                          </h5>
                         </div>
                       </div>
                       <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-6">
                           {time_return !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Return Timings:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">
+                                Return Timings:
+                              </h5>
                             </>
                           ) : (
-                            <>
-
-                            </>
+                            <></>
                           )}
                         </div>
                         <div className="col-md-6">
-                          <h5 className="fw-bold text-secondary">{time_return}</h5>
+                          <h5 className="fw-bold text-secondary">
+                            {time_return}
+                          </h5>
                         </div>
                       </div>
                       <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-6">
                           {days !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">Days:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">
+                                Days:
+                              </h5>
                             </>
                           ) : (
-                            <>
-
-                            </>
+                            <></>
                           )}
                         </div>
                         <div className="col-md-6">
@@ -629,9 +804,13 @@ const CommuterProfile1 = () => {
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div
+                  class="tab-pane fade"
+                  id="pills-profile"
+                  role="tabpanel"
+                  aria-labelledby="pills-profile-tab"
+                >
                   <div className="row ">
-
                     <div className="col-md-11">
                       <div className="row">
                         <div className="col-md-12">
@@ -646,17 +825,22 @@ const CommuterProfile1 = () => {
                           {contact_id !== "" ? (
                             req_stage === 0 ? (
                               <div>
-                                <h3 className="fw-bold" style={{ color: "#FF8A00" }}>Member {contact_id}</h3>
+                                <h3
+                                  className="fw-bold"
+                                  style={{ color: "#FF8A00" }}
+                                >
+                                  Member {contact_id}
+                                </h3>
                               </div>
-                            ) :
-                              (
-                                <div className="row d-flex">
-                                  <h3 className="text-success fw-bold">Member {contact_id}</h3>
-                                </div>
-                              )
+                            ) : (
+                              <div className="row d-flex">
+                                <h3 className="text-success fw-bold">
+                                  Member {contact_id}
+                                </h3>
+                              </div>
+                            )
                           ) : (
-                            <>
-                            </>
+                            <></>
                           )}
                         </div>
                       </div>
@@ -664,37 +848,39 @@ const CommuterProfile1 = () => {
                   </div>
                   <div className="row mt-3">
                     <div className="col-md-9">
-
                       <div className="row mb-2 border-bottom border-2">
                         <div className="col-md-6">
                           {seats !== "" ? (
                             <>
-                              <h5 className="text-dark-green fw-bold font-custom">No.of Seats Requested:</h5>
+                              <h5 className="text-dark-green fw-bold font-custom">
+                                No.of Seats Requested:
+                              </h5>
                             </>
                           ) : (
-                            <>
-
-                            </>
+                            <></>
                           )}
                         </div>
                         <div className="col-md-6">
                           <h5 className="fw-bold text-secondary">{seats}</h5>
                         </div>
                       </div>
-
-                      {seats_left && (
+                      {seats_left !== null && (
                         <div className="row mb-2 border-bottom border-2">
                           <div className="col-md-6">
                             <>
-                              {seats_left && (
+                              {seats_left !== null && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">No.of Seats Left:</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    No.of Seats Left:
+                                  </h5>
                                 </>
                               )}
                             </>
                           </div>
                           <div className="col-md-6">
-                            <h5 className="fw-bold text-secondary">{seats_left}</h5>
+                            <h5 className="fw-bold text-secondary">
+                              {seats_left}
+                            </h5>
                           </div>
                         </div>
                       )}
@@ -705,7 +891,9 @@ const CommuterProfile1 = () => {
                             <>
                               {car_ac && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Car has AC:</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    Car has AC:
+                                  </h5>
                                 </>
                               )}
                             </>
@@ -723,13 +911,17 @@ const CommuterProfile1 = () => {
                             <>
                               {car_brand && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Car Brand:</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    Car Brand:
+                                  </h5>
                                 </>
                               )}
                             </>
                           </div>
                           <div className="col-md-6">
-                            <h5 className="fw-bold text-secondary">{car_brand}</h5>
+                            <h5 className="fw-bold text-secondary">
+                              {car_brand}
+                            </h5>
                           </div>
                         </div>
                       )}
@@ -740,13 +932,17 @@ const CommuterProfile1 = () => {
                             <>
                               {car_model && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Car Model:</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    Car Model:
+                                  </h5>
                                 </>
                               )}
                             </>
                           </div>
                           <div className="col-md-6">
-                            <h5 className="fw-bold text-secondary">{car_model}</h5>
+                            <h5 className="fw-bold text-secondary">
+                              {car_model}
+                            </h5>
                           </div>
                         </div>
                       )}
@@ -757,7 +953,9 @@ const CommuterProfile1 = () => {
                             <>
                               {car_cc && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Car CC:</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    Car CC:
+                                  </h5>
                                 </>
                               )}
                             </>
@@ -774,7 +972,9 @@ const CommuterProfile1 = () => {
                             <>
                               {reg_no && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Registration Number:</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    Registration Number:
+                                  </h5>
                                 </>
                               )}
                             </>
@@ -791,13 +991,17 @@ const CommuterProfile1 = () => {
                             <>
                               {car_reg_year && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Car Manufacture Year:</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    Car Manufacture Year:
+                                  </h5>
                                 </>
                               )}
                             </>
                           </div>
                           <div className="col-md-6">
-                            <h5 className="fw-bold text-secondary">{car_reg_year}</h5>
+                            <h5 className="fw-bold text-secondary">
+                              {car_reg_year}
+                            </h5>
                           </div>
                         </div>
                       )}
@@ -808,20 +1012,29 @@ const CommuterProfile1 = () => {
                             <>
                               {reg_year && (
                                 <>
-                                  <h5 className="text-dark-green fw-bold font-custom">Registration Year:</h5>
+                                  <h5 className="text-dark-green fw-bold font-custom">
+                                    Registration Year:
+                                  </h5>
                                 </>
                               )}
                             </>
                           </div>
                           <div className="col-md-6">
-                            <h5 className="fw-bold text-secondary">{reg_year}</h5>
+                            <h5 className="fw-bold text-secondary">
+                              {reg_year}
+                            </h5>
                           </div>
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div
+                  className="tab-pane fade"
+                  id="pills-contact"
+                  role="tabpanel"
+                  aria-labelledby="pills-contact-tab"
+                >
                   <div className=" row d-flex justify-content-center align-items-center">
                     <Row style={{ height: "275px", width: "100%" }}>
                       <GoogleMap
@@ -829,7 +1042,7 @@ const CommuterProfile1 = () => {
                         center={{ lat: centerLatitude, lng: centerLongitude }}
                         mapContainerStyle={{
                           width: "100%",
-                          height: '100%',
+                          height: "100%",
                         }}
                         options={{
                           types: ["(regions)"],
@@ -837,13 +1050,19 @@ const CommuterProfile1 = () => {
                         }}
                       >
                         <MarkerF
-                          position={{ lat: parseFloat(pickupLatitude), lng: parseFloat(pickupLongitude) }}
+                          position={{
+                            lat: parseFloat(pickupLatitude),
+                            lng: parseFloat(pickupLongitude),
+                          }}
                           icon={{
                             url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                           }}
                         />
                         <MarkerF
-                          position={{ lat: parseFloat(dropoffLatitude), lng: parseFloat(dropoffLongitude) }}
+                          position={{
+                            lat: parseFloat(dropoffLatitude),
+                            lng: parseFloat(dropoffLongitude),
+                          }}
                           icon={{
                             url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
                           }}
@@ -865,8 +1084,30 @@ const CommuterProfile1 = () => {
                     <div className="row justify-content-end">
                       <div className="col-md-12 text-end">
                         <div className="row justify-content-end">
-                          <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-primary" style={{ fontSize: "1.5rem"}}></i><span className="font-custom fw-bold" style={{ fontSize: "18px"}}>Start Point</span></div>
-                          <div className="col-md-3 text-end"><i className="fa-solid fa-location-dot text-danger" style={{ fontSize: "1.5rem"}}></i><span className="font-custom fw-bold" style={{ fontSize: "18px"}}>Drop-off Point</span></div>
+                          <div className="col-md-3 text-end">
+                            <i
+                              className="fa-solid fa-location-dot text-primary"
+                              style={{ fontSize: "1.5rem" }}
+                            ></i>
+                            <span
+                              className="font-custom fw-bold"
+                              style={{ fontSize: "18px" }}
+                            >
+                              Start Point
+                            </span>
+                          </div>
+                          <div className="col-md-3 text-end">
+                            <i
+                              className="fa-solid fa-location-dot text-danger"
+                              style={{ fontSize: "1.5rem" }}
+                            ></i>
+                            <span
+                              className="font-custom fw-bold"
+                              style={{ fontSize: "18px" }}
+                            >
+                              Drop-off Point
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -876,19 +1117,40 @@ const CommuterProfile1 = () => {
             </div>
             <div className="text-end px-3 py-3">
               {req_stage === 1 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3" onClick={() => { viewRequest(contact_id, request_id) }}>
+                <Button
+                  className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white rounded-4 px-3 py-2 mb-3"
+                  onClick={() => {
+                    viewRequest(contact_id, request_id);
+                  }}
+                >
                   Proceed to Payment
                 </Button>
               ) : req_stage === 0 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold text-white  px-3 py-2 mb-3" style={{ background: "#ff8a00" }} onClick={() => { CancelRequest(contact_id) }}>
+                <Button
+                  className="font-custom btn btn-sm fs-6 fw-bold text-white  px-3 py-2 mb-3"
+                  style={{ background: "#ff8a00" }}
+                  onClick={() => {
+                    CancelRequest(contact_id);
+                  }}
+                >
                   Cancel Request
                 </Button>
               ) : req_stage === 2 ? (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { requestViewDriver(name, request_id, contact_id) }}>
+                <Button
+                  className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"
+                  onClick={() => {
+                    requestViewDriver(name, request_id, contact_id);
+                  }}
+                >
                   Proceed to Final Step
                 </Button>
               ) : (
-                <Button className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3" onClick={() => { sendRequest(contact_id) }}>
+                <Button
+                  className="font-custom btn btn-sm fs-6 fw-bold btn-dark-green text-white  px-3 py-2 mb-3"
+                  onClick={() => {
+                    sendRequest(contact_id, currentUserSeats);
+                  }}
+                >
                   Send Request
                 </Button>
               )}
@@ -913,8 +1175,7 @@ const CommuterProfile1 = () => {
                     color: crumb.active ? "black" : "#ff4815",
                     fontFamily: "Roboto, Helvetica, Arial, sans-serif",
                     pointerEvents: crumb.path ? "auto" : "none",
-                    textDecoration: "none"
-
+                    textDecoration: "none",
                   }}
                 >
                   {crumb.label}
@@ -924,9 +1185,10 @@ const CommuterProfile1 = () => {
           </div>
           <div className="card bg-medium-teal p-2 px-4 text-success my-2 fw-bold d-flex">
             <div className="d-flex justify-content-between align-items-xl-baseline">
-              <h3 className="text-dark-green my-2 fw-bold m-0">COMMUTER'S PROFILE</h3>
-              <Link
-                to={"/dashboard"} >
+              <h3 className="text-dark-green my-2 fw-bold m-0">
+                COMMUTER'S PROFILE
+              </h3>
+              <Link to={"/dashboard"}>
                 <button className="font-custom btn btn-dark-green rounded-0 text-white fs-6 lh-1">
                   <i className="fas fa-angle-left text-white" />
                   Back
@@ -950,15 +1212,19 @@ const CommuterProfile1 = () => {
           </div>
         ) : (
           <div className="row">
-            {userProfiles.length > 0 && userProfileDetails.length > 0 ? (
-              userProfiles
-                .filter(user => user.contact_id === requestContactId) // Filter profiles by contact_id
-                .map((user, index) => {
-                  return <UserProfile user={user} key={index} userDetails={userProfileDetails[index]} />;
-                })
-            ) : (
-              null
-            )}
+            {userProfiles.length > 0 && userProfileDetails.length > 0
+              ? userProfiles
+                  .filter((user) => user.contact_id === requestContactId) // Filter profiles by contact_id
+                  .map((user, index) => {
+                    return (
+                      <UserProfile
+                        user={user}
+                        key={index}
+                        userDetails={userProfileDetails[index]}
+                      />
+                    );
+                  })
+              : null}
           </div>
         )}
       </div>
