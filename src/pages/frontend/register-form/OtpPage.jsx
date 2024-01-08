@@ -26,6 +26,7 @@ const OtpPage = () => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
   const [isOTPMatched, setIsOTPMatched] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const[isLoading, setIsLoading] = useState(false);
   const inputRefs = useRef([null, null, null, null, null]);
   const hardcodedOTP = "12345";
   const navigate = useNavigate();
@@ -356,7 +357,11 @@ const OtpPage = () => {
                       onClick={validateOTP}
                       className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                     >
-                      Submit
+                      {isLoading ? (   <span>
+                            <i className="fa fa-spinner fa-spin" /> Submitting...
+                          </span>): ('Submit')
+                          }
+               
                     </Button>
                     {/* <div className="col-12 text-end">
                     </div> */}
