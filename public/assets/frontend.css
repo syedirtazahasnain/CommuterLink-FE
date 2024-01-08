@@ -1049,6 +1049,10 @@ a.nav-link:hover {
   font-weight: 500;
 }
 
+.commuters-text{
+  width: 300px;
+}
+
 @media (max-width: 576px) {
   .new-banner-rectangle {
     display: none;
@@ -1128,10 +1132,13 @@ a.nav-link:hover {
     top: 70vh;
   }
   .commuters-text{
-    width: 400px !important;
+    width: 200px !important;
   }
 }
 
+@media (max-width: 2560px){
+  
+}
 
 .form-color-header{
   background: var(--bg-blue-green);

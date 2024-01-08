@@ -13,11 +13,9 @@ const BePartOfCL = () => {
         <div className='container-fluid px-0 bg-pink my-5'>
             <div className="row g-0">
                 <div className="col-md-7">
-                    <div class="ratio ratio-16x9"
-
-                    >
-                         <iframe src={`${BASE_URL}/assets/images/CommutersLinkVid.mp4`} title="Your Second Video Title" frameborder="0" allow="accelerometer; pause; muted; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
+                    <video class="ratio ratio-16x9" controls>
+                         <source src={`${BASE_URL}/assets/images/CommutersLinkVid.mp4`} type="video/mp4" ></source>
+                    </video>
                 </div>
                 <div className="col-md-5 text-center d-flex">
                     <div className="m-auto p-4">
