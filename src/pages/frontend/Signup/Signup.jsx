@@ -28,6 +28,7 @@ const REDIRECT_URI = window.location.href;
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState("web");
@@ -299,6 +300,7 @@ const Signup = () => {
 
   const postData = async () => {
     try {
+      setIsLoading(true);
       const phonePattern = /^03\d{9}$/;
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (
@@ -310,21 +312,25 @@ const Signup = () => {
       ) {
         displayNotification("warning", "Please Fill All Fields");
       } else if (password !== confirmPassword) {
+        setIsLoading(false);
         displayNotification(
           "warning",
           "Confirm password is not matched with new password!"
         );
       } else if (!phonePattern.test(phoneNumber)) {
+        setIsLoading(false);
         displayNotification(
           "warning",
           "Please follow the correct phone number format"
         );
       } else if (!emailPattern.test(email)) {
+        setIsLoading(false);
         displayNotification(
           "warning",
           "Please follow the correct email format"
         );
       } else if (fullName.length < 3) {
+        setIsLoading(false);
         displayNotification(
           "warning",
           "Full Name should have alteast 3 characters"
@@ -346,6 +352,7 @@ const Signup = () => {
 
           const jsonresponse = await response.json();
           if (jsonresponse.statusCode === 200) {
+            setIsLoading(false);
             dispatch(
               setsignupState({
                 name: fullName,
@@ -366,6 +373,7 @@ const Signup = () => {
             }
           }
         } else {
+          setIsLoading(false);
           displayNotification("warning", "Please Check Terms of Service");
         }
       }
@@ -721,7 +729,7 @@ const Signup = () => {
                           onChange={(e) => setTermsService(e.target.checked)}
                           size="small"
                         />
-                      }
+                      }isLoading
                       label={
                         <div id="span-text" className="mr-5  text-bold">
                           I agree with all statements in
@@ -748,7 +756,8 @@ const Signup = () => {
                       className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                       onClick={() => postData()}
                     >
-                      Sign up
+                      
+                      {isLoading === true ?(<span><i className="fa fa-spinner fa-spin" /> submitting....</span> ):('Sign up')}
                     </Button>
                     {/* <Button
                       className="btn-custom mx-2 px-4 py-2 rounded rounded-5 text-custom fw-bold"

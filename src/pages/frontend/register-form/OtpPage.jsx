@@ -26,7 +26,7 @@ const OtpPage = () => {
   const [otp, setOTP] = useState(["", "", "", "", ""]);
   const [isOTPMatched, setIsOTPMatched] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const[isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const inputRefs = useRef([null, null, null, null, null]);
   const hardcodedOTP = "12345";
   const navigate = useNavigate();
@@ -41,6 +41,7 @@ const OtpPage = () => {
 
   const postData = async () => {
     try {
+      setIsLoading(true);
       let email = userData.email;
       let password = userData.password;
       const body = {
@@ -67,7 +68,7 @@ const OtpPage = () => {
       const jsonresponse = await response.json();
       console.log(jsonresponse);
       if (jsonresponse.statusCode == 200) {
-
+        setIsLoading(true);
         const loginDetails = {
           email: email,
           password: password,
@@ -89,6 +90,7 @@ const OtpPage = () => {
           dispatch(setloginState(jsonresponse.access_token));
           // navigate("/office_school");
           navigate("/datasecurity");
+          setIsLoading(false);
         }
       } else {
         //alert("Error: " + jsonresponse.message);
@@ -102,9 +104,11 @@ const OtpPage = () => {
         // }
         // )
         displayNotification("error", `${jsonresponse.message}`);
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -323,8 +327,10 @@ const OtpPage = () => {
                         return (
                           <div className="col-md-2 col-sm-2 col-3" key={0}>
                             <FormControl
-                              sx={{ m: 1,width: "100%", // Make the form control take the full width
-                              marginBottom: "10px", }}
+                              sx={{
+                                m: 1, width: "100%", // Make the form control take the full width
+                                marginBottom: "10px",
+                              }}
                               variant="outlined"
                               key={1}
                             >
@@ -357,11 +363,11 @@ const OtpPage = () => {
                       onClick={validateOTP}
                       className="btn-custom1 mx-2 border-0 px-4 py-2 rounded rounded-2 text-white fw-bold"
                     >
-                      {isLoading ? (   <span>
-                            <i className="fa fa-spinner fa-spin" /> Submitting...
-                          </span>): ('Submit')
-                          }
-               
+                      {isLoading === true ? (<span>
+                        <i className="fa fa-spinner fa-spin" /> Submitting.....
+                      </span>) : ('Submit')
+                      }
+
                     </Button>
                     {/* <div className="col-12 text-end">
                     </div> */}
