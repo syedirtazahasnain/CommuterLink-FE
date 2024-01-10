@@ -38,12 +38,12 @@ const Contact = () => {
   };
 
   const handleSubjectChange = (e) => {
-    const value = e.target.value.replace(/[^a-z" "]/gi, '');
+    const value = e.target.value.replace(/[^a-z" ".?,]/gi, '');
     setSubject(value);
   };
 
   const handleMessageChange = (e) => {
-    const value = e.target.value.replace(/[^a-z" "]/gi, '');
+    const value = e.target.value.replace(/[^a-z" ".?,/]/gi, '');
     setMessage(value);
   };
 
@@ -141,13 +141,13 @@ const Contact = () => {
   });
 
   return (
-    <div>
-      <section id="contact" className="contact section-bg pt-5" style={{
+    <div id="contact">
+      <section  className="contact section-bg pt-5" style={{
         backgroundImage: `url("/assets/images/contact-bg.png")`,
         backgroundSize: 'cover',
       }}>
 
-        <div className="container">
+        <div className="container" >
           <div className="row text-left">
             <div className="col-md-5 bg-white px-5 pt-3 pb-4 mb-3 sha m-auto rounded rounded-4">
               <h3 className="text-success text-center pb-3">Contact Us</h3>
