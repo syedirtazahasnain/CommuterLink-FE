@@ -753,7 +753,7 @@ const TravelPatners = () => {
                                     {date !== null && (
                                       <>
                                         <h5 className="text-dark-green fw-bold text-end font-custom">
-                                          Agreement Date:
+                                          Start Date:
                                         </h5>
                                       </>
                                     )}
@@ -1454,7 +1454,7 @@ const TravelPatners = () => {
                                         {driverDate2 !== null && (
                                           <>
                                             <h5 className="text-dark-green fw-bold text-end font-custom">
-                                              Agreement Date:
+                                              Start Date:
                                             </h5>
                                           </>
                                         )}
