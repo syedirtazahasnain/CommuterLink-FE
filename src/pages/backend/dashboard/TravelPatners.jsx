@@ -750,6 +750,22 @@ const TravelPatners = () => {
                                 </div>
                                 <div className="row mb-2">
                                   <div className="col-md-6">
+                                    {date !== null && (
+                                      <>
+                                        <h5 className="text-dark-green fw-bold text-end font-custom">
+                                          Agreement Date:
+                                        </h5>
+                                      </>
+                                    )}
+                                  </div>
+                                  <div className="col-md-6">
+                                    <h5 className="fw-bold text-secondary">
+                                      {date && formatDate(date)}
+                                    </h5>
+                                  </div>
+                                </div>
+                                <div className="row mb-2">
+                                  <div className="col-md-6">
                                     {cancelDate !== null && (
                                       <>
                                         <h5 className="text-dark-green fw-bold text-end font-custom">
@@ -1430,6 +1446,22 @@ const TravelPatners = () => {
                                       <div className="col-md-6">
                                         <h5 className="fw-bold text-secondary">
                                           {driverMobileNo2}
+                                        </h5>
+                                      </div>
+                                    </div>
+                                    <div className="row mb-2">
+                                      <div className="col-md-6">
+                                        {driverDate2 !== null && (
+                                          <>
+                                            <h5 className="text-dark-green fw-bold text-end font-custom">
+                                              Agreement Date:
+                                            </h5>
+                                          </>
+                                        )}
+                                      </div>
+                                      <div className="col-md-6">
+                                        <h5 className="fw-bold text-secondary">
+                                          {driverDate2 && formatDate(driverDate2)}
                                         </h5>
                                       </div>
                                     </div>
