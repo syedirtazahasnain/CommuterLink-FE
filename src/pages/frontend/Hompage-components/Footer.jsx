@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Link as DomLink } from 'react-scroll';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { BASE_URL } from '../../../constants';
 
 const Footer = () => {
   const navigate = useNavigate();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const home = () => {
     navigate("/")
@@ -16,9 +17,15 @@ const Footer = () => {
     navigate("/footer");
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2000); // 2000 milliseconds = 2 seconds
+  }, []);
+
   return (
     <div>
-      <footer id="footer">
+      {isLoaded ?(<footer id="footer">
         <div className="footer-top">
           <div className="container-fluid">
             <div className="p-4 row bg-grey">
@@ -184,7 +191,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </footer>
+      </footer>): ('Loading.....')}
+      
     </div>
   )
 }
