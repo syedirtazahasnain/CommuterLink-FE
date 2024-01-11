@@ -24,6 +24,7 @@ const Forget2 = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isValidPassword, setIsValidPassword] = useState(true);
+    const [oTP, setOTP] = useState(null);
     const [isValidConfirmPassword, setisValidConfirmPassword] = useState(true);
 
 
@@ -55,7 +56,7 @@ const Forget2 = () => {
     };
 
     const sendRequest = async () => {
-        try {
+        // try {
             if (password === "" || confirmPassword === "") {
                 displayNotification("warning", "Please Fill All Fields");
             }
@@ -65,6 +66,7 @@ const Forget2 = () => {
             else {
                 const body = {
                     token: userToken,
+                    otp: oTP,
                     password: password,
                     confirm_password: confirmPassword
                 }
@@ -82,9 +84,9 @@ const Forget2 = () => {
                     }
                 );
 
-                if (!response.ok) {
-                    throw new Error(`Request failed with status: ${response.status}`);
-                }
+                // if (!response.ok) {
+                //     throw new Error(`Request failed with status: ${response.status}`);
+                // }
 
                 const jsonresponse = await response.json();
                 console.log("API Response", jsonresponse);
@@ -93,12 +95,19 @@ const Forget2 = () => {
                     dispatch(setloginState(""));
                     displayNotification("success", `${jsonresponse.message}`);
                     navigate("/login");
+                }else if(jsonresponse.statusCode === 422){
+                    // Email validation error
+                    const errorMessage = jsonresponse.errors.otp[0];
+                    displayNotification("error", errorMessage);
+                }
+                else{
+                    displayNotification("error", "An error occured while sending the request.");
                 }
             }
-        } catch (error) {
-            console.error("An error occurred:", error);
-            displayNotification("error", "An error occured while sending the request.");
-        }
+        // } catch (error) {
+        //     console.error("An error occurred:", error);
+        //     displayNotification("error", "An error occured while sending the request.");
+        // }
     };
 
     return (
@@ -183,8 +192,32 @@ const Forget2 = () => {
                                             Forgot{" "}
                                             <span>Password</span>
                                         </h2>{" "}
-                                        <h5 className=" text-custom  mb-2">Enter the new password  <span>for accessing account.</span></h5>
+                                        <h5 className=" text-custom  mb-2">Enter Valid OTP </h5>
                                         <Form className="text-center">
+                                            <Form.Group
+                                                className=" mt-4 text-center"
+                                                controlId="formBasicEmail"
+                                            >
+                                                <FormControl
+                                                    color="success"
+                                                    className="bg-light"
+                                                    size="small"
+                                                    sx={{ width: "100%" }}
+                                                    variant="outlined"
+                                                >
+                                                    <TextField
+                                                        fullWidth
+                                                        className="bg-light"
+                                                        variant="outlined"
+                                                        type="number"
+                                                        label="otp"
+                                                        value={oTP}
+                                                        onChange={(e) => setOTP(e.target.value)}
+                                                        // required
+                                                        size="small"
+                                                    />
+                                                </FormControl>
+                                            </Form.Group>
                                             <Form.Group
                                                 className=" mt-4 text-center"
                                                 controlId="formBasicEmail"
