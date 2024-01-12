@@ -72,7 +72,6 @@ const Forget1 = () => {
     } else {
       const body = {
         email: email,
-        number: phoneNumber,
       };
       console.log("sendRequest1 Body:", body);
 
@@ -225,7 +224,7 @@ const Forget1 = () => {
                           <TextField
                             id="outlined-adornment-password"
                             type="email"
-                            //value={email}
+                            value={email}
                             onChange={(e) => validateEmail(e.target.value)}
                             // required
                             error={!isValidEmail}
@@ -235,20 +234,6 @@ const Forget1 = () => {
                             size="small"
                             sx={{ width: "100%" }}
                             label="Enter email address"
-                          />
-                          <TextField
-                            
-                            id="outlined"
-                            type="number" // Change to 'tel' type for phone number input
-                            value={phoneNumber}
-                            onChange={handlePhoneNumberChange}
-                            // required
-                            size="small"
-                            sx={{
-                              width: "100%",
-                          
-                            }}
-                            label="Enter phone number"
                           />
                         </FormControl>
                       </Form.Group>
