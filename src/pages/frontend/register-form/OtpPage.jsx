@@ -37,7 +37,7 @@ const OtpPage = () => {
     window.scrollTo(0, 0);
   }, [navigate]);
 
-  console.log("Signup Data:", userData);
+  // console.log("Signup Data:", userData);
 
   const postData = async () => {
     try {
@@ -66,7 +66,7 @@ const OtpPage = () => {
       );
 
       const jsonresponse = await response.json();
-      console.log(jsonresponse);
+      // console.log(jsonresponse);
       if (jsonresponse.statusCode == 200) {
         setIsLoading(true);
         const loginDetails = {
@@ -86,7 +86,7 @@ const OtpPage = () => {
         const jsonresponse = await response.json();
 
         if (jsonresponse.statusCode == 200) {
-          console.log(jsonresponse);
+          // console.log(jsonresponse);
           dispatch(setloginState(jsonresponse.access_token));
           // navigate("/office_school");
           navigate("/datasecurity");
@@ -107,7 +107,7 @@ const OtpPage = () => {
         setIsLoading(false);
       }
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       setIsLoading(false);
     }
   };

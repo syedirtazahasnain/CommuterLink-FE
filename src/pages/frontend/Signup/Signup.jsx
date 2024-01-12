@@ -219,7 +219,7 @@ const Signup = () => {
         otp: userData.otp,
         token: userData.facebooktoken,
       };
-      console.log("Signup Data Body:", body);
+      // console.log("Signup Data Body:", body);
       const response = await fetch(`${API_URL}/api/v1/signup`, {
         method: "POST",
         headers: {
@@ -237,7 +237,7 @@ const Signup = () => {
             provider: body.provider,
           })
         );
-        console.log("Signup Data Response:", jsonresponse);
+        // console.log("Signup Data Response:", jsonresponse);
         navigate("/number-generate");
       } else {
         displayNotification("error", `${jsonresponse.message}`);
@@ -260,7 +260,7 @@ const Signup = () => {
         otp: userData.otp,
         token: userData.googletoken,
       };
-      console.log("Signup Data Body:", body);
+      // console.log("Signup Data Body:", body);
       const response = await fetch(`${API_URL}/api/v1/signup`, {
         method: "POST",
         headers: {
@@ -278,7 +278,7 @@ const Signup = () => {
             provider: body.provider,
           })
         );
-        console.log("Signup Data Response:", jsonresponse);
+        // console.log("Signup Data Response:", jsonresponse);
         navigate("/number-generate");
       } else {
         // alert("Error: " + jsonresponse.message);

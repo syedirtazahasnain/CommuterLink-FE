@@ -66,14 +66,14 @@ const Forget1 = () => {
   };
 
   const sendRequest = async () => {
-    console.log('email',email, 'number',phoneNumber );
+    // console.log('email',email, 'number',phoneNumber );
     if (email === "") {
       displayNotification("warning", `Please Enter your Email`);
     } else {
       const body = {
         email: email,
       };
-      console.log("sendRequest1 Body:", body);
+      // console.log("sendRequest1 Body:", body);
 
       const response = await fetch(`${API_URL}/api/v1/forgot`, {
         method: "POST",
@@ -85,7 +85,7 @@ const Forget1 = () => {
       });
 
       const jsonresponse = await response.json();
-      console.log("API Response", jsonresponse);
+      // console.log("API Response", jsonresponse);
 
       if (jsonresponse.statusCode === 200) {
         dispatch(setloginState(jsonresponse.token));
