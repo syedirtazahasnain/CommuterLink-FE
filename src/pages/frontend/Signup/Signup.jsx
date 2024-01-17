@@ -399,7 +399,7 @@ const Signup = () => {
     const value = e.target.value.replace(/[^a-zA-Z" "]/gi, "");
     setFullName(value);
 
-    if (value.replace(/ /g, "").length < 3) {
+    if (value.replace(/ /g, "").length < 4) {
       // setFullNameError(
       //   "Full Name must contain at least 3 alphabetic characters (excluding spaces)"
       // );
